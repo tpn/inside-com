@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Images and Multimedia</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep008.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep010.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_0001000108000000">Images and Multimedia</A></H2>
+<BR CLEAR=ALL>
+<P>You can embed images, sounds, and even video clips in your HTML document by using the <A HREF="sweep021.htm#htmlref2_0001000114002800" TARGET=TEXT>IMG</A> and <A HREF="sweep021.htm#htmlref2_0001000114000a00" TARGET=TEXT>BGSOUND</A> elements. And you can apply simple animation to text by using the <A HREF="sweep021.htm#htmlref2_0001000114003000" TARGET=TEXT>MARQUEE</A> element. 
+
+<P>You use the IMG element to insert images into your document. You specify the image source, typically a .bmp, .gif, or JPEG file, and specify the image attributes, such as the width and height, alignment, and so on. The following example demonstrates how to display a .bmp file, TheEarth.bmp. 
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;IMG SRC="TheEarth.bmp" WIDTH=46 HEIGHT=46 ALT="Picture of the Earth"&gt; 
+</FONT></PRE>
+<P>
+<P><IMG SRC="art/theearth.gif" WIDTH="46" HEIGHT="46" ALT="" >
+<P>
+
+<P>The <A HREF="sweep021.htm#htmlref2_000100011400280c" TARGET=TEXT>SRC=</A> attribute specifies the name of the image file. The file will be sized in a square 46 pixels wide by 46 pixels high. For a text-only browser, the text "Picture of the Earth" will display in place of the image. 
+
+<P>When you place an <A HREF="sweep021.htm#htmlref2_0001000114002800" TARGET=TEXT>IMG</A> element in text, Internet Explorer aligns the surrounding text with the bottom of the image. You can align the text with the top or center of the image by using the <A HREF="sweep021.htm#htmlref2_0001000114002801" TARGET=TEXT>ALIGN=</A> attribute to set the alignment to TOP, BOTTOM, or CENTER. 
+
+In this case, the image keeps its position within the surrounding text.
+
+<P>You can also use the <A HREF="sweep021.htm#htmlref2_0001000114002801" TARGET=TEXT>ALIGN=</A> attribute to have the text flow around the image. For example, setting this attribute to LEFT aligns the image with the left margin and wraps all subsequent text around the right side of the image. Similarly, setting it to RIGHT wraps all subsequent text around the left side. When you use the LEFT or RIGHT alignment, typically it is useful to also use the <A HREF="sweep021.htm#htmlref2_0001000114000e00" TARGET=TEXT>BR</A> element with the <A HREF="sweep021.htm#htmlref2_0001000114000e02" TARGET=TEXT>CLEAR=</A> attribute to stop wrapping and force all remaining text below the image, as in the following example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;IMG SRC="TheEarth.gif" ALIGN=LEFT&gt; Here's some text to the right of a picture.
+&lt;BR CLEAR=LEFT&gt;Here's some text beneath the picture. 
+</FONT></PRE>
+<P>You can make an image a hyperlink hot spot "anchoring" the <A HREF="sweep021.htm#htmlref2_0001000114002800" TARGET=TEXT>IMG</A> element to a reference with the <A HREF="sweep021.htm#htmlref2_0001000114000300" TARGET=TEXT>A</A> element. By default, Internet Explorer draws a border around the image to mark it as a hot spot. To remove the border, set the <A HREF="sweep021.htm#htmlref2_0001000114002803" TARGET=TEXT>BORDER=</A> attribute in the IMG element to zero. 
+
+<P>You can add background sounds or music to your document by using the <A HREF="sweep021.htm#htmlref2_0001000114000a00" TARGET=TEXT>BGSOUND</A> element. You specify the address of a sound file, such as a .wav, .au, or MIDI file, and use the <A HREF="sweep021.htm#htmlref2_0001000114000a01" TARGET=TEXT>LOOP=</A> attribute to set how often the file plays, as in the following example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;BGSOUND SRC="boing.wav" LOOP=5&gt;You will hear a sound played five times 
+in a row.
+</FONT></PRE>
+<P>You can animate a line of text by using the <A HREF="sweep021.htm#htmlref2_0001000114003000" TARGET=TEXT>MARQUEE</A> element. The element automatically scrolls the text, to the left or right, whenever a user views your document. To animate the text, you enclose it in the element and set attributes for scroll direction, type, and amount, as in the following example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;MARQUEE DIRECTION=RIGHT BEHAVIOR=SCROLL SCROLLAMOUNT=10 
+SCROLLDELAY=200&gt;This text is displaying in a right scrolling marquee.&lt;/MARQUEE&gt; 
+</FONT></PRE>
+<P>This displays as:<P>
+
+<P><MARQUEE DIRECTION=RIGHT BEHAVIOR=SCROLL SCROLLAMOUNT=10 
+SCROLLDELAY=200>This text is displaying in a right scrolling marquee.</MARQUEE>
+<BR CLEAR=ALL><P>In this example, the text "This text is displaying in a right scrolling marquee." scrolls from the left margin to the right. After it disappears beyond the right margin, it starts again at the left. The text moves 10 pixels after each 200 millisecond delay. 
+
+<P>You can align marquees to the left or right, like images, and also set the background color, height, width, and extra spacing around the marquee.
+
+
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep008.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep010.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

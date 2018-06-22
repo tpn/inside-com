@@ -1,0 +1,15 @@
+
+WinVerifyTrust distinguishes between a "test" root and a "real" root in the trust hierarchy.
+The makecert.exe utility allows you to create test certificates. These test certificates can be used
+only for trial runs. You must apply for bona fide credentials from agencies such as VeriSign and GTE. 
+These credentials are inserted in the real hierarchy. 
+
+The default behavior of Internet Explorer 3.0 is to treat code signed under the test root as invalid. 
+This means it is considered to be unsigned and the appropriate warning message is displayed. 
+However, the Internet Explorer SDK contains a file called wvtston.reg. (There is a pointer to this file
+in the SDK's Readme file.) Once this file is installed, code signed under the test root is treated as
+including credentials, but credentials that are void. The bitmap dialog is displayed, but with the
+word VOID splashed across it. These credentials can be stored in the local trust database.
+To return to the default behavior, use the file called wvtstoff.reg.
+
+

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Purpose and Background</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep079.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep081.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="wininet_0008000101000000">Purpose and Background</A></H2>
+<BR CLEAR=ALL>
+<P>The Microsoft&#174; Win32&#174; Internet functions provide Win32-based applications with easy access to common Internet protocols. These functions abstract the Internet's Gopher, FTP (file transfer protocol), and HTTP (hypertext transfer protocol) protocols into a high-level application programming interface (API) that is familiar to independent software vendors (ISVs) and software developers, and that provides a fast and straightforward path to making applications Internet-aware.
+
+<P><B>Note</B>  Initially, the Win32 Internet functions will be shipped as redistributables independent of operating systems through the Microsoft Developer Network (MSDN), CompuServe, and the Internet. ISVs can redistribute Wininet.dll with their applications, following the model of Win32s&#174;. In the future, the functions described in this documentation will be folded into all Microsoft operating systems. The Win32 Internet functions are exported from Wininet.dll.
+<P>The Win32 Internet functions facilitate access to the Internet by:
+
+<UL><LI>Eliminating the need to embed knowledge of TCP/IP and Windows&#174; Sockets.
+<P>By converting the Internet protocols into task-oriented functions, application developers do not need to write Windows Sockets code or be familiar with the TCP/IP protocol. 
+<LI>Eliminating the need to embed knowledge of Internet protocols.
+<P>While the concepts supported by the Internet protocols, such as FTP and HTTP, are simple, the actual implementation of these protocols can be complex. For example, FTP servers return ASCII text file directory listings, but parsing these listings requires specific knowledge of the format returned by each FTP server. By encapsulating this functionality within the Internet functions, directory parsing is solved once for all applications using the FTP protocol. This provides consistent behavior across applications. 
+<LI>Providing a constant set of functions in an environment of rapidly changing and evolving protocols.
+<P>Keeping pace with the changes in Internet protocols is a challenge when writing applications. With the set of functions designed to remain constant, application developers no longer need to update their applications every time the underlying protocol changes. Now, only Wininet.dll needs to be changed. In addition, advanced protocols, such as HTTP version 1.1, can also be implemented without changing applications.
+<LI>Following Win32 function standards.
+<P>The Win32 Internet functions are similar to the traditional Win32 functions in the way they treat elements such as buffer management and error returns. Application developers familiar with the Win32 function set will find that the Win32 Internet functions return information in a familiar format. Furthermore, application developers will find it easy to use the returned information in other Win32 functions.
+
+<LI>Providing full access to Internet protocols.
+<P>Occasionally, applications need to access extended features of the Internet protocols. The Win32 Internet functions help provide this access.
+<LI>Enabling high-performance, multithreaded Internet applications.
+<P>The Win32 Internet functions are fully "reentrant" and multithread safe. Multithreaded applications can make simultaneous calls into the functions from different threads without adverse effects. The Internet functions themselves complete any necessary synchronization.
+<LI>Having persistent caching support built in.
+<P>The Win32 Internet functions provide persistent caching for all protocols, so the application developer can concentrate on obtaining the data and not worrying about managing the cache. For more information about how Win32 Internet functions use the cache functions to get proper Web behavior, see <A HREF="sweep087.htm" TARGET=TEXT>Persistent URL Cache Functions</A>.
+</UL>
+<P>The Win32 Internet functions are intended to make Internet client applications easier to write; they are not intended to facilitate writing Internet servers. This is because servers must be able to control how the protocol is accessed and how I/O is performed in order to achieve the high performance necessary for high-traffic servers. In addition, the Win32 Internet functions are not intended to solve the general issue of access to mail and news servers.
+
+
+
+
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep079.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep081.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

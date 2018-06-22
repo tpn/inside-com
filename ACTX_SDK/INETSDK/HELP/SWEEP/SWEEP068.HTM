@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Using the WebBrowser Control</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep067.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep069.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="iexplore_0007000102000000"></A><H3>Using the WebBrowser Control<BR CLEAR=ALL>
+<HR></H3><P>The WebBrowser control adds browsing, document viewing, and data downloading capabilities to your applications. It allows the user to browse sites on the Internet's World Wide Web, as well as folders in the local file system and on a network. The WebBrowser control supports Web browsing through both point-and-click hyperlinking and Uniform Resource Locator (URL) navigation. Also, the control maintains a history list that allows the user to browse forward and backward through previously browsed sites, folders, and documents. 
+
+<P>The WebBrowser control includes support for parsing and displaying HTML-encoded documents. It is also an ActiveX document container that can host any ActiveX document. This means that richly formatted documents, such as a Microsoft Excel spreadsheet or Microsoft Word documents, can be opened and edited in-place from within the WebBrowser control. WebBrowser is also an ActiveX control container that can host any ActiveX control. 
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000102010000"></A><H3>Possible Uses<HR></H3><P>Some possible uses of the WebBrowser control are:
+
+<UL><LI>To enable the user to navigate to and view HTML documents on the local computer, network, or World Wide Web.
+<LI>To provide a single frame in which the user can view and edit all types of ActiveX documents.
+<LI>To create a customized Web browsing application based on the WebBrowser control. 
+</UL>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000102020000"></A><H3>Navigate to a New Location with the Navigate Method<HR></H3><P>The WebBrowser control can browse to any location in the local file system, on the network, or on the World Wide Web. You use the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method to tell the control which location to browse to. The first parameter is a string that contains the name of the location. To browse to a location in the local file system or on the network, specify the full path to the file system location or the Universal Naming Convention (UNC) name of the location on the network. To browse to a site on the World Wide Web, specify the URL of the site. By including a text box in your application, you can let the user specify the location to browse to, and then pass the location to the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method. 
+
+<P>The <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method allows you to target a specific frame on an HTML page, causing the WebBrowser control to display a Web site or file system location in that frame. First, you would call the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method and specify the URL of an HTML page that contains a frame. Then, by specifying the name of the frame in subsequent calls to <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>, you can direct the control to display subsequent locations within that frame. 
+
+<P>You can use the <A HREF="sweep071.htm#iexplore_0007000105000a00" TARGET=TEXT>LocationName</A> and <A HREF="sweep071.htm#iexplore_0007000105000b00" TARGET=TEXT>LocationURL</A> properties to retrieve information about the location that the WebBrowser control is currently displaying. If the location is an HTML page on the World Wide Web, <A HREF="sweep071.htm#iexplore_0007000105000a00" TARGET=TEXT>LocationName</A> retrieves the title of that page, and <A HREF="sweep071.htm#iexplore_0007000105000b00" TARGET=TEXT>LocationURL</A> retrieves the URL of that page. If the location is a folder or file on the network or local computer, <A HREF="sweep071.htm#iexplore_0007000105000a00" TARGET=TEXT>LocationName</A> and <A HREF="sweep071.htm#iexplore_0007000105000b00" TARGET=TEXT>LocationURL</A> both retrieve the UNC or full path of the folder or file. 
+
+<P>An HTML author can create a hyperlink that causes an Internet server to execute a program whenever the hyperlink is selected. The hyperlink typically passes data to the program during the HTTP transaction, and the program processes the data. The <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method supports navigating to such a hyperlink, and includes parameters that allow you to specify data to pass to the program. You can specify an HTTP header, HTTP post data, and the URL of the referring document. The HTTP header specifies such things as the action required of the server, the type of data being passed to the server, or a status code. The HTTP post data is the actual data for the program to process. The referring document is the HTML document that contains the hyperlink. 
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000102030000"></A><H3>Update Cached Pages with the Refresh or Refresh2 Method<HR></H3><P>The WebBrowser control stores Web pages from recently visited sites in cached memory on the user's hard disk so that, when the control revisits a site, it can save time by reloading the page from the cache rather than downloading it again from the Internet server. You can force the WebBrowser control to re-download a page by using the <A HREF="sweep072.htm#iexplore_0007000106000a00" TARGET=TEXT>Refresh</A> or <A HREF="sweep072.htm#iexplore_0007000106000b00" TARGET=TEXT>Refresh2</A> method&#151;this ensures that the user is viewing the current version of the page. Also, you can prevent the control from using the cache by specifying the <A HREF="sweep072.htm#iexplore_0007000106000703" TARGET=TEXT>navNoReadFromCache</A> and <A HREF="sweep072.htm#iexplore_0007000106000704" TARGET=TEXT>navNoWriteToCache</A> flags when calling the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method.
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000102040000"></A><H3>Navigate the History List with the GoBack and GoForward Methods<HR></H3><P>During a browsing session, the WebBrowser control maintains a history list of all Web sites that it visited during the session (unless you specify <A HREF="sweep072.htm#iexplore_0007000106000702" TARGET=TEXT>navNoHistory</A> when calling the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method). You can direct the control to browse backward and forward through the sites in the list by using the <A HREF="sweep072.htm#iexplore_0007000106000300" TARGET=TEXT>GoBack</A> and <A HREF="sweep072.htm#iexplore_0007000106000400" TARGET=TEXT>GoForward</A> methods. 
+
+<P>You can also use the <A HREF="sweep072.htm#iexplore_0007000106000500" TARGET=TEXT>GoHome</A> method to cause the WebBrowser control to return to the user's home or start page, and the <A HREF="sweep072.htm#iexplore_0007000106000600" TARGET=TEXT>GoSearch</A> method to go to the user's Web searching page. 
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000102050000"></A><H3>Control Browsing Operations with the Busy Property and Stop Method<HR></H3><P>You can use the <A HREF="sweep071.htm#iexplore_0007000105000200" TARGET=TEXT>Busy</A> property to determine if the WebBrowser control is in the process of navigating to a new location or downloading a file. If the control is busy, you can use the <A HREF="sweep072.htm#iexplore_0007000106000c00" TARGET=TEXT>Stop</A> method to cancel the navigation or the download before it is finished.
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000102060000"></A><H3>Hide or Show the WebBrowser Control with the Visible Property<HR></H3><P>By default, the WebBrowser control is hidden when it is first created, but it becomes visible after calling the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> or <A HREF="sweep072.htm#iexplore_0007000106000600" TARGET=TEXT>GoSearch</A> method. You can also set the <A HREF="sweep071.htm#iexplore_0007000105001600" TARGET=TEXT>Visible</A> property to <B>True</B> to show the control, or to <B>False</B> to hide it. 
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000102070000"></A><H3>WebBrowser Events<HR></H3><P>The WebBrowser control fires a number of different events to notify an application of user- and browser-generated activity. When the control is about to navigate to a new location, it fires a <A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A> event that specifies the URL or path of the new location and any other data that will be transmitted to the Internet server through the HTTP transaction. The data can include the HTTP header, HTTP post data, and the URL of the referrer. The <A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A> event also includes a cancel flag that you can set to <B>False</B> to cancel the navigation. The WebBrowser control fires the <A HREF="sweep073.htm#iexplore_0007000107000800" TARGET=TEXT>NavigateComplete</A> event after it has navigated to a new location. This event includes the same information as <A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A>, except <A HREF="sweep073.htm#iexplore_0007000107000800" TARGET=TEXT>NavigateComplete</A> does not include the cancel flag.
+
+<P>Whenever the WebBrowser control is about to begin a download operation, it fires the <A HREF="sweep073.htm#iexplore_0007000107000300" TARGET=TEXT>DownloadBegin</A> event. The control fires a number of <A HREF="sweep073.htm#iexplore_0007000107000a00" TARGET=TEXT>ProgressChange</A> events as the operation progresses, and then fires the <A HREF="sweep073.htm#iexplore_0007000107000400" TARGET=TEXT>DownloadComplete</A> event after completing the operation. Applications typically use these three events to indicate the progress of the download operation, often by displaying a progress bar. An application would show the progress bar in response to <A HREF="sweep073.htm#iexplore_0007000107000300" TARGET=TEXT>DownloadBegin</A>, update the progress bar in response to <A HREF="sweep073.htm#iexplore_0007000107000a00" TARGET=TEXT>ProgressChange</A>, and hide it in response to <A HREF="sweep073.htm#iexplore_0007000107000400" TARGET=TEXT>DownloadComplete</A>. 
+
+<P>When an application calls the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method with the <A HREF="sweep072.htm#iexplore_0007000106000701" TARGET=TEXT>navOpenInNewWindow</A> flag, the WebBrowser control fires the <A HREF="sweep073.htm#iexplore_0007000107000900" TARGET=TEXT>NewWindow</A> event before navigating to the new location. The event includes information about the new location, and a flag that indicates whether the application or the control is to create the new window. Set this flag to <B>True</B> if your application will create the window, or to <B>False</B> if the WebBrowser control should create it.
+
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep067.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep069.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Location Object</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep050.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep052.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_0004000107000000"></A><H3>Location Object<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107000100"></A><H3>location Object<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>An object that resides below the window in the scripting object model. The location object represents the current URL:
+
+<P><map name=location>
+<area shape="rect" coords="0,0,109,25" href="sweep048.htm">
+<area shape="rect" coords="69,63,178,88" href="sweep055.htm">
+<area shape="rect" coords="69,94,178,119" href="sweep056.htm">
+<area shape="rect" coords="69,187,178,212" href="sweep049.htm">
+<area shape="rect" coords="105,217,213,242" href="sweep052.htm">
+<area shape="rect" coords="105,248,213,273" href="sweep053.htm">
+<area shape="rect" coords="105,279,213,304" href="sweep050.htm">
+<area shape="rect" coords="138,309,246,334" href="sweep054.htm">
+</map>
+<IMG SRC="art/location.gif" WIDTH="277" HEIGHT="335" ALT="" BORDER=0 USEMAP="#location">
+
+<P>Setting any portion of the location object causes the browser to navigate to the newly constructed URL. The following script navigates to http://www.microsoft.com:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;script language="VBScript"&gt;
+     [some preceding VBScript code]
+     location.href="http://www.microsoft.com"
+&lt;/script&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107010100" TARGET=TEXT>href</A>, <A HREF="sweep051.htm#scriptom_0004000107010200" TARGET=TEXT>protocol</A>, <A HREF="sweep051.htm#scriptom_0004000107010300" TARGET=TEXT>host</A>, <A HREF="sweep051.htm#scriptom_0004000107010400" TARGET=TEXT>hostname</A>, <A HREF="sweep051.htm#scriptom_0004000107010500" TARGET=TEXT>port</A>, <A HREF="sweep051.htm#scriptom_0004000107010600" TARGET=TEXT>pathname</A>, <A HREF="sweep051.htm#scriptom_0004000107010700" TARGET=TEXT>search</A>, <A HREF="sweep051.htm#scriptom_0004000107010800" TARGET=TEXT>hash</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107010000"></A><H3>Properties<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107010100"></A><H3>href Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the compete URL for the location. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>location.</I><B>href</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>location</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a location object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new string value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the complete URL for the location.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107010200" TARGET=TEXT>protocol</A>, <A HREF="sweep051.htm#scriptom_0004000107010300" TARGET=TEXT>host</A>, <A HREF="sweep051.htm#scriptom_0004000107010400" TARGET=TEXT>hostname</A>, <A HREF="sweep051.htm#scriptom_0004000107010500" TARGET=TEXT>port</A>, <A HREF="sweep051.htm#scriptom_0004000107010600" TARGET=TEXT>pathname</A>, <A HREF="sweep051.htm#scriptom_0004000107010700" TARGET=TEXT>search</A>, <A HREF="sweep051.htm#scriptom_0004000107010800" TARGET=TEXT>hash</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107010200"></A><H3>protocol Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the protocol portion of the URL.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>location.</I><B>protocol</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>location</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a location object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new string value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the protocol portion of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com, this would return http:.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107010100" TARGET=TEXT>href</A>, <A HREF="sweep051.htm#scriptom_0004000107010300" TARGET=TEXT>host</A>, <A HREF="sweep051.htm#scriptom_0004000107010400" TARGET=TEXT>hostname</A>, <A HREF="sweep051.htm#scriptom_0004000107010500" TARGET=TEXT>port</A>, <A HREF="sweep051.htm#scriptom_0004000107010600" TARGET=TEXT>pathname</A>, <A HREF="sweep051.htm#scriptom_0004000107010700" TARGET=TEXT>search</A>, <A HREF="sweep051.htm#scriptom_0004000107010800" TARGET=TEXT>hash</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107010300"></A><H3>host Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the host and port portions of the URL (hostname:port.).
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>location.</I><B>host</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>location</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a location object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new string value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the host and port portions of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com:80, this would be www.microsoft.com:80. For file: protocols, this always returns "".
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107010100" TARGET=TEXT>href</A>, <A HREF="sweep051.htm#scriptom_0004000107010200" TARGET=TEXT>protocol</A>, <A HREF="sweep051.htm#scriptom_0004000107010400" TARGET=TEXT>hostname</A>, <A HREF="sweep051.htm#scriptom_0004000107010500" TARGET=TEXT>port</A>, <A HREF="sweep051.htm#scriptom_0004000107010600" TARGET=TEXT>pathname</A>, <A HREF="sweep051.htm#scriptom_0004000107010700" TARGET=TEXT>search</A>, <A HREF="sweep051.htm#scriptom_0004000107010800" TARGET=TEXT>hash</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107010400"></A><H3>hostname Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the host portion of the URL, either a name or an IP address.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>location.</I><B>hostname</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>location</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a location object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new string value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the hostname portion of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com, this would return www.microsoft.com. For file: protocols, this always returns "".
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107010100" TARGET=TEXT>href</A>, <A HREF="sweep051.htm#scriptom_0004000107010200" TARGET=TEXT>protocol</A>, <A HREF="sweep051.htm#scriptom_0004000107010300" TARGET=TEXT>host</A>, <A HREF="sweep051.htm#scriptom_0004000107010500" TARGET=TEXT>port</A>, <A HREF="sweep051.htm#scriptom_0004000107010600" TARGET=TEXT>pathname</A>, <A HREF="sweep051.htm#scriptom_0004000107010700" TARGET=TEXT>search</A>, <A HREF="sweep051.htm#scriptom_0004000107010800" TARGET=TEXT>hash</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107010500"></A><H3>port Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the port of the URL.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>location.</I><B>port</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>location</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a location object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new string value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the port of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For <I>http://www.microsoft.com:80</I>, this returns <I>80</I>. For <I>file:</I> protocols, this always returns "".
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107010100" TARGET=TEXT>href</A>, <A HREF="sweep051.htm#scriptom_0004000107010200" TARGET=TEXT>protocol</A>, <A HREF="sweep051.htm#scriptom_0004000107010300" TARGET=TEXT>host</A>, <A HREF="sweep051.htm#scriptom_0004000107010400" TARGET=TEXT>hostname</A>, <A HREF="sweep051.htm#scriptom_0004000107010600" TARGET=TEXT>pathname</A>, <A HREF="sweep051.htm#scriptom_0004000107010700" TARGET=TEXT>search</A>, <A HREF="sweep051.htm#scriptom_0004000107010800" TARGET=TEXT>hash</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107010600"></A><H3>pathname Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the pathname in the URL.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>location.</I><B>pathname</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>location</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a location object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new string value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the pathname portion of the URL.
+
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com/intdev, this returns intdev. 
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107010100" TARGET=TEXT>href</A>, <A HREF="sweep051.htm#scriptom_0004000107010200" TARGET=TEXT>protocol</A>, <A HREF="sweep051.htm#scriptom_0004000107010300" TARGET=TEXT>host</A>, <A HREF="sweep051.htm#scriptom_0004000107010400" TARGET=TEXT>hostname</A>, <A HREF="sweep051.htm#scriptom_0004000107010500" TARGET=TEXT>port</A>, <A HREF="sweep051.htm#scriptom_0004000107010700" TARGET=TEXT>search</A>, <A HREF="sweep051.htm#scriptom_0004000107010800" TARGET=TEXT>hash</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107010700"></A><H3>search Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the search portion of the URL, if specified.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>location.</I><B>search</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>location</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a location object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new string value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the search portion of the URL.
+
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com/intdev?user, this returns ?user. For http://www.microsoft.com/intdev, this returns NULL.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107010100" TARGET=TEXT>href</A>, <A HREF="sweep051.htm#scriptom_0004000107010200" TARGET=TEXT>protocol</A>, <A HREF="sweep051.htm#scriptom_0004000107010300" TARGET=TEXT>host</A>, <A HREF="sweep051.htm#scriptom_0004000107010400" TARGET=TEXT>hostname</A>, <A HREF="sweep051.htm#scriptom_0004000107010500" TARGET=TEXT>port</A>, <A HREF="sweep051.htm#scriptom_0004000107010600" TARGET=TEXT>pathname</A>, <A HREF="sweep051.htm#scriptom_0004000107010800" TARGET=TEXT>hash</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000107010800"></A><H3>hash<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the hash portion of the URL, if specified.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>location.</I><B>hash</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Parameter</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>location</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a location object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new string value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the hash portion of the URL.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep051.htm#scriptom_0004000107010100" TARGET=TEXT>href</A>, <A HREF="sweep051.htm#scriptom_0004000107010200" TARGET=TEXT>protocol</A>, <A HREF="sweep051.htm#scriptom_0004000107010300" TARGET=TEXT>host</A>, <A HREF="sweep051.htm#scriptom_0004000107010400" TARGET=TEXT>hostname</A>, <A HREF="sweep051.htm#scriptom_0004000107010500" TARGET=TEXT>port</A>, <A HREF="sweep051.htm#scriptom_0004000107010600" TARGET=TEXT>pathname</A>, <A HREF="sweep051.htm#scriptom_0004000107010700" TARGET=TEXT>search</A> 
+
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep050.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep052.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

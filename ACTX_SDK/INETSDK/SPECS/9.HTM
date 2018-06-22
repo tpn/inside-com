@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>VBScript in HTML - Microsoft&#174; Visual Basic&#174; Scripting Edition</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BLOCKQUOTE>
+<FONT FACE="ARIAL" SIZE=2>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<H3><A HREF="6.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="15.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A>How VBScript Looks in HTML</H3>
+<HR SIZE=2>
+</TD></TR></TABLE>
+
+<H5>The &lt;SCRIPT&gt; Tag</H5>
+<BLOCKQUOTE>
+<P>VBScript code goes in an HTML page inside paired &lt;SCRIPT&gt; tags. For example, a procedure to test a delivery date might appear as follows:</P>
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt; 
+&lt;!--
+   Function CanDeliver(Dt)
+      CanDeliver = (CDate(Dt) - Now()) &gt; 2
+   End Function
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>Beginning and ending &lt;SCRIPT&gt; tags surround the code. Notice that the LANGUAGE attribute indicates the scripting language. You need to specify the language since Microsoft Internet Explorer version 3.0 can use other scripting languages. In addition, notice that the CanDeliver function is embedded in comment tags (&lt;!-- and --&gt;). This prevents browsers that don't understand the &lt;SCRIPT&gt; tag from displaying the code.</P>
+
+<P>Since the example is a general function - it isn't tied to any particular form control - you can include it in the HEAD section of the page:</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Place Your Order&lt;/TITLE&gt;
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+   Function CanDeliver(Dt)
+      CanDeliver = (CDate(Dt) - Now()) &gt; 2
+   End Function
+--&gt;
+&lt;/SCRIPT&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+...
+</FONT></PRE>
+<P>You can use procedures in code anywhere in a page. You can put procedures in both the BODY and HEAD sections. However, you may want to put all procedures in the HEAD section in order to keep all the code together.</P>
+
+<P>Now, let's look at some elements of the language.
+</BLOCKQUOTE>
+<BR>
+<BR>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<FONT FACE=ARIAL SIZE=2><HR SIZE=2><A HREF="6.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="15.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A><A HREF="cpyright.htm">&#169; 1996 by Microsoft Corporation</a>.</FONT>
+
+</TD></TR></TABLE>
+</FONT>
+</BLOCKQUOTE>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+

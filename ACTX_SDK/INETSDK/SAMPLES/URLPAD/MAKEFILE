@@ -1,0 +1,36 @@
+
+!if "$(CPU)" == "ALPHA" || "$(CPU)" == "PPC" || "$(CPU)" == "MIPS" 
+Sorry:
+        @echo The URLPad sample only builds on X86 platforms at this time.
+!else
+
+Use_MFC = 1
+
+#  Uncomment the below line if using VC++ 4.2b
+#  _MFC_LIB_ = 42
+
+Proj = UrlPad
+
+# These are "extra" libs beyond the standard set that inetsdk.mak will
+#  append to the libs set
+
+libs=UrlMon.Lib WinInet.Lib WebPost.Lib
+
+cDefines = -GX -I..\BaseCtl\Include
+
+# pull in the master SDK makefile that defines all of the macros
+#  and all of the build rules
+
+!include <INetSDK.Mak>
+
+All: $(ObjDir)\$(Proj).Exe
+
+$(ObjDir)\SuperPad.Exe : $(@R).Obj          $(@D)\UrlPad.Res   $(@D)\PadDoc.Obj  \
+      $(@D)\PadView.Obj  $(@D)\MainFrm.Obj  $(@D)\IPFrame.Obj  $(@D)\PageSet.Obj \
+      $(@D)\TabStop.Obj  $(@D)\PadFrame.Obj $(@D)\AboutBox.Obj $(@D)\PadItem.Obj \
+      $(@D)\LinkItem.Obj $(@D)\DownLoad.Obj $(@D)\FileOpen.Obj
+
+$(ObjDir)\$(Proj).Exe: $(@D)\SuperPad.Exe
+ Copy $? $@
+
+!endif

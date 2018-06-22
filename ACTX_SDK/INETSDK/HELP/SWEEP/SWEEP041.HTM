@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>The Internet Explorer 3.0 Licensing Scheme</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep040.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep042.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="license_0002000502000000">The Internet Explorer 3.0 Licensing Scheme</A></H2>
+<BR CLEAR=ALL>
+<P>Online licensing of controls will continue to use the <B>IClassFactory2</B> mechanism that is implemented by existing licensed controls. An HTML page with licensed controls requires a single associated <I>license package</I> which stores the run-time licenses for all the controls used on the page. The license package (.LPK file) stores an array of (CLSID, license) tuples. The HTML page points to the license package via a <I>relative</I> URL reference inside the HTML. At design-time, authoring tools or utilities should use <B>IClassFactory2::RequestLicKey</B> to create the .LPK file and the associated HTML element (tag) that refers to it. At run-time, web browsers should extract the necessary run-time licenses from the license package in order to instantiate licensed controls embedded in the HTML page using <B>IClassFactory2::CreateInstanceLic</B>. In this model the HTML page is analogous to a Visual Basic form, HTML-authoring tools or helper utilities play the role of the VB Design Environment, and the web browser plays the role of the VB run-time (VBRUN.DLL). 
+
+<P>It is important to note that the URL reference to the license package (.LPK) must be <I>relative only</I>. This makes it inconvenient to pirate licensed controls. Certainly it's less possible to accidentally pirate controls, because one can't copy an HTML page with a relative URL to a .LPK file and expect the page to still work. Since the URL to the .LPK file must be relative, in order to pirate a control one would have to copy the .LPK file knowingly. By using a plain-text format for the .LPK file, it is possible to include a legal copyright statement at the top of the file, dissuading anybody who downloads this file in order to copy it to a pirated site. 
+<P>Web browsers can support this licensing scheme by posing additional obstacles for pirates who wish to copy .LPK files - for example making it difficult to download and save such files, or obscuring the cached copies of such files. Such obstacles do not make piracy impossible, but they make it even more inconvenient. Implementation of such obstacles is <B>optional</B> for web browsers, and is not a requirement of the proposed licensing scheme. 
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep040.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep042.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

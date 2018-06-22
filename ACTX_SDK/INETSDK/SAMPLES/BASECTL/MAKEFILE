@@ -1,0 +1,49 @@
+!ifdef clean
+makeopts = clean=1
+!endif # clean
+
+!ifdef nodebug
+makeopts = $(makeopts) nodebug=1
+!endif
+
+# If sample is installed, cd into that directory and recursively start nmake.
+
+all:
+!IF EXIST (FrameWrk)
+ cd FrameWrk
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (FrameWrk)
+!IF EXIST (OBJVW)
+ cd OBJVW
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (OBJVW)
+!IF EXIST (IELnk)
+ cd IELnk
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (IELnk)
+!IF EXIST (IEMime)
+ cd IEMime
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (IEMime)
+!IF EXIST (ToDoSvr)
+ cd ToDoSvr
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (ToDoSvr)
+!IF EXIST (WebImage)
+ cd WebImage
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (WebImage)
+!IF EXIST (Card)
+ cd Card
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (Card)
+
+Clean:
+    @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts) clean=1

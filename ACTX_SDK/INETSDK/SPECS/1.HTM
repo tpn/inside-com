@@ -1,0 +1,116 @@
+<HTML>
+<HEAD>
+<TITLE>VBScript and Forms - Microsoft&#174; Visual Basic&#174; Scripting Edition</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BLOCKQUOTE>
+<FONT FACE="ARIAL" SIZE=2>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<H3><A HREF="10.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="7.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A>VBScript and Forms</H3>
+<HR SIZE=2>
+</TD></TR></TABLE>
+
+<H5>Simple Validation</H5>
+<BLOCKQUOTE><P>
+You can use Visual Basic Scripting Edition to do much of the form processing that you'd normally need to do on a server. You can also do things that just can't be done on the server.</P>
+<P>
+Here's an example of simple client-side validation. The HTML code is for a text box and a button. If you use Microsoft Internet Explorer version 3.0 to view the <A HREF="2.htm">page produced by the code</A>, you'd see a small text box with a button next to it.  </P>
+<P>
+<PRE><FONT FACE="Courier New" SIZE=3>
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Simple Validation&lt;/TITLE&gt;
+&lt;SCRIPT LANGUAGE="VBScript"&gt; 
+&lt;!--
+Sub Submit_OnClick
+  Dim TheForm
+  Set TheForm = Document.ValidForm
+  If IsNumeric(TheForm.Text1.Value) Then
+    If TheForm.Text1.Value &lt; 1 Or TheForm.Text1.Value &gt; 10 Then
+      MsgBox "Please enter a number between 1 and 10."
+    Else
+      MsgBox "Thank you."
+    End If
+  Else
+    MsgBox "Please enter a numeric value."
+  End If
+End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H3&gt;Simple Validation&lt;/H3&gt;&lt;HR&gt;
+&lt;FORM NAME="ValidForm"&gt;
+Enter a value between 1 and 10: 
+&lt;INPUT NAME="Text1" TYPE="TEXT" SIZE="2"&gt;
+&lt;INPUT NAME="Submit" TYPE="BUTTON" VALUE="Submit"&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</FONT>
+</PRE>
+<P>The only difference between this and the examples on <A HREF="7.htm">A Simple VBScript Page</A> is that the <B>Value</B> property of the text box is used to check the entered value. To get the <B>Value</B> property, however, the code has to qualify the reference to the name of the text box.</P>
+<P>
+You can always write out the full reference, Document.ValidForm.Text1. However, where you have multiple references to form controls you'll want to do what was done here. First, the declare a variable. Then use the  <B>Set</B> statement  to assign the form to the variable <I>TheForm</I>. A regular assignment statement doesn't work here: you have to use <B>Set</B> to preserve the reference to an object.</P>
+</BLOCKQUOTE>
+<H5>Using Numeric Values</H5>
+<BLOCKQUOTE>
+<P>
+Notice that the example directly tests the value against a number: it uses the <B>IsNumeric</B> function to make sure the string in the text box is a number. Although VBScript automatically converts strings and numbers as needed, it's always a good practice to test a user-entered value for its data subtype and to use conversion functions as necessary. In addition, when doing summation with text box values,  convert the values explicitly to numbers since the plus sign (+ operator) represents both addition and string concatenation. For example, if Text1 contained "1" and Text2 contained "2" you'd see the following results:
+</P><P><PRE><FONT FACE="Courier New" SIZE=3>
+A = Text1.Value + Text2.Value		' A is "12"
+A = CDbl(Text1.Value) + Text2.Value	' A is 3
+</FONT>
+</PRE>
+</BLOCKQUOTE>
+<BR>
+
+<H5>Validating and Passing Data Back to the Server</H5>
+<BLOCKQUOTE>
+<P>The simple validation example uses a plain button control. If it used a Submit control, the example would never see the data to check it&#151;everything would go immediately to the server. Avoiding the Submit control lets you check the data, but it doesn't submit it to the server. That requires an additional line of code:</P>
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt; 
+&lt;!--
+Sub Submit_OnClick
+  Dim TheForm
+  Set TheForm = Document.ValidForm
+  If IsNumeric(TheForm.Text1.Value) Then
+    If TheForm.Text1.Value &lt; 1 Or TheForm.Text1.Value &gt; 10 Then
+      MsgBox "Please enter a number between 1 and 10."
+    Else
+      MsgBox "Thank you."
+      TheForm.Submit	' Data correct; send to server.
+    End If
+  Else
+    MsgBox "Please enter a numeric value."
+  End If
+End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+<P>To send the data to the server, the code invokes the <B>Submit</B> method on the form object when the data is correct. From there, the server handles the data just as it otherwise would&#151;except that the data is correct before it gets there. You'll find complete information about the <B>Submit</B> method and other methods on the <A HREF="../help/sweep/sweep029.htm" target="TEXT">Object Model for Scripting</A> page in this SDK.</P>
+<P>
+So far, you've seen only the standard HTML &lt;FORM&gt; objects. Internet Explorer 3.0 also lets you exploit the full power of AciveX&#153; controls (formerly called OLE controls) and Java objects.</P>
+
+</BLOCKQUOTE>
+<BR>
+<BR>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<FONT FACE=ARIAL SIZE=2><HR SIZE=2><A HREF="10.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="7.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A><A HREF="cpyright.htm" TARGET="_top">&#169; 1996 by Microsoft Corporation</a>.</FONT>
+</TD></TR></TABLE>
+</FONT>
+</BLOCKQUOTE>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+

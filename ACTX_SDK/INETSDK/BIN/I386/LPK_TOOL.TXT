@@ -1,0 +1,84 @@
+README file for the License Package Authoring Tool - LPK_TOOL.EXE
+=================================================================
+
+Description
+===========
+
+The License Package Authoring Tool (LPK) allows you to author an 
+LPK file.
+
+An HTML Page with licensed controls requires a single associated 
+license package which stores the run-time licenses for all the 
+controls used on the page. The HTML page should point to a license 
+package via a relative URL. This tool allows you to author a 
+license package file.
+
+For more information on Licensing, please refer to the following 
+document.
+
+Title: Online Licensing of ActiveX controls.
+
+
+Using LPK_TOOL
+==============
+
+LPK_TOOL displays two list boxes. 
+
+Available Controls List Box
+===========================
+The first list box, "Available Controls", lists all controls registered 
+in your system. 
+
+Contorls in License Package List Box
+====================================
+The second list box, "Controls in License Package", lists all 
+controls, whose licensing information, if available, will be stored in 
+the LPK file. The Licensing information will be save when you invoke 
+the 'Save & Exit' button.
+
+Add Button
+==========
+You can select 'controls' in the 'Available Control List Box' and 
+use the 'Add' button to instruct the tool to add it to the LPK file. 
+LPK_TOOL will respond by moving the selected controls to the "Controls 
+in License Package" List Box.
+
+Remove Button
+=============
+You can select 'controls' in the 'Controls in License Package List Box' 
+and use the 'Remove' button to instruct the tool not to add it to the 
+LPK file. The LPK_TOOL will respond by moving the selected controls 
+to the 'Available Control List Box'.
+
+Save & Exit Button
+==================
+The 'Save & Exit' button will instruct the tool to save the licensing 
+information to the LPK file. LPK_TOOL will prompt for a file name and 
+save the Licensing information in the file name provided. LPK_TOOL will 
+terminate after saving the file.
+
+Cancel Button
+=============
+The 'Cancel Button' will terminate the application without creating the  
+LPK file.
+
+About Button
+=============
+The 'About Button' will display the version information. 
+
+Help Button
+===========
+The 'Help Button' will dislay the help file for the tool. 
+
+Show only Controls that support Licensing Check Box
+===================================================
+When checked, LPK_TOOL will display only those controls, which support 
+Licenses (IClassFactory2) interface.
+
+Note:
+=====
+This tool makes use of the License Manager components. Please make 
+sure the License Manager is installed on your system and registered 
+before you use this tool.
+	
+< end of document>

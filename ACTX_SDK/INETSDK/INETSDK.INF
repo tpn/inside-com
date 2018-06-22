@@ -1,0 +1,3437 @@
+
+    ;***********************************************************************
+    ; SOURCE MEDIA DESCRIPTION			
+    ; ------------------------
+    ;***********************************************************************
+    [Source Media Descriptions]
+        1 = "CD-Rom Labelled Windows NT"
+        2 = "CD-Rom Labelled ActiveX(tm) SDK"
+    
+    
+    
+    ;***********************************************************************
+    ; CONSTANTS FOR USING DIALOGS
+    ;***********************************************************************
+    [GeneralConstants]
+    
+        ;
+        ; Constants to support the use of radio button dialogs
+        ;
+    
+        Radio1  = "1"
+        Radio2  = "2"
+        Radio3  = "3"
+        Radio4  = "4"
+        Radio5  = "5"
+        Radio6  = "6"
+        Radio7  = "7"
+        Radio8  = "8"
+        Radio9  = "9"
+    
+        ;
+        ; Constants to support the use of checkbox dialogs
+    
+        Chosen    = "ON"
+        NotChosen = "OFF"
+    
+    
+    [RegistryConstants]
+    
+        MaskAllAccess = 33554432
+        NoTitle       = 0
+        RegLastError  = $(!REG_ERROR_SUCCESS)
+    
+    
+    ;************************************************************************
+    ; CONFIGURATION CHOICES
+    ; ---------------------
+    ; the sections below contain the different choices supported for
+    ; the configuration items shown.  an id section establishes the
+    ; language independent IDs supported by nt setup.  for each language
+    ; supported a text section displays the text used for the different
+    ; choices
+    ;************************************************************************
+    
+    ;********************************
+    ; PLATFORM INDEPENDENT CHOICES
+    ;********************************
+    ;----------------------------------------------------
+    ; LANGUAGE CHOICES
+    ;----------------------------------------------------
+    
+    ;----------------------------------------------------
+    ; PROCESSOR CHOICES
+    ;----------------------------------------------------
+    [ProcessorID]
+    
+        ProcessorID_I386  = I386
+        ProcessorID_I486  = I486
+        ProcessorID_I586  = I586
+        ProcessorID_R4000 = R4000
+        ProcessorID_ALPHA = ALPHA_AXP
+        ProcessorID_PPC601 = PPC601
+        ProcessorID_PPC603 = PPC603
+        ProcessorID_PPC604 = PPC604
+        ProcessorID_PPC620 = PPC620
+    
+    ;----------------------------------------------------
+    ; PLATFORM CHOICES
+    ;----------------------------------------------------
+    [PlatformID]
+    
+        PlatformID_I386 = i386
+        PlatformID_MIPS = mips
+        PlatformID_ALPHA = alpha
+        PlatformID_PPC = ppc
+    
+    ;**************************************************************
+    ;  UI VARIABLES
+    ;**************************************************************
+    
+    [ProcessorVar]
+    
+        STF_PROCESSOR = "" ? $(LIBHANDLE) GetProcessor
+        STF_PLATFORM  = ""
+    
+    [LocaleVar]
+        ;
+        ; Locale for Win95 debug dlls
+        ;
+    
+        STF_LOCALE       = "" ? $(SDKLIBHANDLE) GetWindowsLocaleID
+    
+        ;
+        ; On the topic of locales, set manifest constants
+        ;
+    
+        LANGID_JPN = "JPN"
+        LANGID_ENG = "ENG"
+    
+    
+    
+    [UiVars]
+    
+        ;
+        ; Destination TOOLS Drive Particulars
+        ;
+        VolumeList      = {} ? $(LIBHANDLE) GetHardDriveLetters
+        VolumeFreeList  = {} ? $(LIBHANDLE) GetHardDriveFreeSpace
+        VolumeFSList    = {} ? $(LIBHANDLE) GetHardDriveFileSystems
+        DestVolume      = ""
+        ;
+    
+        ;
+        ; Windows NT Directory
+        ;
+    
+        STF_WINDOWSPATH    = "" ? $(!LIBHANDLE) GetWindowsNtDir
+        STF_HOSTOS         = "" ? $(!SDKLIBHANDLE) GetWindowsPlatform
+    
+        ;
+        ; INetSDK directory
+        ;
+    
+        INETSDK = "\INetSDK"
+    
+        ;
+        ; Installation mode
+        ;
+    
+        MinInteract         = $(Radio1)
+        MaxInteract         = $(Radio2)
+        STF_INSTALL_MODE    = $(MinInteract)
+    
+        ;
+        ; INetSDK Setup Help IDs
+        ;
+    
+        !IDH_DB_TOOLSWELCOME_INS   = 3000
+        !IDH_DB_MSTINSTALLMODE_INS = 3010
+        !IDH_DB_MSTDEST_INS        = 3020
+        !IDH_DB_MSTOPTIONS_INS     = 3030
+    
+    
+    [EnvironmentVars]
+        ;
+        ; user environment variables in the current user's profile
+        ;
+    
+        PathEnvVar     = {} ? $(LIBHANDLE) GetEnvVar $(PRIVILEGES) Path
+        LibEnvVar      = {} ? $(LIBHANDLE) GetEnvVar $(PRIVILEGES) Lib
+        IncludeEnvVar  = {} ? $(LIBHANDLE) GetEnvVar $(PRIVILEGES) Include
+        InitEnvVar     = {} ? $(LIBHANDLE) GetEnvVar $(PRIVILEGES) init
+        INetSDKRootEnvVar  = {} ? $(LIBHANDLE) GetEnvVar $(PRIVILEGES) INetSDKRoot
+        MsToolsRootEnvVar  = {} ? $(LIBHANDLE) GetEnvVar $(PRIVILEGES) MsToolsRoot
+        INetSDKRootEnvVar2  = {} ? $(LIBHANDLE) GetEnvVar $(PRIVILEGES) INetSDK
+        MsToolsRootEnvVar2  = {} ? $(LIBHANDLE) GetEnvVar $(PRIVILEGES) MsTools
+    
+    
+    [VarsPlatformCommon]
+        ;
+        ; Installation options
+        ;
+    
+        DoTools        = $(Chosen)
+        DoBins         = $(Chosen)
+        DoLibs         = $(Chosen)
+        DoHeaders      = $(Chosen)
+        DoOnlineHelp   = $(Chosen)
+        DoSamples      = $(Chosen)
+        DoSample       = $(Chosen)
+        DoINetSDK          = $(Chosen)
+        DoPDCOther     = $(Chosen)
+     
+        HeadersSize      = 1044197
+        OnlineHelpSize   = 8095686  ;this is in primary
+        SamplesSize      = 5863181
+        SampleSize       = 5863181  ;this is the other choice on size
+    
+        ;
+        ; Options to disable
+        ;
+    
+        DisableList = {}
+        SamplesDisableList = {}
+        ToolsDisableList = {}
+    
+        TotalList = {Tools, OnlineHelp, Samples}
+        ToolsList = {Bins, Headers, Libs, OnlineHelp}
+        SamplesList = {Sample}
+    
+    [VarsI386]
+        ;
+        MinToolsSize     = 26
+        MaxToolsSize     = 26
+        BinsSize         = 1968790
+        LibsSize         = 404304
+        WinntDLLSize     = 4272000
+        ToolsSize        = 8363181
+    
+    [VarsMips]
+        ;
+        MinToolsSize     = 14
+        MaxToolsSize     = 14
+        BinsSize         = 1589398
+        LibsSize         = 182000
+        WinntDLLSize     = 4272000
+        ToolsSize        = 2500000
+    
+    [VarsAlpha]
+        ;
+        MinToolsSize     = 14
+        MaxToolsSize     = 14
+        BinsSize         = 1589398
+        LibsSize         = 182000
+        WinntDLLSize     = 4272000
+        ToolsSize        = 2500000
+    
+    [Varsppc]
+        ;
+        MinToolsSize     = 14
+        MaxToolsSize     = 14
+        BinsSize         = 1589398
+        LibsSize         = 182000
+        WinntDLLSize     = 4272000
+        ToolsSize        = 2500000
+    
+    [VarsOS]
+        Target95    = $(Chosen)
+        TargetNT    = $(Chosen)
+    
+    [StringsENG]
+        String1 = "Setup cannot install on the current processor."$(!LF)$(!LF)+
+                  "Cannot proceed with install."
+    
+        String4 = "Setup couldn't copy over the ActiveX SDK files. "$(!LF)$(!LF)+
+                  "Cannot proceed with install."
+    
+        String5 = "Error querying init directory. "$(!LF)$(!LF)+
+                  "Initializing our own init directory."
+    
+        String6 = "Error querying environment variables."$(!LF)$(!LF)+
+                  "Cannot proceed with install."
+    
+        String7 = "Error modifying environment variables."$(!LF)$(!LF)+
+                  "Cannot proceed with install."
+    
+        String8  = "Size required for full installation is: "
+        String9  = "Minimum size required for custom installation is: "
+        String10 = " MB.  "
+        String11 = "No drive was found with this much space."$(!LF)$(!LF)+
+                   "Cannot proceed with install."
+    
+        String12 = "There is enough space for the minimum ActiveX SDK installation. "+
+                   "You need to run Setup again and choose custom installation."
+    
+        String13 = "Setup needs a full path specification of your destination.  Please "+
+                   "reenter a new path.  An example of af full path is: "
+    
+        String14 = "The drive entered in the ActiveX SDK destination path does not "+
+                   "have enough space for a minimal installation.  Please reenter a "+
+    	           "new path."
+    
+        String15 = "There is no space free for the optional ActiveX SDK components."
+        String16 = "Setup has detected that you have chosen to install to a network "+
+    	           "drive.  If you are certain that this drive is a valid drive, and "+
+                   "that it has sufficient space, please hit OK to continue.  Otherwise, "+
+                   "choose Cancel to select another drive."
+        String17 = "The chosen drive does not have enough space to install the chosen "+
+                   "components.  Please choose less components, or another destination."
+        String18 = "Setup was unable to locate the Windows NT CD in the specified"+
+    	           " location.  Please choose OK to select a new drive, or CANCEL "+
+    	           "to continue without copying the .DBG files."
+        String19 = "Setup will attempt to copy the .DBG files from the ActiveX SDK "+
+    	           "or network image. These files are used by Windbg to provide "+
+    	           "complete symbolic information for the Win32 API. Please enter the "+
+                       "full path to the root of the ActiveX SDK."
+        String20 = "Please re-enter a pathname which does not include spaces."
+        String21 = "Setup was unable to copy the .DBG files, please see the ActiveX SDK"+
+                   " Getting Started manual for further information."
+    
+    
+    
+    ;--------------------
+    ; BILLBOARD MESSAGES
+    ;--------------------
+    [BillboardsENG]
+    Billboard1 = "Please wait while Setup creates directories on the destination drive."
+    
+    
+    ;***************************************************************************
+    ; DIALOGS
+    ; -------
+    ; the following sections contain the dialogs used to interact with the user.
+    ; for each language supported there is a different dialog section.
+    ;***************************************************************************
+    
+    
+    ;-----------------------------------------------
+    ; WELCOME DIALOG
+    ;-----------------------------------------------
+    [WelcomeDlgENG]
+        DlgType     = Info
+        DlgTemplate = SDK_WELCOME
+        Caption     = "ActiveX(tm) SDK Setup"
+    
+        DlgText     = "Welcome to Setup."$(LF)$(LF)+
+                      "The Setup program for the Microsoft ActiveX(tm) "+
+                      "Development Kit for Microsoft Windows "+
+                      "installs ActiveX development tools.  "+
+                      "Each Setup dialog has basic instructions for "+
+                      "completing a step of the installation.  "$(LF)$(LF)+
+                      "To install the ActiveX SDK on your computer now, click Next "+
+                      "or press Enter."$(LF)$(LF)+
+                      "To exit Setup without installing the ActiveX SDK, click Cancel "+
+                      "or press F3."$(LF)$(LF)$(LF)+
+                      "Please consult the ReadMe.Txt files in the root of your "+
+                      "ActiveX SDK installation for more information."
+    
+        Continue     = "&Next >" 
+        Back         = "< &Back"
+        Exit         = "Cancel"
+    
+    
+    ;-----------------------------------------------
+    ; INSTALL MODE DIALOG
+    ;-----------------------------------------------
+    [InstallModeDlgENG]
+        DlgType     = "Radio"
+        DlgTemplate = "SDK_INSTALLMODE"
+        Caption     = "Setup Methods"
+        DlgText     = "Express Setup installs the ActiveX SDK using default settings "+
+                      "and detected configuration."$(LF)$(LF)+
+                      "Custom Setup gives you more control in viewing detected configuration "+
+                      "and choosing options."$(LF)$(LF)+
+                      "Choose one of the two Setup methods:"
+    
+        Continue     = "&Next >" 
+        Back         = "< &Back"
+        Exit         = "Cancel"
+    
+        RadioHeader   = ""
+        Radio1Text    = "&Express Setup"
+        Radio2Text    = "&Custom Setup"
+        RadioDefault  = $(STF_INSTALL_MODE)
+        OptionsGreyed = {}
+    
+    ;-----------------------------------------------
+    ; TOOLS DESTINATION DIALOG
+    ;-----------------------------------------------
+    [DestinationDlgENG]
+        DlgType      = Combination
+        DlgTemplate  = "SDK_DESTTOOLS"
+        Caption      = "ActiveX SDK Destination"
+        DlgText      = "Setup recommends installing the ActiveX SDK on the following "+
+                       "hard disk drive."
+    
+        Combo1Label  = "Destination Drive:"
+    
+        Continue     = "&Next >"
+        Back         = "< &Back"
+        Exit         = "Cancel"
+    
+        GroupLabel   = "Destination Drive Characteristics"
+    
+        Static1Label = "Available Space:"
+        Static1Text  = $(DestVolumeFree)
+        footer1      = "MB"
+        footer2      = "( For Full Setup )"
+        footer3      = "( For Minimal Setup )"
+        Static2Label = "Space Needed:"
+        Static2Text  = $(MaxToolsSize)
+        Static3Text  = $(MinToolsSize)
+    
+        TextFields   = {$(Static1Text), $(Static2Text), $(Static3Text)}
+    
+        ;
+        ; Editboxes in the dialog
+        ;
+    
+        EditLabel   = "SDK Directory:"
+        EditTextLim = 256
+        EditTextIn  = $(INetSDKDir)
+        EditFocus   = "ALL"
+    
+        Combo1List   = $(DestVolumeList)
+        Combo1Out    = $(DestVolume)
+    
+        ComboListItemsIn  = {Combo1List}
+        ComboListItemsOut = {Combo1Out}
+    
+        NotifyFields = {YES}
+    
+    
+    ;-------------------------------------------------------------
+    ; PARTIAL INSTALL COMPONENTS
+    ;-------------------------------------------------------------
+    [INetSDKOptionsDlgENG]
+        DlgType     = "Check1"
+        DlgTemplate = "SDK_COMPONENTS_OPTIONS"
+        Caption     = "ActiveX SDK Install Options"
+    
+        DlgText     = "The following optional groups of files (components) can be "+
+                      "installed on your system. "+
+                      "To remove a component, clear its checkbox. "+
+                      "To install a component, check its checkbox. "+
+                      "To remove or install specific files within a component, "+
+                      "choose Files... for that component."
+    
+        Check1Text  = "Copy ActiveX Dev. Environment."
+        Check2Text  = "Copy Online Reference files."
+        Check3Text  = "Copy ActiveX SDK samples."
+    
+    
+        Continue    = "&Finish"
+        Back        = "< &Back"
+        Exit        = "Cancel"
+    
+        CheckHeader    = "Components:"
+        Customise      = "Customize:"
+        SizeHeader     = "Bytes Used:"
+        Files          = "Files..."
+        SpaceRequired  = "Disk Space Required:"
+        SpaceAvailable = "Disk Space Available:"
+        footer1        = "Bytes"
+        SizeAvailable  = $(FreeForOptional)
+    
+        CheckItemsIn      = { $(DoTools), $(DoOnlineHelp), $(DoSamples) }
+        CheckItemsInSizes = { $(ToolsSize), $(OnlineHelpSize), $(SampleSize) }
+        OptionsGreyed     = $(DisableList)
+    
+    [INetSDKOptionsDlgENG2]
+        DlgType     = "Check1"
+        DlgTemplate = "SDK_COMPONENTS_OPTIONS2"
+        Caption     = "ActiveX SDK Install Options"
+    
+        DlgText     = "The following optional groups of files (components) can be "+
+                      "installed on your system. "+
+                      "To remove a component, clear its checkbox. "+
+                      "To install a component, check its checkbox. "+
+                      "To remove or install specific files within a component, "+
+                      "choose Files... for that component."
+    
+        Check1Text  = "Copy ActiveX SDK."
+        Check2Text  = "Copy Other PDC Files."
+    
+    
+        Continue    = "&Finish"
+        Back        = "< &Back"
+        Exit        = "Cancel"
+    
+        CheckHeader    = "Components:"
+        Customise      = "Customize:"
+        SizeHeader     = "Bytes Used:"
+        Files          = "Files..."
+        SpaceRequired  = "Disk Space Required:"
+        SpaceAvailable = "Disk Space Available:"
+        footer1        = "Bytes"
+        SizeAvailable  = $(FreeForOptional)
+    
+        CheckItemsIn      = { $(DoTools), $(DoOnlineHelp) }
+        CheckItemsInSizes = { $(ToolsSize), $(SamplesSize)}
+        OptionsGreyed     = $(DisableList)
+    
+    
+    ;-------------------------------------------------------------
+    ; PARTIAL INSTALL COMPONENTS
+    ;-------------------------------------------------------------
+    [SDKSamplesDlgENG]
+        DlgType     = "Check1"
+        DlgTemplate = "SDK_SAMPLES_OPTIONS"
+        Caption     = "ActiveX SDK Samples Install Options"
+    
+        DlgText     = "The following optional groups of samples can be installed "+
+                      "on your system. "+
+                      "To remove a group, clear its checkbox. "+
+                      "To install a group, check its checkbox."$(!LF)$(!LF)
+    
+        Check1Text  = "Copy Standard ActiveX samples."
+        Check2Text  = ""
+        Check3Text  = ""
+    
+        OK          = "OK"
+        Cancel      = "Cancel"
+    
+        CheckHeader    = "Components:"
+        Customise      = "Customize:"
+        SizeHeader     = "Bytes Used:"
+        Files          = "Files..."
+        SpaceRequired  = "Disk Space Required:"
+        SpaceAvailable = "Disk Space Available:"
+        footer1        = "Bytes"
+        SizeAvailable  = $(FreeForOptional)
+    
+        CheckItemsIn      = { $(DoSamples)}
+        CheckItemsInSizes = { $(SampleSize) }
+        OptionsGreyed     = $(SamplesDisableList)
+    
+    
+    ;-------------------------------------------------------------
+    ; PARTIAL TOOLS COMPONENTS
+    ;-------------------------------------------------------------
+    [THLDlgENG]
+        DlgType     = "Check1"
+        DlgTemplate = "SDK_THL_OPTIONS"
+        Caption     = "ActiveX SDK Environment Install Options"
+    
+        DlgText     = "The following optional components can be installed "+
+                      "on your system. "+
+                      "To remove a group, clear its checkbox. "+
+                      "To install a group, check its checkbox."$(!LF)$(!LF)
+    
+        Check1Text  = "Copy ActiveX Development Tools."
+        Check2Text  = "Copy ActiveX Headers."
+        Check3Text  = "Copy ActiveX Libraries."
+    
+        OK          = "OK"
+        Cancel      = "Cancel"
+    
+        CheckHeader    = "Components:"
+        Customise      = "Customize:"
+        SizeHeader     = "Bytes Used:"
+        Files          = "Files..."
+        SpaceRequired  = "Disk Space Required:"
+        SpaceAvailable = "Disk Space Available:"
+        footer1        = "Bytes"
+        SizeAvailable  = $(FreeForOptional)
+    
+        CheckItemsIn      = { $(DoBins),   $(DoHeaders),   $(DoLibs) }
+        CheckItemsInSizes = { $(BinsSize), $(HeadersSize), $(LibsSize)) }
+        OptionsGreyed     = $(ToolsDisableList)
+    
+    ;--------------------------------------------------------------
+    ; k) SETUP DONE - RESTART DIALOG
+    ;--------------------------------------------------------------
+    [SetupDoneDlgENG]
+        DlgType     = "Info"
+        DlgTemplate = "SDK_RESTART"
+        Caption     = "ActiveX SDK Setup"
+        DlgText     = "The Microsoft ActiveX Software Development Kit is now installed.  "+
+                      "You must install Internet Explorer 3.0 (final version) and the "+
+                      "May '96 release of the Win32 SDK or later to build and run most of the "+
+                      "samples."$(LF)$(LF)+
+    				  $(ShutDownMethod)
+        Windows     = "Exit to &Windows"
+        OK          = "OK"
+    
+    
+    ;--------------------------------------------------------------
+    ; k) SETUP NOT DONE - RESTART DIALOG
+    ;--------------------------------------------------------------
+    [SetupNotDoneDlgENG]
+        DlgType     = "Info"
+        DlgTemplate = "SDK_RESTART"
+        Caption     = "ActiveX SDK Setup"
+        DlgText     = "The Microsoft ActiveX Software Development Kit for Microsoft Windows has not been installed."$(LF)$(LF)+
+                      "Please select OK to exit back to Windows."
+        Windows     = "Exit to &Windows"
+        OK          = "OK"
+    
+    
+    ;--------------------------------------------------------------
+    ; k) QUERY IF WANT TO PROCEED WITH INSTALL OF xxx
+    ;--------------------------------------------------------------
+    [WantToSetupIE]
+        STF_MB_TITLE = "Setup Test Platform"
+        STF_MB_TEXT  = "Would you like to install a test platform browser "+
+                       "to host ActiveX Controls and ActiveX Documents?"
+        DlgType      = "MessageBox"
+        STF_MB_TYPE  = 3
+        STF_MB_ICON  = 5
+        STF_MB_DEF   = 2
+    
+    
+    [WantToSetupAVrml]
+        STF_MB_TITLE = "Setup Test Platform"
+        STF_MB_TEXT  = "Would you like to install ActiveVRML "+
+                       "to create and view interactive 3D multimedia?"
+        DlgType      = "MessageBox"
+        STF_MB_TYPE  = 3
+        STF_MB_ICON  = 5
+        STF_MB_DEF   = 2
+    
+      [WantToReplaceSystemFile]
+          STF_MB_TITLE = "Replace Newer File"
+          STF_MB_TEXT  = "System File: "$($0)$(!LF)$(!LF)+
+                         "The file currently on your system is newer than "+
+                         "the file setup is installing. "+
+                         "Would you like setup to replace it anyway?"
+          DlgType      = "MessageBox"
+          STF_MB_TYPE  = 3
+          STF_MB_ICON  = 4
+          STF_MB_DEF   = 2
+  
+    ;**************************************************************************
+    ; DLL LOAD and FREE
+    ; the following section contain commands to load specific dll libraries and
+    ; to free them
+    ;**************************************************************************
+    
+    ;----------------------------------------------
+    ; a) DETECT LIBRARY
+    ;----------------------------------------------
+    [LoadSetupLibrary]
+        LoadLibrary "x" $(STF_CWDDIR)setupdll.dll LIBHANDLE
+        exit
+    
+    [LoadSDKSetupLibrary]
+        LoadLibrary "x" $(!STF_SRCDIR)INetsdk\bin\$(STF_PLATFORM)\sdkdlg.dll SDKLIBHANDLE
+        exit
+    
+    [FreeSetupLibrary]
+        FreeLibrary $(LIBHANDLE)
+        FreeLibrary $(SDKLIBHANDLE)
+        exit
+    
+    
+    
+    ;**************************************************************************
+    ; PROGRESS GUAGE VARIABLES
+    ;**************************************************************************
+    
+    [ProgressCopyENG]
+        ProCaption   = "ActiveX SDK Setup"
+        ProCancel    = "Cance&l"
+        ProCancelMsg = "ActiveX SDK isn't correctly installed.  Are you sure "+
+                       "you want to cancel copying files?"
+        ProCancelCap = "Setup Message"
+        ProText1     = "Copying:"
+        ProText2     = "To:"
+    
+    
+    ;-----------------------------------------------------------------------
+    ; ROUTINE:      CreateKey
+    ;
+    ; DESCRIPTION:  Creates a key and fixes the values indicated.
+    ;               Key is Handle\Key1\Key2\...\Keyn. Value list
+    ;               is for Valuen.
+    ;
+    ; INPUTS:       $0: Handle into registry
+    ;               $1: KeyTreeComponents {Key1Info, Key2Info..}
+    ;               $2: ValueList {Value1Info, Value2Info, Value3Info}
+    ;
+    ; OUTPUTS:      $R0: Status: STATUS_SUCCESSFUL
+    ;                            STATUS_FAILED
+    ;                            STATUS_ERROR_CREATEKEY
+    ;                            STATUS_ERROR_CREATEVALUE
+    ;
+    ;               $R1: Handle to created key
+    ;
+    ;------------------------------------------------------------------------
+    
+    [CreateKey]
+    
+        ;
+        ; Initialize
+        ;
+    
+        set Status = STATUS_FAILED
+        read-syms RegistryConstants
+    
+        ;
+        ; traverse down the keytreecomponents and open/create components as
+        ; you go along
+        ;
+    
+    
+        set BaseHandle = $($0)
+        set KeyHandle  = $(BaseHandle)
+    
+        ForListDo $($1)
+    
+            set KeyInfo = $($)
+            set KeyName = *($(KeyInfo), 1)
+    
+            ;
+            ; Try opening the key first
+    
+            OpenRegKey $(BaseHandle) "" $(KeyName) $(MaskAllAccess) KeyHandle
+            ifint $(RegLastError) != $(!REG_ERROR_SUCCESS)
+                ;
+                ; Key doesn't exist
+                ;
+                ;Debug-Output "REGISTRY.INF: Key"$(KeyName)"doesn't exist.  Will create key"
+    
+                set RegLastError = 0
+                CreateRegKey $(BaseHandle) $(KeyInfo) "" $(MaskAllAccess) "" KeyHandle
+                ifint $(RegLastError) != $(!REG_ERROR_SUCCESS)
+                    set Status = STATUS_ERROR_CREATEKEY
+                     ;Debug-Output "REGISTRY.INF: Error in creating key"
+                    goto endcreate
+                endif
+            endif
+    
+            ifstr(i) $(BaseHandle) != $($0)
+                CloseRegKey $(BaseHandle)
+                ifint $(RegLastError) != $(!REG_ERROR_SUCCESS)
+                    set Status = STATUS_ERROR_CREATEKEY
+                     ;Debug-Output "REGISTRY.INF: Error in closing base handle"
+                    goto endcreate
+                endif
+            endif
+    
+            set BaseHandle = $(KeyHandle)
+    
+        EndForListDo
+    
+        ifstr(i) $($2) != {}
+            shell "" AddValueList $(KeyHandle) $($2)
+            ifstr(i) $($R0) != STATUS_SUCCESSFUL
+                set Status = STATUS_ERROR_CREATEVALUE
+                goto endcreate
+            endif
+        endif
+        set Status = STATUS_SUCCESSFUL
+    
+    endcreate = +
+        ifstr(i) $(Status) != STATUS_SUCCESSFUL
+             ;Debug-Output "REGISTRY.INF: CreateKey Error:"$(Status)
+        endif
+        Return $(Status) $(KeyHandle)
+    
+    
+    ;*************************************************************************
+    ;
+    ;     SECTION:   AddValueList
+    ;
+    ;     PURPOSE:   Given a nested list of value items, add each to the given
+    ;                key.   Key is left open.
+    ;
+    ;   ARGUMENTS:   $0    Registry key handle
+    ;                $1    List of value items; for example:
+    ;                          { {ValueName1,0,$(!REG_VT_SZ),$(ValueData1)}, +
+    ;                            {ValueName2,0,$(!REG_VT_SZ),$(ValueData2)} }
+    ;
+    ;     RETURNS:   $R0   Status
+    ;
+    ;
+    ;*************************************************************************
+    
+    [AddValueList]
+       set Status = STATUS_FAILED
+       read-syms RegistryConstants
+    
+       ForListDo $($1)
+           SetRegValue $($0) $($)
+           ifint $(RegLastError) != $(!REG_ERROR_SUCCESS)
+               ;Debug-Output "REGISTRY.INF: CreateValue failed:"$($)
+               goto end_addvaluelist
+           endif
+       EndForListDo
+       set Status = STATUS_SUCCESSFUL
+    
+    end_addvaluelist = +
+       return $(Status)
+    
+    ;**************************************************************************
+    ;
+    ;   SetValue
+    ;
+    ;   Checks if key is present, and if so, sets the value. The key must exist
+    ;
+    ;   $0  Key Handle
+    ;   $1  Key name
+    ;   $2  Value Name
+    ;
+    ;**************************************************************************
+    [SetValue]
+        set Status = STATUS_FAILED
+        read-syms RegistryConstants
+        
+        OpenRegKey $($0) "" $($1) $(!REG_KEY_WRITE) TempKey
+    
+        ifint $(RegLastError) != $(!REG_ERROR_SUCCESS)
+            ;Debug-Output "REGISTRY.INF: OpenRegKey Failed: "$($)" "$($0)" "$($1)" "$($2)
+            goto end_set_value
+        endif
+    
+        SetRegValue $(TempKey), $($2)
+        
+        ifint $(RegLastError) != $(!REG_ERROR_SUCCESS)
+            ;Debug-Output "REGISTRY.INF: SetRegValue Failed:"$($)
+            CloseRegKey $(TempKey)
+            goto end_set_value
+        endif
+        
+        set Status = STATUS_SUCCESSFUL
+    
+    end_set_value = +
+        return $(Status) $(KeyValue)
+            
+    
+    ;**************************************************************************
+    ;
+    ;   GetValue
+    ;
+    ;   Checks if key is present, and if so, returns the value
+    ;
+    ;   $0  Key Handle
+    ;   $1  Key name
+    ;   $2  Value Name
+    ;
+    ;**************************************************************************
+    [GetValue]
+        set Status = STATUS_FAILED
+        read-syms RegistryConstants
+        
+        OpenRegKey $($0) "" $($1) $(!REG_KEY_READ) TempKey
+    
+        ifint $(RegLastError) != $(!REG_ERROR_SUCCESS)
+            ;Debug-Output "REGISTRY.INF: OpenRegKey Failed: "$($)" "$($0)" "$($1)" "$($2)
+            goto end_get_value
+        endif
+    
+        GetRegValue $(TempKey), $($2), KeyValue
+        
+        ifint $(RegLastError) != $(!REG_ERROR_SUCCESS)
+            ;Debug-Output "REGISTRY.INF: GetRegValue Failed:"$($)
+            CloseRegKey $(TempKey)
+            goto end_get_value
+        endif
+        
+        set Status = STATUS_SUCCESSFUL
+    
+    end_get_value = +
+        return $(Status) $(KeyValue)
+            
+  [DetectFileTime]
+     FileDateTime = {"0","0"} ? $(!LIBHANDLE) GetFileLastWriteTime $(FileDateTimeName)
+    
+    ;**************************************************************************
+    ; SHELL COMMANDS SCRIPT
+    ;**************************************************************************
+    
+    [Shell Commands]
+        ;
+        ; Initialise the app, by setting the caption and loading the support library
+        ;
+        set-title "ActiveX SDK"
+        set Exit_Code = $(!SETUP_ERROR_GENERAL)
+        install   LoadSetupLibrary
+    
+        StartWait
+    
+        ;
+        ; read general constants
+        ;
+    
+        set-subst LF = "\n"
+        read-syms GeneralConstants
+    
+    
+        ;
+        ; read and detect the processor we are working on
+        ;
+    
+        read-syms ProcessorID
+        read-syms PlatformID
+        read-syms ProcessorVar
+        detect    ProcessorVar
+    
+        ;
+        ; Check processor type, see if it is supported, if so what platform does it
+        ; belong to.
+        ;
+    
+        ifstr(i) $(STF_PROCESSOR) == $(ProcessorID_I386)
+            set STF_PLATFORM = $(PlatformID_I386)
+        else-ifstr(i) $(STF_PROCESSOR) == $(ProcessorID_I486)
+            set STF_PLATFORM = $(PlatformID_I386)
+        else-ifstr(i) $(STF_PROCESSOR) == $(ProcessorID_I586)
+            set STF_PLATFORM = $(PlatformID_I386)
+        else-ifstr(i) $(STF_PROCESSOR) == $(ProcessorID_R4000)
+            set STF_PLATFORM = $(PlatformID_MIPS)
+        else-ifstr(i) $(STF_PROCESSOR) == $(ProcessorID_ALPHA)
+            set STF_PLATFORM = $(PlatformID_ALPHA)
+        else-ifstr(i) $(STF_PROCESSOR) == $(ProcessorID_PPC601)
+            set STF_PLATFORM = $(PlatformID_PPC)
+        else-ifstr(i) $(STF_PROCESSOR) == $(ProcessorID_PPC603)
+            set STF_PLATFORM = $(PlatformID_PPC)
+        else-ifstr(i) $(STF_PROCESSOR) == $(ProcessorID_PPC604)
+            set STF_PLATFORM = $(PlatformID_PPC)
+        else-ifstr(i) $(STF_PROCESSOR) == $(ProcessorID_PPC620)
+            set STF_PLATFORM = $(PlatformID_PPC)
+        else
+    
+            ; Unfortunately, we haven't detected language yet,
+            ;  so default to English, report error, and quit.
+    
+            STF_LANGUAGE = "ENG"
+            shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "FATAL" $(String1)
+            goto setupnotdone
+        endif
+
+    ;Hack off: here to test code i.e. Set STF_PLATFORM = $(PlatformID_ALPHA)
+     ;   set STF_PLATFORM = $(PlatformID_ALPHA)
+    
+    
+        ;
+        ; Call into our DLL to determine Locale
+        ;  Although NEC is not a proper Windows locale,
+        ;  it is a possible return value from our GetWindowsLocaleID()
+        ;
+    
+        install   LoadSDKSetupLibrary
+    
+        read-syms LocaleVar
+        detect    LocaleVar
+        ifstr(i) $(STF_LOCALE) == ""
+            set STF_LOCALE = "usa"
+        endif
+    
+        set STF_LANGUAGE = $(LANGID_ENG)
+	set STF_UI_LANGUAGE = $(LANGID_ENG)
+        
+        
+        read-syms Strings$(!STF_LANGUAGE)
+        read-syms Billboards$(!STF_LANGUAGE)
+    
+        read-syms  RegistryConstants
+    
+        ;
+        ; Call the library function to see if we have admin privileges
+        ;
+    
+        LibraryProcedure STATUS, $(!LIBHANDLE), TestAdmin
+        ifstr(i) $(STATUS) == "YES"
+     	set PRIVILEGES = SYSTEM
+        else
+            set PRIVILEGES = USER
+        endif
+    
+        ;
+        ; read the UI Variables and detect their setting on the current machine
+        ;
+    
+        read-syms UiVars
+        detect    UiVars
+        read-syms Vars$(STF_PLATFORM)
+        read-syms VarsPlatformCommon
+        read-syms VarsOS
+    
+        ;
+        ; Dynamically adjust the variables just read.
+        ;
+    
+        EndWait
+    
+    welcome =+
+        read-syms WelcomeDlg$(STF_LANGUAGE)
+    
+        ui start "Welcome" $(SDKLIBHANDLE)
+        ifstr(i) $(DLGEVENT) == "CONTINUE"
+            ui pop 1
+            goto queryinstallmode
+        else-ifstr(i) $(DLGEVENT) == "EXIT"
+            shell "" QueryUserQuit
+            ifstr(i) $($R1) == "OK"
+                ui pop 1
+                goto setupnotdone
+            else
+                goto welcome
+            endif
+        else
+            goto end
+        endif
+    
+        ;
+        ; show install mode dialog and query if we are to operate in express mode
+        ; or in full install
+        ;
+    
+    queryinstallmode =+
+    ;  
+    ;  Check for license only once
+    ;
+    ifstr(i) $(AcceptLicense) != "TRUE"
+        ;
+        ; Show license agreement and get acceptance
+        ;
+        LibraryProcedure RetCode, $(SDKLIBHANDLE), ShowLicenseAgreement $(STF_SRCDIR)license\license.txt
+
+        ifstr(i) $(RetCode) != "SUCCESS"
+	        goto setupnotdone
+        endif
+
+        set AcceptLicense = "TRUE"
+    endif
+    
+        read-syms InstallModeDlg$(STF_LANGUAGE)
+        ui start "InstallMode" $(SDKLIBHANDLE)
+        ifstr(i) $(DLGEVENT) == "CONTINUE"
+            ui pop 1
+            set STF_INSTALL_MODE = $(ButtonChecked)
+            goto setdestination
+        else-ifstr(i) $(DLGEVENT) == "EXIT"
+            shell "" QueryUserQuit
+            ifstr(i) $($R1) == "OK"
+                ui pop 1
+                goto setupnotdone
+            else
+                goto queryinstallmode
+            endif
+        else-ifstr(i) $(DLGEVENT) == "BACK"
+            ui pop 1
+            goto welcome
+        else
+            goto end
+        endif
+    
+    setdestination =+
+    
+        ;
+        ; go through the volume list and form the destination volume list of
+        ; all volumes which have the size needed to install the INetsdk.
+        ;
+        set DestVolumeList = {}
+        set DestVolumeFreeList = {}
+    
+        ForListDo $(VolumeList)
+    
+           set CurrentVolume      = *($(VolumeList), $(#))
+           set CurrentVolumeFree  = *($(VolumeFreeList), $(#))
+           set CurrentVolumeFS    = *($(VolumeFSList), $(#))
+    
+           set DestVolumeList     = >($(DestVolumeList),     $(CurrentVolume))
+           set DestVolumeFreeList = >($(DestVolumeFreeList), $(CurrentVolumeFree))
+    
+    skipvol=+
+        EndForListDo
+    
+        ;
+        ; destination drive is the drive with the maximum space
+        ;
+    
+        set DestVolume     = ""
+        set DestVolumeFree = 0
+    
+        ForListDo $(DestVolumeList)
+            set Volume     = $($)
+            set VolumeFree = *($(DestVolumeFreeList), ~($(DestVolumeList), $(Volume)))
+    
+            ifint $(VolumeFree) > $(DestVolumeFree)
+                set DestVolume     = $(Volume)
+                set DestVolumeFree = $(VolumeFree)
+            endif
+    
+        EndForListDo
+    
+        ;
+        ; Check for previous installs, and set default target install
+        ;
+    
+        set KeySDKPath = "SOFTWARE\Microsoft\INetSDK\Directories"
+    
+        shell "" GetValue $(!REG_H_CUSER) $(KeySDKPath) "Install Dir"
+    
+    	ifstr(i) $($R0) == STATUS_FAILED
+            set INetSDKDir = $(DestVolume)$(INETSDK)
+        else
+            set INetSDKDir = *($($R1),4)
+            GetDriveInPath DestVolume $(INetSDKDir)
+            set DestVolumeFree = *($(DestVolumeFreeList), ~($(DestVolumeList), $(DestVolume)))
+        endif
+    
+    
+        ;
+        ; display tools destination, size available and needed for
+        ; user approval
+        ;
+    
+    destination =+
+    
+        ifstr(i) $(STF_INSTALL_MODE) == $(MinInteract)
+           ifint $(DestVolumeFree) < $(MaxToolsSize)
+               shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "FATAL" $(String8)$(MaxToolsSize)$(String10)$(String12)
+               goto setupnotdone
+           else
+               goto INetsdkdirs
+           endif
+        endif
+    
+        read-syms DestinationDlg$(STF_LANGUAGE)
+        ui start "Destination" $(SDKLIBHANDLE)
+        ifstr(i) $(DLGEVENT) == "NOTIFY"
+    
+            ifstr(i) $(Combo1Out) != $(DestVolume)
+                set ReInit = YES
+                set DestVolume     = $(Combo1Out)
+                set DestVolumeFree = *($(DestVolumeFreeList), ~($(DestVolumeList), $(DestVolume)))
+                set INetSDKDir     = $(DestVolume)$(INETSDK)
+            else
+                set ReInit = NO
+            endif
+            goto destination
+    
+        else-ifstr(i) $(DLGEVENT) == "CONTINUE"
+            set ReInit = NO
+            LibraryProcedure IsFullPath, $(SDKLIBHANDLE), SDKCheckPathFullPathSpec $(EditTextOut)
+            ifstr(i) $(IsFullPath) == "NO"
+                shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" $(String13)$(DestVolume)$(INETSDK)
+                goto destination
+            else
+                ;
+                ; see if there is any whitespace in the filename, if so, bail
+                ;
+                LibraryProcedure STATUS, $(!LIBHANDLE), WhiteSpaceCheck $(EditTextOut)
+                ifstr(i) $(STATUS) == "YES"
+                    shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" $(String20)
+                    goto destination
+                else
+                    GetDriveInPath Drive, $(EditTextOut)
+                    Ifcontains(i) $(Drive) in $(DestVolumeList)
+                        set DestVolume     = $(Drive)
+                        set DestVolumeFree = *($(DestVolumeFreeList), ~($(DestVolumeList), $(DestVolume)))
+                        set INetSDKDir     = $(EditTextOut)
+                    else
+                        shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "WARNING" $(String16)
+                        ifstr(i) $($R0) != STATUS_SUCCESSFUL
+    			            goto destination
+                        else
+                            ifstr(i) $($R1) == "OK"
+    			                set DestVolume = $(Drive)
+    			                set DestVolumeFree = $(MaxToolsSize)
+    			                set INetSDKDir = $(EditTextOut)
+                            else
+                                set ReInit = NO
+                                goto destination
+                            endif
+                        endif
+                    endif
+                endif
+            endif
+    
+            ui pop 1
+            goto INetsdkdirs
+    
+        else-ifstr(i) $(DLGEVENT) == "EXIT"
+    
+            set ReInit = NO
+            shell "" QueryUserQuit
+            ifstr(i) $($R1) == "OK"
+                ui pop 1
+                goto setupnotdone
+            else
+                goto destination
+            endif
+        else-ifstr(i) $(DLGEVENT) == "BACK"
+            ui pop 1
+            goto queryinstallmode
+        else
+            goto end
+        endif
+    
+    
+    INetsdkdirs = +
+    
+        set INetSDKRoot = $(INetSDKDir)
+    
+    	LibraryProcedure INetSDKDir, $(LIBHANDLE), AppendBackSlash $(INetSDKDir)
+    
+    	;
+        ; First find all the destination directories for the tools
+        ;
+    
+        set INetSDKPath    = $(INetSDKDir)Bin
+        set INetSDKLib     = $(INetSDKDir)Lib
+        set INetSDKLicense = $(INetSDKDir)License
+        set INetSDKInclude = $(INetSDKDir)Include
+    	; No doc dir right now just specs
+        set INetSDKSpecs   = $(INetSDKDir)Specs
+    	;set INetSDKDoc    = $(INetSDKDir)
+        set INetSDKHelp    = $(INetSDKDir)Help
+    
+        ;
+        ; main install.  ask user for options on main install.
+        ;
+    
+    INetSDK = +
+        ifstr(i) $(STF_HOSTOS) == "WIN95"
+    		goto InstallOptions
+     	endif
+    
+    	ifstr(i) $(!STF_PLATFORM) == $(PlatformID_I386)
+    			; NT x86
+    			goto InstallOptions
+     	else
+    			; RISC
+    			; TODO: set other RISC options here
+    			; Debug-Output "Installing on RISC"
+
+			; * (geraldd, conrisc use)
+			  goto InstallOptions
+			; (geraldd, sanrisc use 
+    			; set DoLibs = $(NotChosen)
+			
+    			
+        endif
+    
+    InstallOptions = +
+        ifstr(i) $(STF_INSTALL_MODE) == $(MinInteract)
+            goto INetSDKinstall
+        endif
+    
+        ifint $(DestVolumeFree) < $(MaxToolsSize)
+            set DoTools          = $(NotChosen)
+            set DoOnlineHelp     = $(NotChosen)
+        else
+            set DoTools          = $(Chosen)
+            set DoOnlineHelp     = $(Chosen)
+        endif
+    
+    INetSDKrepeat = +
+        ;;
+    	;;  Skip dialog -- TODO review sample options
+    	;;
+    
+        goto INetSDKinstall
+    
+    	;;
+    	;; Install options are still meaningless.  I will remove the misleading
+    	;; dialog and prompt
+    	;;
+    
+        set FreeForOptional = $(DestVolumeFree)
+        ifstr(i) $(FreeForOptional) == 0
+            shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" $(String15)
+        endif
+    
+        set SamplesSize = 0
+        set ToolsSize   = 0
+    
+    	ForListDo $(ToolsList)
+    	    ifstr(i) $(Do$($)) == $(Chosen)
+    	    	set-add ToolsSize = $(ToolsSize) $($($)Size)
+    	    endif
+    	EndForListDo
+    
+    	ForListDo $(SamplesList)
+    	    ifstr(i) $(Do$($)) == $(Chosen)
+                ;Debug-Output "Adding stuff for sampleslist"
+                        ;Debug-Output $($)
+    			set-add SamplesSize = $(SamplesSize) $($($)Size)
+    	    endif
+    	EndForListDo
+    
+        read-syms INetSDKOptionsDlg$(STF_LANGUAGE)2
+        ui start "Options" $(SDKLIBHANDLE)
+        ifstr(i) $(DLGEVENT) == "CONTINUE"
+            set DoINetSDK      = *($(CheckItemsOut), 1)
+            set DoPDCOther     = *($(CheckItemsOut), 2)
+            ui pop 1
+            goto checkdestfree
+    
+        else-ifstr(i) $(DLGEVENT) == "BACK"
+            ui pop 1
+            goto destination
+    
+        else-ifstr(i) $(DLGEVENT) == "EXIT"
+            shell "" QueryUserQuit
+            ifstr(i) $($R1) == "OK"
+                ui pop 1
+                goto setupnotdone
+            else
+                goto INetSDKrepeat
+            endif
+        else
+            goto "end"
+        endif
+    
+    checkdestfree =+
+        set ToolsSize = 0
+        set SamplesSize = 0
+        set TotalRequiredSize = 0
+        set BytesFree = $(DestVolumeFree)
+    
+    	ForListDo $(ToolsList)
+    	    ifstr(i) $(Do$($)) == $(Chosen)
+    	    	set-add ToolsSize = $(ToolsSize) $($($)Size)
+    	    endif
+    	EndForListDo
+    
+    	ForListDo $(SamplesList)
+    	    ifstr(i) $(Do$($)) == $(Chosen)
+    	    	set-add SamplesSize = $(SamplesSize) $($($)Size)
+    	    endif
+    	EndForListDo
+    
+        ForListDo $(TotalList)
+            ifstr(i) $(Do$($)) == $(Chosen)
+                set-add TotalRequiredSize = $(TotalRequiredSize) $($($)Size)
+            endif
+        EndForListDo
+    
+        ;
+        ; TotalRequiredSize is bytes, but BytesFree is MB... Convert bytes to MB
+        ;  because other direction causes overflow on drives with > 2 GB free.
+        ;
+    
+        set-div TotalRequiredSize = $(TotalRequiredSize) 1024
+        set-div TotalRequiredSize = $(TotalRequiredSize) 1024
+    
+    
+        ifint $(TotalRequiredSize) > $(BytesFree)
+            shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" $(String17)
+            goto INetSDKrepeat
+        endif
+    
+    
+        ;
+        ; build INetSDK copy list
+        ;
+    
+    INetSDKinstall	=+
+        
+        StartWait
+        shell "" SystemFilesBackup
+        shell "subroutn.inf" PushBillboard STATUSDLG $(Billboard1)
+        install Install-CopyToolsFiles
+        shell "subroutn.inf" PopBillboard
+        EndWait
+    
+    finish = +
+    
+        ;
+        ; first copy all the files over
+        ;
+    	
+;	ifstr(i) $(DoBins) == $ (Chosen)
+;		LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\CCDist35.exe $(INetSDKPath)\CCDist35.exe
+;	endif
+
+        ;
+	; Single Copy Redistributables to \Bin directory
+	;
+
+    	     ifstr(i) $(!STF_PLATFORM) == $(PlatformID_I386)
+
+		LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\CabRscKt.exe $(INetSDKPath)\CabRscKt.exe
+		LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\CabDevKt.exe $(INetSDKPath)\CabDevKt.exe
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\APrxDist.exe $(INetSDKPath)\APrxDist.exe
+
+		; Japanese JA
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\JAWINT.exe $(INetSDKPath)\JAWINT.exe
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\JAAXDist.exe $(INetSDKPath)\JAAXDist.exe
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\JAAPrxDi.exe $(INetSDKPath)\JAAPrxDi.exe
+		
+		; German DE		
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\DEWINT.exe $(INetSDKPath)\DEWINT.exe
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\DEAXDist.exe $(INetSDKPath)\DEAXDist.exe
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\DEAPrxDi.exe $(INetSDKPath)\DEAPrxDi.exe
+		
+		; Taiwan TW
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\TWWINT.exe $(INetSDKPath)\TWWINT.exe
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\TWAXDist.exe $(INetSDKPath)\TWAXDist.exe
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\TWAPrxDi.exe $(INetSDKPath)\TWAPrxDi.exe
+
+	      endif
+
+;ifstr(i) $(!STF_PLATFORM) != $(PlatformID_MIPS)
+;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\WINT351.exe $(INetSDKPath)\WINT351.exe
+;endif
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\WINTDist.exe $(INetSDKPath)\WINTDist.exe
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\WINT351.exe $(INetSDKPath)\WINT351.exe
+		;LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_SRCDIR)INETSDK\bin\$(STF_PLATFORM)\AXDist.exe $(INetSDKPath)\AXDist.exe
+
+
+        read-syms ProgressCopy$(STF_LANGUAGE)
+        install Install-All-Files-Now
+        ifstr(i) $(STF_INSTALL_OUTCOME) == "STF_SUCCESS"
+            goto INetSDKconfig
+        else
+            shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "FATAL" $(String4)
+            goto setupnotdone
+        endif
+    
+    
+    INetSDKconfig=+
+        ifstr(i) $(STF_HOSTOS) == "WINNT"
+        read-syms EnvironmentVars
+        detect    EnvironmentVars
+    
+       	;to ensure the we come ahead of mstools
+        set MSTdir = *(*($(MsToolsRootEnvVar2),4),1)
+        Set INSdir = *(*($(INetSDKRootEnvVar2),4),1)
+        LibraryProcedure MSTdir, $(LIBHANDLE), AppendBackSlash $(MSTdir)
+      	LibraryProcedure INSdir, $(LIBHANDLE), AppendBackSlash $(INSdir)
+    
+        ;
+        ; first initialize the variables which indicate whether new values are
+        ; to be set for the variables or not
+        ;
+        ForListDo {Path, Lib, Include, Init}
+            set FSet$($)Var = FALSE
+        EndForListDo
+    
+        ;
+        ; For the Path Lib and Include variables see if we can prepend them
+        ; onto the current variables
+        ;
+    
+        set dolist = {Bins, Libs, Headers}
+        ForListDo {Path, Lib, Include}
+            ifstr(i) $(Do*($(dolist),$(#))) == $(Chosen)
+                set Var = $($)
+                ifstr(i) $($(Var)EnvVar) == {}
+                    set $(Var)EnvVar = {$(Var), 0, $(!REG_VT_EXPAND_SZ), {$(INetSDK$(Var))}}
+                    set FSet$(Var)Var = TRUE
+                else
+                    set VarTitle   = *($($(Var)EnvVar), 2)
+                    set VarRegType = *($($(Var)EnvVar), 3)
+                    set VarValue   = *($($(Var)EnvVar), 4)
+    	            ifstr(i) $(Var) == "Path"
+    	    	        ifstr(i) $(PRIVILEGES) == "SYSTEM"
+                	        shell "" AppendNewValueToEnvVar2 $(VarValue) $(INetSDK$(Var))
+    	    	        else
+    		                shell "" PrependNewValueToEnvVar $(VarValue) $(INetSDK$(Var))
+    	    	        endif
+    	            else
+                        shell "" PrependNewValueToEnvVar $(VarValue) $(INetSDK$(Var))
+    	            endif
+        
+                    ifstr(i) $($R0) == STATUS_FAILED
+                        shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "FATAL" $(String6)
+                        goto setupnotdone
+                    endif
+        
+                    ifstr(i) $($R1) == "TRUE"
+                        set FSet$(Var)Var = TRUE
+                        set $(Var)EnvVar = {$(Var), $(VarTitle), $(VarRegType), $($R2)}
+                    endif
+                endif
+            endif
+        EndForListDo
+    
+        ;
+        ; If a user, then add %EnvVar% so we don't over-write...
+        ;
+    
+        ifstr(i) $(PRIVILEGES) == "USER"
+            set dolist = {Headers,Libs}
+            ifstr(i) $(Do*($(dolist),$(#))) == $(Chosen)
+                ForListDo {Include, Lib}
+                    set Var = $($)
+                    ifstr(i) $($(Var)EnvVar) == {}
+                        set $(Var)EnvVar = {$(Var), 0, $(!REG_VT_EXPAND_SZ), {%$(Var)%}}
+                        set FSet$(Var)Var = TRUE
+                    else
+                        set VarTitle   = *($($(Var)EnvVar), 2)
+                        set VarRegType = *($($(Var)EnvVar), 3)
+                        set VarValue   = *($($(Var)EnvVar), 4)
+        
+                        shell "" PrependNewValueToEnvVar $(VarValue) %$(Var)%
+        
+        
+                        ifstr(i) $($R0) == STATUS_FAILED
+                            shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "FATAL" $(String6)
+                            goto setupnotdone
+                        endif
+        
+                        ifstr(i) $($R1) == "TRUE"
+                            set FSet$(Var)Var = TRUE
+                            set $(Var)EnvVar = {$(Var), $(VarTitle), $(VarRegType), $($R2)}
+                        endif
+                    endif
+                EndForListDo
+            endif
+        endif
+    
+        ;
+        ; make cpu variable - STF_PLATFORM
+        ;
+        set FSetCpuVar = TRUE
+        ifstr(i) $(!STF_PLATFORM) == $(!PlatformID_I386)
+            set CpuEnvVar = {Cpu, 0, $(!REG_VT_SZ), i386}
+        else-ifstr(i) $(!STF_PLATFORM) == $(!PlatformID_ALPHA)
+    	set CpuEnvVar = {Cpu, 0, $(!REG_VT_SZ), ALPHA}
+        else-ifstr(i) $(!STF_PLATFORM) == $(!PlatformID_PPC)
+    	set CpuEnvVar = {Cpu, 0, $(!REG_VT_SZ), PPC}
+        else
+            set CpuEnvVar = {Cpu, 0, $(!REG_VT_SZ), MIPS}
+        endif
+    
+        ;
+        ; make INetSDK Root variable - INetSDKDir
+        ;
+        set FSetINetSDKRootVar = TRUE
+        set INetSDKRootEnvVar = {INetSDK, 0, $(!REG_VT_SZ), $(INetSDKRoot)}
+    
+        ;
+        ; modify all the environment variables
+        ;
+    
+        ForListDo {Lib, Include, Cpu, Path, INetSDKRoot, TARGETLANG}
+            ;
+            ; if the variable to set the variable is set
+    
+            ifstr(i) $(FSet$($)Var) == "TRUE"
+                shell "" SetEnvironmentString $($($)EnvVar) $(PRIVILEGES)
+                ifstr(i) $($R0) == STATUS_FAILED
+                    shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "FATAL" $(String7)
+                endif
+            endif
+        EndForListDo
+    
+        ; Big if NT if
+    	endif
+    
+        ;
+        ; Check to see if VC++ is installed
+        ;  First VC4, if not that, then VC2
+        ;
+    
+        set KeyPath = "SOFTWARE\Microsoft\Developer\Directories"
+        shell "" GetValue $(!REG_H_CUSER) $(KeyPath) "Install Dirs"
+    
+        ifstr(i) $($R0) == STATUS_FAILED
+            set KeyPath = "SOFTWARE\Microsoft\Visual C++ 2.0\Directories"
+            shell "" GetValue $(!REG_H_CUSER) $(KeyPath) "Install Dirs"
+        endif
+    
+        ifstr(i) $($R0) == STATUS_FAILED
+            set VCPresent = "No"
+        else
+            set VCPresent = "Yes"
+            set VCRoot = *($($R1),4)
+        endif
+    
+        ifstr(i) $(VCPresent) == "Yes"
+            ifstr(i) $(STF_PLATFORM) == $(PlatformID_I386)
+                set vcplat = "x86"
+            endif
+            ifstr(i) $(STF_PLATFORM) == $(PlatformID_MIPS)
+                set vcplat = "MIPS"
+            endif
+            ifstr(i) $(STF_PLATFORM) == $(PlatformID_ALPHA)
+                set vcplat = "ALPHA"
+            endif
+            ifstr(i) $(STF_PLATFORM) == $(PlatformID_PPC)
+                set vcplat = "PPC"
+            endif
+        
+            set dolist = {Headers, Libs, Bins}
+            set vclist = {Include, Library, Path}
+            ForListDo {Include, Lib, Path}
+                ifstr(i) $(Do*($(dolist),$(#))) == $(Chosen)
+                    set VCDirs = *($(vclist),$(#))
+                    set KeyPath = "SOFTWARE\Microsoft\Visual C++ 2.0\Platforms\Win32 ("$(vcplat)")"
+                    shell "" GetValue $(!REG_H_CUSER) $(KeyPath) $(VCDirs)" Dirs"
+                    ifstr(i) $($R0) != STATUS_FAILED
+                        set ExistingValue = *($($R1),4)
+                        LibraryProcedure STATUS, $(!SDKLIBHANDLE), CheckStrIStr $(INetSDK$($)) $(ExistingValue)
+    
+                        ;
+                        ; if StrIStr failed, then the string isn't present, and we
+                        ; can add it
+                        ;
+    
+                        ifstr(i) $(STATUS) == "FAILED" 
+    
+                            set NewValue = $(INetSDK$($))";"$(ExistingValue)
+                            set KeyValue = { $(VCDirs)" Dirs", $(NoTitle), $(!REG_VT_SZ), $(NewValue) }
+                            shell "" SetValue $(!REG_H_CUSER) $(KeyPath) $(KeyValue)
+                        endif
+        
+                    endif 
+                endif
+            EndForListDo
+        endif
+
+        install Install-INetSDK-Groups
+
+        ; Create Installed Dirs Key
+        ; TODO Create other keys here
+
+        set KeyPath = { +
+                        {SOFTWARE,      $(NoTitle), $(MaskAllAccess)}, +
+                        {Microsoft,     $(NoTitle), $(MaskAllAccess)}, +
+                        {INetSDK,       $(NoTitle), $(MaskAllAccess)}, +
+                        {Directories,   $(NoTitle), $(MaskAllAccess)} +
+                      }
+
+        ;Debug-Output $(KeyPath)
+        ;Debug-Output $(KeyValues)
+        set KeyValues = {{"Install Dir", $(NoTitle), $(!REG_VT_SZ), $(INetSDKRoot)}}
+    
+        shell "" CreateKey $(!REG_H_CUSER) $(KeyPath) $(KeyValues)
+
+        CloseRegKey $($R1)
+
+
+
+    setupdone=+
+
+    ;
+    ; Do final bits here
+    ;
+;        ifstr(i) $(STF_HOSTOS) == "WIN95"
+;                read-syms WantToSetupIE
+;                ui start "SetupMessage"
+;                ;Debug-Output $(DLGEVENT)
+;                ifstr(i) $(DLGEVENT) == "YES"
+;                         ; continue with install
+;                         RunProgram ExitCode "" "" $(!STF_SRCDIR)INetSDK\Bin\Win95\msie30.exe
+;                else-ifstr(i) $(DLGEVENT) == "NO"
+;                         ;end install
+;                         ;without running test platform install
+;                endif
+;            LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_SRCDIR)MSReport\Setup.exe
+;            ifstr(i) $(RetCode) == "YES"
+;               ;RunProgram ExitCode "" "" $(!STF_SRCDIR)MSReport\Setup.exe
+;            endif
+;        else
+;            ifstr(i) $(STF_PLATFORM) == $(PlatformID_I386)
+;                        read-syms WantToSetupIE
+;                        ui start "SetupMessage"
+;                        ;Debug-Output $(DLGEVENT)
+;                        ifstr(i) $(DLGEVENT) == "YES"
+;                                 ; continue with install
+;                                 RunProgram ExitCode "" "" $(!STF_SRCDIR)INetSDK\Bin\WinNT\msie30.exe
+;                        else-ifstr(i) $(DLGEVENT) == "NO"
+;                                 ;end install
+;                                 ;without running test platform install
+;                        endif
+;                LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_SRCDIR)MSReport\Setup.exe
+;                ifstr(i) $(RetCode) == "YES"
+;                   ;RunProgram ExitCode "" "" $(!STF_SRCDIR)MSReport\Setup.exe
+;                endif
+;            endif
+;        endif
+    
+        set Exit_Code = $(!SETUP_ERROR_SUCCESS)
+;          ifstr(i) $(PRIVILEGES) == "SYSTEM"
+;              set ShutDownMethod = "Select OK to shutdown Windows."
+;          else
+              set ShutDownMethod = "Select OK to exit to Windows."
+;          endif
+        read-syms SetupDoneDlg$(STF_LANGUAGE)
+        EndWait
+        ui start "Done" $(SDKLIBHANDLE)
+        ifstr(i) $(DLGEVENT) == "CONTINUE"
+            ui pop 1
+;            ifstr(i) $(PRIVILEGES) == "SYSTEM"
+;                LibraryProcedure RetCode,$(!LIBHANDLE),ShutdownSystem YES
+;            endif
+        endif
+        goto end
+
+    setupnotdone=+
+        read-syms SetupNotDoneDlg$(STF_LANGUAGE)
+        EndWait
+        ui start "NotDone" $(SDKLIBHANDLE)
+        ifstr(i) $(DLGEVENT) == "CONTINUE"
+            ui pop 1
+            goto end
+        else
+            goto end
+        endif
+    
+    end = +
+
+        install   FreeSetupLibrary
+    	exit
+    
+    
+    
+    ;*****************************************************************
+    ;                                                                *
+    ;         INSTALLATION SUPPORT ROUTINES                          *
+    ;                                                                *
+    ;*****************************************************************
+    
+    ;-----------------------------------------------------------------------
+    ; ROUTINE:      QueryUserQuit
+    ;
+    ; DESCRIPTION:  This routine queries whether the user wants to quit setup
+    ;
+    ; INPUTS:       None
+    ;
+    ; OUTPUTS:      $R0: Status:     STATUS_SUCCESSFUL |
+    ;                                STATUS_FAILED
+    ;
+    ;               $R1: UserAction: OK | CANCEL
+    ;
+    ;------------------------------------------------------------------------
+    
+    [QueryUserQuit]
+    
+        set Status     = STATUS_FAILED
+        set UserAction = CANCEL
+    
+        ;
+        ; read in quit message
+        ;
+        read-syms ExitWarningDlg$(!STF_LANGUAGE)
+        ui start "ExitWarning"
+        ifstr(i) $(DLGEVENT) == "YES"
+            set Status     = STATUS_SUCCESSFUL
+            set UserAction = "OK"
+    
+        else-ifstr(i) $(DLGEVENT) == "NO"
+            set Status     = STATUS_SUCCESSFUL
+            set UserAction = "CANCEL"
+        else
+        endif
+    
+    fin_QueryUserQuit = +
+        Return $(Status) $(UserAction)
+    
+    
+    
+    ;----------------------------------------------
+    ; EXIT WINDOWS NT TOOLS SETUP WARNING
+    ;----------------------------------------------
+    
+    [ExitWarningDlgENG]
+        DlgType      = "MessageBox"
+        STF_MB_TITLE = "Exit ActiveX SDK Setup"
+        STF_MB_TEXT  = "ActiveX SDK isn't correctly installed.  Are you "+
+                       "sure you want to exit Setup?"
+        STF_MB_TYPE  = 3
+        STF_MB_ICON  = 5
+        STF_MB_DEF   = 2
+    
+    
+      ;-----------------------------------------------------------------------
+      ; ROUTINE:      QueryReplaceFile
+      ;
+      ; DESCRIPTION:  This routine queries whether the user wants to replace a file
+      ;
+      ; INPUTS:       $0:    UserFile
+      ;               $1:    InstallFile
+      ;
+      ; USER ACTION:  $R0:    YES | NO 
+      ;               only required if current file is newer, if older return YES
+      ;
+      ;------------------------------------------------------------------------
+
+      [QueryReplaceFile]
+
+          set FileDateTimeName =  $($0)
+          set UserFileName =  $($0)
+          ;Debug-Output $($0)
+          Detect DetectFileTime
+          set CurrentDate = $(FileDateTime)
+          ;Debug-Output $(CurrentDate)
+  
+          set FileDateTimeName =  $($1)
+          ;Debug-Output $($1)
+          Detect DetectFileTime
+          ;Debug-Output $(FileDateTime)
+      
+          set ReplaceFile = YES
+          ifint *($(CurrentDate),2) > *($(FileDateTime),2)
+              ;Debug-Output "Current later than install"
+              set ReplaceFile = NO
+              ;prompt for replace
+;              read-syms WantToReplaceSystemFile
+;
+;              ui start "Welcome" $(SDKLIBHANDLE)
+;              ifstr(i) $(DLGEVENT) == "YES"
+;                  ui pop 1
+;                  set ReplaceFile = YES
+;              else
+;                  ui pop 1
+;              endif
+          else-ifint *($(CurrentDate),2) == *($(FileDateTime),2)
+              ifint *($(CurrentDate),1) >  *($(FileDateTime),1)
+                  ;Debug-Output "Current later that install"
+                  set ReplaceFile = NO
+                  ;prompt for replace
+;                  read-syms WantToReplaceSystemFile
+;
+;                  ui start "Welcome" $(SDKLIBHANDLE)
+;                  ifstr(i) $(DLGEVENT) == "YES"
+;                      ui pop 1
+;                      set ReplaceFile = YES
+;                  else
+;                      ui pop 1
+;                  endif
+              endif
+          endif
+  
+          return $(ReplaceFile)
+
+    ;-----------------------------------------------------------------------
+    ; ROUTINE:      AppendNewValueToEnvVar
+    ;
+    ; DESCRIPTION:  Looks at the existing value of an environment variable
+    ;               and appends a new value if it is not already present
+    ;
+    ; INPUTS:       $0:  OldValueList
+    ;               $1:  NewValue
+    ;
+    ; OUTPUTS:      $R0: Status: STATUS_SUCCESSFUL
+    ;                            STATUS_FAILED
+    ;
+    ;               $R1: Changed?
+    ;               $R2: NewValueList
+    ;
+    ;------------------------------------------------------------------------
+    
+    [AppendNewValueToEnvVar]
+        ;
+        set Status       = STATUS_FAILED
+        set NewValueList = {}
+        set Changed      = TRUE
+        ;
+        set Error = NO
+        ForListDo $($0)
+            ifstr(i) $(Error) == NO
+                ifstr(i) $(Changed) == TRUE
+                     LibraryProcedure ExpandedValue, $(!LIBHANDLE), ExpandSz $($)
+                     ifstr(i) $(ExpandedValue) == "ERROR"
+                         set Error = YES
+                     else-ifstr(i) $(ExpandedValue) == $($1)
+                         set Changed = FALSE
+                     endif
+                endif
+            endif
+        EndForListDo
+    
+        ifstr(i) $(Error) == "YES"
+            goto finish_append
+        endif
+    
+        set Status = STATUS_SUCCESSFUL
+        ifstr(i) $(Changed) == TRUE
+           set NewValueList = >($($0), $($1))
+        endif
+    
+    finish_append = +
+        return $(Status) $(Changed) $(NewValueList)
+    
+    ;-----------------------------------------------------------------------
+    ; ROUTINE:      AppendNewValueToEnvVar2
+    ;
+    ; DESCRIPTION:  Looks at the existing value of an environment variable
+    ;               and appends a new value if it is not already present
+    ;
+    ; INPUTS:       $0:  OldValueList
+    ;               $1:  NewValue
+    ;
+    ; OUTPUTS:      $R0: Status: STATUS_SUCCESSFUL
+    ;                            STATUS_FAILED
+    ;
+    ;               $R1: Changed?
+    ;               $R2: NewValueList
+    ;
+    ;------------------------------------------------------------------------
+    
+    [AppendNewValueToEnvVar2]
+        ;
+        set Status       = STATUS_FAILED
+        set NewValueList = {}
+        set NewValueList2 = {}
+        set Changed      = TRUE
+        set MSTFound = NO
+        ;
+        set Error = NO
+        ForListDo $($0)
+            ifstr(i) $(Error) == NO
+                ifstr(i) $(Changed) == TRUE
+                     LibraryProcedure ExpandedValue, $(!LIBHANDLE), ExpandSz $($)
+                     ;Debug-Output $(ExpandedValue)
+                     ;Debug-Output $(!MSTdir)"bin"
+                     ifstr(i) $(ExpandedValue) == "ERROR"
+                         set Error = YES
+                     else-ifstr(i) $(ExpandedValue) == $($1)
+                         set Changed = FALSE
+                     else-ifstr(i) $(ExpandedValue) == $(!MSTdir)"bin"
+                         set MSTFound = YES
+                         set Error = YES
+                         set NewValueList2 = >($(NewValueList2), $($1))
+                         set NewValueList2 = >($(NewValueList2), $($))
+                     else
+                     set NewValueList2 = >($(NewValueList2), $($))
+                     endif
+                endif
+            else
+               ; Error or done
+               set NewValueList2 = >($(NewValueList2), $($))
+            endif
+        EndForListDo
+    
+        ifstr(i) $(Error) == YES
+            ifstr(i) $(MSTFound) == YES
+                set NewValueList = $(NewValueList2)
+                set Status = STATUS_SUCCESSFUL
+                set Changed = TRUE
+            endif
+            goto finish_append2
+        endif
+    
+        set Status = STATUS_SUCCESSFUL
+        ifstr(i) $(Changed) == TRUE
+           set NewValueList = >($($0), $($1))
+        endif
+    
+    finish_append2 = +
+        ;Debug-Output "Here is the old value list"
+        ;Debug-Output $($0)
+        ;Debug-Output "Here is the new value list"
+        ;Debug-Output $(NewValueList)
+        return $(Status) $(Changed) $(NewValueList)
+    
+    ;-----------------------------------------------------------------------
+    ; ROUTINE:      PrependNewValueToEnvVar
+    ;
+    ; DESCRIPTION:  Looks at the existing value of an environment variable
+    ;               and prepends a new value if it is not already present
+    ;
+    ; INPUTS:       $0:  OldValueList
+    ;               $1:  NewValue
+    ;
+    ; OUTPUTS:      $R0: Status: STATUS_SUCCESSFUL
+    ;                            STATUS_FAILED
+    ;
+    ;               $R1: Changed?
+    ;               $R2: NewValueList
+    ;
+    ;------------------------------------------------------------------------
+    
+    [PrependNewValueToEnvVar]
+        ;
+        set Status       = STATUS_FAILED
+        set NewValueList = {}
+        set Changed      = TRUE
+        ;
+        set Error = NO
+        ForListDo $($0)
+            ifstr(i) $(Error) == NO
+                ifstr(i) $(Changed) == TRUE
+                     LibraryProcedure ExpandedValue, $(!LIBHANDLE), ExpandSz $($)
+                     ifstr(i) $(ExpandedValue) == "ERROR"
+                         set Error = YES
+                     else-ifstr(i) $(ExpandedValue) == $($1)
+                         set Changed = FALSE
+                     endif
+                endif
+            endif
+        EndForListDo
+    
+        ifstr(i) $(Error) == "YES"
+            goto finish_prepend
+        endif
+    
+        set Status = STATUS_SUCCESSFUL
+        ifstr(i) $(Changed) == TRUE
+           set NewValueList = $($1)
+           ForListDo $($0)
+               set NewValueList = >($(NewValueList), $($))
+           EndForListDo
+        endif
+    
+    finish_prepend = +
+        return $(Status) $(Changed) $(NewValueList)
+    
+      ;-----------------------------------------------------------------------
+      ; ROUTINE:      QueryReplaceFile
+      ;
+      ; DESCRIPTION:  This routine queries whether the user wants to replace a file
+      ;
+      ; INPUTS:       $0:    UserFile
+      ;               $1:    InstallFile
+      ;
+      ; USER ACTION:  $R0:    YES | NO 
+      ;               only required if current file is newer, if older return YES
+      ;
+      ;------------------------------------------------------------------------
+      [QueryReplaceFile]
+          set FileDateTimeName =  $($0)
+          set UserFileName =  $($0)
+          ;Debug-Output $($0)
+          Detect DetectFileTime
+          set CurrentDate = $(FileDateTime)
+          ;Debug-Output $(CurrentDate)
+  
+          set FileDateTimeName =  $($1)
+          ;Debug-Output $($1)
+          Detect DetectFileTime
+          ;Debug-Output $(FileDateTime)
+      
+          set ReplaceFile = YES
+          ifint *($(CurrentDate),2) > *($(FileDateTime),2)
+              ;Debug-Output "Current later that install"
+              set ReplaceFile = NO
+              ;prompt for replace
+              read-syms WantToReplaceSystemFile
+         
+              ui start "Welcome" $(SDKLIBHANDLE)
+              ifstr(i) $(DLGEVENT) == "YES"
+                  ui pop 1
+                  set ReplaceFile = YES
+              else
+                  ui pop 1
+              endif
+          else-ifint *($(CurrentDate),2) == *($(FileDateTime),2)
+              ifint *($(CurrentDate),1) >  *($(FileDateTime),1)
+                  ;Debug-Output "Current later that install"
+                  set ReplaceFile = NO
+                  ;prompt for replace
+                  read-syms WantToReplaceSystemFile
+          
+                  ui start "Welcome" $(SDKLIBHANDLE)
+                  ifstr(i) $(DLGEVENT) == "YES"
+                      ui pop 1
+                      set ReplaceFile = YES
+                  else
+                      ui pop 1
+                  endif
+              endif
+          endif
+  
+          return $(ReplaceFile)    
+    ;-----------------------------------------------------------------------
+    ; ROUTINE:      SetEnvironmentString
+    ;
+    ; DESCRIPTION:  Set the value for a user environment string
+    ;
+    ; INPUTS:       $0:  VarList
+    ;               $1:  Privileges
+    ;
+    ; OUTPUTS:      $R0: Status: STATUS_SUCCESSFUL
+    ;                            STATUS_FAILED
+    ;
+    ;
+    ;------------------------------------------------------------------------
+    
+    [SetEnvironmentString]
+        ;
+        ;
+        set Status = STATUS_FAILED
+    
+        set Var          = *($($0), 1)
+        set VarTitle     = *($($0), 2)
+        set VarRegType   = *($($0), 3)
+        set VarValueList = *($($0), 4)
+    
+        set VarValue = ""
+        ForListDo $(VarValueList)
+           ifstr(i) $(VarValue) != ""
+               set VarValue = $(VarValue)";"$($)
+           else
+               set VarValue = $($)
+           endif
+        EndForListDo
+    
+        LibraryProcedure STATUS, $(!LIBHANDLE), SetEnvVar $($1) $(Var) $(VarTitle) $(VarRegType) $(VarValue)
+        ifstr(i) $(STATUS) == "ERROR"
+           goto finish_setenvstr
+        endif
+        set Status = STATUS_SUCCESSFUL
+    
+    finish_setenvstr = +
+        Return $(Status)
+    
+  
+    ;*****************************************************************
+    ;                                                                *
+    ;         INSTALLATION SUPPORT ROUTINES                          *
+    ;                                                                *
+    ;*****************************************************************
+    
+    [Install-INetSDK-Groups]
+    
+        ifstr(i) $(PRIVILEGES) == "SYSTEM"
+    	    set Common = "Common"
+        else
+            set Common = ""
+        endif
+    
+        set ToolsGroup = "ActiveX SDK"
+        Create$(Common)ProgManGroup $(ToolsGroup) ""
+        Show$(Common)ProgManGroup   $(ToolsGroup), 1
+    
+        ;Debug-Output "About to Jump in to Create Icons"
+        ifstr(i) $(DoOnlineHelp) == $(Chosen)
+            set HelpGroup = $(ToolsGroup)
+            ;Debug-Output "Creating Icon"
+    
+;            Remove$(Common)ProgmanItem  $(HelpGroup) , "ActiveX SDK Overview"
+;            Create$(Common)ProgmanItem  $(HelpGroup) , "ActiveX SDK Overview" $(INetSDKHelp)\"Default.Htm" "" ""
+    
+;            Remove$(Common)ProgmanItem  $(HelpGroup) , "ActiveX SDK Help"
+;            Remove$(Common)ProgmanItem  $(HelpGroup) , "ActiveX SDK Help (HTML)"
+;            Create$(Common)ProgmanItem  $(HelpGroup) , "ActiveX SDK Help (HTML)"  $(INetSDKHelp)\"Default.Htm" "" ""
+    
+;            Remove$(Common)ProgmanItem  $(HelpGroup) , "ActiveX SDK Help (InfoViewer)"
+;<ivo>            Create$(Common)ProgmanItem  $(HelpGroup) , "ActiveX SDK Help InfoViewer"  $(INetSDKHelp)\"infoview ActiveX.MVB" "" 0
+;        Create$(Common)ProgmanItem  $(HelpGroup) , "ActiveX SDK Help (InfoViewer)" $(INetSDKHelp)\"InfoView.exe" "" ""
+   
+  
+        endif
+    
+        Remove$(Common)ProgmanItem  $(ToolsGroup) , "ReadMe"
+        Create$(Common)ProgmanItem  $(ToolsGroup) , "ReadMe" $(INetSDKDir)\"ReadMe.txt" "" ""
+    
+        LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(INetSDKDir)\Bin\OLEViewer.exe
+        ifstr(i) $(RetCode) == "YES"
+        Remove$(Common)ProgmanItem  $(ToolsGroup) , "OLE Viewer"
+        Create$(Common)ProgmanItem  $(ToolsGroup) , "OLE Viewer" $(INetSDKDir)\Bin\"OLEViewer.exe" "" ""
+        endif
+    
+        Show$(Common)ProgManGroup   $(ToolsGroup), 6
+    
+        exit
+    
+    ;************************************************************************
+    ;                                                                       *
+    ;  INETSDK SYSTEM FILES REPLACEMENT                                     *
+    ;                                                                       *
+    ;************************************************************************
+    
+[ShellCreateDir]
+  LibraryProcedure STATUS, $(!SDKLIBHANDLE), CreateNestDir  $($0)
+  Return
+
+[SystemFilesBackup]    
+; Debug-Output "Entering SystemFilesBackup"
+;  ifstr(i) $(DoBins) == $(Chosen)
+;    shell "" ShellCreateDir  $(INetSDKPath)
+;
+;    ifstr(i) $(!STF_HOSTOS) == "WIN95"
+;      ;Debug-Output "Enter win95 bin/system"
+;      ; Set Overwrite flag and make back ups
+;      set STF_OVERWRITE = "NEVER"
+;
+;      LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\system\MSVCRT40.IDK
+;      ifstr(i) $(RetCode) == "YES"
+;        LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\system\INetBack\MSVCRT40.Dll
+;        ifstr(i) $(RetCode) == "YES"
+;          LibraryProcedure RetCode,$(!LIBHANDLE), DelFile      $(!STF_WINDOWSPATH)\System\INetBack\MSVCRT40.Dll
+;        endif
+;        shell "" ShellCreateDir $(!STF_WINDOWSPATH)\System\INetBack
+;        ;Debug-Output "CopySingleFile: $(!STF_WINDOWSPATH)\system\MSVCRT40.IDK   ; $(!STF_WINDOWSPATH)\System\INetBack\MSVCRT40.DLL"
+;        LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_WINDOWSPATH)\system\MSVCRT40.IDK   ; $(!STF_WINDOWSPATH)\System\INetBack\MSVCRT40.DLL
+;      endif
+;
+;      LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\system\MFC40.IDK
+;      ifstr(i) $(RetCode) == "YES"
+;        LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\system\INetBack\MFC40.Dll
+;        ifstr(i) $(RetCode) == "YES"
+;          LibraryProcedure RetCode,$(!LIBHANDLE), DelFile      $(!STF_WINDOWSPATH)\System\INetBack\MFC40.Dll
+;        endif
+;        shell "" ShellCreateDir $(!STF_WINDOWSPATH)\System\INetBack
+;        ;Debug-Output "CopySingleFile: $(!STF_WINDOWSPATH)\system\MFC40.IDK   ; $(!STF_WINDOWSPATH)\System\INetBack\MFC40.DLL"
+;        LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_WINDOWSPATH)\system\MFC40.IDK   ; $(!STF_WINDOWSPATH)\System\INetBack\MFC40.DLL
+;      endif
+;
+;      ;
+;      ; Create WININIT.INT for reboot copy.
+;      ;
+;      LibraryProcedure RetCode, $(!LIBHANDLE), ConfigFileAppend $(!STF_WINDOWSPATH)\wininit.ini "[rename]"
+;
+;      shell "" QueryReplaceFile $(!STF_WINDOWSPATH)\system\MSVCRT40.DLL   ; $(!STF_SRCDIR)INetSDK\System32\Win95\MSVCRT40.DLL
+;      ifstr(i) $($R0) == YES
+;        ;Debug-Output "CopySingleFile: $(!STF_SRCDIR)INetSDK\System32\i386\MSVCRT40.DLL   ; $(!STF_WINDOWSPATH)\System\~SVCRT40.DLL"
+;        LibraryProcedure RetCode, $(!LIBHANDLE), CopySingleFile   $(!STF_SRCDIR)INetSDK\System32\i386\MSVCRT40.DLL   ; $(!STF_WINDOWSPATH)\System\~SVCRT40.DLL
+;        LibraryProcedure RetCode, $(!LIBHANDLE), ConfigFileAppend $(!STF_WINDOWSPATH)\wininit.ini ; $(!STF_WINDOWSPATH)"\SYSTEM\MSVCRT40.IDK="$(!STF_WINDOWSPATH)"\SYSTEM\MSVCRT40.DLL"
+;        LibraryProcedure RetCode, $(!LIBHANDLE), ConfigFileAppend $(!STF_WINDOWSPATH)\wininit.ini ; $(!STF_WINDOWSPATH)"\SYSTEM\MSVCRT40.DLL="$(!STF_WINDOWSPATH)"\SYSTEM\~SVCRT40.DLL"
+;      endif
+;
+;      shell "" QueryReplaceFile $(!STF_WINDOWSPATH)\system\MFC40.DLL   ; $(!STF_SRCDIR)INetSDK\System32\Win95\MFC40.DLL
+;      ifstr(i) $($R0) == YES
+;        ;Debug-Output "CopySingleFile: $(!STF_SRCDIR)INetSDK\System32\i386\MFC40.DLL   ; $(!STF_WINDOWSPATH)\System\~FC40.DLL"
+;        LibraryProcedure RetCode, $(!LIBHANDLE), CopySingleFile   $(!STF_SRCDIR)INetSDK\System32\i386\MFC40.DLL   ; $(!STF_WINDOWSPATH)\System\~FC40.DLL
+;        LibraryProcedure RetCode, $(!LIBHANDLE), ConfigFileAppend $(!STF_WINDOWSPATH)\wininit.ini ; $(!STF_WINDOWSPATH)"\SYSTEM\MFC40.IDK="$(!STF_WINDOWSPATH)"\SYSTEM\MFC40.DLL"
+;        LibraryProcedure RetCode, $(!LIBHANDLE), ConfigFileAppend $(!STF_WINDOWSPATH)\wininit.ini ; $(!STF_WINDOWSPATH)"\SYSTEM\MFC40.DLL="$(!STF_WINDOWSPATH)"\SYSTEM\~FC40.DLL"
+;      endif
+;
+;      ; Set Overwrite flag to keep new stuff
+;      set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+;
+;    else
+;      ; NT
+;      shell "" ShellCreateDir $(!STF_WINDOWSPATH)\System32\INetBack
+;      ;Debug-Output  $(!STF_WINDOWSPATH)\System32\INetBack
+;      ; Set Overwrite flag and make back ups
+;      set STF_OVERWRITE = "NEVER"
+;
+;      ;
+;      ; SUR ships with MSVCRT40.DLL and MFC40.DLL; don't install these there.
+;      ;
+;
+;      LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\system32\MSVCRT40.DLL
+;      ifstr(i) $(RetCode) == "YES"
+;        LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance ; $(!STF_WINDOWSPATH)\System32\INetBack\MSVCRT40.DLL
+;        ;Debug-Output $(RetCode)
+;        ifstr(i) $(RetCode) == "YES"
+;          LibraryProcedure RetCode,$(!LIBHANDLE), DelFile          ; $(!STF_WINDOWSPATH)\System32\INetBack\MSVCRT40.Dll
+;        endif
+;        ;Debug-Output "CopySingleFile: $(!STF_WINDOWSPATH)\system32\MSVCRT40.DLL   ; $(!STF_WINDOWSPATH)\System32\INetBack\MSVCRT40.DLL"
+;        LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_WINDOWSPATH)\system32\MSVCRT40.DLL   ; $(!STF_WINDOWSPATH)\System32\INetBack\MSVCRT40.DLL
+;      endif
+;
+;      LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\system32\MFC40.DLL
+;      ifstr(i) $(RetCode) == "YES"
+;        LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\System32\INetBack\MFC40.DLL
+;        ;Debug-Output $(RetCode)
+;        ifstr(i) $(RetCode) == "YES"
+;          LibraryProcedure RetCode,$(!LIBHANDLE), DelFile          $(!STF_WINDOWSPATH)\System32\INetBack\MFC40.Dll
+;        endif
+;        ;Debug-Output "CopySingleFile: $(!STF_WINDOWSPATH)\system32\MFC40.DLL   ; $(!STF_WINDOWSPATH)\System32\INetBack\MFC40.DLL"
+;        LibraryProcedure STATUS,$(!LIBHANDLE), CopySingleFile $(!STF_WINDOWSPATH)\system32\MFC40.DLL   ; $(!STF_WINDOWSPATH)\System32\INetBack\MFC40.DLL
+;      endif
+;
+;      ;
+;      ; On NT just rename the files and copy away
+;      ;
+;
+;      LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\System32\MSVCRT40.DLL
+;      ifstr(i) $(RetCode) == "YES"
+;        shell "inetsdk.inf" QueryReplaceFile $(!STF_WINDOWSPATH)\system32\MSVCRT40.DLL ; $(!STF_SRCDIR)INetSDK\System32\i386\MSVCRT40.DLL
+;        ifstr(i) $($R0) == YES
+;          LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\system32\MSVCRT40.DLL.ISDK
+;          ifstr(i) $(RetCode) == "YES"
+;            LibraryProcedure RetCode,$(!LIBHANDLE), DelFile $(!STF_WINDOWSPATH)\System32\MSVCRT40.DLL.ISDK
+;          endif
+;          LibraryProcedure RetCode,$(!LIBHANDLE), RenFile  $(!STF_WINDOWSPATH)\System32\MSVCRT40.DLL ; $(!STF_WINDOWSPATH)\System32\MSVCRT40.DLL.ISDK
+;          ;Debug-Output "CopySingleFile: $(!STF_SRCDIR)INetSDK\System32\$(!STF_PLATFORM)\MSVCRT40.DLL ; $(!STF_WINDOWSPATH)\System32\MSVCRT40.DLL"
+;          LibraryProcedure RetCode,$(!LIBHANDLE), CopySingleFile ; $(!STF_SRCDIR)INetSDK\System32\$(!STF_PLATFORM)\MSVCRT40.DLL $(!STF_WINDOWSPATH)\System32\MSVCRT40.DLL
+;        endif
+;      endif
+;
+;      LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\System32\MFC40.DLL
+;      ifstr(i) $(RetCode) == "YES"
+;        shell "inetsdk.inf" QueryReplaceFile $(!STF_WINDOWSPATH)\system32\MFC40.DLL ; $(!STF_SRCDIR)INetSDK\System32\i386\MFC40.DLL
+;        ifstr(i) $($R0) == YES
+;          LibraryProcedure RetCode,$(!LIBHANDLE), CheckFileExistance $(!STF_WINDOWSPATH)\system32\MFC40.DLL.ISDK
+;          ifstr(i) $(RetCode) == "YES"
+;            LibraryProcedure RetCode,$(!LIBHANDLE), DelFile $(!STF_WINDOWSPATH)\System32\MFC40.DLL.ISDK
+;          endif
+;          LibraryProcedure RetCode,$(!LIBHANDLE), RenFile  $(!STF_WINDOWSPATH)\System32\MFC40.DLL ; $(!STF_WINDOWSPATH)\System32\MFC40.DLL.ISDK
+;          ;Debug-Output "CopySingleFile: $(!STF_SRCDIR)INetSDK\System32\$(!STF_PLATFORM)\MFC40.DLL ; $(!STF_WINDOWSPATH)\System32\MFC40.DLL"
+;          LibraryProcedure RetCode,$(!LIBHANDLE), CopySingleFile ; $(!STF_SRCDIR)INetSDK\System32\$(!STF_PLATFORM)\MFC40.DLL $(!STF_WINDOWSPATH)\System32\MFC40.DLL
+;        endif
+;      endif
+;
+;      ; Set Overwrite flag to keep newer stuff
+;      set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+;    endif
+;  endif
+return    
+    ;************************************************************************
+    ;                                                                       *
+    ;  INETSDK SUPPORT                                                      *
+    ;                                                                       *
+    ;************************************************************************
+    
+    [Install-CopyToolsFiles]
+        set STF_VITAL = ""
+     
+     ifstr(i) $(DoINetSDK) == $(Chosen ) 
+    
+        ;
+        ; 1. INETSDK - always done
+        ;
+    
+        LibraryProcedure STATUS, $(!SDKLIBHANDLE), CreateNestDir  $(INetSDKDir)
+        AddSectionFilesToCopyList Files-INetSDK $(!STF_SRCDIR)INetSDK                          $(INetSDKDir)
+    
+        ifstr(i) $(DoHeaders) == $(Chosen)
+            CreateDir  $(INetSDKInclude)
+            AddSectionFilesToCopyList Files-INetSDK-include                        $(!STF_SRCDIR)INetSDK\include                        $(INetSDKInclude)
+        endif
+    
+        ifstr(i) $(DoBins) == $(Chosen)
+            CreateDir  $(INetSDKPath)
+            AddSectionFilesToCopyList Files-INetSDK-bin-$(STF_PLATFORM) $(!STF_SRCDIR)INetSDK\bin\$(STF_PLATFORM) $(INetSDKPath)
+    
+    	    ifstr(i) $(STF_HOSTOS) == "WIN95"
+    		  set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+                  AddSectionFilesToCopyList Files-INetSDK-System32-$(STF_PLATFORM)   $(!STF_SRCDIR)INetSDK\System32\$(STF_PLATFORM)    $(STF_WINDOWSPATH)\system
+;                  AddSectionFilesToCopyList Files-INetSDK-System32-Win95             $(!STF_SRCDIR)INetSDK\System32\Win95              $(STF_WINDOWSPATH)\system
+    		else 
+    		   ; NT
+    		  set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+              AddSectionFilesToCopyList Files-INetSDK-System32-$(STF_PLATFORM)   $(!STF_SRCDIR)INetSDK\System32\$(STF_PLATFORM)    $(STF_WINDOWSPATH)\system32
+;              AddSectionFilesToCopyList Files-INetSDK-System32-WinNT   $(!STF_SRCDIR)INetSDK\System32\WinNT    $(STF_WINDOWSPATH)\system32
+            endif
+    
+        endif
+    
+        ;
+        ; Overwrite older sdk components
+        ;
+        set STF_OVERWRITE = "ALWAYS"
+    
+        ifstr(i) $(DoLibs) == $(Chosen)
+            CreateDir  $(INetSDKLib)
+            AddSectionFilesToCopyList Files-INetSDK-lib-$(STF_PLATFORM)      $(!STF_SRCDIR)INetSDK\lib\$(STF_PLATFORM)      $(INetSDKLib)
+        endif
+    
+	;
+	; Always create \license
+	;
+
+        CreateDir  $(INetSDKLicense)
+        AddSectionFilesToCopyList Files-INetSDK-license      $(!STF_SRCDIR)INetSDK\license      $(INetSDKLicense)
+
+        ;
+        ; 2. Help files - conditional
+        ;
+    
+        ifstr(i) $(!DoOnlineHelp)  == $(!Chosen)
+    
+            CreateDir $(INetSDKHelp)
+            CreateDir $(INetSDKHelp)\Art
+            CreateDir $(INetSDKHelp)\Sweep
+            CreateDir $(INetSDKHelp)\OLE
+            CreateDir $(INetSDKHelp)\Sweep\Art
+            CreateDir $(INetSDKHelp)\Sweep\Htmlhlp
+            CreateDir $(INetSDKHelp)\Sweep\Htmlhlp\Art
+            CreateDir $(INetSDKHelp)\Conf
+            CreateDir $(INetSDKSpecs)
+
+            AddSectionFilesToCopyList Files-INetSDK-Specs $(!STF_SRCDIR)INetSDK\Specs $(INetSDKSpecs)
+            AddSectionFilesToCopyList Files-INetSDK-Help $(!STF_SRCDIR)INetSDK\Help $(INetSDKHelp)
+            AddSectionFilesToCopyList Files-INetSDK-Help-OLE $(!STF_SRCDIR)INetSDK\Help\OLE $(INetSDKHelp)\OLE
+
+;help hack
+
+;<ivo>            AddSectionFilesToCopyList Files-INetSDK-Help-$(STF_PLATFORM) $(!STF_SRCDIR)INetSDK\Help\$(STF_PLATFORM) $(INetSDKHelp)
+    
+    
+            ;
+            ; The infoview program looks at infoview.ini for config info.
+            ;  provide the minimum set we need to make it work.
+            ;
+    
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "ActiveX.Settings", "licensed.name", "ActiveX SDK User"
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "ActiveX.Settings", "licensed.organization", " "
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "ActiveX.Settings", "license_version", "N/A"
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "ActiveX.Settings", "license_last_read", "N/A"
+    
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "ActiveX.MVB", "title", "Microsoft ActiveX Software Development Kit"
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "ActiveX.MVB", "LocalDir", $(INetSDKHelp)
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "ActiveX.MVB", "Path", $(INetSDKHelp)
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "ActiveX.MVB", "EXE", $(INetSDKHelp)"\infoview.exe"
+    
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "series", "ActiveX", "ActiveX.MVB"
+;<ivo>            ReplaceIniKeyValue "infoview.ini", "all titles", "ActiveX.MVB", "ActiveX.MVB"
+    
+    
+        endif
+    
+        ;
+        ; 3. INetSDK samples - conditional
+        ;
+    
+    
+        ifstr(i) $(!DoSamples) == $(!Chosen)
+    
+          CreateDir $(INetSDKDir)Samples
+    
+          CreateDir $(INetSDKDir)Samples\BaseCtl
+          CreateDir $(INetSDKDir)Samples\BaseCtl\FrameWrk
+          CreateDir $(INetSDKDir)Samples\BaseCtl\Include
+    
+          CreateDir $(INetSDKDir)Samples\BaseCtl\IELnk
+          CreateDir $(INetSDKDir)Samples\BaseCtl\IEMime
+          CreateDir $(INetSDKDir)Samples\BaseCtl\ToDoSvr
+          CreateDir $(INetSDKDir)Samples\BaseCtl\WebImage
+          CreateDir $(INetSDKDir)Samples\BaseCtl\Card
+          CreateDir $(INetSDKDir)Samples\BaseCtl\ObjVw
+    
+          CreateDir $(INetSDKDir)Samples\Framer
+          CreateDir $(INetSDKDir)Samples\Progress
+
+;          CreateDir $(INetSDKDir)Samples\MSConf
+;          CreateDir $(INetSDKDir)Samples\MSConf\CnfTest
+;          CreateDir $(INetSDKDir)Samples\MSConf\Excel
+;          CreateDir $(INetSDKDir)Samples\MSConf\EzConf
+;          CreateDir $(INetSDKDir)Samples\MSConf\Word
+
+          CreateDir $(INetSDKDir)Samples\AXScript
+          CreateDir $(INetSDKDir)Samples\AXScript\Spruuids
+          CreateDir $(INetSDKDir)Samples\AXScript\Spruuids\Src
+          CreateDir $(INetSDKDir)Samples\AXScript\Spruuids\Src\Inc_Ext
+
+          CreateDir $(INetSDKDir)Samples\Range
+
+          CreateDir $(INetSDKDir)Samples\UrlPad
+
+          CreateDir $(INetSDKDir)Samples\VBScript
+
+          CreateDir $(INetSDKDir)Samples\WinInet
+          CreateDir $(INetSDKDir)Samples\WinInet\FTPJr
+          CreateDir $(INetSDKDir)Samples\WinInet\HTTPDump
+          CreateDir $(INetSDKDir)Samples\WinInet\HTTPAuth
+
+          CreateDir $(INetSDKDir)Samples\WebPost
+          CreateDir $(INetSDKDir)Samples\WebPost\WbPost
+          CreateDir $(INetSDKDir)Samples\WebPost\WbProv
+
+          ; Begin Nashville
+
+         ; CreateDir $(INetSDKDir)Samples\Wab
+         ; CreateDir $(INetSDKDir)Samples\Wab\ApiTest
+
+          ; End Nashville
+
+          AddSectionFilesToCopyList Files-INetSDK-Samples                  $(!STF_SRCDIR)INetSDK\Samples                   $(INetSDKDir)Samples
+          
+          AddSectionFilesToCopyList Files-INetSDK-Samples-BaseCtl          $(!STF_SRCDIR)INetSDK\Samples\BaseCtl           $(INetSDKDir)Samples\BaseCtl
+          AddSectionFilesToCopyList Files-INetSDK-Samples-BaseCtl-FrameWrk $(!STF_SRCDIR)INetSDK\Samples\BaseCtl\FrameWrk  $(INetSDKDir)Samples\BaseCtl\FrameWrk
+          AddSectionFilesToCopyList Files-INetSDK-Samples-BaseCtl-Include  $(!STF_SRCDIR)INetSDK\Samples\BaseCtl\Include   $(INetSDKDir)Samples\BaseCtl\Include
+          AddSectionFilesToCopyList Files-INetSDK-Samples-BaseCtl-IELnk    $(!STF_SRCDIR)INetSDK\Samples\BaseCtl\IELnk     $(INetSDKDir)Samples\BaseCtl\IELnk
+          AddSectionFilesToCopyList Files-INetSDK-Samples-BaseCtl-IEMime   $(!STF_SRCDIR)INetSDK\Samples\BaseCtl\IEMime    $(INetSDKDir)Samples\BaseCtl\IEMime
+          AddSectionFilesToCopyList Files-INetSDK-Samples-BaseCtl-ToDoSvr  $(!STF_SRCDIR)INetSDK\Samples\BaseCtl\ToDoSvr   $(INetSDKDir)Samples\BaseCtl\ToDoSvr
+          AddSectionFilesToCopyList Files-INetSDK-Samples-BaseCtl-WebImage $(!STF_SRCDIR)INetSDK\Samples\BaseCtl\WebImage  $(INetSDKDir)Samples\BaseCtl\WebImage
+          AddSectionFilesToCopyList Files-INetSDK-Samples-BaseCtl-Card $(!STF_SRCDIR)INetSDK\Samples\BaseCtl\Card  $(INetSDKDir)Samples\BaseCtl\Card
+          AddSectionFilesToCopyList Files-INetSDK-Samples-BaseCtl-ObjVw $(!STF_SRCDIR)INetSDK\Samples\BaseCtl\ObjVw  $(INetSDKDir)Samples\BaseCtl\ObjVw
+
+
+          AddSectionFilesToCopyList Files-INetSDK-Samples-Framer           $(!STF_SRCDIR)INetSDK\Samples\Framer            $(INetSDKDir)Samples\Framer
+
+;          AddSectionFilesToCopyList Files-INetSDK-Samples-MSConf           $(!STF_SRCDIR)INetSDK\Samples\MSConf            $(INetSDKDir)Samples\MSConf
+;          AddSectionFilesToCopyList Files-INetSDK-Samples-MSConf-CnfTest   $(!STF_SRCDIR)INetSDK\Samples\MSConf\CnfTest    $(INetSDKDir)Samples\MSConf\CnfTest
+;          AddSectionFilesToCopyList Files-INetSDK-Samples-MSConf-Excel     $(!STF_SRCDIR)INetSDK\Samples\MSConf\Excel      $(INetSDKDir)Samples\MSConf\Excel
+;          AddSectionFilesToCopyList Files-INetSDK-Samples-MSConf-EzConf    $(!STF_SRCDIR)INetSDK\Samples\MSConf\EzConf     $(INetSDKDir)Samples\MSConf\EzConf
+;          AddSectionFilesToCopyList Files-INetSDK-Samples-MSConf-Word      $(!STF_SRCDIR)INetSDK\Samples\MSConf\Word       $(INetSDKDir)Samples\MSConf\Word
+
+          AddSectionFilesToCopyList Files-INetSDK-Samples-Progress         $(!STF_SRCDIR)INetSDK\Samples\Progress          $(INetSDKDir)Samples\Progress
+
+          AddSectionFilesToCopyList Files-INetSDK-Samples-WinInet-Range    $(!STF_SRCDIR)INetSDK\Samples\Range             $(INetSDKDir)Samples\Range
+
+          AddSectionFilesToCopyList Files-INetSDK-Samples-VBScript-Spruuids $(!STF_SRCDIR)INetSDK\Samples\AXScript\Spruuids  $(INetSDKDir)Samples\AXScript\Spruuids
+          AddSectionFilesToCopyList Files-INetSDK-Samples-VBScript-Spruuids-Src $(!STF_SRCDIR)INetSDK\Samples\AXScript\Spruuids\Src $(INetSDKDir)Samples\AXScript\Spruuids\Src
+
+          AddSectionFilesToCopyList Files-INetSDK-Samples-UrlPad           $(!STF_SRCDIR)INetSDK\Samples\UrlPad            $(INetSDKDir)Samples\UrlPad
+
+          AddSectionFilesToCopyList Files-INetSDK-Samples-VBScript         $(!STF_SRCDIR)INetSDK\Samples\VBScript          $(INetSDKDir)Samples\VBScript
+
+          AddSectionFilesToCopyList Files-INetSDK-Samples-WinInet          $(!STF_SRCDIR)INetSDK\Samples\WinInet           $(INetSDKDir)Samples\WinInet
+          AddSectionFilesToCopyList Files-INetSDK-Samples-WinInet-FTPJr $(!STF_SRCDIR)INetSDK\Samples\WinInet\FTPJr  $(INetSDKDir)Samples\WinInet\FTPJr
+          AddSectionFilesToCopyList Files-INetSDK-Samples-WinInet-HTTPDump $(!STF_SRCDIR)INetSDK\Samples\WinInet\HTTPDump  $(INetSDKDir)Samples\WinInet\HTTPDump
+          AddSectionFilesToCopyList Files-INetSDK-Samples-WinInet-HTTPAuth $(!STF_SRCDIR)INetSDK\Samples\WinInet\HTTPAuth  $(INetSDKDir)Samples\WinInet\HTTPAuth
+
+          AddSectionFilesToCopyList Files-WebPost-Include                  $(!STF_SRCDIR)INetSDK\Include                   $(INetSDKDir)Include
+          AddSectionFilesToCopyList Files-WebPost-Lib-$(STF_PLATFORM)      $(!STF_SRCDIR)INetSDK\Lib\$(STF_PLATFORM)       $(INetSDKDir)Lib
+
+          AddSectionFilesToCopyList Files-NashSDK-Samples-WebPost          $(!STF_SRCDIR)INetSDK\Samples\WebPost           $(INetSDKDir)Samples\WebPost
+          AddSectionFilesToCopyList Files-NashSDK-Samples-WebPost-WbPost   $(!STF_SRCDIR)INetSDK\Samples\WebPost\WbPost    $(INetSDKDir)Samples\WebPost\WbPost
+          AddSectionFilesToCopyList Files-NashSDK-Samples-WebPost-WbProv   $(!STF_SRCDIR)INetSDK\Samples\WebPost\WbProv    $(INetSDKDir)Samples\WebPost\WbProv
+
+          ; Begin Nashville
+
+         ; AddSectionFilesToCopyList Files-NashSDK-Include                  $(!STF_SRCDIR)INetSDK\Include                   $(INetSDKDir)Include
+         ; AddSectionFilesToCopyList Files-NashSDK-Specs                    $(!STF_SRCDIR)INetSDK\Specs                     $(INetSDKDir)Specs
+         ; AddSectionFilesToCopyList Files-NashSDK-Lib-$(STF_PLATFORM)      $(!STF_SRCDIR)INetSDK\Lib\$(STF_PLATFORM)       $(INetSDKDir)Lib
+
+         ; AddSectionFilesToCopyList Files-NashSDK-Samples-Wab-ApiTest      $(!STF_SRCDIR)INetSDK\Samples\Wab\ApiTest       $(INetSDKDir)Samples\Wab\ApiTest
+
+          ; End Nashville
+
+        endif
+    
+    endif
+    ; end of INetSDK
+    
+    ifstr(i) $( DoPDCOther) == $(Chosen )
+         ;CreateDir Put directory here
+         ;AddSectionFilesToCopyList section-name $(!STF_SRCDIR)sourcepath  $(INetSDKDir)destpath
+    endif
+    ;endif PDCOther
+    
+    
+    exit
+    
+    
+    [Install-SeeIfFileIsPresent]
+    LibraryProcedure STATUS,$(!LIBHANDLE), CheckFileExistance $(FileToCheck)
+    exit
+    
+    [Install-All-Files-Now]
+        CopyFilesInCopyList
+        exit
+    
+    
+    ;
+    ; REGULAR INETSDK
+    ;
+
+[Files-INetSDK-Bin-i386]
+1,API.EXE,!DECOMPRESS,NOLOG
+;1,APRXDIST.EXE,!DECOMPRESS,NOLOG
+;1,JAAPRXDI.EXE,!DECOMPRESS,NOLOG
+;1,JAWINT.EXE,!DECOMPRESS,NOLOG
+;1,AXDIST.EXE,!DECOMPRESS,NOLOG
+;1,JAWINT35.EXE,!DECOMPRESS,NOLOG
+;1,JAAXDIST.EXE,!DECOMPRESS,NOLOG
+;1,CABRSCKT.EXE,!DECOMPRESS,NOLOG
+; 1,CCDIST.EXE,!DECOMPRESS,NOLOG
+1,CERT2SPC.EXE,!DECOMPRESS,NOLOG
+1,CHKTRUST.EXE,!DECOMPRESS,NOLOG
+1,DUMPCERT.EXE,!DECOMPRESS,NOLOG
+1,IVIEWERS.DLL,!DECOMPRESS,NOLOG
+;1,LMS.ZIP,!DECOMPRESS,NOLOG
+1,LPK_TOOL.EXE,!DECOMPRESS,NOLOG
+1,LPK_TOOL.HLP,!DECOMPRESS,NOLOG
+1,LPK_TOOL.TXT,!DECOMPRESS,NOLOG
+1,MAKECERT.EXE,!DECOMPRESS,NOLOG
+1,MKTYPLIB.EXE,!DECOMPRESS,NOLOG
+1,NOPROXY.REG,!DECOMPRESS,NOLOG
+1,ODS_TOOL.EXE,!DECOMPRESS,NOLOG
+1,OLEVIEW.EXE,!DECOMPRESS,NOLOG
+1,PESIGMGR.EXE,!DECOMPRESS,NOLOG
+1,PROXY.REG,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,REG.TXT,!DECOMPRESS,NOLOG
+1,REGSET.TXT,!DECOMPRESS,NOLOG
+1,ROOT.CER,!DECOMPRESS,NOLOG
+1,SHOWKEYS.EXE,!DECOMPRESS,NOLOG
+1,SIGNCODE.EXE,!DECOMPRESS,NOLOG
+1,MSCNF10A.EXE,!DECOMPRESS,NOLOG
+1,WEBPOST.EXE,!DECOMPRESS,NOLOG
+;1,WINT351.EXE,!DECOMPRESS,NOLOG
+;1,WINTDIST.EXE,!DECOMPRESS,NOLOG
+1,WVTSTOFF.REG,!DECOMPRESS,NOLOG
+1,WVTSTON.REG,!DECOMPRESS,NOLOG
+
+; geraldd, sanrisc
+[Files-INetSDK-Bin-alpha]
+
+; geraldd sanrisc
+[Files-INetSDK-Bin-mips]
+
+; geraldd sanrisc
+[Files-INetSDK-Bin-ppc]
+
+
+[Files-INetSDK-Help-OLE]
+1,CONTENTS.HTM,!DECOMPRESS,NOLOG
+
+
+
+[Files-INetSDK-Help]
+;1,ACTIVEX.AUX,!DECOMPRESS,NOLOG
+;1,ACTIVEX.CAC,!DECOMPRESS,NOLOG
+;1,ACTIVEX.IDX,!DECOMPRESS,NOLOG
+;1,ACTIVEX.KWD,!DECOMPRESS,NOLOG
+;1,ACTIVEX.MVB,!DECOMPRESS,NOLOG
+1,CONF\MSCON000.HTM,!DECOMPRESS,NOLOG
+1,CONF\MSCON001.HTM,!DECOMPRESS,NOLOG
+1,CONF\MSCON002.HTM,!DECOMPRESS,NOLOG
+1,CONF\MSCONF.HTM,!DECOMPRESS,NOLOG
+1,DEFAULT.HTM,!DECOMPRESS,NOLOG
+;1,INFOVIEW.EXE,!DECOMPRESS,NOLOG
+1,OVERVIEW.HTM,!DECOMPRESS,NOLOG
+1,AXSDKFAQ.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\ART\ANCHOR.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\BULL_A~1.GIF,!DECOMPRESS,NOLOG,RENAME="SWEEP\ART\BULL_A_35.GIF"
+1,SWEEP\ART\CODE1.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\CODE2.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\CODE3.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\CODEDWLD.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\D_NEXT_3.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\D_PREV_3.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\DOCUMENT.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\ELEMENT.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\FCONTENT.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\FINDEX.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\FORM.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\FRAME.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\FSDK.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\HISTORY.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\IMAGEMAP.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\JAVA01.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\JAVA02.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\JAVA03.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\JAVA04.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\JAVA05.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\JAVA06.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\JAVA08.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\JAVA1.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\LINK.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\LOCATION.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\MICROBTN.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\NAV.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\OBJMODEL.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\OLESCR01.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\OLESCR02.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\OLESCR03.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\SCRIPT.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\THEEARTH.AVI,!DECOMPRESS,NOLOG
+1,SWEEP\ART\THEEARTH.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\TRUSTARC.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\U_NEXT_3.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\BANNER.JPG,!DECOMPRESS,NOLOG
+1,SWEEP\ART\CLOUDS.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\WEBPOST.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\WINDOW.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\15mb.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\actconf1.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\actconf2.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\actconf3.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\axlogo.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\axtm.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\bullet1.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\bullet2.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\bullet3.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\clouds.JPG,!DECOMPRESS,NOLOG
+1,SWEEP\ART\comp_cat.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\compcat2.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\compcat3.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\contents.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\dconte~1.GIF,!DECOMPRESS,NOLOG,RENAME="SWEEP\ART\dcontents.GIF"
+1,SWEEP\ART\dhome.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\dindex.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\dnext.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\dprevi~1.GIF,!DECOMPRESS,NOLOG,RENAME="SWEEP\ART\dprevious.GIF"
+1,SWEEP\ART\home.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\imgmap.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\impl_cat.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\index.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\mslogo.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\next.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\previous.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\ART\uparrow.GIF,!DECOMPRESS,NOLOG
+1,SWEEP\CONTENTS.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\COPYRITE.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\DEFAULT.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\HEADGRPH.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\INDEX.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\NAVBAR.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\OTHER\FRAME1.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\OTHER\MARQCONT.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\OTHER\SAMPLE1.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\OTHER\SAMPLE2.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\OTHER\X.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\OTHER\XX.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\OTHER\Y.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SPEC-A~1.HTM,!DECOMPRESS,NOLOG,RENAME="SWEEP\SPEC-ACTDOC.HTM"
+1,SWEEP\SPEC-A~2.HTM,!DECOMPRESS,NOLOG,RENAME="SWEEP\SPEC-AXCTRL.HTM"
+1,SWEEP\SPEC-D~1.HTM,!DECOMPRESS,NOLOG,RENAME="SWEEP\SPEC-DIAMOND.HTM"
+1,SWEEP\SPEC-D~2.HTM,!DECOMPRESS,NOLOG,RENAME="SWEEP\SPEC-DOWNLOAD.HTM"
+1,SWEEP\SPEC-S~1.HTM,!DECOMPRESS,NOLOG,RENAME="SWEEP\SPEC-SCRIPT.HTM"
+1,SWEEP\SWEEP000.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP001.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP002.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP003.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP004.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP005.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP006.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP007.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP008.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP009.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP010.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP011.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP012.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP013.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP014.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP015.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP016.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP017.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP018.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP019.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP020.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP021.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP022.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP023.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP024.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP025.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP026.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP027.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP028.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP029.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP030.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP031.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP032.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP033.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP034.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP035.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP036.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP037.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP038.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP039.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP040.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP041.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP042.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP043.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP044.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP045.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP046.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP047.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP048.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP049.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP050.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP051.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP052.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP053.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP054.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP055.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP056.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP057.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP058.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP059.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP060.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP061.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP062.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP063.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP064.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP065.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP066.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP067.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP068.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP069.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP070.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP071.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP072.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP073.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP074.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP075.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP076.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP077.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP078.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP079.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP080.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP081.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP082.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP083.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP084.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP085.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP086.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP087.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP088.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP089.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP090.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP091.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP092.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP093.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP094.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP095.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP096.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP097.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP098.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP099.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP100.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP101.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP102.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP103.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP104.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP105.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP106.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP107.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP108.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP109.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP110.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP111.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP112.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP113.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP114.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\legal.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP115.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP116.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP117.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP118.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP119.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP120.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP121.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP122.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP123.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP124.HTM,!DECOMPRESS,NOLOG
+1,SWEEP\SWEEP125.HTM,!DECOMPRESS,NOLOG
+1,TECHEAD.GIF,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Include]
+1,ACTIVSCP.H,!DECOMPRESS,NOLOG
+1,COMCAT.H,!DECOMPRESS,NOLOG
+1,COMMCTRL.H,!DECOMPRESS,NOLOG
+1,COMCAT.IDL,!DECOMPRESS,NOLOG
+1,DOCOBJ.H,!DECOMPRESS,NOLOG
+1,DOCOBJ.IDL,!DECOMPRESS,NOLOG
+1,EXDISP.H,!DECOMPRESS,NOLOG
+1,EXDISP.ODL,!DECOMPRESS,NOLOG
+1,EXDISPID.H,!DECOMPRESS,NOLOG
+1,HLIFACE.H,!DECOMPRESS,NOLOG
+1,HLIFACE.IDL,!DECOMPRESS,NOLOG
+1,HLINK.H,!DECOMPRESS,NOLOG
+1,HLINK.IDL,!DECOMPRESS,NOLOG
+1,INETSDK.H,!DECOMPRESS,NOLOG
+1,INETSDK.IDL,!DECOMPRESS,NOLOG
+1,INETSDK.MAK,!DECOMPRESS,NOLOG
+1,INTSHCUT.H,!DECOMPRESS,NOLOG
+1,ISGUIDS.H,!DECOMPRESS,NOLOG
+; 1,MSCONF.H,!DECOMPRESS,NOLOG
+1,OAIDL.H,!DECOMPRESS,NOLOG
+1,OAIDL.IDL,!DECOMPRESS,NOLOG
+1,OBJSAFE.H,!DECOMPRESS,NOLOG
+1,OCIDL.H,!DECOMPRESS,NOLOG
+1,OCIDL.IDL,!DECOMPRESS,NOLOG
+1,OLEAUTO.H,!DECOMPRESS,NOLOG
+1,OLECTL.H,!DECOMPRESS,NOLOG
+1,SERVPROV.H,!DECOMPRESS,NOLOG
+1,SERVPROV.IDL,!DECOMPRESS,NOLOG
+1,URLHLINK.H,!DECOMPRESS,NOLOG
+1,URLMON.H,!DECOMPRESS,NOLOG
+1,URLMON.IDL,!DECOMPRESS,NOLOG
+1,WININET.H,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Lib-i386]
+1,HLINK.LIB,!DECOMPRESS,NOLOG
+; 1,MSCONF.LIB,!DECOMPRESS,NOLOG
+1,OLEAUT32.LIB,!DECOMPRESS,NOLOG
+1,URLMON.LIB,!DECOMPRESS,NOLOG
+;	1,UUID.LIB,!DECOMPRESS,NOLOG
+;	1,UUID3.LIB,!DECOMPRESS,NOLOG
+1,WININET.LIB,!DECOMPRESS,NOLOG
+1,COMCTL32.LIB,!DECOMPRESS,NOLOG
+
+; geraldd sanrisc
+[Files-INetSDK-Lib-alpha]
+1,HLINK.LIB,!DECOMPRESS,NOLOG
+1,OLEAUT32.LIB,!DECOMPRESS,NOLOG
+1,URLMON.LIB,!DECOMPRESS,NOLOG
+1,WININET.LIB,!DECOMPRESS,NOLOG
+1,COMCTL32.LIB,!DECOMPRESS,NOLOG
+
+; geraldd sanrisc
+[Files-INetSDK-Lib-mips]
+1,HLINK.LIB,!DECOMPRESS,NOLOG
+1,OLEAUT32.LIB,!DECOMPRESS,NOLOG
+1,URLMON.LIB,!DECOMPRESS,NOLOG
+1,WININET.LIB,!DECOMPRESS,NOLOG
+1,COMCTL32.LIB,!DECOMPRESS,NOLOG
+
+; geraldd sanrisc
+[Files-INetSDK-Lib-ppc]
+1,HLINK.LIB,!DECOMPRESS,NOLOG
+1,OLEAUT32.LIB,!DECOMPRESS,NOLOG
+1,URLMON.LIB,!DECOMPRESS,NOLOG
+1,WININET.LIB,!DECOMPRESS,NOLOG
+1,COMCTL32.LIB,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Lib]
+1,README.TXT,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-License]
+1,LICENSE.TXT,!DECOMPRESS,NOLOG
+1,REDIST.TXT,!DECOMPRESS,NOLOG
+
+;[Files-INetSDK-Other]
+;1,LICENSE.TXT,!DECOMPRESS,NOLOG
+;1,REDIST.TXT,!DECOMPRESS,NOLOG
+
+
+[Files-INetSDK-Samples-BaseCtl-ObjVw]
+1,Appsink.cpp,!DECOMPRESS,NOLOG
+1,Appsink.h,!DECOMPRESS,NOLOG
+1,Cathelp.cpp,!DECOMPRESS,NOLOG
+1,Cathelp.h,!DECOMPRESS,NOLOG
+1,Dispids.h,!DECOMPRESS,NOLOG
+1,Dwinvers.h,!DECOMPRESS,NOLOG
+1,Evtsink.cpp,!DECOMPRESS,NOLOG
+1,Evtsink.h,!DECOMPRESS,NOLOG
+1,Foo.htm,!DECOMPRESS,NOLOG
+1,Foo1.htm,!DECOMPRESS,NOLOG
+1,Gen.h,!DECOMPRESS,NOLOG
+1,Guids.cpp,!DECOMPRESS,NOLOG
+1,Hlsimple.doc,!DECOMPRESS,NOLOG
+1,Localobj.h,!DECOMPRESS,NOLOG
+1,Makefile,!DECOMPRESS,NOLOG
+1,Objvw.cpp,!DECOMPRESS,NOLOG
+1,Objvw.def,!DECOMPRESS,NOLOG
+1,Objvw.mak,!DECOMPRESS,NOLOG
+1,Objvw.mdp,!DECOMPRESS,NOLOG
+1,Objvw.odl,!DECOMPRESS,NOLOG
+1,Objvw.rc,!DECOMPRESS,NOLOG
+1,Objvwctl.bmp,!DECOMPRESS,NOLOG
+1,Objvwctl.cpp,!DECOMPRESS,NOLOG
+1,Objvwctl.h,!DECOMPRESS,NOLOG
+1,Readme.txt,!DECOMPRESS,NOLOG
+1,Resource.h,!DECOMPRESS,NOLOG
+1,Test.htm,!DECOMPRESS,NOLOG
+1,Treeui.cpp,!DECOMPRESS,NOLOG
+1,Wintree.cpp,!DECOMPRESS,NOLOG
+1,Treeui.h,!DECOMPRESS,NOLOG
+1,Wintree.h,!DECOMPRESS,NOLOG
+
+
+[Files-INetSDK-Samples-BaseCtl-Card]
+1,CARD.CPP,!DECOMPRESS,NOLOG
+1,CARD.DEF,!DECOMPRESS,NOLOG
+1,CARD.ODL,!DECOMPRESS,NOLOG
+1,CARD.RC,!DECOMPRESS,NOLOG
+1,CARDCTL.CPP,!DECOMPRESS,NOLOG
+1,CARDCTL.H,!DECOMPRESS,NOLOG
+1,CARDDRAW.CPP,!DECOMPRESS,NOLOG
+1,CARDDRAW.H,!DECOMPRESS,NOLOG
+1,CARDPPG.CPP,!DECOMPRESS,NOLOG
+1,CARDPPG.H,!DECOMPRESS,NOLOG
+1,CATHELP.CPP,!DECOMPRESS,NOLOG
+1,CATHELP.H,!DECOMPRESS,NOLOG
+1,DISPIDS.H,!DECOMPRESS,NOLOG
+1,DWINVERS.H,!DECOMPRESS,NOLOG
+1,GUIDS.CPP,!DECOMPRESS,NOLOG
+1,GUIDS.H,!DECOMPRESS,NOLOG
+1,LOCALOBJ.H,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,POKER\HELP.HTM,!DECOMPRESS,NOLOG
+1,POKER\MAIN.HTM,!DECOMPRESS,NOLOG
+1,POKER\PAYTABLE.HTM,!DECOMPRESS,NOLOG
+1,POKER\POKER.HTM,!DECOMPRESS,NOLOG
+1,POKER\SIDE.HTM,!DECOMPRESS,NOLOG
+1,POKER\STATS.HTM,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RES\BACK1.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK10.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK11.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK12.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK2.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK3.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK4.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK5.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK6.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK7.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK8.BMP,!DECOMPRESS,NOLOG
+1,RES\BACK9.BMP,!DECOMPRESS,NOLOG
+1,RES\FACES.BMP,!DECOMPRESS,NOLOG
+1,RES\ICON.BMP,!DECOMPRESS,NOLOG
+1,RES\JOKER.BMP,!DECOMPRESS,NOLOG
+1,RES\SYMS.BMP,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+1,SOLITAIR\SOL.ALX,!DECOMPRESS,NOLOG
+1,SOLITAIR\SOL.HTM,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-BaseCtl-FrameWrk]
+1,AUTOOBJ.CPP,!DECOMPRESS,NOLOG
+1,CLASSF.CPP,!DECOMPRESS,NOLOG
+1,CLASSF.H,!DECOMPRESS,NOLOG
+1,CTLEMBED.CPP,!DECOMPRESS,NOLOG
+1,CTLHELP.CPP,!DECOMPRESS,NOLOG
+1,CTLHELP.H,!DECOMPRESS,NOLOG
+1,CTLMISC.CPP,!DECOMPRESS,NOLOG
+1,CTLOCX96.CPP,!DECOMPRESS,NOLOG
+1,CTLPSST.CPP,!DECOMPRESS,NOLOG
+1,CTLVIEW.CPP,!DECOMPRESS,NOLOG
+1,CTLWRAP.CPP,!DECOMPRESS,NOLOG
+1,DEBUG.CPP,!DECOMPRESS,NOLOG
+1,DWINVERS.H,!DECOMPRESS,NOLOG
+1,EXTOBJ.CPP,!DECOMPRESS,NOLOG
+1,GLOBALS.CPP,!DECOMPRESS,NOLOG
+1,INTERNET.CPP,!DECOMPRESS,NOLOG
+1,IPSERVER.CPP,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,PROPPAGE.CPP,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,STDENUM.CPP,!DECOMPRESS,NOLOG
+1,UNKNOWN.CPP,!DECOMPRESS,NOLOG
+1,UTIL.CPP,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-BaseCtl-IELnk]
+1,CATHELP.CPP,!DECOMPRESS,NOLOG
+1,CATHELP.H,!DECOMPRESS,NOLOG
+1,DISPIDS.H,!DECOMPRESS,NOLOG
+1,DWINVERS.H,!DECOMPRESS,NOLOG
+1,GUIDS.CPP,!DECOMPRESS,NOLOG
+1,GUIDS.H,!DECOMPRESS,NOLOG
+1,IELNK.CPP,!DECOMPRESS,NOLOG
+1,IELNK.DEF,!DECOMPRESS,NOLOG
+1,IELNK.ODL,!DECOMPRESS,NOLOG
+1,IELNK.RC,!DECOMPRESS,NOLOG
+1,IELNKCTL.BMP,!DECOMPRESS,NOLOG
+1,IELNKCTL.CPP,!DECOMPRESS,NOLOG
+1,IELNKCTL.H,!DECOMPRESS,NOLOG
+1,IELNKDEM.HTM,!DECOMPRESS,NOLOG
+1,IELNKJV.HTM,!DECOMPRESS,NOLOG
+1,IELNKPPG.CPP,!DECOMPRESS,NOLOG
+1,IELNKPPG.H,!DECOMPRESS,NOLOG
+1,LOCALOBJ.H,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+1,RESRC1.H,!DECOMPRESS,NOLOG
+1,XSINK.CPP,!DECOMPRESS,NOLOG
+1,XSINK.H,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-BaseCtl-IEMime]
+1,CATHELP.CPP,!DECOMPRESS,NOLOG
+1,CATHELP.H,!DECOMPRESS,NOLOG
+1,DISPIDS.H,!DECOMPRESS,NOLOG
+1,DWINVERS.H,!DECOMPRESS,NOLOG
+1,GUIDS.CPP,!DECOMPRESS,NOLOG
+1,GUIDS.H,!DECOMPRESS,NOLOG
+1,IEMIM.CPP,!DECOMPRESS,NOLOG
+1,IEMIM.DEF,!DECOMPRESS,NOLOG
+1,IEMIM.HTM,!DECOMPRESS,NOLOG
+1,IEMIM.ODL,!DECOMPRESS,NOLOG
+1,IEMIM.RC,!DECOMPRESS,NOLOG
+1,IEMIM.TXT,!DECOMPRESS,NOLOG
+1,IEMIMCTL.BMP,!DECOMPRESS,NOLOG
+1,IEMIMCTL.CPP,!DECOMPRESS,NOLOG
+1,IEMIMCTL.H,!DECOMPRESS,NOLOG
+1,IEMIMIFC.H,!DECOMPRESS,NOLOG
+1,IEMIMPPG.CPP,!DECOMPRESS,NOLOG
+1,IEMIMPPG.H,!DECOMPRESS,NOLOG
+1,LOCALOBJ.H,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,MIMEINET.CPP,!DECOMPRESS,NOLOG
+1,MIMEINET.H,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+1,RESRC1.H,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-BaseCtl-Include]
+1,AUTOOBJ.H,!DECOMPRESS,NOLOG
+1,CTRLOBJ.H,!DECOMPRESS,NOLOG
+; 1,DATAPATH.H,!DECOMPRESS,NOLOG
+1,DEBUG.H,!DECOMPRESS,NOLOG
+1,EXTOBJ.H,!DECOMPRESS,NOLOG
+1,GLOBALS.H,!DECOMPRESS,NOLOG
+1,INTERNET.H,!DECOMPRESS,NOLOG
+1,IPSERVER.H,!DECOMPRESS,NOLOG
+1,LOCALSRV.H,!DECOMPRESS,NOLOG
+1,PROPPAGE.H,!DECOMPRESS,NOLOG
+1,STDENUM.H,!DECOMPRESS,NOLOG
+1,STRCOLL.H,!DECOMPRESS,NOLOG
+1,UNKNOWN.H,!DECOMPRESS,NOLOG
+1,UTIL.H,!DECOMPRESS,NOLOG
+1,VC41WARN.H,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-BaseCtl-ToDoSvr]
+1,CDOCOBJ.CPP,!DECOMPRESS,NOLOG
+1,CDOCOBJ.H,!DECOMPRESS,NOLOG
+1,DEFAULT.HTM,!DECOMPRESS,NOLOG
+1,DISPIDS.H,!DECOMPRESS,NOLOG
+1,DOREG.CPP,!DECOMPRESS,NOLOG
+1,DWINVERS.H,!DECOMPRESS,NOLOG
+1,GUIDS.CPP,!DECOMPRESS,NOLOG
+1,GUIDS.H,!DECOMPRESS,NOLOG
+1,IODOC.CPP,!DECOMPRESS,NOLOG
+1,IODOCVW.CPP,!DECOMPRESS,NOLOG
+1,LOCALOBJ.H,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,MENU.CPP,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+1,SAMPLE.TDO,!DECOMPRESS,NOLOG
+1,TODOCTL.BMP,!DECOMPRESS,NOLOG
+1,TODOCTL.CPP,!DECOMPRESS,NOLOG
+1,TODOCTL.H,!DECOMPRESS,NOLOG
+1,TODOPPG.CPP,!DECOMPRESS,NOLOG
+1,TODOPPG.H,!DECOMPRESS,NOLOG
+1,TODOSVR.CPP,!DECOMPRESS,NOLOG
+1,TODOSVR.DEF,!DECOMPRESS,NOLOG
+1,TODOSVR.ODL,!DECOMPRESS,NOLOG
+1,TODOSVR.RC,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-BaseCtl-WebImage]
+1,CATHELP.CPP,!DECOMPRESS,NOLOG
+1,CATHELP.H,!DECOMPRESS,NOLOG
+1,DIBCLS.CPP,!DECOMPRESS,NOLOG
+1,DIBCLS.H,!DECOMPRESS,NOLOG
+1,DISPIDS.H,!DECOMPRESS,NOLOG
+1,DWINVERS.H,!DECOMPRESS,NOLOG
+1,GUIDS.CPP,!DECOMPRESS,NOLOG
+1,GUIDS.H,!DECOMPRESS,NOLOG
+1,LOCALOBJ.H,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+1,SHOWWIMG.HTM,!DECOMPRESS,NOLOG
+1,WIMG.CPP,!DECOMPRESS,NOLOG
+1,WIMG.DEF,!DECOMPRESS,NOLOG
+1,WIMG.ODL,!DECOMPRESS,NOLOG
+1,WIMG.RC,!DECOMPRESS,NOLOG
+1,WIMGCTL.BMP,!DECOMPRESS,NOLOG
+1,WIMGCTL.CPP,!DECOMPRESS,NOLOG
+1,WIMGCTL.H,!DECOMPRESS,NOLOG
+1,WIMGPPG.CPP,!DECOMPRESS,NOLOG
+1,WIMGPPG.H,!DECOMPRESS,NOLOG
+1,WINNET24.BMP,!DECOMPRESS,NOLOG
+1,CABS\SHOWWIMG.HTM,!DECOMPRESS,NOLOG
+1,CABS\WIMG.CAB,!DECOMPRESS,NOLOG
+1,CABS\WIMG.INF,!DECOMPRESS,NOLOG
+1,CABS\ALPHA\WIMG.CAB,!DECOMPRESS,NOLOG
+1,CABS\ALPHA\WIMG.INF,!DECOMPRESS,NOLOG
+1,CABS\MIPS\WIMG.CAB,!DECOMPRESS,NOLOG
+1,CABS\MIPS\WIMG.INF,!DECOMPRESS,NOLOG
+1,CABS\PPC\WIMG.CAB,!DECOMPRESS,NOLOG
+1,CABS\PPC\WIMG.INF,!DECOMPRESS,NOLOG
+1,CABS\X86\WIMG.CAB,!DECOMPRESS,NOLOG
+1,CABS\X86\WIMG.INF,!DECOMPRESS,NOLOG
+
+
+
+[Files-INetSDK-Samples-BaseCtl]
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-Framer]
+1,FRAMER.CPP,!DECOMPRESS,NOLOG
+1,FRAMER.H,!DECOMPRESS,NOLOG
+1,FRAMER.ICO,!DECOMPRESS,NOLOG
+1,FRAMER.MAK,!DECOMPRESS,NOLOG
+1,FRAMER.RC,!DECOMPRESS,NOLOG
+1,IADVSINK.CPP,!DECOMPRESS,NOLOG
+1,ICLISITE.CPP,!DECOMPRESS,NOLOG
+1,IDOCSITE.CPP,!DECOMPRESS,NOLOG
+1,IIPSITE.CPP,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+1,SITE.CPP,!DECOMPRESS,NOLOG
+1,SITE.H,!DECOMPRESS,NOLOG
+
+;[Files-INetSDK-Samples-MSConf-CnfTest]
+;1,CMD.C,!DECOMPRESS,NOLOG
+;1,CNFTEST.ICO,!DECOMPRESS,NOLOG
+;1,CNFTEST.MAK,!DECOMPRESS,NOLOG
+;1,CNFTEST.RC,!DECOMPRESS,NOLOG
+;1,DLG.C,!DECOMPRESS,NOLOG
+;1,GLOBAL.H,!DECOMPRESS,NOLOG
+;1,INIT.C,!DECOMPRESS,NOLOG
+;1,MAIN.C,!DECOMPRESS,NOLOG
+;1,MAIN.H,!DECOMPRESS,NOLOG
+;1,MAKEFILE,!DECOMPRESS,NOLOG
+;1,MSG.C,!DECOMPRESS,NOLOG
+;1,README.TXT,!DECOMPRESS,NOLOG
+;1,RESOURCE.H,!DECOMPRESS,NOLOG
+;1,RTNS.C,!DECOMPRESS,NOLOG
+;1,SBAR.C,!DECOMPRESS,NOLOG
+;1,TEST.C,!DECOMPRESS,NOLOG
+;1,UTIL.C,!DECOMPRESS,NOLOG
+
+;[Files-INetSDK-Samples-MSConf-Excel]
+;1,NETMTG.XLA,!DECOMPRESS,NOLOG
+;1,NETMTG.XLS,!DECOMPRESS,NOLOG
+;1,README.TXT,!DECOMPRESS,NOLOG
+
+;[Files-INetSDK-Samples-MSConf-EzConf]
+;1,EZCONF.C,!DECOMPRESS,NOLOG
+;1,EZCONF.DEF,!DECOMPRESS,NOLOG
+;1,EZCONF.DLL,!DECOMPRESS,NOLOG
+;1,EZCONF.MAK,!DECOMPRESS,NOLOG
+;1,EZCONF.RC,!DECOMPRESS,NOLOG
+;1,MAKEFILE,!DECOMPRESS,NOLOG
+;1,README.TXT,!DECOMPRESS,NOLOG
+
+;[Files-INetSDK-Samples-MSConf-Word]
+;1,NETMTG.DOT,!DECOMPRESS,NOLOG
+;1,README.TXT,!DECOMPRESS,NOLOG
+
+;[Files-INetSDK-Samples-MSConf]
+;1,MAKEFILE,!DECOMPRESS,NOLOG
+;1,README.TXT,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-Progress]
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,PROGRESS.CPP,!DECOMPRESS,NOLOG
+1,PROGRESS.MAK,!DECOMPRESS,NOLOG
+1,PROGRESS.MDP,!DECOMPRESS,NOLOG
+1,PROGRESS.RC,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-UrlPad]
+1,ABOUTBOX.CPP,!DECOMPRESS,NOLOG
+1,ABOUTBOX.H,!DECOMPRESS,NOLOG
+1,DOWNLOAD.CPP,!DECOMPRESS,NOLOG
+1,DOWNLOAD.H,!DECOMPRESS,NOLOG
+1,FILEOPEN.CPP,!DECOMPRESS,NOLOG
+1,FILEOPEN.H,!DECOMPRESS,NOLOG
+1,IPFRAME.CPP,!DECOMPRESS,NOLOG
+1,IPFRAME.H,!DECOMPRESS,NOLOG
+1,ITOOLBAR.BMP,!DECOMPRESS,NOLOG
+1,LINKITEM.CPP,!DECOMPRESS,NOLOG
+1,LINKITEM.H,!DECOMPRESS,NOLOG
+1,MAINFRM.CPP,!DECOMPRESS,NOLOG
+1,MAINFRM.H,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,PADDOC.CPP,!DECOMPRESS,NOLOG
+1,PADDOC.H,!DECOMPRESS,NOLOG
+1,PADDOC.ICO,!DECOMPRESS,NOLOG
+1,PADFRAME.CPP,!DECOMPRESS,NOLOG
+1,PADFRAME.H,!DECOMPRESS,NOLOG
+1,PADITEM.CPP,!DECOMPRESS,NOLOG
+1,PADITEM.H,!DECOMPRESS,NOLOG
+1,PADVIEW.CPP,!DECOMPRESS,NOLOG
+1,PADVIEW.H,!DECOMPRESS,NOLOG
+1,PAGESET.CPP,!DECOMPRESS,NOLOG
+1,PAGESET.H,!DECOMPRESS,NOLOG
+1,README.HTM,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+1,STDAFX.CPP,!DECOMPRESS,NOLOG
+1,STDAFX.H,!DECOMPRESS,NOLOG
+1,SUPERPAD.CPP,!DECOMPRESS,NOLOG
+1,SUPERPAD.H,!DECOMPRESS,NOLOG
+1,SUPERPAD.MAK,!DECOMPRESS,NOLOG
+1,SUPERPAD.MDP,!DECOMPRESS,NOLOG
+1,TABSTOP.CPP,!DECOMPRESS,NOLOG
+1,TABSTOP.H,!DECOMPRESS,NOLOG
+1,TOOLBAR.BMP,!DECOMPRESS,NOLOG
+1,URLPAD.ICO,!DECOMPRESS,NOLOG
+1,URLPAD.RC,!DECOMPRESS,NOLOG
+1,URLPAD.REG,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-VBScript-spruuids-Src]
+1,APP.CPP,!DECOMPRESS,NOLOG
+1,APP.H,!DECOMPRESS,NOLOG
+1,DEBUG.H,!DECOMPRESS,NOLOG
+1,DISPIDS.H,!DECOMPRESS,NOLOG
+1,GAME.CPP,!DECOMPRESS,NOLOG
+1,GAME.H,!DECOMPRESS,NOLOG
+1,GAMEOA.CPP,!DECOMPRESS,NOLOG
+1,GUIDS.CPP,!DECOMPRESS,NOLOG
+1,GUIDS.H,!DECOMPRESS,NOLOG
+1,HELPERS.H,!DECOMPRESS,NOLOG
+1,INC_EXT\COMPMGR.H,!DECOMPRESS,NOLOG
+1,INC_EXT\MULTINFO.H,!DECOMPRESS,NOLOG
+1,INC_EXT\VBSGUIDS.H,!DECOMPRESS,NOLOG
+1,MAIN.H,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,MSGLOOP.CPP,!DECOMPRESS,NOLOG
+1,MSGLOOP.H,!DECOMPRESS,NOLOG
+1,OLEAUTO.CPP,!DECOMPRESS,NOLOG
+1,OLEAUTO.H,!DECOMPRESS,NOLOG
+1,PLUS.BMP,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+1,SCORE.CPP,!DECOMPRESS,NOLOG
+1,SCORE.H,!DECOMPRESS,NOLOG
+1,SHIP.BMP,!DECOMPRESS,NOLOG
+1,SPR.CPP,!DECOMPRESS,NOLOG
+1,SPR.H,!DECOMPRESS,NOLOG
+1,SPROA.CPP,!DECOMPRESS,NOLOG
+1,SPRUUIDP.H,!DECOMPRESS,NOLOG
+1,SPRUUIDP.HH,!DECOMPRESS,NOLOG
+1,SPRUUIDP.PIX,!DECOMPRESS,NOLOG
+1,SPRUUIDS.BMP,!DECOMPRESS,NOLOG
+1,SPRUUIDS.CUR,!DECOMPRESS,NOLOG
+1,SPRUUIDS.ICO,!DECOMPRESS,NOLOG
+1,SPRUUIDS.MAK,!DECOMPRESS,NOLOG
+1,SPRUUIDS.ODL,!DECOMPRESS,NOLOG
+1,SPRUUIDS.RC,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-VBScript-spruuids]
+1,GAME1.TXT,!DECOMPRESS,NOLOG
+1,GAME2.TXT,!DECOMPRESS,NOLOG
+1,GAME3.TXT,!DECOMPRESS,NOLOG
+1,GAMEFULL.TXT,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-VBScript]
+1,README.TXT,!DECOMPRESS,NOLOG,RENAME="VBScript Web Site.Url"
+1,VBSCRI~1.URL,!DECOMPRESS,NOLOG,RENAME="VBScript Web Site.Url"
+
+[Files-INetSDK-Samples-WinINet-FTPJr]
+1,FTPJR.CPP,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-WinINet-HTTPAuth]
+1,HTTPAuth.CPP,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-WinInet-HTTPDump]
+1,HEADDUMP.CPP,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-WinInet-Range]
+1,CACHE.CPP,!DECOMPRESS,NOLOG
+1,CALLBACK.CPP,!DECOMPRESS,NOLOG
+1,CALLBACK.HPP,!DECOMPRESS,NOLOG
+1,DOWNLOAD.CPP,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,RANGE.C,!DECOMPRESS,NOLOG
+1,RANGE.H,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RECVBUF.CPP,!DECOMPRESS,NOLOG
+1,RECVBUF.HPP,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples-WinInet]
+1,MAKEFILE,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Samples]
+1,MAKEALL.BAT,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+
+[Files-INetSDK-Specs]
+1,CC_INFO.DOC,!DECOMPRESS,NOLOG
+1,1.HTM,!DECOMPRESS,NOLOG
+1,10.HTM,!DECOMPRESS,NOLOG
+1,11.HTM,!DECOMPRESS,NOLOG
+1,12.HTM,!DECOMPRESS,NOLOG
+1,13.HTM,!DECOMPRESS,NOLOG
+1,14.HTM,!DECOMPRESS,NOLOG
+1,15.HTM,!DECOMPRESS,NOLOG
+1,16.HTM,!DECOMPRESS,NOLOG
+1,2.HTM,!DECOMPRESS,NOLOG
+1,3.HTM,!DECOMPRESS,NOLOG
+1,4.HTM,!DECOMPRESS,NOLOG
+1,5.HTM,!DECOMPRESS,NOLOG
+1,6.HTM,!DECOMPRESS,NOLOG
+1,600WLINE.GIF,!DECOMPRESS,NOLOG
+1,7.HTM,!DECOMPRESS,NOLOG
+1,8.HTM,!DECOMPRESS,NOLOG
+1,9.HTM,!DECOMPRESS,NOLOG
+1,ASYNCMON.DOC,!DECOMPRESS,NOLOG
+1,BTNLR.JPG,!DECOMPRESS,NOLOG
+1,BTNTUTOR.JPG,!DECOMPRESS,NOLOG
+1,CPYRIGHT.HTM,!DECOMPRESS,NOLOG
+1,DIAMOND.HTM,!DECOMPRESS,NOLOG
+1,EMBEDTAG.HTM,!DECOMPRESS,NOLOG
+1,ENCODE.HTM,!DECOMPRESS,NOLOG
+1,HLINK.DOC,!DECOMPRESS,NOLOG
+1,HLSIMPLE.DOC,!DECOMPRESS,NOLOG
+1,NEXT.JPG,!DECOMPRESS,NOLOG
+1,OC96.DOC,!DECOMPRESS,NOLOG
+1,OCGUIDE.DOC,!DECOMPRESS,NOLOG
+1,OLELOGO.GIF,!DECOMPRESS,NOLOG
+1,OUTLINE.GIF,!DECOMPRESS,NOLOG
+1,PLUGURL.HTM,!DECOMPRESS,NOLOG
+1,PREV.JPG,!DECOMPRESS,NOLOG
+1,REGISTER.HTM,!DECOMPRESS,NOLOG
+1,URLMON.DOC,!DECOMPRESS,NOLOG
+1,VBFLDR1.GIF,!DECOMPRESS,NOLOG
+1,VBSC116B.GIF,!DECOMPRESS,NOLOG
+1,VBSSML.JPG,!DECOMPRESS,NOLOG
+1,VBSTUTOR.HTM,!DECOMPRESS,NOLOG
+1,WALLPPER.GIF,!DECOMPRESS,NOLOG
+1,ASYNCH~1.DOC,!DECOMPRESS,NOLOG,RENAME="Asynchronous Storage.Doc"
+1,OLECON~1.DOC,!DECOMPRESS,NOLOG,RENAME="OLE Controls-COM Objects for the Internet.Doc"
+1,OLEDOC~1.DOC,!DECOMPRESS,NOLOG,RENAME="OLE Document Objects Specification.Doc"
+
+[Files-INetSDK-System32-i386]
+; 1,DATAPATH.TLB,!DECOMPRESS,NOLOG
+
+; geraldd sanrisc
+[Files-INetSDK-System32-alpha]
+
+;geraldd sanrisc
+[Files-INetSDK-System32-ppc]
+
+;geraldd sanrisc
+[Files-INetSDK-System32-mips]
+
+
+
+
+[Files-INetSDK]
+1,README.TXT,!DECOMPRESS,NOLOG
+1,SETENV.BAT,!DECOMPRESS,NOLOG
+
+[Files-NashSDK-Include]
+1,JOBSCHED.H,!DECOMPRESS,NOLOG
+1,WAB.H,!DECOMPRESS,NOLOG
+1,WABAPI.H,!DECOMPRESS,NOLOG
+1,WABCODE.H,!DECOMPRESS,NOLOG
+1,WABDEFS.H,!DECOMPRESS,NOLOG
+1,WABIAB.H,!DECOMPRESS,NOLOG
+1,WABMEM.H,!DECOMPRESS,NOLOG
+1,WABNOT.H,!DECOMPRESS,NOLOG
+1,WABTAGS.H,!DECOMPRESS,NOLOG
+1,WABUTIL.H,!DECOMPRESS,NOLOG
+
+[Files-NashSDK-Lib-i386]
+1,MSTASK.LIB,!DECOMPRESS,NOLOG
+1,WAB32.LIB,!DECOMPRESS,NOLOG
+
+;geraldd sanrisc
+;[Files-NashSDK-Lib-ppc]
+
+;geraldd sanrisc
+;[Files-NashSDK-Lib-alpha]
+
+;geraldd sanrisc
+;[Files-NashSDK-Lib-mips]
+
+[Files-NashSDK-Samples-Wab-ApiTest]
+1,APITEST.C,!DECOMPRESS,NOLOG
+1,APITEST.DEF,!DECOMPRESS,NOLOG
+1,APITEST.H,!DECOMPRESS,NOLOG
+1,APITEST.RC,!DECOMPRESS,NOLOG
+1,INSTRING.C,!DECOMPRESS,NOLOG
+1,INSTRING.H,!DECOMPRESS,NOLOG
+1,INSTRING.RC,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+
+[Files-NashSDK-Samples-WebPost-WbPost]
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,WBPOST.CPP,!DECOMPRESS,NOLOG
+1,WBPOST.H,!DECOMPRESS,NOLOG
+
+[Files-NashSDK-Samples-WebPost-WbProv]
+1,GUID.C,!DECOMPRESS,NOLOG
+1,MAKEFILE,!DECOMPRESS,NOLOG
+1,README.TXT,!DECOMPRESS,NOLOG
+1,RESOURCE.H,!DECOMPRESS,NOLOG
+1,SITE.CPP,!DECOMPRESS,NOLOG
+1,WBPROV.CPP,!DECOMPRESS,NOLOG
+1,WBPROV.DEF,!DECOMPRESS,NOLOG
+1,WBPROV.H,!DECOMPRESS,NOLOG
+1,WBPROV.RC,!DECOMPRESS,NOLOG
+1,WIZARD.CPP,!DECOMPRESS,NOLOG
+
+[Files-NashSDK-Samples-WebPost]
+1,MAKEFILE,!DECOMPRESS,NOLOG
+
+[Files-NashSDK-Specs]
+1,WABAPI.DOC,!DECOMPRESS,NOLOG
+
+[Files-WebPost-Include]
+1,WPAPI.H,!DECOMPRESS,NOLOG
+1,WPGUID.H,!DECOMPRESS,NOLOG
+1,WPOBJ.H,!DECOMPRESS,NOLOG
+1,WPSPI.H,!DECOMPRESS,NOLOG
+
+[Files-WebPost-Lib-i386]
+1,WEBPOST.LIB,!DECOMPRESS,NOLOG
+
+;geraldd sanrisc
+[Files-WebPost-Lib-ppc]
+;1,WEBPOST.LIB,!DECOMPRESS,NOLOG
+
+;geraldd sanrisc
+[Files-WebPost-Lib-alpha]
+
+;geraldd sanrisc
+[Files-WebPost-Lib-mips]
+
+
+

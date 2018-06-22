@@ -1,0 +1,1873 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>ActiveX Control Objects, Properties, Methods, and Events</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep123.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep125.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="actxobj_000f000601000000">ActiveX Control Objects, Properties, Methods, and Events</A></H2>
+<BR CLEAR=ALL>
+<P>All events fired by the control go through the Conference Manager object. The following hierarchy shows the control's objects, and the properties, methods, and events for each. Brackets indicate the object from which each event originates.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Conference Manager</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601020000" TARGET=TEXT>IConferenceManagerX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Properties
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601030100" TARGET=TEXT>ConferenceCapabilities</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601030200" TARGET=TEXT>RemoteConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601030300" TARGET=TEXT>Conferences</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601030400" TARGET=TEXT>Users</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601030500" TARGET=TEXT>NullObject</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Methods
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601040100" TARGET=TEXT>Initialize</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601040200" TARGET=TEXT>Uninitialize</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601040300" TARGET=TEXT>CreateConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601040400" TARGET=TEXT>CreateUser</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601040500" TARGET=TEXT>Advise</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601040600" TARGET=TEXT>Unadvise</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Events
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050100" TARGET=TEXT>InvitedToConference</A> {Conference Manager}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050200" TARGET=TEXT>ConferenceCreated</A> {Conference Manager}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050300" TARGET=TEXT>StateChanged</A> {Conference}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050400" TARGET=TEXT>RequestToJoin</A> {Conference}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050500" TARGET=TEXT>MemberChanged</A> {Conference}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050600" TARGET=TEXT>ChannelChanged</A> {Conference}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050700" TARGET=TEXT>DataSent</A> {Communication Channel}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050800" TARGET=TEXT>DataReceived</A> {Communication Channel}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050900" TARGET=TEXT>FileSent</A> {Communication Channel}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050a00" TARGET=TEXT>FileReceived</A> {Communication Channel}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050b00" TARGET=TEXT>AppSharingStatusChanged</A> {Communication Channel}
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601050c00" TARGET=TEXT>AppControlStatusChanged</A> {Communication Channel}
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>User</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601070000" TARGET=TEXT>IConfUserX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Properties
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601080100" TARGET=TEXT>Name</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601080200" TARGET=TEXT>Type</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601080300" TARGET=TEXT>ConferenceCapabilities</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601080400" TARGET=TEXT>IsMCU</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601080500" TARGET=TEXT>Conferences</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601080600" TARGET=TEXT>Applications</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Conference</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010a0000" TARGET=TEXT>IConferenceX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Properties
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010b0100" TARGET=TEXT>Name</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010b0200" TARGET=TEXT>Capabilities</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010b0300" TARGET=TEXT>State</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010b0400" TARGET=TEXT>Members</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010b0500" TARGET=TEXT>Applications</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010b0600" TARGET=TEXT>ChannelInterfaces</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010b0700" TARGET=TEXT>Channels</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Methods
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0100" TARGET=TEXT>Invite</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0200" TARGET=TEXT>AcceptInvite</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0300" TARGET=TEXT>RejectInvite</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0400" TARGET=TEXT>Join</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0500" TARGET=TEXT>AcceptJoin</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0600" TARGET=TEXT>RejectJoin</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0700" TARGET=TEXT>CreateChannel</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0800" TARGET=TEXT>Leave</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0900" TARGET=TEXT>IsSameAs</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0a00" TARGET=TEXT>Advise</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010c0b00" TARGET=TEXT>Unadvise</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Member</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010e0000" TARGET=TEXT>IConfMemberX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Properties
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010f0100" TARGET=TEXT>Name</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010f0200" TARGET=TEXT>Type</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010f0300" TARGET=TEXT>ConferenceCapabilities</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010f0400" TARGET=TEXT>IsMCU</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010f0500" TARGET=TEXT>Conferences</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010f0600" TARGET=TEXT>Applications</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010f0700" TARGET=TEXT>Conference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006010f0800" TARGET=TEXT>IsSelf</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Method
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601100100" TARGET=TEXT>IsSameAs</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Communication Channel</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601120000" TARGET=TEXT>IConfChannelX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Properties
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601130100" TARGET=TEXT>Conference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601130200" TARGET=TEXT>Interface</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601130300" TARGET=TEXT>Members</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601130400" TARGET=TEXT>Object</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Methods
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601140100" TARGET=TEXT>IncludeMember</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601140200" TARGET=TEXT>ExcludeMember</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601140300" TARGET=TEXT>IsSameAs</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601150000" TARGET=TEXT>IConfDataExchangeX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Methods
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601160100" TARGET=TEXT>SendData</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601160200" TARGET=TEXT>Advise</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601160300" TARGET=TEXT>Unadvise</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601170000" TARGET=TEXT>IConfFileExchangeX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Property
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601180200" TARGET=TEXT>ReceiveFileDir</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Methods
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601190100" TARGET=TEXT>SendFile</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601190200" TARGET=TEXT>Cancel</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601190300" TARGET=TEXT>Advise</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601190400" TARGET=TEXT>Unadvise</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006011a0000" TARGET=TEXT>IConfAppSharingX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Property
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006011b0100" TARGET=TEXT>SharableApps</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Methods
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006011c0100" TARGET=TEXT>Advise</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006011c0200" TARGET=TEXT>Unadvise</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006011d0000" TARGET=TEXT>IConfAppControlX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Methods
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006011e0100" TARGET=TEXT>StartRemoteInstance</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006011e0200" TARGET=TEXT>Advise</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006011e0300" TARGET=TEXT>Unadvise</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Client Application</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601200000" TARGET=TEXT>IConfApplicationX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Properties
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601210100" TARGET=TEXT>GUID</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601210200" TARGET=TEXT>Name</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Sharable Application</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601230000" TARGET=TEXT>IConfShareAppX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Properties
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601240100" TARGET=TEXT>Name</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601240200" TARGET=TEXT>ShareState</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Methods
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601250100" TARGET=TEXT>Share</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601250200" TARGET=TEXT>Unshare</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Data Transfer Object</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601270000" TARGET=TEXT>IConfDataTransferX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Properties
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601280100" TARGET=TEXT>BytesTransferred</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601280200" TARGET=TEXT>String</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f000601280300" TARGET=TEXT>Array</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>File Transfer Object</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006012a0000" TARGET=TEXT>IConfFileTransferX</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Properties
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006012b0100" TARGET=TEXT>Name</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006012b0200" TARGET=TEXT>BytesTransferred</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006012b0300" TARGET=TEXT>TotalSize</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006012b0400" TARGET=TEXT>State</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Method
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep124.htm#actxobj_000f0006012c0100" TARGET=TEXT>IsSameAs</A>
+</FONT></TD></TR></TABLE>
+<H3><A NAME="actxobj_000f000601010000">Conference Manager Object</A></H3>
+<P>The Conference Manager object provides the following interface:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601020000" TARGET=TEXT>IConferenceManagerX</A>
+</UL>
+<H3><A NAME="actxobj_000f000601020000">IConferenceManagerX</A></H3>
+<P>The <B>IConferenceManagerX</B> interface provides the following properties:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601030100" TARGET=TEXT>ConferenceCapabilities</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601030200" TARGET=TEXT>RemoteConference</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601030300" TARGET=TEXT>Conferences</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601030400" TARGET=TEXT>Users</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601030500" TARGET=TEXT>NullObject</A>
+</UL>
+<P>and the following methods:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601040100" TARGET=TEXT>Initialize</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601040200" TARGET=TEXT>Uninitialize</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601040300" TARGET=TEXT>CreateConference</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601040400" TARGET=TEXT>CreateUser</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601040500" TARGET=TEXT>Advise</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601040600" TARGET=TEXT>Unadvise</A>
+</UL>
+<H3><A NAME="actxobj_000f000601030000">IConferenceManagerX Properties</A></H3>
+<P>Following is a description of the properties for the <A HREF="sweep124.htm#actxobj_000f000601020000" TARGET=TEXT>IConferenceManagerX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601030100">IConferenceManagerX::ConferenceCapabilities</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ConferenceCapabilities(
+    LONG *plConfCaps);
+</FONT></PRE>
+<P>Indicates which types of conferences (audio, data, or video) are available on the local computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plConfCaps</I> </DT><DD>Field with one or more of the following values set:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_CAPS_NONE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Not capable of conferencing.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_CAPS_DATA </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Data conferencing.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_CAPS_AUDIO </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Audio conferencing.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_CAPS_VIDEO </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Video conferencing.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H4><A NAME="actxobj_000f000601030200">IConferenceManagerX::RemoteConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RemoteConference(
+    IConferenceX **ppConference);
+</FONT></PRE>
+<P>Indicates the ongoing Conference object from which the application was remotely activated by a remote node. The calling application should use the Conference object to communicate with the remote node.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppConference</I> </DT><DD>Address to receive an instance of the Conference object.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601030300">IConferenceManagerX::Conferences</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Conferences(
+    Iconferences **ppConferences);
+</FONT></PRE>
+<P>Returns the collection of existing Conference objects. If there is a conference in progress, the person setting up the conference can choose to use that one instead of starting a new one.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppConferences</I> </DT><DD>Address to a collection of Conference objects.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601030400">IConferenceManagerX::Users</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Users(
+    IConfUsers **ppUsers);
+</FONT></PRE>
+<P>Indicates a collection of users who can become participants in a conference. It returns a pointer to a collection of existing User objects.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppUsers</I> </DT><DD>Address to a collection of User objects.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601030500">IConferenceManagerX::NullObject</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT NullObject(
+    IDispatch **pIDispatch);
+</FONT></PRE>
+<P>Indicates the IDispatch pointer set to null.
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pIDispatch</I> </DT><DD>Address to the IDispatch pointer to be set to null.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601040000">IConferenceManagerX Methods</A></H3>
+<P>Following is a description of the methods for the <A HREF="sweep124.htm#actxobj_000f000601020000" TARGET=TEXT>IConferenceManagerX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601040100">IConferenceManagerX::Initialize</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Initialize(
+    BSTR bstrID,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Activates the Conference Manager object and allows the calling application to register itself to the conference services.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>bstrID</I> parameter is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>bstrID</I> </DT><DD>Interface ID of the calling application (textual description of a globally unique identifier [GUID]).
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the conference was initialized successfully, FALSE 
+otherwise.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601040200">IConferenceManagerX::Uninitialize</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Uninitialize(void);
+</FONT></PRE>
+<P>Must be called by scripts and Visual Basic applications before the control is unloaded.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<P>If the <A HREF="sweep124.htm#actxobj_000f000601040100" TARGET=TEXT>Initialize</A> method has not yet been called, it is not to call <B>Uninitialize</B>.
+<H4><A NAME="actxobj_000f000601040300">IConferenceManagerX::CreateConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT CreateConference(
+    BSTR bstrName,
+    LONG lConfCaps,
+    IConferenceX **ppConference);
+</FONT></PRE>
+<P>Retrieves an instance of a new Conference object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>bstrName</I> </DT><DD>String for the conference name.
+</DD><DT><I>lConfCaps</I> </DT><DD>Bitmap for conferencing capabilities.
+</DD><DT><I>ppConference</I> </DT><DD>Address to receive an instance of the Conference object.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601040400">IConferenceManagerX::CreateUser</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT CreateUser(
+    BSTR bstrName,
+    LONG lType,
+    IConfUserX **ppUser);
+</FONT></PRE>
+<P>Retrieves an instance of a new User object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>bstrName</I> </DT><DD>String for the user's name or address.
+</DD><DT><I>lType</I> </DT><DD>Constant that indicates the type of the user name/address. Can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_USER_UNKNOWN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The transport is unknown.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_USER_IP </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user name contains an IP address.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_USER_MACHINENAME </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user name contains a computer name.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_USER_PSTN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user name contains a telephone number.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>ppUser</I> </DT><DD>Address to receive an instance of the User object.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601040500">IConferenceManagerX::Advise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Advise(void);
+</FONT></PRE>
+<P>Enables advisements (events) for the <A HREF="sweep124.htm#actxobj_000f000601020000" TARGET=TEXT>IConferenceManagerX</A> interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="actxobj_000f000601040600">IConferenceManagerX::Unadvise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Unadvise(void);
+</FONT></PRE>
+<P>Disables advisements (events) for the <A HREF="sweep124.htm#actxobj_000f000601020000" TARGET=TEXT>IConferenceManagerX</A> interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H3><A NAME="actxobj_000f000601050000">Events</A></H3>
+<P>Following are the events fired
+ by the control. All events are fired by the Conference Manager object.
+ 
+
+
+<H4><A NAME="actxobj_000f000601050100">InvitedToConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void InvitedToConference(
+    IConfUserX *pUser,
+    IConferenceX *pConference);
+</FONT></PRE>
+<P>Retrieves a pointer to the conference that the called application is being invited to join. 
+
+<DL><DT><I>pUser</I> </DT><DD>User who invited the local computer to the conference.
+</DD><DT><I>pConference</I> </DT><DD>Instance of the Conference object.
+</DD></DL>
+<P>This event is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601050200">ConferenceCreated</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void ConferenceCreated(
+    IConferenceX *pConference);
+</FONT></PRE>
+<P>Fires when a new conference is activated by other applications. The Conference object can be used as if it were activated by the client application. 
+
+<DL><DT><I>pConference</I> </DT><DD>Instance of the Conference object.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601050300">StateChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void StateChanged(
+    IConferenceX *pConference,
+    LONG lConfState,
+    LONG hr);
+</FONT></PRE>
+<P>Fires when the status of the conference has changed. 
+
+<DL><DT><I>pConference</I> </DT><DD>Instance of the Conference object.
+</DD><DT><I>lConfState</I> </DT><DD>State of the conference.
+</DD><DT><I>hr</I> </DT><DD>Result of the status change operation.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601050400">RequestToJoin</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void RequestToJoin(
+    IConferenceX *pConference,
+    IConfUserX *pUser);
+</FONT></PRE>
+<P>Fires when a user has made a request to join a conference. 
+
+<DL><DT><I>pConference</I> </DT><DD>Instance of the Conference object to be joined.
+</DD><DT><I>pUser</I> </DT><DD>Instance of the User object who wants to join the conference.
+</DD></DL>
+<P>This event is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601050500">MemberChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void MemberChanged(
+    IConferenceX *pConference,
+    IConfMemberX *pMember,
+    LONG lNotify);
+</FONT></PRE>
+<P>Fires when the member roster for the conference has changed (someone has joined or left the conference). 
+
+<DL><DT><I>pConference</I> </DT><DD>Instance of the Conference object.
+</DD><DT><I>pMember</I> </DT><DD>Instance of the Member object that is added or removed 
+from the conference. 
+</DD><DT><I>lNotify</I> </DT><DD>Constant for the notification type. Can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_MEMB_ADDED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The member is being added to the conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_MEMB_REMOVED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The member is being removed from the conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_MEMB_UPDATED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The member information is changed.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H4><A NAME="actxobj_000f000601050600">ChannelChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void ChannelChanged(
+    IConferenceX *pConference,
+    IConfChannelX *pChannel,
+    LONG lNotify);
+</FONT></PRE>
+<P>Fires when a channel has been added or removed from a conference. 
+
+<DL><DT><I>pConference</I> </DT><DD>Instance of the Conference object.
+</DD><DT><I>pChannel</I> </DT><DD>Instance of the Channel object that is added or removed from the conference
+</DD><DT><I>lNotify</I> </DT><DD>Constant for the notification type. Can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_CHAN_ADDED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The channel is being added to the conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_CHAN_REMOVED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The channel is being removed from the conference.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P>This event is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601050700">DataSent</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void DataSent(
+    IConfDataExchangeX *pDataExchange,
+    IConfMemberX *pMember,
+    IConfDataTransferX *pDataTransfer,
+    LONG hr);
+</FONT></PRE>
+<P>Fires when data has been sent, and indicates the result of the operation.
+
+
+<DL><DT><I>pDataExchange</I> </DT><DD>Address to the ConfDataExchange object used to send the data. 
+</DD><DT><I>pMember </I></DT><DD>Instance of the Member object that received the data. This parameter's value is NULL if the data was sent to all members.
+</DD><DT><I>pDataTransfer</I> </DT><DD>IConfDataTransferX object.
+</DD><DT><I>hr</I> </DT><DD>Result of the data transfer.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601050800">DataReceived</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void DataReceived(
+    IConfDataExchangeX *pDataExchange,
+    IConfMemberX *pMember,
+    IConfDataTransferX *pDataTransfer,
+    LONG hr);
+</FONT></PRE>
+<P>Fires when data has been received. 
+
+<DL><DT><I>pDataExchange</I> </DT><DD>Address to the ConfDataExchange object used to send the data
+</DD><DT><I>pMember </I></DT><DD>Instance of the Member object that sent the data.
+</DD><DT><I>pDataTransfer</I> </DT><DD>IConfDataTransferX object.
+</DD><DT><I>hr</I> </DT><DD>Result of the data transfer.
+</DD></DL>
+<P>The data buffer is valid only during the event notification, that is, the data buffer is freed by the source object after the event notification.
+<H4><A NAME="actxobj_000f000601050900">FileSent</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void FileSent(
+    IConfFileExchangeX *pFileExchange,
+    IConfMemberX *pMember,
+    IConfFileTransferX *pFileTransfer,
+    LONG hr);
+</FONT></PRE>
+<P>Fires when a file has been sent. 
+
+<DL><DT><I>pFileExchange</I> </DT><DD>Address to the File Exchange object that was used to send the file. 
+</DD><DT><I>pMember </I></DT><DD>Instance of the Member object where the file is sent. Will be NULL if the file was sent to everyone.
+</DD><DT><I>pFileTransfer</I> </DT><DD>Instance of the File Transfer object.
+</DD><DT><I>hr</I> </DT><DD>Result of the data transfer.
+</DD></DL>
+<P>This event can be fired multiple times to get progress information from the ConfFileTransfer object.
+<H4><A NAME="actxobj_000f000601050a00">FileReceived</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void FileReceived(
+    IConfFileExchangeX *pFileExchange,
+    IConfMemberX *pMember,
+    IConfFileTransferX *pFileTransfer,
+    LONG hr);
+</FONT></PRE>
+<P>Fires when a file has been received. 
+
+<DL><DT><I>pFileExchange</I> </DT><DD>Address to the ConfFileExchange object that was used to receive the file.
+</DD><DT><I>pMember </I></DT><DD>Instance of the Member object where the file is received.
+</DD><DT><I>pFileTransfer</I> </DT><DD>Instance of the File Transfer object.
+</DD><DT><I>hr</I> </DT><DD>Result of the data transfer.
+</DD></DL>
+<P>It can be fired multiple times to get progress information.
+<H4><A NAME="actxobj_000f000601050b00">AppSharingStatusChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void AppSharingStatusChanged(
+    IConfAppSharingX *pAppSharing,
+    IConfShareAppX *pShrApp,
+    LONG lAppStatus
+    LONG hr);
+</FONT></PRE>
+<P>Fires when a sharable application becomes shared or unshared.
+
+<DL><DT><I>pAppSharing</I> </DT><DD>Address to the App Sharing channel.
+</DD><DT><I>pShrApp</I> </DT><DD>Instance of the Sharable Application object.
+</DD><DT><I>lAppStatus</I> </DT><DD>Current sharing status. Can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_SHARED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application is shared.
+ </FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_UNSHARED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application is not shared.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>hr</I> </DT><DD>Result of the application sharing operation.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601050c00">AppControlStatusChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void AppControlStatusChanged(
+    IConfAppControlX *pAppControl,
+    IConfMemberX *pMember,
+    IConfApplicationX *pApplication,
+    LONG lAppStatus
+    LONG hr);
+</FONT></PRE>
+<P>Fires when the remote instance of an application on a member's computer changes its status.
+
+<DL><DT><I>pAppControl</I> </DT><DD>Address to the App Control channel.
+</DD><DT><I>pMember </I></DT><DD>Member object whose application instance is changing its status.
+</DD><DT><I>pApplication</I> </DT><DD>Instance of the Application object.
+</DD><DT><I>lAppStatus</I> </DT><DD>Current sharing status for application invocation. Can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_APP_UNKNOWN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The state of the remote instance of the application is unknown.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_APP_STARTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The remote instance of the application is started. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_APP_STOPPED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The remote instance of the application is stopped. 
+</FONT></TD></TR></TABLE>
+</DD><DT><I>hr</I> </DT><DD>Result of the application sharing operation.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601060000">User Object</A></H3>
+<P>The User object provides the following interface:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601070000" TARGET=TEXT>IConfUserX</A>
+</UL>
+<H3><A NAME="actxobj_000f000601070000">IConfUserX</A></H3>
+<P>The <B>IConfUserX</B> interface provides the following properties:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601080100" TARGET=TEXT>Name</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601080200" TARGET=TEXT>Type</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601080300" TARGET=TEXT>ConferenceCapabilities</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601080400" TARGET=TEXT>IsMCU</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601080500" TARGET=TEXT>Conferences</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601080600" TARGET=TEXT>Applications</A>
+</UL>
+<H3><A NAME="actxobj_000f000601080000">IConfUserX Properties</A></H3>
+<P>Following is a description of the properties for the <A HREF="sweep124.htm#actxobj_000f000601070000" TARGET=TEXT>IConfUserX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601080100">IConfUserX::Name</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Name(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Indicates a user name string.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the user name or address.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601080200">IConfUserX::Type</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Type(
+    LONG *plType);
+</FONT></PRE>
+<P>Indicates the type of name for the User object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plType</I> </DT><DD>Address to the type of name of the user.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601080300">IConfUserX::ConferenceCapabilities</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ConferenceCapabilities(
+    LONG *plConfCaps);
+</FONT></PRE>
+<P>Indicates which types of conferences (audio, data, or video) are available on the user's computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plConfCaps</I> </DT><DD>Address to a buffer that upon return will contain the capabilities of the computer.
+</DD></DL>
+<P>This property is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601080400">IConfUserX::IsMCU</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsMCU(
+    BOOLEAN *pfMCU);
+</FONT></PRE>
+<P>Indicates whether the user is a multipoint control unit (MCU).
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">User is an MCU.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">User is not an MCU.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pfMCU</I> </DT><DD>TRUE if the user is an MCU, FALSE otherwise.
+</DD></DL>
+<P>This property is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601080500">IConfUserX::Conferences</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Conferences(
+    IConferences **ppConferences);
+</FONT></PRE>
+<P>Indicates a collection of Conference objects that a user is participating in.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppConferences</I> </DT><DD>Address to a collection of conference objects.
+</DD></DL>
+<P>This property is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601080600">IConfUserX::Applications</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Applications(
+    IConfApplications **ppApplications);
+</FONT></PRE>
+<P>Indicates a collection of Client Application objects for a user.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppApplications</I> </DT><DD>Address to a collection of Client Application objects.
+</DD></DL>
+<P>This property is not supported in the current version.
+
+<H3><A NAME="actxobj_000f000601090000">Conference Object</A></H3>
+<P>The Conference object provides the following interface:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006010a0000" TARGET=TEXT>IConferenceX</A>
+</UL>
+<H3><A NAME="actxobj_000f0006010a0000">IConferenceX</A></H3>
+<P>The <B>IConferenceX</B> interface provides the following properties:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006010b0100" TARGET=TEXT>Name</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010b0200" TARGET=TEXT>Capabilites</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010b0300" TARGET=TEXT>State</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010b0400" TARGET=TEXT>Members</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010b0500" TARGET=TEXT>Applications</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010b0600" TARGET=TEXT>ChannelInterfaces</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010b0700" TARGET=TEXT>Channels</A>
+</UL>
+<P>and the following methods:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006010c0100" TARGET=TEXT>Invite</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0200" TARGET=TEXT>AcceptInvite</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0300" TARGET=TEXT>RejectInvite</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0400" TARGET=TEXT>Join</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0500" TARGET=TEXT>AcceptJoin</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0600" TARGET=TEXT>RejectJoin</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0700" TARGET=TEXT>CreateChannel</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0800" TARGET=TEXT>Leave</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0900" TARGET=TEXT>IsSameAs</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0a00" TARGET=TEXT>Advise</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010c0b00" TARGET=TEXT>Unadvise</A>
+</UL>
+<H3><A NAME="actxobj_000f0006010b0000">IConferenceX Properties</A></H3>
+<P>Following is a description of the properties for the <A HREF="sweep124.htm#actxobj_000f0006010a0000" TARGET=TEXT>IConferenceX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f0006010b0100">IConferenceX::Name</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Name(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Indicates a conference name string. The conference name is the name passed in when the object is created by <A HREF="sweep124.htm#actxobj_000f000601040300" TARGET=TEXT>CreateConference</A>, or is the name that exists when another user's conference is joined.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the conference name.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010b0200">IConferenceX::Capabilities</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Capabilities(
+    LONG *plConfCaps);
+</FONT></PRE>
+<P>Indicates which types of conferences (audio, data, video) the conference was originally created with. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plConfCaps</I> </DT><DD>Address to a buffer that contains the capabilities of the conference.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010b0300">IConferenceX::State</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT State(
+    LONG *plConfState);
+</FONT></PRE>
+<P>Indicates the state of the conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plConfState</I> </DT><DD>Address to receive a conference state. Can receive one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_IDLE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is idle (just created).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_INITIALIZING </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is being initialized.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_ACTIVE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is active and can be used.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_STOPPING </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is being terminated.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_OFFERED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is offered.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010b0400">IConferenceX::Members</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Members(
+    IConfMembers **ppMembers);
+</FONT></PRE>
+<P>Indicates a collection of existing Member objects when a conference is active.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppMembers</I> </DT><DD>Address to a collection of Member objects.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010b0500">IConferenceX::Applications</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Applications(
+    IConfApplications **ppApplications);
+</FONT></PRE>
+<P>Indicates a collection of Client Application objects available to this conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppApplications</I> </DT><DD>Address to a collection of Client Application objects.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010b0600">IConferenceX::ChannelInterfaces</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ChannelInterfaces(
+    IChanInterfaces **ppChanInterfaces);
+</FONT></PRE>
+<P>Indicates a collection of Channel interfaces available to the conference. The interfaces signify how the channel can be used.
+
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppChanInterfaces</I> </DT><DD>Address to a collection of Channel interfaces.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010b0700">IConferenceX::Channels</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Channels(
+    IConfChannels **ppChannels);
+</FONT></PRE>
+<P>Indicates a collection of Channel objects available to the conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppChannels</I> </DT><DD>Address to a collection of Channel objects.
+</DD></DL>
+<H3><A NAME="actxobj_000f0006010c0000">IConferenceX Methods</A></H3>
+<P>Following is a description of the methods for the <A HREF="sweep124.htm#actxobj_000f0006010a0000" TARGET=TEXT>IConferenceX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f0006010c0100">IConferenceX::Invite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Invite(
+    IConfUserX *pUser,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Invites a new user to the conference. If the conference is inactive, it becomes active when the invited user accepts the invitation. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>Instance of the User object.
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the invitation is accepted, FALSE otherwise.
+</DD></DL>
+<P>This method is asynchronous (an event notification will be returned later if the invitee accepts).
+<H4><A NAME="actxobj_000f0006010c0200">IConferenceX::AcceptInvite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT AcceptInvite(
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Accepts an invitation to a conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pfSucceeded</I> </DT><DD>TRUE if the invitation is accepted, FALSE otherwise.
+</DD></DL>
+<P>This method will not be implemented for the first release because SCRAPI does not support it. For the first release, invitations will have to be accepted from Microsoft NetMeeting.
+
+<H4><A NAME="actxobj_000f0006010c0300">IConferenceX::RejectInvite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RejectInvite(
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Rejects an invitation to a conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pfSucceeded</I> </DT><DD>TRUE if the user who rejects the invitation is not added to the conference, FALSE otherwise.
+</DD></DL>
+<P>This method will not be implemented for the first release because SCRAPI does not support it. For the first release, invitations will have to be rejected from Microsoft NetMeeting.
+<H4><A NAME="actxobj_000f0006010c0400">IConferenceX::Join</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Join(
+    IConfUserX *pUser,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Joins a user who already has a conference running.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>Instance of the User object.
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the join is successful, FALSE otherwise.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010c0500">IConferenceX::AcceptJoin</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT AcceptJoin(
+    IConfUserX *pUser,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Accepts a request from a user to join a conference. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>Instance of the User object.
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the join is successful, FALSE otherwise.
+</DD></DL>
+<P>This method will not be implemented for the first release because SCRAPI does not support it. For the first release, joining will have to be accepted from Microsoft NetMeeting.
+<H4><A NAME="actxobj_000f0006010c0600">IConferenceX::RejectJoin</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RejectJoin(
+    IConfUserX *pUser,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Rejects a request from a user to join a conference. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>Instance of the User object.
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the user is not added to the conference, FALSE otherwise.
+</DD></DL>
+<P>This method will not be implemented for the first release because SCRAPI does not support it. For the first release, joining will have to be rejected from Microsoft NetMeeting.
+<H4><A NAME="actxobj_000f0006010c0700">IConferenceX::CreateChannel</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT CreateChannel(
+    BSTR bstrID,
+    IConfChannelX **ppChannel);
+</FONT></PRE>
+<P>Returns an instance of a new Channel object with the specified interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>bstrID</I> </DT><DD>Interface ID of the specific-type channel (textual representation of a GUID). See samples for acceptable GUID string format.
+</DD><DT><I>ppChannel</I> </DT><DD>Address to receive an instance of a new Channel object.
+</DD></DL>
+<P>This method is not supported in the current version.
+<H4><A NAME="actxobj_000f0006010c0800">IConferenceX::Leave</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Leave(
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Removes the local computer from the active conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pfSucceeded</I> </DT><DD>Request to leave the conference was accepted.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010c0900">IConferenceX::IsSameAs</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSameAs(
+    IConferenceX *pConference,
+    BOOLEAN *pfSame);
+</FONT></PRE>
+<P>Identifies whether the two Conference objects represent the same conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Conference objects represent the same conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Conference objects do not represent the same conference.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pConference</I> </DT><DD>Instance of the Conference object to compare with.
+</DD><DT><I>pfSame</I> </DT><DD>TRUE if it is the same conference, FALSE otherwise.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010c0a00">IConferenceX::Advise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Advise(void);
+</FONT></PRE>
+<P>Enables advisements (events) for the <A HREF="sweep124.htm#actxobj_000f0006010a0000" TARGET=TEXT>IConferenceX</A> interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Conference objects represent the same conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="actxobj_000f0006010c0b00">IConferenceX::Unadvise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Unadvise(void);
+</FONT></PRE>
+<P>Disables advisements (events) for the <A HREF="sweep124.htm#actxobj_000f0006010a0000" TARGET=TEXT>IConferenceX</A> interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H3><A NAME="actxobj_000f0006010d0000">Member Object</A></H3>
+<P>The Member object is derived from the user:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006010e0000" TARGET=TEXT>IConfMemberX</A>
+</UL>
+<H3><A NAME="actxobj_000f0006010e0000">IConfMemberX</A></H3>
+<P>The <B>IConfMemberX</B> interface provides the following properties:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006010f0100" TARGET=TEXT>Name</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010f0200" TARGET=TEXT>Type</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010f0300" TARGET=TEXT>ConferenceCapabilities</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010f0400" TARGET=TEXT>IsMCU</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010f0500" TARGET=TEXT>Conferences</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010f0600" TARGET=TEXT>Applications</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010f0700" TARGET=TEXT>Conference</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006010f0800" TARGET=TEXT>IsSelf</A>
+</UL>
+<P>and the following method:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601100100" TARGET=TEXT>IsSameAs</A>
+</UL>
+<H3><A NAME="actxobj_000f0006010f0000">IConfMemberX Properties</A></H3>
+<P>Following is a description of the properties for the <A HREF="sweep124.htm#actxobj_000f0006010e0000" TARGET=TEXT>IConfMemberX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f0006010f0100">IConfMemberX::Name</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Name(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Indicates a user name string.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the user name or address.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010f0200">IConfMemberX::Type</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Type(
+    LONG *plType);
+</FONT></PRE>
+<P>Indicates the type of name for the User object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plType</I> </DT><DD>Address to the type of name of the user.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010f0300">IConfMemberX::ConferenceCapabilities</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ConferenceCapabilities(
+    LONG *plConfCaps);
+</FONT></PRE>
+<P>Indicates which types of conferences (audio, data, or video) are available on the user's computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plConfCaps</I> </DT><DD>Address to a buffer that upon return will contain the capabilities of the computer.
+</DD></DL>
+<P>This property is not supported in the current version.
+
+<H4><A NAME="actxobj_000f0006010f0400">IConfMemberX::IsMCU</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsMCU(
+    BOOLEAN *pfMCU);
+</FONT></PRE>
+<P>Indicates whether the user is a multipoint control unit (MCU).
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user is an MCU.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user is not an MCU.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pfMCU</I> </DT><DD>TRUE if the user is an MCU, FALSE otherwise.
+</DD></DL>
+<P>This property is not supported in the current version.
+
+<H4><A NAME="actxobj_000f0006010f0500">IConfMemberX::Conferences</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Conferences(
+    IConferences **ppConferences);
+</FONT></PRE>
+<P>Indicates a collection of Conference objects that a user is participating in.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppConferences</I> </DT><DD>Address to a collection of conference objects.
+</DD></DL>
+<P>This property is not supported in the current version.
+
+<H4><A NAME="actxobj_000f0006010f0600">IConfMemberX::Applications</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Applications(
+    IConfApplications **ppApplications);
+</FONT></PRE>
+<P>Indicates a collection of Client Application objects for a user.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppApplications</I> </DT><DD>Address to a collection of Client Application objects.
+</DD></DL>
+<P>This property is not supported in the current version.
+
+<H4><A NAME="actxobj_000f0006010f0700">IConfMemberX::Conference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Conference(
+    IConferenceX **ppConference);
+</FONT></PRE>
+<P>Indicates an instance of the Conference object to which the member belongs.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppConference</I> </DT><DD>Address to a buffer to receive the instance of the conference object.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006010f0800">IConfMemberX::IsSelf</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSelf(
+    BOOLEAN *pfSelf);
+</FONT></PRE>
+<P>Identifies whether the Member object represents the local computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Member object represents the local computer.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Member object does not represent the local computer.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pfSelf</I> </DT><DD>TRUE if self, FALSE otherwise.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601100000">IConfMemberX Method</A></H3>
+<P>Following is a description of the method for the <A HREF="sweep124.htm#actxobj_000f0006010e0000" TARGET=TEXT>IConfMemberX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601100100">IConfMemberX::IsSameAs</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSameAs(
+    IConfMemberX *pConfMember,
+    BOOLEAN *pfSame);
+</FONT></PRE>
+<P>Indicates whether two Member objects represent the same member.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Conference objects represent the same conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Conference objects do not represent the same conference.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pConfMember</I> </DT><DD>Instance of the Member object to compare with.
+</DD><DT><I>pfSame</I> </DT><DD>TRUE if it is the same member, FALSE otherwise.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601110000">Channel Object</A></H3>
+<P>The Channel object provides the following interfaces:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601120000" TARGET=TEXT>IConfChannelX</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601150000" TARGET=TEXT>IConfDataExchangeX</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601170000" TARGET=TEXT>IConfFileExchangeX</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006011a0000" TARGET=TEXT>IConfAppSharingX</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006011d0000" TARGET=TEXT>IConfAppControlX</A>
+</UL>
+<H3><A NAME="actxobj_000f000601120000">IConfChannelX</A></H3>
+<P>The <B>IConfChannelX</B> interface provides the following properties:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601130100" TARGET=TEXT>Conference</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601130200" TARGET=TEXT>Interface</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601130300" TARGET=TEXT>Members</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601130400" TARGET=TEXT>Object</A>
+</UL>
+<P>and the following methods:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601140100" TARGET=TEXT>IncludeMember</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601140200" TARGET=TEXT>ExcludeMember</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601140300" TARGET=TEXT>IsSameAs</A>
+</UL>
+<H3><A NAME="actxobj_000f000601130000">IConfChannelX Properties</A></H3>
+<P>Following is a description of the properties for the <A HREF="sweep124.htm#actxobj_000f000601120000" TARGET=TEXT>IConfChannelX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601130100">IConfChannelX::Conference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Conference(
+    IConferenceX **ppConference);
+</FONT></PRE>
+<P>Indicates the Conference object to which the channel belongs.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppConference</I> </DT><DD>Address to a collection of instances of the Conference object.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601130200">IConfChannelX::Interface</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Interface(
+    BSTR *pbstrID);
+</FONT></PRE>
+<P>Indicates a Channel-specific interface identifier.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrID</I> </DT><DD>Address to an interface's unique identifier.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601130300">IConfChannelX::Members</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Members(
+    IConfMembers **ppMembers);
+</FONT></PRE>
+<P>Indicates a collection of Member objects that are currently allowed to use the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppMembers</I> </DT><DD>Address to receive the Member object enumerator.
+</DD></DL>
+<P>This property is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601130400">IConfChannelX::Object</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Object(
+    IDispatch **ppObject);
+</FONT></PRE>
+<P>Retrieves either a data exchange object, a file exchange object, an app control object, or an app sharing object, depending on the channel type.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppObject</I> </DT><DD>Address to receive the data exchange, file exchange, app control, or app sharing object.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601140000">IConfChannelX Methods</A></H3>
+<P>Following is a description of the methods for the <A HREF="sweep124.htm#actxobj_000f000601120000" TARGET=TEXT>IConfChannelX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601140100">IConfChannelX::IncludeMember</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IncludeMember(
+    IConfMemberX *pMember,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Allows a Member object to use the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>Instance of the Member object to be given use of the channel.
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the request to use the channel is accepted, FALSE otherwise.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601140200">IConfChannelX::ExcludeMember</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ExcludeMember(
+    IConfMemberX *pMember,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Prevents a Member object from using the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>Instance of the Member object to be prevented from using the channel.
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the request to exclude a member is accepted, FALSE otherwise.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="actxobj_000f000601140300">IConfChannelX::IsSameAs</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSameAs(
+    IConfChannelX *pConfChannel,
+    BOOLEAN *pfSame);
+</FONT></PRE>
+<P>Indicates whether the two Channel objects represent the same channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Conference objects represent the same conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Conference objects do not represent the same conference.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pConfChannel</I> </DT><DD>Instance of the Channel object to compare with.
+</DD><DT><I>pfSame</I> </DT><DD>TRUE if it is the same channel, FALSE otherwise.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601150000">IConfDataExchangeX</A></H3>
+<P>The <B>IConfDataExchangeX</B> interface provides the following methods:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601160100" TARGET=TEXT>SendData</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601160200" TARGET=TEXT>Advise</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601160300" TARGET=TEXT>Unadvise</A>
+</UL>
+<H3><A NAME="actxobj_000f000601160000">IConfDataExchangeX Methods</A></H3>
+<P>Following is a description of the methods for the <A HREF="sweep124.htm#actxobj_000f000601150000" TARGET=TEXT>IConfDataExchangeX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601160100">IConfDataExchangeX::SendData</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SendData(
+    IConfMemberX *pMember,
+    IConfApplicationX *pApplication,
+    VARIANT data,
+    LONG lOptions,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Sends a block of data bytes through the channel to a specified application on the specified member's computer. The buffer can be freed anytime after calling this method.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>Instance of the Member object to send data to. If the parameter is NULL, the data is sent to all the members in the channel.
+</DD><DT><I>pApplication</I> </DT><DD>Instance of the Application object to send data to. If the parameter is NULL, the data is sent to the remote instance of the calling application.
+</DD><DT><I>data</I> </DT><DD>Data to be sent. Can be either a string or an array of bytes, integers, and so on.
+</DD><DT><I>lOptions</I> </DT><DD>Flags for data transfer options. Can be the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_SDOPT_NONE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">No option is specified. 
+</FONT></TD></TR></TABLE>
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the data transfer succeeded, FALSE otherwise.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601160200">IConfDataExchangeX::Advise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Advise(void);
+</FONT></PRE>
+<P>Enables advisements (events) for this object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="actxobj_000f000601160300">IConfDataExchangeX::Unadvise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Unadvise(void);
+</FONT></PRE>
+<P>Disables advisements (events) generated by the object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H3><A NAME="actxobj_000f000601170000">IConfFileExchangeX</A></H3>
+<P>The <B>IConfFileExchangeX</B> interface provides the following property:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601180200" TARGET=TEXT>ReceiveFileDir</A>
+</UL>
+<P>and the following methods:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601190100" TARGET=TEXT>SendFile</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601190200" TARGET=TEXT>Cancel</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601190300" TARGET=TEXT>Advise</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601190400" TARGET=TEXT>Unadvise</A>
+</UL>
+<H3><A NAME="actxobj_000f000601180000">IConfFileExchangeX Property</A></H3>
+<P>Following is a description of the property for the <A HREF="sweep124.htm#actxobj_000f000601170000" TARGET=TEXT>IConfFileExchangeX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601180100">IConfFileExchangeX::ReceiveFileDir</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ReceiveFileDir(
+    BSTR *pbstrDir);
+</FONT></PRE>
+<P>Sets the path of the directory where received files will be stored.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrDir</I> </DT><DD>Address to receive a string for the path of the directory where received files will be stored.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601180200">IConfFileExchangeX::ReceiveFileDir</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ReceiveFileDir(
+    BSTR strDir);
+</FONT></PRE>
+<P>Sets the path of the directory where the received file will be stored on the local computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>bstrDir</I> </DT><DD>String for the path of the directory where a received file will be stored.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601190000">IConfFileExchangeX Methods</A></H3>
+<P>Following is a description of the methods for the <A HREF="sweep124.htm#actxobj_000f000601170000" TARGET=TEXT>IConfFileExchangeX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601190100">IConfFileExchangeX::SendFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SendFile(
+    IConfMemberX *pMember,
+    IConfApplicationX *pApplication,
+    BSTR bstrFile,
+    LONG lOptions,
+    IConfFileTransferX **ppFileTransfer);
+</FONT></PRE>
+<P>Sends a file through the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>Member object that will receive the file. If the parameter is NULL, the file is sent to all members in the channel.
+</DD><DT><I>pApplication</I> </DT><DD>Application object that will receive the transfer progress notification. If the parameter is NULL, the notification is sent to the remote instance of the calling application.
+</DD><DT><I>bstrFile</I> </DT><DD>Full path of the file to be sent.
+</DD><DT><I>lOptions</I> </DT><DD>Flags for file transfer options. Can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_SFOPT_NONE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">No option is specified. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_SFOPT_NOUI </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The default progress dialog user interface should not be used.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_SFOPT_NOCOMPRESS </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file should not be compressed.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>ppFileTransfer</I> </DT><DD>Address to a buffer to receive a File Transfer object.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601190200">IConfFileExchangeX::Cancel</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Cancel(
+    IConfFileTransferX *pFileTransfer,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Cancels the file being sent or received.
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pFileTransfer</I> </DT><DD>Instance of a File Transfer object being sent or received.
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the send is canceled, FALSE otherwise.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601190300">IConfFileExchangeX::Advise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Advise(void);
+</FONT></PRE>
+<P>Enables advisements (events) for this interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="actxobj_000f000601190400">IConfFileExchangeX::Unadvise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Unadvise(void);
+</FONT></PRE>
+<P>Disables advisements (events) for this interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H3><A NAME="actxobj_000f0006011a0000">IConfAppSharingX</A></H3>
+<P>The <B>IConfAppSharingX</B> interface provides the following property:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006011b0100" TARGET=TEXT>SharableApps</A>
+</UL>
+<P>and the following methods:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006011c0100" TARGET=TEXT>Advise</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006011c0200" TARGET=TEXT>Unadvise</A>
+</UL>
+<H3><A NAME="actxobj_000f0006011b0000">IConfAppSharingX Property</A></H3>
+<P>Following is a description of the property for the <A HREF="sweep124.htm#actxobj_000f0006011a0000" TARGET=TEXT>IConfAppSharingX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f0006011b0100">IConfAppSharingX::SharableApps</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SharableApps(
+    IConfShareApps **ppSharableApps);
+</FONT></PRE>
+<P>Retrieves a pointer to a collection of the Sharable Applications objects for the applications that can be shared.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppSharableApps</I> </DT><DD>Address to a collection of sharable applications.
+</DD></DL>
+<H3><A NAME="actxobj_000f0006011c0000">IConfAppSharingX Methods</A></H3>
+<P>Following is a description of the methods for the <A HREF="sweep124.htm#actxobj_000f0006011a0000" TARGET=TEXT>IConfAppSharingX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f0006011c0100">IConfAppSharingX::Advise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Advise(void);
+</FONT></PRE>
+<P>Enables advisements (events) for this interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="actxobj_000f0006011c0200">IConfAppSharingX::Unadvise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Unadvise(void);
+</FONT></PRE>
+<P>Disables advisements (events) for this interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H3><A NAME="actxobj_000f0006011d0000">IConfAppControlX</A></H3>
+<P>The <B>IConfAppControlX</B> interface provides the following methods:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006011e0100" TARGET=TEXT>StartRemoteInstance</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006011e0200" TARGET=TEXT>Advise</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006011e0300" TARGET=TEXT>Unadvise</A>
+</UL>
+<H3><A NAME="actxobj_000f0006011e0000">IConfAppControlX Methods</A></H3>
+<P>Following is a description of the methods for the <A HREF="sweep124.htm#actxobj_000f0006011d0000" TARGET=TEXT>IConfAppControlX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f0006011e0100">IConfAppControlX::StartRemoteInstance</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT StartRemoteInstance(
+    IConfMemberX *pMember,
+    IConfApplicationX *pApplication,
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Accepts an Application object and starts an instance of the application on the specified member's computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember </I></DT><DD>Member object where the remote instance of the application will be started. If the parameter is NULL, the application will be started on all members in the channel.
+</DD><DT><I>pApplication</I> </DT><DD>Application object whose remote instance will be started. If the parameter is NULL, the method starts the remote instance of the calling application.
+</DD><DT><I>pfSucceeded</I> </DT><DD>TRUE if the application was started, FALSE otherwise.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006011e0200">IConfAppControlX::Advise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Advise(void);
+</FONT></PRE>
+<P>Enables advisements (events) for this interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="actxobj_000f0006011e0300">IConfAppControlX::Unadvise</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Unadvise(void);
+</FONT></PRE>
+<P>Disables advisements (events) for this interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<H3><A NAME="actxobj_000f0006011f0000">Client Application Object</A></H3>
+<P>The Client Application object provides the following interface:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601200000" TARGET=TEXT>IConfApplicationX</A>
+</UL>
+<H3><A NAME="actxobj_000f000601200000">IConfApplicationX</A></H3>
+<P>The <B>IConfApplicationX</B> interface provides the following properties:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601210100" TARGET=TEXT>GUID</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601210200" TARGET=TEXT>Name</A>
+</UL>
+<H3><A NAME="actxobj_000f000601210000">IConfApplicationX Properties</A></H3>
+<P>Following is a description of the properties for the <A HREF="sweep124.htm#actxobj_000f000601200000" TARGET=TEXT>IConfApplicationX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601210100">IConfApplicationX::GUID</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GUID(
+    BSTR *pbstrID);
+</FONT></PRE>
+<P>Indicates a string form of an application's globally unique identifier (GUID).
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrID</I> </DT><DD>Address to a string containing the application's unique identifier.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601210200">IConfApplicationX::Name</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Name(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Indicates an application name string.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the application name.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601220000">Sharable Application Object</A></H3>
+<P>The Sharable Application object provides the following interface:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601230000" TARGET=TEXT>IConfShareAppX</A>
+</UL>
+<H3><A NAME="actxobj_000f000601230000">IConfShareAppX</A></H3>
+<P>The <B>IConfShareAppX</B> interface provides the following properties:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601240100" TARGET=TEXT>Name</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601240200" TARGET=TEXT>ShareState</A>
+</UL>
+<P>and the following methods:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601250100" TARGET=TEXT>Share</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601250200" TARGET=TEXT>Unshare</A>
+</UL>
+<H3><A NAME="actxobj_000f000601240000">IConfShareAppX Properties</A></H3>
+<P>Following is a description of the properties for the <A HREF="sweep124.htm#actxobj_000f000601230000" TARGET=TEXT>IConfShareAppX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601240100">IConfShareAppX::Name</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Name(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Indicates a string for the sharable application name.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the share application name.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601240200">IConfShareAppX::ShareState</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ShareState(
+    LONG *puShrState);
+</FONT></PRE>
+<P>Retrieves the "share" state of the application.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puShrState</I> </DT><DD>Address to the current "share" state of the application. Can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_UNKNOWN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application state is unknown.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_SHARED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application is being shared.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_UNSHARED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application is not being shared.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H3><A NAME="actxobj_000f000601250000">IConfShareAppX Methods</A></H3>
+<P>Following is a description of the methods for the <A HREF="sweep124.htm#actxobj_000f000601230000" TARGET=TEXT>IConfShareAppX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601250100">IConfShareAppX::Share</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Share(
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Shares the application on all the members in the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pfSucceeded</I> </DT><DD>TRUE if the application is shared, FALSE otherwise.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601250200">IConfShareAppX::Unshare</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Unshare(
+    BOOLEAN *pfSucceeded);
+</FONT></PRE>
+<P>Unshares the application on all the members in the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pfSucceeded</I> </DT><DD>TRUE if the application is unshared, FALSE otherwise.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601260000">Data Transfer Object</A></H3>
+<P>The Data Transfer object provides the following interface:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601270000" TARGET=TEXT>IConfDataTransferX</A>
+</UL>
+<H3><A NAME="actxobj_000f000601270000">IConfDataTransferX</A></H3>
+<P>The <B>IConfDataTransferX</B> interface provides the following properties:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f000601280100" TARGET=TEXT>BytesTransferred</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601280200" TARGET=TEXT>String</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f000601280300" TARGET=TEXT>Array</A>
+</UL>
+<H3><A NAME="actxobj_000f000601280000">IConfDataTransferX Properties</A></H3>
+<P>Following is a description of the properties for the <A HREF="sweep124.htm#actxobj_000f000601270000" TARGET=TEXT>IConfDataTransferX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f000601280100">IConfDataTransferX::BytesTransferred</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT BytesTransferred(
+    LONG *plBytes);
+</FONT></PRE>
+<P>Indicates the number of bytes transferred.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plBytes</I> </DT><DD>Address to the number of bytes transferred.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601280200">IConfDataTransferX::String</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT String(
+    BSTR *pbstrData);
+</FONT></PRE>
+<P>Retrieves the data to be transferred as a string.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrData</I> </DT><DD>Address to the string of data to be transferred.
+</DD></DL>
+<H4><A NAME="actxobj_000f000601280300">IConfDataTransferX::Array</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Array(
+    LONG cbElements
+    SAFEARRAY (unsigned char) *array);
+</FONT></PRE>
+<P>Retrieves an array (SAFEARRAY) of the data to be transferred.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>cbElements</I> </DT><DD>Width, in bytes, of each element (for example, 1 is a Byte, 2 is an Integer, 4 is a Long).
+</DD><DT><I>array</I> </DT><DD>Address to the string of data to be transferred.
+</DD></DL>
+<H3><A NAME="actxobj_000f000601290000">File Transfer Object</A></H3>
+<P>The File Transfer object provides the following interface:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006012a0000" TARGET=TEXT>IConfFileTransferX</A>
+</UL>
+<H3><A NAME="actxobj_000f0006012a0000">IConfFileTransferX</A></H3>
+<P>The <B>IConfFileTransferX</B> interface provides the following properties:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006012b0100" TARGET=TEXT>Name</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006012b0200" TARGET=TEXT>BytesTransferred</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006012b0300" TARGET=TEXT>TotalSize</A>
+ <LI><A HREF="sweep124.htm#actxobj_000f0006012b0400" TARGET=TEXT>State</A>
+</UL>
+<P>and the following method:
+<UL><LI><A HREF="sweep124.htm#actxobj_000f0006012c0100" TARGET=TEXT>IsSameAs</A>
+</UL>
+<H3><A NAME="actxobj_000f0006012b0000">IConfFileTransferX Properties</A></H3>
+<P>Following is a description of the properties for the <A HREF="sweep124.htm#actxobj_000f0006012a0000" TARGET=TEXT>IConfFileTransferX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f0006012b0100">IConfFileTransferX::Name</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Name(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Indicates a string for the full path of the file.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the full path of the file.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006012b0200">IConfFileTransferX::BytesTransferred</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT BytesTransferred(
+    LONG *plBytes);
+</FONT></PRE>
+<P>Indicates the number of bytes transferred.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plBytes</I> </DT><DD>Address to a collection of the number of bytes transferred.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006012b0300">IConfFileTransferX::TotalSize</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT TotalSize(
+    LONG *plBytes);
+</FONT></PRE>
+<P>Indicates the size, in bytes, of the file.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plBytes</I> </DT><DD>Address to a collection of the size, in bytes, of the file.
+</DD></DL>
+<H4><A NAME="actxobj_000f0006012b0400">IConfFileTransferX::State</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT State(
+    LONG *plState);
+</FONT></PRE>
+<P>Indicates the state of the File Transfer object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unknown error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>plState</I> </DT><DD>Address to a collection of the state of the file. Can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_FILE_IDLE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file-transfer operation was requested but not yet initialized.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_FILE_INITIALIZING </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file-transfer operation was requested but now initialized.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_FILE_PROGRESS </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file-transfer operation is in progress.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_FILE_COMPLETE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file-transfer operation is completed.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P>Note that the CNF_FILE_COMPLETE value can represent three reasons for file-transfer operation completion: success, cancellation, or failure. 
+<H3><A NAME="actxobj_000f0006012c0000">IConfFileTransferX Method</A></H3>
+<P>Following is a description of the method for the <A HREF="sweep124.htm#actxobj_000f0006012a0000" TARGET=TEXT>IConfFileTransferX</A> interface.
+
+ 
+
+<H4><A NAME="actxobj_000f0006012c0100">IConfFileTransferX::IsSameAs</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSameAs(
+    IConfFileTransfer *pFileTransfer, 
+    BOOLEAN *pfSame);
+</FONT></PRE>
+<P>Indicates whether the two File Transfer objects represent the same file-transfer operation.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both File Transfer objects represent the same operation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both File Transfer objects do not represent the same operation.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pFileTransfer</I> </DT><DD>Instance of the File Transfer object to compare with.
+</DD><DT><I>pfSame</I> </DT><DD>TRUE if it is the same file transfer, FALSE otherwise.
+</DD></DL>
+
+<BR CLEAR=ALL><TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep123.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep125.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+
+
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

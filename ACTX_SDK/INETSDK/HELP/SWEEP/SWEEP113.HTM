@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>WebPost Overview</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep112.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep114.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="webpost_000d000101000000">WebPost Overview</A></H2>
+<BR CLEAR=ALL>
+<P>The components of the WebPost Software Development Kit (SDK) allow authoring tools to easily post Web pages (files) to the user's Internet Web site. The WebPost functions can be used to connect to the Internet Service Provider (ISP), determine the protocol needed to copy the files, and so on. Optionally, these functions can also display a wizard to guide the user through posting a file. 
+
+
+
+
+<H3><A NAME="webpost_000d000101010000">WebPost API</A></H3>
+<P>The WebPost application programming interface (API) makes it possible for authoring tools to post Web pages to an Internet site with just one call to the <A HREF="sweep114.htm#webpost_000d000102010400" TARGET=TEXT>WpPost</A> function. In a typical scenario, an authoring tool's <B>File</B> menu would include a <B>Post to Web</B> button that, when clicked, causes the tool to call the <A HREF="sweep114.htm#webpost_000d000102010400" TARGET=TEXT>WpPost</A> function. This function starts a wizard that asks the user for a friendly name for the Internet site, the Uniform Resource Locator (URL) for the given site, and the name of a dial-up connection for accessing the Internet. Next, the function connects to the Internet server at the given URL, determines the protocol to use for posting the Web pages, and then posts the requested files. For subsequent posting to the same site, this function remembers the details of how to connect to the site, and posts the files with little user intervention. Thus, the WebPost API maintains an association between a friendly site name, remembers all the details involved in posting to that site, and allows the applications to easily post Web pages to a site or to the URL associated with that site.
+
+<P>As an alternative to the wizard, an authoring tool can let the user choose the Web site before calling <A HREF="sweep114.htm#webpost_000d000102010400" TARGET=TEXT>WpPost</A> by displaying a list of sites (plus a New Site item) obtained by a call to the <A HREF="sweep114.htm#webpost_000d000102010300" TARGET=TEXT>WpListSites</A> function. The list of sites could be in a nested menu that appears when the user clicks the <B>Post to Web</B> button.
+
+
+
+<H3><A NAME="webpost_000d000101020000">WebPost Service Providers</A></H3>
+<P>The WebPost dynamic-link library (DLL) can post Web pages to some of the popular types of Internet servers, including the National Center for Supercomputing Applications' (NCSA's) <I>httpd</I> and Microsoft's Internet Information Server (IIS). To post to other types of Internet servers, the WebPost API uses the WebPost Service Provider Interface (SPI) to communicate with DLLs that "know how" to post Web pages to those servers. 
+
+<P><IMG SRC="art/webpost.gif" WIDTH="400" HEIGHT="200" ALT="" >
+
+<P>A WebPost service provider is implemented as an OLE Component Object Model (COM) server. An authoring tool can take advantage of the functionality available from a WebPost service provider by calling functions implemented by the provider. An authoring tool uses the <A HREF="sweep114.htm#webpost_000d000102010100" TARGET=TEXT>WpBindToSite</A> function to retrieve the addresses of the provider's functions. For descriptions of the functions that a provider implements, see <A HREF="sweep114.htm#webpost_000d000102040000" TARGET=TEXT>WebPost SPI Interface Functions</A>.
+
+
+
+<H4><A NAME="webpost_000d000101020100">Posting Information File</A></H4>
+<P>Because of variations among Internet servers, Microsoft requests that Internet Service Providers (ISPs) include a posting information file named postinfo.html on the root URLs of their Internet servers. (Because file names are case-sensitive on some servers, the name of the postinfo.html file should be in all lowercase letters.) This file contains details about the posting protocol and policy. The standard WebPost service provider uses the information in the file to help with the detection of the WebPost protocol. 
+
+<P>The following is a sample postinfo.html file that the default provider uses. The comments section that follows the &lt;body&gt; tag contains configuration information for authoring tools that use the Microsoft WebPost functions.
+
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;html&gt;
+&lt;!-- postinfo.html version 0.100 --&gt;
+
+&lt;head&gt;
+&lt;title&gt;
+    Web Posting Information
+&lt;/title&gt;
+&lt;head&gt;
+    
+&lt;body&gt;
+&lt;!--
+    WebPost
+    version="0.100"
+    BaseURL="http://&lt;servername&gt;/~$USERNAME"
+    BasePath="public_html"
+    FtpServerName="&lt;servername&gt;"
+    XferType="FTP"
+    DefaultPage="default.htm"
+    VerifyFiles="1"
+    CreateRoot="1"
+--&gt;
+
+&lt;h1&gt;
+    Web Posting Information
+&lt;/h1&gt;
+</FONT></PRE>
+<H4><A NAME="webpost_000d000101020200">Provider DLL Installation</A></H4>
+<P>Each provider should create a subkey in the following registry location:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services
+    \WebPost\Providers
+</FONT></PRE>
+<P>The subkey consists of the WpSite class identifier (CLSID) that the provider exports. Within this subkey, you should enter the following values:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Description
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string that contains the name of the provider. This name is used in the wizard; it appears in the list box that contains the names of the providers. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Path
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The path of the WebPost service provider DLL.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Priority
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A doubleword value that indicates the provider's priority. A value of 0 is high priority. The default provider has a priority of 8192.
+</FONT></TD></TR></TABLE>
+<P>The following example shows the registry entries for the default provider:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Providers
+    \{3151E2E0-6C4C-11CF-86B1-00AA0060F86C}
+        "Provider"="Other Internet Provider"
+        "Path"="defwpp.dll"
+        "Priority"=hex:00,10,00,00
+</FONT></PRE>
+<P>All providers should also register their class identifiers at the following registry location, with the value name set to the class identifier. WebPost functions use the entries in this registry location to determine which providers to load. 
+
+<PRE><FONT FACE="Courier" SIZE="2">
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\WebPost\Providers
+</FONT></PRE>
+<P>The default provider entry at this location is as follows:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+"{3151E2E0-6C4C-11CF-86B1-00AA0060F86C}"=""
+</FONT></PRE>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep112.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep114.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

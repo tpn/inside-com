@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//IETF/DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Simple Validation</TITLE>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Submit_OnClick
+  Dim TheForm
+  Set TheForm = Document.ValidForm
+  If IsNumeric(TheForm.Text1.Value) Then
+    If TheForm.Text1.Value < 1 Or TheForm.Text1.Value > 10 Then
+      MsgBox "Please enter a number between 1 and 10."
+    Else
+      MsgBox "Thank you."
+    End If
+  Else
+    MsgBox "Please enter a numeric value."
+  End If
+End Sub
+-->
+</SCRIPT>
+</HEAD>
+<BODY>
+<FONT FACE=ARIAL SIZE=2> <!-- global default -->
+<H3>Simple Validation</H3><HR>
+<FORM NAME="ValidForm" Action="">
+Enter a value between 1 and 10: 
+<INPUT NAME="Text1" TYPE="TEXT" SIZE="2">
+<INPUT NAME="Submit" TYPE="BUTTON" VALUE="Submit">
+</FORM>
+</FONT>
+</BODY>
+</HTML>
+
+
+
+
+
+

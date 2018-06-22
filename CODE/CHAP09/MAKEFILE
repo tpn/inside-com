@@ -1,0 +1,100 @@
+#
+# Chapter 9 - Makefile
+#
+#
+# Flags - Always compiles debug.
+#
+CPP_FLAGS=/c /MTd /Zi /Od /D_DEBUG 
+EXE_LINK_FLAGS= /NOD /DEBUG
+DLL_LINK_FLAGS=/NOD /DLL /DEBUG
+
+LIBS=kernel32.lib uuid.lib advapi32.lib ole32.lib
+
+#################################################
+#
+# Targets
+#
+all : Client1.exe Client2.exe Server.dll
+
+#################################################
+#
+# Shared Source files
+#
+
+GUIDs.obj : GUIDs.cpp
+	cl $(CPP_FLAGS) GUIDs.cpp
+
+Util.obj : Util.cpp Util.h
+	cl $(CPP_FLAGS) Util.cpp
+
+#################################################
+#
+# Component/server source files
+#
+
+Server.obj : Server.cpp CUnknown.h CFactory.h Iface.h Util.h
+	cl $(CPP_FLAGS) Server.cpp
+
+Cmpnt1.obj : Cmpnt1.cpp Cmpnt1.h Iface.h Registry.h CUnknown.h Util.h
+	cl $(CPP_FLAGS) Cmpnt1.cpp
+
+Cmpnt2.obj : Cmpnt2.cpp Cmpnt2.h Iface.h Registry.h CUnknown.h Util.h
+	cl $(CPP_FLAGS) Cmpnt2.cpp
+
+Cmpnt3.obj : Cmpnt3.cpp Cmpnt3.h iface.h Registry.h CUnknown.h Util.h
+	cl $(CPP_FLAGS) Cmpnt3.cpp
+
+CUnknown.obj : CUnknown.cpp CUnknown.h Util.h
+	cl $(CPP_FLAGS) CUnknown.cpp
+
+CFactory.obj : CFactory.cpp CFactory.h Util.h CUnknown.h
+	cl $(CPP_FLAGS) CFactory.cpp
+
+Registry.obj : Registry.cpp Registry.h Util.h
+	cl $(CPP_FLAGS) Registry.cpp
+
+#################################################
+#
+# Client source files
+#
+
+Client1.obj : Client1.cpp Iface.h Util.h
+	cl $(CPP_FLAGS) Client1.cpp
+
+Client2.obj : Client2.cpp Iface.h Util.h Ptr.h
+	cl $(CPP_FLAGS) Client2.cpp
+
+
+#################################################
+#
+# Link components and automatically register component
+#
+
+SERVER_OBJS = Server.obj     \
+              Cmpnt1.obj     \
+              Cmpnt2.obj     \
+              Cmpnt3.obj     \
+              Registry.obj   \
+              CFactory.obj   \
+              CUnknown.obj   \
+              GUIDs.obj      \
+              Util.obj		
+
+Server.dll :  $(SERVER_OBJS) Server.def 
+	link $(DLL_LINK_FLAGS) $(SERVER_OBJS) Libcmtd.lib Libcimtd.lib $(LIBS) /DEF:Server.def 
+	regsvr32 -s Server.dll
+
+#################################################
+#
+# Link clients
+#
+
+Client1.exe : Client1.obj GUIDs.obj Util.obj
+	link $(EXE_LINK_FLAGS) Client1.obj GUIDs.obj Util.obj Libcmtd.lib Libcimtd.lib $(LIBS) 
+
+
+Client2.exe : Client2.obj GUIDs.obj Util.obj
+	link $(EXE_LINK_FLAGS) Client2.obj GUIDs.obj Util.obj Libcmtd.lib Libcimtd.lib $(LIBS) 
+
+
+

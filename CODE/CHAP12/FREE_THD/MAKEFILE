@@ -1,0 +1,151 @@
+#
+# Makefile - Chapter 12, free-thread example
+#
+!MESSAGE Building In-proc server.
+SERVER =
+TARGETS = Server.dll Proxy.dll
+DIR_SERVER = InProc
+
+#
+# Flags - Always compiles debug.
+#
+CPP_FLAGS=/c /MTd /Zi /Od /D_DEBUG /D_WIN32_DCOM
+EXE_LINK_FLAGS= /NOD /DEBUG
+DLL_LINK_FLAGS=/NOD /DLL /DEBUG
+
+LIBS = kernel32.lib uuid.lib advapi32.lib ole32.lib
+
+#################################################
+#
+# Targets
+#
+
+all : Client.exe $(TARGETS)
+
+#################################################
+#
+# Proxy source files
+#
+Iface.h Server.tlb Proxy.c Guids.c Dlldata.c : Server.idl
+	midl /h Iface.h /iid Guids.c /proxy Proxy.c Server.idl
+
+#
+# Build proxy/stub for cross apartment marshaling.
+#
+Dlldata.obj : Dlldata.c
+	cl /c /DWIN32 /DREGISTER_PROXY_DLL Dlldata.c
+
+Proxy.obj : Proxy.c
+	cl /c /DWIN32 /DREGISTER_PROXY_DLL Proxy.c
+
+PROXYSTUBOBJS = Dlldata.obj  \
+                Proxy.obj    \
+                Guids.obj
+
+PROXYSTUBLIBS = kernel32.lib  \
+                rpcndr.lib    \
+                rpcns4.lib    \
+                rpcrt4.lib    \
+                uuid.lib
+
+Proxy.dll : $(PROXYSTUBOBJS) Proxy.def
+	link /dll /out:Proxy.dll /def:Proxy.def  \
+		$(PROXYSTUBOBJS) $(PROXYSTUBLIBS)
+	regsvr32 /s Proxy.dll
+
+
+#################################################
+#
+# Shared source files
+#
+
+Guids.obj : Guids.c
+	cl /c /DWIN32 /DREGISTER_PROXY_DLL Guids.c
+
+#################################################
+#
+# Component/server source files
+#
+
+$(DIR_SERVER)\Server.obj : Server.cpp CUnknown.h CFactory.h Iface.h
+	cl $(CPP_FLAGS) /Fo"$*.obj" Server.cpp
+
+$(DIR_SERVER)\Cmpnt.obj : Cmpnt.cpp Cmpnt.h Iface.h  \
+		Registry.h CUnknown.h Lock.h
+	cl $(CPP_FLAGS) /Fo"$*.obj" Cmpnt.cpp
+
+
+#
+# Helper classes
+#
+
+$(DIR_SERVER)\CUnknown.obj : CUnknown.cpp CUnknown.h
+	cl $(CPP_FLAGS) $(SERVER) /Fo"$*.obj" CUnknown.cpp
+
+$(DIR_SERVER)\CFactory.obj : CFactory.cpp CFactory.h
+	cl $(CPP_FLAGS) $(SERVER) /Fo"$*.obj" CFactory.cpp
+
+$(DIR_SERVER)\Registry.obj : Registry.cpp Registry.h
+	cl $(CPP_FLAGS) $(SERVER) /Fo"$*.obj" Registry.cpp
+
+# Util.cpp compiled for server.
+$(DIR_SERVER)\Util.obj : Util.cpp Util.h
+	cl $(CPP_FLAGS) $(SERVER) /Fo"$*.obj" Util.cpp
+
+#################################################
+#
+# Client source files
+#
+
+Client.obj : Client.cpp Free.h Cli-Free.h Iface.h Util.h
+	cl $(CPP_FLAGS) Client.cpp
+
+Free.obj : Free.cpp Free.h Iface.h Util.h
+	cl $(CPP_FLAGS) Free.cpp
+
+Cli-Free.obj : Cli-Free.cpp Cli-Free.h Free.h Iface.h Util.h Lock.h
+	cl $(CPP_FLAGS) Cli-Free.cpp
+
+
+# Util.cpp compiled for the client.
+Util.obj : Util.cpp Util.h
+	cl $(CPP_FLAGS) /D_OUTPROC_SERVER_ Util.cpp
+
+#### NOTICE THE COMPILATION FLAG!!!!
+#### This compiles Util.cpp to use the msgbox.
+
+Client.res : Client.rc
+	rc /l 0x409 Client.rc
+
+#################################################
+#
+# Link component - Automatically register component
+#
+
+SERVER_OBJS = $(DIR_SERVER)\Server.obj    \
+              $(DIR_SERVER)\Cmpnt.obj     \
+              $(DIR_SERVER)\Registry.obj  \
+              $(DIR_SERVER)\CFactory.obj  \
+              $(DIR_SERVER)\CUnknown.obj  \
+              $(DIR_SERVER)\Util.obj      \
+              Guids.obj
+
+Server.dll: $(SERVER_OBJS) Server.def
+	link $(DLL_LINK_FLAGS) $(SERVER_OBJS) libcmtd.lib  \
+		libcimtd.lib $(LIBS) /DEF:Server.def
+	regsvr32 -s Server.dll
+
+#################################################
+#
+# Link client
+#
+
+CLIENT_OBJS = Client.obj    \
+              Guids.obj     \
+              Util.obj      \
+              Free.obj      \
+              Cli-Free.obj
+
+Client.exe : $(CLIENT_OBJS) Client.res
+	link $(EXE_LINK_FLAGS) $(CLIENT_OBJS) Client.res libcmtd.lib  \
+		libcimtd.lib $(LIBS) user32.lib gdi32.lib

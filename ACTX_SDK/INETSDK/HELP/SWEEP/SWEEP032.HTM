@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Appendix - Registry Details</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep031.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep033.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="codedwld_0002000209000000">Appendix - Registry Details</A></H2>
+<BR CLEAR=ALL>
+<P>The Internet Component Download service will keep registry entries for every new downloaded component. These registry entries will be useful for (a) writing a utility for cleaning up the code storage, or (b) migrating the Component Download service to use a code cache rather than a permanent store(14).
+
+<H3><A NAME="codedwld_0002000209010000">Why the existing &quot;SharedDLL&quot; mechanism is inadequate</A></H3>
+<P>To do correct code caching, the existing shared DLL ref. counting scheme will not suffice, because ref. counts are easily inflated. Specifically, any application that is re-installed increases the ref. count on a shared DLL even though that DLL already has a ref. count belonging to the particular application. (this is already broken for current ref. counting, but it will especially fail for Code Download, in which OCXs are used by multiple pages quite regularly, and there is no way of knowing which OCXs need reference counts.
+
+<H3><A NAME="codedwld_0002000209020000">The new &quot;ModuleUsage&quot; mechanism in the registry for tracking usage of shared components.</A></H3>
+<P>To do ref. counting correctly, Component Download will maintain a ModuleUsage section in the registry which holds a list of "owners" and "clients" for each shared module. Thus the registry can keep track of <I>who</I> is using a shared module, not just <I>how many clients</I> that module has. The registry entries would use the following syntax:
+<PRE><FONT FACE="Courier" SIZE="2">
+[ModuleUsage]
+	[&lt;Fully Qualified Path&amp;File Name&amp;gt;]
+		.FileVersion=a,b,c,d
+		.Owner = Friendly Name/ID of Owner
+		&lt;Client ID &gt; = &lt;info peculiar to this client&gt;
+		&lt;Client ID &gt; = &lt;info peculiar to this client&gt;
+</FONT></PRE>
+<P>A ModuleUsage section in a sample registry would look something like the following:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+Under My Computer\HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion: 
+
+[ModuleUsage]
+	[c:\windows/system/mfc40.dll]
+		.FileVersion=0,4,0,0
+		.Owner = Microsoft Internet Code Downloader
+		Microsoft Internet Code Downloader= &lt;any info, or default&gt;
+		AnotherAppID= &lt;any info, or default&gt;
+</FONT></PRE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Key name
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">&lt;Fully Qualified Path&amp;File Name&gt;
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">This is the full path of the shared module. This name has to use "/"s instead of "\"s because the "\" is an invalid char in a key name.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">.Owner
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application that installs the shared module and creates the original ModuleUsage section will put some identifier in the Owner key section. If the DLL already existed on the system then and this Module Usage key did not exist then the .Owner key should be set to "Unknown" and the DLL should not be removed on uninstall. The owner should always also enlist itself as a client.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">.File Version
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The version number for the shared module.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">&lt;Client ID&gt;
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ID of a client who is using the shared module. The value corresponding to each client key contains client specific information. When the client is Internet Component Download, the &lt;Client ID&gt; is "Microsoft Internet Code Downloader", and the client-specific information is a number which serves as a reference count. For other clients, the client-specific information should be the full path of the client, so that if the client is accidentally deleted it is possible to do garbage collection.
+</FONT></TD></TR></TABLE>
+<P>Every client of this module is expected to increment and decrement the existing SharedDLLs section in the registry as well (a client only increments this value once when it adds itself as a client under [ModuleUsage]). This is to allow a migration path for apps currently implementing only SharedDLLs scheme.
+<P>This registry information complements the reference counts in the SharedDLLs section by remembering which clients are actually using a shared module. This counting scheme will work correctly and allow caching of downloaded code. Furthermore, when downloading files, Internet Component Download can use this registry information as an efficient shortcut for verifying whether a file needs to be overwritten because it is an out-of-date version.
+
+
+<P><B>Footnotes</B>
+<P>(1) Note: Internet Component Download as specified will not download anything other than OLE Objects. This document does not list steps needed to download/certify other entities. For other code-download needs see documentation for WinVerifyTrust.
+<P>(2) In future releases code for Document Object components will likewise be downloaded and installed automatically.
+<P>(3) Note: The &lt;OBJECT&gt; tag used to be called the &lt;INSERT&gt; tag. This change was decided on by the W3C on 2/13.
+<P>(4) Care must be taken so that the cabinet file contains only those files that must <I>necessarily</I> be downloaded (e.g. the OCX executable itself). Any additional helper DLLs (e.g. MFC) may have already been installed and if so should not be bundled into the cabinet.
+<P>(5) Note that Internet Component Download makes the assumption that a <I>newer</I> version of an object with the same ClassID is <I>always backwards compatible</I> with previous versions. A newer version of an object may be used to replace older versions without worry of losing functionality. If a newer version of an object is not backwards compatible with previous versions, it is advised to assign a new ClassID to the incompatible implementations in order to avoid one overwriting the other resulting in loss of functionality.
+<P>(6) If Internet Search Path is used to find the <I>latest</I> version of an object, Component Download will search the path, querying servers, and it will use the <I>first matching component</I> that is a newer version than the existing version installed on the system (if any). For more details see the below documentation on Internet Search Path.
+<P>(7) Note: The MIME scheme described here is <I>temporary</I>. Obviously this scheme results in too many MIME types. Eventually, MIME attributes will be used for the purpose of describing platform-dependent code (e.g. application/x-cabinet; os=win32 cpu=x86). Until more HTTP servers support such requests, the temporary scheme described above should suffice.
+<P>(8) Internet Component Download accomplishes self-registration using the /regserver command-line argument for .EXE files, and DLLRegisterServer() for other executables (.DLL, .OCX)
+<P>(9) See the specification for further details.
+<P>(10) Actually, this UI is displayed by the WinVerifyTrust mechanism that is used within Component Download.
+<P>(11) The path to this directory is specified in the registry under HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\InternetSettings\ActiveCache. Component code will be installed in this directory unless a previous version exist. In such cases, the Component Download mechanism will attempt to replace the previous version and invoke ICodeInstall::OnCodeInstallProblem.
+<P>(12) Currently Object Stores must be HTTP servers that can serve content dynamically, for instance via ISAPI. In future versions a mechanism will be introduced allowing non-HTTP Object Stores.
+<P>(13) Note: an HTTP <B>POST</B> request is used, not a GET request. This is because the number of parameters involved is large enough that a GET request may exceed the maximum URL length of 1024 characters.
+<P>(14) Either of these would be intelligent about un-installing and un-registering component code using its existing self-registration mechanism.
+
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep031.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep033.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

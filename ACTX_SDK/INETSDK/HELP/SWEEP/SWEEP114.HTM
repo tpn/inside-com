@@ -1,0 +1,583 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>WebPost Reference</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep113.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep115.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="webpost_000d000102000000">WebPost Reference</A></H2>
+<BR CLEAR=ALL>
+<H3><A NAME="webpost_000d000102010000">WebPost API Functions</A></H3>
+<P>This section describes the functions in the WebPost API. 
+<P>The functions for simple usage include: 
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep114.htm#webpost_000d000102010200" TARGET=TEXT>WpDeleteSite</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Deletes a friendly site name that has been configured.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep114.htm#webpost_000d000102010300" TARGET=TEXT>WpListSites</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves a list of the friendly site names that the user has configured. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep114.htm#webpost_000d000102010400" TARGET=TEXT>WpPost</A> 
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Posts a file name to the URL at a given site. If the URL and site name are set to NULL, the function starts a wizard that asks the user to choose or set up a URL and site. 
+</FONT></TD></TR></TABLE>
+<P>The function for advanced usage is:
+
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep114.htm#webpost_000d000102010100" TARGET=TEXT>WpBindToSite</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a COM object to the WebPost service provider that supports the given site name or URL. With this object, the application can call into the provider functions listed in <A HREF="sweep114.htm#webpost_000d000102030000" TARGET=TEXT>WebPost SPI Functions</A>.
+
+
+</FONT></TD></TR></TABLE>
+<P>A fifth WebPost API function, <A HREF="sweep114.htm#webpost_000d000102010500" TARGET=TEXT>WpPostFile</A>, is OLE Automation-enabled and very similar to <A HREF="sweep114.htm#webpost_000d000102010400" TARGET=TEXT>WpPost</A>. The major difference is that <A HREF="sweep114.htm#webpost_000d000102010500" TARGET=TEXT>WpPostFile</A> can post only one file or directory at a time.
+
+
+
+<H4><A NAME="webpost_000d000102010100">WpBindToSite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">LONG WpBindToSite(
+    IN HWND    hwnd,
+    IN LPTSTR  lpszSiteName,
+    IN LPTSTR  lpszURL OPTIONAL,
+    IN DWORD   fdwFlags,
+    IN DWORD   dwReserved,
+    OUT LPVOID *ppbObj
+);
+</FONT></PRE>
+<P>Retrieves the address of a WebPost service provider object that can post Web pages to the specified site name or URL. The application can then call the provider functions directly. The function works only if the site exists.
+
+<UL><LI>Returns ERROR_SUCCESS if successful or an error value otherwise.
+</UL>
+<DL><DT><I>hwnd</I>
+</DT><DD>Handle of the window to which the focus returns when the wizard, if invoked, completes. This parameter can be NULL if the wizard is not invoked or if this function is called from a console application.
+</DD><DT><I>lpszSiteName</I>
+</DT><DD>Address of a null-terminated string that contains the site name.
+</DD><DT><I>lpszURL</I>
+</DT><DD>Address of a null-terminated string that contains a URL. 
+</DD><DT><I>fdwFlags</I>
+</DT><DD>Action flags. Reserved for future use.
+</DD><DT><I>dwReserved</I>
+</DT><DD>Reserved; must be set to zero.
+</DD><DT><I>ppbObj</I>
+</DT><DD>Address of a WebPost service provider interface.
+</DD></DL>
+<H4><A NAME="webpost_000d000102010200">WpDeleteSite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">LONG WpDeleteSite(
+     IN LPTSTR lpszSiteName
+); 
+</FONT></PRE>
+<P>Deletes a site name that has been configured. 
+
+<UL><LI>Returns ERROR_SUCCESS if successful or an error value otherwise. 
+</UL>
+<DL><DT><I>lpszSiteName</I>
+</DT><DD>Address of a null-terminated string that contains the site name. 
+</DD></DL>
+<H4><A NAME="webpost_000d000102010300">WpListSites</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">LONG WpListSites(
+    IN OUT LPDWORD   lpcbSites,
+    OUT LPWPSITEINFO lpbSites,
+    OUT LPDWORD      lpcSites
+); 
+</FONT></PRE>
+<P>Retrieves information about the Internet sites that are already configured.
+
+<UL><LI>Returns ERROR_SUCCESS if successful or an error value otherwise.
+</UL>
+<DL><DT><I>lpcbSites</I>
+</DT><DD>Address of a variable that contains the size, in bytes, of the buffer pointed to by the <I>lpbSites</I> parameter. When this function returns, the variable contains the number of bytes in the <I>lpbSites</I> buffer. If the <I>lpbSites</I> value is NULL, the variable receives the size of the buffer required to contain all of the site structures.
+</DD><DT><I>lpbSites</I>
+</DT><DD>Address of a buffer that receives an array of <A HREF="sweep114.htm#webpost_000d000102020100" TARGET=TEXT>WPSITEINFO</A> structures that contain the site information.
+</DD><DT><I>lpcSites</I>
+</DT><DD>Address of a variable that receives the number of structures returned in the <I>lpbSites</I> array. If the <I>lpbSites</I> value is NULL, the variable receives the total number of sites. 
+</DD></DL>
+<H4><A NAME="webpost_000d000102010400">WpPost</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">LONG WpPost( 
+    IN HWND        hwnd  OPTIONAL,
+    IN DWORD       cLocalPaths,
+    IN LPTSTR      *lppszLocalPaths,  
+    IN OUT LPDWORD lpcbSiteName,
+    IN OUT LPTSTR  lpszSiteName OPTIONAL,
+    IN OUT LPDWORD lpcbURL,
+    IN OUT LPTSTR  lpszURL OPTIONAL, 
+    IN DWORD       fdwFlags
+); 
+</FONT></PRE>
+<P>Posts a list of files or directories to an Internet site identified by the given site name or URL. If the site name and URL are NULL, the function invokes a wizard to let the user choose an existing or create a new Internet site.
+
+<UL><LI>Returns ERROR_SUCCESS if successful or an error value otherwise.
+
+</UL>
+<DL><DT><I>hwnd</I>
+</DT><DD>Handle of the window to which the focus returns when the wizard, if invoked, completes. This parameter can be NULL if the wizard is not invoked or if this function is called from a console application.
+</DD><DT><I>cLocalPaths</I>
+</DT><DD>Number of elements in the array specified by the <I>lppszLocalPaths</I> parameter.
+</DD><DT><I>lppszLocalPaths</I>
+</DT><DD>Address of an array of null-terminated strings that contain the file names or directories to be posted on the Internet. If any of these strings point to a directory (and the <B>WPF_NO_RECURSIVE_POST</B> flag is not set in the <I>fdwFlags</I> parameter), all the files in that directory are posted.
+</DD><DT><I>lpcbSiteName</I>
+</DT><DD>Address of a variable that contains the length, in bytes, of the buffer specified by the <I>lpszSiteName</I> parameter.
+</DD><DT><I>lpszSiteName</I>
+</DT><DD>Address of a null-terminated string that contains the friendly Internet site name. If this parameter and the <I>lpszURL</I> parameter are NULL, the function invokes the wizard (unless <B>WPF_NO_WIZARD</B> is set in <I>fdwFlags</I>) to let the user choose or create a site name. 
+<P>If this parameter is not NULL, on return it will contain the site name that the files were posted to.
+</DD><DT><I>lpcbURL</I>
+</DT><DD>Address of a variable that receives the length, in bytes, of the buffer specified by <I>lpszURL</I>. 
+</DD><DT><I>lpszURL</I>
+</DT><DD>Address of a null-terminated string that contains the destination URL. If this parameter is NULL, the files are posted in the root URL for <I>lpszSiteName</I>. 
+<P>If this parameter is not NULL, the URL of the file copied, or the URL of the directory that the files were copied to, is returned in the buffer pointed to by this parameter.
+</DD><DT><I>fdwFlags</I>
+</DT><DD>Array of action flags. The following values can be combined:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102010401">WPF_FIRST_FILE_AS_DEFAULT</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Take the first file specified in the <I>lppszLocalPaths</I> list as the file that will be shown as the default page.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102010402">WPF_MINIMAL_UI</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Skip the pages where the input has been provided. For example, if <I>lpszSiteName</I> is specified, the wizard will not show the page for choosing the site name.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102010403">WPF_NO_RECURSIVE_POST</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">If any element in the <I>lppszLocalPaths</I> array points to a directory, do not post files recursively.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102010404">WPF_NO_WIZARD</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not prompt the user for any input. This is relevant only if <I>lpszSiteName</I> has been created before.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P>Suppose you have created a site named "My Web Site" that has a URL of "http://www.isp.com/~username", and you want to post a file named "abcd.tmp" to "http://www.isp.com/~username/personal" as person.htm. The parameters for <B>WpPost</B> should be as follows:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+lpszSiteName = "My Web Site"
+cLocalPaths = 1
+lppszLocalPaths = {"c:\tmp\abcd.tmp"}
+lpszURL = "http://www.isp.com/~username/personal/person.htm"
+</FONT></PRE>
+<H4><A NAME="webpost_000d000102010500">WpPostFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT WpPostFile(
+    [in] long hwnd,
+    [in] BSTR lpszLocalPaths,
+    [in, out]long * lpcbSiteName,
+    [in, out]BSTR * lpszSiteName,
+    [in, out]long * lpcbURL,
+    [in, out]BSTR * lpszURL,
+    [in] long   fdwFlags,
+    [out] long *lpRetCode
+);
+</FONT></PRE>
+<P>This function is for use with OLE Automation. It posts a file or directory to an Internet site identified by the given site name or URL. If the site name and URL are NULL, the function invokes a wizard to let the user choose an existing or create a new Internet site.
+
+<UL><LI>Returns ERROR_SUCCESS if successful or an error value otherwise. 
+
+</UL>
+<DL><DT><I>hwnd</I>
+</DT><DD>Handle of the window to which the focus returns when the wizard, if invoked, completes. This parameter can be NULL if the wizard is not invoked or if this function is called from a console application. 
+</DD><DT><I>lpszLocalPaths</I>
+</DT><DD>Address of a null-terminated string that contains the file name or directory to be posted on the Internet. 
+</DD><DT><I>lpcbSiteName</I>
+</DT><DD>Address of a variable that contains the length, in bytes, of the buffer specified by the <I>lpszSiteName</I> parameter. 
+</DD><DT><I>lpszSiteName</I>
+</DT><DD>Address of a null-terminated string that contains the friendly Internet site name. If this parameter and the <I>lpszURL</I> parameter are NULL, the function invokes the wizard (unless <B>WPF_NO_WIZARD</B> is set in <I>fdwFlags</I>) to let the user choose or create a site name. 
+<P>If this parameter is not NULL, on return it will contain the site name that the files were posted to. 
+</DD><DT><I>lpcbURL</I>
+</DT><DD>Address of a variable that receives the length, in bytes, of the buffer specified by <I>lpszURL</I>. 
+</DD><DT><I>lpszURL</I>
+</DT><DD>Address of a null-terminated string that contains the destination URL. If this parameter is NULL, the files are posted in the root URL for <I>lpszSiteName</I>. 
+<P>If this parameter is not NULL, the URL of the file copied, or the URL of the directory that the files were copied to, returns in the buffer pointed to by this parameter. 
+</DD><DT><I>fdwFlags</I>
+</DT><DD>Array of action flags. The following values can be combined: 
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value 
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102010501">WPF_FIRST_FILE_AS_DEFAULT</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Take the first file specified in <I>lpszLocalPaths</I> as the file that will be shown as the default page.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102010502">WPF_MINIMAL_UI</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Skip the pages where input has been provided. For example, when this flag is set and <I>lpszSiteName</I> is specified, the wizard will not show the page for choosing the site name.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102010503">WPF_NO_RECURSIVE_POST</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">If <I>lpszLocalPaths</I> points to a directory, do not post files recursively.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102010504">WPF_NO_WIZARD</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not prompt the user for any input. This is relevant only if <I>lpszSiteName</I> points to a site that has been created before.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>lpRetCode</I>
+</DT><DD>Address of a variable that receives the function's return code.
+</DD></DL>
+<P>This function can post only one file or directory at a time.
+
+<P>Here are two examples that show how to use this function with Visual Basic&#174;.
+<P>Example 1:
+<PRE><FONT FACE="Courier" SIZE="2">
+Dim wpo as New WPObj.WPObj
+wpo.WpPostFile  &lt;etc.&gt;
+</FONT></PRE>
+<P>Example 2:
+<PRE><FONT FACE="Courier" SIZE="2">
+Dim wpo as Object
+Set wpo = CreateObject("WPObj.Application")
+wpo.WpPostFile  &lt;etc.&gt;
+</FONT></PRE>
+<H3><A NAME="webpost_000d000102020000">WebPost API Structures</A></H3>
+<H4><A NAME="webpost_000d000102020100">WPSITEINFO</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct tagWPSITEINFO {
+    DWORD  dwSize;
+    DWORD  fdwFlags;
+    LPTSTR lpszSiteName;
+    LPTSTR lpszSiteURL;
+} WPSITEINFO, *LPWPSITEINFO;
+</FONT></PRE>
+<P>Contains information about a site on the World Wide Web. 
+
+<DL><DT><B><A NAME="webpost_000d000102020101">dwSize</B></A>
+</DT><DD>Size, in bytes, of the structure.
+</DD><DT><B><A NAME="webpost_000d000102020102">fdwFlags</B></A>
+</DT><DD>Array of flags that indicate the state of the site and provide information about the site. The following values can be combined:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102020103">WPSF_NEEDS_COMMIT</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Posting occurs during the <A HREF="sweep114.htm#webpost_000d000102040200" TARGET=TEXT>Commit</A> function.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102020104">WPSF_CAN_BROWSE_DIR</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Browsing directories is supported.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102020105">WPSF_CONNECTED_TO_NETWORK</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Connected to the network.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102020106">WPSF_LOGGED_IN_TO_SERVER</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Logged in to the server.
+</FONT></TD></TR></TABLE>
+</DD><DT><B><A NAME="webpost_000d000102020107">lpszSiteName</B></A>
+</DT><DD>Address of a null-terminated string that specifies a friendly name for the URL pointed to by <I>lpszSiteURL</I>. 
+</DD><DT><B><A NAME="webpost_000d000102020108">lpszSiteURL</B></A>
+</DT><DD>Address of a null-terminated string that specifies the root URL for this site.
+</DD></DL>
+<H3><A NAME="webpost_000d000102030000">WebPost SPI Functions</A></H3>
+<P>WebPost service provider DLLs are OLE COM servers that do the actual work of posting files to Internet sites. They provide the functions described in this section. The WebPost functions, and the wizard, route the request to one of the providers based on the site name or URL and use the provider functions to post the files.
+
+<P>Each provider DLL exports the <A HREF="sweep114.htm#webpost_000d000102030100" TARGET=TEXT>WppBindToSite</A> function, which takes a site name or URL and an interface identifier, and returns a pointer to the interface. The <A HREF="sweep114.htm#webpost_000d000102010100" TARGET=TEXT>WpBindToSite</A> function uses the <A HREF="sweep114.htm#webpost_000d000102030100" TARGET=TEXT>WppBindToSite</A> function to obtain the address of an interface, and then passes the address back to the caller. Each provider also exports the <A HREF="sweep114.htm#webpost_000d000102030300" TARGET=TEXT>WppListSites</A> function, which lists all the Internet sites that the provider can post to.
+
+
+
+<H4><A NAME="webpost_000d000102030100">WppBindToSite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">LONG WppBindToSite(
+    IN HWND hwnd,
+    IN LPCTSTR lpszSiteName OPTIONAL,
+    IN LPCTSTR lpszURL OPTIONAL,
+    IN REFIID riid,
+    IN DWORD fdwFlags,
+    IN DWORD dwReserved,
+    OUT PVOID *ppvObj
+);
+</FONT></PRE>
+<P>Retrieves the address of an interface if the provider DLL owns the site name or the URL.
+
+<UL><LI>Returns ERROR_SUCCESS if successful or an error value otherwise.
+</UL>
+<DL><DT><I>hwnd</I>
+</DT><DD>Handle of the window to which the focus returns when the wizard, if invoked, completes. This parameter can be NULL if the wizard is not invoked or if this function is called from a console application.
+</DD><DT><I>lpszSiteName</I>
+</DT><DD>Address of a null-terminated string that contains an Internet site name.
+</DD><DT><I>lpszURL</I>
+</DT><DD>Address of a null-terminated string that contains a URL.
+</DD><DT><I>riid</I>
+</DT><DD>Interface identifier. All providers should support the IID_IWPSite interface identifier. 
+</DD><DT><I>fdwFlags</I>
+</DT><DD>Action flag. Can be the following value:
+
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102030101">WPF_FORCE_BIND</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The provider should return successfully for the function no matter what the <I>lpszURL</I> value is.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>dwReserved</I>
+</DT><DD>Reserved; must be set to zero.
+</DD><DT><I>ppvObj</I>
+</DT><DD>Address of a variable to receive the interface address. For more information about the interfaces, see <A HREF="sweep114.htm#webpost_000d000102040000" TARGET=TEXT>WebPost SPI Interface Functions</A>.
+</DD></DL>
+<H4><A NAME="webpost_000d000102030200">WppDeleteSite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">LONG WppDeleteSite(
+    IN LPTSTR lpszSiteName
+); 
+</FONT></PRE>
+<P>Deletes a site name that has been configured. 
+
+<UL><LI>Returns ERROR_SUCCESS if successful or an error value otherwise. 
+</UL>
+<DL><DT><I>lpszSiteName</I>
+</DT><DD>Address of a null-terminated string that contains the site name. 
+</DD></DL>
+<H4><A NAME="webpost_000d000102030300">WppListSites</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">LONG WppListSites(
+    IN OUT LPDWORD   lpcbSites,
+    OUT LPWPSITEINFO lpbSites,
+    OUT LPDWORD      lpcSites
+);
+</FONT></PRE>
+<P>Retrieves information about the Internet sites managed by this provider. The <A HREF="sweep114.htm#webpost_000d000102010300" TARGET=TEXT>WpListSites</A> function calls this function for each provider, aggregates the results, and returns them to the caller.
+
+<UL><LI>Returns ERROR_SUCCESS if successful or an error value otherwise.
+</UL>
+<DL><DT><I>lpcbSites</I>
+</DT><DD>Address of a variable that receives the number of bytes copied to the buffer pointed to by the <I>lpbSites</I> parameter. If <I>lpbSites</I> is NULL, the variable receives the required size, in bytes, of the buffer.
+</DD><DT><I>lpbSites</I>
+</DT><DD>Address of a buffer that receives an array of <A HREF="sweep114.htm#webpost_000d000102020100" TARGET=TEXT>WPSITEINFO</A> structures that contain the site information
+</DD><DT><I>lpcSites</I>
+</DT><DD>Address of a variable that receives the number of structures copied to the <I>lpbSites</I> buffer. If <I>lpbSites</I> is NULL, the variable receives the total number of sites.
+</DD></DL>
+<H3><A NAME="webpost_000d000102040000">WebPost SPI Interface Functions</A></H3>
+<P>A WebPost SPI provides the interface functions described in this section. There should be an ANSI version and a Unicode version of each interface. Please refer to the Wpspi.h file for details.
+
+
+<H4><A NAME="webpost_000d000102040100">AddWizardPages</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">AddWizardPages(
+    IN LPVOID               lpv,
+    IN LPFNADDPROPSHEETPAGE lpfnAdd,
+    IN OUT LPARAM           lParam
+);
+</FONT></PRE>
+<P>Allows the provider DLLs to plug pages into the wizard invoked by the <A HREF="sweep114.htm#webpost_000d000102010400" TARGET=TEXT>WpPost</A> function. 
+
+<DL><DT><I>lpv</I>
+</DT><DD>Not currently used.
+</DD><DT><I>lpfnAdd</I>
+</DT><DD>Address of a function that this WebPost service provider should use to add wizard pages.
+</DD><DT><I>lParam</I>
+</DT><DD>Address of a page identifier, an unsigned integer. 
+<P>As input to this function, the low-order word is the dialog identifier of the next page of the last page of the provider, and the high-order word is the dialog identifier of the previous page of the first page of the provider. If the high-order word is zero, the provider's first page is the first page of the wizard (for the <A HREF="sweep114.htm#webpost_000d000102010502" TARGET=TEXT>WPF_MINIMAL_UI</A> case). The <B>Back</B> button should be disabled using <B>PropSheet_SetWizButtons</B>. If the low-order word is zero, the provider's last page is the last page of the wizard. The <B>Next</B> button should be changed to the <B>Finish</B> button using <B>PropSheet_SetWizButtons</B>.
+<P>As output from this function, the low-order word is the dialog identifier of the provider's last page, and the high-order word is the dialog identifier of the provider's first page. If the provider has no pages, they should return zero as the page identifier.
+</DD></DL>
+<P>As an example, in setting up a new site the wizard would provide the friendly site name and the site's URL, and the provider DLLs would handle the rest of the site setup. The dialog identifier of the provider wizard page should be a value between the value of IDD_WEBPOST_PROVIDER_FIRST and IDD_WEBPOST_PROVIDER_LAST.
+<H4><A NAME="webpost_000d000102040200">Commit</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">Commit(void);
+</FONT></PRE>
+<P>Ensures that all the files posted to this server with the <A HREF="sweep114.htm#webpost_000d000102040c00" TARGET=TEXT>PostFiles</A> function are actually written to the Internet server.
+
+<H4><A NAME="webpost_000d000102040300">DeleteFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">DeleteFile(IN LPCTSTR lpszFile);
+</FONT></PRE>
+<P>Deletes the given file from the destination site.
+
+<DL><DT><I>lpszFile</I>
+</DT><DD>Address of a null-terminated string that contains the name of the file to delete.
+</DD></DL>
+<H4><A NAME="webpost_000d000102040400">FindClose</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">FindClose(IN HANDLE hSearchHandle);
+</FONT></PRE>
+<P>Closes the specified search handle. 
+
+<DL><DT><I>hSearchHandle</I>
+</DT><DD>Search handle returned by a previous call to the <A HREF="sweep114.htm#webpost_000d000102040500" TARGET=TEXT>FindFirstFile</A> function.
+</DD></DL>
+<P>The <A HREF="sweep114.htm#webpost_000d000102040500" TARGET=TEXT>FindFirstFile</A> and <A HREF="sweep114.htm#webpost_000d000102040600" TARGET=TEXT>FindNextFile</A> functions use the search handle to locate files with names that match a given name.
+<H4><A NAME="webpost_000d000102040500">FindFirstFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">FindFirstFile( 
+    IN LPCTSTR            lpszSearchFile,
+    OUT LPWIN32_FIND_DATA lpFindFileData,
+    OUT LPHANDLE          lpSearchHandle
+);
+</FONT></PRE>
+<P>Searches a directory for a file whose name matches the specified file name on the destination site identified by this object. It examines subdirectory names as well as file names.
+
+<DL><DT><I>lpszSearchFile</I>
+</DT><DD>Address of a null-terminated string that contains the file name to find.
+</DD><DT><I>lpFindFileData</I>
+</DT><DD>Address of a <B>WIN32_FIND_DATA</B> structure that receives information about the file or subdirectory that has been found. 
+</DD><DT><I>lpSearchHandle</I>
+</DT><DD>Address of a variable that receives a handle that can be used for subsequent calls to the <A HREF="sweep114.htm#webpost_000d000102040600" TARGET=TEXT>FindNextFile</A> and <A HREF="sweep114.htm#webpost_000d000102040400" TARGET=TEXT>FindClose</A> functions.
+</DD></DL>
+<H4><A NAME="webpost_000d000102040600">FindNextFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">FindNextFile( 
+    IN HANDLE hSearchHandle,
+    OUT LPWIN32_FIND_DATA lpFindFileData,
+); 
+</FONT></PRE>
+<P>Continues a file search from a previous call to the <A HREF="sweep114.htm#webpost_000d000102040500" TARGET=TEXT>FindFirstFile</A> function.
+
+<DL><DT><I>hSearchHandle</I>
+</DT><DD>Search handle returned by a previous call to the <A HREF="sweep114.htm#webpost_000d000102040500" TARGET=TEXT>FindFirstFile</A> function.
+</DD><DT><I>lpFindFileData</I>
+</DT><DD>Address of a <B>WIN32_FIND_DATA</B> structure that receives information about the file or subdirectory that has been found. 
+</DD></DL>
+<H4><A NAME="webpost_000d000102040700">GetError</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">GetError(
+    OUT LPDWORD    lpdwErrorType,
+    OUT LPDWORD    lpdwErrorCode,
+    IN OUT LPDWORD lpcbError,
+    OUT LPTSTR     lpszError
+);
+</FONT></PRE>
+<P>Retrieves additional information about an error.
+
+<DL><DT><I>lpdwErrorType</I>
+</DT><DD>Indicates the error type. To be defined.
+</DD><DT><I>lpdwErrorCode</I>
+</DT><DD>Indicates the error code.
+</DD><DT><I>lpcbError</I>
+</DT><DD>Indicates the size, in bytes, of the <I>lpszError</I> buffer.
+</DD><DT><I>lpszError</I>
+</DT><DD>Address of a buffer that receives the error information.
+</DD></DL>
+<H4><A NAME="webpost_000d000102040800">GetParam</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">GetParam(
+    IN LPCTSTR     lpszParameter,
+    IN OUT LPDWORD lpcbValue,
+    OUT LPTSTR     lpszValue
+);
+</FONT></PRE>
+<P>Retrieves the configuration parameters for this site.
+
+<DL><DT><I>lpszParameter</I>
+</DT><DD>Address of a null-terminated string that contains the configuration parameter name, such as <B>WPCP_HOMEPAGE_URL</B>. For more information about configuration parameters, see <A HREF="sweep114.htm#webpost_000d000102050100" TARGET=TEXT>Configuration Parameters</A>.
+</DD><DT><I>lpcbValue</I>
+</DT><DD>Address of a variable that receives the size of the <I>lpszValue</I> buffer. If <I>lpszValue</I> is NULL, or if the buffer length is short, this variable receives the size, in bytes, of the parameter name.
+</DD><DT><I>lpszValue</I>
+</DT><DD>Address of a buffer that receives the value of the parameter queried.
+</DD></DL>
+<H4><A NAME="webpost_000d000102040900">GetSiteInfo</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">GetSiteInfo(
+    OUT LPWPSITEINFO lpbSite,
+    IN OUT LPDWORD   lpcbSite
+);
+</FONT></PRE>
+<P>Retrieves the site information for the current object.
+
+<DL><DT><I>lpbSite</I>
+</DT><DD>Address of a buffer that receives a <A HREF="sweep114.htm#webpost_000d000102020100" TARGET=TEXT>WPSITEINFO</A> structure containing the site information. 
+</DD><DT><I>lpcbSite</I>
+</DT><DD>Address of a variable that contains the size, in bytes, of the <I>lpbSite</I> buffer.
+</DD></DL>
+<H4><A NAME="webpost_000d000102040a00">NetworkConnect</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">NetworkConnect(
+    IN LPCTSTR lpszUserName,
+    IN LPCTSTR lpszPassword
+);
+</FONT></PRE>
+<P>Connects to the Internet. If the site uses a dial-up connection, this function starts the dial-up connection (configured during the site setup).
+
+<DL><DT><I>lpszUserName</I>
+</DT><DD>Address of a null-terminated string that contains the user name for the dial-up connection. If this parameter is NULL, the user name created during the setup of this site is reused.
+</DD><DT><I>lpszPassword</I>
+</DT><DD>Address of a null-terminated string that contains the password for the dial-up connection. If this parameter is NULL, the behavior depends on the provider.
+</DD></DL>
+<H4><A NAME="webpost_000d000102040b00">NetworkDisconnect</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">NetworkDisconnect(void);
+</FONT></PRE>
+<P>Disconnects from the Internet (hang-up if a dial-up connection was used).
+
+<H4><A NAME="webpost_000d000102040c00">PostFiles</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">PostFiles( 
+    IN DWORD cLocalPaths,
+    IN LPTSTR *lppszLocalPaths,  
+    IN OUT LPDWORD lpcbURL,
+    IN OUT LPTSTR lpszURL OPTIONAL, 
+    IN DWORD fdwFlags
+);
+</FONT></PRE>
+<P>Posts files to the specified URL on the destination site identified by this object.
+
+<DL><DT><I>cLocalPaths</I>
+</DT><DD>Number of elements in the <I>lppszLocalPaths</I> array.
+</DD><DT><I>lppszLocalPaths</I>
+</DT><DD>Address of an array of null-terminated strings that contain the file names or directories to be posted on the Internet. If any of these strings point to a directory and the <B>WPF_NO_RECURSIVE_POST</B> flag is not set in <I>fdwFlags</I>, all the files in that directory are posted.
+</DD><DT><I>lpcbURL</I>
+</DT><DD>Address of a variable that indicates the length of the <I>lpszURL</I> buffer. When the function returns, the variable contains the length, in bytes, of that buffer.
+</DD><DT><I>lpszURL</I>
+</DT><DD>Address of a null-terminated string that contains the destination URL. If this parameter is NULL, the files are posted in the root URL for the site name specified by <I>lpszSiteName</I>. 
+<P>If this parameter is not NULL, the URL of the copied file, or the URL of the directory that the files were copied to, is returned in the buffer pointed to by this parameter.
+</DD><DT><I>fdwFlags</I>
+</DT><DD>Action flags. The following values can be combined:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">0 
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Post files, invoking the wizard if necessary.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102040c01">WPF_FIRST_FILE_AS_DEFAULT</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Take the first file specified in the <I>lppszLocalPaths</I> list as the file that will be shown as the default page.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102040c02">WPF_MINIMAL_UI</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Skip the introduction page in the wizard.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102040c03">WPF_NO_RECURSIVE_POST</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">If any element in the <I>lppszLocalPaths</I> array points to a directory, do not post files recursively.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="webpost_000d000102040c04">WPF_NO_WIZARD</B></A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not prompt the user for any input.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P>For more information, see the description of <A HREF="sweep114.htm#webpost_000d000102010400" TARGET=TEXT>WpPost</A>.
+
+<H4><A NAME="webpost_000d000102040d00">ServerLogin</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">ServerLogin(
+    IN LPCTSTR lpszUserName,
+    IN LPCTSTR lpszPassword
+);
+</FONT></PRE>
+<P>Logs the user on to the Internet server. The given user name and password are for the Internet server. They may or may not be the same as those used for the <A HREF="sweep114.htm#webpost_000d000102040a00" TARGET=TEXT>NetworkConnect</A> function.
+
+<DL><DT><I>lpszUserName</I>
+</DT><DD>Address of a null-terminated string that contains the user name for the Internet server. If this parameter is NULL, the user name created during the setup of this site is reused.
+</DD><DT><I>lpszPassword</I>
+</DT><DD>Address of a null-terminated string that contains the password for the Internet server. If this parameter is NULL, the behavior depends on the provider.
+</DD></DL>
+<H4><A NAME="webpost_000d000102040e00">ServerLogout</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">ServerLogout(void);
+</FONT></PRE>
+<P>Logs the user out of the Internet server.
+
+<H4><A NAME="webpost_000d000102040f00">SetParam</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">SetParam(
+    IN LPCTSTR lpszParameter,
+    IN LPCTSTR lpszValue
+); </FONT></PRE>
+<P>Sets a configuration parameter for a given site.
+
+<DL><DT><I>lpszParameter</I>
+</DT><DD>Address of a null-terminated string that contains a configuration parameter name, such as <B>WPCP_DEFAULT_URL</B>. For more information about configuration parameters, see <A HREF="sweep114.htm#webpost_000d000102050100" TARGET=TEXT>Configuration Parameters</A>.
+</DD><DT><I>lpszValue</I>
+</DT><DD>Address of a null-terminated string that contains the configuration parameter value.
+</DD></DL>
+<H3><A NAME="webpost_000d000102050000">Appendix</A></H3>
+<H4><A NAME="webpost_000d000102050100">Configuration Parameters</A></H4>
+<P>Every WebPost service provider must support the following parameters:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+#define WPCP_HOMEPAGE_URL "HomepageURL"
+</FONT></PRE>
+<P>A query of this parameter should return the home page for the given site. For example, for www.provider.com running NCSA's httpd server, the home page will usually be <I>"http://www.provider.com/~username/index.htm"</I>.
+
+<P>Here are the parameters supported by the default service provider (Defwpp.dll):
+<PRE><FONT FACE="Courier" SIZE="2">
+#define WPCP_BASEURL    "BaseURL"
+</FONT></PRE>
+<P>A query of this parameter should return the root URL for the given user. For example, for www.provider.com running NCSA's httpd server, it will usually be "http://www.provider.com/~username".
+<PRE><FONT FACE="Courier" SIZE="2">
+#define WPCP_BASEPATH    "BasePath"
+</FONT></PRE>
+<P>A query of this parameter should return the corresponding file path for the above WPCP_BASEURL parameter. For example, for www.provider.com running NCSA's httpd server, it will usually be "public_html". 
+
+<P>More parameters are to be defined at a later date.
+
+
+
+<H4><A NAME="webpost_000d000102050200">Release Notes</A></H4>
+<P>The WebPost SDK files include Wpapi.h, Wpspi.h, Wpguid.h, Webpost.lib, and this document, Webpost.doc. Wpobj.h and Wpobj.tlb are for OLE Automation programmers.
+
+<P>The WebPost executable files in the SDK CD include Wpwiz.exe, Webpost.dll, and Defwpp.dll. The Wpwiz.exe file is a simple utility that calls the <A HREF="sweep114.htm#webpost_000d000102010400" TARGET=TEXT>WpPost</A> function. The Webpost.dll file provides the WebPost API functions. The Defwpp.dll file provides the Service Provider Interface (SPI) for the default provider that can post files to NCSA's httpd server. By default, it posts files using the <I>ftp</I> protocol to the <I>public_html</I> subdirectory under the user's home directory and verifies them with the <I>http</I> protocol using the <I>wininet</I> interface. It also lets the user identify a dial-up connection to the Web site and can connect to the Internet server over this dial-up connection.
+
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep113.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep115.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

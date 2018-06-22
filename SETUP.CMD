@@ -1,0 +1,1 @@
+CopyDir Tangram %InstallPath%\Tangram

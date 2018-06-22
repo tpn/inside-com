@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Internet Search Path</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep028.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep030.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="codedwld_0002000206000000">Internet Search Path</A></H2>
+<BR CLEAR=ALL>
+<P>When Internet Component Download is called to download code, it traverses the <I>Internet Search Path</I> to look for the desired component. This path is a list of <I>Object Store</I> servers that will be queried every time components are downloaded using CoGetClassObjectFromURL. This way, even if an &lt;OBJECT&gt; tag in an HTML document does not specify a CODEBASE location to download code for an embedded OLE Control, the Internet Component Download will still use the Internet Search Path to find the necessary code.
+
+<H3><A NAME="codedwld_0002000206010000">Internet Search Path syntax</A></H3>
+<P>The search path is specified in a string in the registry, under the key HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Internet Settings\CodeBaseSearchPath. The value for this key is a string in the following format:
+<PRE><FONT FACE="Courier" SIZE="2">
+CodeBaseSearchPath = URL1; URL2; ... URLm; CODEBASE; URLm+1; ... URLn-1; URLn
+</FONT></PRE>
+<P>Where each of <I>URL1</I> through <I>URLn</I> are absolute URLs pointing to HTTP servers acting as "Object Stores". When processing a call to CoGetClassObjectFromURL, the Internet Component Download service will <I>first</I> try downloading the desired code from the locations <I>URL1</I> through <I>URLm</I>, it will <I>then</I> try the location specified in the szCodeURL parameter (corresponding to the CODEBASE attribute in the &lt;OBJECT&gt; tag), and will <I>finally</I> try the locations specified in locations <I>URLm+1</I> through <I>URLn</I>.
+
+<P><B>Note</B>  That if the CODEBASE keyword is not included in the CodeBaseSearchPath key, then calls to CoGetClassObjectFromURL will never check the szCodeURL location for downloading code. By removing the CODEBASE keyword from the CodeBaseSearchPath, corporate intranet administrators can effectively disable Internet Component Download for corporate users.<H3><A NAME="codedwld_0002000206020000">Object Stores</A></H3>
+<P>An <I>Object Store</I> on the Internet Search Path is an HTTP server that services requests for downloadable code(12). During a call to CoGetClassObjectFromURL, Internet Component Download will try to download code from the various Object Stores on the search path. Specifically, an Object Store will receive an HTTP POST request with data in the format below(13). 
+<PRE><FONT FACE="Courier" SIZE="2">
+CLSID={class id}
+Version=a,b,c,d
+MIMETYPE=mimetype
+</FONT></PRE>
+<P>All the values above are optional, although one of CLSID or MIMETYPE <I>must</I> be present. The Object Store should parse this information, check an internal database, and either fail the call, or <B>redirect</B> the HTTP request to the download-able code Cabinet file (.CAB), setup script (.INF), or portable executable (.EXE/.DLL/.OCX).
+
+<P>The POST parameters should be processed by the Object Store as follows:
+<UL><LI>If CLSID is provided with no version number, then the most recent object matching the CLSID will be returned. If the CLSID is provided with Version, then the object matching the CLSID and with the <I>largest version number greater than or equal to</I> Version will be provided. If no object is available that matches the CLSID with a large enough version number, then the 404 error will be returned. MIMETYPE will be ignored when CLSID is provided. 
+<LI>If no CLSID is provided, but MIMETYPE is provided, then the first object found in the database that matches the MIMETYPE will be returned. Version, if provided, is treated <I>exactly</I> as above. If neither CLSID or MIMETYPE is provided then the error return code 400 Bad Request will be returned.
+</UL>
+<P>In addition to the POST data described above, queries to Object Stores will also include HTTP headers for Accept (MIME type) and Accept-Language, thus specifying the desired platforms (see above for Platform Independence and HTTP) and language-localized implementation for a component. Note that these HTTP headers are added to all HTTP requests made by Internet Component Download. This allows Object Stores to serve different code implementations for differing platforms or even different languages.
+
+<P><B>Note</B>  Internet Component Download will use the <I>first successful response</I> from a server on the Internet Search Path. Component Download will <I>not</I> continue searching for newer versions of components.<H3><A NAME="codedwld_0002000206030000">Uses for Internet Search Path</A></H3>
+<P>The Internet Search Path can be used in two ways:
+<OL><LI>Object Store servers at the beginning of the path will be asked for code <I>before</I> checking the location specified in the szCodeURL parameter for CoGetClassObjectFromURL. Servers at the beginning of the search path will thus be checked <I>before</I> trying the location specified in the CODEBASE attribute of an &lt;OBJECT&gt; tag. This is a useful feature for corporate intranets, because it allows intranet administrators to set up a local Object Store that is used to serve code for download by employees. (in fact, it is possible to disable the CODEBASE attribute for &lt;OBJECT&gt; tags by removing the CODEBASE keyword from the search path.
+<LI>"Object Store" servers at the end of the search path will be asked for code <I>after</I> trying the location specified in the szCodeURL parameter for CoGetClassObjectFromURL, and thus <I>after </I>trying the location specified in the CODEBASE attribute. This allows registration of default Object Store locations on the World Wide Web, where browsers can find code when no CODEBASE location is explicitly specified.
+</OL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep028.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep030.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

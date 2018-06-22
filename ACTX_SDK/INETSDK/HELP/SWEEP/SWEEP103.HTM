@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>IUniformResourceLocator Interface</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep102.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep104.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="intshcut_000b000101000000">IUniformResourceLocator Interface</A></H2>
+<BR CLEAR=ALL>
+<P>This section provides information about the following <B>IUniformResourceLocator</B> interface methods:
+<UL><LI><A HREF="sweep103.htm#intshcut_000b000101000100" TARGET=TEXT>IUniformResourceLocator::GetURL</A>
+<LI><A HREF="sweep103.htm#intshcut_000b000101000200" TARGET=TEXT>IUniformResourceLocator::InvokeCommand</A>
+<LI><A HREF="sweep103.htm#intshcut_000b000101000300" TARGET=TEXT>IUniformResourceLocator::SetURL</A>
+</UL>
+<H3><A NAME="intshcut_000b000101000100">IUniformResourceLocator::GetURL</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetURL(
+    LPSTR *ppszURL
+);
+</FONT></PRE>
+<P>Retrieves an object's uniform resource locator (URL).
+
+<UL><LI>Returns S_OK if the object's URL was retrieved successfully. If the object does not have a URL associated with it, the function returns S_FALSE and sets <I>ppszURL</I> to NULL. Otherwise, the return value is an error code that can be one of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value</B> </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning</B>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">There is not enough memory to complete the operation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">IS_E_EXEC_FAILED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The URL's protocol handler failed to run.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">URL_E_INVALID_SYNTAX </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The URL's syntax is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">URL_E_UNREGISTERED_PROTOCOL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The URL's protocol does not have a registered protocol handler.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppszURL</I>
+</DT><DD>Pointer to an LPSTR that will be filled in with a pointer to the object's URL. Because this method allocates memory for the string, you must instantiate an <B>Imalloc</B> interface and free the memory using <B>IMalloc::Free</B> when it is no longer needed. The following code fragment provides an example of how this can be done:
+
+<PRE><FONT FACE="Courier" SIZE="2">//  START CODE FRAGMENT
+{
+    // In this example, pURL is a global IUniformResourceLocator pointer.
+    LPSTR lpTemp;
+
+    hres = pURL-&gt;GetURL(&amp;lpTemp); 
+    if (SUCCEEDED(hres)){
+        IMalloc* pMalloc;
+        hres = SHGetMalloc(&amp;pMalloc); 
+        if (SUCCEEDED(hres)){
+            pMalloc-&gt;Free(lpTemp);
+            pMalloc-&gt;Release();
+        }
+    }
+}
+//  END CODE FRAGMENT
+</FONT></PRE>
+</DD></DL>
+<H3><A NAME="intshcut_000b000101000200">IUniformResourceLocator::InvokeCommand</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT InvokeCommand(
+    PURLINVOKECOMMANDINFO pURLCommandInfo;
+);
+</FONT></PRE>
+<P>Runs a command on an object's URL.
+
+<UL><LI>Returns S_OK if the object's URL was opened successfully. If the object does not have a URL associated with it, the function returns S_FALSE. Otherwise, the return value is an error code that can be one of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value</B> </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning</B>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">There is not enough memory to complete the operation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">IS_E_EXEC_FAILED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The URL's protocol handler failed to run.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">URL_E_INVALID_SYNTAX </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The URL's syntax is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">URL_E_UNREGISTERED_PROTOCOL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The URL's protocol does not have a registered protocol handler.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pURLCommandInfo</I>
+</DT><DD>Pointer to a <A HREF="sweep106.htm#intshcut_000b000104000100" TARGET=TEXT>URLINVOKECOMMANDINFO</A> structure that contains command information for the function.
+</DD></DL>
+<H3><A NAME="intshcut_000b000101000300">IUniformResourceLocator::SetURL</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SetURL(
+    LPCSTR pcszURL,
+    DWORD dwInFlags
+);
+</FONT></PRE>
+<P>Sets an object's URL.
+
+<UL><LI>Returns S_OK if the object's URL was set successfully. Otherwise, the return value is an error code that can be one of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value</B> </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning</B>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">There is not enough memory to complete the operation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">IS_E_EXEC_FAILED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The URL's protocol handler failed to run.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">URL_E_INVALID_SYNTAX </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The URL's syntax is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">URL_E_UNREGISTERED_PROTOCOL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The URL's protocol does not have a registered protocol handler.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pcszURL</I>
+</DT><DD>Pointer to a zero-terminated string that contains the URL to set. The protocol scheme may be included as part of the URL.
+</DD><DT><I>dwInFlags</I>
+</DT><DD>Flag value that specifies the behavior for setting the protocol scheme. This field can contain one of the following values:
+<DL>
+<DT>IURL_SETURL_FL_GUESS_PROTOCOL
+</DT><DD>If the protocol scheme is not specified in <I>pcszURL</I>, the system automatically chooses a scheme and adds it to the URL.
+</DD><DT>IURL_SETURL_FL_USE_DEFAULT_PROTOCOL
+</DT><DD>If the protocol scheme is not specified in <I>pcszURL</I>, the system adds the default protocol scheme to the URL.
+</DD></DL>
+</DD></DL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep102.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep104.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

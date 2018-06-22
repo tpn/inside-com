@@ -1,0 +1,407 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Methods</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep071.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep073.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="iexplore_0007000106000000"></A><H3>Methods<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000100"></A><H3>ClientToWindow Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Converts the client coordinates of a point to window coordinates. Client coordinates are relative to the upper-left corner of the client area; window coordinates are relative to the upper-left corner of a window. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><BR>
+<I>object</I><B>.ClientToWindow</B> <I>pcx</I><B>,</B> <I>pcy</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>pcx</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. A long integer value that specifies the x-coordinate of the point in client coordinates. When <B>ClientToWindow</B> returns, this variable contains the x-coordinate of the point in window coordinates.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>pcy</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. A long integer value that specifies the y-coordinate of the point in client coordinates. When <B>ClientToWindow</B> returns, this variable contains the y-coordinate of the point in window coordinates.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000200"></A><H3>GetProperty Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Retrieves the current value of a property associated with the given object. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.GetProperty</B> <I>szProperty</I><B>,</B> <I>vtValue</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>szProperty</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. A string expression that contains the name of the property to retrieve.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>vtValue</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. A variable that receives the current value of the property.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000b00" TARGET=TEXT>PropertyChange</A>, <A HREF="sweep072.htm#iexplore_0007000106000800" TARGET=TEXT>PutProperty</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000300"></A><H3>GoBack Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Navigates backward one item in the history list. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.GoBack<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep072.htm#iexplore_0007000106000400" TARGET=TEXT>GoForward</A>, <A HREF="sweep072.htm#iexplore_0007000106000500" TARGET=TEXT>GoHome</A>, <A HREF="sweep072.htm#iexplore_0007000106000600" TARGET=TEXT>GoSearch</A> 
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000400"></A><H3>GoForward Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Navigates forward one item in the history list.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.GoForward<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep072.htm#iexplore_0007000106000300" TARGET=TEXT>GoBack</A>, <A HREF="sweep072.htm#iexplore_0007000106000500" TARGET=TEXT>GoHome</A>, <A HREF="sweep072.htm#iexplore_0007000106000600" TARGET=TEXT>GoSearch</A> 
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000500"></A><H3>GoHome Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Navigates to the current home or start page, as specified in the Internet Explorer Options dialog box and Internet Control Panel. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.GoHome<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to object in the Applies To list. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep072.htm#iexplore_0007000106000300" TARGET=TEXT>GoBack</A>, <A HREF="sweep072.htm#iexplore_0007000106000400" TARGET=TEXT>GoForward</A>, <A HREF="sweep072.htm#iexplore_0007000106000600" TARGET=TEXT>GoSearch</A> 
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000600"></A><H3>GoSearch Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Navigates to the current search page, as specified in the Internet Explorer Options dialog box and Internet Control Panel. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.GoSearch<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep072.htm#iexplore_0007000106000300" TARGET=TEXT>GoBack</A>, <A HREF="sweep072.htm#iexplore_0007000106000400" TARGET=TEXT>GoForward</A>, <A HREF="sweep072.htm#iexplore_0007000106000500" TARGET=TEXT>GoHome</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000700"></A><H3>Navigate Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Navigates to the resource identified by a Universal Resource Locator (URL), or to the file identified by a full path.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><BR>
+<I>object</I><B>.Navigate</B> <I>URL</I> [<I>Flags</I><B>,</B>] [<I>TargetFrameName</I><B>,</B>] [<I>PostData</I><B>,</B>] [<I>Headers</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>URL</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. A string expression that evaluates to the URL of the resource to display, or the full path of the file to display.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Flags</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A constant or value that specifies whether to add the resource to the history list, whether to read from or write to the cache, and whether to display the resource in a new window. It can be a combination of the following values.
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Constant</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000106000701">navOpenInNewWindow</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">1</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Open the resource or file in a new window.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000106000702">navNoHistory</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">2</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not add the resource or file to the history list. The new page replaces the current page in the list.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000106000703">navNoReadFromCache</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">4</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not read from the disk cache for this navigation.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000106000704">navNoWriteToCache</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">8</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not write the results of this navigation to the disk cache.
+</FONT></TD>
+</TR>
+</TABLE>
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>TargetFrameName</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string expression that evaluates to the name of a frame in which to display the resource. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>PostData</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. Data to send to the server during the HTTP POST transaction. For example, the POST transaction is used to send data gathered by an HTML form. If this parameter does not specify any post data, the <B>Navigate</B> method issues an HTTP GET transaction. This parameter is ignored if <I>URL</I> is not an HTTP URL. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Headers</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A value that specifies additional HTTP headers to send to the server. These headers are added to the default Internet Explorer headers. The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code. This parameter is ignored if <I>URL</I> is not an HTTP URL. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000800"></A><H3>PutProperty Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Sets the value of a property associated with the given object. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.PutProperty</B> <I>szProperty</I><B>,</B> <I>vtValue</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>szProperty</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. A string expression that contains the name of the property to set.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>vtValue</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. A variable that specifies the new value of the property.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep072.htm#iexplore_0007000106000200" TARGET=TEXT>GetProperty</A>, <A HREF="sweep073.htm#iexplore_0007000107000b00" TARGET=TEXT>PropertyChange</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000900"></A><H3>Quit Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Closes the Internet Explorer application. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.Quit<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000c00" TARGET=TEXT>Quit</A>, <A HREF="sweep072.htm#iexplore_0007000106000a00" TARGET=TEXT>Refresh</A>, <A HREF="sweep072.htm#iexplore_0007000106000b00" TARGET=TEXT>Refresh2</A>, <A HREF="sweep072.htm#iexplore_0007000106000c00" TARGET=TEXT>Stop</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000a00"></A><H3>Refresh Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Reloads the page that the WebBrowser control is currently displaying. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.Refresh<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep072.htm#iexplore_0007000106000b00" TARGET=TEXT>Refresh2</A>, <A HREF="sweep072.htm#iexplore_0007000106000c00" TARGET=TEXT>Stop</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000b00"></A><H3>Refresh2 Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Reloads the file that the WebBrowser control is currently displaying. Unlike the <A HREF="sweep072.htm#iexplore_0007000106000a00" TARGET=TEXT>Refresh</A> method, this method contains a parameter that specifies the refresh level. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.Refresh2</B> [<I>Level</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Level</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A constant or value that specifies the refresh level. It can be one of the following constants or values.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Constant</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000106000b01">REFRESH_NORMAL</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">0</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Perform a lightweight refresh that does not include sending the HTTP "pragma:nocache" header to the server. 
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000106000b02">REFRESH_IFEXPIRED</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">1</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Perform a lightweight refresh if the page has expired.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000106000b03">REFRESH_COMPLETELY</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">3</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Perform a full refresh that includes sending a "pragma:nocache" header to the server (HTTP URLs only). 
+</FONT></TD>
+</TR>
+</TABLE>
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The "pragma:nocache" header tells the server not to return a cached copy, but to ensure that the information is as fresh as possible. Browsers typically send this header when the user selects refresh, but the header causes problems for some servers.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep072.htm#iexplore_0007000106000900" TARGET=TEXT>Quit</A>, <A HREF="sweep072.htm#iexplore_0007000106000a00" TARGET=TEXT>Refresh</A>, <A HREF="sweep072.htm#iexplore_0007000106000c00" TARGET=TEXT>Stop</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000106000c00"></A><H3>Stop Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Cancels any pending navigation or download operation, and stops any dynamic page elements such as background sounds and animations.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>object</I><B>.Stop<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000500" TARGET=TEXT>FrameBeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000300" TARGET=TEXT>DownloadBegin</A>, <A HREF="sweep073.htm#iexplore_0007000107000a00" TARGET=TEXT>ProgressChange</A>, <A HREF="sweep072.htm#iexplore_0007000106000a00" TARGET=TEXT>Refresh</A>, <A HREF="sweep072.htm#iexplore_0007000106000b00" TARGET=TEXT>Refresh2</A>
+
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep071.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep073.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

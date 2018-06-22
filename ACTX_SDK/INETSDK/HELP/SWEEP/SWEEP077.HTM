@@ -1,0 +1,1689 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Interfaces</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep076.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep078.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="iexplr_c_0007000203000000">Interfaces</A></H2>
+<BR CLEAR=ALL>
+<H3><A NAME="iexplr_c_0007000203010000">IWebBrowser</A></H3>
+<P>Designates an interface that applications can use to implement an instance of the Web browser control in an application. By implementing a Web browser control, an application can allows the user to browse sites on the Internet's World Wide Web, as well as objects in the Windows name space such as files, folders, disk drives, and locations on the network. 
+
+<P><B>Methods in Vtable Order</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IUnknown Methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>QueryInterface</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns pointers to supported interfaces.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>AddRef</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Increments the reference count.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Release</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Decrements the reference count.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IDispatch Methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>GetTypeInfoCount</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the number of type information interfaces that the Web browser control provides.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>GetTypeInfo</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves a type information object, which can be used to get the type information for an interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>GetIDsOfNames</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Maps a single member and an optional set of argument names to a corresponding set of integer DISPIDs, which may be used in subsequent calls to <B>IDispatch::Invoke</B>.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Invoke</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Provides access to properties and methods exposed by an object.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IWebBrowser Methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010100" TARGET=TEXT>GoBack</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to the previous item in the history list. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010200" TARGET=TEXT>GoForward</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to the next item in the history list. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010300" TARGET=TEXT>GoHome</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to the current home or start page. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010400" TARGET=TEXT>GoSearch</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to the current search page. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>Navigate</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to a resource identified by a Universal Resource Locator (URL) 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010600" TARGET=TEXT>Refresh</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reloads the current file. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010700" TARGET=TEXT>Refresh2</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reloads the current file and optionally prevents the pragma:noCache header from being sent. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010800" TARGET=TEXT>Stop</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Stops opening a file. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010900" TARGET=TEXT>get_Application</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns an Application object representing the application that contains the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011300" TARGET=TEXT>get_Parent</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the form on which the Web browser control is located. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010b00" TARGET=TEXT>get_Container</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the container of the Web browser control, if any. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010c00" TARGET=TEXT>get_Document</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the active document. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011600" TARGET=TEXT>get_TopLevelContainer</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a value indicating whether the current object is the top level container of the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011700" TARGET=TEXT>get_Type</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the type of the current contained object
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010f00" TARGET=TEXT>get_Left</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the distance between the internal left edge of the Web browser control and the left edge of its container. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011000" TARGET=TEXT>put_Left</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the distance between the internal left edge of the Web browser control and the left edge of its container. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011400" TARGET=TEXT>get_Top</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the distance between the internal top edge of the Web browser control and the top edge of its container. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011500" TARGET=TEXT>put_Top</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the distance between the internal top edge of the Web browser control and the top edge of its container. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011800" TARGET=TEXT>get_Width</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the horizontal dimension of the frame window that contains the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011900" TARGET=TEXT>put_Width</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the horizontal dimension of the frame window that contains the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010d00" TARGET=TEXT>get_Height</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the vertical dimension of the frame window that contains the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010e00" TARGET=TEXT>put_Height</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the vertical dimension of the frame window that contains the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011100" TARGET=TEXT>get_LocationName</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the name of the resource that the Web browser control or Internet Explorer is currently displaying.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203011200" TARGET=TEXT>get_LocationURL</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the URL of the resource that the Web browser control or Internet Explorer is currently displaying. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203010a00" TARGET=TEXT>get_Busy</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a value indicating whether a download or other activity is still in progress. 
+</FONT></TD></TR></TABLE>
+<H4><A NAME="iexplr_c_0007000203010100">IWebBrowser::GoBack</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GoBack(void);
+</FONT></PRE>
+<P>Navigates backward one item in the history list.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203010101">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010200" TARGET=TEXT>IWebBrowser::GoForward</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010300" TARGET=TEXT>IWebBrowser::GoHome</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010400" TARGET=TEXT>IWebBrowser::GoSearch</A>
+
+<H4><A NAME="iexplr_c_0007000203010200">IWebBrowser::GoForward</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GoForward(void);
+</FONT></PRE>
+<P>Navigates forward one item in the history list. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203010201">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010100" TARGET=TEXT>IWebBrowser::GoBack</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010300" TARGET=TEXT>IWebBrowser::GoHome</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010400" TARGET=TEXT>IWebBrowser::GoSearch</A>
+
+<H4><A NAME="iexplr_c_0007000203010300">IWebBrowser::GoHome</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GoHome(void);
+</FONT></PRE>
+<P>Navigates to the current home or start page, as specified in the Internet Explorer Options dialog box and Internet Control Panel. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203010301">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010100" TARGET=TEXT>IWebBrowser::GoBack</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010200" TARGET=TEXT>IWebBrowser::GoForward</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010400" TARGET=TEXT>IWebBrowser::GoSearch</A>
+
+<H4><A NAME="iexplr_c_0007000203010400">IWebBrowser::GoSearch</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GoSearch(void);
+</FONT></PRE>
+<P>Navigates to the current search page, as specified in the Internet Explorer Options dialog box and Internet Control Panel. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203010401">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010100" TARGET=TEXT>IWebBrowser::GoBack</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010200" TARGET=TEXT>IWebBrowser::GoForward</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010300" TARGET=TEXT>IWebBrowser::GoHome</A>
+
+<H4><A NAME="iexplr_c_0007000203010500">IWebBrowser::Navigate</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IWebBrowser::Navigate(
+    BSTR URL,                     // URL to navigate to
+    VARIANT FAR* Flags,           // address of option flags
+    VARIANT FAR* TargetFrameName, // address of frame name for resource
+    VARIANT FAR* PostData,        // address of HTTP POST data
+    VARIANT FAR* Headers,         // address of HTTP headers
+);
+</FONT></PRE>
+<P>Navigates to a resource identified by a Universal Resource Locator (URL), or to the file identified by a full path. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010501">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010502">E_INVALIDARG</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">One or more parameters are invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010503">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>URL</I>
+ </DT><DD>A caller-allocated string that contains the URL to navigate to, or the full path of the file to display.
+</DD><DT><I>Flags</I>
+ </DT><DD>Address of a variable that specifies whether to add the resource to the history list, whether to read or write from the cache, and whether to display the resource in a new window. The variable can be a combination of the values defined by the 
+<A HREF="sweep078.htm#iexplr_c_0007000204000100" TARGET=TEXT>BrowserNavConstants</A> enumeration. 
+</DD><DT><I>TargetFrameName</I>
+ </DT><DD>Address of a string that contains the name of the frame in which to display the resource. 
+</DD><DT><I>PostData</I>
+ </DT><DD>Address of data to send with the HTTP POST transaction. For example, the POST transaction is used to send data gathered by an HTML form. If this parameter does not specify any post data, the <B>IWebBrowser::Navigate</B> function issues an HTTP GET transaction. This parameter is ignored if URL is not an HTTP URL.
+</DD><DT><I>Headers</I>
+ </DT><DD>Address of a value that specifies the HTTP headers to send to the server. These headers are added to the default Internet Explorer headers. The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code. This parameter is ignored if URL is not an HTTP URL. 
+</DD></DL>
+<P>The post data specified by <I>PostData</I> is passed as a <B>SAFEARRAY</B>. The variant should be of type <B>VT_ARRAY</B> and point to a <B>SAFEARRAY</B>. The <B>SAFEARRAY</B> should be of element type <B>VT_UI1</B>, dimension one, and have an element count equal to the number of bytes of post data.
+
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030100" TARGET=TEXT>DWebBrowserEvents::BeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030500" TARGET=TEXT>DWebBrowserEvents::FrameBeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030600" TARGET=TEXT>DWebBrowserEvents::FrameNavigateComplete</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030800" TARGET=TEXT>DWebBrowserEvents::NavigateComplete</A>, <B>IWebBrowser::Navigate</B> 
+
+<H4><A NAME="iexplr_c_0007000203010600">IWebBrowser::Refresh</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Refresh(void);
+</FONT></PRE>
+<P>Reloads the file that the Web browser control is currently displaying. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010601">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010602">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR></TABLE>
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010700" TARGET=TEXT>Refresh2</A>
+
+<H4><A NAME="iexplr_c_0007000203010700">IWebBrowser::Refresh2</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Refresh(
+    VARIANT FAR* Level  // level of refresh to perform
+);
+</FONT></PRE>
+<P>Reloads the file that the Web browser control is currently displaying. Unlike the <A HREF="sweep077.htm#iexplr_c_0007000203010600" TARGET=TEXT>IWebBrowser::Refresh</A> function, this function contains a parameter that specifies the refresh level. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010701">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010702">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>Level</I>
+ </DT><DD>Address of a variable that specifies the level of refresh operation to perform. The variable can contain a type defined by the <A HREF="sweep078.htm#iexplr_c_0007000204000300" TARGET=TEXT>RefreshConstants</A> enumeration. 
+</DD></DL>
+<P>See also <A HREF="sweep078.htm#iexplr_c_0007000204000300" TARGET=TEXT>RefreshConstants</A>
+
+<H4><A NAME="iexplr_c_0007000203010800">IWebBrowser::Stop</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Stop(void);
+</FONT></PRE>
+<P>Cancels any pending navigation or download operation, and stops any dynamic page elements such as background sounds and animations.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203010801">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030100" TARGET=TEXT>DWebBrowserEvents::BeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030300" TARGET=TEXT>DWebBrowserEvents::DownloadBegin</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030500" TARGET=TEXT>DWebBrowserEvents::FrameBeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030a00" TARGET=TEXT>DWebBrowserEvents::ProgressChange</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010600" TARGET=TEXT>IWebBrowser::Refresh</A>
+
+<H4><A NAME="iexplr_c_0007000203010900">IWebBrowser::get_Application</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Application(
+    IDispatch * FAR* ppDisp  // address of variable for IDispatch pointer
+);
+</FONT></PRE>
+<P>Retrieves the automation object supported by the application that contains the Web browser control if the object is accessible; otherwise, this property returns the Web browser control's automation object.
+
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010901">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010902">E_NOINTERFACE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The interface is not supported. 
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppDisp</I>
+ </DT><DD>Address of a variable that receives the pointer to the application's <B>IDispatch</B> interface.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010b00" TARGET=TEXT>IWebBrowser::get_Container</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010c00" TARGET=TEXT>IWebBrowser::get_Document</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011300" TARGET=TEXT>IWebBrowser::get_Parent</A>
+
+<H4><A NAME="iexplr_c_0007000203010a00">IWebBrowser::get_Busy</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Busy(
+    VARIANT_BOOL FAR* pBool  // address of variable for busy flag
+);
+</FONT></PRE>
+<P>Discovers whether the Web browser control is engaged in a navigation or downloading operation. 
+
+<DL><DT><I>pBool</I>
+ </DT><DD>Address of a variable that receives <B>TRUE</B> if the Web browser control is busy, or <B>FALSE</B> otherwise.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203010b00">IWebBrowser::get_Container</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Container(
+    IDispatch * FAR* ppDisp  // address of variable for IDispatch pointer
+);
+</FONT></PRE>
+<P>Retrieves an object that evalutate to the container of the Web browser control, if any. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010b01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010b02">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010b03">E_NOINTERFACE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The interface is not supported. 
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppDisp</I>
+ </DT><DD>Address of a variable that receives the pointer to the container's <B>IDispatch</B> interface.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010900" TARGET=TEXT>IWebBrowser::get_Application</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010c00" TARGET=TEXT>IWebBrowser::get_Document</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011300" TARGET=TEXT>IWebBrowser::get_Parent</A>
+
+<H4><A NAME="iexplr_c_0007000203010c00">IWebBrowser::get_Document</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Document(
+    IDispatch * FAR* ppDisp  // address of variable for IDispatch pointer
+);
+</FONT></PRE>
+<P>Retrieves the automation object of the active document, if any. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010c01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010c02">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010c03">E_INVALIDARG</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">One or more parameters are invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203010c04">E_NOINTERFACE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The interface is not supported. 
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppDisp</I>
+ </DT><DD>Address of a variable that receives the pointer to the document object's <B>IDispatch</B> interface.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010900" TARGET=TEXT>IWebBrowser::get_Application</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010b00" TARGET=TEXT>IWebBrowser::get_Container</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011300" TARGET=TEXT>IWebBrowser::get_Parent</A>
+
+<H4><A NAME="iexplr_c_0007000203010d00">IWebBrowser::get_Height</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Height(
+    long FAR* pl  // address of variable for height
+);
+</FONT></PRE>
+<P>Retrieves the vertical dimension of the frame window that contains the Web browser control.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203010d01">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pl</I>
+ </DT><DD>Address of a variable that receives the frame window height, in pixels.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010e00" TARGET=TEXT>IWebBrowser::put_Height</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011800" TARGET=TEXT>IWebBrowser::get_Width</A>
+
+<H4><A NAME="iexplr_c_0007000203010e00">IWebBrowser::put_Height</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_Height(
+    long Height  // frame window height
+);
+</FONT></PRE>
+<P>Sets the vertical dimension of the frame window that contains the Web browser control.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203010e01">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>Height</I>
+ </DT><DD>New height, in pixels, of the frame window.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010d00" TARGET=TEXT>IWebBrowser::get_Height</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011900" TARGET=TEXT>IWebBrowser::put_Width</A>
+
+<H4><A NAME="iexplr_c_0007000203010f00">IWebBrowser::get_Left</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Left(
+    long FAR* pl  // address of variable for left-edge distance
+);
+</FONT></PRE>
+<P>Retrieves the distance between the internal left edge of the Web browser control and the left edge of its container. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203010f01">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pl</I>
+ </DT><DD>Address of a variable that recieves the left-edge distance, in pixels.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203011400" TARGET=TEXT>IWebBrowser::get_Top</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011000" TARGET=TEXT>IWebBrowser::put_Left</A>
+
+<H4><A NAME="iexplr_c_0007000203011000">IWebBrowser::put_Left</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_Left(
+    long Left  // left-edge distance
+);
+</FONT></PRE>
+<P>Sets the distance between the internal left edge of the Web browser control and the left edge of its container. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203011001">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>Left</I>
+ </DT><DD>Left-edge distance, in pixels.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010f00" TARGET=TEXT>IWebBrowser::get_Left</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011500" TARGET=TEXT>IWebBrowser::put_Top</A>
+
+<H4><A NAME="iexplr_c_0007000203011100">IWebBrowser::get_LocationName</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_LocationName(
+    BSTR FAR* pbstrLocationName  // address of buffer for location name
+);
+</FONT></PRE>
+<P>Retrieves the name of the resource that the Web browser control is currently displaying. If the resource is an HTML page on the World Wide Web, the name is the title of that page. If the resource is a folder or file on the network or local computer, the name is the UNC or full path of the folder or file. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011101">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011102">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrLocationName</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the name of the location.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203011200" TARGET=TEXT>IWebBrowser::get_LocationURL</A>
+
+<H4><A NAME="iexplr_c_0007000203011200">IWebBrowser::get_LocationURL</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_LocationURL(
+    BSTR FAR* pbstrLocationURL  // address of buffer for location URL
+);
+</FONT></PRE>
+<P>Retrieves the URL of the resource that the Web browser control is currently displaying. If the resource is a folder or file on the network or local computer, the name is the UNC or full path of the folder or file. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011201">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011202">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrLocationURL</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the URL.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203011100" TARGET=TEXT>IWebBrowser::get_LocationName</A>
+
+<H4><A NAME="iexplr_c_0007000203011300">IWebBrowser::get_Parent</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Parent(
+    IDispatch * FAR* ppDisp  // address of variable for IDispatch pointer
+);
+</FONT></PRE>
+<P>Retrieves a pointer to the <B>IDispatch</B> interface of the object that is the parent of the Web browser control. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011301">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011302">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011303">E_NOINTERFACE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The interface is not supported. 
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppDisp</I>
+ </DT><DD>Address of a variable that receives the pointer to the parent object's <B>IDispatch</B> interface.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010900" TARGET=TEXT>IWebBrowser::get_Application</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010b00" TARGET=TEXT>IWebBrowser::get_Container</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010c00" TARGET=TEXT>IWebBrowser::get_Document</A>
+
+<H4><A NAME="iexplr_c_0007000203011400">IWebBrowser::get_Top</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Top(
+    long FAR* pl  // address of variable for top-edge distance
+);
+</FONT></PRE>
+<P>Retrieves the distance between the internal top edge of the Web browser control and the top edge of its container. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203011401">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pl</I>
+ </DT><DD>Address of a variable that receives the top-edge distance, in pixels.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010f00" TARGET=TEXT>IWebBrowser::get_Left</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011500" TARGET=TEXT>IWebBrowser::put_Top</A>
+
+<H4><A NAME="iexplr_c_0007000203011500">IWebBrowser::put_Top</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_Top(
+    long Top  // top-edge distance
+);
+</FONT></PRE>
+<P>Sets the distance between the internal top edge of the Web browser control and the top edge of its container. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203011501">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>Top</I>
+ </DT><DD>Top-edge distance, in pixels.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203011400" TARGET=TEXT>IWebBrowser::get_Top</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011000" TARGET=TEXT>IWebBrowser::put_Left</A>
+
+<H4><A NAME="iexplr_c_0007000203011600">IWebBrowser::get_TopLevelContainer</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_TopLevelContainer(
+    VARIANT_BOOL FAR* pBool)  // address of variable for top-level flag
+</FONT></PRE>
+<P>Determines if the container of the Web browser control is a top-level container. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011601">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011602">E_INVALIDARG</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Invalid parameter.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pBool</I>
+ </DT><DD>Address of variable that receives <B>TRUE</B> if the container is a top-level container, or <B>FALSE</B> otherwise.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203011700">IWebBrowser::get_Type</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Type(
+    BSTR FAR* pbstrType  // address of buffer for type
+);
+</FONT></PRE>
+<P>Retrieves the type name of the contained document object.
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011701">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011702">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203011703">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrType</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the type name.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203011800">IWebBrowser::get_Width</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Width(
+    long FAR* pl  // address of variable for width
+);
+</FONT></PRE>
+<P>Retrieves the horizontal dimension of the frame window that contains the Web browser control.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203011801">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pl</I>
+ </DT><DD>Address of a variable that receives the frame window width, in pixels.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010d00" TARGET=TEXT>IWebBrowser::get_Height</A>, <A HREF="sweep077.htm#iexplr_c_0007000203011900" TARGET=TEXT>IWebBrowser::put_Width</A>
+
+<H4><A NAME="iexplr_c_0007000203011900">IWebBrowser::put_Width</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_Width(
+    long Width  // frame window width
+);
+</FONT></PRE>
+<P>Sets the horizontal dimension of the frame window that contains the Web browser control.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203011901">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>Width</I>
+ </DT><DD>New width, in pixels, of the frame window.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203011800" TARGET=TEXT>IWebBrowser::get_Width</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010e00" TARGET=TEXT>IWebBrowser::put_Height</A>
+
+<H3><A NAME="iexplr_c_0007000203020000">IWebBrowserApp</A></H3>
+<P>Designates an Automation interface that allows an application to control an instance of the Microsoft Internet Explorer application. 
+
+<P><B>Methods in Vtable Order</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IUnknown Methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>QueryInterface</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns pointers to supported interfaces.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>AddRef</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Increments the reference count.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Release</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Decrements the reference count.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IDispatch Methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>GetTypeInfoCount</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the number of type information interfaces that the Web browser control provides.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>GetTypeInfo</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves a type information object, which can be used to get the type information for an interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>GetIDsOfNames</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Maps a single member and an optional set of argument names to a corresponding set of integer DISPIDs, which may be used in subsequent calls to <B>IDispatch::Invoke</B>.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Invoke</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Provides access to properties and methods exposed by an object.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IWebBrowserApp Methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020300" TARGET=TEXT>GoBack</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to the previous item in the history list. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020400" TARGET=TEXT>GoForward</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to the next item in the history list. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020500" TARGET=TEXT>GoHome</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to the current home or start page. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020600" TARGET=TEXT>GoSearch</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to the current search page. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020700" TARGET=TEXT>Navigate</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Navigates to a resource identified by a Universal Resource Locator (URL) 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020a00" TARGET=TEXT>Refresh</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reloads the current file. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020b00" TARGET=TEXT>Refresh2</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reloads the current file and optionally prevents the pragma:noCache header from being sent. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020c00" TARGET=TEXT>Stop</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Stops opening a file. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020d00" TARGET=TEXT>get_Application</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns an Application object representing the application that contains the current instance of the Internet Explorer application. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021e00" TARGET=TEXT>get_Parent</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the automation object supported by Internet Explorer. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020f00" TARGET=TEXT>get_Container</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the container of the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021000" TARGET=TEXT>get_Document</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the active document. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022800" TARGET=TEXT>get_TopLevelContainer</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a value indicating whether the current object is the top level container of the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022900" TARGET=TEXT>get_Type</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the type of the current contained object
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021700" TARGET=TEXT>get_Left</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the distance between the internal left edge of the Web browser control and the left edge of its container. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021800" TARGET=TEXT>put_Left</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the distance between the internal left edge of the Web browser control and the left edge of its container. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022600" TARGET=TEXT>get_Top</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the distance between the internal top edge of the Web browser control and the top edge of its container. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022700" TARGET=TEXT>put_Top</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the distance between the internal top edge of the Web browser control and the top edge of its container. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022c00" TARGET=TEXT>get_Width</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the horizontal dimension of the frame window that contains the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022d00" TARGET=TEXT>put_Width</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the horizontal dimension of the frame window that contains the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021400" TARGET=TEXT>get_Height</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the vertical dimension of the frame window that contains the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021500" TARGET=TEXT>put_Height</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the vertical dimension of the frame window that contains the Web browser control. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021900" TARGET=TEXT>get_LocationName</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the name of the resource that Internet Explorer is currently displaying.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021a00" TARGET=TEXT>get_LocationURL</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the URL of the resource that Internet Explorer is currently displaying. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020e00" TARGET=TEXT>get_Busy</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a value indicating whether a download or other activity is still in progress. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020900" TARGET=TEXT>Quit</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Closes the Internet Explorer application.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020100" TARGET=TEXT>ClientToWindow</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Converts the client coordinates of a point to window coordinates.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020800" TARGET=TEXT>PutProperty</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the value of a property associated with the given object.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203020200" TARGET=TEXT>GetProperty</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the current value of a property associated with the given object.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021d00" TARGET=TEXT>get_Name</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the name of the object that contains the Web browser control.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021600" TARGET=TEXT>get_HWND</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the window handle of Internet Explorer's main window.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021100" TARGET=TEXT>get_FullName</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the full pathname of the file that Internet Explorer is currently displaying.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021f00" TARGET=TEXT>get_Path</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a string that evaluates to the full pathname of the resource that Internet Explorer is currently displaying. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022a00" TARGET=TEXT>get_Visible</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a value indicating whether Internet Explorer is visible or hidden. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022b00" TARGET=TEXT>put_Visible</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets a value indicating whether Internet Explorer is visible or hidden. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022000" TARGET=TEXT>get_StatusBar</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a value that indicates whether the status bar is visible. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022100" TARGET=TEXT>put_StatusBar</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets a value that determines whether the status bar is visible. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022200" TARGET=TEXT>get_StatusText</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns the text of the status bar. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022300" TARGET=TEXT>put_StatusText</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets the text for the status bar. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022400" TARGET=TEXT>get_ToolBar</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a value that indicates whether the toolbar is visible. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203022500" TARGET=TEXT>put_ToolBar</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets a value that determines whether the toolbar is visible. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021b00" TARGET=TEXT>get_MenuBar</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a value that indicates whether the menu bar is visible. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021c00" TARGET=TEXT>put_MenuBar</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets a value that determines whether the menu bar is visible.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021200" TARGET=TEXT>get_FullScreen</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns a value indicating whether Internet Explorer is in full screen or normal window mode. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203021300" TARGET=TEXT>put_FullScreen</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Sets a value that determines whether Internet Explorer is in full screen or normal window mode. 
+</FONT></TD></TR></TABLE>
+<H4><A NAME="iexplr_c_0007000203020100">IWebBrowserApp::ClientToWindow</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ClientToWindow(
+    int FAR* pcx,  // x-coordinate of point
+    int FAR* pcy   // y-coordinate of point
+);
+</FONT></PRE>
+<P>Converts the client coordinates of a point to window coordinates. Client coordinates are relative to the upper-left corner of the client area; window coordinates are relative to the upper-left corner of a window.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203020101">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pcx</I>
+ </DT><DD>X-coordinate of the point to convert, in client coordinates. When <B>ClientToWindow</B> returns, this variable contains the x-coordinate of the point in window coordinates. 
+</DD><DT><I>pcy</I>
+ </DT><DD>Y-coordinate of the point to convert, in client coordinates. When <B>ClientToWindow</B> returns, this variable contains the y-coordinate of the point in window coordinates. 
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203020200">IWebBrowserApp::GetProperty</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetProperty(
+    BSTR szProperty,       // name of property to retrieve
+    VARIANT FAR* pvtValue  // address of variable for property value
+);
+</FONT></PRE>
+<P>Retrieves the value of a property associated with the given object. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020201">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020202">E_INVALIDARG</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">One or more parameters are invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>szProperty</I>
+ </DT><DD>A caller-allocated buffer that contains the name of the property to retrieve. 
+</DD><DT><I>pvtValue</I>
+ </DT><DD>Address of a variable that receives the value associated with the given property.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020800" TARGET=TEXT>IWebBrowserApp::PutProperty</A>
+
+<H4><A NAME="iexplr_c_0007000203020300">IWebBrowserApp::GoBack</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GoBack(void);
+</FONT></PRE>
+<P>Navigates backward one item in the history list.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203020301">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020400" TARGET=TEXT>IWebBrowserApp::GoForward</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020500" TARGET=TEXT>IWebBrowserApp::GoHome</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020600" TARGET=TEXT>IWebBrowserApp::GoSearch</A>
+
+<H4><A NAME="iexplr_c_0007000203020400">IWebBrowserApp::GoForward</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GoForward(void);
+</FONT></PRE>
+<P>Navigates forward one item in the history list. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203020401">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020300" TARGET=TEXT>IWebBrowserApp::GoBack</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020500" TARGET=TEXT>IWebBrowserApp::GoHome</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020600" TARGET=TEXT>IWebBrowserApp::GoSearch</A>
+
+<H4><A NAME="iexplr_c_0007000203020500">IWebBrowserApp::GoHome</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GoHome(void);
+</FONT></PRE>
+<P>Navigates to the current home or start page, as specified in the Internet Explorer Options dialog box and Internet Control Panel. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203020501">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020300" TARGET=TEXT>IWebBrowserApp::GoBack</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020400" TARGET=TEXT>IWebBrowserApp::GoForward</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020600" TARGET=TEXT>IWebBrowserApp::GoSearch</A>
+
+<H4><A NAME="iexplr_c_0007000203020600">IWebBrowserApp::GoSearch</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GoSearch(void);
+</FONT></PRE>
+<P>Navigates to the current search page, as specified in the Internet Explorer Options dialog box and Internet Control Panel. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203020601">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020300" TARGET=TEXT>IWebBrowserApp::GoBack</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020400" TARGET=TEXT>IWebBrowserApp::GoForward</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020500" TARGET=TEXT>IWebBrowserApp::GoHome</A>
+
+<H4><A NAME="iexplr_c_0007000203020700">IWebBrowserApp::Navigate</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IWebBrowserApp::Navigate(
+    BSTR URL,                     // URL to navigate to
+    VARIANT FAR* Flags,           // address of option flags
+    VARIANT FAR* TargetFrameName, // address of frame name for resource
+    VARIANT FAR* PostData,        // address of HTTP POST data
+    VARIANT FAR* Headers,         // address of HTTP headers
+);
+</FONT></PRE>
+<P>Navigates to a resource identified by a Universal Resource Locator (URL), or to the file identified by a full path. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020701">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020702">E_INVALIDARG</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">One or more parameters are invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020703">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>URL</I>
+ </DT><DD>A caller-allocated string that contains the URL to navigate to, or the full path of the file to display.
+</DD><DT><I>Flags</I>
+ </DT><DD>Address of a variable that specifies whether to add the resource to the history list, whether to read or write from the cache, and whether to display the resource in a new window. The variable can be a combination of the values defined by the 
+<A HREF="sweep078.htm#iexplr_c_0007000204000100" TARGET=TEXT>BrowserNavConstants</A> enumeration. 
+</DD><DT><I>TargetFrameName</I>
+ </DT><DD>Address of a string that contains the name of the frame in which to display the resource. 
+</DD><DT><I>PostData</I>
+ </DT><DD>Address of data to send with the HTTP POST transaction. For example, the POST transaction is used to send data gathered by an HTML form. If this parameter does not specify any post data, the <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A> function issues an HTTP GET transaction. This parameter is ignored if URL is not an HTTP URL.
+</DD><DT><I>Headers</I>
+ </DT><DD>Address of a value that specifies the HTTP headers to send to the server. These headers are added to the default Internet Explorer headers. The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code. This parameter is ignored if URL is not an HTTP URL. 
+</DD></DL>
+<P>The post data specified by <I>PostData</I> is passed as a <B>SAFEARRAY</B>. The variant should be of type <B>VT_ARRAY</B> and point to a <B>SAFEARRAY</B>. The <B>SAFEARRAY</B> should be of element type <B>VT_UI1</B>, dimension one, and have an element count equal to the number of bytes of post data.
+
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030100" TARGET=TEXT>DWebBrowserEvents::BeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030500" TARGET=TEXT>DWebBrowserEvents::FrameBeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030600" TARGET=TEXT>DWebBrowserEvents::FrameNavigateComplete</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030800" TARGET=TEXT>DWebBrowserEvents::NavigateComplete</A>
+
+<H4><A NAME="iexplr_c_0007000203020800">IWebBrowserApp::PutProperty</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT PutProperty(
+    BSTR szProperty,   // name of property to set
+    VARIANT vtValue    // address of variable for property value
+);
+</FONT></PRE>
+<P>Sets the value of a property associated with the given object. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020801">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020802">E_INVALIDARG</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">One or more parameters are invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020803">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>szProperty</I>
+ </DT><DD>A caller-allocated buffer that contains the name of the property to set. 
+</DD><DT><I>tvValue</I>
+ </DT><DD>New value for the given property.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020200" TARGET=TEXT>IWebBrowserApp::GetProperty</A>
+
+<H4><A NAME="iexplr_c_0007000203020900">IWebBrowserApp::Quit</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Quit(void);
+</FONT></PRE>
+<P>Closes the Internet Explorer application.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203020901">S_OK</B></A> to indicate that the operation was successful.
+</UL>
+<H4><A NAME="iexplr_c_0007000203020a00">IWebBrowserApp::Refresh</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Refresh(void);
+</FONT></PRE>
+<P>Reloads the file that Internet Explorer is currently displaying. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020a01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020a02">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="iexplr_c_0007000203020b00">IWebBrowserApp::Refresh2</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Refresh(
+    VARIANT FAR* Level  // level of refresh to perform
+);
+</FONT></PRE>
+<P>Reloads the file that Internet Explorer is currently displaying. Unlike the <A HREF="sweep077.htm#iexplr_c_0007000203020a00" TARGET=TEXT>IWebBrowserApp::Refresh</A> function, this function contains a parameter that specifies the refresh level. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020b01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020b02">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>Level</I>
+ </DT><DD>Address of a variable that specifies the level of refresh operation to perform. The variable can contain a type defined by the <A HREF="sweep078.htm#iexplr_c_0007000204000300" TARGET=TEXT>RefreshConstants</A> enumeration. 
+</DD></DL>
+<P>See also <A HREF="sweep078.htm#iexplr_c_0007000204000300" TARGET=TEXT>RefreshConstants</A>
+
+<H4><A NAME="iexplr_c_0007000203020c00">IWebBrowserApp::Stop</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Stop(void);
+</FONT></PRE>
+<P>Cancels any pending navigation or download operation, and stops any dynamic page elements such as background sounds and animations.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203020c01">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030100" TARGET=TEXT>DWebBrowserEvents::BeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030300" TARGET=TEXT>DWebBrowserEvents::DownloadBegin</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030500" TARGET=TEXT>DWebBrowserEvents::FrameBeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030a00" TARGET=TEXT>DWebBrowserEvents::ProgressChange</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020900" TARGET=TEXT>IWebBrowserApp::Quit</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020a00" TARGET=TEXT>IWebBrowserApp::Refresh</A>
+
+<H4><A NAME="iexplr_c_0007000203020d00">IWebBrowserApp::get_Application</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Application(
+    IDispatch * FAR* ppDisp  // address of variable for IDispatch pointer
+);
+</FONT></PRE>
+<P>Retrieves the Automation interface supported by the Internet Explorer application.
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020d01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020d02">E_NOINTERFACE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The interface is not supported. 
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppDisp</I>
+ </DT><DD>Address of a variable that receives the pointer to the application's <B>IDispatch</B> interface.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020f00" TARGET=TEXT>IWebBrowserApp::get_Container</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021000" TARGET=TEXT>IWebBrowserApp::get_Document</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021e00" TARGET=TEXT>IWebBrowserApp::get_Parent</A>
+
+<H4><A NAME="iexplr_c_0007000203020e00">IWebBrowserApp::get_Busy</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Busy(
+    VARIANT_BOOL FAR* pBool  // address of variable for busy flag
+);
+</FONT></PRE>
+<P>Discovers whether Internet Explorer is engaged in a downloading operation or other activity. 
+
+<DL><DT><I>pBool</I>
+ </DT><DD>Address of a variable that receives <B>TRUE</B> if Internet Explorer is busy, or <B>FALSE</B> if not.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203020f00">IWebBrowserApp::get_Container</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Container(
+    IDispatch * FAR* ppDisp  // address of variable for IDispatch pointer
+);
+</FONT></PRE>
+<P>Retrieves a pointer to the <B>IDispatch</B> interface of the container. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020f01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020f02">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203020f03">E_NOINTERFACE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The interface is not supported. 
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppDisp</I>
+ </DT><DD>Address of a variable that receives the pointer to the container's <B>IDispatch</B> interface.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020d00" TARGET=TEXT>IWebBrowserApp::get_Application</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021000" TARGET=TEXT>IWebBrowserApp::get_Document</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021e00" TARGET=TEXT>IWebBrowserApp::get_Parent</A>
+
+<H4><A NAME="iexplr_c_0007000203021000">IWebBrowserApp::get_Document</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Document(
+    IDispatch * FAR* ppDisp  // address of variable for IDispatch pointer
+);
+</FONT></PRE>
+<P>Retrieves a pointer to the <B>IDispatch</B> interface of the active document object.
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021001">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021002">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021003">E_INVALIDARG</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">One or more parameters are invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021004">E_NOINTERFACE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The interface is not supported. 
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppDisp</I>
+ </DT><DD>Address of a variable that receives the pointer to the document object's <B>IDispatch</B> interface.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020d00" TARGET=TEXT>IWebBrowserApp::get_Application</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020f00" TARGET=TEXT>IWebBrowserApp::get_Container</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021e00" TARGET=TEXT>IWebBrowserApp::get_Parent</A>
+
+<H4><A NAME="iexplr_c_0007000203021100">IWebBrowserApp::get_FullName</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_FullName(
+    BSTR FAR* pbstrFullName  // address of buffer for pathname
+);
+</FONT></PRE>
+<P>Retrieves the fully qualified pathname of the Internet Explorer executable file.
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021101">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021102">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021103">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrFullName</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the pathname of the executable file.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203021200">IWebBrowserApp::get_FullScreen</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_FullScreen(
+    VARIANT_BOOL FAR* pbFullScreen  // address of variable for full-screen flag
+);
+</FONT></PRE>
+<P>Determines if Internet Explorer is in full screen or normal window mode. In full-screen mode, the Internet Explorer main window is maximized and the status bar, toolbar, menu bar, and title bar are hidden. 
+
+<DL><DT><I>pbFullScreen</I>
+ </DT><DD>Address of a variable that recieves <B>TRUE</B> if Internet Explorer is in full-screen mode, or <B>FALSE</B> if it is in normal window mode. 
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021300" TARGET=TEXT>IWebBrowserApp::put_FullScreen</A>
+
+<H4><A NAME="iexplr_c_0007000203021300">IWebBrowserApp::put_FullScreen</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_FullScreen(
+    VARIANT_BOOL bFullScreen  // full-screen flag
+);
+</FONT></PRE>
+<P>Sets Internet Explorer to either full-screen or normal window mode. In full-screen mode, the Internet Explorer main window is maximized and the status bar, toolbar, menu bar, and title bar are hidden.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203021301">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>bFullScreen</I>
+ </DT><DD>Full-screen flag. If this parameter is <B>TRUE</B>, Internet Explorer is set to full-screen mode; if <B>FALSE</B>, it is set to normal window mode.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021200" TARGET=TEXT>IWebBrowserApp::get_FullScreen</A>
+
+<H4><A NAME="iexplr_c_0007000203021400">IWebBrowserApp::get_Height</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Height(
+    long FAR* pl  // address of variable for height
+);
+</FONT></PRE>
+<P>Retreives the height of Internet Explorer's main window.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203021401">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pl</I>
+ </DT><DD>Address of a variable that receives the height, in pixels, of the main window.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022c00" TARGET=TEXT>IWebBrowserApp::get_Width</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021500" TARGET=TEXT>IWebBrowserApp::put_Height</A>
+
+<H4><A NAME="iexplr_c_0007000203021500">IWebBrowserApp::put_Height</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_Height(
+    long Height  // height of main window
+);
+</FONT></PRE>
+<P>Sets the height of Internet Explorer's main window.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203021501">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>Height</I>
+ </DT><DD>Height, in pixels, of the main window.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021400" TARGET=TEXT>IWebBrowserApp::get_Height</A>, <A HREF="sweep077.htm#iexplr_c_0007000203022d00" TARGET=TEXT>IWebBrowserApp::put_Width</A>
+
+<H4><A NAME="iexplr_c_0007000203021600">IWebBrowserApp::get_HWND</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_HWND(
+    long FAR* pHWND  // address of variable for window handle
+);
+</FONT></PRE>
+<P>Retrieves the handle of Internet Explorer's main window. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203021601">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pHWND</I>
+ </DT><DD>Address of a variable that receives window handle. 
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203021700">IWebBrowserApp::get_Left</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Left(
+    long FAR* pl  // address of variable for left-edge coordinate
+);
+</FONT></PRE>
+<P>Retrieves the screen coordinate of the left edge of Internet Explorer's main window.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203021701">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pl</I>
+ </DT><DD>Address of a variable that receives the screen coordinate of the main window's left edge.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022600" TARGET=TEXT>IWebBrowserApp::get_Top</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021800" TARGET=TEXT>IWebBrowserApp::put_Left</A>
+
+<H4><A NAME="iexplr_c_0007000203021800">IWebBrowserApp::put_Left</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_Left(
+    long Left  // screen coordinate of left edge
+);
+</FONT></PRE>
+<P>Sets the horizontal position of Internet Explorer's main window.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203021801">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>Left</I>
+ </DT><DD>Screen coordinate of the left edge of the main window.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021700" TARGET=TEXT>IWebBrowserApp::get_Left</A>, <A HREF="sweep077.htm#iexplr_c_0007000203022700" TARGET=TEXT>IWebBrowserApp::put_Top</A>
+
+<H4><A NAME="iexplr_c_0007000203021900">IWebBrowserApp::get_LocationName</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_LocationName(
+    BSTR FAR* pbstrLocationName  // address of buffer for location name
+);
+</FONT></PRE>
+<P>Retrieves the name of the resource that Internet Explorer is currently displaying. If the resource is an HTML page on the World Wide Web, the name is the title of that page. If the resource is a folder or file on the network or local computer, the name is the UNC or full path of the folder or file. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021901">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021902">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrLocationName</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the name of the location.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021a00" TARGET=TEXT>IWebBrowserApp::get_LocationURL</A>
+
+<H4><A NAME="iexplr_c_0007000203021a00">IWebBrowserApp::get_LocationURL</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_LocationURL(
+    BSTR FAR* pbstrLocationURL  // address of buffer for location URL
+);
+</FONT></PRE>
+<P>Retrieves the URL of the resource that Internet Explorer is currently displaying. If the resource is a folder or file on the network or local computer, the name is the UNC or full path of the folder or file. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021a01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021a02">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrLocationURL</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the URL.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021900" TARGET=TEXT>IWebBrowserApp::get_LocationName</A>
+<H4><A NAME="iexplr_c_0007000203021b00">IWebBrowserApp::get_MenuBar</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_MenuBar(
+    VARIANT_BOOL FAR* Value  // address of variable for visibility flag
+);
+</FONT></PRE>
+<P>Returns a value that indicates whether Internet Explorer's menu bar is visible. 
+
+<DL><DT><I>Value</I>
+ </DT><DD>Address of a variable that receives <B>TRUE</B> if the menu bar is visible or <B>FALSE</B> if it isn't.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021c00" TARGET=TEXT>IWebBrowserApp::put_MenuBar</A>
+
+<H4><A NAME="iexplr_c_0007000203021c00">IWebBrowserApp::put_MenuBar</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_MenuBar(
+    VARIANT_BOOL Value  // show flag
+);
+</FONT></PRE>
+<P>Shows or hides Internet Explorer's menu bar. 
+
+<DL><DT><I>Value</I>
+ </DT><DD>Show flag. A value of <B>TRUE</B> shows the menu bar; a value of <B>FALSE</B> hides it.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021b00" TARGET=TEXT>IWebBrowserApp::get_MenuBar</A>
+
+<H4><A NAME="iexplr_c_0007000203021d00">IWebBrowserApp::get_Name</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Name(
+    BSTR FAR* pbstrName  // address of buffer that receives the name
+);
+</FONT></PRE>
+<P>Retrieves the name of the object that contains the Web browser control used by Internet Explorer.
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021d01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021d02">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the name of the object that contains the Web browser control.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203021e00">IWebBrowserApp::get_Parent</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Parent(
+    IDispatch * FAR* ppDisp  // address of variable for IDispatch pointer
+);
+</FONT></PRE>
+<P>Retrieves a pointer to the <B>IDispatch</B> interface of the object that is the container of the Web browser control. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021e01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021e02">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021e03">E_NOINTERFACE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The interface is not supported. 
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppDisp</I>
+ </DT><DD>Address of a variable that receives the pointer to the container's <B>IDispatch</B> interface.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020d00" TARGET=TEXT>IWebBrowserApp::get_Application</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020f00" TARGET=TEXT>IWebBrowserApp::get_Container</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021000" TARGET=TEXT>IWebBrowserApp::get_Document</A>
+
+<H4><A NAME="iexplr_c_0007000203021f00">IWebBrowserApp::get_Path</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Path(
+    BSTR FAR* pbstrPath  // address of buffer for full path
+);
+</FONT></PRE>
+<P>Retrieves the full path of the Internet Explorer application. 
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021f01">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021f02">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203021f03">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrPath</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the full path.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203022000">IWebBrowserApp::get_StatusBar</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_StatusBar(
+    VARIANT_BOOL FAR* pBool  // address of variable for visibility flag
+);
+</FONT></PRE>
+<P>Returns a value that indicates whether Internet Explorer's status bar is visible. 
+
+<DL><DT><I>pBool</I>
+ </DT><DD>Address of a variable that receives <B>TRUE</B> if the status bar is visible or <B>FALSE</B> if it isn't.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022100" TARGET=TEXT>IWebBrowserApp::put_StatusBar</A>
+
+<H4><A NAME="iexplr_c_0007000203022100">IWebBrowserApp::put_StatusBar</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_StatusBar(
+    VARIANT_BOOL Value  // show flag
+);
+</FONT></PRE>
+<P>Shows or hides Internet Explorer's status bar. 
+
+<DL><DT><I>Value</I>
+ </DT><DD>Show flag. A value of <B>TRUE</B> shows the status bar; a value of <B>FALSE</B> hides it.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022000" TARGET=TEXT>IWebBrowserApp::get_StatusBar</A>
+
+<H4><A NAME="iexplr_c_0007000203022200">IWebBrowserApp::get_StatusText</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_StatusText(
+    BSTR FAR* pbstr  // address of buffer for text
+);
+</FONT></PRE>
+<P>Retrieves the text of Internet Explorer's status bar. 
+
+<DL><DT><I>pbstr</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the text of the status bar.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022300" TARGET=TEXT>IWebBrowserApp::put_StatusText</A>
+
+<H4><A NAME="iexplr_c_0007000203022300">IWebBrowserApp::put_StatusText</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_StatusText(
+    BSTR bstr  // status bar text
+);
+</FONT></PRE>
+<P>Sets the text of Internet Explorer's status bar. 
+
+<DL><DT><I>bstr</I>
+ </DT><DD>Status bar text.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022200" TARGET=TEXT>IWebBrowserApp::get_StatusText</A>
+
+<H4><A NAME="iexplr_c_0007000203022400">IWebBrowserApp::get_ToolBar</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_ToolBar(
+    int FAR* pValue  // receives visibility flag
+);
+</FONT></PRE>
+<P>Retrieves a value that indicates whether Internet Explorer's toolbar is visible. 
+
+<DL><DT><I>pValue</I>
+ </DT><DD>Address of a variable that receives <B>TRUE</B> if the toolbar is visible, or <B>FALSE</B> if it isn't.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022500" TARGET=TEXT>IWebBrowserApp::put_ToolBar</A>
+
+<H4><A NAME="iexplr_c_0007000203022500">IWebBrowserApp::put_ToolBar</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_ToolBar(
+    int Value  // show flag
+);
+</FONT></PRE>
+<P>Shows or hides Internet Explorer's toolbar. 
+
+
+<DL><DT><I>Value</I>
+ </DT><DD>Show flag. A value of <B>TRUE</B> shows the toolbar; a value of <B>FALSE</B> hides it.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022400" TARGET=TEXT>IWebBrowserApp::get_ToolBar</A>
+
+<H4><A NAME="iexplr_c_0007000203022600">IWebBrowserApp::get_Top</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Top(
+    long FAR* pl  // address of variable for top-edge coordinate
+);
+</FONT></PRE>
+<P>Retrieves the screen coordinate of the top edge of Internet Explorer's main window.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203022601">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pl</I>
+ </DT><DD>Address of a variable that receives the screen coordinate of the main window's top edge.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021700" TARGET=TEXT>IWebBrowserApp::get_Left</A>, <A HREF="sweep077.htm#iexplr_c_0007000203022700" TARGET=TEXT>IWebBrowserApp::put_Top</A>
+
+<H4><A NAME="iexplr_c_0007000203022700">IWebBrowserApp::put_Top</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_Top(
+    long Top  // screen coordinate of top edge
+);
+</FONT></PRE>
+<P>Sets the vertical position of Internet Explorer's main window.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203022701">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>Top</I>
+ </DT><DD>Screen coordinate of the top edge of the main window.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022600" TARGET=TEXT>IWebBrowserApp::get_Top</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021800" TARGET=TEXT>IWebBrowserApp::put_Left</A>
+
+<H4><A NAME="iexplr_c_0007000203022800">IWebBrowserApp::get_TopLevelContainer</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_TopLevelContainer(
+    VARIANT_BOOL FAR* pBool)  // address of variable for top-level flag
+</FONT></PRE>
+<P>Determines if Internet Explorer is the top-level container of the Web browser control. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203022801">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pBool</I>
+ </DT><DD>Address of variable that receives <B>TRUE</B> if the container is a top-level container, or <B>FALSE</B> otherwise. 
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203022900">IWebBrowserApp::get_Type</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Type(
+    BSTR FAR* pbstrType  // address of buffer for type
+);
+</FONT></PRE>
+<P>Retrieves the type name of the contained document object.
+
+<UL><LI>Returns one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203022901">S_OK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was successful. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203022902">E_FAIL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000203022903">E_OUTOFMEMORY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Out of memory.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrType</I>
+ </DT><DD>Address of a caller-allocated buffer that receives the type name.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203022a00">IWebBrowserApp::get_Visible</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Visible(
+    VARIANT_BOOL FAR* pBool  // address of variable for visibility flag
+);
+</FONT></PRE>
+<P>Discovers whether Internet Explorer is visible or hidden.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203022a01">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pBool</I>
+ </DT><DD>Address of a variable that receives <B>TRUE</B> if Internet Explorer is visible, or <B>FALSE</B> if it is hidden.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022b00" TARGET=TEXT>IWebBrowserApp::put_Visible</A>
+
+<H4><A NAME="iexplr_c_0007000203022b00">IWebBrowserApp::put_Visible</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_Visible(
+    VARIANT_BOOL Value  // visibility flag
+);
+</FONT></PRE>
+<P>Sets the visibility state of Internet Explorer. 
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203022b01">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>Value</I>
+ </DT><DD>Visibility flag. If this parameter is <B>TRUE</B>, Internet Explorer is visible; if <B>FALSE</B>, it is hidden.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022a00" TARGET=TEXT>IWebBrowserApp::get_Visible</A>
+
+<H4><A NAME="iexplr_c_0007000203022c00">IWebBrowserApp::get_Width</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT get_Width(
+    long FAR* pl  // address of variable for width
+);
+</FONT></PRE>
+<P>Retreives the width of Internet Explorer's main window.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203022c01">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>pl</I>
+ </DT><DD>Address of a variable that receives the width, in pixels, of the main window.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203021400" TARGET=TEXT>IWebBrowserApp::get_Height</A>, <A HREF="sweep077.htm#iexplr_c_0007000203022d00" TARGET=TEXT>IWebBrowserApp::put_Width</A>
+
+<H4><A NAME="iexplr_c_0007000203022d00">IWebBrowserApp::put_Width</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT put_Width(
+    long Width  // width of main window
+);
+</FONT></PRE>
+<P>Sets the width of Internet Explorer's main window.
+
+<UL><LI>Returns <B><A NAME="iexplr_c_0007000203022d01">S_OK</B></A> to indicate that the operation was successful.
+
+</UL>
+<DL><DT><I>Width</I>
+ </DT><DD>Width, in pixels, of the main window.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203022c00" TARGET=TEXT>IWebBrowserApp::get_Width</A>, <A HREF="sweep077.htm#iexplr_c_0007000203021500" TARGET=TEXT>IWebBrowserApp::put_Height</A>
+
+<H3><A NAME="iexplr_c_0007000203030000">DWebBrowserEvents</A></H3>
+<P>Designates an event sink interface that an application must implement in order to receive event notifications from a Web browser control or from the Internet Explorer application.
+
+<P><B>Methods in Vtable Order</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IUnknown Methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>QueryInterface</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns pointers to supported interfaces.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>AddRef</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Increments the reference count.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Release</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Decrements the reference count.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IDispatch Methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>GetTypeInfoCount</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the number of type information interfaces that the Web browser control provides.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>GetTypeInfo</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves a type information object, which can be used to get the type information for an interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>GetIDsOfNames</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Maps a single member and an optional set of argument names to a corresponding set of integer DISPIDs, which may be used in subsequent calls to <B>IDispatch::Invoke</B>.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Invoke</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Provides access to properties and methods exposed by an object.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>DWebBrowserEvents Methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030100" TARGET=TEXT>BeforeNavigate</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when the Web browser control is about to navigate to a new URL.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030500" TARGET=TEXT>FrameBeforeNavigate</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when the Web browser control is about to navigate to a new URL. This event is fired for navigations that occur inside an HTML frame.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030600" TARGET=TEXT>FrameNavigateComplete</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs after the browser has successfully navigated to a new location. This event is fired for navigations that occur inside an HTML frame.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030700" TARGET=TEXT>FrameNewWindow</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when a new window is to be created for displaying a resource. This event is fired for navigations that occur inside an HTML frame.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030800" TARGET=TEXT>NavigateComplete</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs after the browser has successfully navigated to a new location.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030d00" TARGET=TEXT>StatusTextChange</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when the status bar text has changed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030a00" TARGET=TEXT>ProgressChange</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when the progress of a download operation is updated.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030400" TARGET=TEXT>DownloadComplete</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when a navigation operation finished, was halted, or failed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030200" TARGET=TEXT>CommandStateChange</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when the enabled state of a command changes.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030300" TARGET=TEXT>DownloadBegin</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when a navigation operation is beginning, shortly after the <A HREF="sweep077.htm#iexplr_c_0007000203030100" TARGET=TEXT>BeforeNavigate</A> event, unless the navigation is cancelled.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030900" TARGET=TEXT>NewWindow</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when a new window is to be created for displaying a resource.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030e00" TARGET=TEXT>TitleChange</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when the title of a document in the Web browser control becomes available or changes.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030c00" TARGET=TEXT>Quit</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when the Internet Explorer application is ready to quit.
+
+
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep077.htm#iexplr_c_0007000203030b00" TARGET=TEXT>PropertyChange</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Occurs when the <A HREF="sweep077.htm#iexplr_c_0007000203020800" TARGET=TEXT>IWebBrowserApp::PutProperty</A> function changes the value of a property.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="iexplr_c_0007000203030100">DWebBrowserEvents::BeforeNavigate</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void BeforeNavigate(
+    BSTR URL,              // URL to navigate to
+    long Flags,            // option flags
+    BSTR TargetFrameName,  // name of frame for resource
+    VARIANT FAR* PostData, // address of HTTP POST data
+    BSTR Headers,          // HTTP headers
+    VARIANT_BOOL FAR* Cancel  // cancel flag
+);
+</FONT></PRE>
+<P>Notifies an application that Web browser control is about to navigate to a different URL, which may happen as a result of external automation, internal automation from a script, or the user clicking a link or typing in the address bar. The container has an opportunity to cancel the pending navigation. 
+
+<UL><LI>No return Value.
+
+</UL>
+<DL><DT><I>URL</I>
+ </DT><DD>URL to be navigated to.
+</DD><DT><I>Flags</I>
+ </DT><DD>Reserved for future use.
+</DD><DT><I>TargetFrameName</I>
+ </DT><DD>String that contains the name of the frame in which to display the resource, or NULL if no named frame is targeted for the resource. 
+</DD><DT><I>PostData</I>
+ </DT><DD>Address of data to send to the server if the HTTP POST transaction is being used.
+</DD><DT><I>Headers</I>
+ </DT><DD>Additional HTTP headers to send to the server (HTTP URLs only). The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code. 
+</DD><DT><I>Cancel</I>
+ </DT><DD>Address of cancel flag. An application can set this parameter to <B>TRUE</B> to cancel the navigation operation, or <B>FALSE</B> to allow it to proceed. 
+</DD></DL>
+<P>The post data specified by <I>PostData</I> is passed as a <B>SAFEARRAY</B>. The variant should be of type <B>VT_ARRAY</B> and point to a <B>SAFEARRAY</B>. The <B>SAFEARRAY</B> should be of element type <B>VT_UI1</B>, dimension one, and have an element count equal to the number of bytes of post data.
+
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030500" TARGET=TEXT>DWebBrowserEvents::FrameBeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030600" TARGET=TEXT>DWebBrowserEvents::FrameNavigateComplete</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030800" TARGET=TEXT>DWebBrowserEvents::NavigateComplete</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A>
+
+<H4><A NAME="iexplr_c_0007000203030200">DWebBrowserEvents::CommandStateChange</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void CommandStateChange(
+    long Command,        // command identifier
+    VARIANT_BOOL Enable  // enabled state
+);
+</FONT></PRE>
+<P>Notifies an application that the enabled state of a Web browser command has changed. 
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>Command</I>
+ </DT><DD>Identifier of the command whose enable state has changed.
+</DD><DT><I>Enable</I>
+ </DT><DD>Enabled state. This parameter is <B>TRUE</B> if the command is enabled, or <B>FALSE</B> if it is disabled.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203030300">DWebBrowserEvents::DownloadBegin</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void DownloadBegin(void);
+</FONT></PRE>
+<P>Notifies an application that a navigation operation is beginning. This event is fired shortly after the <A HREF="sweep077.htm#iexplr_c_0007000203030100" TARGET=TEXT>BeforeNavigate</A> event, unless the navigation is cancelled. Any animation or "busy" indication that the container needs to display should be connected to this event. a new page is about to be downloaded. 
+
+<UL><LI>No return value.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030400" TARGET=TEXT>DWebBrowserEvents::DownloadComplete</A>
+<H4><A NAME="iexplr_c_0007000203030400">DWebBrowserEvents::DownloadComplete</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void DownloadComplete(void);
+</FONT></PRE>
+<P>Occurs when a navigation operation finished, was halted, or failed. Unlike <A HREF="sweep077.htm#iexplr_c_0007000203030800" TARGET=TEXT>NavigateComplete</A> which is only fired when a URL is successfully navigated to, this event is always fired after a navigation starts. Any animation or "busy" indication that the container needs to display should be connected to this event. 
+
+<UL><LI>No return value.
+
+</UL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030300" TARGET=TEXT>DWebBrowserEvents::DownloadBegin</A>
+<H4><A NAME="iexplr_c_0007000203030500">DWebBrowserEvents::FrameBeforeNavigate</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void FrameBeforeNavigate(
+    BSTR URL,              // URL to navigate to
+    long Flags,            // option flags
+    BSTR TargetFrameName,  // name of frame for resource
+    VARIANT FAR* PostData, // address of HTTP POST data
+    BSTR Headers,          // HTTP headers
+    VARIANT_BOOL FAR* Cancel  // cancel flag
+);
+</FONT></PRE>
+<P>Notifies an application that Web browser control is about to navigate to a different URL, which may happen as a result of external automation, internal automation from a script, or the user clicking a link or typing in the address bar. The container has an opportunity to cancel the pending navigation. This event is fired for navigations that occur inside an HTML frame.
+
+<UL><LI>No return Value.
+
+</UL>
+<DL><DT><I>URL</I>
+ </DT><DD>URL to be navigated to.
+</DD><DT><I>Flags</I>
+ </DT><DD>Reserved for future use.
+</DD><DT><I>TargetFrameName</I>
+ </DT><DD>String that contains the name of the frame in which to display the resource, or NULL if no named frame is targeted for the resource. 
+</DD><DT><I>PostData</I>
+ </DT><DD>Address of data to send to the server if the HTTP POST transaction is being used.
+</DD><DT><I>Headers</I>
+ </DT><DD>Additional HTTP headers to send to the server (HTTP URLs only). The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code. 
+</DD><DT><I>Cancel</I>
+ </DT><DD>Address of cancel flag. An application can set this parameter to <B>TRUE</B> to cancel the navigation operation, or <B>FALSE</B> to allow it to proceed. 
+</DD></DL>
+<P>The post data specified by <I>PostData</I> is passed as a <B>SAFEARRAY</B>. The variant should be of type <B>VT_ARRAY</B> and point to a <B>SAFEARRAY</B>. The <B>SAFEARRAY</B> should be of element type <B>VT_UI1</B>, dimension one, and have an element count equal to the number of bytes of post data.
+
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030600" TARGET=TEXT>DWebBrowserEvents::FrameNavigateComplete</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030800" TARGET=TEXT>DWebBrowserEvents::NavigateComplete</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A>
+
+<H4><A NAME="iexplr_c_0007000203030600">DWebBrowserEvents::FrameNavigateComplete</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void FrameNavigateComplete(
+    BSTR URL,              // URL to navigate to
+);
+</FONT></PRE>
+<P>Notifies an application that the browser has successfully navigated to a new location. The document may still be downloading (and in the case of HTML, images may still be downloading), but at least part of the document has been received from the server and the viewer for the document has been created. This event is fired for navigations that occur inside an HTML frame.
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>URL</I>
+ </DT><DD>URL to be navigated to. Note that this URL can be different from the URL that the browser was told to navigate to. One reason is that this URL is the canonicalized and qualified URL; for instance, if an application specified a URL of "www.microsoft.com" in a call to the Navigate function, the URL passed by NavigateComplete will be "http://www.microsoft.com/". Also, if the server has redirected the browser to a different URL, the redirected URL will be reflected here. 
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030500" TARGET=TEXT>DWebBrowserEvents::FrameBeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A>
+
+<H4><A NAME="iexplr_c_0007000203030700">DWebBrowserEvents::FrameNewWindow</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void FrameNewWindow(
+    BSTR URL,              // URL to navigate to
+    long Flags,            // option flags
+    BSTR TargetFrameName,  // name of frame for resource
+    VARIANT FAR* PostData, // address of HTTP POST data
+    BSTR Headers,          // HTTP headers
+    VARIANT_BOOL FAR* Processed // name of referring document
+);
+</FONT></PRE>
+<P>Notifies an application that a new window is to be created for displaying a resource. Some actions that can cause this include the user shift-clicking on a link, the user right-clicking on a link and choosing "open in new window", or a targeted navigation to a frame name that does not yet exist. The container has an opportunity to handle the new window creation itself. If it does not, a top-level Internet Explorer window is created as a separate process. This event is fired for navigations that occur inside an HTML frame.
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>URL</I>
+ </DT><DD>URL to be navigated to.
+</DD><DT><I>Flags</I>
+ </DT><DD>Reserved for future use.
+</DD><DT><I>TargetFrameName</I>
+ </DT><DD>String that contains the name of the frame in which to display the resource, or NULL if no named frame is targeted for the resource. 
+</DD><DT><I>PostData</I>
+ </DT><DD>Address of data to send to the server if the HTTP POST transaction is used.
+</DD><DT><I>Headers</I>
+ </DT><DD>HTTP headers to send to the server (HTTP URLs only). The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code. 
+</DD><DT><I>Processed</I>
+ </DT><DD>Value that indicates whether the container intends to create the new window. Set this parameter to <B>TRUE</B> if the container will create the window, or to <B>FALSE</B> if a top-level Internet Explorer window is to be created. 
+</DD></DL>
+<P>The preferred behavior of Web browser control containers is to process this event, create a new instance of the Web browser control, and pass all the parameters from the <A HREF="sweep077.htm#iexplr_c_0007000203030900" TARGET=TEXT>NewWindow</A> event directly to the <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A> method on the newly created Web browser control. Another option for containers that cannot or do not need to create a new window is to degrade by performing the navigation in the existing window. To do this, they may process this event and then pass the parameters from this event to <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A> on the existing window. 
+
+<P>The post data specified by <I>PostData</I> is passed as a <B>SAFEARRAY</B>. The variant should be of type <B>VT_ARRAY</B> and point to a <B>SAFEARRAY</B>. The <B>SAFEARRAY</B> should be of element type <B>VT_UI1</B>, dimension one, and have an element count equal to the number of bytes of post data.
+
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A>
+<H4><A NAME="iexplr_c_0007000203030800">DWebBrowserEvents::NavigateComplete</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void NavigateComplete(
+    BSTR URL,              // URL to navigate to
+);
+</FONT></PRE>
+<P>Notifies an application that the browser has successfully navigated to a new location. The document may still be downloading (and in the case of HTML, images may still be downloading), but at least part of the document has been received from the server and the viewer for the document has been created. 
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>URL</I>
+ </DT><DD>URL to be navigated to. Note that this URL can be different from the URL that the browser was told to navigate to. One reason is that this URL is the canonicalized and qualified URL; for instance, if an application specified a URL of "www.microsoft.com" in a call to the Navigate function, the URL passed by NavigateComplete will be "http://www.microsoft.com/". Also, if the server has redirected the browser to a different URL, the redirected URL will be reflected here. 
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030100" TARGET=TEXT>DWebBrowserEvents::BeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A>
+
+<H4><A NAME="iexplr_c_0007000203030900">DWebBrowserEvents::NewWindow</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void NewWindow(
+    BSTR URL,              // URL to navigate to
+    long Flags,            // option flags
+    BSTR TargetFrameName,  // name of frame for resource
+    VARIANT FAR* PostData, // address of HTTP POST data
+    BSTR Headers,          // HTTP headers
+    VARIANT_BOOL FAR* Processed // name of referring document
+);
+</FONT></PRE>
+<P>Notifies an application that a new window is to be created for displaying a resource. Some actions that can cause this include the user shift-clicking on a link, the user right-clicking on a link and choosing "open in new window", or a targeted navigation to a frame name that does not yet exist. The container has an opportunity to handle the new window creation itself. If it does not, a top-level Internet Explorer window is created as a separate process. 
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>URL</I>
+ </DT><DD>URL to be navigated to.
+</DD><DT><I>Flags</I>
+ </DT><DD>Reserved for future use.
+</DD><DT><I>TargetFrameName</I>
+ </DT><DD>String that contains the name of the frame in which to display the resource, or NULL if no named frame is targeted for the resource. 
+</DD><DT><I>PostData</I>
+ </DT><DD>Address of data to send to the server if the HTTP POST transaction is used.
+</DD><DT><I>Headers</I>
+ </DT><DD>HTTP headers to send to the server (HTTP URLs only). The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code. 
+</DD><DT><I>Processed</I>
+ </DT><DD>Value that indicates whether the container intends to create the new window. Set this parameter to <B>TRUE</B> if the container will create the window, or to <B>FALSE</B> if a top-level Internet Explorer window is to be created. 
+</DD></DL>
+<P>The preferred behavior of Web browser control containers is to process this event, create a new instance of the Web browser control, and pass all the parameters from the <B>NewWindow</B> event directly to the <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A> method on the newly created Web browser control. Another option for containers that cannot or do not need to create a new window is to degrade by performing the navigation in the existing window. To do this, they may process this event and then pass the parameters from this event to <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A> on the existing window. 
+
+<P>The post data specified by <I>PostData</I> is passed as a <B>SAFEARRAY</B>. The variant should be of type <B>VT_ARRAY</B> and point to a <B>SAFEARRAY</B>. The <B>SAFEARRAY</B> should be of element type <B>VT_UI1</B>, dimension one, and have an element count equal to the number of bytes of post data.
+
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A>
+<H4><A NAME="iexplr_c_0007000203030a00">DWebBrowserEvents::ProgressChange</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void ProgressChange(
+    long Progress,    // amount of total progress
+    long ProgressMax  // maximum progress
+);
+</FONT></PRE>
+<P>Notifies an application that the progress of a download operation has been updated. 
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>Progress</I>
+ </DT><DD>Amount of total progress to show, or -1 when progress is complete. 
+</DD><DT><I>ProgressMax</I>
+ </DT><DD>Maximum progress value. 
+</DD></DL>
+<P>The container can use the information provided by this event to display the number of bytes downloaded so far or to update a progress indicator. 
+
+<P>To calculate the percentage of progress to show in a progress indicator, multiply the value of <I>Progress</I> by 100 and divide by the value of <I>ProgressMax </I>(unless progress is -1, in which case the container can indicate that the operation is finished or hide the progress indicator). 
+
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030300" TARGET=TEXT>DWebBrowserEvents::DownloadBegin</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030400" TARGET=TEXT>DWebBrowserEvents::DownloadComplete</A>
+<H4><A NAME="iexplr_c_0007000203030b00">DWebBrowserEvents::PropertyChange</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void PropertyChange(
+    BSTR szProperty,    // name of property that changed
+);
+</FONT></PRE>
+<P>Notifies an application that the <A HREF="sweep077.htm#iexplr_c_0007000203020800" TARGET=TEXT>PutProperty</A> function has changed the value of a property.
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>szProperty</I>
+ </DT><DD>Caller-alocated buffer that contains the name of the property.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020200" TARGET=TEXT>IWebBrowserApp::GetProperty</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020800" TARGET=TEXT>IWebBrowserApp::PutProperty</A>
+<H4><A NAME="iexplr_c_0007000203030c00">DWebBrowserEvents::Quit</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void Quit(
+    VARIANT_BOOL FAR* Cancel  // address of cancel flag
+);
+</FONT></PRE>
+<P>Notifies an application that the Internet Explorer application is ready to quit.
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>Cancel</I>
+ </DT><DD>Address of the cancel flag. An application can set this parameter to <B>TRUE</B> to cancel the quit operation, or <B>FALSE</B> to allow it to continue. 
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203030d00">DWebBrowserEvents::StatusTextChange</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void StatusTextChange(
+    BSTR bstrText  // new status bar text
+);
+</FONT></PRE>
+<P>Notifies an application that the text of the status bar associated with the Web browser control has changed. 
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>bstrText</I>
+ </DT><DD>String that contains the new status bar text.
+</DD></DL>
+<H4><A NAME="iexplr_c_0007000203030e00">DWebBrowserEvents::TitleChange</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">void TitleChange(
+    BSTR Text  // document title
+);
+</FONT></PRE>
+<P>Notifies an application that the title of a document in the Web browser control becomes available or changes. For HTML, the title may change; while HTML is still downloading, the URL of the document is set as the title. After the real title (if there is one) is parsed from the HTML, the title is changed to reflect the actual title. 
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>Text</I>
+ </DT><DD>Caller allocated buffer that contains the new document title.
+</DD></DL>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030200" TARGET=TEXT>DWebBrowserEvents::CommandStateChange</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030d00" TARGET=TEXT>DWebBrowserEvents::StatusTextChange</A>
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep076.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep078.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

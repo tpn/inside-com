@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Frames</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep009.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep011.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_0001000109000000">Frames</A></H2>
+<BR CLEAR=ALL>
+<P>Frames give you a way to organize and structure the content of your HTML documents by letting you create compound documents that the user can view within the main window of Internet Explorer. To use frames, you create a document that uses the <A HREF="sweep021.htm#htmlref2_0001000114002100" TARGET=TEXT>FRAMESET</A> and <A HREF="sweep021.htm#htmlref2_0001000114002000" TARGET=TEXT>FRAME</A> elements to divide the main window into rectangular frames (like panes in a window). Then, for each frame, you specify an HTML document that contains the content (text and images) to fill the frame. Floating frames enable you to open a browser within a browser. You can insert a floating frame in the same manner in which you can insert an image on an HTML page. You can specify the size of the frame and its border, and you can align it with other text and images on the page. With frames, you can create sophisticated layouts that add and mix sounds, video, animation, and colors. Using two frames in a single page, you can display an index in one frame and the content in another.
+
+For example, you can split the main window into two equal frames and fill these with different documents by using the following elements:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Two Equal Frames&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;FRAMESET COLS="50%,*"&gt;
+&lt;FRAME SRC=x.htm&gt;
+&lt;FRAME SRC=y.htm&gt;
+&lt;/FRAMESET&gt;
+&lt;/HTML&gt;
+</FONT></PRE>
+<P>
+<!--    Demo code for HTML AG and Ref
+        l_frame1.htm                                        -->
+<P>
+<A HREF="other/frame1.htm">Click here to see demo.</A>
+<P>
+<BR CLEAR=ALL><P>In this example, the <A HREF="sweep021.htm#htmlref2_0001000114002101" TARGET=TEXT>COLS=</A> attribute in the <A HREF="sweep021.htm#htmlref2_0001000114002100" TARGET=TEXT>FRAMESET</A> element specifies the width of the frames. The width of the first frame is 50 percent of the main window, and the width of the second, given as an asterisk, is relative to the first (meaning it spans whatever is left of the main window). Note that this document does not contain a <A HREF="sweep021.htm#htmlref2_0001000114000d00" TARGET=TEXT>BODY</A> element. This is because documents that define frames do not contain content. Instead, the <A HREF="sweep021.htm#htmlref2_0001000114002008" TARGET=TEXT>SRC=</A> attribute in each <A HREF="sweep021.htm#htmlref2_0001000114002000" TARGET=TEXT>FRAME</A> element specifies a document. In this example, the x.htm and y.htm files are content sources for the frames. 
+
+<P>You can divide the main window into rows, as well as columns, by using the <A HREF="sweep021.htm#htmlref2_0001000114002104" TARGET=TEXT>ROWS=</A> attribute. Furthermore, you can independently divide individual rows into rows and columns by nesting <A HREF="sweep021.htm#htmlref2_0001000114002100" TARGET=TEXT>FRAMESET</A> elements. The following example shows how to divide the main window into two rows in which the last row is divided into two columns:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Nested Frames&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;FRAMESET ROWS="10%,*"&gt;
+&lt;FRAME SCROLLING=NO SRC=z.htm&gt;
+&lt;FRAMESET COLS="50%,*"&gt;
+&lt;FRAME SRC=x.htm&gt;
+&lt;FRAME SRC=y.htm&gt;
+&lt;/FRAMESET&gt;
+&lt;/FRAMESET&gt;
+&lt;/HTML&gt;
+</FONT></PRE>
+<P>In this example, the <A HREF="sweep021.htm#htmlref2_0001000114002007" TARGET=TEXT>SCROLLING=</A> attribute is used in the first <A HREF="sweep021.htm#htmlref2_0001000114002000" TARGET=TEXT>FRAME</A> element to prevent the scroll bar from being displayed. By default, Internet Explorer displays the scroll bar only if the entire content of the frame does not fit within the frame. Setting <A HREF="sweep021.htm#htmlref2_0001000114002007" TARGET=TEXT>SCROLLING=</A> to NO always prevents the scroll bar.
+
+<P>The FRAME element has attributes to let you set the width and height of margins within the frame, and whether the frame has a border. The <A HREF="sweep021.htm#htmlref2_0001000114002100" TARGET=TEXT>FRAMESET</A> element has attributes to let you set the spacing between frames, and whether the frames in the set have borders. 
+
+<P>An important feature of the FRAME element is the <A HREF="sweep021.htm#htmlref2_0001000114002005" TARGET=TEXT>NAME=</A> attribute. This attribute lets you assign a unique name to the frame; you then use this name when creating hyperlinks to direct documents into the frame. To create such a hyperlink, use the <A HREF="sweep021.htm#htmlref2_000100011400030a" TARGET=TEXT>TARGET=</A> attribute in the <A HREF="sweep021.htm#htmlref2_0001000114000300" TARGET=TEXT>A</A> element. For example, the following element creates a hyperlink that displays the x.htm file in a frame named CONTENT:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;A HREF="x.htm" TARGET="CONTENT"&gt;List of Components&lt;/A&gt;
+</FONT></PRE>
+<P>Internet Explorer provides an alternate way to create compound documents by letting you place frames in your HTML document using the <A HREF="sweep021.htm#htmlref2_0001000114002700" TARGET=TEXT>IFRAME</A> element. Called "floating frames," this design technique allows you to insert HTML documents into your document in the same way you insert images using the <A HREF="sweep021.htm#htmlref2_0001000114002800" TARGET=TEXT>IMG</A> element. This means you can use the <A HREF="sweep021.htm#htmlref2_0001000114002701" TARGET=TEXT>ALIGN=</A> attribute just as you do with IMG to align the frame with the surrounding text. The following example aligns a frame at the left margin and wraps subsequent text around the right side of the frame:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;IFRAME SRC="xx.htm" ALIGN=LEFT&gt;
+&lt;/IFRAME&gt; Here's some text to the right of a frame.
+&lt;BR CLEAR=LEFT&gt;Here's some text beneath the frame.
+</FONT></PRE>
+<P>This displays as:
+<!-- fframes.htm, example for IE AG and HR, demostrates floating frames -->
+<p>
+<IFRAME SRC="other/xx.htm" ALIGN=LEFT TARGET="text"></IFRAME>Here's some text to the right of a frame.
+<BR CLEAR=LEFT>Here's some text beneath the frame.
+<p>
+<BR CLEAR=ALL><P>The IFRAME syntax might not be compatible with all browsers. In that case, you can use a <A HREF="sweep021.htm#htmlref2_0001000114002000" TARGET=TEXT>FRAME</A> element within the IFRAME tags to provide an alternative presentation. For example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;IFRAME SRC="xx.htm" ALIGN=LEFT&gt;&lt;FRAME SRC="xx.htm"&gt;
+&lt;IFRAME&gt;
+</FONT></PRE>
+<P>In the previous example, the text of xx.htm will display in a floating frame in either an <A HREF="sweep021.htm#htmlref2_0001000114002700" TARGET=TEXT>IFRAME</A> or non-IFRAME-compatible browser. Remember that you set the attributes of IFRAME and FRAME independently. For example, if you want to specify position or size, you include those attributes in both the IFRAME tag and the FRAME tag.
+
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep009.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep011.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

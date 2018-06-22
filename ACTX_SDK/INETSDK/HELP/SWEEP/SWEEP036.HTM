@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Marking a Control as Safe</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep035.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep037.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="safety_0002000303000000">Marking a Control as Safe</A></H2>
+<BR CLEAR=ALL>
+<P>There are two ways to make a COM object as safe for scripting and initializing&#151;either through a component category entry in the registry, or by supporting the IObjectSafety interface.
+
+<H3><A NAME="safety_0002000303010000">Component Category Registry Entry</A></H3>
+<P>A control can be marked as safe for scripting or initializing by adding it to the CATID_SafeForScripting and CATID_SafeForInitializing component categories in the registry, respectively. This should be done using the component category manager, which already a standard part of IE3.
+
+<H4><A NAME="safety_0002000303010100">Marking Controls As Safe</A></H4>
+<P>Use the following code to mark your control as SafeForScripting:
+<PRE><FONT FACE="Courier" SIZE="2">
+hr = CreateComponentCategory(CATID_SafeForScripting, L"Controls that are safely scriptable");
+hr = RegisterCLSIDInCategory(CLSID_SafeItem, CATID_SafeForScripting);
+</FONT></PRE>
+<P>or this code to mark your control as SafeForInitializing:
+<PRE><FONT FACE="Courier" SIZE="2">
+hr = CreateComponentCategory(CATID_SafeForInitializing, L"Controls safely initializable from persistent data");
+hr = RegisterCLSIDInCategory(CLSID_SafeItem, CATID_SafeForInitializing);
+</FONT></PRE>
+<P>Both of these snippets use the helper functions below, and assume that CLSID_SafeItem contains the CLSID of the control, while CATID_SafeForInitializing and CATID_SafeForScripting are defined in objsafe.h.
+
+<H4><A NAME="safety_0002000303010200">RegisterCLSIDInCategory</A></H4>
+<P>This function can be used to create a component category and associated description.
+<PRE><FONT FACE="Courier" SIZE="2">
+#include "comcat.h"
+HRESULT CreateComponentCategory(CATID catid, WCHAR* catDescription)
+	{
+
+    ICatRegister* pcr = NULL ;
+    HRESULT hr = S_OK ;
+
+    hr = CoCreateInstance(CLSID_StdComponentCategoriesMgr, 
+			NULL, CLSCTX_INPROC_SERVER, IID_ICatRegister, (void**)&amp;pcr);
+	if (FAILED(hr))
+		return hr;
+
+    // Make sure the HKCR\Component Categories\{..catid...}
+    // key is registered
+    CATEGORYINFO catinfo;
+    catinfo.catid = catid;
+    catinfo.lcid = 0x0409 ; // english
+
+	// Make sure the provided description is not too long.
+	// Only copy the first 127 characters if it is
+	int len = wcslen(catDescription);
+	if (len&gt;127)
+		len = 127;
+    wcsncpy(catinfo.szDescription, catDescription, len);
+	// Make sure the description is null terminated
+	catinfo.szDescription[len] = '\0';
+
+    hr = pcr-&gt;RegisterCategories(1, &amp;catinfo);
+	pcr-&gt;Release();
+
+	return hr;
+	}
+</FONT></PRE>
+<H4><A NAME="safety_0002000303010300">RegisterCLSIDInCategory</A></H4>
+<P>This function can be used to register a CLSID as belonging to a component category.
+<PRE><FONT FACE="Courier" SIZE="2">
+#include "comcat.h"
+HRESULT RegisterCLSIDInCategory(REFCLSID clsid, CATID catid)
+	{
+// Register your component categories information.
+    ICatRegister* pcr = NULL ;
+    HRESULT hr = S_OK ;
+    hr = CoCreateInstance(CLSID_StdComponentCategoriesMgr, 
+			NULL, CLSCTX_INPROC_SERVER, IID_ICatRegister, (void**)&amp;pcr);
+    if (SUCCEEDED(hr))
+    {
+       // Register this category as being "implemented" by
+       // the class.
+       CATID rgcatid[1] ;
+       rgcatid[0] = catid;
+       hr = pcr-&gt;RegisterClassImplCategories(clsid, 1, rgcatid);
+    }
+
+    if (pcr != NULL)
+        pcr-&gt;Release();
+  
+	return hr;
+	}
+</FONT></PRE>
+<H4><A NAME="safety_0002000303010400">UnRegisterCLSIDInCategory</A></H4>
+<P>This function can be used to unregister a CLSID as belonging to a component category.
+<PRE><FONT FACE="Courier" SIZE="2">
+#include "comcat.h"
+HRESULT UnRegisterCLSIDInCategory(REFCLSID clsid, CATID catid)
+	{
+    ICatRegister* pcr = NULL ;
+    HRESULT hr = S_OK ;
+    hr = CoCreateInstance(CLSID_StdComponentCategoriesMgr, 
+			NULL, CLSCTX_INPROC_SERVER, IID_ICatRegister, (void**)&amp;pcr);
+    if (SUCCEEDED(hr))
+    {
+       // Unregister this category as being "implemented" by
+       // the class.
+       CATID rgcatid[1] ;
+       rgcatid[0] = catid;
+       hr = pcr-&gt;UnRegisterClassImplCategories(clsid, 1, rgcatid);
+    }
+
+    if (pcr != NULL)
+        pcr-&gt;Release();
+  
+	return hr;
+	}
+</FONT></PRE>
+<P>Calls to these snippets should be inserted in your DLL registration and unregistration routines.
+
+<H3><A NAME="safety_0002000303020000">IObjectSafety</A></H3>
+<P>The IObjectSafety interface is an interface that allows an object user to ask the object to make itself safe, or to ask the current safety of the object, with regards to various capabilities on the object. The current defined capabilites are INTERFACESAFE_FOR_UNTRUSTED_CALLER and INTERFACESAFE_FOR_UNTRUSTED_DATA, corresponding the "Safe for Scripting" and "Safe for Initializing", but the design allows us to later define other capabilities. 
+<P>The interface is as follows. 
+
+
+<PRE><FONT FACE="Courier" SIZE="2">
+// Option bit definitions for IObjectSafety:
+#define	INTERFACESAFE_FOR_UNTRUSTED_CALLER	0x00000001	// Caller of interface may be untrusted
+#define	INTERFACESAFE_FOR_UNTRUSTED_DATA	0x00000002	// Data passed into interface may be untrusted
+
+// {CB5BDC81-93C1-11cf-8F20-00805F2CD064}
+DEFINE_GUID(IID_IObjectSafety, 0xcb5bdc81, 0x93c1, 0x11cf, 0x8f, 0x20, 0x0, 0x80, 0x5f, 0x2c, 0xd0, 0x64);
+
+interface IObjectSafety : public IUnknown
+    {
+    public:
+        virtual HRESULT __stdcall GetInterfaceSafetyOptions( 
+            /* [in] */ REFIID riid,
+            /* [out] */ DWORD __RPC_FAR *pdwSupportedOptions,
+            /* [out] */ DWORD __RPC_FAR *pdwEnabledOptions) = 0;
+        
+        virtual HRESULT __stdcall SetInterfaceSafetyOptions( 
+            /* [in] */ REFIID riid,
+            /* [in] */ DWORD dwOptionSetMask,
+            /* [in] */ DWORD dwEnabledOptions) = 0;
+        
+    };
+</FONT></PRE>
+<H4><A NAME="safety_0002000303020100">SetInterfaceSafetyOptions</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SetInterfaceSafetyOptions( 
+            /* [in] */ REFIID riid,
+            /* [in] */ DWORD dwOptionSetMask,
+            /* [in] */ DWORD dwEnabledOptions);
+</FONT></PRE>
+<P>The <B>SetInterfaceSafetyOptions</B> function makes an object safe for initialization or scripting.
+
+<UL><LI>If the function is successful, it returns S_OK. If the argument <I>riid</I> specifies an interface that is unknown to the object, this function returns E_NOINTERFACE. If the <I>dwOptionSetMask</I> specifies an option that is not supported by the object, this function returns E_FAIL.
+</UL>
+<DL><DT><I>riid</I>
+ </DT><DD>Specifies the interface ID for the object to be made safe.
+</DD><DT><I>dwOptionSetMask</I>
+ </DT><DD>Specifies the options to be changed.
+</DD><DT><I>dwEnabledOptions</I>
+ </DT><DD>Specifies the settings for the options that are to be changed. This argument can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERFACESAFE_FOR_UNTRUSTED_CALLER
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Specifies that the interface identified by <I>riid</I> should be made safe for scripting.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERFACESAFE_FOR_UNTRUSTED_DATA
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Specifies that the interface identified by <I>riid</I> should be made safe for untrusted data during initialization.
+</FONT></TD>
+</TR>
+</TABLE>
+</DD></DL>
+<P>Typically, a control client would call <I>SetInterfaceSafetyOptions</I> before attempting to script or initialize the object, to attempt to require that the object is safe for the desired action. If SetInterfaceSafetyOptions returns failure, it client will display UI to the user to confirm whether the action should be allowed.
+<P>SetInterfaceOptions takes an interface (either IDispatch for scripting or IPersist* for initialization), a bitmask of options to change (dwOptionSetMask) and the new settings for those options (dwEnabledOptions). The currently supported capabilities are, as described above, INTERFACESAFE_FOR_UNTRUSTED_CALLER and INTERFACESAFE_FOR_UNTRUSTED_DATA.
+<H4><A NAME="safety_0002000303020200">GetInterfaceSafetyOptions</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT  GetInterfaceSafetyOptions( 
+            /* [in] */ REFIID riid,
+            /* [out] */ DWORD __RPC_FAR *pdwSupportedOptions,
+            /* [out] */ DWORD __RPC_FAR *pdwEnabledOptions);
+</FONT></PRE>
+<P>The <B>GetInterfaceSafetyOptions</B> function retrieves the safety options supported by an object as well as the safety options that are currently set for that object.
+
+<UL><LI>TBD.
+
+</UL>
+<DL><DT><I>riid</I>
+ </DT><DD>Specifies the interface ID for a given object.
+</DD><DT><I>pdwSupportedOptions</I>
+ </DT><DD>Specifies the options supported for the interface identified by <I>riid</I>.
+</DD><DT><I>pdwEnabledOptions</I>
+ </DT><DD>Specifies the options currently enabled for the interace identified by <I>riid</I>.
+</DD></DL>
+<P>GetInterfaceSafetyOptions returns a set of bits in pdwSupportedOptions for each capability that the control knows about, and a set of bits in pdwEnabledOptions for each capability for which the control is currently safe.
+<P>For example, my control might say that it knows about INTERFACESAFE_FOR_UNTRUSTED_DATA and INTERFACESAFE_FOR_UNTRUSTED_CALLER, and is currently safe for just INTERFACESAFE_FOR_UNTRUSTED_DATA.
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep035.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep037.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

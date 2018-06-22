@@ -1,0 +1,24 @@
+!ifdef clean
+makeopts = clean=1
+!endif # clean
+
+!ifdef nodebug
+makeopts = $(makeopts) nodebug=1
+!endif
+
+# If sample is installed, cd into that directory and recursively start nmake.
+
+all:
+!IF EXIST (WbPost)
+ cd WbPost
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (WbPost)
+!IF EXIST (WbProv)
+ cd WbProv
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (WbProv)
+
+Clean:
+    @nmake -nologo /$(MAKEFLAGS) $(makeopts) clean=1

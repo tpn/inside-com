@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Executive Summary</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep023.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep025.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="codedwld_0002000201000000">Executive Summary</A></H2>
+<BR CLEAR=ALL>
+<P>This document provides a description of the mechanism for downloading and installing code for COM Objects (components) using the Microsoft Active Internet Platform (Sweeper). This mechanism is used internally by the Microsoft Internet Explorer for downloading OLE Controls inserted in HTML pages.
+<UL><LI>Internet Component Download is a mechanism for downloading and installing code for COM objects(1).
+<LI>Details are presented for how OLE Control authors should package their objects to be downloaded and installed automatically.
+<LI>A new system API CoGetClassObjectFromURL is presented for downloading COM components. Other "safe code-download" needs can be met using the lower-level <B>WinVerifyTrust</B> service, or possibly using a high-level "Setup" OLE Control. Future releases may expose a more sophisticated component download interface.
+<LI>Internet Component Download makes use of an Internet Search Path to search various "Object Stores" for download-able code.
+<LI>Internet Component Download installs code in a permanent store. This document details a migration strategy for future releases to convert this store into a cache that discards unpopular components.
+</UL>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>ActiveX Conferencing Win32 API</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep117.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep119.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="msconfov_000f000101000000">ActiveX Conferencing Win32 API</A></H2>
+<BR CLEAR=ALL>
+<P>This high-level Conferencing Application Programming Interface (API) enables productivity applications to take advantage of existing conferencing features while requiring minimal development effort.
+<H3><A NAME="msconfov_000f000101010000">Conferencing Function Groups</A></H3>
+<P>The functions enabled by these APIs can be grouped into three areas:
+<UL><LI>Managing conference information
+<LI>Sharing applications
+<LI>Transferring data
+</UL>
+<P>It is not intended that these functions be used to streamline development of truly distributed conferencing applications. The Multipoint Communication Services (MCS) and Generic Call Control (GCC) APIs are available to applications for this purpose. The MCS and GCC APIs are beyond the scope of this document.
+
+<P>It should be noted that almost all of the APIs are synchronous. In general, the function call will not return until the specified action is complete. If the application requires the process to maintain control for an extended period of time, it should start a separate thread to handle the task.
+
+<H4><A NAME="msconfov_000f000101010100">Managing Conference Information</A></H4>
+<P>An application can start a call, terminate a call, or determine if a call is active. Also, an application can be notified when a call begins or ends.
+
+<P>The APIs for managing conference information are:
+
+<UL><LI><A HREF="sweep120.htm#msconfrf_000f000201000200" TARGET=TEXT>ConferenceConnect</A>
+<LI><A HREF="sweep120.htm#msconfrf_000f000201000300" TARGET=TEXT>ConferenceDisconnect</A>
+<LI><A HREF="sweep120.htm#msconfrf_000f000201000400" TARGET=TEXT>ConferenceGetInfo</A>
+<LI><A HREF="sweep120.htm#msconfrf_000f000201000a00" TARGET=TEXT>ConferenceSetInfo</A>
+<LI><A HREF="sweep120.htm#msconfrf_000f000201000b00" TARGET=TEXT>ConferenceSetNotify</A>
+<LI><A HREF="sweep120.htm#msconfrf_000f000201000700" TARGET=TEXT>ConferenceRemoveNotify</A>
+<LI><A HREF="sweep120.htm#msconfrf_000f000201000500" TARGET=TEXT>ConferenceLaunchRemote</A>
+<LI><A HREF="sweep120.htm#msconfrf_000f000201000600" TARGET=TEXT>ConferenceListen</A>
+</UL>
+<P><A HREF="sweep120.htm#msconfrf_000f000201000200" TARGET=TEXT>ConferenceConnect</A> and <A HREF="sweep120.htm#msconfrf_000f000201000300" TARGET=TEXT>ConferenceDisconnect</A> are used to create and terminate a conferencing call. Information about the call can be obtained by using <A HREF="sweep120.htm#msconfrf_000f000201000400" TARGET=TEXT>ConferenceGetInfo</A> and can be modified through <A HREF="sweep120.htm#msconfrf_000f000201000a00" TARGET=TEXT>ConferenceSetInfo</A>. Callback functions can be established to notify an application about changes in the conferencing call.
+
+<H4><A NAME="msconfov_000f000101010200">Sharing Applications</A></H4>
+<P>The <A HREF="sweep120.htm#msconfrf_000f000201000c00" TARGET=TEXT>ConferenceShareWindow</A> API is provided to allow an application window to be shared or unshared without invoking the system applet for this purpose. This API can also be used to check a window's sharing capability and status. If a sharing status is changed, the application affected is notified through the notification callback function for the conference.
+
+<P>Although application sharing is currently done at the task level rather than the window level, all of these APIs use window handles (HWNDs) to identify the application. This is done for programming convenience and to allow for compatibility with future versions of Microsoft&#174; NetMeeting that may support sharing individual windows.
+
+<H4><A NAME="msconfov_000f000101010300">Transferring Data</A></H4>
+<P>Applications can transfer data and files between users in the conferencing call.
+
+<P>The APIs for data transfer are:
+
+<UL><LI><A HREF="sweep120.htm#msconfrf_000f000201000800" TARGET=TEXT>ConferenceSendData</A>
+<LI><A HREF="sweep120.htm#msconfrf_000f000201000900" TARGET=TEXT>ConferenceSendFile</A>
+<LI><A HREF="sweep120.htm#msconfrf_000f000201000100" TARGET=TEXT>ConferenceCancelTransfer</A>
+</UL>
+<P><A HREF="sweep120.htm#msconfrf_000f000201000800" TARGET=TEXT>ConferenceSendData</A> can be used to send data to a conference participant with the information marked for use by a specific application on the participant's computer. The notification callback function for the conference is informed of incoming data and file transfer progress. 
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep117.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep119.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

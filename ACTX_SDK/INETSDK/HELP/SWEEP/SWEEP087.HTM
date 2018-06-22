@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Persistent URL Cache Functions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep086.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep088.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="wininet_0008000108000000">Persistent URL Cache Functions</A></H2>
+<BR CLEAR=ALL>
+<P>This section describes the functions used by clients that need persistent caching services. The functions allow an application to save data in the local file system for subsequent use, such as in situations where access to the data is over a low bandwidth link, or the access is not available at all. The calling program that inserts data into the persistent cache assigns a source name that is used to do operations such as retrieve the data, set and get some properties on it, and delete it.
+
+<P>The protocols implemented in Win32 Internet functions use the cache functions to provide persistent caching and off-line browsing. Unless explicitly specified not to cache through the INTERNET_FLAG_NO_CACHE_WRITE flag, Win32 Internet functions cache all data downloaded from the network. The responses to POST data are not cached.
+
+
+
+
+
+
+
+<H3><A NAME="wininet_0008000108010000">Handling Structures with Variable Size Information</A></H3>
+<P>The cache may contain variable size information for each URL stored. This is reflected in the <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> structure. When the cache functions return this structure, they create a buffer that is always the size of <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> plus any variable-size information. If a pointer member is not NULL, it points to the memory area immediately after the structure. While copying the returned buffer from a function into another buffer, the pointer members should be fixed to point to the appropriate place in the new buffer, as the following example shows:
+
+<PRE><FONT FACE="Courier" SIZE="2">lpDstCEInfo-&gt;lpszSourceUrlName = 
+    (LPINTERNET_CACHE_ENTRY_INFO) ((LPBYTE) lpSrcCEInfo + 
+((DWORD) (lpOldCEInfo-&gt;lpszSourceUrlName) - (DWORD) lpOldCEInfo))
+</FONT></PRE>
+<P>Some cache functions fail with the ERROR_INSUFFICIENT_BUFFER error value if you specify a buffer that is too small to contain the cache-entry information retrieved by the function. In this case, the function also returns the required size of the buffer. You can then allocate a buffer of the appropriate size and call the function again. If you want the function to succeed on the first call, allocate a buffer of the size specified by the MAX_CACHE_ENTRY_INFO_SIZE value, and then set the <B>dwStructSize</B> member of the <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> structure to MAX_CACHE_ENTRY_INFO_SIZE when calling the function. 
+
+
+
+
+<H3><A NAME="wininet_0008000108020000">Cache APIs</A></H3>
+<H4><A NAME="wininet_0008000108020100">CommitUrlCacheEntry</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL CommitUrlCacheEntry(
+    IN LPCSTR lpszUrlName,
+    IN LPCTSTR lpszLocalFileName,
+    IN FILETIME ExpireTime,
+    IN FILETIME LastModifiedTime,
+    IN DWORD CacheEntryType,
+    IN LPCBYTE lpHeaderInfo,
+    IN DWORD dwHeaderSize,
+    IN LPCTSTR lpszFileExtension,
+    IN DWORD dwReserved
+    );
+</FONT></PRE>
+<P>Caches data in the specified file in the cache storage and associates it with the given URL. 
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. Possible error values include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B> Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_FILE_NOT_FOUND
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The specified local file is not found.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_DISK_FULL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The cache storage is full.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>lpszUrlName</I> 
+ </DT><DD>Address of a string that contains the source name of the cache entry. The name string must be unique, and should not contain any escape characters.
+</DD><DT><I>lpszLocalFileName</I>
+ </DT><DD>Address of a string that contains the name of the local file that is being cached. This should be the same name as that returned by <A HREF="sweep087.htm#wininet_0008000108020200" TARGET=TEXT>CreateUrlCacheEntry</A>. 
+</DD><DT><I>ExpireTime</I> 
+ </DT><DD>A <B>FILETIME</B> structure that contains the expire date and time (GMT) of the file that is being cached. If the expire date and time is unknown, set this parameter to zero. 
+</DD><DT><I>LastModifiedTime</I> 
+ </DT><DD>A <B>FILETIME</B> structure that contains the last modified date and time (GMT) of the URL that is being cached. If the last modified date and time is unknown, set this parameter to zero.
+</DD><DT><I>CacheEntryType</I>
+ </DT><DD>Type of the cache entry.
+</DD><DT><I>lpHeaderInfo</I> 
+ </DT><DD>Address of the header information. If this parameter is not NULL, the header information is treated as extended attributes of the URL and is returned back in the <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> structure.
+</DD><DT><I>dwHeaderSize</I>
+ </DT><DD>Size of the header information. If <I>lpHeaderInfo</I> is not NULL, this value is assumed to indicate the size of the header information. An application can maintain headers as part of the data and provide <I>dwHeaderSize</I>, together with a NULL value for <I>lpHeaderInfo</I>.
+</DD><DT><I>lpszFileExtension</I> 
+ </DT><DD>Address of a buffer that contains information maintained in the cache database for future use. In this version of Win32 Internet functions, this information is not used.
+</DD><DT><I>dwReserved</I> 
+ </DT><DD> Reserved; must be zero. 
+</DD></DL>
+<P>If the cache storage is full, the function invokes cache cleanup to make space for this new file. If the file size is bigger than the cache size, the function returns ERROR_DISK_FULL. If the cache entry already exists, the function overwrites the entry. The user could specify SPARSE_CACHE_ENTRY in the Commit to indicate that the size of the data is incomplete.
+
+<H4><A NAME="wininet_0008000108020200">CreateUrlCacheEntry</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL CreateUrlCacheEntry(
+    IN LPCSTR lpszUrlName,
+    IN DWORD dwExpectedFileSize,
+    IN DWORD lpszFileExtension,
+    OUT LPTSTR lpszFileName,
+    IN DWORD dwReserved
+);
+</FONT></PRE>
+<P>Allocates requested cache storage, and creates a local file name for saving the cache entry corresponding to the source name. 
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>lpszUrlName</I>
+ </DT><DD>Address of a string that contains the name of the URL. The string should not contain any escape characters.
+</DD><DT><I>dwExpectedFileSize</I> 
+ </DT><DD>Expected size of the file needed to store the data corresponding to the source entity. If the expected size is unknown, set this value to zero.
+</DD><DT><I>lpszFileExtension</I>
+ </DT><DD>Address of a string that contains an extension name of the file in the local storage.
+</DD><DT><I>lpszFileName</I> 
+ </DT><DD>Address of a buffer that receives the file name. The buffer should be large enough (MAX_PATH) to store the file path name of the created file. 
+</DD><DT><I>dwReserved</I> 
+ </DT><DD> Reserved; must be zero.
+</DD></DL>
+<P>Internet services that use the cache should call this function to write directly into the cache storage. The caller should indicate the expected size of the file, but it is not guaranteed. Once the file is completely received, the caller should call <A HREF="sweep087.htm#wininet_0008000108020100" TARGET=TEXT>CommitUrlCacheEntry</A> to commit the entry in the cache.
+
+<H4><A NAME="wininet_0008000108020300">GetUrlCacheEntryInfo</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL GetUrlCacheEntryInfo(
+    IN LPCSTR lpszUrlName,
+    IN LPINTERNET_CACHE_ENTRY_INFO lpCacheEntryInfo,
+    IN OUT LPDWORD lpdwCacheEntryInfoBufferSize
+);
+</FONT></PRE>
+<P>Retrieves information about a cache entry.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. Possible error values include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_INSUFFICIENT_BUFFER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The size of <I>lpCacheEntryInfo</I> as specified by <I>lpdwCacheEntryInfoBufferSize</I> is not sufficient to contain all the information. The value returned in <I>lpdwCacheEntryInfoBufferSize</I> indicates the buffer size necessary to contain all the information.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_FILE_NOT_FOUND
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The specified cache entry is not found in the cache.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>lpszUrlName</I>
+ </DT><DD>Address of a string that contains the name of the cache entry. The name string should not contain any escape characters.
+</DD><DT><I>lpCacheEntryInfo</I> 
+ </DT><DD>Address of an <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> structure that receives information about the cache entry.
+</DD><DT><I>lpdwCacheEntryInfoBufferSize</I> 
+ </DT><DD>Address of a variable that specifies the size of the <I>lpszCacheEntryInfo</I> buffer. When the function returns, the variable contains the number of bytes copied to the buffer, or the required size of the buffer.
+</DD></DL>
+<H4><A NAME="wininet_0008000108020400">ReadUrlCacheEntryStream</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL ReadUrlCacheEntryStream(
+    IN HANDLE hUrlCacheStream,
+    IN  DWORD dwLocation,
+    IN OUT LPVOID lpBuffer,
+    IN OUT LPDWORD lpdwLen,
+    IN DWORD dwReserved
+    );
+</FONT></PRE>
+<P>Reads the cached data from a stream that has been opened using the <A HREF="sweep087.htm#wininet_0008000108020600" TARGET=TEXT>RetrieveUrlCacheEntryStream</A> function.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. 
+
+
+
+
+</UL>
+<DL><DT><I>hUrlCacheStream</I> 
+ </DT><DD>Handle that was returned by the <A HREF="sweep087.htm#wininet_0008000108020600" TARGET=TEXT>RetrieveUrlCacheEntryStream</A> function.
+</DD><DT><I>dwLocation</I> 
+ </DT><DD>Offset to read from.
+</DD><DT><I>lpBuffer</I> 
+ </DT><DD>Address of a buffer that receives the data.
+</DD><DT><I>lpdwLen</I>
+ </DT><DD>Address of a variable that specifies the length of the <I>lpBuffer</I> buffer. When the function returns, the variable contains the number of bytes copied to the buffer, or the required size of the buffer.
+</DD><DT><I>dwReserved</I> 
+ </DT><DD> Reserved; must be zero. 
+</DD></DL>
+<H4><A NAME="wininet_0008000108020500">RetrieveUrlCacheEntryFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL RetrieveUrlCacheEntryFile(
+    IN LPCSTR lpszUrlName,
+    OUT LPINTERNET_CACHE_ENTRY_INFO lpCacheEntryInfo, 
+    IN OUT LPDWORD lpdwCacheEntryInfoBufferSize
+    IN DWORD dwReserved
+    );
+</FONT></PRE>
+<P>Retrieves a cache entry from the cache in the form of a file. 
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. Possible error values include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_FILE_NOT_FOUND
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The cache entry specified by the source name is not found in the cache storage.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_INSUFFICIENT_BUFFER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The size of the <I>lpCacheEntryInfo</I> buffer as specified by <I>lpdwCacheEntryInfoBufferSize</I> is not sufficient to contain all the information. The value returned in <I>lpdwCacheEntryInfoBufferSize</I> indicates the buffer size necessary to get all the information.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>lpszUrlName</I> 
+ </DT><DD>Source name of the cache entry. This must be a unique name. The name string should not contain any escape characters.
+</DD><DT>lpCacheEntryInfo
+ </DT><DD>Address of a cache entry information buffer. If the buffer is not sufficient to accommodate all the information associated with the URL, one or more of the embedded pointers will be NULL.
+</DD><DT>lpdwCacheEntryInfoBufferSize
+ </DT><DD>Address of a variable that specifies the size of the <I>lpCacheEntryInfo</I> buffer. When the function returns, this variable contains the size of the actual buffer used or required. The caller should check the return value in this variable. If the return size is less than or equal to the size passed in, all the relevant data has been returned.
+</DD><DT><I>dwReserved</I> 
+ </DT><DD> Reserved; must be zero.
+</DD></DL>
+<P>If an extension was provided while calling <A HREF="sweep087.htm#wininet_0008000108020100" TARGET=TEXT>CommitUrlCacheEntry</A>, the file will have the specified extension. If the entry is not available in the cache, this function returns ERROR_FILE_NOT_FOUND; otherwise, it returns the name of the local file. The caller is given only read permission to the local file, so the caller should not attempt to write or delete the file. 
+
+<P>The file is locked for the caller when it is retrieved; the caller should unlock the file after it has been used up. The cache manager will automatically unlock the locked files after a certain interval. While the file is locked, the cache manager will not remove the file from the cache. It is important to note that this function may be efficient or expensive, depending on the internal implementation of the cache. For instance, if the URL data is stored in a packed file that contains data for other URLs, the cache will make a copy of the data to a file in a temporary directory maintained by the cache. The cache will eventually delete the copy. It is recommended that this function be used only in situations where a file name is needed to launch an application. <A HREF="sweep087.htm#wininet_0008000108020600" TARGET=TEXT>RetrieveUrlCacheEntryStream</A> and associated stream functions should be used in most cases.
+
+<H4><A NAME="wininet_0008000108020600">RetrieveUrlCacheEntryStream</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HANDLE RetrieveUrlCacheEntryStream(
+    IN LPCSTR lpszUrlName,
+    OUT LPINTERNET_CACHE_ENTRY_INFO lpCacheEntryInfo, 
+    IN OUT LPDWORD lpdwCacheEntryInfoBufferSize,
+    IN BOOL fRandomRead,
+    IN DWORD dwReserved
+    );
+</FONT></PRE>
+<P>Provides the most efficient and implementation-independent way of accessing the cache data. 
+
+<UL><LI>Returns a valid handle for use in the <A HREF="sweep087.htm#wininet_0008000108020400" TARGET=TEXT>ReadUrlCacheEntryStream</A> and <A HREF="sweep087.htm#wininet_0008000108020900" TARGET=TEXT>UnlockUrlCacheEntryStream</A> functions if successful, or INVALID_HANDLE_VALUE otherwise. To get extended error information, call <B>GetLastError</B>. Possible error values include:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_FILE_NOT_FOUND
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The cache entry specified by the source name is not found in the cache storage.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_INSUFFICIENT_BUFFER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The size of <I>lpCacheEntryInfo</I> as specified by <I>lpdwCacheEntryInfoBufferSize</I> is not sufficient to contain all the information. The value returned in <I>lpdwCacheEntryInfoBufferSize</I> indicates the buffer size necessary to contain all the information.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>lpszUrlName</I> 
+ </DT><DD>Address of a string that contains the source name of the cache entry. This must be a unique name. The name string should not contain any escape characters.
+</DD><DT><I>lpCacheEntryInfo</I>
+ </DT><DD>Address of an <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> structure that receives information about the cache entry. 
+</DD><DT><I>lpdwCacheEntryInfoBufferSize</I> 
+ </DT><DD>Address of a variable that specifies the size of the <I>lpCacheEntryInfo</I> buffer. When the function returns, the variable receives the number of bytes copied to the buffer, or the required size of the buffer.
+</DD><DT><I>fRandomRead</I> 
+ </DT><DD>Flag to indicate whether the stream is opened for random access or not. Set the flag to TRUE to open the stream for random access.
+</DD><DT><I>dwReserved</I> 
+ </DT><DD> Reserved; must be zero. 
+</DD></DL>
+<P>Cache clients that do not need URL data in the form of a file should use this function to access the data for a particular URL.
+
+<H4><A NAME="wininet_0008000108020700">SetUrlCacheEntryInfo</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL SetUrlCacheEntryInfo(
+    IN LPCSTR lpszUrlName,
+    IN LPINTERNET_CACHE_ENTRY_INFO lpCacheEntryInfo,
+    IN DWORD dwFieldControl
+);
+</FONT></PRE>
+<P>Sets the specified members of the <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> structure.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. Possible error values include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_FILE_NOT_FOUND
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The specified cache entry is not found in the cache.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_INVALID_PARAMETER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The value(s) to be set is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>lpszUrlName</I>
+ </DT><DD>Address of a string that contains the name of the cache entry. The name string should not contain any escape characters.
+</DD><DT><I>lpCacheEntryInfo</I> 
+ </DT><DD>Address of an <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> structure. 
+</DD><DT><I>dwFieldControl</I>
+ </DT><DD>Bitmask that indicates the members that are to be set. Can be a combination of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CACHE_ENTRY_ATTRIBUTE_FC
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CACHE_ENTRY_HITRATE_FC
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CACHE_ENTRY_MODTIME_FC
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CACHE_ENTRY_EXPTIME_FC
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CACHE_ENTRY_ACCTIME_FC
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CACHE_ENTRY_SYNCTIME_FC
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CACHE_ENTRY_HEADERINFO_FC
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR></TABLE>
+<P>The last two flags have not been implemented in this release.
+</DD></DL>
+<H4><A NAME="wininet_0008000108020800">UnlockUrlCacheEntryFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL UnlockUrlCacheEntryFile(
+    IN LPCSTR lpszUrlName, 
+    IN DWORD dwReserved
+    );
+</FONT></PRE>
+<P>Unlocks the cache entry that was locked while the file was retrieved for use from the cache.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. ERROR_FILE_NOT_FOUND indicates that the cache entry specified by the source name is not found in the cache storage. 
+
+
+
+</UL>
+<DL><DT><I>lpszUrlName</I> 
+ </DT><DD>Address of a string that contains the source name of the cache entry that is being unlocked. The name string should not contain any escape characters.
+</DD><DT><I>dwReserved</I> 
+ </DT><DD> Reserved; must be zero. 
+</DD></DL>
+<P>The application should not access the file after calling this function. 
+
+<P>When this function returns, the cache manager is free to delete the cache entry.
+
+<H4><A NAME="wininet_0008000108020900">UnlockUrlCacheEntryStream</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL UnlockUrlCacheEntryStream(
+    IN HANDLE hUrlCacheStream,
+    IN DWORD dwReserved
+);
+</FONT></PRE>
+<P>Closes the stream that has been retrieved using the <A HREF="sweep087.htm#wininet_0008000108020600" TARGET=TEXT>RetrieveUrlCacheEntryStream</A> function.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. 
+
+</UL>
+<DL><DT><I>hUrlCacheStream</I> 
+ </DT><DD>Handle that was returned by the <A HREF="sweep087.htm#wininet_0008000108020600" TARGET=TEXT>RetrieveUrlCacheEntryStream</A> function.
+</DD><DT><I>dwReserved</I> 
+ </DT><DD> Reserved; must be zero.
+</DD></DL>
+<P>See also <A HREF="sweep087.htm#wininet_0008000108020600" TARGET=TEXT>RetrieveUrlCacheEntryStream</A>
+
+<H3><A NAME="wininet_0008000108030000">Cache Enumeration</A></H3>
+<H4><A NAME="wininet_0008000108030100">DeleteUrlCacheEntry</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL DeleteUrlCacheEntry(
+    IN LPCSTR lpszUrlName
+);
+</FONT></PRE>
+<P>Removes the file associated with the source name from the cache, if the file exists.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. Possible error values include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_FILE_NOT_FOUND
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file is not in the cache.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_ACCESS_DENIED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file is in use. 
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>lpszUrlName</I>
+ </DT><DD>Address of a string that contains the name of the source corresponding to the cache entry.
+</DD></DL>
+<H4><A NAME="wininet_0008000108030200">FindCloseUrlCache</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FindCloseUrlCache(
+    IN HANDLE hEnumHandle
+);
+</FONT></PRE>
+<P>Closes the specified enumeration handle. 
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hEnumHandle</I> 
+ </DT><DD>Handle returned by a previous call to the <A HREF="sweep087.htm#wininet_0008000108030300" TARGET=TEXT>FindFirstUrlCacheEntry</A> function.
+</DD></DL>
+<P>See also <A HREF="sweep087.htm#wininet_0008000108030300" TARGET=TEXT>FindFirstUrlCacheEntry</A>
+
+<H4><A NAME="wininet_0008000108030300">FindFirstUrlCacheEntry</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HANDLE FindFirstUrlCacheEntry (
+    IN LPCSTR lpszUrlSearchPattern,
+    OUT LPINTERNET_CACHE_ENTRY_INFO lpFirstCacheEntryInfo,
+    IN OUT LPDWORD lpdwFirstCacheEntryInfoBufferSize
+);
+</FONT></PRE>
+<P>Begins the enumeration of the cache.
+
+<UL><LI>Returns a handle that the application can use in the <A HREF="sweep087.htm#wininet_0008000108030400" TARGET=TEXT>FindNextUrlCacheEntry</A> function to retrieve subsequent entries in the cache. If the function fails, the return value is NULL. To get extended error information, call <B>GetLastError</B>. ERROR_INSUFFICIENT_BUFFER indicates that the size of <I>lpCacheEntryInfo</I> as specified by <I>lpdwCacheEntryInfoBufferSize</I> is not sufficient to contain all the information. The value returned in <I>lpdwCacheEntryInfoBufferSize</I> indicates the buffer size necessary to contain all the information.
+
+
+</UL>
+<DL><DT><I>lpszUrlSearchPattern</I> 
+ </DT><DD>Address of a string that contains the source name pattern to search for. If this parameter is NULL, the function uses *.*. (In this version, only *.* semantics are implemented.)
+</DD><DT><I>lpFirstCacheEntryInfo</I>
+ </DT><DD>Address of an <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> structure.
+</DD><DT><I>lpdwFirstCacheEntryInfoBufferSize</I> 
+ </DT><DD>Address of a variable that specifies the size of the <I>lpFirstCacheEntryInfo</I> buffer. When the function returns, the variable contains the number of bytes copied to the buffer, or the required size of the buffer.
+</DD></DL>
+<P>This function and the <A HREF="sweep087.htm#wininet_0008000108030400" TARGET=TEXT>FindNextUrlCacheEntry</A> function return variable size information. In order to not have the enumeration terminate due to ERROR_INSUFFICIENT_BUFFER, an application should create one buffer of the size specified by the MAX_CACHE_ENTRY_INFO_SIZE value, and pass the address of the buffer repeatedly to all the enumeration functions. After the function succeeds, another buffer may be used of the size returned by <I>lpdwCacheEntryInfoBufferSize</I> to keep the returned information. Be careful to fix the pointer elements while copying the buffer.
+
+<P>See also <A HREF="sweep087.htm#wininet_0008000108030400" TARGET=TEXT>FindNextUrlCacheEntry</A>
+
+<H4><A NAME="wininet_0008000108030400">FindNextUrlCacheEntry</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FindNextUrlCacheEntry(
+    IN HANDLE hEnumHandle,
+    OUT LPINTERNET_CACHE_ENTRY_INFO lpNextCacheEntryInfo,
+    IN OUT LPWORD lpdwNextCacheEntryInfoBufferSize
+);
+</FONT></PRE>
+<P>Retrieves the next entry in the cache.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. Possible error values include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_NO_MORE_FILES
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The enumeration completed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_INSUFFICIENT_BUFFER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The size of <I>lpCacheEntryInfo</I> as specified by <I>lpdwCacheEntryInfoBufferSize</I> is not sufficient to contain all the information. The value returned in <I>lpdwCacheEntryInfoBufferSize</I> indicates the buffer size necessary to contain all the information.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>hEnumHandle</I> 
+ </DT><DD>Enumeration handle obtained from a previous call to <A HREF="sweep087.htm#wininet_0008000108030300" TARGET=TEXT>FindFirstUrlCacheEntry</A>.
+</DD><DT><I>lpNextCacheEntryInfo</I> 
+ </DT><DD>Address of an <A HREF="sweep088.htm#wininet_0008000109000400" TARGET=TEXT>INTERNET_CACHE_ENTRY_INFO</A> structure that receives information about cache entry.
+</DD><DT><I>lpdwNextCacheEntryInfoBufferSize</I> 
+ </DT><DD>Address of a variable that specifies the size of the <I>lpNextCacheEntryInfo</I> buffer. When the function returns, the variable contains the number of bytes copied to the buffer, or the required size of the buffer.
+</DD></DL>
+<P>See also <A HREF="sweep087.htm#wininet_0008000108030300" TARGET=TEXT>FindFirstUrlCacheEntry</A>
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep086.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep088.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

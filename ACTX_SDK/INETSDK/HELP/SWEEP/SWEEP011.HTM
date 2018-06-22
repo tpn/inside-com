@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Tables</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep010.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep012.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_000100010a000000">Tables</A></H2>
+<BR CLEAR=ALL>
+<P>Use the <A HREF="sweep021.htm#htmlref2_0001000114004700" TARGET=TEXT>TABLE</A> element to format a table. The <A HREF="sweep021.htm#htmlref2_0001000114004f00" TARGET=TEXT>TR</A> element (table row) inserts a row in the table, and the <A HREF="sweep021.htm#htmlref2_0001000114004900" TARGET=TEXT>TD</A> element (table detail) inserts a cell within a row. With Internet Explorer 3.0 as the browser, images or text can be placed within the cells. This example shows the HTML elements for a simple table:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;TABLE&gt;
+&lt;TR&gt;
+&lt;TD&gt;Apples&lt;TD&gt;Celery
+&lt;TR&gt;
+&lt;TD&gt;Oranges&lt;TD&gt;Carrots
+&lt;/TABLE&gt;
+</FONT></PRE>
+<P>This displays as:
+<!--    Demo code for HTML AG and Ref
+        Table0.htm                              -->
+<TABLE>
+<TR>
+<TD>Apples<TD>Celery
+<TR>
+<TD>Oranges<TD>Carrots
+</TABLE>
+<BR CLEAR=ALL><P>By default, Internet Explorer aligns the table to the left. The width of the table, unless specified, is determined by the content of the longest element in each column. The content of each cell is aligned to the center and to the left edge of each cell, but you can override these defaults. For example, you can set the width of the table by using the <A HREF="sweep021.htm#htmlref2_0001000114004713" TARGET=TEXT>WIDTH=</A> attribute in the <A HREF="sweep021.htm#htmlref2_0001000114004700" TARGET=TEXT>TABLE</A> element. You can align the content of each cell to the top, left, right, or bottom of a cell by using the <A HREF="sweep021.htm#htmlref2_0001000114004f01" TARGET=TEXT>ALIGN=</A> and <A HREF="sweep021.htm#htmlref2_0001000114004f0a" TARGET=TEXT>VALIGN=</A> attributes in <A HREF="sweep021.htm#htmlref2_0001000114004f00" TARGET=TEXT>TR</A> or <A HREF="sweep021.htm#htmlref2_0001000114004900" TARGET=TEXT>TD</A>. This example creates a table that is the full width of the Internet Explorer window. The contents of the cells are at the top and the left:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;TABLE WIDTH="100%"&gt;
+&lt;TR VALIGN=TOP ALIGN=LEFT&gt;
+&lt;TD&gt;Apples&lt;TD&gt;Celery
+&lt;TR VALIGN=TOP ALIGN=LEFT&gt;
+&lt;TD&gt;Oranges&lt;TD&gt;Carrots
+&lt;/TABLE&gt;
+</FONT></PRE>
+<P>This displays as:
+<!-- Demo program for HTML AG and Ref
+     Table1.htm
+     Appears in Tables section                     -->
+<TABLE WIDTH=100%>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD>Apples<TD>Celery
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD>Oranges<TD>Carrots
+</TABLE>
+
+<BR CLEAR=ALL><P>In this example, the table width is given as a percentage of the total Internet Explorer window width. But you can also specify table widths in pixels. 
+
+<P>You can add a caption, row and column headings, and a border to a table by using elements and attributes. For example, you can add a caption to a table by using the <A HREF="sweep021.htm#htmlref2_0001000114000f00" TARGET=TEXT>CAPTION</A> element. By default, the caption is centered above the table, but you can use the <A HREF="sweep021.htm#htmlref2_0001000114000f01" TARGET=TEXT>ALIGN=</A> attribute to place the caption at the top or bottom and at the left or right edge of the table.
+
+<P>To add headings to the rows and columns of a table, use the <A HREF="sweep021.htm#htmlref2_0001000114004c00" TARGET=TEXT>TH</A> element. This element is like the <A HREF="sweep021.htm#htmlref2_0001000114004900" TARGET=TEXT>TD</A> element in that it creates a cell and can contain text and images, but it automatically emphasizes its text to distinguish it from text in other cells. To draw a border around the table and the individual cells, you use the <A HREF="sweep021.htm#htmlref2_0001000114004704" TARGET=TEXT>BORDER=</A> attribute in the <A HREF="sweep021.htm#htmlref2_0001000114004700" TARGET=TEXT>TABLE</A> element. Specify the border width in pixels. The following example creates a table with headings, border, and a caption:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;TABLE BORDER=1&gt;
+&lt;CAPTION&gt;Fruits and Vegetables&lt;/CAPTION&gt;
+&lt;TR&gt;
+&lt;TH&gt;Fruits&lt;TH&gt;Vegetables
+&lt;TR&gt;
+&lt;TD&gt;Apples&lt;TD&gt;Celery
+&lt;TR&gt;
+&lt;TD&gt;Oranges&lt;TD&gt;Carrots
+&lt;/TABLE&gt;
+</FONT></PRE>
+<P>This displays as:<P>
+<!-- Demo program for HTML AG and Ref  
+        Table2.htm
+        Appears in Tables section
+        Tables example showing ALIGN= and VALUE= attributes     -->
+<TABLE BORDER=1>
+<CAPTION>Fruits and Vegetables</CAPTION>
+<TR>
+<TH>Fruits<TH>Vegetables
+<TR>
+<TD>Apples<TD>Celery
+<TR>
+<TD>Oranges<TD>Carrots
+</TABLE>
+<BR CLEAR=ALL><P>By default, Internet Explorer centers headings in the cell, but you can override this by using the <A HREF="sweep021.htm#htmlref2_0001000114004c01" TARGET=TEXT>ALIGN=</A> and <A HREF="sweep021.htm#htmlref2_0001000114004c0d" TARGET=TEXT>VALIGN=</A> attributes.
+
+<P>You can add color to your tables by using the <A HREF="sweep021.htm#htmlref2_0001000114004703" TARGET=TEXT>BGCOLOR=</A> and <A HREF="sweep021.htm#htmlref2_0001000114004705" TARGET=TEXT>BORDERCOLOR=</A> attributes. These attributes are available in the <A HREF="sweep021.htm#htmlref2_0001000114004700" TARGET=TEXT>TABLE</A>, <A HREF="sweep021.htm#htmlref2_0001000114004f00" TARGET=TEXT>TR</A>, and <A HREF="sweep021.htm#htmlref2_0001000114004900" TARGET=TEXT>TD</A> elements, so you can apply colors to all cells in a table, to cells in selected rows, or to individual cells. The <B>BGCOLOR=</B> attribute sets the color used to fill the background of the cell before text and images are drawn. The <B>BORDERCOLOR=</B> attribute sets the color of the borders drawn around the table, row, or cell. The following example uses the same background color for the column headings, but different colors for the two columns in the table:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;TABLE BORDERCOLOR=NAVY BORDER=1&gt;
+&lt;CAPTION&gt;Fruits and Vegetables&lt;/CAPTION&gt;
+&lt;TR BGCOLOR=GRAY&gt;
+&lt;TH&gt;Fruits&lt;TH&gt;Vegetables
+&lt;TR&gt;
+&lt;TD BGCOLOR=LIME&gt;Apples&lt;TD BGCOLOR=AQUA&gt;Celery
+&lt;TR&gt;
+&lt;TD BGCOLOR=LIME&gt;Oranges&lt;TD BGCOLOR=AQUA&gt;Carrots
+&lt;/TABLE&gt;
+</FONT></PRE>
+<P>This displays as:<P>
+<!-- Demo program for HTML AG and Ref  
+        Table3.htm
+        Appears in Tables section
+					-->
+<TABLE BORDER=1>
+<CAPTION>Fruits and Vegetables</CAPTION>
+<TR BGCOLOR=GRAY>
+<TH>Fruits<TH>Vegetables
+<TR>
+<TD BGCOLOR=LIME>Apples<TD BGCOLOR=AQUA>Celery
+<TR>
+<TD BGCOLOR=LIME>Oranges<TD BGCOLOR=AQUA>Carrots
+</TABLE>
+<BR CLEAR=ALL><P>You can change the character formatting for the text in a table by using elements such as <A HREF="sweep021.htm#htmlref2_0001000114000700" TARGET=TEXT>B</A>, <A HREF="sweep021.htm#htmlref2_0001000114002600" TARGET=TEXT>I</A>, and <A HREF="sweep021.htm#htmlref2_0001000114001e00" TARGET=TEXT>FONT</A>. You can change the color and font name for all text in a table by enclosing the table in an appropriate FONT element, but the table elements block the effect of other character formatting elements. To get these effects, you must apply the elements within each cell. 
+
+<P>Within a cell, you can use most of the elements that you ordinarily use in the body of the HTML document, including elements for section headings, lists, and even other tables. Using tables in this way can give you additional control over the placement of text and images when your document is displayed, but can also make the management of your document more complex. For example, you can use tables to give your document a two-column layout by nesting a single-column table in each cell of a two-column table. But if you do this, you must take special care to divide the content of your document equally between the two nested tables and be prepared to account for differences in the size of the window through which users view your document. In most cases, documents that use tables in this way are designed to be viewed within a minimum window size at a given screen resolution.
+
+<P>If you use tables in the more traditional way (that is, presenting information in rows and columns), there are some additional elements and attributes that can make that job easier. The <A HREF="sweep021.htm#htmlref2_0001000114004d00" TARGET=TEXT>THEAD</A>, <A HREF="sweep021.htm#htmlref2_0001000114004800" TARGET=TEXT>TBODY</A>, and <A HREF="sweep021.htm#htmlref2_0001000114004b00" TARGET=TEXT>TFOOT</A> elements let you divide your tables into parts: header, body, and footer. The <A HREF="sweep021.htm#htmlref2_0001000114001400" TARGET=TEXT>COLGROUP</A> and <A HREF="sweep021.htm#htmlref2_0001000114001300" TARGET=TEXT>COL</A> elements let you group columns within the table and globally apply properties, such as alignment, to the columns without having to specify these properties in each <A HREF="sweep021.htm#htmlref2_0001000114004900" TARGET=TEXT>TD</A> element. 
+
+<P>The <A HREF="sweep021.htm#htmlref2_000100011400470d" TARGET=TEXT>FRAME=</A> and <A HREF="sweep021.htm#htmlref2_0001000114004710" TARGET=TEXT>RULES=</A> attributes in the <A HREF="sweep021.htm#htmlref2_0001000114004700" TARGET=TEXT>TABLE</A> element let you control how the table border is drawn. For example, you can choose to have no border around the outside of the table, while restricting the border inside the table to just vertical rules separating the columns and horizontal rules separating the table header, body, and footer. The <A HREF="sweep021.htm#htmlref2_0001000114004908" TARGET=TEXT>COLSPAN=</A> and <A HREF="sweep021.htm#htmlref2_000100011400490c" TARGET=TEXT>ROWSPAN=</A> attributes in the <A HREF="sweep021.htm#htmlref2_0001000114004900" TARGET=TEXT>TD</A> and <A HREF="sweep021.htm#htmlref2_0001000114004c00" TARGET=TEXT>TH</A> elements let you extend the content of a cell into adjoining cells. This is useful, for example, if you need to stretch a column heading across more than one column. 
+
+<P>The following example shows how some of these elements and attributes can be used in a table:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;TABLE WIDTH="50%" BORDER=1 FRAME=BOX RULES=GROUPS&gt;
+&lt;COLGROUP ALIGN=CENTER&gt;
+&lt;COLGROUP ALIGN=CENTER&gt;
+&lt;THEAD&gt;
+&lt;TR&gt;
+&lt;TH COLSPAN=2&gt;Fruits and Vegetables
+&lt;TBODY&gt;
+&lt;TR&gt;
+&lt;TD&gt;Apples&lt;TD&gt;Celery
+&lt;TR&gt;
+&lt;TD&gt;Oranges&lt;TD&gt;Carrots
+&lt;/TABLE&gt;
+</FONT></PRE>
+<P>This displays as:<P>
+<TABLE WIDTH=50% BORDER=1 FRAME=BOX RULES=GROUPS>
+<COLGROUP ALIGN=CENTER>
+<COLGROUP ALIGN=CENTER>
+<THEAD>
+<TR>
+<TH COLSPAN=2>Fruits and Vegetables
+<TBODY>
+<TR>
+<TD>Apples<TD>Celery
+<TR>
+<TD>Oranges<TD>Carrots
+</TABLE>
+<BR CLEAR=ALL><P>Internet Explorer supports advanced table functionality, including displaying background images behind table cells, specifying rules or borders just along columns or along rows, and aligning text to the baseline within a table cell.
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep010.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep012.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

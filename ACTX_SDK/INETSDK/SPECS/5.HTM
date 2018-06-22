@@ -1,0 +1,273 @@
+<HTML>
+<HEAD>
+<TITLE>Controlling Program Flow - Microsoft&#174 Visual Basic&#174; Scripting Edition</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BLOCKQUOTE>
+<FONT FACE="ARIAL" SIZE=2>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<H3><A HREF="13.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="12.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using VBScript"></A>Controlling Program Flow in VBScript</H3>
+<HR SIZE=2>
+</TD></TR></TABLE>
+
+<H5>Controlling Program Execution</H5>
+<BLOCKQUOTE>
+<P>Using conditional statements and looping statements (also known as control structures), you can write VBScript code that makes decisions and repeats actions.</P>
+</BLOCKQUOTE>
+
+<H5>Making Decisions Using If ... Then ... Else</H5>
+<BLOCKQUOTE>
+<P>The <B>If ... Then ... Else</B>  statement is used to  evaluate whether a condition is <B>True</B> or <B>False</B> and then to specify one or more statements to run, depending on the result. Usually, 
+the  condition is an expression that uses a comparison operator to compare one value or variable with another. For information about comparison operators, see Comparison Operators. <B>If...Then...Else</B> statements can be nested to as many levels as you need.</P>
+
+<H5>Running Statements if a Condition Is True</H5>
+
+<P>If you need to run only one statement when a condition is <B>True</B>, you can use the single-line syntax of the <B>If...Then...Else</B> statement. The following example shows the single-line syntax; notice that this example omits the <B>Else</B> keyword.</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub FixDate()
+     Dim myDate
+     myDate = #2/13/95#
+     If myDate &lt; Now Then myDate = Now
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+
+<P>If you want to run more than one line of code, you must use the multiple-line syntax. This syntax includes the <B>End If</B> statement, as shown in the following example:</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub AlertUser(value)
+     If value = 0 Then
+         AlertLabel.ForeColor = "Red"
+         AlertLabel.Font.Bold = True
+         AlertLabel.Font.Italic = True
+     End If
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+
+<H5>Running Certain Statements if a Condition Is True, and Running Others if it Is False </H5>
+
+<P>You can use an <B>If...Then...Else</B> statement to define two blocks of executable statements: one block to run if the condition is <B>True</B>, the other block to run if the condition is <B>False</B>.</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub AlertUser(value)
+     If value = 0 Then
+         AlertLabel.ForeColor = vbRed
+         AlertLabel.Font.Bold = True
+         AlertLabel.Font.Italic = True
+     Else
+         AlertLabel.Forecolor = vbBlack
+         AlertLabel.Font.Bold = False
+         AlertLabel.Font.Italic = False
+     End If
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+</BLOCKQUOTE>
+
+<H5> Using Loops to Repeat Code</H5>
+<BLOCKQUOTE>
+<P>Looping allows you to run a group of statements repeatedly. Some loops repeat statements until a condition is <B>False</B>; others repeat statements until a condition is <B>True</B>. There are also loops that repeat statements a specific number of times.</P>
+
+<P>The following looping statements are available in VBScript:
+
+<UL>
+<LI><B>Do...Loop</B>: Loops while or until a condition is <B>True</B></LI>
+<LI><B>While...Wend</B>: Loops while a condition is <B>True</B></LI>
+<LI><B>For...Next</B>: Uses a counter to run statements a specified number of times</LI>
+
+</UL>
+</BLOCKQUOTE>
+
+<H5>Using Do Loops</H5>
+<BLOCKQUOTE>
+<P>You can use <B>Do...Loop</B> statements to run a block of statements an indefinite number of times. The statements are repeated either while a condition is <B>True</B> or until a condition becomes <B>True</B>.</P>
+
+<H5>Repeating Statements While a Condition Is True</H5>
+
+<P>Use the <B>While </B>keyword to check a condition in a <B>Do...Loop</B> statement. You can check the condition before you 
+enter the loop (as shown in the first example following this paragraph), or you can check it after the loop has run at least once (as shown in the second example). In the ChkFirstWhile procedure, if myNum were set to 9 instead of 20, the statements inside the loop would never run. In the ChkLastWhile procedure, the statements inside the loop run only once because the condition is already <B>False</B>.</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub ChkFirstWhile()
+     Dim counter, myNum
+     counter = 0
+     myNum = 20
+     Do While myNum &gt; 10
+         myNum = myNum - 1
+         counter = counter + 1
+     Loop
+     MsgBox "The loop made " & counter & " repetitions."
+ End Sub
+
+ Sub ChkLastWhile()
+     Dim counter, myNum
+     counter = 0
+     myNum = 9
+     Do
+         myNum = myNum - 1
+         counter = counter + 1
+     Loop While myNum &gt; 10
+     MsgBox "The loop made " & counter & " repetitions."
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+
+<H5>Repeating a Statement Until a Condition Becomes True</H5>
+
+<P>You can use the <B>Until</B> keyword in two ways to check a condition in a <B>Do...Loop</B> statement. You can check the condition before you enter the loop (as shown in the first example following this paragraph), or you can check it after the loop has run at least once (as shown in the second example). As long as the condition is <B>False</B>, the looping occurs.</P>
+
+<PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub ChkFirstUntil()
+     Dim counter, myNum
+     counter = 0
+     myNum = 20
+     Do Until myNum = 10
+         myNum = myNum - 1
+         counter = counter + 1
+     Loop
+     MsgBox "The loop made " & counter & " repetitions."
+ End Sub
+
+ Sub ChkLastUntil()
+     Dim counter, myNum
+     counter = 0
+     myNum = 1
+     Do
+         myNum = myNum + 1
+         counter = counter + 1
+     Loop Until myNum = 10
+     MsgBox "The loop made " & counter & " repetitions."
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+
+<H5>Exiting a Do ... Loop Statement from Inside the Loop</H5>
+
+<P>You can exit a <B>Do ... Loop</B> by using the <B>Exit Do</B> statement. Because you usually want to exit only in certain situations, such as to avoid an endless loop, you should use the <B>Exit Do</B> statement in the <B>True</B> statement block of an <B>If...Then...Else</B> statement. If the condition is <B>False</B>, the loop runs as usual.</P>
+
+<P.In the following example, myNum is assigned a value that creates an endless loop. The <B>If...Then...Else</B> statement checks for this condition, preventing the endless repetition.</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VB"&gt;
+&lt;!--
+ Sub ExitExample()
+     Dim counter, myNum
+     counter = 0
+     myNum = 9
+     Do Until myNum = 10
+         myNum = myNum - 1
+         counter = counter + 1
+         If myNum &lt; 10 Then Exit Do
+     Loop
+     MsgBox "The loop made " & counter & " repetitions."
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+
+</BLOCKQUOTE>
+<H5>Using While ... Wend</H5>
+<BLOCKQUOTE>
+<P>The <B>While ... Wend</B> statement is provided in VBScript for those who are familiar with its usage.  However, because of the lack of flexibility in <B>While ... Wend</B>, it is recommended that you use <B>Do ... Loop</B> instead.  </P>
+</BLOCKQUOTE>
+
+<H5>Using For ... Next</H5>
+<BLOCKQUOTE>
+<P>You can use <B>For...Next</B> statements to run a block of statements a specific number of times. For loops, use a counter variable whose value is increased or decreased with each repetition of the loop.</P>
+
+<P>For example, the following procedure causes a procedure called MyProc to execute 50 times. The <B>For</B> statement specifies the counter variable x and its start and end values. The <B>Next</B> statement increments the counter variable by 1.</P>
+
+<PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub DoMyProc50Times()
+     Dim x
+     For x = 1 To 50
+         MyProc
+     Next
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+
+<P>Using the <B>Step</B> keyword, you can increase or decrease the counter variable by the value you specify. In the following example, the counter variable j is incremented by 2 each time the loop repeats. When the loop is finished, total is the sum of 2, 4, 6, 8, and 10.</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub TwosTotal()
+     Dim j, total
+     For j = 2 To 10 Step 2
+         total = total + j
+     Next
+     MsgBox "The total is " & total
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+
+<P>To decrease the counter variable, you use a negative <B>Step</B> value. When doing so, you must specify an end value that is less than the start value. In the following example, the counter variable myNum is decreased by 2 each time the loop repeats. When the loop is finished, total is the sum of 16, 14, 12, 10, 8, 6, 4, and 2.</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub NewTotal()
+     Dim myNum, total
+     For myNum = 16 To 2 Step -2
+         total = total + myNum
+     Next
+     MsgBox "The total is " & total
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+
+<P>You can exit any <B>For...Next</B> statement before the counter reaches its end value by using the <B>Exit For</B> statement. Because you usually want to exit only in certain situations, such as when an error occurs, you should use the <B>Exit For</B> statement in the <B>True</B> statement block of an <B>If...Then...Else</B> statement. If the condition is <B>False</B>, the loop runs as usual.</P>
+</BLOCKQUOTE>
+
+
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<FONT FACE=ARIAL SIZE=2><HR SIZE=2><A HREF="13.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="12.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A><A HREF="cpyright.htm" TARGET="_top">&#169; 1996 by Microsoft Corporation</a>.</FONT>
+
+</TD></TR></TABLE>
+</FONT>
+</BLOCKQUOTE>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+

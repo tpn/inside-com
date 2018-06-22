@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<TITLE>A Simple VBScript Page - Microsoft&#174; Visual Basic&#174; Scripting Edition</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BLOCKQUOTE>
+<FONT FACE="ARIAL" SIZE=2>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<H3><A HREF="1.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="13.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A>A Simple VBScript Page</H3>
+<HR SIZE=2>
+</TD></TR></TABLE>
+
+<H5>A Simple Page</H5>
+<BLOCKQUOTE>
+<P>With Microsoft Internet Explorer 3.0, you can view the <A HREF="8.htm">page produced by the HTML code</A> below. If you clicked the button on the page, you'd see Microsoft Visual Basic Scripting Edition in action.</P>
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;A Simple First Page&lt;/TITLE&gt;
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+Sub Button1_OnClick
+        MsgBox "Mirabile visu."
+End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H3&gt;A Simple First Page&lt;/H3&gt;&lt;HR&gt;
+&lt;FORM&gt;&lt;INPUT NAME="Button1" TYPE="BUTTON" VALUE="Click Here"&gt;&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</FONT></PRE>
+<P>The result is a little underwhelming: you see a dialog box with a phrase in it (Latin for "Wonderful to behold"). However, there's quite a bit going on.</P>
+
+<P>When Internet Explorer reads the page, it finds the &lt;SCRIPT&gt; tags, recognizes there is a piece of VBScript code, and saves the code. Then when you click the button, Internet Explorer makes the connection between the button and the code, and runs the procedure.</P>
+
+<P>The <B>Sub</B> procedure in the &lt;SCRIPT&gt; tags is known as an <I>event procedure</I>. You'll notice that there are two parts to the procedure name: the name of the button, Button1 (from the NAME attribute in the &lt;INPUT&gt; tag), and an event name, OnClick; the two are joined together by an underscore. Anytime the button is clicked, Internet Explorer looks for and runs the corresponding event procedure, Button1_OnClick.</P>
+
+<P>Internet Explorer 3.0 defines the events available for form controls in the <A HREF="../help/sweep/sweep029.htm" target="TEXT">Scripting Object Model documentation</A>.</P>
+
+<P>Pages can use combinations of controls and procedures, too. The next page, <A HREF="1.htm"> VBScript and Forms</A>, shows some simple interactions among controls.</P> 
+</BLOCKQUOTE>
+<BR>
+<H5>Other Ways to Attach Code to Events</H5>
+<BLOCKQUOTE>
+<P>
+You can attach VBScript code to events in two other ways, though the way you've already seen is probably the most general and simple.</P>
+
+<P>Internet Explorer 3.0 allows you to add short sections of inline code in the tag defining the control. For example, the following &lt;INPUT&gt; tag does precisely the same action as the previous code example when you click the button:</P>
+<P>
+<PRE><FONT FACE="Courier New" SIZE=3>
+&lt;INPUT NAME="Button1" TYPE="BUTTON"
+       VALUE="Click Here" OnClick='MsgBox "Mirabile visu."'&gt;
+</FONT>
+</PRE>
+<P>Notice that the function call itself is in single quotes and the string for the <B>MsgBox</B> function is in double quotes. You can use multiple statements as long as you separate the statements with colons (:).</P>
+<P>You can also write a &lt;SCRIPT&gt; tag so that it applies only to a particular event for a specific control:</P><P>
+<PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript" EVENT="OnClick" FOR="Button1"&gt;
+&lt;!--
+    MsgBox "Mirabile visu."
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+<P>Here, since the &lt;SCRIPT&gt; tag already specifies the event and the control, you don't use the <B>Sub</B> and <B>End Sub</B> statements.
+</BLOCKQUOTE>
+<BR>
+<BR>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<FONT FACE=ARIAL SIZE=2><HR SIZE=2><A HREF="1.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="13.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A><A HREF="cpyright.htm" TARGET="_top">&#169; 1996 by Microsoft Corporation</a>.</FONT>
+
+</TD></TR></TABLE>
+</FONT>
+</BLOCKQUOTE>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+

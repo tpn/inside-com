@@ -1,0 +1,392 @@
+<HTML>
+<HEAD>
+<TITLE>Coding Conventions - Microsoft&#174; Visual Basic&#174; Scripting Edition</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BLOCKQUOTE>
+<FONT FACE="ARIAL" SIZE=2>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<H3><A HREF="16.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using VBScript"></A>VBScript Coding Conventions</H3>
+<HR SIZE=2>
+</TD></TR></TABLE>
+
+<H5>What Are Coding Conventions?</H5>
+<BLOCKQUOTE>
+<P>Coding conventions are suggestions that may help you write code using Microsoft Visual Basic Scripting Edition. Some of the things that coding conventions include are:</P>
+<UL>
+<LI>Naming conventions for objects, variables, and procedures</LI>
+<LI>Commenting conventions</LI>
+<LI>Text formatting and indenting guidelines</LI>
+</UL>
+
+<P>The main reason for using a consistent set of coding conventions is to standardize the structure and coding style of a script or set of scripts so that you and others can easily read and understand the code.</P>
+
+<P>Using good coding conventions results in precise, readable, and unambiguous source code that is consistent with other language 
+conventions and as intuitive as possible.</P>
+</BLOCKQUOTE>
+
+<H5>Constant Naming Conventions</H5>
+<BLOCKQUOTE>
+<P>Constant names should be uppercase with underscores (_) between words. For example:</P>
+<P>
+<PRE><FONT FACE="Courier New" SIZE=3>
+ USER_LIST_MAX
+ NEW_LINE
+</FONT>
+</PRE>
+</BLOCKQUOTE>
+
+<H5>Variable Naming Conventions</H5>
+<BLOCKQUOTE>
+<P>For purposes of readability and consistency, use the prefixes listed in the following table, along with descriptive names for variables  in your VBScript.</P>
+
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR BGCOLOR=#DDDDDD VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Subtype</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Prefix</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Example</B></FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Boolean</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>bln</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>blnFound</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Byte</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>byt</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>bytRasterData</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Date (Time)</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>dtm</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>dtmStart</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Double</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>dbl</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>dblTolerance</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Error</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>err</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>errOrderNum</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Integer</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>int</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>intQuantity</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Long</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>lng</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>lngDistance</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Object</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>obj</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>objCurrent</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Single</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>sng</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>sngAverage</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>String</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>str</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>strFirstName</FONT></TD></TR>
+
+</TABLE>
+</BLOCKQUOTE>
+<BLOCKQUOTE>
+<H5>Variable Scope</H5>
+
+<P>Variables should always be defined with the smallest scope possible.  <A HREF="14.htm">VBScript variables</A> can have the following scope.</P>
+
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR BGCOLOR=#DDDDDD VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Scope</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Where Variable Is Declared</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Visibility</B></FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Procedure-level</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Event, Function, or Sub procedure</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Visible in the procedure in which it is declared.</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Script-level</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>HEAD section of  an HTML page, outside any procedure</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Visible in every procedure in the script.</FONT></TD></TR>
+</TABLE>
+
+<H5>Variable Scope Prefixes</H5>
+
+<P>As script size grows, so does the value of being able to quickly differentiate the scope of variables. A one-letter scope prefix preceding the type prefix provides this, without unduly increasing the size of variable names.</P>
+
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR BGCOLOR=#DDDDDD VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Scope</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Prefix</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Example</B></FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Procedure-level</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>None</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>dblVelocity</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Script-level</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>s</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>sblnCalcInProgress</FONT></TD></TR>
+
+</TABLE>
+
+
+<H5>Descriptive Variable and Procedure Names</H5>
+
+<P>The body of a variable or procedure name should use mixed case and should be as complete as necessary to describe its purpose. 
+In addition, procedure names should begin with a verb, such as InitNameArray or CloseDialog.</P>
+
+<P>For frequently used or long terms, standard abbreviations are recommended to help keep name length reasonable.
+In general, variable names greater than 32 characters can be difficult to read.</P>
+
+<P>When using abbreviations, make sure they are consistent throughout the entire script. Randomly switching between Cnt and Count within a script or set of scripts may lead to confusion.</P>
+</BLOCKQUOTE>
+
+<H5>Object Naming Conventions </H5>
+<BLOCKQUOTE>
+<P>The next table lists recommended conventions for the various objects you may encounter while programming VBScript.</P>
+
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR BGCOLOR=#DDDDDD VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Object type</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Prefix</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Example</B></FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>3D Panel</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>pnl</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>pnlGroup</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Animated button</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>ani</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>aniMailBox</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Check box</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>chk</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>chkReadOnly</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Combo box, drop-down list box</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>cbo</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>cboEnglish</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Command button</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>cmd</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>cmdExit</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Common dialog</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>dlg</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>dlgFileOpen</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Frame</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>fra</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>fraLanguage</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Horizontal scroll bar</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>hsb</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>hsbVolume</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Image</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>img</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>imgIcon</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Label</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>lbl</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>lblHelpMessage</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Line</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>lin</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>linVertical</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>List Box</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>lst</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>lstPolicyCodes</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Spin</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>spn</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>spnPages</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Text box</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>txt</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>txtLastName</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Vertical scroll bar</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>vsb</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>vsbRate</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Slider</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>sld</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>sldScale</FONT></TD></TR>
+</TABLE>
+</BLOCKQUOTE>
+
+<H5>Code Commenting Conventions</H5>
+<BLOCKQUOTE>
+<P>All procedures should begin with a brief comment describing what they do. This description should not describe the implementation details (how it does it) because these often change over time, resulting in unnecessary comment maintenance work, or worse yet, erroneous comments. The code itself and any necessary inline comments 
+describe the implementation. </P>
+
+<P>Arguments passed to a procedure should be described when their purpose is not obvious and when the procedure expects the arguments 
+to be in a specific range. Function return values and other variables that are changed by the procedure, especially through reference 
+arguments, should also be described at the beginning of each procedure.</P>
+
+<P>Procedure header comments should include the following section headings. For examples, see the section "Formatting Your Code" that follows.</P>
+
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR BGCOLOR=#DDDDDD VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Section Heading</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Comment Contents</B></FONT></TD>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Purpose</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>What the  procedure does (not how).</FONT></TD>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Assumptions</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>List of any external variable, control, or other element whose state affects this procedure.</FONT></TD>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Effects</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>List of the procedure's effect on each external variable, control, or other element.</FONT></TD>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Inputs</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Explanation of each argument that is not obvious. Each argument should be on a separate line with inline comments.</FONT></TD>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2>Return Values</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Explanation of the value returned.</FONT></TD>
+</TABLE>
+
+<P>Remember the following points:</P>
+<UL>
+<LI>Every important variable declaration should include an inline comment describing the use of the variable being declared.</LI>
+<LI>Variables, controls, and procedures should be named clearly enough that inline comments are only needed for complex implementation details. </LI>
+<LI>At the beginning of your script, you should include an overview that describes the script, enumerating  objects, procedures, algorithms, dialog boxes, and other system dependencies. Sometimes a piece of pseudocode describing the algorithm can be helpful.</LI>
+</UL>
+</BLOCKQUOTE>
+
+<H5>Formatting Your Code</H5>
+<BLOCKQUOTE>
+<P>Screen space should be conserved as much as possible, while still allowing code formatting to reflect logic structure and nesting. Here are a few pointers:</P>
+<UL>
+<LI>Standard nested blocks should be indented four spaces. </LI>
+<LI>The overview comments of a procedure should be indented one space.</LI>
+<LI> The highest level statements that follow the overview comments should be indented four spaces, with each nested block indented an additional four spaces. For example:</LI>
+</UL>
+<PRE><FONT FACE="Courier New" SIZE =3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ '*********************************************************
+ ' Purpose:  Locates the first occurrence of a specified user 
+ '           in the UserList array.
+ ' Inputs:   strUserList():   the list of users to be searched.
+ '           strTargetUser:   the name of the user to search for.
+ ' Returns:  The index of the first occurrence of the strTargetUser 
+ '           in the strUserList array. 
+ '           If the target user is not found, return -1.
+ '*********************************************************
+
+ Function intFindUser (strUserList(), strTargetUser)
+     Dim i                      ' Loop counter.
+     Dim blnFound	       ' Target found flag.
+     intFindUser = -1
+     i = 0
+     Do While i &lt;= Ubound(strUserList) and Not blnFound
+         If strUserList(i) = strTargetUser Then 
+             blnFound = True
+             intFindUser = i
+         End If
+     Loop
+ End Function
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+</BLOCKQUOTE>
+
+
+<H5>Formatting Your Pages</H5>
+<BLOCKQUOTE>
+<P>Examples on this Web site use the following template:</P>
+<P>
+<PRE><FONT FACE="Courier New" SIZE=3>
+&lt;!DOCTYPE HTML PUBLIC "-//IETF/DTD HTML//EN"&gt;
+&lt;!-- Recommended template for
+     Microsoft Visual Basic Scripting-Enabled Pages --&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt; &lt;/TITLE&gt;
+
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!-- 
+	Function CanDeliver (Dt)
+		CanDeliver = (Cdate(Dt) - Now()) &gt; 2
+	End Function
+--&gt;
+&lt;/SCRIPT&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;FONT FACE=ARIAL SIZE=2&gt; &lt;!-- global default --&gt;
+
+&lt;!-- Static page content goes here. -->
+
+&lt;/FONT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</FONT></PRE>
+<P>The template has the following features:</P>
+<UL>
+<LI>VBScript procedures, including event procedures for controls, appear in the &lt;HEAD&gt; section of the page. This keeps all of the code in one place.</LI>
+<LI>HTML start and end comment tags (&lt;!-- and --&gt;) surround the code to hide it from browsers that can't handle the &lt;SCRIPT&gt; tag.
+<LI>&lt;HTML&gt;, &lt;HEAD&gt;, &lt;TITLE&gt;, and &lt;BODY&gt; tags are used to create a standard HTML page.</LI>
+</UL>
+<P>In addition, examples on this site use &lt;FORM&gt; tags around groups of &lt;INPUT&gt; elements to make controls viewable in all browsers.</P>
+</BLOCKQUOTE>
+<BR>
+
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<FONT FACE=ARIAL SIZE=2><HR SIZE=2><A HREF="16.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using VBScript"></A><A HREF="cpyright.htm" TARGET="_top">&#169; 1996 by Microsoft Corporation</a>.</FONT>
+
+</TD></TR></TABLE>
+</FONT>
+</BLOCKQUOTE>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+

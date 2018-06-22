@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Release Notes for Internet Explorer 3.01</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep002.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep004.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_0001000102000000">Release Notes for Internet Explorer 3.01</A></H2>
+<BR CLEAR=ALL>
+<P>Internet Explorer version 3.01 includes a change in HTML margin handling when using style sheets. HTML pages that take advantage of this feature will not display in the manner specified when viewed with Internet Explorer 3.0. The following describes how to author HTML pages with margins that are rendered the same size in version 3.0 and 3.01.
+
+<P><B>In Internet Explorer 3.0:</B>
+<P>Margins function as absolute instead of relative margins. For example, with a 1-inch left margin in the BODY element and a 0.5-inch left margin on a paragraph inside BODY, a paragraph would be 0.5 inches, instead of 1.5 inches, from the left side of the window. This includes vertical margins.
+
+<P><B>In Internet Explorer 3.01:</B>
+
+<P>All margins use relative sizes. For example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;BODY STYLE="margin-left: 1in; margin-right: 1in"&gt;
+&lt;P STYLE="margin-left: 0.5in; margin-top: 1.5in"&gt;This is some text.&lt;/P&gt;
+&lt;/BODY&gt;
+</FONT></PRE>
+<P>This text will have an effective left margin of 1.5 inches and an effective right margin of 2.5 inches. 
+
+<P><B>Creating a page compatible with Internet Explorer 3.0 and 3.01:</B>
+
+<P>By not specifing more than one margin in the hierarchy, your HTML page is compatible with both Internet Explorer 3.0 and 3.01. For example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;BODY&gt;
+&lt;P STYLE="margin-left: 1.5in; margin-right: 2.5in"&gt;This is some text.&lt;/P&gt;
+&lt;/BODY&gt;
+</FONT></PRE>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep002.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep004.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

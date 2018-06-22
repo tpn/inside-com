@@ -1,0 +1,12 @@
+#
+# Chapter 10 Makefile
+#   - Builds both in-proc and out-of-proc servers
+#
+# The real work is done in the file MAKE-ONE.
+# The first command below calls that file to build the in-proc server.
+# The second command below builds the out-of-proc server.
+# Either command can be used separately to build just one server.
+#
+always:
+	nmake -f make-one
+	nmake -f make-one OUTPROC=1

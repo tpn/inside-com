@@ -1,0 +1,26 @@
+
+LIBRARY  WBPROV
+
+DESCRIPTION 'Web Post Sample Provider DLL'
+
+SECTIONS
+    .bss        READ WRITE SHARED
+    .idata      READ WRITE
+    .instance   READ WRITE
+    .rsrc       READ WRITE SHARED
+
+EXPORTS
+
+        DllMain
+        DllEntryPoint
+
+        DllCanUnloadNow               ; DLL unloading
+        DllGetClassObject             ; Component object model
+
+        WppBindToSiteA            		; WP object binder
+		WppListSitesA
+		WppDeleteSiteA
+
+        WppBindToSiteW            		; WP object binder
+		WppListSitesW
+		WppDeleteSiteW

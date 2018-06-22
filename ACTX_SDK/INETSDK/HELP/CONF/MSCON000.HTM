@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Conferencing Function Groups</TITLE></HEAD>
+<BODY BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LEFTMARGIN=10 TOPMARGIN=10>
+<P><FONT FACE="arial" SIZE=5>Windows Conferencing API</FONT><BR><HR><P><P><FONT FACE="arial" SIZE="2">
+<H1><A NAME="msconfov_0001000102000000">Conferencing Function Groups</A></H1>
+<H2><A NAME="msconfov_0001000102000100">Managing conference information</A></H2>
+<P>An application can start a call, terminate a call, or find out if a call is active. An application can also be 
+notified when a call begins or ends. 
+
+<P>The APIs for managing conference information are:
+
+<UL><LI><A HREF="mscon001.htm#msconfrf_0001000201000100">ConferenceConnect</A>
+<LI><A HREF="mscon001.htm#msconfrf_0001000201000200">ConferenceDisconnect</A>
+<LI><A HREF="mscon001.htm#msconfrf_0001000201000300">ConferenceGetInfo</A>
+<LI><A HREF="mscon001.htm#msconfrf_0001000201000400">ConferenceSetInfo</A>
+<LI><A HREF="mscon001.htm#msconfrf_0001000201000b00">ConferenceSetNotify</A>
+<LI><A HREF="mscon001.htm#msconfrf_0001000201000c00">ConferenceRemoveNotify</A>
+<LI><A HREF="mscon001.htm#msconfrf_0001000201000900">ConferenceLaunchRemote</A>
+<LI><A HREF="mscon001.htm#msconfrf_0001000201000a00">ConferenceListen</A>
+</UL>
+<P><I>ConferenceConnect</I> and <I>ConferenceDisconnect</I> are used to create and terminate a conferencing call.
+Information about the call can be obtained using <I>ConferenceGetInfo</I> and modified through <I>ConferenceSetInfo</I>.
+A callback function can be established to receive notifications about changes in the conference.
+
+<H2><A NAME="msconfov_0001000102000200">Sharing applications</A></H2>
+<P>The <A HREF="mscon001.htm#msconfrf_0001000201000800">ConferenceShareWindow</A> API is provided to allow an application window
+to be shared or unshared without invoking the system applet for this purpose.
+
+<P>It can also be used to check if a window is capable of being shared or is currently shared.
+
+<P>Applications are notified through the notification callback function for the conference when their sharing status changes.
+
+<P>Although application sharing is currently done at the task level
+rather than the window level, all of these 
+APIs use window handles (HWNDs) to identify the application.
+This is done for programming convenience and to allow for future versions of Microsoft NetMeeting that may support sharing individual windows.
+
+
+<H2><A NAME="msconfov_0001000102000300">Transferring data</A></H2>
+<P>Applications can transfer data and files between users in the call.
+
+<P>The APIs for data transfer are:
+
+<UL><LI><A HREF="mscon001.htm#msconfrf_0001000201000500">ConferenceSendData</A>
+<LI><A HREF="mscon001.htm#msconfrf_0001000201000600">ConferenceSendFile</A>
+<LI><A HREF="mscon001.htm#msconfrf_0001000201000700">ConferenceCancelTransfer</A>
+</UL>
+<P><I>ConferenceSendData</I> can be used to send data to a specific application of a conference participant.
+The information can be marked for use by a specific application. 
+The notification callback function for the conference is informed of incoming data and file transfer progress.
+
+
+<HR><CENTER>
+<A HREF="msconf.htm">[Previous]</A>
+<A HREF="msconf.htm">[Up One Level]</A>
+<A HREF="mscon001.htm">[Next]</A>
+</CENTER>
+</FONT>
+</BODY></HTML>

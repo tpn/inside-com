@@ -1,0 +1,38 @@
+USE_BASECTL=1
+Proj = IEMim
+crtmt = 1
+
+# pull in the master SDK makefile that defines all of the macros
+#  and all of the build rules
+
+!include <Inetsdk.Mak>
+
+all: $(ObjDir)\$(Proj).Ocx Register
+
+$(ObjDir)\$(Proj).Ocx: $(ObjDir)\$(Proj).Obj $(ObjDir)\$(Proj).Res \
+                       $(ObjDir)\Guids.Obj $(ObjDir)\$(Proj)Ctl.Obj  \
+                       $(ObjDir)\$(Proj)PPG.Obj $(ObjDir)\CatHelp.Obj \
+                       $(ObjDir)\MimeINet.Obj
+
+$(ObjDir)\$(Proj).Res: $(Proj).Rc $(ObjDir)\$(Proj).Tlb
+
+$(ObjDir)\Guids.Obj : $(@B).Cpp \
+        ..\Include\IPServer.h Guids.h $(Proj)Ifc.h
+
+$(ObjDir)\$(Proj).Obj : $(@B).Cpp \
+        ..\Include\IPServer.h ..\Include\LocalSrv.h LocalObj.h $(Proj)Ifc.h ..\Include\CtrlObj.h ..\Include\Globals.h  \
+        ..\Include\Util.h Resource.h $(Proj)Ctl.h Dispids.h MimeINet.h  \
+        $(Proj)PPG.h ..\Include\PropPage.h Guids.h
+
+$(ObjDir)\$(Proj)Ctl.Obj : $(@B).Cpp \
+        ..\Include\IPServer.h Guids.h $(Proj)Ctl.h ..\Include\CtrlObj.h $(Proj)Ifc.h Dispids.h  \
+        MimeINet.h LocalObj.h ..\Include\Util.h  \
+        ..\Include\Globals.h Resource.h
+
+$(ObjDir)\$(Proj)Ppg.Obj : $(@B).Cpp \
+        ..\Include\IPServer.h LocalObj.h $(Proj)PPG.h ..\Include\PropPage.h Resource.h Guids.h  \
+        $(Proj)Ctl.h ..\Include\CtrlObj.h $(Proj)Ifc.h Dispids.h MimeINet.h \
+        ..\Include\Util.h
+
+$(ObjDir)\MimeINet.Obj : $(@B).Cpp \
+        ..\Include\IPServer.h MimeINet.h ..\Include\CtrlObj.h ..\Include\Util.h

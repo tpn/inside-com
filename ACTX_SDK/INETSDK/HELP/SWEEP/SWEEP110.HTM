@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Internet Ratings API</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep109.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep111.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="intratng_000c000103000000">Internet Ratings API</A></H2>
+<BR CLEAR=ALL>
+<P>The Microsoft Internet Ratings API provides Win32&#174;-based applications with easy access to support PICS-based Internet ratings and related services. These functions provide any application with access to a PICS rating parsing engine, as well as a mechanism for comparing ratings against the user information settings in Internet Explorer 4.0. This API will be available as part of Internet Explorer 4.0.
+
+<P>The functions in the Internet Ratings API set facilitate access to the rating support in the following ways:
+
+<UL><LI><I>Provides a common interface for parsing and obtaining PICS-compliant rating information.</I> A browser or other application can support ratings with the addition of only a few function calls. By providing task-oriented functions, applications need only make a few function calls to support ratings.
+
+<LI><I>Eliminates the need for individual applications to define their own control systems.</I> With this API, applications need only find the rating information for a given piece of content. Additional APIs for retrieving some types of Internet ratings are provided. 
+</UL>
+<H3><A NAME="intratng_000c000103010000">Overview of Internet Ratings Functions</A></H3>
+<P><B>Note</B>  The following overview should be considered a pre-release draft of the API specification. 
+<P>The PICS specification allows for rating information to appear in HTML tags, in HTTP headers, and on a third-party URL. For performance reasons, each individual browser is responsible for obtaining HTML- and HTTP-based rating information (for details on obtaining these mechanisms, consult the PICS specification).
+
+<P>The following table summarizes the PICS support API functions. This table lists all of the functions for finding, pairing, and comparing rating information.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Function
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep111.htm#intratng_000c000104000100" TARGET=TEXT>RatingAccessDeniedDialog</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Displays a system dialog box informing the user that access has been denied.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Takes in a PICS rating, parses it, and compares it against what a specified user can see.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep111.htm#intratng_000c000104000400" TARGET=TEXT>RatingEnabledQuery</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Specifies whether ratings are on or off.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep111.htm#intratng_000c000104000200" TARGET=TEXT>RatingFreeDetails</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Frees a pointer to denial information.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep111.htm#intratng_000c000104000500" TARGET=TEXT>RatingObtainCancel</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Cancels a call to <A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A>.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Obtains ratings from certain locations and compares them.
+</FONT></TD></TR></TABLE>
+<H3><A NAME="intratng_000c000103020000">Using the Internet Ratings Functions</A></H3>
+<P>A browser or other application would typically use the rating functions in the following fashion:
+
+<OL><LI>The browser starts, and the user connects to the Internet. 
+<LI>The user enters a URL.
+<LI>The browser calls the <A HREF="sweep111.htm#intratng_000c000104000400" TARGET=TEXT>RatingEnabledQuery</A> function. If the function returns S_FALSE, the browser allows access to the content.
+<LI>The browser calls the <A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A> function and passes the URL. The function checks the local list and then the third-party list or any third-party add-on, if any are activated. If the function finds a rating for the URL, it calls <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A> with the rating. If <A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A> does not return an error immediately, eventually the browser's callback function will be called.
+<LI>Meanwhile, the browser searches for a rating label within the content being downloaded from the site. If it finds an HTML/HTTP rating, it calls the <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A> function.
+<LI>If no rating label is found within the document, the browser calls the <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A> function with a NULL rating label, to determine whether the user can access unrated content.
+<LI>When both <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A> and <A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A> have been called, the browser has received at least one explicit access-allowed or access-denied report. If <A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A> explicitly allowed or denied access, that result should override any rating found in the document and the user's ability to see unrated content.
+<LI>If access is denied, the browser calls the <A HREF="sweep111.htm#intratng_000c000104000100" TARGET=TEXT>RatingAccessDeniedDialog</A> function. Depending on the supervisor's response to the dialog box, this function can indicate that access should be allowed after all.
+<LI>If access is allowed, the browser displays the content.
+</OL>
+<H3><A NAME="intratng_000c000103030000">Finding HTML/HTTP Rating Labels</A></H3>
+<P>The PICS specification defines the Backus-Naur Form (BNF) syntax for rating information, or rating nuggets. PICS specifies that rating nuggets can appear as part of HTML documents, within the header tags. The PICS specification also allows for rating information to appear as part of the HTTP headers. 
+
+<P>For performance and logistic reasons, it is the responsibility of the browser to obtain HTML- and HTTP-level ratings. Details on how to find HTML-based ratings are part of the PICS specification. 
+
+<P>Support for HTTP ratings may eventually be provided via URL_Moniker, part of the ActiveX SDK. Details on HTTP ratings and the associated HTTP header are specified by PICS.
+
+<P>The PICS committee may eventually provide reference code for applications that want to find HTML/HTTP-based ratings. 
+
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep109.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep111.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

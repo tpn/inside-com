@@ -1,0 +1,158 @@
+<HTML>
+<HEAD>
+<TITLE> Procedures - Microsoft&#174; Visual Basic&#174; Scripting Edition</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BLOCKQUOTE>
+<FONT FACE="ARIAL" SIZE=2>
+
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<H3><A HREF="7.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="5.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using VBScript"></A>VBScript Procedures</H3>
+<HR SIZE=2>
+</TD></TR></TABLE>
+
+<H5>Kinds of Procedures</H5>
+<BLOCKQUOTE>
+<P>In VBScript there are two kinds of procedure: the <B>Sub</B>  procedure and the <B>Function</B>  procedure.</P>
+
+
+<H5><B>Sub</B> Procedures</H5>
+<P>
+A <B>Sub</B> procedure is a series of VBScript statements, enclosed by the <B>Sub</B> and <B>End Sub</B> statements, that performs actions but does not return a value.  A <B>Sub</B> procedure can take arguments (constants, variables, or expressions that are passed by a calling procedure).  If a <B>Sub</B> procedure has no arguments, its <B>Sub</B> statement must include an empty set of parentheses.</P>
+
+<P>The following <B>Sub</B> procedure uses two intrinsic, or built-in, VBScript functions,  <B>InputBox</B>  and   <B>MsgBox</B>, to prompt a user for some information. It then displays the results of a calculation based on that information.  The calculation is performed in a <B>Function</B> procedure created using VBScript.  It is shown in the discussion of the <B>Function</B> procedure that follows.</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub ConvertTemp()
+    temp = InputBox("Please enter the temperature in degrees F.", 1)
+    MsgBox "The temperature is " & Celsius(temp) & " degrees C."
+ End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT>
+</PRE>
+
+
+<H5><B>Function</B> Procedures</H5>
+
+<P>A <B>Function</B> procedure is a series of VBScript statements enclosed by the <B>Function</B> and <B>End Function</B> statements.  A <B>Function</B> procedure is similar to a <B>Sub</B> procedure, but can also return a value.  A <B>Function</B> procedure can take arguments (constants, variables, or expressions that are passed to it by a calling procedure).  If a <B>Function</B> procedure has no arguments, its <B>Function</B> statement must include an empty set of parentheses.  A <B>Function</B> returns a value by assigning a value to its name in one or more statements of the procedure.  The return type of a <B>Function</B> is always a <B>Variant</B>.</P>
+
+<P>In the following example, the Celsius function calculates degrees Celsius from degrees Fahrenheit.  When the function is called from the ConvertTemp <B>Sub</B> procedure, a variable containing the argument value is passed to the function.  The result of the calculation is returned to the calling procedure and displayed in a message box.</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Sub ConvertTemp()
+     temp = InputBox("Please enter the temperature in degrees F.", 1)
+     MsgBox "The temperature is " & Celsius(temp) & " degrees C."
+ End Sub
+
+ Function Celsius(fDegrees)
+     Celsius = (fDegrees - 32) * 5 / 9
+ End Function
+--&gt;
+&lt;/SCRIPT&gt
+</FONT>
+</PRE>
+</BLOCKQUOTE>
+
+<H5>Declaring Procedures</H5>
+
+<BLOCKQUOTE>
+<P>Since you need to define procedures before they are used, you should always put them at the begining of the HEAD section of your HTML page. All subsequent code should also be in the HEAD section.   Further, <B>Function</B> and <B>Sub</B> statements, like all other elements of the VBScript language, must be contained in paired &lt;SCRIPT LANGUAGE="VBScript"&gt;&lt;/SCRIPT&gt; tags to be properly recognized in HTML. In addition, comment tags (&lt;!-- and --&gt;) should surround the code inside the &lt;SCRIPT&gt; tag to ensure that it is not displayed in browsers that don't handle VBScript.</P>
+</BLOCKQUOTE>
+
+<H5>Getting Data Into and Out of Procedures</H5>
+<BLOCKQUOTE>
+<P>Each piece of data is passed into your procedures using an <I>argument</I>.  Arguments serve as placeholders for the data you want to pass into your procedure. When you create a procedure using either the <B>Sub</B> statement or the <B>Function</B> statement, parentheses must be included after the name of the procedure.  Any arguments are placed inside these parentheses, separated by commas.  For example, in the following example, <I>fDegrees</I> is a placeholder for the value being passed into the Celsius function for conversion:</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Function Celsius(fDegrees)
+    Celsius = (fDegrees - 32) * 5 / 9
+ End Function
+--&gt;
+&lt;/SCRIPT&gt
+</FONT>
+</PRE>
+
+<P>You can name your arguments anything that is valid as a variable name.</P>
+
+<P>To get data out of a procedure, you must use a <B>Function</B>.  Remember, a <B>Function</B> procedure can return a value; a <B>Sub</B> procedure cannot.</P>
+</BLOCKQUOTE>
+
+<H5>Using <B>Sub</B> and <B>Function</B> Procedures in Code</H5>
+<BLOCKQUOTE>
+
+<P>To use a <B>Function</B> in your code, it must always be used on the right side of a variable assignment or in an expression.  For example:</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Temp = Celsius(fDegrees)
+--&gt;
+&lt;/SCRIPT&gt
+</FONT>
+</PRE>
+
+<P>or</P>
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ MsgBox "The Celsius temperature is " & Celsius(fDegrees) & " degrees."
+--&gt;
+&lt;/SCRIPT&gt
+</FONT>
+</PRE>
+
+<P>To call a <B>Sub</B> procedure from another procedure, you can just type the name of the procedure along with values for any required arguments, each separated by a comma. The  <B>Call</B>  statement is not required, but if you do use it, you must enclose any arguments in parentheses.</P>  
+
+<P>The following example shows two calls to the MyProc procedure. One uses the <B>Call</B> statement in the code; the other does not.  Both do exactly the same thing.
+
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+ Call MyProc(firstarg, secondarg)
+ MyProc firstarg, secondarg
+--&gt;
+&lt;/SCRIPT&gt
+</FONT>
+</PRE>
+
+<P>Notice that the parentheses are omitted in the call when the <B>Call </B>statement isn't used.</P>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0 WIDTH=87%>
+<TR><TD COLSPAN=2 VALIGN=BOTTOM><HR></TD></TR>
+<TR><TD VALIGN=TOP><FONT SIZE=2><b>Note</b>    The current release supports only passing arguments by value (passing copies of the arguments). If you need to set values inside a <B>Sub</B> procedure, you must assign those values to variables defined outside of the procedure.
+</FONT></TD></TR>
+<TR><TD COLSPAN=2 VALIGN=TOP><HR></TD></TR></TABLE>
+</BLOCKQUOTE>
+<BR>
+<BR>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<FONT FACE=ARIAL SIZE=2><HR SIZE=2><A HREF="7.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="5.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A><A HREF="cpyright.htm" TARGET="_top">&#169; 1996 by Microsoft Corporation</a>.</FONT>
+
+</TD></TR></TABLE>
+</FONT>
+</BLOCKQUOTE>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+
+

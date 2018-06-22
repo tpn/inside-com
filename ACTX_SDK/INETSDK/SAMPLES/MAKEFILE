@@ -1,0 +1,53 @@
+!ifdef clean
+makeopts = clean=1
+!endif # clean
+
+!ifdef nodebug
+makeopts = $(makeopts) nodebug=1
+!endif
+
+all:
+ set LOG=NO
+!IF EXIST (BaseCtl)
+ cd BaseCtl
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (BaseCtl)
+!IF EXIST (Framer)
+ cd Framer
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (Framer)
+!IF EXIST (Progress)
+ cd Progress
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (Progress)
+!IF EXIST (Range)
+  cd Range
+  @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+  cd ..
+!ENDIF # exist (Range)
+!IF EXIST (UrlPad)
+  cd UrlPad
+  @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+  cd ..
+!ENDIF # exist (UrlPad)
+!IF EXIST (WebPost)
+ cd WebPost
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (WebPost)
+!IF EXIST (WinINet)
+ cd WinINet
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..
+!ENDIF # exist (WinINet)
+!IF EXIST (AXScript\Spruuids\Src)
+ cd AXScript\Spruuids\Src
+ @$(MAKE) -nologo /$(MAKEFLAGS) $(makeopts)
+ cd ..\..\..
+!ENDIF # exist (AXScript\Spruuids\Src)
+
+Clean:
+    @nmake -nologo /$(MAKEFLAGS) $(makeopts) clean=1

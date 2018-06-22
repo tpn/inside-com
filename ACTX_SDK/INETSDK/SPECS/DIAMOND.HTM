@@ -1,0 +1,1151 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD><TITLE>Diamond: A compression scheme for setup programs</TITLE>
+</HEAD>
+<!--DocHeaderStart-->
+<BODY leftmargin=8 bgcolor="#FFFFFF" VLINK="#666666" LINK="#FF0000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<!--DocHeaderEnd-->
+<!-- This is a PANDA Generated HTML file. The source is a WinWord Document. -->
+<h2>Diamond: A Compression and Disk Layout Tool</h2>
+<P><!--DATE-->July 10, 1996
+<P><!--/DATE-->
+<P>Version 1.01
+<P>Microsoft Corporation
+<P><blockquote><b>Note:</b> This document is an early release of the final specification. It is meant to specify and accompany software that is still in development. Some of the information in this documentation may be inaccurate or may not be an accurate representation of the functionality of the final specification or software. Microsoft assumes no responsibility for any damages that might occur either directly or indirectly from these inaccuracies. Microsoft may have trademarks, copyrights, patents or pending patent applications, or other intellectual property rights covering subject matter in this document. The furnishing of this document does not give you a license to these trademarks, copyrights, patents, or other intellectual property rights.</blockquote>
+<P><h4>Contents</H4>
+<P>1. <A HREF="#OVER">Overview</A>
+<BR>1.1. <A HREF="#CASE1">Case 1: Diamond for Setup Programs</A>
+<BR>1.2. <A HREF="#CASE2">Case 2: Diamond for a 200MB Source Code Archive</A>
+<BR>1.3. <A HREF="#CASE3">Case 3: Self-Extracting Cabinet File(s)</A>
+<BR>1.4. <A HREF="#DELIV">Diamond Deliverables</A>
+<BR>1.5. <A HREF="#GOALS">Diamond Goals</A>
+<P>2. <A HREF="#OPT">Diamond Optimizing and Tuning</A>
+<BR>2.1. <A HREF="#SAVING">Saving Diskettes</A>
+<BR>2.2. <A HREF="#RATIO">Tuning Access Time vs. Compression Ratio</A>
+<BR>2.3. <A HREF="#PIECE">Piecemeal DDFs for Localization and Different Disk Sizes</A>
+<P>3. <A HREF="#CONCEPTS">Diamond Concepts</A>
+<BR>3.1. <A HREF="#DECOUPLING">Decoupling File Layout and INF Layout</A>
+<P>4. <A HREF="#EXE">Diamond .EXE</A>
+<BR>4.1. <A HREF="#SYNTAX">Diamond.EXE Syntax</A>
+<BR>4.2. <A HREF="#DIRECTIVE">Diamond.EXE Directive File Syntax</A>
+<P>5. <A HREF="#EXTRACT">Extract.EXE</A>
+<P><h3><A NAME="OVER"></A> 1. Overview</h3>
+<P>Diamond is a lossless data compression tool that can be used for a wide variety of purposes.  Although it was originally designed for use by setup programs, it can also be used in almost any situation where lossless data compression is required.
+<P>Diamond has three key features: 1) storing multiple files in a single <i>cabinet ("CAB") </i>file, 2) performing compression <b>across</b> file boundaries, and 3) permitting files to span cabinets.  While existing products such as PKZIP, LHARC, and ARJ support some of these features, combining all three does not appear to be common practice.  Diamond also supports self-extracting archives, by simply concatenating a cabinet file to EXTRACT.EXE.
+<P>Depending upon the number of files to be compressed, and the access patterns expected (sequential or random access; whether most of the files will be requested at once or only a small portion of them), Diamond can be instructed to build cabinet files in different ways. One key concept in Diamond is the <i>folder</i>.  A <i>folder </i>is a collection of one or more files that are compressed together, as a single entity. 
+<P>The cabinet file format is capable of supporting multiple forms of compression.  However, at this time, MSZIP is the compression format supported by Microsoft.  Other compression formats are possible in the future.
+<P>The following sections provide case studies of several <i>possible</i> ways that Diamond might be used.  These are only provided to stimulate your imagination--they are not the only ways in which Diamond can be used!
+<P><h4><A NAME="CASE1"></A> 1.1. Case 1: Diamond for Setup Programs</H4>
+<P>Since Diamond was designed with setup programs in mind, it has a great deal of power and flexibility to trade off compressed size against speed of random access to files. The primary impact of Diamond is to minimize the number of diskettes required to distribute a product, thereby minimizing the Cost of Goods Sold (COGS). 
+<P>In order for Diamond to build the disk images for a product, a <i>Diamond directive file</i>--which specifies the list of files in a product, and any constraints on which disks certain files should be located--must be created. The same <i>Diamond Directive File </i>can even be used for all the various localized versions of a product, because directive files support parameterization.
+<P><h5>Characteristics of a Setup Program</h5><OL><LI>   Minimizing disk count is very important, because it saves money in production costs
+<LI>   Files are accessed sequentially<LI>   Most files are accessed</OL><h5>Diamond Application</h5><P>The distribution disks for a typical application product like Microsoft Excel produced by Diamond might look similar to the following:<P><img src="outline.gif" WIDTH="185" HEIGHT="290" ALT="[Outline]"><P><b><b>Figure </b>: Distribution disk layout</b><P>SETUP.EXE is the setup program, and SETUP.INF is a file generated by Diamond that guides the operation of the setup program (which files are needed for which options, and on which disk and in which cabinet file a file is contained).  All of the remaining product files are contained in the cabinet files EXCEL.1 through EXCEL.N (N might be 7, for example).<P>To produce this disk layout with Diamond, a <i>Diamond Directive File (DDF) </i>is prepared that lists all of the files for Microsoft Excel, along with some optional Diamond settings to control parameters such as: 1) the capacity of the disks being used, 2) the naming convention of the cabinet files, 3) the visible (user-readable) labels on each disk, and 4) how much random access is desired for files within a cabinet.  The following is an example of a DDF that might be appropriate for Microsoft Excel:<P><PRE><FONT FACE="COURIER" SIZE="2">;*** EXCEL Diamond Directive file example
+;
+.OPTION EXPLICIT                     ; Generate errors on variable typos
+
+.Set DiskLabel1=Setup               ; Label of first disk
+.Set DiskLabel2=Program               ; Label of second disk
+.Set DiskLabel3=&quot;Program Continued&quot;   ; Label of third disk
+.Set CabinetNameTemplate=EXCEL.*    ; EXCEL.1, EXCEL.2, etc.
+.set DiskDirectoryTemplate=Disk*      ; disk1, disk2, etc.
+.Set MaxDiskSize=1.44M                ; 3.5&quot; disks
+
+;** Setup.exe and setup.inf are placed uncompressed in the first disk
+.Set Cabinet=off
+.Set Compress=off
+.Set InfAttr=                     ; Turn off read-only, etc. attrs
+bin\setup.exe                      ; Just copy SETUP.EXE as is
+bin\setup.inf                      ; Just copy SETUP.INF as is
+
+;** The rest of the files are stored, compressed, in cabinet files
+.Set Cabinet=on
+.Set Compress=on
+bin\excel.exe                      ; Big EXE, will span cabinets
+bin\excel.hlp
+bin\olecli.dll
+bin\olesrv.dll
+;...                              ; Many more files
+;*** &lt;the end&gt;                     ; That's it
+</FONT></PRE><P>Now, you run Diamond to create the disk layout:<P><PRE><FONT FACE="COURIER" SIZE="2">diamond /f excel.ddf
+</FONT></PRE>
+<P>Diamond will create directories Disk1, Disk2, and so forth, to hold the files for each disk, and will copy uncompressed files or create cabinet files (as appropriate) in each directory.  The file SETUP.RPT will be written to the current directory (this can be overridden) with a summary of what Diamond did, and the file SETUP.INF will contain details on every disk and cabinet created, including a list of where each file was placed.
+<P><h4><A NAME="CASE2"></A> 1.2. Case 2: Diamond for a 200Mb Source Code Archive</H4>
+<P>The Microsoft Developers Network (MSDN) CD includes 200 MB of source code.  Although uncompressed this is only 1/3rd of the CD, that is still too much space; so tight compression is desired. This is slightly different from the Setup case, however, because there is a front-end tool that allows users to select sample programs and expand them onto the hard disk.
+<P><h5>Characteristics of a Source Code Archive</h5><OL><LI>   Minimizing space usage is slightly less important
+<LI>   Files are accessed somewhat randomly, though in groups<LI>   Only a small portion of the files will be accessed at any one time</OL><h5>Diamond Application</h5><P>The cabinet files produced for the source archive need to be big enough to provide good compression, but not so big that random access speed is sacrificed.  The challenge is to obtain a good tradeoff between compression and access time.<P><PRE><FONT FACE="COURIER" SIZE="2">;*** MSDN Sample Source Code Diamond Directive file example
+;
+.OPTION EXPLICIT                     ; Generate errors on variable typos
+
+.Set CabinetNameTemplate=MSDN.*       ; MSDN.1, MSDN.2, etc.
+.set DiskDirectoryTemplate=CDROM      ; All cabinets go in a single directory
+.Set MaxDiskFileCount=1000            ; Limit file count per cabinet, so that
+                                 ; scanning is not too slow
+.Set FolderSizeThreshold=200000      ; Aim for ~200K per folder
+.Set CompressionType=MSZIP      
+
+;** All files are compressed in cabinet files
+.Set Cabinet=on
+.Set Compress=on
+foo.c
+foo.h
+....
+;*** &lt;the end&gt;                     ; That's it
+
+</FONT></PRE>
+<P><h4><A NAME="CASE3"></A> 1.3. Case 3: Diamond over a network</H4>
+<P>Many times, a software developer will want to ship executables, libraries, or the like across an intranet or the Internet. They need a small package and an easy way for users to extract data. For example, Java&#153; developers may want to ship large libraries of classes, so that home and business developers can use those classes in their software. 
+<P>The program that extracts files from CAB files, EXTRACT.EXE, recognizes when it has been copied to the front of a cabinet file, and will automatically extract the files in that cabinet file (and any continuation cabinet files).  Here is how this is accomplished:<OL><LI>   Create a cabinet file (or set of cabinet files)
+<LI>   Prepend EXTRACT.EXE to the first cabinet file (do not prepend EXTRACT.EXE to any other cabinet files in the set)
+<LI>   Distribute the self-extracting cabinet (and any subsequent cabinets)</OL>Example 1:<P><PRE><FONT FACE="COURIER" SIZE="2">diamond /f self.ddf      ; Build cabinet file set self1.cab, self2.cab
+copy /b extract.exe+self1.cab self.exe  ; self.exe is self-extracting
+
+</FONT></PRE>
+<P><h4><A NAME="DELIV"></A> 1.4. Diamond Deliverables</H4>
+<P>The following table is a list of all the libraries and programs that are part of Diamond:
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>File</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Contents</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>DIAMOND.EXE</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Command-line tool to perform disk layout (uses FCI.LIB)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>FDI.LIB</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>File Decompression Interface library (uses MDI.LIB).
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>EXTRACT.EXE</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Command-line tool to expand files (uses FDI.LIB)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>DDUMP.EXE</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Tool to dump internal format of a Diamond cabinet file</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>FCI.LIB</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>File Compression Interface library (uses MCI.LIB).
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>MCI.LIB</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>MSZIP Memory Compression Interface library.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>MDI.LIB</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>MSZIP Memory Decompression Interface library.
+</FONT></TD></TR>
+</TABLE><h4><A NAME="GOALS"></A> 1.5. Diamond Goals</H4><UL><LI> Provide excellent compression ratio and decompression speed
+<LI> Simplify production of disk layouts for MS products<LI> Provide command line tools and link libraries for all Microsoft platforms</UL><h3><A NAME="OPT"></A> 2. Diamond Optimizing and Tuning</h3><P><h4><A NAME="SAVING"></A> 2.1. Saving Diskettes</H4><P>For a product shipped on floppy disks, it is very important to minimize the number of disks shipped per product!  As a back-of-the-envelope calculation, if each disk cost a dollar and one million units were shipped, then each disk saved would save $1 million. The following pseudo-code suggests a process you might follow as you strive to keep your Cost of Goods Sold (COGS) to a minimum:<P><PRE><FONT FACE="COURIER" SIZE="2">   get initial product files;
+   while (have not yet shipped)
+      //** Figure out smallest possible size
+      Compress file set using:
+         CompressionType=MSZIP
+      If near a disk boundary
+         Consider tossing files to save a disk (especially clipart &amp; samples!)
+      If near shipping
+         Relax FolderSizeThreshold to
+            improve access time   at decompress.
+   end-while
+   Ship it!
+</FONT></PRE>
+<P><h4><A NAME="RATIO"></A> 2.2. Tuning Access Time vs. Compression Ratio</H4>
+<P>Diamond introduces the concept of a <i>folder </i>to refer to a contiguous set of compressed bytes.  To decompress a file from a cabinet, FDI.LIB (called by SETUP.EXE and EXTRACT.EXE) finds the folder that the file starts in, and then must <b>read and decompress </b>all the bytes in that folder from the start-up through and including the desired file.  
+<P>For example, if the file FOO.EXE is at the end of a 1.44 MB folder on a 1.44 M diskette, then FDI.LIB must read the entire diskette and decompress all the data.  This is about the worst access time possible.  By contrast, if FOO.EXE  were at the start of a folder (regardless of how large the folder is), then it would be read and decompressed with no extra overhead.
+<P>So, why would one not always Set FolderFileCountThreshold=1?  Because doing so would reset the compression history after each file, resulting in a poor compression ratio.  Diamond provides several variables and directives to provide very fine control over these issues:
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>Variable/Directive</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>More Compression; Slower Access Time</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Less Compression;Faster Access Time</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>CabinetFileCountThreshold</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Bigger numbers</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Lower numbers</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>FolderFileCountThreshold</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Bigger numbers</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Lower numbers</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>FolderSizeThreshold</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Bigger numbers</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Lower numbers</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>MaxCabinetSize</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Bigger numbers</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Lower numbers</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>.New Folder</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Don't use</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Use often</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>.New Cabinet</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Don't use</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Use often</FONT></TD></TR>
+</TABLE><br>The Diamond defaults are configured for a floppy disk layout, with the assumption that the most common scenario is a full setup that will extract most of the files, so these are the settings:
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>Variable/Directive</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Value</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>CabinetFileCountThreshold</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Unlimited</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>FolderFileCountThreshold</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Unlimited</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>FolderSizeThreshold</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Same as MaxCabinetSize</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>MaxCabinetSize</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Same as MaxDiskSize</FONT></TD></TR>
+</TABLE><br>For the MSDN source archive (&gt;200 MB of sample source code, &gt;30,000 files) that ships on a CD-ROM, the following values might be a reasonable tradeoff between compression and access time:
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>Variable/Directive</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Value</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>CabinetFileCountThreshold</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>2000 (Since we have to call FDICopy() on a cabinet and walk through all the FILE headers, we want this small enough so that isn't too much overhead, but large enough to keep the number of cabinets down.)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>FolderFileCountThreshold</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Unlimited (Let FolderSizeThreshold control folder size!)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>FolderSizeThreshold</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>200K (Represents 600K-800K of source (assuming 3:1 or 4:1 compression ratio)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>MaxCabinetSize</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Unlimited (Let CabinetFileCountThreshold control the cabinet size!)</FONT></TD></TR>
+</TABLE><br>Of course, if you are tight for space on your CD-ROM, you'll probably boost the <b>FolderSizeThreshold</b> and <b>CompressionMemory</b> settings!
+<P><h4><A NAME="PIECE"></A> 2.3. Piecemeal DDFs for Localization and Different Disk Sizes</H4>
+<P>DIAMOND.EXE was designed to minimize the amount of duplicate information needed to generate product layouts for different languages and disk sizes.  A key feature is the ability to specify more than one DDF on the DIAMOND.EXE command line.  For example:
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>acme.ddf</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Some standard definitions to control the format of the output INF file</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>lang.ddf</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Sets language-specific settings (SourceDir, for example)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>disk.ddf</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Sets the diskette sizes (CDROM, 1.2M, 1.44M, etc.)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>product.ddf</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Lists all the files in the product, and uses variables set in the previous DDFs to customize its operation</FONT></TD></TR>
+</TABLE><br>The following command line would be used to process this set of DDFs:<P><PRE><FONT FACE="COURIER" SIZE="2">   diamond /f acme.ddf /f lang.ddf /f disk.ddf /f product.ddf
+</FONT></PRE><P><h3><A NAME="CONCEPTS"></A> 3. Diamond Concepts</h3><P>The key feature of Diamond is that it takes a set of files and produces a <i>disk layout </i>while at the same time attempting to minimize the number of disks required.  In order to understand how Diamond does this, three terms need to be defined: <i>cabinet</i>, <i>folder</i>, and <i>file</i>.  Diamond takes all of the <i>files</i> in the product or application being compressed, lays the bytes down as one continuous byte stream, compresses the entire stream, chopping it up into <i>folders</i> as appropriate, and then fills up one or more <i>cabinets </i>with the <i>folders</i>.<P><i>Cabinet --  </i>A normal file that contains pieces of one or more files, usually compressed.  Also known as a "CAB file".<P><i>Folder --  </i>A decompression boundary.  Large folders enable higher compression, because the compressor can refer back to more data in finding patterns.  However, to retrieve a file at the end of a folder, the entire folder must be decompressed.  So there is a tradeoff between achieved compression and the quickness of random access to individual files.<P><i>File --  </i>A file to be placed in the layout.<P><h4><A NAME="DECOUPLING"></A> 3.1. Decoupling File Layout and INF Layout</H4><P>Diamond has two "modes" for generating the INF file; <i>unified mode</i> and <i>relational mode</i>.  In <i>unified mode</i>, the INF file is generated as file copy commands are processed in the DDF file.  This is the default, and minimizes the amount of effort needed to construct a DDF file.  However, this forces the INF file to list the files in the layout in exactly the same order as they are placed on disks/cabinets.<P><b>Example of a Unified DDF:</b><P><PRE><FONT FACE="COURIER" SIZE="2">    ;** Set up INF formats before we do the disk layout, because Diamond
+    ;   writes Disk and Cabinet information out as it is generated.
+    .OPTION EXPLICIT                      ; Generate errors for undefined variables
+
+    .Set InfDiskHeader=&quot;[disk list]&quot;
+    .Set InfDiskHeader1=&quot;;&lt;disk number&gt;,&lt;disk label&gt;&quot;
+    .Set InfDiskLineFormat=&quot;*disk#*,*label*&quot;
+
+    .Set InfCabinetHeader=&quot;[cabinet list]&quot;
+    .Set InfCabinetHeader1=&quot;;&lt;cabinet number&gt;,&lt;disk number&gt;,&lt;cabinet file name&gt;&quot;
+    .Set InfCabinetLineFormat=&quot;*cab#*,*disk#*,*cabfile*&quot;
+
+    .Set InfFileHeader=&quot;;*** File List ***&quot;
+    .Set InfFileHeader1=&quot;;&lt;disk number&gt;,&lt;cabinet number&gt;,&lt;filename&gt;,&lt;size&gt;&quot;
+    .Set InfFileHeader2=&quot;;Note: File is not in a cabinet if cab# is 0&quot;
+    .Set InfFileHeader3=&quot;&quot;
+    .Set InfFileLineFormat=&quot;*disk#*,*cab#*,*file*,*date*,*size*&quot;
+
+
+    .set GenerateInf=ON        ; Unified mode - create the INF file as we go
+
+    ;** Setup files.  These don't need to be in the INF file, so we put
+    ;   /inf=NO on these lines so that Diamond won't generate an error when
+    ;   it finds that these files are not mentioned in the INF portion of
+    ;   the DDF.
+
+    .set Compress=OFF
+    .set Cabinet=OFF
+    setup.exe /inf=NO           ; This file doesn't show up in INF
+    setup.inf /inf=NO           ; This file doesn't show up in INF
+
+    ;** Files in cabinets
+    .set Compress=ON
+    .set Cabinet=ON
+
+    ;* Put all bitmaps together to help compression
+    a1.bmp                      ; Bitmap for client1.exe
+    b1.bmp                      ; Bitmap for client1.exe
+    c1.bmp                      ; Bitmap for client1.exe
+    d1.bmp                      ; Bitmap for client1.exe
+    a2.bmp                      ; Bitmap for client1.exe
+    b2.bmp                      ; Bitmap for client2.exe
+    c2.bmp                      ; Bitmap for client2.exe
+    d2.bmp                      ; Bitmap for client2.exe
+    shared.dll  /date=10/12/93  ; File needed by client1.exe and client2.exe
+    client1.exe                 ; needs shared.dll
+    client2.exe                 ; needs shared.dll
+
+    ;*** The End
+</FONT></PRE><P>In <i>relational mode</i> the DDF has <i>file reference</i> lines to specify the exact placement of file information lines, including the ability to list the same file multiple times.  This feature is important for INF structures which use section headers (e.g. "[clipart]", "[screen savers]") to identify sets of files for particular functionality, and for which the same file may need to be included in more than one section.  For example, a product may have several optional features, all of which require a DLL file named "shared.dll".  Rather than having "shared.dll" stored multiple times (once for each section which uses the file), a waste of disk space, a single copy of the file can be stored, and then referenced by all of the sections which require it.<P>A relational mode DDF is similar to a unified mode DDF, with the exception that a ".set GenerateInf=OFF" line must be inserted before the product's files are listed (as shown below).  Once all of the files have been listed, the INF file generating portion of the DDF begins, and a ".set GenerateInf=ON" line must be inserted, followed by the section definitions.<P><b>Example of a Relational DDF:</b><P><PRE><FONT FACE="COURIER" SIZE="2">    ;** Set up INF formats before we do the disk layout, because Diamond
+    ;   writes Disk and Cabinet information out as it is generated.
+    .OPTION EXPLICIT                      ; Generate errors for undefined variables
+
+    .Set InfDiskHeader=&quot;[disk list]&quot;
+    .Set InfDiskHeader1=&quot;;&lt;disk number&gt;,&lt;disk label&gt;&quot;
+    .Set InfDiskLineFormat=&quot;*disk#*,*label*&quot;
+
+    .Set InfCabinetHeader=&quot;[cabinet list]&quot;
+    .Set InfCabinetHeader1=&quot;;&lt;cabinet number&gt;,&lt;disk number&gt;,&lt;cabinet file name&gt;&quot;
+    .Set InfCabinetLineFormat=&quot;*cab#*,*disk#*,*cabfile*&quot;
+
+    .Set InfFileHeader=&quot;;*** File List ***&quot;
+    .Set InfFileHeader1=&quot;;&lt;disk number&gt;,&lt;cabinet number&gt;,&lt;filename&gt;,&lt;size&gt;&quot;
+    .Set InfFileHeader2=&quot;;Note: File is not in a cabinet if cab# is 0&quot;
+    .Set InfFileHeader3=&quot;&quot;
+    .Set InfFileLineFormat=&quot;*disk#*,*cab#*,*file*,*date*,*size*&quot;
+
+
+;
+; *** Here is where we list all the files
+;
+    .set GenerateInf=OFF        ; RELATIONAL MODE - Do disk layout first
+
+    ;** Setup files.  These don't need to be in the INF file, so we put
+    ;   /inf=NO on these lines so that Diamond won't generate an error when
+    ;   it finds that these files are not mentioned in the INF portion of
+    ;   the DDF.
+
+    .set Compress=OFF
+    .set Cabinet=OFF
+    setup.exe /inf=NO           ; This file doesn't show up in INF
+    setup.inf /inf=NO           ; This file doesn't show up in INF
+
+    ;** Files in cabinets
+    ;
+    .set Compress=ON
+    .set Cabinet=ON
+
+    ;* Put all bitmaps together to help compression
+    a1.bmp                      ; Bitmap for client1.exe
+    b1.bmp                      ; Bitmap for client1.exe
+    c1.bmp                      ; Bitmap for client1.exe
+    d1.bmp                      ; Bitmap for client1.exe
+    a2.bmp                      ; Bitmap for client1.exe
+    b2.bmp                      ; Bitmap for client2.exe
+    c2.bmp                      ; Bitmap for client2.exe
+    d2.bmp                      ; Bitmap for client2.exe
+    shared.dll  /date=10/12/93  ; File needed by client1.exe and client2.exe
+    client1.exe                 ; needs shared.dll
+    client2.exe                 ; needs shared.dll
+
+
+;
+; *** Now we're generating the INF file
+;
+    .set GenerateInf=ON         
+
+    ;** Feature One files
+    .InfBegin File
+    [feature One]
+    ;Files for feature one
+    .InfEnd
+    client1.exe
+    shared.dll  /date=04/01/94  ; Override date
+    a1.bmp
+    b1.bmp
+    c1.bmp
+    d1.bmp
+
+    ;** Feature Two files
+    .InfBegin File
+
+    [feature Two]
+    ;Files for feature Two
+    ;Note that shared.dll is also required by Feature One
+    .InfEnd
+    client1.exe
+    shared.dll
+    a2.bmp
+    b2.bmp
+    c2.bmp
+    d2.bmp
+
+    ;*** The End
+
+<b>The generated INF file would look something like this:
+</b>   [disk list]
+    ;&lt;disk number&gt;,&lt;disk label&gt;
+    1,&quot;Disk 1&quot;
+
+    [cabinet list]
+    ;&lt;cabinet number&gt;,&lt;disk number&gt;,&lt;cabinet file name&gt;
+    1,1,cabinet.1
+
+    ;*** File List ***
+    ;&lt;disk number&gt;,&lt;cabinet number&gt;,&lt;filename&gt;,&lt;size&gt;
+    ;Note: File is not in a cabinet if cab# is 0
+
+    [feature One]
+    ;Files for feature one
+    1,1,client1.exe,12/12/93,1234
+    1,1,shared.dll,04/01/94,1234
+    1,1,a1.bmp,12/12/93,573
+    1,1,b1.bmp,12/12/93,573
+    1,1,c1.bmp,12/12/93,573
+    1,1,d1.bmp,12/12/93,573
+
+    [feature Two]
+    ;Files for feature Two
+    ;Note that shared.dll is also required by Feature One
+    1,1,client1.exe,12/12/93,1234
+    1,1,shared.dll,10/12/93,1234
+    1,1,a2.bmp,12/12/93,643
+    1,1,b2.bmp,12/12/93,643
+    1,1,c2.bmp,12/12/93,643
+    1,1,d2.bmp,12/12/93,643
+
+</FONT></PRE>
+<P><b>Notes:</b><OL><LI>   In &quot;relational&quot; mode, only the last setting of a particular <b>Inf</b>Xxx default parameter variable (both standard parameters like <b>InfDate</b>, <b>InfTime</b>, etc. and custom parameters) in the layout portion (i.e. the first part) of the DDF is respected.
+<P><blockquote><b>Example:</b>
+<P>If you did &quot;.set <b>InfDate</b>=12/05/92&quot; at the start of the layout portion, and then did &quot;.set <b>InfDate</b>=01/01/94&quot; in the middle of the layout portion, the latter value would be used for the entire INF file.
+<P></blockquote><LI>   Any parameters on a reference line will override parameters on the corresponding file copy line.
+<b>Example:</b><P><PRE><FONT FACE="COURIER" SIZE="2">      ;* layout portion
+      bar /x=1
+      ...
+      ;* INF portion
+      bar /x=2            ; INF file will have value 2
+</FONT></PRE><LI>   In &quot;relational&quot; mode, each file copy command in the layout portion of the DDF must be referenced at least once in a reference command in the INF portion of the DDF.  Any files that are not referenced will cause an error during pass 1.  The <b>/inf</b>=<b>no</b> parameter must be specified on any file copy commands for files which are going to be omitted from the INF file (such as SETUP.EXE and SETUP.INF).
+<LI>   In &quot;relational&quot; mode, <b>UniqueFiles</b> must be <b>ON</b>, because the destination file name is used in the INF portion of the DDF to refer back to file information.
+</OL><h3><A NAME="EXE"></A> 4. DIAMOND.EXE</h3><P>DIAMOND.EXE is designed to produce the final distribution files and cabinets for an entire product in a single run. The most common way to use DIAMOND.EXE is to supply a <i>directives file </i>that controls how files are compressed and stored into one or more cabinets.  <P><h4><A NAME="SYNTAX"></A> 4.1. DIAMOND.EXE Syntax</H4><P>There two primary forms of DIAMOND.EXE usage.  The first is used for compressing a single file, while the second is used for compressing multiple files.<P><PRE><FONT FACE="COURIER" SIZE="2"><b>DIAMOND   </b>[<b>/V</b>n] [<b>/D </b>variable=value ...] [<b>/L</b> directory] source [destination]
+<b>DIAMOND</b>   [<b>/V</b>n] [<b>/D </b>variable=value ] <b>/F</b> directives_file [...]
+   
+</FONT></PRE>
+<P>The parameters are described below.
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>Parameter</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Description</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>source</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>A file to be compressed.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>destination</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>The name of the file to receive the compressed version of the source file.  If not supplied, a default destination name is constructed from the source file name according to the rules defined by the <A HREF="#VARI">CompressedFileExtensionChar</A> variable.  You can use /D CompressedFileExtensionChar=c on the command line to change the appended character.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>/D </b>variable=value</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Set variable to be equal to value.  Equivalent to using the <b>.Set </b>command in the directives file.  For example, a single directive file could be used to produce layouts for different disk sizes by running Diamond once with different values of <b>MaxDiskSize</b> defined: /D MaxDiskSize=1.44M.  Both standard Diamond variables and custom variables may be defined in this way.  If <b>.Option Explicit </b>is specified in a directive file, then variable must be defined with a <b>.Define </b>command in a directive file.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>/L </b>directory</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Specifies an output directory where the compressed file will be placed (most useful when destination is not supplied).
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>/F</b> directives_file</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>A file containing commands for DIAMOND.EXE to execute.  If more than one directive file is specified (/F file1 /F file2 ...), they are processed in the order (left to right) specified on the command line.  Variable settings, open cabinets, open disks, etc. are all carried forward from one directive file to the next (just as if all of the files had been concatenated together and presented as a single file to Diamond).  For example, this is intended to simplify the work for a product shipped in multiple languages.  There would be a short, language-specific directives file, and then a single, large master directives file that covers the bulk of the product.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>/V</b>n</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Set debugging verbosity level (0=none,...,3=full)</FONT></TD></TR>
+</TABLE><h4><A NAME="DIRECTIVE"></A> 4.2. DIAMOND.EXE Directive File Syntax</H4><P>Before diving into the details of the syntax of the directives file, provided here is an example of what the Excel directives file might look like:<P><PRE><FONT FACE="COURIER" SIZE="2">;*** EXCEL DIAMOND Directive file
+;
+.Set DiskLabel1=Setup               ; Label of first disk
+.Set DiskLabel2=Program               ; Label of second disk
+.Set DiskLabel3=&quot;Program Continued&quot;   ; Label of third disk
+.Set CabinetNameTemplate=EXCEL*.CAB    ; EXCEL1.CAB, EXCEL2.CAB, etc.
+.Set MaxDiskSize=1.44M                ; 3.5&quot; disks
+
+;** Setup.exe and setup.inf are placed uncompressed in the first disk
+.Set Cabinet=off
+.Set Compress=off
+bin\setup.exe                      ; Just copy SETUP.EXE as is
+bin\setup.inf                      ; Just copy SETUP.INF as is
+;** The rest of the files are stored, compressed, in cabinet files
+.Set Cabinet=on
+.Set Compress=on
+bin\excel.exe                      ; Big EXE, will span cabinets
+bin\excel.hlp
+bin\olecli.dll
+bin\olesrv.dll
+...
+</FONT></PRE>
+<P>Here are some additional notes on the general syntax and behavior of Diamond Directive Files.<OL><LI>   Diamond will place files on disks (and in cabinets) in the order they are specified in the directive file(s).
+<LI>   Whenever a filename or directory is called for, you may supply either a relative (e.g., foo\bar, ..\foo) or an absolute (e.g., c:\banana, x:\slm\src\bin) path.
+<LI>   Optimal compression is achieved when files with similar types of data are grouped together.
+<LI>   Diamond is controlled in large part by setting <i>variables</i>.  Diamond has a many predefined variables, all of which have default values chosen to represent the most common case.  You can modify these variables, and you can define your own variables as well.<LI>   The value of a variable is retrieved by enclosing the variable name in percent (%) signs.  If the variable is not defined, an error is generated.  If you want an explicit percent sign, use two adjacent percent signs (%%).  Diamond will collapse this to a single percent sign (%).
+<LI>   Variable substitution is only done once.  For example, .Set A=One [A is "One"]; .Set B=%%A%% (B is "%A%"); .Set C=%B% (C is "%A%", <b>not </b>"One").
+<LI>   Variable substitution is done before any other line parsing, so variables can be used anywhere.
+<LI>   Variables values may include blanks.  Quote (") or apostrophe(') marks may be used in .Set statements to capture blanks.  If you want an explicit quote(") or apostrophe('), you can intermix these two marks (use one for bracketing so that you may specify the other), or, as with the percent sign above, you can specify two adjacent marks ("") and Diamond will collapse this to a single mark(").
+<LI>   All sizes are specified in bytes.
+<LI>    There are a few special values for common disks sizes (CDROM, 1.44M, 1.2M, 720K, 360K) that can be used for any of the predefined Diamond variables that describe the attributes of a disk (<b>MaxDiskSize</b>, <b>ClusterSize</b>, <b>MaxDiskFileCount</b>).  Diamond has built-in knowledge about the correct values of these attributes for these common disk sizes.
+<LI>    Diamond does not check for 8.3 filename limitations directly, but rather depends upon the underlying operating system to do filename validity checking (this will allow Diamond to work with Long File Names, for example, on either FAT or HPFS or NTFS or OFS).
+<LI>    Diamond makes two passes of the directive file(s).  On the first pass, Diamond checks for syntax errors and makes sure that all of the files can be found.  This is very fast, and reduces the chance that the second pass, where the actual data compression occurs, will have any problems.  This is important because compression is very time consuming, so Diamond wants to avoid, for example, spending an hour compressing files only to find that a file toward the end of the directive file(s) cannot be found.
+</OL><h5>4.2.1. Command Summary</h5>
+<P>The following table provides a summary of the Diamond Directive File syntax.  Directives begin with a period ("."), followed by a command name, and possibly by blank delimited arguments.  Note that a File Copy command is distinguished from a File Reference command by the setting of the <b>GenerateInf</b> variable.
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>Syntax</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Description</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>;</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Comment (anywhere on a DDF line)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>src [dest] [<b>/inf=yes|no</b>] [<b>/unique=yes|no</b>] [/x=y [/x=y ...]]</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>File Copy command</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>destination  [/x=y [/x=y ...]]</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>File Reference command</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.Define</b> variable=[value]</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Define <i>variable</i> to be equal to <i>value </i>(see <b>.Option Explicit</b>)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.Delete</b> variable</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Delete a variable definition</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.Dump</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Display all variable definitions</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.InfBegin Disk | Cabinet | File</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Copy lines to specified INF file section</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.InfEnd</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>End an <b>.InfBegin</b> section</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.InfWrite</b> string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Write "string" to file section of INF file</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.InfWriteCabinet</b> string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Write "string" to cabinet section of INF file</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.InfWriteDisk</b> string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Write "string" to disk section of INF file</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.New Disk | Cabinet | Folder</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Start a new Disk, Cabinet, or Folder</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.Option Explicit</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Require <b>.Define</b> first time for user-defined variables</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>.Set</b> variable=[value]</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Set <i>variable</i> to be equal to <i>value</i></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>%variable%</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Substitute value of <i>variable</i></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><i>&lt;blank line&gt;</i></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Blank lines are ignored</FONT></TD></TR>
+</TABLE><h5>4.2.2. Variable Summary</h5>
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>Standard Variables</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Description</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>Cabinet=ON | OFF</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Turns Cabinet Mode on or off</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>CabinetFileCountThreshold</b>=count</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Threshold count of files per Cabinet</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>CabinetName</b><i>n</i>=filename</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Cabinet file name for cabinet number <i>n</i></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>CabinetNameTemplate</b>=template</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Cabinet file name template; * is replaced by Cabinet number</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>ChecksumWidth=1 | 2 | ... | 8</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Max low-order hex digits displayed by INF <b>csum</b> parameter</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>ClusterSize</b>=bytesPerCluster</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Cluster size on diskette (default is 512 bytes)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>Compress=ON | OFF</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Turns compression on or off</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>CompressedFileExtensionChar</b>=char</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Last character of the file extension for compressed files</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD></TR>
+<TR VALIGN=TOP>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>CompressionType=MSZIP</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Compression engine</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>DestinationDir=path</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Default path for destination files (stored in cabinet file)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>DiskDirectory</b><i>n</i>=directory</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Output directory name for disk <i>n</i></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>DiskDirectoryTemplate</b>=template</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Output directory name template; * is replaced by disk number</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>DiskLabel</b><i>n</i>=label</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Printed disk label name for disk <i>n</i></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>DiskLabelTemplate</b>=template</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Printed disk label name template; * is replaced by disk number</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>DoNotCopyFiles= ON | OFF</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Controls whether files are actually copied (ACME ADMIN.INF)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>FolderFileCountThreshold</b>=count</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Threshold count of files per Folder</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>FolderSizeThreshold</b>=size</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Threshold folder size for current folder</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>GenerateInf=ON | OFF</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Control Unified vs. Relation INF generation mode</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>Inf</b><i>Xxx</i>=string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Set default value for INF Parameter Xxx</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfCabinetHeader</b>[<i>n</i>]=string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF cabinet section header text</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfCabinetLineFormat</b>[<i>n</i>]=format string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF cabinet section detail line format</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfCommentString</b>=string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF comment string</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfDateFormat=yyyy-mm-dd | mm/dd/yy</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF date format</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfDiskHeader</b>[<i>n</i>]=string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF disk section header text</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfDiskLineFormat</b>[<i>n</i>]=format string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF disk section detail line format</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfFileHeader</b>[<i>n</i>]=string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF file section header text</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfFileLineFormat</b>[<i>n</i>]=format string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF file section detail line format</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfFileName</b>=filename</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Name of INF file</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfFooter</b>[<i>n</i>]=string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF footer text</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfHeader</b>[<i>n</i>]=string</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF header text</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>InfSectionOrder=[D | C | F]*</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>INF section order (disk, cabinet, file)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>MaxCabinetSize</b>=size</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Maximum cabinet file size for current cabinet</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>MaxDiskFileCount</b>=count</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Maximum count of files per Disk</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>MaxDiskSize</b>[<i>n</i>]=size</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Maximum disk size</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>MaxErrors</b>=count</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Maximum errors allowed before pass 1 terminates</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>ReservePerCabinetSize</b>=size</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Base amount of space to reserve for FCRESERVE data</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>ReservePerDataBlockSize</b>=size</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Amount of space to reserve in each data block</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>ReservePerFolderSize</b>=size</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Amount of additional space in FCRESERVE for each folder</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>RptFileName</b>=filename</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Name of RPT file</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>SourceDir</b>=path</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Default path for source files</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>UniqueFiles=ON | OFF</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Control whether duplicate destination file names are allowed</FONT></TD></TR>
+</TABLE><h5>4.2.3. InfDisk/Cabinet/FileLineFormat Syntax and Semantics</h5>
+<P>The <b>InfDiskLineFormat</b>, <b>InfCabinetLineFormat</b>, and <b>InfFileLineFormat </b>variables are used to control the formatting of the "detail" lines in the INF file.  The syntax of the values assigned to these variables is as follows:<OL><LI>   The "*" character is used to bracket replaceable parameters.
+<LI>   Two "*" characters in a row ("**") are replaced by a single "*".
+<LI>   A replaceable parameter name may be one of the standard ones defined by Diamond, or it may be a custom parameter.  The value used for a parameter is found in the following order:<UL><LI> If a parameter is specified on a File Copy or File Reference command, the specified value is used.
+<LI> If a variable InfXxxx is defined for this parameter, its value is used.<LI> The parameter is a standard paramater, and its defined value is used.
+</UL><LI>   Braces &quot;{}&quot; may be used to indicate portions of text plus exactly one parameter that are omitted if the parameter value is blank.  For example, "{*id*,}*file*,*size*" will generate the following strings, depending upon the values of id, file, and size:</OL>
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>id</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>file</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>size</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Output String</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>foo.dat</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>23</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>foo.dat,23</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>17</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>foo.dat</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>23</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>17,foo.dat,23</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>17</FONT></TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>23</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>17,,23</FONT></TD></TR>
+</TABLE><h4>4.2.4. INF Parameters</H4>
+<P>The following table lists the standard parameters that may be specified in INF line formats and on File Copy and File Reference commands.  The Disk, Cab, and File columns indicate which parameters are supported in the <b>InfDiskLineFormat</b>, <b>InfCabinetLineFormat</b>, and <b>InfFileLineFormat</b>, respectively.  In addition, the File column also indicates which parameters may be specified on the File Copy and File Reference commands.
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>Parameter</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Disk</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Cab</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>File</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Description</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>attr</b></FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>File attributes (A=archive, R=read-only, H=hidden, S=system)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>cab#</b>   </FONT></TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Cabinet number (0 means not in cabinet, 1 or higher is cabinet number)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>cabfile</b> </FONT></TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Cabinet file name</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>csum</b>    </FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Checksum</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>date</b>    </FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>File date (mm/dd/yy or yyyy-mm-dd, depending upon InfDateFormat)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>disk#</b>   </FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Disk number (1-based)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>file</b>    </FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Destination file name in layout (in cabinet or on a disk)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>file#</b>    </FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Destination file number in layout (first file is 1, second file is 2, ...); the order of File Copy Commands controls the file number, so in relational INF mode the order of File Reference Commands has no affect on the file number.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>label</b>   </FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Disk user-readable label (value comes from DiskLabel<i>n</i>, if defined, and otherwise is constructed from DiskLabelTemplate).
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>lang</b>    </FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Language (i.e., VER.DLL info) in base 10, blank separated if multiple values </FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>size</b>    </FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>File size (only affects value written to INF file)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>time</b></FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>File time (hh:mm:ss[a|p])</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>ver</b></FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Binary File version (n.n.n.n base 10 format)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2><b>vers</b></FONT></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2>Yes</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>String File version  -- can be different from ver!</FONT></TD></TR>
+</TABLE>
+<br>Just as custom INF parameters can be defined by using the <b>.Define</b> and <b>.Set</b> command (e.g., <b>.Set </b>InfCustom=default value), the <b>.Set</b> command can also be used to override the values of these parameters.  This is most obviously useful for the <b>date </b>and <b>time </b>parameters, as it provides a simple way to "date stamp" all the files in a layout; and for the <b>attr </b>parameter, this provides a way to force a consistent set of file attributes (commonly used to clear the read-only and archive attribute bits).
+<P><h4>4.2.5. Command Details</H4>
+<P><hr><b>;</b>
+<p>A comment line.  
+<P>A comment may appear anywhere in a directive file.  In addition, any line may include a comment at the end.  Any text on the line following the comment is ignored.
+<P><hr>source [destination] <b>[/INF= YES | NO] [/UNIQUE=YES | NO] [/x=y [/x=y ...]]</b>
+<p>A File Copy Command; specifies a file to be placed onto a disk or cabinet.  If <b>GenerateInf</b> is <b>OFF</b>, then lines without leading periods are interpreted as File Copy Commands.
+<P><i>source </i>is a file name, and may include a relative or absolute path specification.  The <b>SourceDir </b>variable is applied first, if specified.
+<P><i>destination </i>is the name to store in the cabinet file (if <b>Cabinet </b>is <b>On</b>), or the name for the destination file (if <b>Cabinet </b>is <b>Off</b>).  The <b>DestinationDir </b>variable is used as a prefix.
+<P><b>/INF</b>=<b>YES </b>| <b>NO</b> controls whether <i>destination</i> must specified in a Reference command in the INF section of the DDF.  If <b>YES</b> is specified (the default), then <i>destination </i>must be specified in at least one Reference command.  If <b>NO </b>is specified, then <i>destination </i>does not have to be specified in any Reference command.  This parameter is used only if Relational INF mode is selected (see the <b>GenerateInf</b> variable), as Unified mode does not support Reference commands.
+<P><b>/UNIQUE</b>=<b>YES </b>| <b>NO</b> controls whether <i>destination</i> must be unique throughout the layout.  Specifiying this parameter on the file copy command overrides the default setting controlled by the <b>UniqueFiles</b> variable (which defaults to YES).  If Relational INF mode is selected (see the <b>GenerateInf</b> variable), then <b>UniqueFiles</b> must be <b>YES</b>.
+<P><b>/x</b>=<b>y </b>permits standard and custom INF parameters to be applied to a file copy command.  These parameters are carried along with the file by Diamond and used to format file detail lines in the INF file.  In addition, the <b>/Date</b>, <b>/Time</b>, and <b>/Attr</b> parameters also control the values that are placed in the cabinet files or on the disk layout (for files outside of a cabinet).  This permits a great deal of flexibility in customizing the INF file format.  A parameter "x" is defined to have the value "y" (which may be empty).  Quotes can be used in "y" to include blanks or other special characters.  If a parameter "x" is also defined on a File Reference command, that setting overrides any setting for "x" specified on the referred to File Copy command.  See "" on page  for a list of standard parameters.
+<P><blockquote><b>NOTE:   You must define a variable InfX if you are going to use /X=y on a File Copy (or File Reference) command.</b>  If no such variable is defined, then /X=y will generate an error.  This behavior ensures that there is a default value for every parameter, and makes it easier to catch inadvertent typing errors.</blockquote>
+<P>If the <i>destination </i>is not specified, its default value depends upon the <b>Cabinet</b> and <b>Compress</b> variables, as indicated by the following table, using BIN\EXCEL.EXE as a sample source file name.  Note that the variable <b>CompressedFileExtensionChar </b>controls the actual character used to indicate a compressed file.  Note also that the <b>DestinationDir </b>variable is prefixed to the destination name before it is stored in the cabinet file.
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD>&nbsp;</TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Compress = OFF</b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Compress = ON</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>Cabinet = OFF</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>EXCEL.EXE -- uncompressed, not in a cabinet.
+</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>EXCEL.EX_ -- compressed, not in cabinet (actually, this is a cabinet with a <A HREF="#END1DEFAULT_DESTINATION_NAMING">single file!</A>)</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>Cabinet = ON</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>EXCEL.EXE -- uncompressed, in a cabinet.
+</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>EXCEL.EXE -- compressed, in a cabinet</FONT></TD></TR>
+</TABLE><br>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set Compress=OFF         ; Turn off compression
+.Set Cabinet=OFF         ; No cabinet file
+setup.exe /inf=no         ; Setup is put on disk 1, won't be in INF
+setup.inf            ; Classic chicken &amp; the egg problem
+
+.Set Compress=ON         ; Turn compression on
+readme.txt            ; Placed on disk 1 as README.TX_
+.Set Cabinet=ON         ; Turn cabinet file creation on
+bin\excel.exe         ; Placed in cabinet as EXCEL.EXE
+msdraw.exe msapps\msdraw.exe  ; Placed in cabinet as MSAPPS\MSDRAW.EXE
+a.txt dup.txt /unique=no   ; Another dup.txt is allowed
+b.txt dup.txt /unique=no   ; And here it is
+</FONT></PRE></dl><p><hr>destination <b>[/x=y [/x=y ...]]</b><P>A File Reference Command; specifies that information for a file (previously specified in a File Copy command) is to be written to the File section of the INF file.  This command is only supported in Relational INF mode. If <b>GenerateInf</b> is <b>ON</b>, then lines without leading periods are interpreted as File Reference Commands.<P><i>destination </i>is the name of a file previously specified in a File Copy command as the <b>destination </b>in the layout (not the source!).  Therefore, <b>UniqueFiles</b> is required to be <b>ON</b>.<P><b>/x</b>=<b>y </b>permits standard and custom INF parameters to be applied to a file reference command.  These parameters are merged with any parameters specified on the referenced File Copy command, with parameters on the File Reference command taking precedence.<P>A parameter "x" is defined to have the value "y" (which may be empty).  Quotes can be used in "y" to include blanks or other special characters. .  See "" on page  for a list of standard parameters.<P><blockquote><b>NOTE:   You must define a variable InfX if you are going to use /X=y on a File Reference (or File Copy) command.</b>  If no such variable is defined, then /X=y will generate an error.  This behavior ensures that there is a default value for every parameter, and makes it easier to catch inadvertent typing errors.</blockquote><P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set GenerateInf=OFF      ; Relational INF mode; file layout
+setup.exe /inf=no         ; Setup is put on disk 1, won't be in INF
+readme.txt
+shared.dll /special=yes      ; Custom parameter
+
+.Set GenerateInf=ON      ; INF section of DDF
+.InfWrite [Common]
+readme.txt
+.InfWrite [One]
+shared.dll /special=no      ; Override parm on file copy command
+.InfWrite [Two]
+shared.dll            ; Use /special value from file copy
+</FONT></PRE></dl><p><hr><b>.Define </b>variable=[value]<P>Define <i>variable </i>to be equal to <i>value</i>.<P>To use <i>variable</i>, surround it with percent signs (%) -- %variable%.<P>Using an undefined variable is an error, and will cause Diamond to stop before pass 2.<P><i>value </i>may include references to other variables.<P>Leading and trailing blanks in <i>value </i>are discarded.<P>Blanks may be enclose in quote (") or apostrophe (') marks.<P>Explicit percent signs (%), quotes ("), or apostrophes (') must be specified twice.<P><blockquote><b>NOTE:</b>   If <b>.Option Explicit </b>is specified, then you must first use <b>.Define </b>to define any user-defined variables before you can use <b>.Set </b>to modify them.  For standard Diamond variables, <b>.Define </b>is not permitted, and only <b>.Set </b>may be used on.  If <b>.Option Explicit </b>is not specified, then <b>.Define </b>is equivalent to <b>.Set</b>.</blockquote><P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Define lang=ENGLISH         ; Set language
+.Define country=USA         ; Set country
+.Define SourceDir=%lang%\%country%   ; SourceDir = [ENGLISH\USA]
+.Define join=%lang%%country%      ; join = [ENGLISHUSA]
+.Define success=100%%         ; success = [100%]
+.Define SourceDir=         ; SourceDir = []
+.Define contraction="don't"      ; contraction = [don't]
+.Define contraction=don''t      ; contraction = [don't]
+.Define someSpaces=  hi there      ; someSpaces = [hi there]
+.Define someMore="  blue dog  "   ; someMore = [  blue dog  ]
+</FONT></PRE></dl><p><hr><b>.Delete </b>variable<P>Delete a variable definition.<P>You may only delete variables that have been created by <b>.Define </b>or <b>.Set </b>commands.  Standard Diamond variables may not be deleted.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set myVariable=raisin
+.Delete myVariable      ; Delete myVariable
+</FONT></PRE></dl><p><hr><b>.Dump</b><P>Display the entire Diamond variable table.<P>This command can be used to aid debugging of complicated (or not so complicated) Diamond directive files.  Note that the dump will be displayed during pass 1 and again during pass 2.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Dump               ; Dump variable table to stdout
+</FONT></PRE></dl><p><hr><b>.InfBegin DISK | CABINET | FILE</b><P>Start a block of one or more lines to write to the specified area of the INF file.<P>The lines in the block will be copied unmodified to the specified section of the INF file, so no Diamond variable substitution will be performed.  Similarly, Diamond will not strip comments.<P>Use <b>.InfWrite</b>, <b>.InfWriteCabinet</b>, or <b>.InfWriteDisk</b> if you need variable substitution.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.InfBegin disk         ; Text for disk section of INF file
+;This is a comment for the disk section.  Diamond will not process
+;this line, so, for example, %var% will not be substituted.
+.InfEnd
+</FONT></PRE></dl><p><hr><b>.InfEnd</b><P>Terminate an .InfBegin block.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.InfEnd            ; Close an .InfBegin block
+</FONT></PRE></dl><p><hr><b>.InfWrite  string</b><P>Write <i>string</i> to the file area of the INF file.<P>Note that lines will have Diamond comments removed and variable values substituted.  If you want to avoid this processing, use the <b>.InfBegin File</b> command.  Leading whitespace is normally removed, but you can override this by placing whitespace in quotes (see examples below)<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.InfWrite [A Section Header]   ; Text for file section, this comment
+               ;    will not appear.
+
+.InfWrite ;&lt;disk&gt;,&lt;file&gt;   ; Diamond strips off the comments, so this
+               ;    command just writes a blank line!
+
+.InfWrite ";&lt;disk&gt;,&lt;file&gt;"   ; Get that comment in the INF file
+
+.InfWrite "  "%someVar%      ; Get leading space on the INF line
+</FONT></PRE></dl><p><hr><b>.InfWriteCabinet  string</b><P>Write <i>string</i> to the cabinet area of the INF file.<P>Note that lines will have Diamond comments removed and variable values substituted.  If you want to avoid this processing, use the <b>.InfBegin Cabinet</b> command.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.InfWriteCabinet 40%% off your favorite furniture ; %% collapse down to
+               ; one %, because Diamond does variable
+               ; substitution on the string.
+</FONT></PRE></dl><p><hr><b>.InfWriteDisk  string</b><P>Write <i>string</i> to the disk area of the INF file.<P>Note that lines will have Diamond comments removed and variable values substituted.  If you want to avoid this processing, use the <b>.InfBegin Disk</b> command.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.InfWriteDisk The Rain in Spain falls Mainly on the Plain
+</FONT></PRE></dl><p><hr><b>.New Disk | Cabinet | Folder</b><P>Force a disk, cabinet, or folder break.<P>This is used to complete the current disk, cabinet, or folder, and start a new one.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.New Disk         ; Start a new disk
+.New Cabinet      ; Start a new cabinet
+.New Folder         ; Start a new folder
+</FONT></PRE></dl><p><hr><b>.Set</b> variable=value<P>Set <i>variable </i>to be equal to <i>value</i>.<P>To use <i>variable</i>, surround it with percent signs (%) -- %variable%.<P>Using an undefined variable is an error, and will cause Diamond to stop before pass 2.<P><i>value </i>may include references to other variables.<P><i>value </i>may be empty, in which case <i>variable </i>is set to the empty string.<P>Leading and trailing blanks in <i>value </i>are discarded.<P>Blanks may be enclose in quote (") or apostrophe (') marks.<P>Explicit percent signs (%), quotes ("), or apostrophes (') must be specified twice.<P><blockquote><b>NOTE:</b>   If <b>.Option Explicit </b>is specified, then you must first use <b>.Define </b>to define any user-defined variables before you can use <b>.Set </b>to modify them.  For standard Diamond variables, <b>.Define </b>is not permitted, and only <b>.Set </b>may be used on.</blockquote><P>Examples<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set lang=ENGLISH            ; Set language
+.Set country=USA            ; Set country
+.Set SourceDir=%lang%\%country%   ; SourceDir = [ENGLISH\USA]
+.Set join=%lang%%country%      ; join = [ENGLISHUSA]
+.Set success=100%%         ; success = [100%]
+.Set SourceDir=            ; SourceDir = []
+.Set contraction="don't"      ; contraction = [don't]
+.Set contraction=don''t         ; contraction = [don't]
+.Set someSpaces=  hi there      ; someSpaces = [hi there]
+.Set someMore="  blue dog  "      ; someMore = [  blue dog  ]
+<hr></FONT></PRE></dl><h4>4.2.6. Variable Details</H4>
+<P>The standard Diamond variables are listed below.  These variables are predefined, and each of them has a default value, which is used if you do not set the variable from the command line (/D var=value) or prior to the time you explicitly set the variable with a <b>.Define</b> or <b>.Set</b> command in a directive file.  
+<P>You can create your own variables as well, using the <b>.Define </b>command if you specify <b>.Option Explict</b>, and the <b>.Set </b>command otherwise.
+<P><hr><b>Cabinet=On | Off</b>
+<P>Turns <i>cabinet mode </i>on or off.
+<P>Default:   .Set Cabinet=On      ; Cabinet mode is ON
+<P>When cabinet mode is <b>On</b>, the following applies:
+<P><blockquote><OL><LI>   Files are stored in a cabinet, whose name is taken from the <b>CabinetNameTemplate</b> variable<LI>  If the compressed size of a file would cause the current Cabinet to exceed the current <b>MaxCabinetSize </b>variable, then as much of the compressed file as possible is stored in the current Cabinet, that Cabinet is closed, and a new Cabinet is created.  Note that it is possible for a large file to span multiple Cabinets!
+<LI>   If the compressed size of a file (or set of files, if the files are small) would cause the current Folder to exceed the current <b>MinFolderSize</b> variable, these files are the last ones added to the current Folder, a new Folder is started for any <A HREF="#END2">subsequent files</A>.  Note that if the current Folder cannot fit in the current Cabinet, as much as possible of the Folder is stored in the current Cabinet, and the remainder of the Folder is stored in the next Cabinet.  This means that it is possible for <i>several </i>files to be continued from one Cabinet file to the next Cabinet file!</OL></blockquote><P>When cabinet mode is <b>Off</b>, the following applies:<P><blockquote><OL><LI>   Files are stored in individual files<LI>  If the destination file is not supplied, the default name is controlled by the <i>compression mode</i> (see the <b>Compress </b>variable)</OL></blockquote>Examples<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set Cabinet=OFF         ; Files not in cabinets...
+.Set Compress=OFF         ; ...and no compression.
+setup.exe            ; Setup program is simply copied to disk.
+.Set Cabinet=ON         ; Use a cabinet...
+.SET Compress=ON         ; ...and compress remaining files.
+</FONT></PRE></dl><p><hr><b>CabinetFileCountThreshold</b>=count<P>Sets a goal for the maximum number of files in a cabinet.<P>Default:   .Set CabinetFileCountThreshold=0   ; Default is no threshold<P><i>count</i> is a threshold for the number of files to store in a cabinet.  Once this count has been reached, Diamond will close the current cabinet as soon as possible.  Due to the blocking of files for compression purposes, it is possible that the cabinet will contain more files than specified by this variable.<P>If <i>count </i>is 0, then there is no limit on the number files per cabinet.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set CabinetFileCountThreshold=100   ; Shoot for 100 files per cabinet
+</FONT></PRE></dl><p><hr><b>CabinetName</b>n=filename<P>The cabinet file name for the specified cabinet.<P>Default:         ; By default none of these variables are defined<P>If this variable is not defined for a particular disk, then Diamond uses the <b>CabinetNameTemplate</b> to construct the cabinet name.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set CabinetName1=one.cab
+</FONT></PRE></dl><p><hr><b>CabinetNameTemplate</b>=template<P>Sets the cabinet file name template.<P>Default:   .Set CabinetNameTemplate=*.CAB   ; 1.CAB, 2.CAB, ...<P>This template is used to construct the file name of each cabinet.  The &quot;*&quot; in this template is replaced by the cabinet number (1, 2, etc.). This variable is used only if no variable <b>CabinetName</b><i><B>n</b></i><i> </i>exists for cabinet <i>n</i>.<P><blockquote><b>NOTE:   Be sure that the expanded cabinet name does not exceed the limits for your file system!  </b>For example, if you used "CABINET*.CAB", and Diamond had to create 10 or more cabinets, then you would have cabinet names like CABINET10.CAB, which is 9.3, which is an invalid name in the FAT file system.  Unfortunately, Diamond would not detect this until it had already created 9 cabinets!</blockquote><P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set CabinetNameTemplate=EXCEL*.DIA ; EXCEL1.DIA, EXCEL2.DIA, etc.
+.Set CabinetNameTemplate=*.         ; 1, 2, 3, etc.
+</FONT></PRE></dl><p><hr><b>ChecksumWidth</b>=1 | 2 | ... | 8<P>Sets the maximum number of low-order hex digits displayed by <b>InfFileLineFormat</b> <b>csum</b> parameter.<P>Default:   .Set ChecksumWidth=8      ; Default is all 8 hex digits (csum is a 32-bit value)<P>The presence of the <b>csum </b>parameter in the <b>InfFileLineFormat </b>variable causes Diamond to compute a 32-bit CRC for each file and write that checksum to the INF file.  While leading zeros are not written out, the presence of these checksums can significantly increase the size of the INF file.  You can use <b>ChecksumWidth </b>to restrict the size of the checksum written to the INF file.  If a value less than 8 is specified, then Diamond will mask off the high-order bits of the 32-bit checksum to produce a value for the INF file that is at most the number of hex digits specified.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set ChecksumWidth=4      ; Only display the low order 4 hex digits
+</FONT></PRE></dl><p><hr><b>ClusterSize</b>=bytesPerCluster<P>The cluster size of the distribution media.<P>Default:   .Set ClusterSize=512   ; 1.44M and 1.2M floppies have 512-byte clusters<P>This is used by Diamond to round up the sizes of files and cabinets to a cluster boundary, so it can determine when to switch to the next disk.<P>You can use a standard disk size from the following list, and Diamond will supply the known cluster size for that disk size:<P><b>1.44M</b><P><b>1.25M</b> (Japanese NEC 3.5" drive capacity)<P><B>1.2M</b><P><b>720K</b><P><b>360K</b><P><b>CD-ROM</b><P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set ClusterSize=1.44M          ; Use known 1.44M floppy info
+</FONT></PRE></dl><p><hr><b>Compress=ON | OFF</b><P>Turn file compression on or off.<P>Default:   .Set Compress=On   ; Compression is on<P>While compression is usually on, you generally turn if off for the first few files on disk 1 (SETUP.EXE, for example).  This applies regardless of the <b>Cabinet </b>setting, so it is valid to store one or more uncompressed files in a Cabinet File.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set Cabinet=OFF         ; Files not in cabinets...
+.Set Compress=OFF         ; ...and no compression.
+setup.exe            ; Setup program is simply copied to disk.
+.Set Cabinet=ON         ; Use a cabinet...
+.SET Compress=ON         ; ...and compress remaining files.
+</FONT></PRE></dl><p><hr><A NAME="VAR"></A> <b>CompressedFileExtensionChar</b>=char<P>Last character in file name used when compressing an individual file.<P>Default:   .Set CompressedFileExtensionChar=_   ; Default is an underscore (&quot;_&quot;)<P>If <b>Cabinet</b>=<b>OFF </b>and <b>Compress</b>=<b>ON </b>, then Diamond will compress an individual file.  While the compressed files is stored in a Cabinet File, it has only a single file.  To maintain some consistency with existing setup compression products, the default compressed file name is constructed by taking the source file name and replacing the last character of the file extension with the setting of this variable.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set CompressedFileExtensionChar=$   ; SAMPLE.EXE =&gt; SAMPLE.EX$
+                  ; SAMPLE.EX  =&gt; SAMPLE.EX$
+                  ; SAMPLE.E   =&gt; SAMPLE.E$
+                  ; SAMPLE.    =&gt; SAMPLE.$
+                  ; SAMPLE     =&gt; SAMPLE.$
+</FONT></PRE></dl><p><hr><b>CompressionType=MSZIP</b> <P>Select compression engine.<P>Default:   .Set CompressionType=MSZIP   ; Default is MSZIP compressor<P>MSZIP is the only compression type supported by Microsoft.<P><i>MSZIP </i>is a PKZIP-compatible compression engine, achieving compressed file sizes almost identical to PKZIP v2.04g with the -ex switch.  <P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set CompressionType=MSZIP   ; MSZIP compressor
+</FONT></PRE></dl><p><hr><b>DestinationDir</b>=path<P>Path prefix to store in cabinet file for each file in the cabinet.<P>Default:   .Set DestinationDir=      ; Default is no path prefix<P><i>path </i> is concatenated with a path separator ("\") and the target file name on File Copy Commands to produce the file name that is stored in cabinet file.  EXTRACT.EXE will use this file name as the default name when the file is extracted.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set DestinationDir=SYSTEM   ; Following files get SYSTEM prefix
+bin\ARIAL.TTF         ; Name in cabinet is SYSTEM\ARIAL.TTF
+.Set DestinationDir=      ; No prefix
+bin\ARIAL.TTF         ; Name in cabinet is ARIAL.TTF
+</FONT></PRE></dl><p><hr><b>DiskDirectory</b>n=directory<P>The output directory name for the specified disk.<P>Default:         ; By default none of these variables are defined<P>If this variable is not defined for a particular disk, then Diamond uses the <b>DiskDirectoryTemplate</b> to construct the disk directory.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set DiskDirectory1=disk.one
+</FONT></PRE></dl><p><hr><b>DiskDirectoryTemplate</b>=template<P>Set the output directory name template.  One directory is created for each disk of the layout.<P>Default:   .Set DiskDirectoryTemplate=DISK* ; Default is DISK1, DISK2, etc.<P>As Diamond processes a directive file, it will create one or more disk "images".  Rather than using some specific disk format, however, Diamond simply creates one subdirectory for each disk and places the files for each disk in the appropriate directory.  If a "*" exists in this variable, then it is replaced with the disk number.  If no "*" is specified, then all files are placed in the single directory specified by this variable. <P>This variable is used only if no variable <b>DiskDirectory</b><i><B>n</b></i><i> </i>exists for disk <i>n</i>.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set DiskDirectoryTemplate=C:\EXCEL6\DISK*  ; Put files in separate dirs
+.Set DiskDirectoryTemplate=C:\EXCEL6   ; Put all files in C:\EXCEL6
+.Set DiskDirectoryTemplate=         ; Put all files in current dir
+</FONT></PRE></dl><p><hr><b>DiskLabel</b>n=label<P>The user-readable text string for the specified disk.<P>Default:         ; By default none of these variables are defined<P>This <i>label</i> is stored in cabinet files that contain files that are split across disk boundaries, to simplify prompting for the appropriate disk to insert into the drive.  For example, if EXCEL.EXE started in 1.CAB and finished in 2.CAB, and a user asked to extract EXCEL.EXE from 2.CAB, EXTRACT.EXE can retrieve the printed label for the disk containing 1.CAB (say, Excel Program Disk 1) and tell the user to insert that disk and try again.<P>If this variable is not defined for a particular disk, then Diamond uses the <b>DiskLabelTemplate</b> to construct the disk label.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set DiskLabel1="Excel Setup Disk 1"
+.Set DiskLabel2="Excel Setup Disk 2"
+</FONT></PRE></dl><p><hr><b>DiskLabelTemplate</b>=template<P>Set the printed disk label.  Used if individual <b>DiskLabel</b>n variables are not defined<P>Default:   .Set DiskLabelTemplate="Disk *" ; Default is "Disk 1", "Disk 2", etc.<P>Sets the default user-readable disk label.  If a "*" exists in this variable, then it is replaced with the disk number.  This variable is used only if no variable <b>DiskLabel</b><i><B>n</b></i><i> </i>exists for disk <i>n</i>.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set DiskLabelTemplate="Excel Disk *"
+</FONT></PRE></dl><p><hr><b>DoNotCopyFiles=On | Off</b><P>Controls whether File Copy Commands actually copy files.<P>Default:   .Set DoNotCopyFiles=Off      ; Files <i>are </i>copied<P>This option is intended to be used when Cabinet is OFF and Compress is OFF, as a means of generating an INF file very quickly.  It has no affect when Cabinet is ON or Compress is ON.<P>Examples<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set DoNotCopyFiles=ON      ; Make Diamond create the INF file quickly
+</FONT></PRE></dl><p><hr><b>FolderFileCountThreshold</b>=count<P>Set the threshold on the number of files to store in a folder.<P>Default:   .Set FolderFileCountThreshold=0   ; Default to no limit on count of files in a folder<P>Sets the threshold file count for the current folder.  When this threshold is exceeded, then the current folder is closed.  If any more files are to be processed, they will go into a new folder.<P>If <b>Cabinet </b>is <b>OFF</b>, this variable is ignored.<P>If <i>count </i>is 0, then there is no limit on the count of files in a folder.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set FolderFileCountThreshold=50   ; No more than 50 files per folder
+</FONT></PRE></dl><p><hr><b>FolderSizeThreshold</b>=size<P>Set the threshold size for the current folder.<P>Default:   .Set MinMaxFolderSize=0   ; Default to the maximum cabinet size<P>Sets the threshold size for the current folder.  When this threshold is exceeded, then the current folder is closed.  If any more files are to be processed, they will go into a new folder.  Diamond attempts to limit folders to the size specified by this variable, but in most cases folders will be a bit larger than this threshold.<P>If <b>Cabinet </b>is <b>OFF</b>, this variable is ignored.<P>If <i>size </i>is 0, then the threshold is the same as the maximum cabinet size.<P>Folders are compression/encryption boundaries.  The state of the compressor and cryptosystem are reset at folder boundaries.  To access a file in a folder, the folder must be decrypted and decompressed starting from the <b>front </b>of the folder and continuing through to the desired file.  Thus, smaller folder thresholds are appropriate for a layout where a small number of files needs to be randomly accessed quickly from a cabinet.  On the other hand, larger folder thresholds permit the compressor to examine more data, and so generally yield better compression results.  For a layout where the files will be accessed sequentially and most of the files will be accessed, a larger folder threshold is best.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set FolderSizeThreshold=1M   ; Aim for 1Mb folders
+</FONT></PRE></dl><p><hr><b>GenerateInf=ON | OFF</b><P>Controls Unified vs. Relational INF generation mode.<P>Default:    .Set GenerateInf=ON     ; Default to &quot;unified&quot; INF mode<P>If <b>GenerateInf</b> is <b>ON </b>when the first file copy command is encountered, then Unified INF mode is selected.  In this mode, file detail lines are written to the INF file as file copy commands are processed, so the order of file lines in the INF is exactly the same as the order of the files in the layout.<P>If <b>GenerateInf</b> is <b>OFF</b> when the first file copy command is encountered, then Relational INF mode is selected.  In this mode, file copy commands are processed, but INF file generation is delayed until <b>GenerateInf</b> is set to <b>ON</b>, and File Reference commands are used to select information on files in the layout to be placed in the INF file.<P><i>Unified mode</i> is easier to use, since each file is specified only once, and is most appropriate for quick usage of Diamond.<P><i>Relational mode</i> is more complicated, since each file must be specified (at least) twice, but it provides very fine control of both the disk layout <b>and </b>the format of the INF file.  In particular, some INF files want to have sections to list the files associated with a certain feature, there may be many such sections, and some files may be required in more than one section.  Unified mode does not provide any method to generate such an INF file, but Relational mode does via the File Reference command.  <P>By separating the disk layout order from the INF file order, Diamond permits optimization of the file layout for compression vs. access time.  The <i>layout section </i>of the DDF contains file copy commands that controlprecisely where files are in the layout.  The <i>INF section </i>of the DDF contains INF formatting information, including File Reference commands to pull in information about specific files from earlier File Copy commands in the layout section.<P><blockquote><b>Note:</b>   Once <b>GenerateInf</b> is set to <b>ON </b>and at least one File Copy command has been processed, <b>GenerateInf</b> may not be set to <b>OFF</b> (i.e., in Relational Mode, all File Copy commands must be processed before any File Reference commands)</blockquote><P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">;** Layout section - File Copy commands
+.Set GenerateInf=OFF
+foo.exe
+bar.exe other.exe
+foo.exe foo1.exe
+....
+
+;** INF section -- File Reference commands
+.Set GenerateInf=ON
+.WriteInf &quot;[a section]&quot;
+foo.exe
+other.exe
+foo1.exe /rename=sys\foo.exe   ; pass custom parameter
+....
+</FONT></PRE></dl><p><hr><b>Inf</b><i>X</i><i>xx</i>=string
+<P>Sets the default value for an INF parameter.
+
+<P>Default:   [Not applicable]
+<P>Variables of this form (other than the standard ones in this list) can be used for two purposes:
+<P><blockquote><blockquote><UL><LI> To override the usual value of a standard INF parameter (like <b>date</b>, <b>time</b>, <b>attr</b>, etc.) for all the files (or a set of files) in the layout.
+<LI> To define a custom INF parameter, and specify its default value.
+</UL></blockquote></blockquote><p><blockquote><b>Note:</b>   When in Relation INF mode, only the <b>last value</b> for a particular <b>Inf</b><i>Xxx</i> variable will be carried over from the layout section to the INF section of the DDF.  In the following example:</blockquote><P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">   ;** Layout section - File Copy commands
+   .Set GenerateInf=OFF   ; Select Relational INF
+   .Set InfCustom=apple
+   file.1
+   .Set InfCustom=pear
+   file.2
+   ;** INF section - File Reference commands
+   .Set GenerateInf=ON
+   file.1         ; *custom* value is "pear", not "apple"!
+   file.2
+</FONT></PRE></dl>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set InfDate=05/02/94      ; Date stamp all files
+.Set InfTime=06:00:00a      ; Time stamp all files
+.Set InfAttr=         ; Turn off all attributes (esp. read-only)
+.Set InfCustom=yes      ; Define custom INF parameter
+</FONT></PRE></dl><p><hr><b>InfCabinetHeader</b>[<i>n</i>]=string
+<P>Sets the header text for the cabinet section of the INF file.
+<P>Default:   .Set InfCabinetHeader=&quot;[cabinet list]&quot;<P>This string is written to the INF prior to any cabinet detail lines. Diamond will also use any variables of the form <b>InfCabinetHeader</b><i>n</i> where <i>n </i>is an integer with no leading zeros (0).  These additional lines will be printed out in increasing order after the <b>InfCabinetHeader</b> line.  Any <b>.InfBegin</b> <b>Cabinet</b>/<b>.InfEnd</b> lines will be printed as they are encountered, but in any event after all of these header lines.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set InfCabinetHeader=";Lots o' cabinets"
+
+.Set InfCabinetHeader=      ; No cabinet header
+
+.Set InfCabinetHeader=";Line 1 of cabinets"
+.Set InfCabinetHeader1=";Line 2 of cabinets"
+.Set InfCabinetHeader2=";Line 3 of cabinets"
+</FONT></PRE></dl><p><hr><b>InfCabinetLineFormat</b>[<i>n</i>]=format string
+<P>Sets the detail line format for the cabinet section of the INF file.
+
+<P>Default:   .Set InfCabinetLineFormat=*cab#*,*disk#*,*cabfile*
+<P>This format is used to generate a line in the &quot;cabinet&quot; section of the INF.  If a numeric suffix <i>n </i>is specified in the variable name, then the specified format is used for cabinet number <i>n</i>.  If no such cabinet number-specific format is defined, then the value of the <b>InfCabinetLineFormat</b> variable is used.
+<P>See "" on page  for details on the format string..
+<P>See "" on page  for a list of the allowed parameter names.
+<P><hr><b>InfCommentString</b>=string
+<P>Sets the line comment string for the INF file.
+
+<P>Default:   .Set InfCommentString=&quot;;&quot;
+<P>This is the string Diamond will use to prefix comment lines that it generates in the INF (the autogenerated diamond version/date/time lines, for example). 
+<P><hr><b>InfDateFormat</b>=YYYY-MM-DD | MM/DD/YY
+<P>Sets the date format used for dates written to the INF file.
+<P>Default:   .Set InfDateFormat=MM/DD/YY   ; Default to normal US convention<P>This format is used to format the <b>date </b>parameter for the <b>InfFileLineFormat </b>used to write file detail lines to the INF file.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set InfDateFormat=YYYY-MM-DD      ; Use the preferred ACME format
+</FONT></PRE></dl><p><hr><b>InfDiskHeader</b>[<i>n</i>]=string
+<P>Sets the header text for the disk section of the INF file.
+<P>Default:   .Set InfDiskHeader=&quot;[disk list]&quot;<P>This string is written to the INF prior to any disk detail lines. Diamond will also use any variables of the form <b>InfDiskHeader</b><i>n</i> where <i>n </i>is an integer with no leading zeros (0).  These additional lines will be printed out in increasing order after the <b>InfDiskHeader</b> line.  Any <b>.InfBegin</b> <b>Disk</b>/<b>.InfEnd</b> lines will be printed as they are encountered, but in any event after all of these header lines.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set InfDiskHeader=";Lots o' Disks"
+
+.Set InfDiskHeader=      ; No Disk header
+
+.Set InfDiskHeader=";Line 1 of Disks"
+.Set InfDiskHeader1=";Line 2 of Disks"
+.Set InfDiskHeader2=";Line 3 of Disks"
+</FONT></PRE></dl><p><hr><b>InfDiskLineFormat</b>[<i>n</i>]=format string
+<P>Sets the detail line format for the disk section of the INF file.
+
+<P>Default:   .Set InfDiskLineFormat=*disk#*,*label*
+<P>This format is used to generate a line in the &quot;disks&quot; section of the INF.  If a numeric suffix <i>n </i>is specified in the variable name, then the specified format is used for disk number <i>n</i>.  If no such disk number-specific format is defined, then the value of the <b>InfDiskLineFormat</b> variable is used.
+<P>See "" on page  for details on the format string..
+<P>See "" on page  for a list of the allowed parameter names.
+<P><b>InfFileHeader</b>[<i>n</i>]=string
+<P>Sets the header text for the file section of the INF file.
+
+<P>Default:   .Set InfFileHeader=&quot;[file list]&quot;
+<P>This string is written to the INF prior to any file detail lines. Diamond will also use any variables of the form <b>InfFileHeader</b><i>n</i> where <i>n </i>is an integer with no leading zeros (0).  These additional lines will be printed out in increasing order after the <b>InfFileHeader</b> line.  Any <b>.InfBegin</b> <b>File</b>/<b>.InfEnd</b> lines will be printed as they are encountered, but in any event after all of these header lines.
+<P><hr><b>InfFileLineFormat</b>[<i>n</i>]=format string
+<P>Sets the detail line format for the file section of the INF file.
+<P>Default:   .Set InfFileLineFormat=*disk#*,*cab#*,*file*,*size*<P>This format is used to generate a line in the &quot;file&quot; section of the INF. If a numeric suffix <i>n </i>is specified in the variable name, then the specified format is used for file number <i>n </i>(file numbers start at 1, and are based on the File Copy Commands, not the File Reference Commands).  If no such file number-specific format is defined, then the value of the <b>InfFileLineFormat</b> variable is used.<P>See "" on page  for details on the format string..<P>See "" on page  for a list of the allowed parameter names.<P><hr><b>InfFileName</b>=filename<P>Sets the name of the INF output file.<P>Default:   .Set InfFileName=SETUP.INF   ; Default file name is SETUP.INF<P>Defines the file name for the INF file.  This file has disk, cabinet, and file information that is intended for use by a setup program during the setup process.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set InfFileName=EXCEL.INF
+</FONT></PRE></dl><p><hr><b>InfFooter</b>[<i>n</i>]=string
+<P>Sets the footer text for beginning of the INF file.
+
+<P>Default:   // Run Diamond and use the .Dump command to see the default footer
+<P>These strings are written to the INF file after all other information.  To disable this footer text, set InfFooter to the empty string (.Set InfFooter=).  Diamond will also use any variables of the form <b>InfFooter</b><i>n</i> where <i>n </i>is an integer with no leading zeros (0).  These additional lines will be printed out in increasing order after the <b>InfFooter</b> line, starting with <b>InfFooter1</b>.
+<P>The following special strings may be specified in InfFooter[n] values (note that the two percent signs are required, so that Diamond does not interpret these as variable references):
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>String</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Description</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>%%1</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>The comment string -- each InfFooter[n] line should probably start with %%1.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>%%2</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>The date and time Diamond was run to produce the INF file.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>%%3</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>The version of Diamond use to produce the INF file.
+</FONT></TD></TR>
+</TABLE><br>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set InfFooter=         ; Disable INF footer text
+.Set InfFooter="%%1 %2 %3"   ; Short footer
+.Set InfFooter="%%1*****"   ; Long footer
+.Set InfFooter1="%%1* %2"   ; Long footer continued
+.Set InfFooter2="%%1* %3"   ; Long footer continued
+.Set InfFooter3="%%1*****"   ; Long footer continued
+</FONT></PRE></dl><p><hr><b>InfHeader</b>[<i>n</i>]=string
+<P>Sets the header text for beginning of the INF file.
+
+<P>Default:   // Run Diamond and use the .Dump command to see the default header.
+<P>These strings are written to the INF file prior to any other information.  To disable this header text, set InfHeader to the empty string (.Set InfHeader=).  Diamond will also use any variables of the form <b>InfHeader</b><i>n</i> where <i>n </i>is an integer with no leading zeros (0).  These additional lines will be printed out in increasing order after the <b>InfHeader</b> line, starting with <b>InfHeader1</b>.
+<P>The following special strings may be specified in InfHeader[n] values (note that the two percent signs are required, so that Diamond does not interpret these as variable references):
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>String</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Description</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>%%1</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>The comment string -- each InfHeader[n] line should probably start with %%1.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>%%2</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>The date and time Diamond was run to produce the INF file.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>%%3</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>The version of Diamond use to produce the INF file.
+</FONT></TD></TR>
+</TABLE><br>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set InfHeader=         ; Disable INF header text
+.Set InfHeader="%%1 %2 %3"   ; Short header
+.Set InfHeader="%%1*****"   ; Long header
+.Set InfHeader1="%%1* %2"   ; Long header continued
+.Set InfHeader2="%%1* %3"   ; Long header continued
+</FONT></PRE></dl><p><hr><b>InfSectionOrder=[D | C | F]*   </b><P>Set the generation and relative order of the Disk, Cabinet, and File sections in the INF file.<P>Default:   .Set InfSectionOrder=DCF  ; Disk, then Cabinet, and then File<P>This variable controls what sections of the INF file are generated, and the order in which they appear.  Each of the letters "C" (cabinet), "D" (disk), and "F" (file) may be used at most once.   Any or all of these letters may be omitted, and the corresponding section of the INF file will not be generated.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set InfSectionOrder=DF   ; Disks, then files, omit the cabinet section
+</FONT></PRE></dl><p><hr><b>MaxCabinetSize</b>=size<P>Set the maximum size for the current cabinet.<P>Default:   .Set MaxCabinetSize=0      ; No limit, except MaxDiskSize<P><i>size</i> is the maximum size for the current cabinet. If <b>Cabinet </b>is <b>ON</b> when this maximum is exceeded, then the current folder being processed will be split between the current cabinet and the next cabinet.  If <b>Cabinet </b>is <b>OFF</b>, then this variable is ignored.<P>Note that <b>MaxDiskSize </b>(or <b>MaxDiskSize</b><i>n</i>, if specified) takes precedence over this variable.  Diamond never splits a cabinet file across a disk boundary, so a cabinet file will be no larger than the amount of free space available on the disk at the time the cabinet is created, even if this size is less than <b>MaxCabinetSize</b>.<P>If <i>size </i>is 0, then the cabinet size is limited only by the disk size (<b>MaxDiskSize or MaxDiskSize</b><i>n</i>).<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set MaxCabinetSize=0      ; Use disk size as limit
+</FONT></PRE></dl><p><hr><b>MaxDiskFileCount</b>=count<P>Sets the maximum number of files that can be stored on a disk.<P>Default:   .Set MaxDiskFileCount=0   ; Default is no limit<P><i>count</i> is the maximum number of files to store on a disk.  Once this count has been reached, Diamond will close the current disk, even if space remains on the disk.  This variable is most useful when cabinet files are not being used (say, to simulate the old style setup where each file is individually compressed), and Diamond needs to understand the limit of the number of files that can be stored in the root directory of a floppy.<P>If <i>count </i>is 0, then there is no limit on the number files per disk.<P>You can use a standard disk size from the following list, and Diamond will supply the known FAT root directory limits for that disk size:<P><b>   1.44M<P>   1.25M </b>(Japanese NEC 3.5" drive capacity)<P><B>   1.2M<P>   720K<P>   360K<P>   CDROM</b><P>The file count does <b>not </b>include any files inside cabinets.  Each cabinet counts as a single file for purposes of this count.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set DiskFileCountMax=256   ; Limit of 256 files per disk
+.Set DiskFileCountMax=1.44M   ; Use limit for 1.44M FAT floppy disk
+</FONT></PRE></dl><p><hr><b>MaxDiskSize</b>[<i>n</i>]=size<P>Set the maximum default size for a disk.<P>Default:   .Set MaxDiskSize=1.44M      ; Default is 1.44M floppy<P><i>size</i> is the maximum default size for a disk.  This variable is used only for disks for which a variable <b>MaxDiskSize</b><i>n</i> is not defined.<P>If <b>Cabinet </b>is <b>OFF</b>, and the next file to be laid out cannot fit on the current disk, then Diamond will move to the next disk.  If <b>Cabinet </b>is <b>ON</b>, then the current cabinet will use as much space on the current disk as possible.<P>If <i>size </i>is 0, then the disk size is unlimited.<P>You can use a standard disk size from the following list, and Diamond will use the correct disk size, down to the byte:<P><b>   1.44M<P>   1.25M </b>(Japanese NEC 3.5" drive capacity)<P><B>   1.2M<P>   720K<P>   360K<P>   CDROM</b><P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set MaxDiskSize=0      ; No limit
+.Set MaxDiskSize=CDROM      ; All files are being placed on a CD-ROM
+
+.Set MaxDiskSize1=720K      ; First disk is 720K
+.Set MaxDiskSize=1.44M      ; ... rest are 1.44M
+</FONT></PRE></dl><p><hr><b>MaxErrors</b>=count<P>Set the maximum number of errors allowed before pass 1 terminates.<P>Default:   .Set MaxErrors=20      ; Default is 20 errors<P><i>count </i>is the maximum number of errors to permit before terminating pass 1.<P>If <i>count </i>is 0, then an unlimited number of errors is allowed.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set MaxErrors=0      ; No limit
+.Set MaxErrors=5      ; Limit to just a few
+</FONT></PRE></dl><p><hr><b>ReservePerCabinetSize</b>=size<P>Sets a fixed size to reserve in a cabinet for the FCRESERVE structure.<P>Default:   .Set ReservePerCabinetSize=0   ; Default is to reserve no space<P><i>size </i>is the amount of space to reserve in a cabinet for the FCRESERVE structure.  The total size of the FCRESERVE structure is the value of this variable plus the number of folders in the cabinet times the value of the <b>ReservePerFolderSize </b>variable.<P><i>size </i>must be a multiple of 4 (to ensure memory alignment on certain systems).<P>A common use for this variable is to reserve space to store per-folder cryptosystem information, in the case where the cabinet is encrypted.  For example, some sort of checksum value might be stored here to permit validation that the key being used to decrypt the cabinet is actually the one that was used to encrypt the cabinet.<P>Diamond fills this reserved section with zeros.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set ReservePerCabinetSize=8   ; For use as a cryptosystem key checksum
+</FONT></PRE></dl><p><hr><b>ReservePerDataBlockSize</b>=size<P>Sets the amount of space to reserve in each Data Block header.<P>Default:   .Set ReservePerDataBlockSize=0   ; Default is to reserve no space<P><i>size </i>is the amount of space to reserve in each Data Block header.  This space is located after the standard Data Block header and before the data for the data block.<P><i>size </i>must be a multiple of 4 (to ensure memory alignment on certain systems).<P>One possible use for this variable is to reserve space to store a per-data block cryptosystem information, in the case where the cabinet is <A HREF="#END3">encrypted</A>.<P>Diamond fills this reserved section with zeros.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set ReservePerCabinetSize=4   ; Reserve 4 bytes per data block
+</FONT></PRE></dl><P><HR><b>ReservePerFolderSize</b>=size<P>Sets the amount of additional space to reserve in the FCRESERVE structure for each folder in the cabinet.<P>Default:   .Set ReservePerFolderSize=0   ; Default is to reserve no space<P><i>size </i>is the amount of space to reserve in the FCRESERVE structure for each folder in the cabinet.  The total size of the FCRESERVE structure is the value of this variable times the value of the number of folders in the cabinet, plus the value of the <b>ReservePerCabinetSize </b>variable.<P><i>size </i>must be a multiple of 4 (to ensure memory alignment on certain systems).<P>A common use for this variable is to reserve space to store a per-folder cryptosystem key, in the case where the cabinet is encrypted.<P>Diamond fills this reserved section with zeros.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set ReservePerCabinetSize=8   ; Size of an RC4 cryptosystem key
+</FONT></PRE></dl><P><HR><b>RptFileName</b>=filename<P>Sets the name of the RPT output file.<P>Default:   .Set RptFileName=SETUP.RPT   ; Default file name is SETUP.RPT<P>Defines the file name for the RPT file.  This file has summary information on the Diamond run.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set RptFileName=EXCEL.RPT
+</FONT></PRE></dl><p><hr><b>SourceDir</b>=path<P>The default path used to locate source files specified in File Copy Commands.<P>Default:   .Set SourceDir=      ; Default is to look in the current directory<P><i>path </i> is concatenated with a path separator ("\") and the source file name on the File Copy Command to produce the file name used to find the source file.<P>If <i>path </i>is empty, then the source file name specified on the File Copy Command is not modified.<P>Examples:<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2">.Set SourceDir=C:\PROJECT     ; Find all source files in c:\project
+</FONT></PRE></dl><P><HR><b>UniqueFiles=ON | OFF</b>
+<P>Controls whether destination file names in a layout must be unique..
+<P>Default:   .Set UniqueFiles=&quot;ON&quot;   ; File names must be unique<P>If <b>UniqueFiles</b> is <b>ON</b>, Diamond checks that all destination file names (names stored on disks or in cabinets) are unique, and generates an error (during pass 1) if they are not.  <b>ON</b> is the default, since using the same filename twice usually means that the same file was accidentally included twice, and this would be a waste of disk space.<P>If <b>UniqueFiles</b> is <b>OFF</b>, Diamond permits duplicate destination file names.<P>The <b>/UNIQUE</b> parameter may be specified on individual File Copy commands to override the value of <b>UniqueFiles</b>.<P>If the <b>GenerateInf</b> variable is used to select Relational INF generation, then <b>UniqueFiles</b> must always be <b>ON</b>, since Diamond uses the destination filename as the unique key to link File Reference commands back to File Copy commands.<P><h3><A NAME="EXTRACT"></A> 5. EXTRACT.EXE</h3><P>Extract supports command-line extraction of files from cabinet files.<P><dl><dd><PRE><FONT FACE="COURIER" SIZE="2"><b>extract </b>[<b>/y</b>] [<b>/A</b>] [<b>/D</b> |<b> /E</b>] [<b>/L </b><i>location</i>] [<b>/R</b>] <i>cabinet_file</i> [<i>file_spec</i> ...]
+<b>extract</b> [<b>/y</b>] <i>compressed_file</i> [<i>destination_file</i>]
+<b>extract </b>[<b>/y</b>] <b>/C</b> <i>source</i> <i>destination</i>
+</FONT></PRE></dl><b>Switches:</b>
+<P><b>/A     </b>Process <b>all </b>files in a cabinet set, starting with the <i>cabinet_file.</i>
+<P><b>/C     </b>Copy <i>source </i>file to <i>destination </i>file or directory.
+
+<P><b>/D     </b>Only produce a directory listing (do not extract).
+
+<P><B>/E     </b>Force extraction.
+
+<P><b>/L     </b>Use the directory specified by <i>location</i>, instead of the current directory, as the default location to place extracted files.
+<P><b>/R     </b>Show RESERVED sections of cabinet file(s).  NOTE: This is undocumented in the command-line help!
+<P><b>/Y     </b>Overwrite destination without prompting.  The default is to prompt if the destination file already exists, and allow the customer to: a) overwrite the file, b) skip the file, c) overwrite this file and all subsequent files that may already exist, or d) exit.
+<P><b>Parameters:</b>
+<P><i>compressed_file</i>
+<P>This is a cabinet file that contains a single file (example, FOO.EX_ containing FOO.EXE).  If <i>destination_file </i>is not specified, then the file is extracted and given its original name in the current directory.
+<P><i>destination_file</i>
+<P>This can be either a relative path (&quot;.:, &quot;..&quot;, &quot;c:foo&quot;, etc.) or a fully qualified path, and may specify either a file (or files, if wild cards are included) or a directory.  If a directory is specified, then the file name stored in the cabinet is used.  Otherwise, <i>destination_file</i> is used as the complete file name for the extracted file.
+<P><i>cabinet_file</i>
+<P>This is a cabinet file that contains two or more files.  If no <i>file_spec </i>parameter is specified, then a list of the files in the cabinet is displayed.  If one or more <i>file_spec </i>parameters are specified, then these are used to select which files are to be extracted from the cabinet (or cabinets).  Wild cards are allowed to specify multiple cabinets.
+<P><i>Location</i>
+<P>Specifies the directory where extracted files should be placed.
+<P><i>file_spec</i>
+<P>Specifies files to be extracted from the cabinet(s).  May contain ? and * wild cards.  Multiple file_specs may be supplied.
+<P><b>Examples:</b>
+<P>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="Arial" SIZE=2><b><b>Command</b></b></FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2><b>Behavior</b></FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>EXTRACT foo.ex_</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Assuming foo.ex_ contained just the single file foo.exe, then foo.exe would be extracted and placed in the current directory.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>EXTRACT foo.ex_ bar.exe</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Assuming foo.ex_ contained just the single file foo.exe, then foo.exe would be extracted and placed in the current directory in the file bar.exe.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>EXTRACT cabinet.1</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Assuming cabinet.1 contains multiple files, then a list of the files stored in the cabinet would be displayed.
+</FONT></TD></TR>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=2>EXTRACT cabinet.1 *.exe</FONT></TD>
+<TD><FONT FACE="Arial" SIZE=2>Extract all *.EXE files from cabinet.1 and place them in the current directory</FONT></TD></TR>
+<P>
+<!--DocFooterStart-->
+</FONT>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&#169; 1996 Microsoft Corporation
+</FONT>
+
+<!--DocFooterEnd-->
+</BODY></HTML>

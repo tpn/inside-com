@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Palette Management for ActiveX Objects</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep037.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep039.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="palettes_0002000401000000">Palette Management for ActiveX Objects</A></H2>
+<BR CLEAR=ALL>
+<P>Note: This document is an early release of the final specification. It is meant to specify and accompany software that is still in development. Some of the information in this documentation may be inaccurate or may not be an accurate representation of the functionality of the final specification or software. Microsoft assumes no responsibility for any damages that might occur either directly or indirectly from these inaccuracies. Microsoft may have trademarks, copyrights, patents or pending patent applications, or other intellectual property rights covering subject matter in this document. The furnishing of this document does not give you a license to these trademarks, copyrights, patents, or other intellectual property rights. 
+<H3><A NAME="palettes_0002000401010000">Introduction</A></H3>
+<P>This document describes palette management for ActiveX Objects, specifically ActiveX Controls and ActiveX Document Objects. The palette management rules below allow multiple controls inside a form or in an HTML page to display correctly while still leaving enough flexibility to allow a control to demand palette control. In general, containers are responsible for palette management, and contained objects (e.g. controls) should only realize their palettes in the background.
+<H3><A NAME="palettes_0002000401020000">Palette Management for ActiveX Controls and Containers</A></H3>
+<P>This section describes how ActiveX controls and containers should manage the palette.
+<H4><A NAME="palettes_0002000401020100">Palette Selection</A></H4>
+<P>Because there may be more than one control on a page or form, it is up to the container to choose a common palette, and every control should realize its paleete in the background. Anything else would result in chaos as each control realized its palette while painting. The display would flicker madly and most controls would look awful. 
+<P>How the container chooses the common palette is up to the implementor of the container. Some containers may use the UI active object's palette, others may compute the palette at runtime. Microsoft Internet Explorer 3.0 will either use a default halftone palette, or use the UI active object's palette. This policy may change in future versions of Microsoft Internet Explorer.
+<H4><A NAME="palettes_0002000401020200">Ambient palette property</A></H4>
+<P>The container should make its palette available as an ambient property: DISPID_AMBIENT_PALETTE. This property is defined in OLE Controls documentation and will be implemented by Microsoft Internet Explorer 3.0 and other Microsoft OLE containers. Controls can receive notification of changes to this property by implementing: IOleControl::OnAmbientPropertyChange() 
+<P>Containers should realize the ambient palette in the foreground before calling this function or IViewObject2::Draw(). 
+<P>Older containers that do not implement this property will typically iterate through their controls, forwarding the WM_QUERYNEWPALETTE message until a control returns TRUE (indicating it has realized a palette). 
+<P>Newer containers that implement DISPID_AMBIENT_PALETTE should never send WM_QUERYNEWPALETTE to their controls. 
+<H4><A NAME="palettes_0002000401020300">Palette change notification</A></H4>
+<P>Palette aware controls that wish to be notified of changes to the ambient palette should implement IOleControl::OnAmbientPropertyChange() and handle DISPID_AMBIENT_PALETTE and DISPID_UNKNOWN. The DISPID_UNKNOWN change can be sent when more than one property changes. When this happens, controls should explicitly check for a changed palette. 
+<P>Existing containers that do not define an ambient palette will send WM_PALETTECHANGED messages. Controls are encouraged to handle this message as well. 
+<P>Note: controls can still realize a different palette (in the background). The ambient palette property is only useful if a control wishes to optimize its display to the palette of the container. If this is not necessary, the control should ignore the ambient palette property.
+<H4><A NAME="palettes_0002000401020400">IViewObject2::GetColorSet()</A></H4>
+<P>All palette aware controls should implement IViewObject2::GetColorSet() if they wish to specify a palette preference. Containers can use the return value to determine if a control is palette aware. Containers may also use the color information returned to choose what palette to realize.
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOTIMPL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The control is not palette aware
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The control is palette aware but does not have a palette at this time.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The control is palette aware and has returned its palette to the container.
+</FONT></TD></TR></TABLE>
+<P>It should be noted that the container does not have to call IViewObject2::GetColorSet(). The container may determine it's palette independently of its controls. 
+<H4><A NAME="palettes_0002000401020500">Realizing the palette</A></H4>
+<P>Current OLE guidelines allow the UI active object to realize its own palette in the foreground. Under the new guidelines, this is no longer the case. 
+<P>Controls should only realize their palette in the foreground when receiving WM_QUERYNEWPALETTE message. In every other situation, the <B>control must realize its palette in the background.</B> Containers that implement DISPID_AMBIENT_PALETTE will never send this message. 
+<H4><A NAME="palettes_0002000401020600">Summary</A></H4>
+<UL><LI>Containers determine the palette
+<LI>Containers may choose to implement DISPID_AMBIENT_PALETTE
+<LI>Containers must realize the ambient palette before calling IViewObject2::Draw() or IOleControl::OnAmbientPropertyChange()
+<LI>Controls must <B>always</B> realize their palette in the background. The only exception is when receiving the WM_QUERYNEWPALETTE message. 
+<LI>Controls should implement IViewObject2::GetColorSet() if they care to tell the container about their palette preferences.
+<LI>Controls should implement IOleControl::OnAmbientPropertyChange() if they wish to be notified about changes in the ambient palette property in order to optimize their display to the container's palette.
+</UL>
+<H3><A NAME="palettes_0002000401030000">Palette Management for ActiveX Document Objects</A></H3>
+<P>The following sections describe issues related to palette management by OLE Document Objects. In general, the palette management scheme for document objects is the same as the scheme used for controls, except that document objects do not receive ambient properties from their container.
+<H4><A NAME="palettes_0002000401030100">The Responsibilities of the Document Object</A></H4>
+<P>Palette management for document objects is similar to palette management for controls. The following are the responsibilities of the document object:
+<UL><LI>Document objects should implement IViewObject2::GetColorSet if interested in notifying the container about the palette they wish to display with. This is exactly the same as the corresponding responsibility for Controls (above).
+<LI>Document objects should realize their palette in the background unless when handling WM_QUERYNEWPALETTE messages (forwarded from the container). Again, this is exactly the same as the corresponding responsibility for Controls (above).
+</UL>
+<P>The only difference between the responsibilities of controls and document objects is that document objects do not handle the DISPID_AMBIENT_PALETTE property.
+<H4><A NAME="palettes_0002000401030200">Single Documnet Case</A></H4>
+<P>In the most common cases, a DocObject container will only activate one DocObject at a time. In such a situation, it is acceptable that the activated DocObject should have complete control over the palette which includes managing palette issues for any controls or content within that document.
+<P>The DocObject container in this case has nothing to do with palettes and need not be concerned with palette issues. It should leave palette handling up to the DocObject - in other words, it should forward all Windows palette management messages on to the DocObject.
+<P>Example code for the window procedure of the Document Object host:
+<PRE><FONT FACE="Courier" SIZE="2">    case WM_PALETTECHANGED:
+    case WM_QUERYNEWPALETTE:
+    {
+        HWND hwnd;
+        IOleWindow *pOleWindow;
+        if (pDocObj &amp;&amp; SUCCEEDED(pDocObj-&gt;QueryInterface(IID_IOleWindow, (LPVOID*)&amp;pOleWindow))) {
+            LRESULT lres = 0;
+            if (SUCCEEDED(pOleWindow-&gt;GetWindow(&amp;hwnd))) {
+                lres = SendMessage(hwnd, uMsg, wParam, lParam);
+            }
+            pOleWindow-&gt;Release();
+            return lres;
+        }
+        break;
+    }
+</FONT></PRE>
+<H4><A NAME="palettes_0002000401030300">Multiple DocObject Case</A></H4>
+<P>In rare cases, a DocObject container may be able to activate more than one DocObject at a time within multiple container frames. While this user interface is discouraged at this time, it is still possible to achieve.
+<P>However, no palette-management solution exists for this scenario because there is currently no protocol for communicating palettes between a DocObject and its container. Therefore the container cannot create a palette suitable to all DocObjects that it has activated.
+<P>Because of this, the activated DocObject in the foreground has control over the palette and should use foreground palette rendering. Other activated DocObjects in the background use background palette rendering. The DocObject container itself does not participate in palette management at all. 
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep037.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep039.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,81 @@
+The following are registry settings for various files found in the redistributable self
+extracting .exe files WINTDist.exe and AXDist.exe.  This information is taken from .inf
+files to install the various components.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	WININET.DLL Registry Entries
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+HKLM,"Software\Microsoft\Internet Explorer\Security\Basic","SecurityName",,"Basic Authentication"
+HKLM,"Software\Microsoft\Internet Explorer\Security\Basic","DLLFile",0,"wininet.dll"
+HKLM,"Software\Microsoft\Internet Explorer\Security\Basic","SchemeList",,"Basic"
+HKLM,"Software\Microsoft\Internet Explorer\Security\Basic","Flags",1,00,00,00,00
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	URLMON.DLL Registry Entries
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+HKCR,"CLSID\{%CLSID_URLMON%}",,0,"UrlMon ProxyStub Factory"
+HKCR,"CLSID\{%CLSID_URLMON%}\InprocServer32",,0,"urlmon.dll"
+HKCR,"CLSID\{%CLSID_IPersistMoniker%}",,0,"IPersistMoniker"
+HKCR,"CLSID\{%CLSID_IPersistMoniker%}\ProxyStubClsid32",,0,"{%CLSID_URLMON%}"
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	HLINK.DLL Registry Entries
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+HKCR,"CLSID\{%CLSID_HLinkPSFactory%}",,,"Hyperlinking ProxyStub Factory"
+HKCR,"CLSID\{%CLSID_HLinkPSFactory%}\InprocServer32",,,"%11%\hlinkprx.dll"
+HKCR,"Interface\{%CLSID_HLinkPSFactory%}",,,"IBinding"
+HKCR,"Interface\{%CLSID_HLinkPSFactory%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IBindStatusCallback%}",,,"IBindStatusCallback"
+HKCR,"Interface\{%CLSID_IBindStatusCallback%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IHlinkSite%}",,,"IHlinkSite"
+HKCR,"Interface\{%CLSID_IHlinkSite%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IHlink%}",,,"IHlink"
+HKCR,"Interface\{%CLSID_IHlink%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IHlinkSource%}",,,"IHlinkSource"
+HKCR,"Interface\{%CLSID_IHlinkSource%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IHlinkFrame%}",,,"IHlinkFrame"
+HKCR,"Interface\{%CLSID_IHlinkFrame%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IEnumHLINKITEM%}",,,"IEnumHLINKITEM"
+HKCR,"Interface\{%CLSID_IEnumHLINKITEM%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IHlinkBrowseContext%}",,,"IHlinkBrowseContext"
+HKCR,"Interface\{%CLSID_IHlinkBrowseContext%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IHlinkHistory%}",,,"IHlinkHistory"
+HKCR,"Interface\{%CLSID_IHlinkHistory%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IPersistMoniker%}",,,"IPersistMoniker"
+HKCR,"Interface\{%CLSID_IPersistMoniker%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+HKCR,"Interface\{%CLSID_IFile%}",,,"IFile"
+HKCR,"Interface\{%CLSID_IFile%}\ProxyStubClsid32",,,"{%CLSID_HLinkPSFactory%}"
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	RunOnce Commands
+;
+;	These commands will be executed when the machine
+;	restarts and it's guarenteed that no other
+;	process will be using needed files.  Also, files
+;	may not installed before this point because they
+;	could have been loaded during installation.
+;       %11% refers to the system directory.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+HKLM,"Software\Microsoft\Windows\CurrentVersion\RunOnce","Register urlmon.dll",0,"%11%\regsvr32.exe /s %11%\urlmon.dll"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\RunOnce","Register hlink.dll",0,"%11%\regsvr32.exe /s %11%\hlink.dll"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\RunOnce","Register oleaut32.dll",0,"%11%\regsvr32.exe /s %11%\oleaut32.dll"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\RunOnce","IE 3.0 RegSvr schannel.dll",0,"%11%\regsvr32.exe /s %11%\schannel.dll"
+
+
+
+[Strings]
+CLSID_URLMON		= "79eac9f1-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IPersistMoniker	= "79eac9c9-baf9-11ce-8c82-00aa004ba90b"
+CLSID_HLinkPSFactory	= "79eac9c0-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IBindStatusCallback	= "79eac9c1-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IHlinkSite		= "79eac9c2-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IHlink			= "79eac9c3-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IHlinkSource		= "79eac9c4-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IHlinkFrame		= "79eac9c5-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IEnumHLINKITEM	= "79eac9c6-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IHlinkBrowseContext= "79eac9c7-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IHlinkHistory		= "79eac9c8-baf9-11ce-8c82-00aa004ba90b"
+CLSID_IFile				= "79eac9ca-baf9-11ce-8c82-00aa004ba90b"
+
+

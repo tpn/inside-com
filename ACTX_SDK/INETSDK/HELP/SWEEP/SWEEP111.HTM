@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Reference</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep110.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep112.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="intratng_000c000104000000">Reference</A></H2>
+<BR CLEAR=ALL>
+<P>This section contains detailed reference information about the functions in the Microsoft Internet Ratings API.
+
+
+<H3><A NAME="intratng_000c000104000100">RatingAccessDeniedDialog</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RatingAccessDeniedDialog(
+    HWND hwndParent, 
+    LPCTSTR pszUsername, 
+    LPCTSTR pszContentDescription, 
+    LPVOID pRatingDetails
+); 
+</FONT></PRE>
+<P>Displays a modal dialog box telling the user that access to the requested content is denied. The supervisor can set an option that adds controls to the dialog box; these controls would allow a supervisor to enter a user name and password to override the rating and allow access. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The supervisor entered the password. Access should be allowed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user is still denied access to the content.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Error values
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An error occurred.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>hwndParent</I>
+ </DT><DD>Handle of the parent window for the modal dialog box.
+</DD><DT><I>pszUsername</I>
+ </DT><DD>Address of a string that contains the name of the user who was denied access. If this parameter is NULL, the user name is extracted from the structure specified by <I>pRatingDetails</I>, or the current user name is used.
+</DD><DT><I>pszContentDescription</I>
+ </DT><DD>Address of a string that describes the content to which access was denied.
+</DD><DT><I>pRatingDetails</I>
+ </DT><DD>Opaque pointer returned by the <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A> function. This parameter can provide the dialog box with additional information about why access was denied, such as whether the site is considered rated, which ratings exceeded limits, and where the rating was obtained.
+</DD></DL>
+<P>See also <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A>
+
+<H3><A NAME="intratng_000c000104000200">RatingFreeDetails</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RatingFreeDetails(
+    LPVOID pRatingDetails
+); 
+</FONT></PRE>
+<P>Frees the detail information returned by the <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A> function. 
+
+<DL><DT><I>pRatingDetails</I>
+ </DT><DD>Opaque pointer returned by the <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A> function. 
+</DD></DL>
+<P>See also <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A>
+<H3><A NAME="intratng_000c000104000300">RatingCheckUserAccess</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RatingCheckUserAccess(
+    LPCTSTR pszUsername, 
+    LPCTSTR pszURL,
+    LPCTSTR pszRatingInfo, 
+    LPBYTE pData, 
+    DWORD cbData, 
+    LPVOID *ppRatingDetails
+); 
+</FONT></PRE>
+<P>Determines whether the user is allowed to view the given content based on the associated rating label. An application calls this function when it finds a rating label. 
+
+<UL><LI>Returns one of the following values:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Access is allowed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Access is denied.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Error values
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Content should be considered unrated.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pszUsername</I>
+ </DT><DD>Address of a string that contains the name of the user whose access to the content should be validated. A NULL value means the currently logged on user. For Internet Explorer version 3.0, NULL is the only valid value for this parameter.
+</DD><DT><I>pszURL</I>
+ </DT><DD>Address of the URL to which the rating label is to apply. The function uses this parameter to validate the corresponding field in the rating label, to verify that the rating label actually belongs to the URL for which the label was obtained. This parameter can be NULL if a URL is not applicable.
+</DD><DT><I>pszRatingInfo</I>
+ </DT><DD>Address of the PICS label to parse and verify (for example, the text between the "content" single quotation marks in the example in <A HREF="sweep109.htm#intratng_000c000102020000" TARGET=TEXT>Example of HTML Tagged Ratings</A>). This parameter can be NULL if the application cannot find a rating in the content itself; in this case, the function returns a value that indicates whether the user is allowed to see unrated content.
+</DD><DT><I>pData</I> and <I>cbData</I>
+ </DT><DD>Address of the content being rated and the length, in bytes, of the content data stream. These parameters may be necessary if the rating itself contains a hash of the data for security reasons. If <I>pData</I> is NULL, the <I>cbData</I> parameter is ignored, and the hash cannot be validated.
+</DD><DT><I>ppRatingDetails</I>
+ </DT><DD>Address of a variable that contains a pointer to an opaque data structure that describes in more detail why access to the content is denied. This parameter has meaning only to the <A HREF="sweep111.htm#intratng_000c000104000100" TARGET=TEXT>RatingAccessDeniedDialog</A> function. This parameter can be NULL, in which case the dialog box created by <A HREF="sweep111.htm#intratng_000c000104000100" TARGET=TEXT>RatingAccessDeniedDialog</A> cannot report detailed information to the user. If this parameter is not NULL, the application must call the <A HREF="sweep111.htm#intratng_000c000104000200" TARGET=TEXT>RatingFreeDetails</A> function to free the data, no matter what value the <B>RatingCheckUserAccess</B> function returns or what value is stored in <I>ppRatingDetails</I>.
+</DD></DL>
+<P>This function allows ratings of any content type, including CD-ROMs, news groups, Web sites, and so on, provided the client application can find the rating information. The <A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A> function makes an internal call to the <B>RatingCheckUserAccess</B> function before calling the application's callback function.
+
+<P>See also <A HREF="sweep111.htm#intratng_000c000104000100" TARGET=TEXT>RatingAccessDeniedDialog</A>, <A HREF="sweep111.htm#intratng_000c000104000200" TARGET=TEXT>RatingFreeDetails</A>, <A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A>
+
+<H3><A NAME="intratng_000c000104000400">RatingEnabledQuery</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RatingEnabledQuery(void)
+</FONT></PRE>
+<P>Reports whether ratings should be enforced or not. If the supervisor has not configured any restrictions or has temporarily disabled them, the application may allow access to all content and need not call any other rating functions.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Ratings are enabled and should be enforced.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Ratings are disabled and should be ignored.
+</FONT></TD></TR></TABLE>
+</UL>
+<H3><A NAME="intratng_000c000104000500">RatingObtainCancel</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RatingObtainCancel(
+    HANDLE hRatingObtainQuery
+); 
+</FONT></PRE>
+<P>Allows a browser to cancel its request to obtain the rating for a URL.
+
+<DL><DT><I>hRatingObtainQuery</I>
+</DT><DD>Handle obtained by a previous call to the <A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A> function.
+</DD></DL>
+<P>See also <A HREF="sweep111.htm#intratng_000c000104000600" TARGET=TEXT>RatingObtainQuery</A>
+<H3><A NAME="intratng_000c000104000600">RatingObtainQuery</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RatingObtainQuery(
+    LPCTSTR pszTargetUrl,
+    DWORD dwUserData, 
+    void (*fCallback)(
+        DWORD dwUserData, 
+        HRESULT hres,
+        LPCTSTR pszRating, 
+        LPVOID lpvRatingDetails
+    ), 
+    HANDLE *phRatingObtainQuery
+); 
+</FONT></PRE>
+<P>Encapsulates the process of checking ratings that appear on a local list, third-party PICS server, or future third-party add-on rating services. 
+
+<DL><DT><I>pszTargetUrl</I>
+ </DT><DD>URL whose ratings are to be queried.
+</DD><DT><I>dwUserData </I>
+ </DT><DD>Data to be passed to the callback function specified by <I>fCallback</I>.
+</DD><DT><I>fCallback</I> 
+ </DT><DD>Application-defined function that is called upon completion. This function is called in the context of a different thread than the one that called <B>RatingObtainQuery</B>.
+<P>The callback function has the following parameters:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><I>hres </I>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Result of the query. Can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Rating found and access allowed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Rating found and access denied.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Any error values
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Rating or service unavailable; look for ratings from other sources if possible.
+</FONT></TD></TR></TABLE>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><I>pszRating</I> 
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Rating information for the document if it is available. (Note that the application can choose to ignore this parameter because <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A> has already been called to generate the <I>hres</I> parameter).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><I>lpvRatingDetails</I>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Token that can be used in the <A HREF="sweep111.htm#intratng_000c000104000100" TARGET=TEXT>RatingAccessDeniedDialog</A> dialog box. This must be freed with a call to <A HREF="sweep111.htm#intratng_000c000104000200" TARGET=TEXT>RatingFreeDetails</A>.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>phRatingObtainQuery</I>
+ </DT><DD>Address of a handle that can be used to cancel this operation. This parameter can be NULL if the handle is not needed. 
+</DD></DL>
+<P>A browser obtains the URL from the user and calls this function. Asynchronously, this function searches for a rating for the specified document. When the search ends, the function calls the application's callback function, on a different thread than the one that called <B>RatingObtainQuery</B>. While waiting for the callback to be called, browsers may choose to download the content but prevent the user from accessing it until the query is resolved.
+
+<P>If <B>RatingObtainQuery</B> returns an error, the application should assume the site is unrated by local and third-party ratings, and look for the HTML/HTTP-level ratings itself.
+
+<H3><A NAME="intratng_000c000104000700">RatingSetupUI</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RatingSetupUI(
+    HWND hwndParent, 
+    LPCSTR pszUsername
+); 
+</FONT></PRE>
+<P>Displays a modal dialog box that allows a supervising parent to set levels of restrictions. The <A HREF="sweep111.htm#intratng_000c000104000300" TARGET=TEXT>RatingCheckUserAccess</A> function uses these settings to compare against rating labels.
+
+<DL><DT><I>hwndParent</I>
+ </DT><DD>Handle of the window handle for the modal dialog box.
+</DD><DT><I>pszUsername</I>
+ </DT><DD>Address of a string that contains the name of the user whose settings should be configured. If this parameter is NULL, settings for all users are set. This parameter must be NULL in Internet Explorer version 3.0.
+</DD></DL>
+<P>This function ensures that the current user is a supervisor before allowing access to the configuration user interface. 
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep110.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep112.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

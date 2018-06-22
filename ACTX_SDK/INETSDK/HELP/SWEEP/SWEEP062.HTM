@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>ActiveX Scripting Engine</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep061.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep063.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="olescrpt_0005000105000000">ActiveX Scripting Engine</A></H2>
+<BR CLEAR=ALL>
+<P>To write an ActiveX Scripting engine, write an OLE COM object that supports the following interfaces.
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Interface
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Required?
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010000" TARGET=TEXT>IActiveScript</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Yes
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Basic scripting ability.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IPersist*</B>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Yes. At least one of the following (see note below).
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Persistence support.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IPersistStorage</B>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>DATA=</B><I>{url}</I> syntax for <A HREF="sweep021.htm#htmlref2_0001000114003500" TARGET=TEXT>OBJECT</A> tag.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IPersistStreamInit</B>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Same as above, as well as <B>DATA=</B><I>"string-encoded byte stream"</I> syntax for <A HREF="sweep021.htm#htmlref2_0001000114003500" TARGET=TEXT>OBJECT</A> tag.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>IPersistPropertyBag</B>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>PARAM=</B> syntax for <A HREF="sweep021.htm#htmlref2_0001000114003500" TARGET=TEXT>OBJECT</A> tag.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106020000" TARGET=TEXT>IActiveScriptParse</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">No
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Ability to add script text, evaluate expressions, and so on.
+</FONT></TD>
+</TR>
+</TABLE>
+<P>Support for the <A HREF="sweep063.htm#olescrpt_0005000106020000" TARGET=TEXT>IActiveScriptParse</A> interface is optional; however, if it is not supported, the script engine must implement one of the <B>IPersist*</B> interfaces in order to load a given script.
+
+<P><B>Note:</B>  Certain interpreted script languages (for example, VBScript) running in specific host environments (for example, Internet Explorer) may rarely (or never) be called upon to save or restore a script state through <B>IPersist*</B>. Instead, <A HREF="sweep063.htm#olescrpt_0005000106020000" TARGET=TEXT>IActiveScriptParse</A> is used by calling <A HREF="sweep063.htm#olescrpt_0005000106020200" TARGET=TEXT>IActiveScriptParse::InitNew</A> to create a blank script, then scriptlets are added and connected to events with <A HREF="sweep063.htm#olescrpt_0005000106020100" TARGET=TEXT>IActiveScriptParse::AddScriptlet</A> and general code is added via <A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>IActiveScriptParse::ParseScriptText</A>. Nonetheless, a scripting engine should fully implement at least one <B>IPersist*</B> scheme (preferably <B>IPersistStreamInit</B>), because other host applications may try to make use of them.
+<H3><A NAME="olescrpt_0005000105010000">Registry Standard</A></H3>
+<P>An ActiveX Scripting engine can identify itself using component categories. ActiveX Scripting currently defines two component categories:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Category
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000105010001">CATID_ActiveScript</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the class identifiers (CLSIDs) are ActiveX Scripting engines that support, at a minimum, <A HREF="sweep063.htm#olescrpt_0005000106010000" TARGET=TEXT>IActiveScript</A> and a persistence mechanism (<B>IPersistStorage</B>, <B>IPersistStreamInit</B>, or <B>IPersistPropertyBag</B>).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000105010002">CATID_ActiveScriptParse</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the CLSIDs are ActiveX Scripting engines that support, at a minimum, <A HREF="sweep063.htm#olescrpt_0005000106010000" TARGET=TEXT>IActiveScript</A> and <A HREF="sweep063.htm#olescrpt_0005000106020000" TARGET=TEXT>IActiveScriptParse</A>.
+
+
+</FONT></TD></TR></TABLE>
+<P>Although <A HREF="sweep063.htm#olescrpt_0005000106020000" TARGET=TEXT>IActiveScriptParse</A> is not a true persistence mechanism, it does support an <A HREF="sweep063.htm#olescrpt_0005000106020200" TARGET=TEXT>InitNew</A> method that is functionally equivalent to <B>IPersist*::InitNew</B>. 
+
+
+
+<H3><A NAME="olescrpt_0005000105020000">Script Engine States</A></H3>
+<P>At any given time, an ActiveX Scripting engine can be in one of several states.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>State
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000105020001">uninitialized</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script has not been initialized or loaded using an <B>IPersist*</B> interface, or does not have an <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A> set. The scripting engine is generally not usable from this state until the host takes steps to initialize the engine.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000105020002">initialized</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script has been initialized with an <B>IPersist*</B> interface and has an <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A> set, but is not connected to host objects and sinking events. Note that this state simply means that <B>IPersist*::Load</B>, <B>IPersist*::InitNew</B>, or <A HREF="sweep063.htm#olescrpt_0005000106020200" TARGET=TEXT>IActiveScriptParse::InitNew</A> has been completed, and <A HREF="sweep063.htm#olescrpt_0005000106010c00" TARGET=TEXT>IActiveScript::SetScriptSite</A> has been called.
+The engine cannot run code in this mode. The engine queues code that the host passes to it through <A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>IActiveScriptParse::ParseScriptText</A>, and executes the code after transitioning to the <B>started</B> state.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000105020003">started</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The transition from the <B>initialized</B> state to <B>started</B> state causes the engine to execute any code that was queued in the <B>initialized</B> state. The engine can execute code while in the <B>started</B> state, but it is not connected to events of the objects added through <A HREF="sweep063.htm#olescrpt_0005000106010100" TARGET=TEXT>IActiveScript::AddNamedItem</A>. The engine can execute code by calling the <B>IDispatch</B> interface obtained from <A HREF="sweep063.htm#olescrpt_0005000106010600" TARGET=TEXT>IActiveScript::GetScriptDispatch</A>, or by calling <A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>IActiveScriptParse::ParseScriptText</A>. It is possible that further background initialization (progressive loading) is still ongoing, and that calling <A HREF="sweep063.htm#olescrpt_0005000106010d00" TARGET=TEXT>SetScriptState</A> with the <A HREF="sweep063.htm#olescrpt_0005000106010d03" TARGET=TEXT>SCRIPTSTATE_CONNECTED</A> value may cause the script to block until initialization is complete. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000105020004">connected</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script is loaded and connected for sinking events from host objects.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000105020005">disconnected</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script is loaded and has a run-time state, but is temporarily disconnected from sinking events from host objects. This state is distinguished from the <B>initialized</B> state in that the transition to this state does not cause the script to reset, the run-time state of the script is not reset, and a script initialization procedure is not executed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000105020006">closed</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script has been closed. The scripting engine no longer works and returns errors for most methods.
+</FONT></TD></TR></TABLE>
+<P>The following illustration shows the relationships between the various scripting engine states, and shows the methods that cause transitions from one state to another.
+
+<P><IMG SRC="art/olescr02.gif" WIDTH="361" HEIGHT="318" ALT="" >
+
+<P>The following illustration shows the actions that the scripting engine performs during the various state transitions.
+
+<P><IMG SRC="art/olescr03.gif" WIDTH="326" HEIGHT="384" ALT="" >
+
+
+
+<H3><A NAME="olescrpt_0005000105030000">A Word About Threading</A></H3>
+<P>Because an ActiveX Scripting engine can be used in many environments, it is important to keep its execution model as flexible as possible. For example, a server-based host may have a multithreaded design that it needs to preserve while using ActiveX Scripting in an efficient manner. At the same time, a host that does not use threading, such as a typical application, should not be burdened with threading management. ActiveX Scripting achieves this balance by restricting the ways a free-threaded scripting engine can call back to the host, freeing hosts from this burden.
+
+
+
+<H4><A NAME="olescrpt_0005000105030100">For Scripting Engine Implementers</A></H4>
+<P>Scripting engines used on servers are typically implemented as free-threading COM objects. This means that methods on <A HREF="sweep063.htm#olescrpt_0005000106010000" TARGET=TEXT>IActiveScript</A> and its associated interfaces can be called from any thread in the process, without marshaling. (Unfortunately, this also means that the scripting engine must be implemented as an in-process server, because OLE does not currently support interprocess marshaling of free-threaded objects.) Synchronization is the responsibility of the scripting engine. For scripting engines that are not internally reentrant, or for language models that are not multithreaded, synchronization could be as simple as serializing access to the scripting engine with a mutex. Of course certain methods, such as <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A>, should not be serialized in this way, so that a stuck script can be terminated from another thread.
+
+<P>The fact that <A HREF="sweep063.htm#olescrpt_0005000106010000" TARGET=TEXT>IActiveScript</A> is free-threaded generally implies that <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A> and the host's object model should be free-threaded as well. This would make implementation of the host quite difficult, particularly in the common case where the host is a single-threaded Windows&#174;-based application with single-threaded or apartment-model ActiveX controls in its object model. For this reason, the following constraints are placed on the scripting engine's use of <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>:
+
+<UL><LI>The script site is always called in the context of a host thread. That is, the scripting engine never calls the script site in the context of a thread that it created, but only from within a scripting engine method that was called from the host (directly through <A HREF="sweep063.htm#olescrpt_0005000106010000" TARGET=TEXT>IActiveScript</A> and its derivatives, through the exposed scripting engine's dispatch object, or through a Windows message; indirectly from an event source in the host's object model).
+<LI>The script site is never called from within the context of a simple thread state control method (for example, <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A>) or from the <A HREF="sweep063.htm#olescrpt_0005000106010300" TARGET=TEXT>Clone</A> method.
+</UL>
+<H4><A NAME="olescrpt_0005000105030200">For Scripting Host Implementers</A></H4>
+<P>A host can safely assume that an engine will call <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A> only in the context of the base thread, as long as the host obeys the following rules:
+
+<UL><LI>Choose a base thread (generally the thread that contains the message loop).
+<LI>Instantiate the scripting engine in the base thread.
+<LI>Call scripting engine methods only from the base thread, except where specifically allowed, as in the cases of <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A> and <A HREF="sweep063.htm#olescrpt_0005000106010300" TARGET=TEXT>Clone</A>.
+<LI>Call the scripting engine's dispatch object only in the base thread.
+<LI>Ensure that the message loop runs in the base thread if a window handle is provided. 
+<LI>Ensure that objects in the host's object model only source events in the base thread.
+</UL>
+<P>Note that these rules are automatically followed by all single-threaded hosts. The restricted model described above is intentionally loose enough to allow a host to abort a stuck script by calling <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A> from another thread (initiated by a <FONT SIZE=-2>CTRL+BREAK</FONT> handler or the like), or to duplicate a script in a new thread using <A HREF="sweep063.htm#olescrpt_0005000106010300" TARGET=TEXT>Clone</A>.
+
+<P>Also note that none of these restrictions apply to a host that chooses to implement a free-threaded <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A> and a free-threaded object model. Such a host can use <A HREF="sweep063.htm#olescrpt_0005000106010000" TARGET=TEXT>IActiveScript</A> from any thread, without restriction.
+
+<H4><A NAME="olescrpt_0005000105030300">Script Thread Execution States</A></H4>
+<P>Each script thread can be in one of the following execution states:
+
+
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>State
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>NotInScript</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The thread is not currently running in a script (sinking a scripted event, processing <A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>ParseScriptText</A>, or being called through a global script function published through <A HREF="sweep063.htm#olescrpt_0005000106010600" TARGET=TEXT>GetScriptDispatch</A>).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Running</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The thread is currently executing script code.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep061.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep063.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

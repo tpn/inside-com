@@ -1,0 +1,91 @@
+#
+# Chapter 5 - Makefile
+#
+#
+# Flags - Always compiles debug.
+#
+CPP_FLAGS=/c /MTd /Zi /Od /D_DEBUG
+EXE_LINK_FLAGS=/DEBUG
+DLL_LINK_FLAGS=/DLL /DEBUG
+
+LIBS=UUID.lib
+
+#################################################
+#
+# Targets
+#
+all : clients components
+
+clients : Client1.exe Client2.exe Client3.exe
+
+components : Cmpnt1.dll Cmpnt2.dll Cmpnt3.dll 
+	   
+
+#################################################
+#
+# Shared source files
+#
+
+GUIDs.obj : GUIDs.cpp 
+	cl $(CPP_FLAGS) GUIDs.cpp
+
+#################################################
+#
+# Component source files
+#
+
+Cmpnt1.obj : Cmpnt1.cpp Iface.h
+	cl $(CPP_FLAGS) Cmpnt1.cpp
+
+Cmpnt2.obj : Cmpnt2.cpp Iface.h
+	cl $(CPP_FLAGS) Cmpnt2.cpp
+
+Cmpnt3.obj : Cmpnt3.cpp Iface.h
+	cl $(CPP_FLAGS) Cmpnt3.cpp
+
+
+#################################################
+#
+# Client source files
+#
+
+# Shared File
+Create.obj : Create.cpp Create.h
+	cl $(CPP_FLAGS) Create.cpp
+
+Client1.obj : Client1.cpp Iface.h Create.h
+	cl $(CPP_FLAGS) Client1.cpp
+
+Client2.obj : Client2.cpp Iface.h Create.h
+	cl $(CPP_FLAGS) Client2.cpp
+
+Client3.obj : Client3.cpp Iface.h Create.h
+	cl $(CPP_FLAGS) Client3.cpp
+
+#################################################
+#
+# Link components.
+#
+
+Cmpnt1.dll : Cmpnt1.obj	GUIDs.obj Cmpnt1.def 
+	link $(DLL_LINK_FLAGS) Cmpnt1.obj GUIDs.obj $(LIBS) /DEF:Cmpnt1.def 
+
+Cmpnt2.dll : Cmpnt2.obj	GUIDs.obj Cmpnt2.def 
+	link $(DLL_LINK_FLAGS) Cmpnt2.obj GUIDs.obj $(LIBS) /DEF:Cmpnt2.def 
+
+Cmpnt3.dll : Cmpnt3.obj	GUIDs.obj Cmpnt3.def 
+	link $(DLL_LINK_FLAGS) Cmpnt3.obj GUIDs.obj $(LIBS) /DEF:Cmpnt3.def 
+
+#################################################
+#
+# Link clients.
+#
+
+Client1.exe : Client1.obj Create.obj GUIDs.obj
+	link $(EXE_LINK_FLAGS) Client1.obj Create.obj GUIDs.obj $(LIBS)
+
+Client2.exe : Client2.obj Create.obj GUIDs.obj
+	link $(EXE_LINK_FLAGS) Client2.obj Create.obj GUIDs.obj $(LIBS)
+
+Client3.exe : Client3.obj Create.obj GUIDs.obj
+	link $(EXE_LINK_FLAGS) Client3.obj Create.obj GUIDs.obj $(LIBS)

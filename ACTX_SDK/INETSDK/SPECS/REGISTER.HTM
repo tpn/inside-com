@@ -1,0 +1,161 @@
+<HTML>
+
+<HEAD>
+
+<TITLE>Untitled</TITLE>
+
+<META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.0z">
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<H1>Registering an ActiveX Object as the Player for a Media Type
+</H1>
+
+<P>
+This document describes how to register an ActiveX object as the
+&quot;viewer&quot; or &quot;player&quot; for a particular media
+type (MIME). This registration is <I>essential i</I>n order for
+Microsoft Internet Explorer to launch the correct player when
+interpreting the standard HTML &lt;A HREF&gt; tag or the Netscape-introduced
+&lt;EMBED&gt; tag. Note that &lt;A HREF&gt; and &lt;EMBED&gt; can 
+instantiate ActiveX objects only when given a data file.
+Without the registration described below it is impossible for ActiveX containers
+to guess what application to use to display or play an unknown
+media file. The registration process associates an ActiveX object
+with a given MIME type or filename extension so that Microsoft
+Internet Explorer or any other ActiveX container can launch the
+correct &quot;player&quot; for files of that type. Microsoft Internet
+Explorer first tries to find a match for the correct media type,
+and if that is not possible, the filename extension is used.
+When finding a viewer for &lt;HREF&gt; to a new file type, Internet
+Explorer first tries to find an ActiveX Document Object, and if none
+is found, it will also try to find an OLE Control (matching the 
+OC'94 specification) that is marked as "full-page aware" (see below).
+
+<H2><A NAME="top">What information needs to be registered</A></H2>
+
+<P>
+An ActiveX Object has four pieces of identifying information:
+<OL>
+<LI><A HREF="#clsid"><B>The CLSID (Class ID) of the object.</B></A> This is
+a Globally Unique ID (GUID). In examples below we will use this
+CLSID: {01234567-89AB-CDEF-0123-456789ABCDEF}
+<LI><A HREF="#progid"><B>The &quot;ProgId&quot; of the object.</B></A> This is
+a textual &quot;program ID&quot;. In examples below we will use
+the progid &quot;FooCorp.BarControl&quot;
+<LI><A HREF="#mime"><B>The MIME Type for media types the object understands.</B></A>
+Note: not all ActiveX Objects are viewers or players for media
+types, so not every object needs to be associated with a MIME type.
+For examples below, we will use the MIME Type &quot;application/foobar&quot;.
+<LI><A HREF="#fileext"><B>The File Extension for media types the object understands.</B></A>
+Note: not all ActiveX Objects are viewers or players for media
+types, so not every object needs to be associated with a file
+extension. For examples below, we will use the extension &quot;.foo&quot;.
+</OL>
+
+<H2><A NAME="clsid">Step 1: Registering the CLSID for the ActiveX object </A></H2>
+
+<P>
+All ActiveX/COM objects must be entered in the registry so COM
+knows how to instantiate the object servers from the appropriate
+executable file. For full details on this registration process,
+see the COM Specification or OLE Reference (Win32 SDK). A simple
+in-proc server would enter information such as the following in
+the registry:
+<PRE>    HKEY_CLASSES_ROOT\CLSID\
+        {01234567-89AB-CDEF-0123-456789ABCDEF}\
+            InProcServer32            DLL File location
+            ProgId                    FooCorp.BarControl
+            ......
+</PRE>
+To see an example, run regedit.exe and look under HKEY_CLASSES_ROOT\CLSID.
+<P>
+It is possible for an OLE Control (matching the OC'94 specification) 
+to act as an embedded viewer for &lt;EMBED&gt;
+tags. For this to happen correctly, it is necessary to include the 
+"Control" keyword in the registry settings for the control:
+<PRE>    HKEY_CLASSES_ROOT\CLSID\
+        {01234567-89AB-CDEF-0123-456789ABCDEF}\
+            Control                   (value not set)
+</PRE>
+<P>
+It is <I>also</I> possible
+to register an OC'94 OLE Control as a &quot;full-frame&quot; viewer
+so it is used as the viewer/player when following &lt;A HREF&gt;
+hyperlinks to a particular media type. In order to mark an OLE
+Control as capable of &quot;full-frame&quot; display, you must mark it with
+the "Control" keyword as described above, and also add the
+following registry information to enable full-frame viewing for particular
+data types:
+<PRE>    HKEY_CLASSES_ROOT\CLSID\
+        {01234567-89AB-CDEF-0123-456789ABCDEF}\
+            EnableFullPage\
+               .foo<BR>
+</PRE>
+<B>Note: </B>a requirement of this &quot;EnableFullPane&quot; registration process is to
+register the control as the viewer for the &quot;.foo&quot; file extension as described below.
+The requirement for the control to match the OC'94 specification is there
+because otherwise the object marked "Control" will show up in other
+OC'94 containers but will not work correctly. Future versions of Internet
+Explorer should allow non-OC'94 ActiveX Controls to work correctly with 
+&lt;EMBED&gt; and &lt;A HREF&gt;.
+<P>
+<A HREF="#top">Back to top.</A>
+<H2><A NAME="progid">Step 2: Associating the object's CLSID with a ProgId </A></H2>
+
+<P>
+In order to associate a given ActiveX object with data types,
+it is first necessary to associate the object CLSID with a ProgId
+(Program ID). This is explained fully in the COM Specification
+or OLE Reference pages (Win32 SDK), and is illustrated in the
+simple example below for defining the new ProgId &quot;FooCorp.BarControl&quot;:
+<PRE>    HKEY_CLASSES_ROOT\
+        FooCorp.BarControl\
+            CLSID                     {01234567-89AB-CDEF-0123-456789ABCDEF}
+</PRE>
+Also under the ProgId key it is possible to register shell commands
+to be used to edit or open files for this ProgId, for example:
+<PRE>    HKEY_CLASSES_ROOT\FooCorp.BarControl\
+        Shell\Open\
+            Command                   c:\Program Files\foobar.exe %1
+</PRE>
+<A HREF="#top">Back to top.</A>
+<H2><A NAME="mime">Step 3: Associating the object with a MIME type </A></H2>
+
+<P>
+It is possible to associate an ActiveX object as a viewer for
+various media types. The following keys must be entered in the
+registry to associate a given ActiveX object with a given media
+type application/foobar:
+<PRE>    HKEY_CLASSES_ROOT\
+        MIME\Database\Content Type\
+            application/foobar\
+                Extension             .foo
+                CLSID                 {01234567-89AB-CDEF-0123-456789ABCDEF}
+</PRE>
+Note: neither the &quot;Extension&quot; nor the &quot;CLSID&quot;
+keys are necessary. One associates the MIME type with a file extension,
+the other associates it with the CLSID of an ActiveX object.
+<P><A HREF="#top">Back to top.</A>
+<H2><A NAME="fileext">Step 4: Associating the file extension with a ProgId and optionally
+with a MIME type </A></H2>
+
+<P>
+If an ActiveX container such as Microsoft Internet Explorer does
+not have a (server-provided) MIME type to choose a viewer for
+a new data type, the data filename extension is used to find the
+appropriate ActiveX object to understand the new media format.
+If the filename extension is associated with a MIME type, the
+MIME-CLSID mapping is used to pick the object. Otherwise, the
+extension-ProgId mapping is used. The example below shows how
+to associate a 3-letter file extension with a MIME type and a
+ProgId, although the MIME association is optional
+<PRE>    HKEY_CLASSES_ROOT\
+        .foo\
+            (Default)                 FooCorp.BarControl
+            Content Type              application/foobar
+</PRE>
+<A HREF="#top">Back to top.</A>
+</BODY>
+
+</HTML>

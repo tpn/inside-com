@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>About Conferencing APIs</TITLE></HEAD>
+<BODY BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LEFTMARGIN=10 TOPMARGIN=10>
+<P><FONT FACE="arial" SIZE=5>Windows Conferencing API</FONT><BR><HR><P><P><FONT FACE="arial" SIZE="2">
+<H1><A NAME="msconfov_0001000101000000">About Conferencing APIs</A></H1>
+<P>The purpose of the high-level Conferencing Application Program Interface is to enable productivity applications to take advantage of 
+existing conferencing features while requiring minimal development effort.
+ 
+<P>The functions enabled by these APIs can be grouped into three areas:
+<UL><LI><A HREF="mscon000.htm#msconfov_0001000102000100">Managing conference information</A>
+<LI><A HREF="mscon000.htm#msconfov_0001000102000200">Sharing applications</A>
+<LI><A HREF="mscon000.htm#msconfov_0001000102000300">Transferring data</A>
+</UL>
+<P>It is not intended that these functions be used to streamline development
+of truly distributed conferencing applications.
+The Multipoint Communication Services (MCS) and Generic Call Control (GCC)
+APIs are available to applications for this purpose.
+The MCS and GCC APIs are beyond the scope of this document. 
+
+<P>It should be noted that almost all of the APIs are synchronous.
+In general, the function call will not return until the 
+specified action is complete.
+If the application requires the process to not lose control for an extended 
+period of time, it should start a separate thread to handle the task.
+
+<HR><CENTER>
+<A HREF="mscon000.htm">[Next]</A>
+</CENTER>
+</FONT>
+</BODY></HTML>

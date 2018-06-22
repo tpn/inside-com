@@ -1,0 +1,68 @@
+#
+# Chapter 7 - Makefile
+#
+#
+# Flags - Always compiles debug.
+#
+CPP_FLAGS=/c /MTd /Zi /Od /D_DEBUG
+EXE_LINK_FLAGS=/DEBUG
+DLL_LINK_FLAGS=/DLL /DEBUG
+
+LIBS=UUID.lib Advapi32.lib Ole32.lib
+
+#################################################
+#
+# Targets
+#
+all : client component
+
+client : Client.exe 
+
+component : Cmpnt.dll 
+	   
+
+#################################################
+#
+# Shared source files
+#
+
+GUIDs.obj : GUIDs.cpp 
+	cl $(CPP_FLAGS) GUIDs.cpp
+
+Registry.obj : Registry.cpp Registry.h
+	cl $(CPP_FLAGS) Registry.cpp
+
+#################################################
+#
+# component source files
+#
+
+Cmpnt.obj : Cmpnt.cpp Iface.h Registry.h
+	cl $(CPP_FLAGS) Cmpnt.cpp
+
+
+#################################################
+#
+# Client source files
+#
+
+Client.obj : Client.cpp Iface.h 
+	cl $(CPP_FLAGS) Client.cpp
+
+
+#################################################
+#
+# Link component and automatically register component.
+#
+
+Cmpnt.dll : Cmpnt.obj	GUIDs.obj Registry.obj Cmpnt.def 
+	link $(DLL_LINK_FLAGS) Cmpnt.obj GUIDs.obj Registry.obj $(LIBS) /DEF:Cmpnt.def 
+	regsvr32 -s Cmpnt.dll
+
+#################################################
+#
+# Link client.
+#
+
+Client.exe : Client.obj GUIDs.obj
+	link $(EXE_LINK_FLAGS) Client.obj GUIDs.obj $(LIBS)

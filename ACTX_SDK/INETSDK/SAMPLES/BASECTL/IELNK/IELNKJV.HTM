@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE>Hlink Control</TITLE>
+</HEAD>
+
+<BODY>
+<H1> Internet Ielnk Sample Control </H1>
+<HR>
+<OBJECT
+id=ielnk1
+type="application/x-oleobject"
+classid="clsid:80EC37C0-984A-11CF-A3A9-00A0C9034920"
+width=400
+height=30
+>
+<PARAM NAME="hlink" value="http://www.microsoft.com">
+<PARAM NAME="flags" value="1">
+</OBJECT>
+
+<HR>
+Hlink control.
+
+<HR>
+Mode
+<INPUT TYPE=TEXT VALUE="0" NAME="Mode">
+<BR>
+<BR>
+<BR>
+Target
+<INPUT TYPE=TEXT VALUE="http://www.microsoft.com" NAME="Target">
+<BR>
+<BR>
+<BR>
+Location
+<INPUT TYPE=TEXT VALUE="" NAME="Location">
+<BR>
+<BR>
+<BR>
+TargetFrame
+<INPUT TYPE=TEXT VALUE="scene" NAME="TargetFrame">
+<BR>
+<BR>
+<BR>
+Flags
+<INPUT TYPE=TEXT VALUE="1" NAME="Flags">
+<BR>
+<BR>
+<BR>
+<INPUT TYPE=BUTTON VALUE="Back" NAME="BtnBack" onClick="BackOnClick()">
+
+<INPUT TYPE=BUTTON VALUE="Go" NAME="BtnGo" onClick="GoOnClick()">
+
+<INPUT TYPE=BUTTON VALUE="Forward" NAME="BtnForward" onClick="ForwardOnClick()">
+<HR>
+<UL>Properties
+<BR>
+<LI>Hlink - Target URL.
+<LI>Location - Location within the target URL specified.
+<LI>TargetFrame - Target Frame for navigation.
+<LI>Flags - HLNF navigation flags
+<UL>
+<LI>1 - Navigation required is an internal jump. (HLNF_INTERNALJUMP)
+<LI>2 - Navigation required in a new browser window. (HLNF_OPENINNEWWINDOW)
+</UL>
+<LI>Mode
+<UL>
+<LI>0 - HlinkSimpleNavigateToString
+<LI>1 - HlinkSimpleNavigateToString with NULL pUnk
+<LI>2 - HlinkNavigateString
+<LI>3 - HlinkNavigateString with NULL pUnk
+<LI>4 - HlinkSimpleNavigateToMoniker
+<LI>5 - HlinkSimpleNavigateToMoniker with NULL pUnk
+<LI>6 - HlinkNavigateMoniker
+<LI>7 - HlinkNavigateMoniker with NULL pUnk
+</UL>
+</UL>
+<BR>
+<UL> Methods
+<BR>
+<LI> Go
+<LI> Back
+<LI> Forward
+</UL>
+<SCRIPT LANGUAGE="JavaScript">
+function GoOnClick() {
+	ielnk1.mode = Mode.Value
+	ielnk1.hlink = Target.Value
+	ielnk1.location = Location.Value
+	ielnk1.targetframe = TargetFrame.Value
+	ielnk1.flags = Flags.Value
+	ielnk1.Go()
+}
+
+function BackOnClick() {
+	ielnk1.Back()
+}
+
+function ForwardOnClick()  {
+	ielnk1.Forward()
+}
+</SCRIPT>
+
+NOTE: HLSIMPLE.DOC available in the specs directory under INETSDK installation explains these functions in detail.
+</BODY>
+</HTML>

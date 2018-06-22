@@ -1,0 +1,270 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Gopher Functions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep083.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep085.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="wininet_0008000105000000">Gopher Functions</A></H2>
+<BR CLEAR=ALL>
+<P>The Gopher functions control the creation and use of the Internet Gopher utilities. 
+
+
+
+<H3><A NAME="wininet_0008000105000100">GopherCreateLocator</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL GopherCreateLocator(
+    IN LPCTSTR lpszHost,
+    IN INTERNET_PORT nServerPort,
+    IN LPCTSTR lpszDisplayString OPTIONAL,
+    IN LPCTSTR lpszSelectorString OPTIONAL,
+    IN DWORD dwGopherType,
+    OUT LPCTSTR lpszLocator OPTIONAL,
+    IN OUT LPDWORD lpdwBufferLength
+);
+</FONT></PRE>
+<P>Creates a Gopher or Gopher+ locator string from its component parts.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B> or <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A>.
+
+</UL>
+<DL><DT><I>lpszHost</I>
+ </DT><DD>Address of a string that contains the name of the host, or a dotted-decimal IP address (such as 198.105.232.1).
+</DD><DT><I>nServerPort</I>
+ </DT><DD>Number of the port on which the Gopher server at <I>lpszHost</I> lives, in host byte order. If <I>nServerPort</I> is INTERNET_INVALID_PORT_NUMBER, the default Gopher port is read from the \etc\services file.
+
+</DD><DT><I>lpszDisplayString</I>
+ </DT><DD>Gopher document or directory to be displayed. If this parameter is NULL, the function returns the default directory for the Gopher server.
+</DD><DT><I>lpszSelectorString</I>
+ </DT><DD>Address of the selector string to send to the Gopher server in order to retrieve information. This parameter can be NULL.
+</DD><DT><I>dwGopherType</I>
+ </DT><DD>Value that specifies whether <I>lpszSelectorString</I> refers to a directory or document, and whether the request is Gopher+ or Gopher. 
+
+For more information, see the <A HREF="sweep088.htm#wininet_0008000109000200" TARGET=TEXT>GOPHER_FIND_DATA</A> structure.
+</DD><DT><I>lpszLocator</I>
+ </DT><DD>Address of a buffer that receives the locator string. If <I>lpszLocator</I> is NULL, <I>lpdwBufferLength</I> receives the needed buffer length, but the function performs no other processing.
+</DD><DT><I>lpdwBufferLength</I>
+ </DT><DD>Length of the <I>lpszLocator</I> buffer. When the function returns, this parameter receives the number of bytes written to the <I>lpszLocator</I> buffer. If <B>GetLastError</B> returns ERROR_INSUFFICIENT_BUFFER, this parameter receives the number of bytes required to form the locator successfully.
+</DD></DL>
+<P>To retrieve information from a Gopher server, an application must first get a Gopher "locator" from the Gopher server. 
+
+<P>The locator, which the application should treat as an opaque token, is normally used for calls to the <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A> function to retrieve a specific piece of information.
+<H3><A NAME="wininet_0008000105000200">GopherGetLocatorType</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL GopherGetLocatorType(
+    IN LPCTSTR lpszLocator,
+    OUT LPDWORD lpdwGopherType
+);
+</FONT></PRE>
+<P>Parses a Gopher locator and determines its attributes.
+
+<DL><DT><I>lpszLocator</I>
+ </DT><DD>Address of the Gopher locator string to parse.
+</DD><DT><I>lpdwGopherType</I>
+ </DT><DD>Address of a variable that receives the type of the locator. The type is a bitmask that consists of a combination of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_TEXT_FILE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An ASCII text file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_DIRECTORY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A directory of additional Gopher items.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_CSO
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A CSO telephone book server.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_ERROR
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicator of an error condition.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_MAC_BINHEX
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A Macintosh file in BINHEX format.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_DOS_ARCHIVE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An MS-DOS&#174; archive file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_UNIX_UUENCODED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A UUENCODED file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_INDEX_SERVER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An index server.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_TELNET
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A Telnet Server.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_BINARY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A binary file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_REDUNDANT
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicator of a duplicated server. The information contained within is a duplicate of the primary server. The primary server is defined as the last directory entry that did not have a GOPHER_TYPE_REDUNDANT type.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_TN3270
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A TN3270 server.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_GIF
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A GIF graphics file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_IMAGE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An image file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_BITMAP
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A bitmap file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_MOVIE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A movie file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_SOUND
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A sound file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_HTML
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An HTML document.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_PDF
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A PDF file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_CALENDAR
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A calendar file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_INLINE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An inline file.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_UNKNOWN
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The item type is unknown.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_ASK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An Ask+ item.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_TYPE_GOPHER_PLUS
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A Gopher+ item.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P>The <B>GopherGetLocatorType</B> function returns information about the item referenced by a Gopher locator. Note that it is possible for multiple attributes to be set on a file. For example, both GOPHER_TYPE_TEXT_FILE and GOPHER_TYPE_GOPHER_PLUS are set for a text file stored on a Gopher+ server.
+<H3><A NAME="wininet_0008000105000300">GopherFindFirstFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HINTERNET GopherFindFirstFile(
+    IN HINTERNET hGopherSession,
+    IN LPCTSTR lpszLocator OPTIONAL,
+    IN LPCTSTR lpszSearchString OPTIONAL,
+    OUT LPGOPHER_FIND_DATA lpFindData OPTIONAL,
+    IN DWORD dwFlags,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Uses a Gopher locator and some search criteria to create a session with the server and locate the requested documents, binary files, index servers, or directory trees.
+
+<UL><LI>Returns a valid search handle if successful, or NULL otherwise. To get extended error information, call <B>GetLastError</B> or <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A>.
+
+</UL>
+<DL><DT><I>hGopherSession</I>
+ </DT><DD>Handle to a Gopher session returned by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>.
+</DD><DT><I>lpszLocator</I>
+ </DT><DD>Name of the item to locate. Can be one of the following items:
+<UL><LI>A Gopher locator returned by <I>lpGopherFindData</I>, or a locator obtained by a previous call to this function or the <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A> function.
+<LI>A NULL pointer or zero-length string indicating that the topmost information from a Gopher server is being returned.
+<LI>A locator created by the <A HREF="sweep084.htm#wininet_0008000105000100" TARGET=TEXT>GopherCreateLocator</A> function.
+</UL>
+</DD><DT><I>lpszSearchString</I>
+ </DT><DD>Address of a buffer that contains the strings to search, if this request is to an index server. Otherwise, this parameter should be NULL. 
+</DD><DT><I>lpFindData</I>
+ </DT><DD>Address of a <A HREF="sweep088.htm#wininet_0008000109000200" TARGET=TEXT>GOPHER_FIND_DATA</A> structure that receives the information retrieved by this function.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Action flag. For a list of the valid flag values, see <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>.
+</DD><DT><I>dwContext</I>
+ </DT><DD>Application-defined value that associates this search with any application data. 
+</DD></DL>
+<P>The <B>GopherFindFirstFile</B> function closely resembles the Win32 <B>FindFirstFile</B> function. It creates a connection with a Gopher server, and then returns a single structure containing information about the first Gopher object referenced by the locator string.
+
+<P>After calling <B>GopherFindFirstFile</B> to retrieve the first Gopher object in an enumeration, an application can use the <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A> function to retrieve subsequent Gopher objects.
+
+<P>Use the <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> function to close the handle returned from <B>GopherFindFirstFile</B>. If there are any pending operations described by the handle when the application calls <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, they are canceled or marked as closed pending. Any open sessions are terminated, and any data waiting for the caller is discarded. In addition, any allocated buffers are freed.
+
+<P>See also <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>, <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A>
+<H3><A NAME="wininet_0008000105000400">GopherGetAttribute</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL GopherGetAttribute(
+    IN HINTERNET hGopherSession,
+    IN LPCTSTR lpszLocator,
+    IN LPCTSTR lpszAttributeName OPTIONAL,
+    OUT LPBYTE lpBuffer,
+    IN DWORD dwBufferLength,
+    OUT LPDWORD lpdwCharactersReturned,
+    IN GOPHER_ATTRIBUTE_ENUMERATOR lpfnEnumerator OPTIONAL,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Allows an application to retrieve specific attribute information from the server.
+
+<UL><LI>Returns TRUE if the request is satisfied, or FALSE otherwise. To get extended error information, call <B>GetLastError</B> or <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A>.
+
+</UL>
+<DL><DT><I>hGopherSession</I>
+ </DT><DD>Handle to a Gopher session returned by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>.
+</DD><DT><I>lpszLocator</I>
+ </DT><DD>Address of a string that identifies the item at the Gopher server on which to return attribute information.
+</DD><DT><I>lpszAttributeName</I>
+ </DT><DD>Address of a space-delimited string specifying the names of attributes to return. If <I>lpszAttributeName</I> is NULL, <B>GopherGetAttribute</B> will return information about all attributes.
+</DD><DT><I>lpBuffer</I>
+ </DT><DD>Address of an application-defined buffer from which attribute information is retrieved.
+</DD><DT><I>dwBufferLength</I>
+ </DT><DD>Size, in bytes, of the <I>lpBuffer</I> buffer.
+</DD><DT><I>lpdwCharactersReturned</I>
+ </DT><DD>Number of characters read into the <I>lpBuffer</I> buffer.
+</DD><DT><I>lpfnEnumerator</I>
+ </DT><DD>Address of a callback function that enumerates each attribute of the locator. This parameter is optional. If it is NULL, all the Gopher attribute information is placed into <I>lpBuffer</I>. If <I>lpfnEnumerator</I> is specified, the callback function is called once for each attribute of the object.
+ </DD><DD>The callback function receives the address of a single <A HREF="sweep088.htm#wininet_0008000109000100" TARGET=TEXT>GOPHER_ATTRIBUTE_TYPE</A> structure with each call. The enumeration callback function allows the application to avoid having to parse the Gopher attribute information.
+</DD><DT><I>dwContext</I>
+ </DT><DD>Application-defined value that associates this operation with any application data.
+</DD></DL>
+<P>Generally, applications call this function after calling <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A> or <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A>.
+
+<P>The size of the <I>lpBuffer</I> parameter must be equal to or greater than the value of MIN_GOPHER_ATTRIBUTE_LENGTH (currently defined in Wininet.h as 256 bytes).
+
+<P>See also <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>
+
+<H3><A NAME="wininet_0008000105000500">GopherAttributeEnumerator</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">
+BOOL GopherAttributeEnumerator(
+    LPGOPHER_ATTRIBUTE_TYPE lpAttributeInformation,
+    DWORD dwError
+);
+</FONT></PRE>
+<P>Defines a callback function that processes attribute information from a Gopher server. This callback function is installed by a call to the <A HREF="sweep084.htm#wininet_0008000105000400" TARGET=TEXT>GopherGetAttribute</A> function.
+
+<UL><LI>Returns TRUE to continue the enumeration, or FALSE to immediately stop it. This function is primarily used for returning the results of a Gopher+ ASK item.
+
+</UL>
+<DL><DT><I>lpAttributeInformation</I>
+ </DT><DD>Address of a buffer that contains a single <A HREF="sweep088.htm#wininet_0008000109000100" TARGET=TEXT>GOPHER_ATTRIBUTE_TYPE</A> structure. The <I>lpBuffer</I> parameter to <A HREF="sweep084.htm#wininet_0008000105000400" TARGET=TEXT>GopherGetAttribute</A> is used for storing this structure. The <I>lpBuffer</I> size must be equal to or greater than the value of MIN_GOPHER_ATTRIBUTE_LENGTH. 
+</DD><DT><I>dwError</I>
+ </DT><DD>Error value. This parameter is NO_ERROR if the attribute was parsed and written to the buffer successfully. If a problem was encountered, an error value is returned.
+</DD></DL>
+<H3><A NAME="wininet_0008000105000600">GopherOpenFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HINTERNET GopherOpenFile(
+    IN HINTERNET hGopherSession,
+    IN LPCTSTR lpszLocator,
+    IN LPCTSTR lpszView OPTIONAL,
+    IN DWORD dwFlags,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Begins reading a Gopher data file from a Gopher server.
+
+<UL><LI>Returns a handle if successful, or NULL if the file cannot be opened. To get extended error information, call <B>GetLastError</B> or <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A>.
+
+</UL>
+<DL><DT><I>hGopherSession</I>
+ </DT><DD>Handle to a Gopher session returned by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>.
+</DD><DT><I>lpszLocator</I>
+ </DT><DD>Address of a string that identifies the file to open. Generally, this locator is returned from a call to <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A> or <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A>. Because the Gopher protocol has no concept of a current directory, the locator is always fully qualified.
+</DD><DT><I>lpszView</I>
+ </DT><DD>Address of a string that describes the view to open if several views of the file exist at the server. If <I>lpszView</I> is NULL, the function uses the default file view.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Any combination of the INTERNET_FLAG_* flag values. For a list of valid flag values, see <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>.
+</DD><DT><I>dwContext</I>
+ </DT><DD>Application-defined value that associates this operation with any application data.
+</DD></DL>
+<P>This function opens a file at a Gopher server. Because a file cannot be actually opened or locked at a server, this function simply associates location information with a handle that an application can use for file-based operations such as <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A> or <A HREF="sweep084.htm#wininet_0008000105000400" TARGET=TEXT>GopherGetAttribute</A>.
+
+<P>Use the <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> function to close the handle returned from <B>GopherOpenFile</B>. If there are any pending operations described by the handle when the application calls <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, they are canceled or marked as closed pending. Any open sessions are terminated, and any data waiting for the caller is discarded. In addition, any allocated buffers are freed.
+
+<P>See also <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A>, <A HREF="sweep084.htm#wininet_0008000105000400" TARGET=TEXT>GopherGetAttribute</A>, <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>, <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A>, <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>, <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep083.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep085.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

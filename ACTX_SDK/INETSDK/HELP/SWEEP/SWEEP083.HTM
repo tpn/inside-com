@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>FTP Functions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep082.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep084.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="wininet_0008000104000000">FTP Functions</A></H2>
+<BR CLEAR=ALL>
+<P>The FTP functions deal with FTP file and directory manipulation and navigation.
+
+
+<H3><A NAME="wininet_0008000104000100">FtpCreateDirectory</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FtpCreateDirectory(
+    IN HINTERNET hFtpSession,
+    IN LPCTSTR lpszDirectory
+);
+</FONT></PRE>
+<P>Creates a new directory on the FTP server.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get a specific error code, call <B>GetLastError</B>. If the error code indicates that the FTP server denied the request to create a directory, use <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A> to determine why.
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session.
+</DD><DT><I>lpszDirectory</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the directory to create on the remote system. This can be either a fully qualified path name or a name relative to the current directory.
+</DD></DL>
+<P>An application should use <A HREF="sweep083.htm#wininet_0008000104000400" TARGET=TEXT>FtpGetCurrentDirectory</A> to determine the remote site's current working directory, instead of assuming that the remote system uses a hierarchical naming scheme for directories.
+
+<P>The <I>lpszDirectory</I> parameter can be either partially or fully qualified file names relative to the current directory. A backslash (\) or forward slash (/) can be used as the directory separator for either name. The <B>FtpCreateDirectory</B> function translates the directory name separators to the appropriate character before they are used.
+<H3><A NAME="wininet_0008000104000200">FtpDeleteFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FtpDeleteFile(
+    IN HINTERNET hFtpSession,
+    IN LPCTSTR lpszFileName
+);
+</FONT></PRE>
+<P>Deletes a file stored on the FTP server.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get a specific error code, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session.
+</DD><DT><I>lpszFileName</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the file to delete on the remote system.
+</DD></DL>
+<P>The <I>lpszFile</I> parameter can be either partially or fully qualified file names relative to the current directory. A backslash (\) or forward slash (/) can be used as the directory separator for either name. The <B>FtpDeleteFile</B> function translates the directory name separators to the appropriate character before they are used.
+<H3><A NAME="wininet_0008000104000300">FtpFindFirstFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HINTERNET FtpFindFirstFile(
+    IN HINTERNET hFtpSession,
+    IN LPCTSTR lpszSearchFile OPTIONAL,
+    OUT LPWIN32_FIND_DATA lpFindFileData,
+    IN DWORD dwFlags
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Searches the specified directory of the given FTP session. File and directory entries are returned to the application in the <B>WIN32_FIND_DATA</B> structure.
+
+<UL><LI>Returns a valid handle for the request if the directory enumeration was started successfully; otherwise, returns NULL. To get a specific error code, call <B>GetLastError</B>. If the function finds no matching files, <B>GetLastError</B> returns ERROR_NO_MORE_FILES.
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session returned from <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>.
+</DD><DT><I>lpszSearchFile</I>
+ </DT><DD>Address of a null-terminated string that specifies a valid directory path name or file name for the FTP server's file system. If the value of <I>lpszSearchFile</I> is NULL or if it is an empty string, it will find the first file in the current directory on the server.
+</DD><DT><I>lpFindFileData</I>
+ </DT><DD>Address of a <B>WIN32_FIND_DATA</B> structure that receives information about the found file or directory.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Application-defined value that associates this search with any application. For a description of the values, see <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>.
+</DD><DT><I>dwContext</I>
+ </DT><DD>Application-defined value that associates this search with any application data. This parameter is used only if the application has already called <A HREF="sweep082.htm#wininet_0008000103001400" TARGET=TEXT>InternetSetStatusCallback</A> to set up a status callback function.
+</DD></DL>
+<P>This function enumerates both files and directories.
+
+<P>The <B>FtpFindFirstFile</B> function is similar to the Win32 <B>FindFirstFile</B> function. Note, however, that only one <B>FtpFindFirstFile</B> can occur at a time within a given FTP session. The enumerations, therefore, are correlated with the FTP session handle. This is because the FTP protocol allows only a single directory enumeration per session.
+
+<P>After calling <B>FtpFindFirstFile</B> and until calling <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, the application cannot call <B>FtpFindFirstFile</B> again on a given FTP session handle. If this happens, calls to the <B>FtpFindFirstFile</B> function will fail with error code ERROR_FTP_TRANSFER_IN_PROGRESS.
+
+<P>After beginning a directory enumeration with <B>FtpFindFirstFile</B>, the <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A> function can be used to continue the enumeration.
+
+<P>The <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> function is used to close the handle returned from <B>FtpFindFirstFile</B>. If the <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> function closes the handle before <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A> fails with ERROR_NO_MORE_FILES, the directory enumeration will be terminated.
+
+<P>Because the FTP protocol provides no standard means of enumerating, some of the common information about files, such as file creation date and time, is not always available or correct. When this happens, <B>FtpFindFirstFile</B> and <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A> fill in unavailable information with a "best guess" based on available information. For example, creation and last access dates will often be the same as the file's modification date.
+
+<P>The application cannot call <B>FtpFindFirstFile</B> between calls to <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A> and <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>.
+
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A>, <A HREF="sweep082.htm#wininet_0008000103001400" TARGET=TEXT>InternetSetStatusCallback</A>
+<H3><A NAME="wininet_0008000104000400">FtpGetCurrentDirectory</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FtpGetCurrentDirectory(
+    IN HINTERNET hFtpSession,
+    OUT LPCTSTR lpszCurrentDirectory,
+    IN OUT LPDWORD lpdwCurrentDirectory
+);
+</FONT></PRE>
+<P>Retrieves the current directory for the specified FTP session.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get the specific error code, call <B>GetLastError</B>. If the error code indicates that the FTP server denied the request to change to a directory, use <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A> to determine why.
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session.
+</DD><DT><I>lpszCurrentDirectory</I>
+ </DT><DD>Address of a buffer that receives the current directory string, which specifies the absolute path to the current directory. The string is null terminated.
+</DD><DT><I>lpdwCurrentDirectory</I>
+ </DT><DD>Address of a variable that specifies the length, in characters, of the buffer for the current directory string. The buffer length must include room for a terminating null character. Using a length of MAX_PATH is sufficient for all path names. When the function returns, this parameter receives the number of characters copied into the buffer.
+</DD></DL>
+<P>If the <I>lpszCurrentDirectory</I> buffer is not large enough, <I>lpdwCurrentDirectory</I> receives the number of bytes required to retrieve the full, current directory name.
+<H3><A NAME="wininet_0008000104000500">FtpGetFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FtpGetFile(
+    IN HINTERNET hFtpSession,
+    IN LPCSTR lpszRemoteFile,
+    IN LPCSTR lpszNewFile,
+    IN BOOL fFailIfExists,
+    IN DWORD dwFlagsAndAttributes,
+    IN DWORD dwFlags,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Retrieves a file from the FTP server and stores it under the specified file name, creating a new local file in the process.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get a specific error code, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session.
+</DD><DT><I>lpszRemoteFile</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the file to retrieve from the remote system.
+</DD><DT><I>lpszNewFile</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the file to create on the local system.
+</DD><DT><I>fFailIfExists</I>
+ </DT><DD>Boolean flag that indicates whether the function should proceed if a local file of the specified name already exists. If <I>fFailIfExists</I> is TRUE and the local file exists, <B>FtpGetFile</B> fails.
+</DD><DT><I>dwFlagsAndAttributes</I>
+ </DT><DD>File attributes for the new file. Can be any combination of the FILE_ATTRIBUTE_* flags used by <B>CreateFile</B>. See <B>CreateFile</B> in the Win32 SDK for more information on FILE_ATTRIBUTE_* attributes.
+</DD><DT><I>dwFlags</I>
+
+ </DT><DD>Flags that control how the function will handle the file download. The first set of flag values indicates the conditions under which the transfer occurs. These transfer type flags can be used in combination with the second set of flags that control caching. The application can select one of these transfer type values:
+
+<DL>
+<DT>FTP_TRANSFER_TYPE_ASCII
+ </DT><DD>Transfer the file using FTP's ASCII (Type A) transfer method. Control and formatting information is converted to local equivalents.
+</DD><DT>FTP_TRANSFER_TYPE_BINARY
+ </DT><DD>Transfer the file using FTP's Image (Type I) transfer method. The file is transferred exactly as it exists with no changes. This is the default transfer method.
+</DD><DT>INTERNET_FLAG_TRANSFER_ASCII
+ </DT><DD>Transfer the file as ASCII. 
+</DD><DT>INTERNET_FLAG_TRANSFER_BINARY
+ </DT><DD>Transfer the file as binary. 
+</DD></DL>
+</DD><DD>The following flags handle how the caching of this file will be handled. Any combination of the following flags can be used with the transfer type flag. The possible values are:
+
+<DL>
+<DT>INTERNET_FLAG_DONT_CACHE
+ </DT><DD>Do not add the returned entity to the cache.
+</DD><DT>INTERNET_FLAG_HYPERLINK
+ </DT><DD>Force a reload if there was no Expires time and no Last-Modified time returned from the server when determining whether to reload the item from the network.
+</DD><DT>INTERNET_FLAG_MAKE_PERSISTENT
+ </DT><DD>Add the returned entity to the cache as a persistent entity. This means that standard cache cleanup, consistency checking, or garbage collection cannot remove this item from the cache.
+</DD><DT>INTERNET_FLAG_MUST_CACHE_REQUEST
+ </DT><DD>Cause the operation to fail if the downloaded file cannot be cached.
+</DD><DT>INTERNET_FLAG_NO_CACHE_WRITE
+ </DT><DD>Do not add the returned entity to the cache.
+</DD><DT>INTERNET_FLAG_RELOAD
+ </DT><DD>Force a download of the requested file, object, or directory listing from the origin server, not from the cache. 
+
+</DD><DT>INTERNET_FLAG_RESYNCHRONIZE
+ </DT><DD>Cause the FTP resource to be reloaded from the server.
+
+</DD></DL>
+</DD><DT><I>dwContext</I>
+ </DT><DD>Application-defined value that associates this search with any application data. This is used only if the application has already called <A HREF="sweep082.htm#wininet_0008000103001400" TARGET=TEXT>InternetSetStatusCallback</A> to set up a status callback function.
+</DD></DL>
+<P>The <B>FtpGetFile</B> function is a high-level routine that handles all the bookkeeping and overhead associated with reading a file from an FTP server and storing it locally. An application that needs to retrieve file data only or that requires close control over the file transfer should use the <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A> and <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A> functions.
+
+<P>If the <I>dwTransferType</I> specifies FILE_TRANSFER_TYPE_ASCII, translation of the file data converts control and formatting characters to local equivalents. The default transfer is binary mode, where the file is downloaded in the same format as it is stored on the server.
+
+<P>Both <I>lpszRemoteFile</I> and <I>lpszNewFile</I> can be either partially or fully qualified file names relative to the current directory. A backslash (\) or forward slash (/) can be used as the directory separator for either name. The <B>FtpGetFile</B> function translates the directory name separators to the appropriate character before they are used.
+<H3><A NAME="wininet_0008000104000600">FtpOpenFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HINTERNET FtpOpenFile(
+    IN HINTERNET hFtpSession,
+    IN LPCSTR lpszFileName,
+    IN DWORD fdwAccess,
+    IN DWORD dwFlags,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Initiates access to a remote file for writing or reading.
+
+<UL><LI>Returns a handle if successful. Otherwise, the function returns NULL. To get a specific error code, call <B>GetLastError</B>.
+
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session.
+</DD><DT><I>lpszFileName</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the file to access on the remote system.
+</DD><DT><I>fdwAccess</I>
+ </DT><DD>Value that determines how the file will be accessed. This can be GENERIC_READ or GENERIC_WRITE, but not both.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Conditions under which the transfers occur. The application should select one transfer type and any of the flags that control how the caching of the file will be controlled. The transfer type can be any one of the following values:
+<DL>
+<DT>FTP_TRANSFER_TYPE_ASCII
+ </DT><DD>Transfer the file using FTP's ASCII (Type A) transfer method. Control and formatting information is converted to local equivalents.
+</DD><DT>FTP_TRANSFER_TYPE_BINARY
+ </DT><DD>Transfer the file using FTP's Image (Type I) transfer method. The file is transferred exactly as it exists with no changes. This is the default transfer method.
+</DD><DT>INTERNET_FLAG_TRANSFER_ASCII
+ </DT><DD>Transfer the file as ASCII. 
+</DD><DT>INTERNET_FLAG_TRANSFER_BINARY
+ </DT><DD>Transfer the file as binary. 
+</DD></DL>
+<P>The application can use one or more of the following values to control the caching of the file:
+<DL>
+<DT>INTERNET_FLAG_HYPERLINK
+ </DT><DD>Force a reload if there was no Expires time and no Last-Modified time returned from the server when determining whether to reload the item from the network.
+</DD><DT>INTERNET_FLAG_MAKE_PERSISTENT
+ </DT><DD>Add the returned entity to the cache as a persistent entity. This means that standard cache cleanup, consistency checking, or garbage collection cannot remove this item from the cache.
+</DD><DT>INTERNET_FLAG_MUST_CACHE_REQUEST
+ </DT><DD>Cause the operation to fail if the downloaded file cannot be cached.
+</DD><DT>INTERNET_FLAG_RELOAD
+ </DT><DD>Force a download of the requested file, object, or directory listing from the origin server, not from the cache.
+
+</DD><DT>INTERNET_FLAG_RESYNCHRONIZE
+ </DT><DD>Cause the FTP resource to be reloaded from the server.
+
+</DD></DL>
+</DD><DT><I>dwContext</I>
+ </DT><DD>Application-defined value that associates this search with any application data. This is only used if the application has already called <A HREF="sweep082.htm#wininet_0008000103001400" TARGET=TEXT>InternetSetStatusCallback</A> to set up a status callback function.
+</DD></DL>
+<P>The <B>FtpOpenFile</B> function should be used in the following situations:
+<UL><LI>An application has data it needs to send to an FTP server to be created as a file on the FTP server, but the application does not have a local file containing the data. After the file is opened with <B>FtpOpenFile</B>, the application uses <A HREF="sweep082.htm#wininet_0008000103001800" TARGET=TEXT>InternetWriteFile</A> to send the FTP file data to the server.
+<LI>An application needs to retrieve a file from the server into application-controlled memory, instead of writing the file to disk. The application uses <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A> after using <B>FtpOpenFile</B> to open the file.
+<LI>An application needs a fine level of control over a file transfer. For example, the application may need to display a "thermometer" when downloading a file to indicate to the user that the file transfer is or is not proceeding correctly.
+</UL>
+<P>After calling the <B>FtpOpenFile</B> function and until calling <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, the application can call only <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A> or <A HREF="sweep082.htm#wininet_0008000103001800" TARGET=TEXT>InternetWriteFile</A>, <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, or <A HREF="sweep083.htm#wininet_0008000104000300" TARGET=TEXT>FtpFindFirstFile</A>. Calls to other FTP functions on the same FTP session will fail and set the error code to ERROR_FTP_TRANSFER_IN_PROGRESS 
+
+<P>Only one file can be open in a single FTP session. Therefore, no file handle is returned and the application simply uses the FTP session handle when necessary.
+
+<P>The <I>lpszFile</I> parameter can be either partially or fully qualified file names relative to the current directory. A backslash (\) or forward slash (/) can be used as the directory separator for either name. The <B>FtpOpenFile</B> function translates the directory name separators to the appropriate character before they are used.
+
+<P>The <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> function is used to close the handle returned from <B>FtpOpenFile</B>. If the <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> function closes the handle before all the data has been transferred, the transfer is terminated.
+<H3><A NAME="wininet_0008000104000700">FtpPutFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FtpPutFile(
+    IN HINTERNET hFtpSession,
+    IN LPCTSTR lpszLocalFile,
+    IN LPCTSTR lpszNewRemoteFile,
+    IN DWORD dwFlags,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Stores a file on the FTP server.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get a specific error code, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session.
+</DD><DT><I>lpszLocalFile</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the file to send from the local system.
+</DD><DT><I>lpszNewRemoteFile</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the file to create on the remote system.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Conditions under which the transfer occurs. Can be any combination of FTP_TRANSFER_* defined constants. For further information on the FTP_TRANSFER_* constants, see <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>.
+</DD><DT><I>dwContext</I>
+ </DT><DD>Application-defined value that associates this search with any application data. This parameter is used only if the application has already called <A HREF="sweep082.htm#wininet_0008000103001400" TARGET=TEXT>InternetSetStatusCallback</A> to set up a status callback.
+</DD></DL>
+<P>The <B>FtpPutFile</B> function is a high-level routine that handles all the bookkeeping and overhead associated with reading a file locally and storing it on an FTP server. An application that needs to send file data only, or that requires close control over the file transfer, should use the <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A> and <A HREF="sweep082.htm#wininet_0008000103001800" TARGET=TEXT>InternetWriteFile</A> functions.
+
+<P>If the <I>dwTransferType</I> specifies FILE_TRANSFER_TYPE_ASCII, translation of the file data converts control and formatting characters to local equivalents.
+
+<P>Both <I>lpszNewRemoteFile</I> and <I>lpszLocalFile</I> can be either partially or fully qualified file names relative to the current directory. A backslash (\) or forward slash (/) can be used as the directory separator for either name. The <B>FtpPutFile</B> function translates the directory name separators to the appropriate character before they are used.
+<H3><A NAME="wininet_0008000104000800">FtpRemoveDirectory</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FtpRemoveDirectory(
+    IN HINTERNET hFtpSession,
+    IN LPCTSTR lpszDirectory
+);
+</FONT></PRE>
+<P>Removes the specified directory on the FTP server.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get the specific error code, call <B>GetLastError</B>. If the error code indicates that the FTP server denied the request to remove a directory, use <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A> to determine why.
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session.
+</DD><DT><I>lpszDirectory</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the directory to remove on the remote system. This can be either a fully qualified path name or a name relative to the current directory.
+</DD></DL>
+<P>An application should use <A HREF="sweep083.htm#wininet_0008000104000400" TARGET=TEXT>FtpGetCurrentDirectory</A> to determine the remote site's current working directory, instead of assuming that the remote system uses a hierarchical naming scheme for directories.
+
+<P>The <I>lpszDirectory</I> parameter can be either partially or fully qualified file names relative to the current directory. A backslash (\) or forward slash (/) can be used as the directory separator for either name. The <B>FtpRemoveDirectory</B> function translates the directory name separators to the appropriate character before they are used.
+<H3><A NAME="wininet_0008000104000900">FtpRenameFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FtpRenameFile(
+    IN HINTERNET hFtpSession,
+    IN LPCTSTR lpszExisting,
+    IN LPCTSTR lpszNew
+);
+</FONT></PRE>
+<P>Renames a file stored on the FTP server.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get a specific error code, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session.
+</DD><DT><I>lpszExisting</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the file that will have its name changed on the remote FTP server.
+</DD><DT><I>lpszNew</I>
+ </DT><DD>Address of a null-terminated string that contains the new name for the remote file.
+</DD></DL>
+<P>The <I>lpszExisting</I> and <I>lpszNew</I> parameters can be either partially or fully qualified file names relative to the current directory. A backslash (\) or forward slash (/) can be used as the directory separator for either name. The <B>FtpRenameFile</B> function translates the directory name separators to the appropriate character before they are used.
+<H3><A NAME="wininet_0008000104000a00">FtpSetCurrentDirectory</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL FtpSetCurrentDirectory(
+    IN HINTERNET hFtpSession,
+    IN LPCTSTR lpszDirectory
+);
+</FONT></PRE>
+<P>Changes to a different working directory on the FTP server.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get the specific error code, call <B>GetLastError</B>. If the error code indicates that the FTP server denied the request to change a directory, use <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A> to determine why.
+
+</UL>
+<DL><DT><I>hFtpSession</I>
+ </DT><DD>Valid handle to an FTP session.
+</DD><DT><I>lpszDirectory</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the directory to change to on the remote system. This can be either a fully qualified path name or a name relative to the current directory.
+</DD></DL>
+<P>An application should use <A HREF="sweep083.htm#wininet_0008000104000400" TARGET=TEXT>FtpGetCurrentDirectory</A> to determine the remote site's current working directory, instead of assuming that the remote system uses a hierarchical naming scheme for directories.
+
+<P>The <I>lpszDirectory</I> parameter can be either partially or fully qualified file names relative to the current directory. A backslash (\) or forward slash (/) can be used as the directory separator for either name. The <B>FtpSetCurrentDirectory</B> function translates the directory name separators to the appropriate character before they are used.
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep082.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep084.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

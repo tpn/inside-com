@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Basic Architecture</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep060.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep062.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="olescrpt_0005000104000000">Basic Architecture</A></H2>
+<BR CLEAR=ALL>
+<P>The following illustration shows the interaction between an ActiveX Scripting host and an ActiveX Scripting engine.
+
+<P><IMG SRC="art/olescr01.gif" WIDTH="458" HEIGHT="296" ALT="" >
+
+<P>Following is a description of the steps involved in the interaction between the host and engine (the actual nesting of the function calls is omitted for clarity):
+
+<OL><LI><B>Create a Project.</B> The host loads a project or document. (This step is not particular to ActiveX Scripting, but is included here for completeness.)
+<LI><B>Create the ActiveX Scripting Engine.</B> The host calls <B>CoCreateInstance</B> to create a new ActiveX Scripting engine, specifying the class identifier (CLSID) of the specific scripting engine to use. For example, the HTML browsing component of Internet Explorer receives the scripting engine's class identifier through the <B>CLSID=</B> attribute of the HTML &lt;OBJECT&gt; tag.
+<LI><B>Load the Script.</B> If the script contents have been persisted, the host calls the script engine's <B>IPersist*::Load</B> method to feed it the script storage, stream, or property bag. Otherwise, the host uses <B>IPersist*::InitNew</B> or <A HREF="sweep063.htm#olescrpt_0005000106020200" TARGET=TEXT>IActiveScriptParse::InitNew</A> to create a null script. A host that maintains a script as text can use <A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>IActiveScriptParse::ParseScriptText</A> to feed the scripting engine the text of the script, after calling <A HREF="sweep063.htm#olescrpt_0005000106020200" TARGET=TEXT>InitNew</A>.
+<LI><B>Add Items.</B> For each top-level named item (such as pages and forms) imported into the scripting engine's name space, the host calls <A HREF="sweep063.htm#olescrpt_0005000106010100" TARGET=TEXT>IActiveScript::AddNamedItem</A> to create an entry in the engine's name space. This step is not necessary if top-level named items are already part of the persistent state of the script loaded in step 3. A host does not use <A HREF="sweep063.htm#olescrpt_0005000106010100" TARGET=TEXT>AddNamedItem</A> to add sublevel named items (such as controls on an HTML page); rather, the engine indirectly obtains sublevel items from top-level items by using the host's <B>ITypeInfo</B> and <B>IDispatch</B> interfaces.
+<LI><B>Run the Script.</B> The host causes the engine to start running the script by passing the <A HREF="sweep063.htm#olescrpt_0005000106010d03" TARGET=TEXT>SCRIPTSTATE_CONNECTED</A> value to <A HREF="sweep063.htm#olescrpt_0005000106010d00" TARGET=TEXT>IActiveScript::SetScriptState</A>. This call would likely perform any scripting engine construction work, including static bindings, hooking up to events (see below), and executing code similar to a scripted "<B>main()</B>" function.
+<LI><B>Get Item Information.</B> Each time the script engine needs to associate a symbol with a top-level item, it calls the <A HREF="sweep063.htm#olescrpt_0005000106040200" TARGET=TEXT>IActiveScriptSite::GetItemInfo</A> method, which returns information about the given item. 
+<LI><B>Hook Up Events.</B> Before starting the actual script, the scripting engine connects to the events of all the relevant objects through the <A HREF="sweep123.htm#comobj_000f000501160000" TARGET=TEXT>IConnectionPoint</A> interface and other methods.
+<LI><B>Invoke Properties and Methods.</B> As the script runs, the scripting engine realizes references to methods and properties on named objects through <B>IDispatch::Invoke</B> or other standard OLE binding mechanisms.
+</OL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep060.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep062.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,72 @@
+#
+# Chapter 8 - Example 2 - Makefile
+#
+#
+# Flags - Always compiles debug.
+#
+CPP_FLAGS=/c /MTd /Zi /Od /D_DEBUG
+EXE_LINK_FLAGS=/DEBUG
+DLL_LINK_FLAGS=/DLL /DEBUG
+
+LIBS=uuid.lib advapi32.lib ole32.lib
+
+#################################################
+#
+# Targets
+#
+all : clients components
+
+clients : Client.exe
+
+components : Cmpnt1.dll Cmpnt2.dll
+
+#################################################
+#
+# Shared source files
+#
+
+GUIDs.obj : GUIDs.cpp
+	cl $(CPP_FLAGS) GUIDs.cpp
+
+Registry.obj : Registry.cpp Registry.h
+	cl $(CPP_FLAGS) Registry.cpp
+
+#################################################
+#
+# Component source files
+#
+
+Cmpnt1.obj : Cmpnt1.cpp Iface.h Registry.h
+	cl $(CPP_FLAGS) Cmpnt1.cpp
+
+Cmpnt2.obj : Cmpnt2.cpp Iface.h Registry.h
+	cl $(CPP_FLAGS) Cmpnt2.cpp
+
+#################################################
+#
+# Client source files
+#
+
+Client.obj : Client.cpp Iface.h
+	cl $(CPP_FLAGS) Client.cpp
+
+#################################################
+#
+# Link components and automatically register components.
+#
+
+Cmpnt1.dll : Cmpnt1.obj	GUIDs.obj Registry.obj Cmpnt1.def
+	link $(DLL_LINK_FLAGS) Cmpnt1.obj GUIDs.obj Registry.obj $(LIBS) /DEF:Cmpnt1.def
+	regsvr32 -s Cmpnt1.dll
+
+Cmpnt2.dll : Cmpnt2.obj	GUIDs.obj Registry.obj Cmpnt2.def
+	link $(DLL_LINK_FLAGS) Cmpnt2.obj GUIDs.obj Registry.obj $(LIBS) /DEF:Cmpnt2.def
+	regsvr32 -s Cmpnt2.dll
+
+#################################################
+#
+# Link clients.
+#
+
+Client.exe : Client.obj GUIDs.obj
+	link $(EXE_LINK_FLAGS) Client.obj GUIDs.obj $(LIBS)

@@ -1,0 +1,1815 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>COM Objects, Interfaces, and Functions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep122.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep124.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="comobj_000f000501000000">COM Objects, Interfaces, and Functions</A></H2>
+<BR CLEAR=ALL>
+<P>This section defines the COM-based objects, including the interfaces and methods through which a client application makes use of object instances.
+
+<P>The objects are:
+<UL><LI>Conference Manager&#151;manager of the overall conference
+ <LI>User&#151;any potential participant in a conference, including:
+<UL><LI>anyone on a ULS server (an IP address)
+ <LI>someone you can call on IPX or TCP/IP
+ <LI>a phone number 
+</UL>
+<LI>Conference&#151;a conference in progress
+ <LI>Member&#151;a participant in a conference (subset of User)
+ <LI>Channel&#151;a conduit for a specific kind of media (audio, data, video)
+</UL>
+<P>Each conference that is created gets all default channels for a normal conference automatically. For this release, the conference will get four default channels&#151;data transfer, file transfer, application sharing, and application control. Future releases will include channels for audio and video. 
+
+<P>If the default channels are used, everyone in the conference sees the results. A file sent through the file transfer channel goes to everyone in the conference, for instance. However, some methods allow a user to operate on a particular member&#151;for example, a file can be sent to one member through this open-to-all channel. 
+
+<P>In a future release, new data channels can be created to include just a subset of conference members. For example, you will be able to create a file transfer channel that sends the file to only three of the four people in your conference.
+
+<P>A channel is allowed to have only one of the following usage-specific interfaces (for example, a channel cannot have both <A HREF="sweep123.htm#comobj_000f000501110000" TARGET=TEXT>IConfDataExchange</A> and <A HREF="sweep123.htm#comobj_000f000501120000" TARGET=TEXT>IConfFileExchange</A>): 
+<UL><LI>Client application
+ <LI>Sharable application
+ <LI>File transfer
+</UL>
+<P>Conference Manager is the first COM object a COM application must create. Only one Conference Manager object needs to be created per an application instance. 
+
+<P>Objects other than Conference Manager are created in one of two ways:
+<UL><LI>Through a method in another object (for example, by calling the <A HREF="sweep123.htm#comobj_000f000501020500" TARGET=TEXT>IConferenceManager::CreateConference</A> method to create a conference).
+
+<P>The Conference, User, Communication Channel, and File Transfer objects are created this way.
+
+
+ <P><IMG SRC="art/actconf3.gif" WIDTH="436" HEIGHT="286" ALT="" ><P>
+ <LI>By object enumeration, in which the enumerator is instantiated through a method in another object (for example, by calling the <A HREF="sweep123.htm#comobj_000f000501090b00" TARGET=TEXT>IConference::EnumMember</A> method). 
+
+<P>The objects created this way are:
+<UL><LI>Member
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501090b00" TARGET=TEXT>IConference::EnumMember</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501100600" TARGET=TEXT>IConfChannel::EnumMember</A>
+</UL>
+<LI>Client Application
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501070600" TARGET=TEXT>IConfUser::EnumApplication</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010e0600" TARGET=TEXT>IConfMember::EnumApplication</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090c00" TARGET=TEXT>IConference::EnumApplication</A>
+</UL>
+<LI>Sharable Application
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501130100" TARGET=TEXT>IConfAppSharing::EnumSharableApp</A>
+</UL>
+</UL>
+<P>This automatically provides the context of the objects to be enumerated. For instance, a list of Client Application objects whose enumerator is obtained from the <A HREF="sweep123.htm#comobj_000f000501070000" TARGET=TEXT>IConfUser</A> interface is the set of applications that the User object had, whereas a list of Client Application objects whose enumerator is obtained from the <A HREF="sweep123.htm#comobj_000f000501090000" TARGET=TEXT>IConference</A> interface is the set of applications that can make use of the particular conference session.
+</UL>
+<P>Some methods in the objects' interfaces are asynchronous and require a notification to the client application when an event takes place. This will be accomplished with outgoing interfaces as defined by COM's Connectable Objects. The object defines the interface; however, the actual implementation of the interface is in the client of the object. The object (notification sender) is called a source, and the client (notification receiver) is called a sink. 
+
+<P>To have outgoing interfaces, an object must implement the <A HREF="sweep123.htm#comobj_000f000501150000" TARGET=TEXT>IConnectionPointContainer</A> interface. With this interface, the client can browse through each outgoing interface, called a connection point. Each connection point implements the <A HREF="sweep123.htm#comobj_000f000501160000" TARGET=TEXT>IConnectionPoint</A> interface. It is through <A HREF="sweep123.htm#comobj_000f000501160000" TARGET=TEXT>IConnectionPoint</A> that the client can ask for the identifier of an outgoing interface, and can give the connection point an interface pointer through which the connectable object sends notifications (that is, calls the functions in the sink). The outgoing interfaces and notifications are shown in the following table.
+<P>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Object </B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Outgoing interface </B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Function/Notification
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Conference Manager </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501050000" TARGET=TEXT>IConfMgrNotify</A> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501050100" TARGET=TEXT>InvitedToConference</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501050200" TARGET=TEXT>ConferenceCreated</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Conference </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010c0000" TARGET=TEXT>IConferenceNotify</A> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010c0100" TARGET=TEXT>StateChanged</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010c0200" TARGET=TEXT>RequestToJoin</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010c0300" TARGET=TEXT>MemberChanged</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010c0400" TARGET=TEXT>ChannelChanged</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Communication Channel </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501170000" TARGET=TEXT>IConfDataExchangeNotify</A> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501170100" TARGET=TEXT>DataSent</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501170200" TARGET=TEXT>DataReceived</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501180000" TARGET=TEXT>IConfFileExchangeNotify</A> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501180100" TARGET=TEXT>FileSent</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501180200" TARGET=TEXT>FileReceived</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501190000" TARGET=TEXT>IConfAppSharingNotify</A> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501190100" TARGET=TEXT>StatusChanged</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011a0000" TARGET=TEXT>IConfAppControlNotify</A> </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011a0100" TARGET=TEXT>StatusChanged</A>
+</FONT></TD>
+</TR>
+</TABLE>
+<P>Not all the interfaces nor methods in this specification need to be implemented. If an interface is not supported, the object returns E_NOINTERFACE. If the method is not supported, the calling method returns E_NOTIMPL.
+
+<P>The overall hierarchy of objects, interfaces, and methods are shown below.
+<P>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Conference Manager</B> 
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501020000" TARGET=TEXT>IConferenceManager</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501020100" TARGET=TEXT>Initialize</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501020200" TARGET=TEXT>GetConferenceCapabilities</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501020300" TARGET=TEXT>EnumConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501020400" TARGET=TEXT>EnumUser</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501020500" TARGET=TEXT>CreateConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501020600" TARGET=TEXT>GetRemoteConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501020700" TARGET=TEXT>CreateUser</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501150000" TARGET=TEXT>IConnectionPointContainer</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501160000" TARGET=TEXT>IConnectionPoint</A>&#151;<A HREF="sweep123.htm#comobj_000f000501050000" TARGET=TEXT>IConfMgrNotify</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501050100" TARGET=TEXT>InvitedToConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501050200" TARGET=TEXT>ConferenceCreated</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>User</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501070000" TARGET=TEXT>IConfUser</A> 
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501070100" TARGET=TEXT>GetName</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501070200" TARGET=TEXT>GetType</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501070300" TARGET=TEXT>GetConferenceCapabilities</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501070400" TARGET=TEXT>IsMCU</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501070500" TARGET=TEXT>EnumConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501070600" TARGET=TEXT>EnumApplication</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Conference</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090000" TARGET=TEXT>IConference</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090100" TARGET=TEXT>GetName</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090200" TARGET=TEXT>GetConferenceCapabilities</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090300" TARGET=TEXT>GetConferenceState</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090400" TARGET=TEXT>IsSameAs&gt;IsSameAs</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090500" TARGET=TEXT>Invite</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090600" TARGET=TEXT>AcceptInvite</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090700" TARGET=TEXT>RejectInvite</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090800" TARGET=TEXT>Join</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090900" TARGET=TEXT>AcceptJoin</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090a00" TARGET=TEXT>RejectJoin</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090b00" TARGET=TEXT>EnumMember</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090c00" TARGET=TEXT>EnumApplication</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090d00" TARGET=TEXT>EnumChannelInterface</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090e00" TARGET=TEXT>EnumChannel</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501090f00" TARGET=TEXT>CreateChannel</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501091000" TARGET=TEXT>Leave</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501150000" TARGET=TEXT>IConnectionPointContainer</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501160000" TARGET=TEXT>IConnectionPoint</A>&#151; <A HREF="sweep123.htm#comobj_000f0005010c0000" TARGET=TEXT>IConferenceNotify</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010c0100" TARGET=TEXT>StateChanged</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010c0200" TARGET=TEXT>RequestToJoin</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010c0300" TARGET=TEXT>MemberChanged</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010c0400" TARGET=TEXT>ChannelChanged</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Member</B> 
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0000" TARGET=TEXT>IConfMember</A> 
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0100" TARGET=TEXT>GetName</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0200" TARGET=TEXT>GetType</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0300" TARGET=TEXT>GetConferenceCapabilities</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0400" TARGET=TEXT>IsMCU</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0500" TARGET=TEXT>EnumConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0600" TARGET=TEXT>EnumApplication</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0700" TARGET=TEXT>GetConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0800" TARGET=TEXT>IsSelf</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005010e0900" TARGET=TEXT>IsSameAs</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Communication Channel</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501100000" TARGET=TEXT>IConfChannel</A> 
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501100100" TARGET=TEXT>GetConference</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501100200" TARGET=TEXT>GetInterface</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501100300" TARGET=TEXT>IsSameAs</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501100400" TARGET=TEXT>IncludeMember</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501100500" TARGET=TEXT>ExcludeMember</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501100600" TARGET=TEXT>EnumMember</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501110000" TARGET=TEXT>IConfDataExchange</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501110100" TARGET=TEXT>SendData</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501120000" TARGET=TEXT>IConfFileExchange</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501120100" TARGET=TEXT>SetReceiveFileDir</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501120200" TARGET=TEXT>GetReceiveFileDir</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501120300" TARGET=TEXT>SendFile</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501120400" TARGET=TEXT>Cancel</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501130000" TARGET=TEXT>IConfAppSharing</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501130100" TARGET=TEXT>EnumSharableApp</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501140000" TARGET=TEXT>IConfAppControl</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501140100" TARGET=TEXT>StartRemoteInstance</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501140200" TARGET=TEXT>EnumPeer</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501150000" TARGET=TEXT>IConnectionPointContainer</A>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501160000" TARGET=TEXT>IConnectionPoint</A>&#151;<A HREF="sweep123.htm#comobj_000f000501170000" TARGET=TEXT>IConfDataExchangeNotify</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501170100" TARGET=TEXT>DataSent</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501170200" TARGET=TEXT>DataReceived</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501160000" TARGET=TEXT>IConnectionPoint</A>&#151;<A HREF="sweep123.htm#comobj_000f000501180000" TARGET=TEXT>IConfFileExchangeNotify</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501180100" TARGET=TEXT>FileSent</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501180200" TARGET=TEXT>FileReceived</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501160000" TARGET=TEXT>IConnectionPoint</A>&#151;<A HREF="sweep123.htm#comobj_000f000501190000" TARGET=TEXT>IConfAppSharingNotify</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501190100" TARGET=TEXT>StatusChanged</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501160000" TARGET=TEXT>IConnectionPoint</A>&#151;<A HREF="sweep123.htm#comobj_000f0005011a0000" TARGET=TEXT>IConfAppControlNotify</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011a0100" TARGET=TEXT>StatusChanged</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Client Application</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011c0000" TARGET=TEXT>IConfApplication</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011c0100" TARGET=TEXT>GetGUID</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011c0200" TARGET=TEXT>GetName</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Sharable Application</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011e0000" TARGET=TEXT>IConfShareApp</A>
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011e0100" TARGET=TEXT>GetName</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011e0200" TARGET=TEXT>Share</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011e0300" TARGET=TEXT>Unshare</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f0005011e0400" TARGET=TEXT>GetShareState</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>File Transfer Object</B>
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501200000" TARGET=TEXT>IConfFileTransfer</A> 
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501200100" TARGET=TEXT>GetName</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501200200" TARGET=TEXT>GetBytesTransferred</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501200300" TARGET=TEXT>GetTotalSize</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501200400" TARGET=TEXT>GetFileState</A>
+</FONT></TD></TR><TR><TD></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep123.htm#comobj_000f000501200500" TARGET=TEXT>IsSameAs</A>
+</FONT></TD></TR></TABLE>
+<H3><A NAME="comobj_000f000501010000">Conference Manager Object</A></H3>
+<P>The Conference Manager object is created with the <B>CoCreateInstance</B> function using a predefined class identifier (<B>CLSID_ConferenceManager</B>) and interface identifier (<B>IID_IConferenceManager</B>). It is the first COM object a client application must create. Only one Conference Manager object need be created per application instance. The object provides the following interfaces:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501020000" TARGET=TEXT>IConferenceManager</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501050000" TARGET=TEXT>IConfMgrNotify</A>
+</UL>
+<H3><A NAME="comobj_000f000501020000">IConferenceManager</A></H3>
+<P><B>IConferenceManager</B> provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501020100" TARGET=TEXT>Initialize</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501020200" TARGET=TEXT>GetConferenceCapabilities</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501020300" TARGET=TEXT>EnumConference</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501020400" TARGET=TEXT>EnumUser</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501020500" TARGET=TEXT>CreateConference</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501020600" TARGET=TEXT>GetRemoteConference</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501020700" TARGET=TEXT>CreateUser</A>
+</UL>
+<H4><A NAME="comobj_000f000501020100">IConferenceManager::Initialize</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Initialize(
+    REFGUID rguid);
+</FONT></PRE>
+<P>Activates the Conference Manager object and allows the calling 
+application to register itself to the conference services.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>rguid</I> parameter is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was already initialized, or the conference services are not available.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>rguid</I> 
+</DT><DD>Globally unique identifier (GUID) that identifies the calling application.
+</DD></DL>
+<H4><A NAME="comobj_000f000501020200">IConferenceManager::GetConferenceCapabilities</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetConferenceCapabilities(
+    ULONG *puConfCaps);
+</FONT></PRE>
+<P>Determines which type of conferencing (audio, data, or video) is available on the local computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puConfCaps</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object has not been initialized.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puConfCaps</I>
+ </DT><DD>Address of a buffer to receive a bitmap of the local computer conferencing capabilities. Any of the following messages can be returned:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_CAPS_NONE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Not capable of conferencing.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_CAPS_DATA </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Data conferencing.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_CAPS_AUDIO </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Audio conferencing.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_CAPS_VIDEO </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Video conferencing.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H4><A NAME="comobj_000f000501020300">IConferenceManager::EnumConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumConference(
+    IEnumConf**ppEnumConf);
+</FONT></PRE>
+<P>Determines if a conference is in progress. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumConf</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumConf</I>
+</DT><DD>Address to receive an instance of the enumerator for existing Conference objects.
+</DD></DL>
+<P>This method returns an instance of the enumerator for Conference objects for existing conferences. If there is a conference in progress, the person setting up another may choose to use the first rather than start a new one.
+
+<H4><A NAME="comobj_000f000501020400">IConferenceManager::EnumUser</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumUser(
+    IEnumConfUser **ppEnumUser);
+</FONT></PRE>
+<P>Determines available users who can become participants in a conference. It returns an instance of the enumerator for existing User objects. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumUser</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumUser</I>
+ </DT><DD>An address to receive an instance of the enumerator for existing User objects.
+</DD></DL>
+<P>This method is not currently supported.
+
+<H4><A NAME="comobj_000f000501020500">IConferenceManager::CreateConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT CreateConference(
+    BSTR bstrName,
+    ULONG uConfCaps,
+    Iconference **ppConference);
+</FONT></PRE>
+<P>Returns an instance of a new Conference object with the <A HREF="sweep123.htm#comobj_000f000501090000" TARGET=TEXT>IConference</A> interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppConference</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>bstrName</I> string is invalid, or <I>uConfCaps</I> contains an invalid value.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>bstrName</I> </DT><DD>String to contain the conference name.
+</DD><DT><I>uConfCaps</I> </DT><DD>Bitmap to contain conferencing capabilities.
+</DD><DT><I>ppConference</I> </DT><DD>Address to receive an instance of the Conference object.
+</DD></DL>
+<H4><A NAME="comobj_000f000501020600">IConferenceManager::GetRemoteConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetRemoteConference(
+    Iconference **ppConference);
+</FONT></PRE>
+<P>Returns an instance of an ongoing Conference object from which the application was remotely activated by a remote node. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppConference</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object is not initialized, the application was not activated remotely, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppConference</I> </DT><DD>Address to receive an instance of the Conference object.
+</DD></DL>
+<P>The calling application should use the Conference object to communicate with the remote node.
+<H4><A NAME="comobj_000f000501020700">IConferenceManager::CreateUser</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT CreateUser(
+    BSTR bstrName,
+    CONFUSERTYPE uType,
+    IConfUser **ppUser);
+</FONT></PRE>
+<P>Returns an instance of a new User object with the <A HREF="sweep123.htm#comobj_000f000501070000" TARGET=TEXT>IConfUser</A> interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppUser</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>bstrName</I> string is invalid, or <I>uType</I> is not one of the valid types.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Conference Manager object was not initialized, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>bstrName</I> </DT><DD>String to contain the user's name or address.
+</DD><DT><I>uType</I> </DT><DD>Constant that shows the type of the user name/address:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_USER_UNKNOWN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Unknown transport.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_USER_IP </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user name contains an IP address.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_USER_MACHINENAME </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user name contains a computer name.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_USER_PSTN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user name contains a telephone number.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>ppUser</I> </DT><DD>Address to receive an instance of the User object.
+</DD></DL>
+<H3><A NAME="comobj_000f000501030000">IConnectionPointContainer</A></H3>
+<P>This interface is instantiated from <B>IID_IConnectionPointContainer</B> to identify Conference Manager as a connectable object. The interface contains the standard set of methods for <B>IConnectionPointContainer</B>.
+
+
+<H3><A NAME="comobj_000f000501040000">IConnectionPoint</A></H3>
+<P>This interface is instantiated from <A HREF="sweep123.htm#comobj_000f000501150000" TARGET=TEXT>IConnectionPointContainer</A>. The client uses this interface to:
+<UL><LI>Ask for the identifier of the Conference Manager object's outgoing interface&#151;<B>IID_IConfMgrNotify</B>.
+ <LI>Give in return the interface pointer through which the connectable object should send notifications (which it sends by calling the member functions implemented in the 
+client)&#151;<A HREF="sweep123.htm#comobj_000f000501050000" TARGET=TEXT>IConfMgrNotify</A>.
+</UL>
+<H3><A NAME="comobj_000f000501050000">IConfMgrNotify</A></H3>
+<P>To receive asynchronous event notifications from a Conference Manager object, a client application must implement the methods in the <B>IConfMgrNotify</B> interface, which is instantiated from <B>IID_IConfMgrNotify</B>.
+
+<P>The <B>IConfMgrNotify</B> interface provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501050100" TARGET=TEXT>InvitedToConference</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501050200" TARGET=TEXT>ConferenceCreated</A>
+</UL>
+<H4><A NAME="comobj_000f000501050100">IConfMgrNotify::InvitedToConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT InvitedToConference(
+    IConfUser *pUser,
+    Iconference *pConference);
+</FONT></PRE>
+<P>Starts when an application receives a call to give the application a pointer to the Conference object it is being invited to. Conference Manager must be initialized. 
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>User who invited the local computer to the conference.
+</DD><DT><I>pConference</I> </DT><DD>Instance of the Conference object. The sink method needs to call the <B>AddRef</B> method to the Conference object if it wants to keep the object.
+</DD></DL>
+<P>This event is not supported in the current version.
+
+<H4><A NAME="comobj_000f000501050200">IConfMgrNotify::ConferenceCreated</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ConferenceCreated(
+    Iconference *pConference);
+</FONT></PRE>
+<P>Starts when a new conference is activated by other applications. The Conference object can be used as if it were activated by the client application. 
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pConference</I> </DT><DD>Instance of the Conference object. The sink method needs to call the <B>AddRef</B> method to the Conference object if it wants to keep the object.
+</DD></DL>
+<H3><A NAME="comobj_000f000501060000">User Object</A></H3>
+<P>The User object is enumerated from the enumerator obtained from the <A HREF="sweep123.htm#comobj_000f000501020400" TARGET=TEXT>IConferenceManager::EnumUser</A> method. 
+
+<P>This object provides one interface:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501070000" TARGET=TEXT>IConfUser</A>
+</UL>
+<H3><A NAME="comobj_000f000501070000">IConfUser</A></H3>
+<P><B>IConfUser</B> is instantiated automatically when the object is obtained from the enumerator. It provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501070100" TARGET=TEXT>GetName</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501070200" TARGET=TEXT>GetType</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501070300" TARGET=TEXT>GetConferenceCapabilities</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501070400" TARGET=TEXT>IsMCU</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501070500" TARGET=TEXT>EnumConference</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501070600" TARGET=TEXT>EnumApplication</A>
+</UL>
+<H4><A NAME="comobj_000f000501070100">IConfUser::GetName</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetName(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Returns the string for the user name.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>pbstrName</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The name is not valid, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the user name or address.
+</DD></DL>
+<H4><A NAME="comobj_000f000501070200">IConfUser::GetType</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetType(
+    CONFUSERTYPE *puType);
+</FONT></PRE>
+<P>Determines the type of name for the User object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puType</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puType</I> </DT><DD>Address of a buffer to receive the type of the user's name.
+</DD></DL>
+<H4><A NAME="comobj_000f000501070300">IConfUser::GetConferenceCapabilities</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetConferenceCapabilities(
+    ULONG *puConfCaps);
+</FONT></PRE>
+<P>Determines which type of conferencing (audio, data, or video) is available on the user's computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puConfCaps</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puConfCaps</I> </DT><DD>Address of a buffer to contain the capabilities of the computer.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="comobj_000f000501070400">IConfUser::IsMCU</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsMCU(void);
+</FONT></PRE>
+<P>Determines whether the User object is a multipoint control unit (MCU).
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user is an MCU.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user is not an MCU. 
+</FONT></TD></TR></TABLE>
+</UL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="comobj_000f000501070500">IConfUser::EnumConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumConference(
+    IEnumConf  **ppEnumConf);
+</FONT></PRE>
+<P>Returns an instance of the enumerator for existing Conference objects for the User object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumConf</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumConf</I> </DT><DD>Address to receive a conference enumerator
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="comobj_000f000501070600">IConfUser::EnumApplication</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumApplication(
+    IEnumConfApp  **ppEnumApp);
+</FONT></PRE>
+<P>Returns an instance of the enumerator for the Client Application object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumApp</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumApp</I> </DT><DD>Address to receive a Client Application enumerator.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H3><A NAME="comobj_000f000501080000">Conference Object</A></H3>
+<P>A Conference object may be:
+<UL><LI>Created from the <A HREF="sweep123.htm#comobj_000f000501020500" TARGET=TEXT>IConferenceManager::CreateConference</A> method.
+ <LI>Enumerated from the enumerator obtained from the <A HREF="sweep123.htm#comobj_000f000501020300" TARGET=TEXT>IConferenceManager::EnumConference</A> method.
+ <LI>Offered through the <A HREF="sweep123.htm#comobj_000f000501050100" TARGET=TEXT>IConfMgrNotify::InvitedToConference</A> sink method.
+ <LI>Offered through the <A HREF="sweep123.htm#comobj_000f000501050200" TARGET=TEXT>IConfMgrNotify::ConferenceCreated</A> sink method.
+ <LI>Obtained from the <A HREF="sweep123.htm#comobj_000f000501100100" TARGET=TEXT>IConfChannel::GetConference</A> method.
+</UL>
+<P>The object provides the following interfaces:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501090000" TARGET=TEXT>IConference</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010c0000" TARGET=TEXT>IConferenceNotify</A>
+</UL>
+<H3><A NAME="comobj_000f000501090000">IConference</A></H3>
+<P>The <B>IConference</B> interface provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501090100" TARGET=TEXT>GetName</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090200" TARGET=TEXT>GetConferenceCapabilities</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090300" TARGET=TEXT>GetConferenceState</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090400" TARGET=TEXT>IsSameAs</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090500" TARGET=TEXT>Invite</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090600" TARGET=TEXT>AcceptInvite</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090700" TARGET=TEXT>RejectInvite</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090800" TARGET=TEXT>Join</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090900" TARGET=TEXT>AcceptJoin</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090a00" TARGET=TEXT>RejectJoin</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090b00" TARGET=TEXT>EnumMember</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090c00" TARGET=TEXT>EnumApplication</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090d00" TARGET=TEXT>EnumChannelInterface</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090e00" TARGET=TEXT>EnumChannel</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501090f00" TARGET=TEXT>CreateChannel</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501091000" TARGET=TEXT>Leave</A>
+</UL>
+<H4><A NAME="comobj_000f000501090100">IConference::GetName</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetName(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Returns the string for the conference name. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>pbstrName</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The name is not valid, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the conference name.
+</DD></DL>
+<P>The conference name is passed in when the object is created by <A HREF="sweep123.htm#comobj_000f000501020500" TARGET=TEXT>IConferenceManager::CreateConference</A>, or is the name that existed when another user's conference was joined.
+
+<H4><A NAME="comobj_000f000501090200">IConference::GetConferenceCapabilities</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetConferenceCapabilities(
+    ULONG *puConfCaps);
+</FONT></PRE>
+<P>Determines which type of conferencing (audio, data, or video) the Conference object was originally created with. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puConfCaps</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puConfCaps</I> </DT><DD>Address of a buffer to contain the capabilities of the conference.
+</DD></DL>
+<H4><A NAME="comobj_000f000501090300">IConference::GetConferenceState</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetConferenceState(
+    CONFSTATE *puConfState);
+</FONT></PRE>
+<P>Returns the state of the Conference object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>pConfState</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pConfState</I> </DT><DD>Address to receive a conference state. This can be any of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_IDLE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is idle (just created).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_INITIALIZING </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is being initialized.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_ACTIVE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is active and can be used.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_STOPPING </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is being terminated.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_STATE_OFFERED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is offered.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H4><A NAME="comobj_000f000501090400">IConference::IsSameAs</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSameAs(
+    IConference *pConference);
+</FONT></PRE>
+<P>Identifies whether the two Conference objects represent the same conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Conference objects represent the same conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Conference objects do not represent the same conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pConference </I>address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pConference</I> object does not have the required interface.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pConference</I> </DT><DD>Address of a Conference object instance to compare with.
+</DD></DL>
+<H4><A NAME="comobj_000f000501090500">IConference::Invite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Invite(
+    IConfUser *pUser);
+</FONT></PRE>
+<P>Invites a new user to the conference. If the Conference object is inactive, it becomes active when the invited user accepts the invitation. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pUser</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The object in <I>pUser</I> does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>Address of an instance of the User object.
+</DD></DL>
+<P>This method is asynchronous (an event notification will be returned later if it is successful).
+
+<H4><A NAME="comobj_000f000501090600">IConference::AcceptInvite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT AcceptInvite(void);
+</FONT></PRE>
+<P>Accepts an invitation to a conference. It is called in response to the <A HREF="sweep123.htm#comobj_000f000501050100" TARGET=TEXT>IConfMgrNotify::InvitedToConference</A> sink method.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<P>This method will not be implemented for the first release because SCRAPI does not support it. For the first release, invitations will have to be accepted from Microsoft NetMeeting.
+
+<H4><A NAME="comobj_000f000501090700">IConference::RejectInvite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RejectInvite(void);
+</FONT></PRE>
+<P>Rejects an invitation to a conference. It is called in response to the 
+<A HREF="sweep123.htm#comobj_000f000501050100" TARGET=TEXT>IConfMgrNotify::InvitedToConference</A> sink method.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<P>This method will not be implemented for the first release because SCRAPI does not support it. For the first release, invitations will have to be rejected from Microsoft NetMeeting.
+
+<H4><A NAME="comobj_000f000501090800">IConference::Join</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Join(
+    IConfUser *pUser);
+</FONT></PRE>
+<P>Joins a user who already has a conference running.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pUser</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The object in <I>pUser</I> does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>Address of an instance of the User object.
+</DD></DL>
+<H4><A NAME="comobj_000f000501090900">IConference::AcceptJoin</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT AcceptJoin(
+    IConfUser *pUser);
+</FONT></PRE>
+<P>Accepts a request from a user to join a conference. This method is called in response to the <A HREF="sweep123.htm#comobj_000f0005010c0200" TARGET=TEXT>IConferenceNotify::RequestToJoin</A> sink method.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pUser</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> The object in <I>pUser</I> does not have the required interface
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>Address of an instance of the User object.
+</DD></DL>
+<P>This method will not be implemented for the first release because SCRAPI does not support it. For the first release, invitations will have to be accepted from Microsoft NetMeeting.
+
+<H4><A NAME="comobj_000f000501090a00">IConference::RejectJoin</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RejectJoin(
+    IConfUser *pUser);
+</FONT></PRE>
+<P>Rejects a request from a user to join a conference. This method is called in response to the <B>IConferenceNotify::RejectJoin</B> sink method.
+
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pUser</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"> The object in <I>pUser</I> does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>Addrress of an instance of the User object.
+</DD></DL>
+<P>This method will not be implemented for the first release because SCRAPI does not support it. For the first release, invitations will have to be rejected from Microsoft NetMeeting.
+
+<H4><A NAME="comobj_000f000501090b00">IConference::EnumMember</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumMember(
+    IEnumConfMember **ppEnumMember);
+</FONT></PRE>
+<P>Returns an instance of the enumerator for the Member object when the conference is active.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumMember</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumMember</I> </DT><DD>Address to receive a member enumerator.
+</DD></DL>
+<H4><A NAME="comobj_000f000501090c00">IConference::EnumApplication</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumApplication(
+    IEnumConfApp **ppEnumApp);
+</FONT></PRE>
+<P>Returns an instance of the enumerator of the Application object when the conference is active.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumApp</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumApp</I> </DT><DD>Address to receive an application enumerator.
+</DD></DL>
+<H4><A NAME="comobj_000f000501090d00">IConference::EnumChannelInterface</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumChannelInterface(
+    IEnumChanInterface **ppEnumChanInterface);
+</FONT></PRE>
+<P>Returns an instance of the enumerator of the Channel interface object available in the conference. The interface signifies how the channel can be used.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumChanInterface</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumChanInterface</I> </DT><DD>Address to receive a channel interface enumerator.
+</DD></DL>
+<H4><A NAME="comobj_000f000501090e00">IConference::EnumChannel</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumChannel(
+    IEnumConfChannel **ppEnumChannel);
+</FONT></PRE>
+<P>Returns an instance of the enumerator of the existing Channel object in the conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumChannel</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumChannel</I> </DT><DD>An address to receive a channel enumerator.
+</DD></DL>
+<H4><A NAME="comobj_000f000501090f00">IConference::CreateChannel</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT CreateChannel(
+    REFIID riid,
+    IConfChannel *ppChannel);
+</FONT></PRE>
+<P>Returns an instance of a new Channel object with the specified interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppChannel</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>riid</I> parameter contains a channel interface that is not available in this conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The channel cannot be created, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>riid</I> </DT><DD>An interface ID of the specific-type channel.
+</DD><DT><I>ppChannel</I> </DT><DD>Address to receive an instance of a new channel object.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="comobj_000f000501091000">IConference::Leave</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Leave(void);
+</FONT></PRE>
+<P>Removes the local computer from the active conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference is not in the proper state, the operation failed, or internal resources are not available.
+</FONT></TD></TR></TABLE>
+</UL>
+<H3><A NAME="comobj_000f0005010a0000">IConnectionPointContainer</A></H3>
+<P>This interface is instantiated from <B>IID_IConnectionPointContainer</B> to identify a Conference object as connectable. The interface contains the standard set of methods for <B>IConnectionPointContainer</B>.
+
+
+<H3><A NAME="comobj_000f0005010b0000">IConnectionPoint</A></H3>
+<P>This interface is instantiated from <A HREF="sweep123.htm#comobj_000f000501150000" TARGET=TEXT>IConnectionPointContainer</A>. The client uses this interface to:
+
+<UL><LI>Ask for the identifier of the Connection object's outgoing interface&#151;<B>IDD_IConferenceNotify</B>.
+ <LI>Give in return the interface pointer through which the connectable object should send notifications (which it sends by calling the methods implemented in the client)&#151;<A HREF="sweep123.htm#comobj_000f0005010c0000" TARGET=TEXT>IConferenceNotify</A>.
+</UL>
+<H3><A NAME="comobj_000f0005010c0000">IConferenceNotify</A></H3>
+<P>To receive asynchronous event notifications from the Conference object, a client application must implement the methods in the <B>IConferenceNotify</B> interface, which is instantiated from <B>IID_IConferenceNotify</B>.
+
+<P>The <B>IConferenceNotify</B> interface must provide the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f0005010c0100" TARGET=TEXT>StateChanged</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010c0200" TARGET=TEXT>RequestToJoin</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010c0300" TARGET=TEXT>MemberChanged</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010c0400" TARGET=TEXT>ChannelChanged</A>
+</UL>
+<H4><A NAME="comobj_000f0005010c0100">IConferenceNotify::StateChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT StateChanged(
+    CONFSTATE uConfState,
+    HRESULT hr);
+</FONT></PRE>
+<P>Notifies the client that the status of the conference has changed. It also notifies the error result if the previous asynchronous method fails.
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>uConfState</I> </DT><DD>The current conference state.
+</DD><DT><I>hr</I> </DT><DD>The result of the previous asynchronous operation.
+</DD></DL>
+<H4><A NAME="comobj_000f0005010c0200">IConferenceNotify::RequestToJoin</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT RequestToJoin(
+    IConfUser *pUser);
+</FONT></PRE>
+<P>Notifies the client that a user has made a request to join the conference.
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pUser</I> </DT><DD>An instance of the User object that wants to join the conference.
+</DD></DL>
+<P>This event is not supported in the current version.
+
+<H4><A NAME="comobj_000f0005010c0300">IConferenceNotify::MemberChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT MemberChanged(
+    IConfMember *pConfMember,
+    CONFMEMBNOTIFY uNotify);
+</FONT></PRE>
+<P>Notifies the client that the member roster for the conference has changed (someone has joined or left the conference).
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pConfMember</I> </DT><DD>An instance of the Member object that is added or removed from the conference.
+</DD><DT><I>uNotify</I> </DT><DD>The enumerated constant for the notification type can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_MEMB_ADDED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The member is being added to the conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_MEMB_REMOVED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The member is being removed from the conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_MEMB_UPDATED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The member information is changed.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H4><A NAME="comobj_000f0005010c0400">IConferenceNotify::ChannelChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ChannelChanged(
+    IConfChannel *pChannel,
+    CONFCHANNOTIFY uNotify);
+</FONT></PRE>
+<P>Notifies the client that a new channel is available in the conference.
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pChannel</I> </DT><DD>An instance of the Channel object that is added or removed from 
+the conference.
+</DD><DT><I>uNotify</I> </DT><DD>The enumerated constant for the notification type can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_CHAN_ADDED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The channel is being added to the conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_CHAN_REMOVED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The channel is being removed from the conference.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P>This event is not supported in the current version.
+
+<H3><A NAME="comobj_000f0005010d0000">Member Object</A></H3>
+<P>A Member object is enumerated from the enumerator obtained from the <A HREF="sweep123.htm#comobj_000f000501090b00" TARGET=TEXT>IConference::EnumMember</A> or the <A HREF="sweep123.htm#comobj_000f000501100600" TARGET=TEXT>IConfChannel::EnumMember</A> method. The object is derived from the User object and provides only one interface:
+<UL><LI><A HREF="sweep123.htm#comobj_000f0005010e0000" TARGET=TEXT>IConfMember</A>
+</UL>
+<H3><A NAME="comobj_000f0005010e0000">IConfMember</A></H3>
+<P>The <B>IConfMember</B> interface provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f0005010e0100" TARGET=TEXT>GetName</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010e0200" TARGET=TEXT>GetType</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010e0300" TARGET=TEXT>GetConferenceCapabilities</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010e0400" TARGET=TEXT>IsMCU</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010e0500" TARGET=TEXT>EnumConference</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010e0600" TARGET=TEXT>EnumApplication</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010e0700" TARGET=TEXT>GetConference</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010e0800" TARGET=TEXT>IsSelf</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005010e0900" TARGET=TEXT>IsSameAs</A>
+</UL>
+<H4><A NAME="comobj_000f0005010e0100">IConfMember::GetName</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetName(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Returns the string for the member name.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>pbstrName</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The name is not valid, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the user name or address.
+</DD></DL>
+<H4><A NAME="comobj_000f0005010e0200">IConfMember::GetType</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetType(
+    CONFUSERTYPE *puType);
+</FONT></PRE>
+<P>Determines the type of name for the Member object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puType</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puType</I> </DT><DD>Address to a buffer to receive the type of the member's name.
+</DD></DL>
+<H4><A NAME="comobj_000f0005010e0300">IConfMember::GetConferenceCapabilities</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetConferenceCapabilities(
+    ULONG *puConfCaps);
+</FONT></PRE>
+<P>Determines which type of conferencing (audio, data, or video) is available on the member's computer in the context of this conference.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puConfCaps</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puConfCaps</I> </DT><DD>Address to a buffer that contains the capabilities of the machine.
+</DD></DL>
+<H4><A NAME="comobj_000f0005010e0400">IConfMember::IsMCU</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsMCU(void);
+</FONT></PRE>
+<P>Determines whether the Member object is a multipoint control unit (MCU).
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user is an MCU.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user is not an MCU.
+</FONT></TD></TR></TABLE>
+</UL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="comobj_000f0005010e0500">IConfMember::EnumConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumConference(
+    IEnumConf **ppEnumConf);
+</FONT></PRE>
+<P>Returns an instance of the enumerator for existing Conference objects for the Member object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumConf</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumConf</I> </DT><DD>Address to receive a conference enumerator.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="comobj_000f0005010e0600">IConfMember::EnumApplication</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumApplication(
+    IEnumConfApp **ppEnumApp);
+</FONT></PRE>
+<P>Returns an instance of the enumerator for the Client Application object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumApp</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumApp</I> </DT><DD>Address to receive a Client Application enumerator.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="comobj_000f0005010e0700">IConfMember::GetConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetConference(
+    Iconference **ppConference);
+</FONT></PRE>
+<P>Returns the instance of the Conference object where the member belongs.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppConference</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference no longer exists.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppConference</I> </DT><DD>Address of a buffer to receive the instance of the Conference object.
+</DD></DL>
+<H4><A NAME="comobj_000f0005010e0800">IConfMember::IsSelf</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSelf(void);
+</FONT></PRE>
+<P>Determines if the Member object represents the local computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Member object represents the local machine.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The Member object does not represent the local machine.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="comobj_000f0005010e0900">IConfMember::IsSameAs</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSameAs(
+    IConfMember *pConfMember);
+</FONT></PRE>
+<P>Determines if the two Member objects represent the same conference member.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Member objects represent the same conference member.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Member objects do not represent the same conference member.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pConfMember</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pConfMember</I> object does not have the required interface.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pConfMember</I> </DT><DD>Address of the Member object to be compared.
+</DD></DL>
+<H3><A NAME="comobj_000f0005010f0000">Communication Channel Object</A></H3>
+<P>The Communication Channel object may be:
+
+<UL><LI>Created from the <A HREF="sweep123.htm#comobj_000f000501090f00" TARGET=TEXT>IConference::CreateChannel</A> method.
+ <LI>Enumerated from the enumerator obtained from the <A HREF="sweep123.htm#comobj_000f000501090e00" TARGET=TEXT>IConference::EnumChannel</A> method.
+ <LI>Offered through the <A HREF="sweep123.htm#comobj_000f0005010c0400" TARGET=TEXT>IConferenceNotify::ChannelChanged</A>sink method.
+</UL>
+<P>The object provides the following interfaces:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501100000" TARGET=TEXT>IConfChannel</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501110000" TARGET=TEXT>IConfDataExchange</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501120000" TARGET=TEXT>IConfFileExchange</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501130000" TARGET=TEXT>IConfAppSharing</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501140000" TARGET=TEXT>IConfAppControl</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501170000" TARGET=TEXT>IConfDataExchangeNotify</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501180000" TARGET=TEXT>IConfFileExchangeNotify</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501190000" TARGET=TEXT>IConfAppSharingNotify</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005011a0000" TARGET=TEXT>IConfAppControlNotify</A>
+</UL>
+<H3><A NAME="comobj_000f000501100000">IConfChannel</A></H3>
+<P>The <B>IConfChannel</B> interface is instantiated automatically when the Conference object is created, explicitly created through the Conference object, obtained from the enumerator, or offered. The interface is common to all the Channel objects. It provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501100100" TARGET=TEXT>GetConference</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501100200" TARGET=TEXT>GetInterface</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501100300" TARGET=TEXT>IsSameAs</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501100400" TARGET=TEXT>IncludeMember</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501100500" TARGET=TEXT>ExcludeMember</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501100600" TARGET=TEXT>EnumMember</A>
+</UL>
+<H4><A NAME="comobj_000f000501100100">IConfChannel::GetConference</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetConference(
+    Iconference **ppConference);
+</FONT></PRE>
+<P>Returns an instance of the Conference object to which the channel belongs. The Conference object is returned with the <A HREF="sweep123.htm#comobj_000f000501090000" TARGET=TEXT>IConference</A> interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppConference</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The conference no longer exists.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppConference</I> </DT><DD>Address of a buffer to receive the instance of the conference object.
+</DD></DL>
+<H4><A NAME="comobj_000f000501100200">IConfChannel::GetInterface</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetInterface(
+    IID *piid);
+</FONT></PRE>
+<P>Obtains the Channel-specific interface.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>piid</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>piid</I> </DT><DD>Address of a buffer to receive the channel-specific interface ID.
+</DD></DL>
+<H4><A NAME="comobj_000f000501100300">IConfChannel::IsSameAs</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSameAs(
+    IConfChannel *pConfChannel);
+</FONT></PRE>
+<P>Identifies whether the two Channel objects represent the same channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Member objects represent the same conference member.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both Member objects do not represent the same conference member.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pConfChannel</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pConfChannel</I> object does not have the required interface.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pConfChannel</I> </DT><DD>Address of the Channel object to be compared.
+</DD></DL>
+<H4><A NAME="comobj_000f000501100400">IConfChannel::IncludeMember</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IncludeMember(
+    IConfMember *pMember);
+</FONT></PRE>
+<P>Gives a Member object use of the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pMember</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pMember</I> object does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>Address of the Member object to be given use of the channel.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="comobj_000f000501100500">IConfChannel::ExcludeMember</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ExcludeMember(
+    IConfMember *pMember);
+</FONT></PRE>
+<P>Prevents a Member object from using the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pMember</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pMember</I> object does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>Address of the Member object to be prevented from using the channel.
+</DD></DL>
+<P>This method is not supported in the current version.
+
+<H4><A NAME="comobj_000f000501100600">IConfChannel::EnumMember</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumMember(
+    IEnumConfMember **ppEnumMember);
+</FONT></PRE>
+<P>Returns an instance of the enumerator for the Member objects that are currently allowed to use the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumMember</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumMember</I> </DT><DD>Address to receive the Member object enumerator.
+</DD></DL>
+<H3><A NAME="comobj_000f000501110000">IConfDataExchange</A></H3>
+<P>The <B>IConfDataExchange</B> interface is instantiated by an application, from the Channel object with <B>IID_IConfDataExchange</B>, when the application wants to exchange blocks of data with other members. 
+
+<P>This interface provides the following method:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501110100" TARGET=TEXT>Send Data</A>
+</UL>
+<H4><A NAME="comobj_000f000501110100">IConfDataExchange::SendData</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SendData(
+    IConfMember *pMember,
+    IConfApplication *pApplication,
+    ULONG uSize,
+    byte *pvbuffer,
+    ULONG uOptions);
+</FONT></PRE>
+<P>Sends a block of data bytes through the channel to a specified application on the specified member's computer. The caller must not free the buffer until it receives the <A HREF="sweep123.htm#comobj_000f000501170100" TARGET=TEXT>IConfDataExchangeNotify::DataSent</A> event.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pvBuffer</I> address is invalid, or <I>uOptions</I> contains an invalid option.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pMember</I> or <I>pApplication</I> object does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The specified data buffer was not sent, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>An instance of the Member object to send data to. If the parameter is NULL, the data is sent to all the members in the channel.
+</DD><DT><I>pApplication</I> </DT><DD>An instance of the Application object to send data to. If the parameter is NULL, the data is sent to the remote instance of the calling application.
+</DD><DT><I>uSize</I> </DT><DD>The size, in bytes, of the data in the buffer.
+</DD><DT><I>pvBuffer</I> </DT><DD>Address to a buffer that contains the data to be sent (size_is(uSize)).
+</DD><DT><I>uOptions</I> </DT><DD>Flags for data transfer options follow:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_SDOPT_NONE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">No option is specified. 
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H3><A NAME="comobj_000f000501120000">IConfFileExchange</A></H3>
+<P>The <B>IConfFileExchange</B> interface is instantiated by an application, from the Channel object with <B>IID_IConfFileExchange</B>, when the application wants to exchange files with other members.
+
+<P>This interface provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501120100" TARGET=TEXT>SetReceiveFileDir</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501120200" TARGET=TEXT>GetReceiveFileDir</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501120300" TARGET=TEXT>SendFile</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501120400" TARGET=TEXT>Cancel</A>
+</UL>
+<H4><A NAME="comobj_000f000501120100">IConfFileExchange::SetReceiveFileDir</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SetReceiveFileDir(
+    BSTR bstrDir);
+</FONT></PRE>
+<P>Sets the path to the directory where the received file will be stored on the local computer.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>bstrDir</I> path is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>bstrDir</I> </DT><DD>A string for the path to the directory where a received file will be stored.
+</DD></DL>
+<H4><A NAME="comobj_000f000501120200">IConfFileExchange::GetReceiveFileDir</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetReceiveFileDir(
+    BSTR *pbstrDir);
+</FONT></PRE>
+<P>Gets the path to the directory where the received file will be stored.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>pbstrDir</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrDir</I> </DT><DD>Address of a string for the path to the directory where a received file will be stored.
+</DD></DL>
+<H4><A NAME="comobj_000f000501120300">IConfFileExchange::SendFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SendFile(
+    IConfMember *pMember,
+    IConfApplication *pApplication,
+    BSTR bstrFile,
+    ULONG uOptions,
+    IConfFileTransfer **ppFileTransfer);
+</FONT></PRE>
+<P>Sends a file through the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppFileTransfer</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>bstrFile</I> string is invalid, or <I>uOptions</I> contains an invalid option.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pMember</I> or <I>pApplication</I> object does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The specified file was not sent, the specified file does not exist, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>A Member object that will receive the file. If this parameter is NULL, the file is sent to all the members in the channel.
+</DD><DT><I>pApplication</I> </DT><DD>An Application object that will receive the transfer progress notification. If this parameter is NULL, the notification is sent to the remote instance of the calling application.
+</DD><DT><I>bstrFile</I> </DT><DD>The full path of the file to be sent.
+</DD><DT><I>uOptions</I> </DT><DD>Flags for file transfer options follow:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_SFOPT_NONE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">No option is specified. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_SFOPT_NOUI </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The default progress dialog user interface should not be used. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNFF_SFOPT_NOCOMPRESS </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file should not be compressed.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>ppFileTransfer</I> </DT><DD>An address to a buffer to receive a File Transfer object.
+</DD></DL>
+<H4><A NAME="comobj_000f000501120400">IConfFileExchange::Cancel</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Cancel(
+    IConfFileTransfer *pFileTransfer);
+</FONT></PRE>
+<P>Cancels the file being sent or received.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pFileTransfer</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pFileTransfer</I> object does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation cannot be canceled, or internal resources are not available.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pFileTransfer</I> </DT><DD>Address of a File Transfer object to be sent or received.
+</DD></DL>
+<H3><A NAME="comobj_000f000501130000">IConfAppSharing</A></H3>
+<P>The <B>IConfAppSharing</B> interface is instantiated by an application from the Channel object with <B>IID_IConfAppSharing</B> when it wants to share an application. 
+
+<P>This interface provides the following method:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501130100" TARGET=TEXT>EnumSharableApp</A>
+</UL>
+<H4><A NAME="comobj_000f000501130100">IConfAppSharing::EnumSharableApp</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumSharableApp(
+    IEnumConfShareApp **ppEnumShareApp);
+</FONT></PRE>
+<P>Returns an instance of the ConfShareApp object enumerator for the applications that can be shared. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumShareApp</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>ppEnumShareApp</I> </DT><DD>Address to receive the sharable application enumerator.
+</DD></DL>
+<P>The ConfShareApp object provides methods for sharing and unsharing the application.
+
+<H3><A NAME="comobj_000f000501140000">IConfAppControl</A></H3>
+<P>The <B>IConfAppControl</B> interface is instantiated by an application from the Channel object with <B>IID_IConfAppControl</B>.
+
+<P>This interface provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501140100" TARGET=TEXT>StartRemoteInstance</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501140200" TARGET=TEXT>EnumPeer</A>
+</UL>
+<H4><A NAME="comobj_000f000501140100">IConfAppControl::StartRemoteInstance</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT StartRemoteInstance(
+    IConfMember *pMember,
+    IConfApplication *pApplication);
+</FONT></PRE>
+<P>Accepts an Application object and starts its instance on the specified member in the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pMember</I> or <I>pApplication</I> object does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The remote instance cannot be started, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>A Member object where the remote instance of the application will be started. If the parameter is NULL, the application will be started on all the members in the channel.
+</DD><DT><I>pApplication</I> </DT><DD>An Application object whose remote instance will be started. If the parameter is NULL, the method starts the remote instance of the calling application.
+</DD></DL>
+<H4><A NAME="comobj_000f000501140200">IConfAppControl::EnumPeer</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT EnumPeer(
+    IConfApplication *pApplication,
+    IEnumConfMember **ppEnumMember);
+</FONT></PRE>
+<P>Returns an instance of the enumerator for the Member object that currently has the application running. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>ppEnumMember</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pApplication</I> object does not have the required interface.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pApplication</I> </DT><DD>An Application object whose remote instance. If the parameter is NULL, the method uses the calling application.
+
+
+</DD><DT><I>ppEnumMember</I> </DT><DD>Addrerss of the Member object enumerator.
+</DD></DL>
+<H3><A NAME="comobj_000f000501150000">IConnectionPointContainer</A></H3>
+<P>This interface is instantiated from <B>IID_IConnectionPointContainer</B> to identify the Communication Channel object as a connectable object. The interface contains the standard set of methods for <B>IConnectionPointContainer</B>.
+
+
+
+<H3><A NAME="comobj_000f000501160000">IConnectionPoint</A></H3>
+<P>This interface is instantiated from <A HREF="sweep123.htm#comobj_000f000501150000" TARGET=TEXT>IConnectionPointContainer</A>. The client uses this interface to:
+<UL><LI>Ask for the identifier for each of the Communication Channel object's outgoing interfaces:
+<UL><LI><B>IDD_IConfDataExchangeNotify</B>
+ <LI><B>IDD_IConfFileExchangeNotify</B>
+ <LI><B>IDD_IConfAppSharingNotify</B>
+ <LI><B>IDD_IConfAppControlNotify</B>
+</UL>
+<LI>Give in return the interface pointers through which the connectable object should send notifications (which it sends by calling the member functions implemented in the client):
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501170000" TARGET=TEXT>IConfDataExchangeNotify</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501180000" TARGET=TEXT>IConfFileExchangeNotify</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501190000" TARGET=TEXT>IConfAppSharingNotify</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005011a0000" TARGET=TEXT>IConfAppControlNotify</A>
+</UL>
+</UL>
+<H3><A NAME="comobj_000f000501170000">IConfDataExchangeNotify</A></H3>
+<P>To receive asynchronous event notifications relating to the exchange of data from the Communications Channel object, a client application must implement the methods in the <B>IConfDataExchangeNotify</B> interface, which is instantiated from <B>IID_IConfDataExchangeNotify</B>.
+
+<P>The <B>IConfDataExchangeNotify</B> interface must provide the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501170100" TARGET=TEXT>DataSent</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501170200" TARGET=TEXT>DataReceived</A>
+</UL>
+<H4><A NAME="comobj_000f000501170100">IConfDataExchangeNotify::DataSent</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT DataSent(
+    IConfMember *pMember,
+    ULONG uSize,
+    byte *pvBuffer,
+    HRESULT hr);
+</FONT></PRE>
+<P>Provides status notification of data sent, including the result of the operation.
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>An instance of the Member object that received the data. The parameter is NULL if the data was sent to all the members.
+</DD><DT><I>uSize</I> </DT><DD>The amount of data sent, in bytes.
+</DD><DT><I>pvBuffer</I> </DT><DD>Address to the buffer that contains the sent data (size_is(uSize)). This is the same address that the caller passed into the <A HREF="sweep123.htm#comobj_000f000501110100" TARGET=TEXT>IConfDataExchange::SendData</A> method. When the sink object receives this event, the data buffer can be released.
+</DD><DT><I>hr</I> </DT><DD>The result of the data transfer.
+</DD></DL>
+<H4><A NAME="comobj_000f000501170200">IConfDataExchangeNotify::DataReceived</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT DataReceived(
+    IConfMember *pMember,
+    ULONG uSize,
+    byte *pvBuffer,
+    HRESULT hr);
+</FONT></PRE>
+<P>Provides status notification of data received. 
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>The instance of the Member object from which the data was received.
+</DD><DT><I>uSize</I> </DT><DD>The amount of data received, in bytes.
+</DD><DT><I>pvBuffer</I> </DT><DD>Address to the buffer that contains the received data (size_is(uSize)).
+</DD><DT><I>hr</I> </DT><DD>The result of the data transfer.
+</DD></DL>
+<P>The data buffer is valid only during the event notification, and is freed by the source object once the notification is over.
+
+<H3><A NAME="comobj_000f000501180000">IConfFileExchangeNotify</A></H3>
+<P>To receive asynchronous event notifications relating to the exchange of files from the Communications Channel object, a client application must implement the methods in the <B>IConfFileExchangeNotify</B> interface, which is instantiated from <B>IID_IConfFileExchangeNotify</B>.
+
+<P>The <B>IConfFileExchangeNotify</B> interface provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501180100" TARGET=TEXT>FileSent</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501180200" TARGET=TEXT>FileReceived</A>
+</UL>
+<H4><A NAME="comobj_000f000501180100">IConfFileExchangeNotify::FileSent</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT FileSent(
+    IConfMember *pMember,
+    IConfFileTransfer *pFileTransfer,
+    HRESULT hr);
+</FONT></PRE>
+<P>Provides notification of file sent status. This method can be used multiple times to get progress information from the File Transfer object.
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>An instance of the Member object where the file is sent.
+</DD><DT><I>pFileTransfer</I> </DT><DD>An instance of the File Transfer object.
+</DD><DT><I>hr</I> </DT><DD>The result of the file transfer operation.
+</DD></DL>
+<H4><A NAME="comobj_000f000501180200">IConfFileExchangeNotify::FileReceived</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT FileReceived(
+    IConfMember *pMember
+    IConfFileTransfer *pFileTransfer,
+    HRESULT hr);
+</FONT></PRE>
+<P>Provides notification of file received status. This method can be used multiple times to get progress information.
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>The instance of the Member object from which the file was received.
+</DD><DT><I>pFileTransfer</I> </DT><DD>An instance of the File Transfer object.
+</DD><DT><I>hr</I> </DT><DD>The result of the file transfer operation.
+</DD></DL>
+<H3><A NAME="comobj_000f000501190000">IConfAppSharingNotify</A></H3>
+<P>To receive asynchronous event notifications relating to the sharing of applications from the Communications Channel object, a client application must implement the methods in the <B>IConfAppSharingNotify</B> interface, which is instantiated from <B>IID_IConfAppSharingNotify</B>.
+
+<P>The <B>IConfAppSharingNotify</B> interface provides the following method:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501190100" TARGET=TEXT>StatusChanged</A>
+</UL>
+<H4><A NAME="comobj_000f000501190100">IConfAppSharingNotify::StatusChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT StatusChanged(
+    IConfShareApp *pShrApp,
+    CONFSHRSTATE uShareStatus
+    HRESULT hr);
+</FONT></PRE>
+<P>Provides notification when a sharable application becomes shared or unshared.
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pShrApp</I> </DT><DD>The instance of the ConfShareApp object.
+</DD><DT><I>uShareStatus</I> </DT><DD>The current sharing status can be one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_UNKNOWN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application status is unknown.
+
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_SHARED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application is shared.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_UNSHARED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application is not shared.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>hr</I> </DT><DD>The result of the application sharing operation.
+</DD></DL>
+<H3><A NAME="comobj_000f0005011a0000">IConfAppControlNotify</A></H3>
+<P>To receive asynchronous event notifications relating to the control of the remote instance of the application from the Communications Channel object, a client application must implement the methods in the <B>IConfAppControlNotify</B> interface, which is instantiated from <B>IID_IConfAppControlNotify</B>.
+
+<P>The <B>IConfAppControlNotify</B> interface provides the following method:
+<UL><LI><A HREF="sweep123.htm#comobj_000f0005011a0100" TARGET=TEXT>StatusChanged</A>
+</UL>
+<H4><A NAME="comobj_000f0005011a0100">IConfAppControlNotify::StatusChanged</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT StatusChanged(
+    IConfMember *pMember,
+    IConfApplication *pApplication,
+    CONFAPPSTATE uAppStatus,
+    HRESULT hr);
+</FONT></PRE>
+<P>Provides notification when the remote instance of an application on a member changes its status.
+
+<UL><LI>Returns the following value:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pMember</I> </DT><DD>An instance of the Member object whose application instance is changing its status.
+</DD><DT><I>pApplication</I> </DT><DD>An instance of the Application object.
+</DD><DT><I>uAppStatus</I> </DT><DD>The current status for application invocation is represented by one of the values below:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_APP_UNKNOWN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The state of the remote instance of the application is unknown.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_APP_STARTED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The remote instance of the application is started.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_APP_STOPPED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The remote instance of the application is stopped.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>hr</I> </DT><DD>The result of the remote instance invocation.
+</DD></DL>
+<H3><A NAME="comobj_000f0005011b0000">Client Application Object</A></H3>
+<P>The Client Application object, or Application object, is enumerated from the enumerator obtained from the <A HREF="sweep123.htm#comobj_000f000501070600" TARGET=TEXT>IConfUser::EnumApplication</A> or the <A HREF="sweep123.htm#comobj_000f000501090c00" TARGET=TEXT>IConference::EnumApplication</A> method. 
+
+<P>The object provides the following interface:
+<UL><LI><A HREF="sweep123.htm#comobj_000f0005011c0000" TARGET=TEXT>IConfApplication</A>
+</UL>
+<H3><A NAME="comobj_000f0005011c0000">IConfApplication</A></H3>
+<P>The <B>IConfApplication</B> interface is instantiated automatically when the object is enumerated from the enumerator. 
+
+<P>The interface provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f0005011c0100" TARGET=TEXT>GetGUID</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005011c0200" TARGET=TEXT>GetName</A>
+</UL>
+<H4><A NAME="comobj_000f0005011c0100">IConfApplication::GetGUID</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetGUID(
+    GUID *pGUID);
+</FONT></PRE>
+<P>Returns the application's globally unique identifier (GUID).
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>pGUID</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pGUID</I> </DT><DD>Address of a buffer to receive the application's unique identifier.
+</DD></DL>
+<H4><A NAME="comobj_000f0005011c0200">IConfApplication::GetName</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetName(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Returns the string to contain the application name.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>pbstrName</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the application name.
+</DD></DL>
+<H3><A NAME="comobj_000f0005011d0000">Sharable Application Object</A></H3>
+<P>The Sharable Application object, or Share Application object, is enumerated from the enumerator obtained from the <A HREF="sweep123.htm#comobj_000f000501130100" TARGET=TEXT>IConfAppSharing::EnumSharableApp</A> method. 
+
+<P>The object provides the following interface:
+<UL><LI><A HREF="sweep123.htm#comobj_000f0005011e0000" TARGET=TEXT>IConfShareApp</A>
+</UL>
+<H3><A NAME="comobj_000f0005011e0000">IConfShareApp</A></H3>
+<P>The <B>IConfShareApp</B> interface is instantiated automatically when the object is enumerated from the enumerator. 
+
+<P>The interface provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f0005011e0100" TARGET=TEXT>GetName</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005011e0200" TARGET=TEXT>Share</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005011e0300" TARGET=TEXT>Unshare</A>
+ <LI><A HREF="sweep123.htm#comobj_000f0005011e0400" TARGET=TEXT>GetShareState</A>
+</UL>
+<H4><A NAME="comobj_000f0005011e0100">IConfShareApp::GetName</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetName(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Returns the string for the share application name.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>pbstrName</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application no longer exists, or internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>An address to receive a string for the share application name.
+</DD></DL>
+<H4><A NAME="comobj_000f0005011e0200">IConfShareApp::Share</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Share(void);
+</FONT></PRE>
+<P>Shares the application on all the members in the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="comobj_000f0005011e0300">IConfShareApp::Unshare</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Unshare(void);
+</FONT></PRE>
+<P>Unshares the application on all the members in the channel.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. The requested number of elements was returned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation failed.
+</FONT></TD></TR></TABLE>
+</UL>
+<H4><A NAME="comobj_000f0005011e0400">IConfShareApp::GetShareState</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetShareState(
+    CONFSHRSTATE *puShrState);
+</FONT></PRE>
+<P>Retrieves the "share" state of the application. 
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puShrState</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puShrState</I> </DT><DD>Address of a buffer to receive the current "share" state of the application:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_UNKNOWN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application state is unknown.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_SHARED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application is being shared.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_SHR_UNSHARED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The application is not being shared.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H3><A NAME="comobj_000f0005011f0000">File Transfer Object</A></H3>
+<P>A File Transfer object is obtained from the <A HREF="sweep123.htm#comobj_000f000501180100" TARGET=TEXT>IConfFileExchangeNotify::FileSent</A> or <A HREF="sweep123.htm#comobj_000f000501180200" TARGET=TEXT>IConfFileExchangeNotify::FileReceived</A> method.
+
+<P>The object provides the following interface:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501200000" TARGET=TEXT>IConfFileTransfer</A>
+</UL>
+<H3><A NAME="comobj_000f000501200000">IConfFileTransfer</A></H3>
+<P>The <B>IConfFileTransfer</B> interface provides the following methods:
+<UL><LI><A HREF="sweep123.htm#comobj_000f000501200100" TARGET=TEXT>GetName</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501200200" TARGET=TEXT>GetBytesTransferred</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501200300" TARGET=TEXT>GetTotalSize</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501200400" TARGET=TEXT>GetFileState</A>
+ <LI><A HREF="sweep123.htm#comobj_000f000501200500" TARGET=TEXT>IsSameAs</A>
+</UL>
+<H4><A NAME="comobj_000f000501200100">IConfFileTransfer::GetName</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2"> HRESULT GetName(
+    BSTR *pbstrName);
+</FONT></PRE>
+<P>Returns the string for the full path of the file.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>pbstrName</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internal resources are not available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Memory could not be allocated to service the request.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pbstrName</I> </DT><DD>Address to receive a string for the full path of the file.
+</DD></DL>
+<H4><A NAME="comobj_000f000501200200">IConfFileTransfer::GetBytesTransferred</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetBytesTransferred(
+    ULONG *puBytes);
+</FONT></PRE>
+<P>Returns the number of bytes transferred.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puBytes</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puBytes</I> </DT><DD>Address of a buffer to receive the number of bytes transferred.
+</DD></DL>
+<H4><A NAME="comobj_000f000501200300">IConfFileTransfer::GetTotalSize</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetTotalSize(
+    ULONG *puBytes);
+</FONT></PRE>
+<P>Returns the size, in bytes, of the file.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puBytes</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puBytes</I> </DT><DD>An address to a buffer to receive the size (in bytes) of the file.
+</DD></DL>
+<H4><A NAME="comobj_000f000501200400">IConfFileTransfer::GetFileState</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetFileState(
+    CONFFILESTATE *puState);
+</FONT></PRE>
+<P>Returns the state of the File Transfer object.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The address in <I>puState</I> is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>puState</I> </DT><DD>Address to a buffer to receive the state of the file. This can be filled by one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_FILE_IDLE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file-transfer operation was requested but not yet initialized.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_FILE_INITIALIZING </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file-transfer operation was requested and is now initialized.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_FILE_PROGRESS </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file-transfer operation is in progress.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CNF_FILE_COMPLETE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The file-transfer operation is completed.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P>Note that the CNF_FILE_COMPLETE value simply represents completion of the operation. The operation may have completed due to success, cancellation, or failure.
+<H4><A NAME="comobj_000f000501200500">IConfFileTransfer::IsSameAs</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IsSameAs(
+    IConfFileTransfer *pFileTransfer);
+</FONT></PRE>
+<P>Identifies whether the two File Transfer objects represent the same file-transfer operation.
+
+<UL><LI>Returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both File Transfer objects represent the same operation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Both File Transfer objects do not represent the same operation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pFileTransfer</I> address is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <I>pFileTransfer</I> object does not have the required interface.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pFileTransfer</I> </DT><DD>Address of the File Transfer object to compare with.
+</DD></DL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep122.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep124.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,740 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Conference Functions</TITLE></HEAD>
+<BODY BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LEFTMARGIN=10 TOPMARGIN=10>
+<P><FONT FACE="arial" SIZE=5>Windows Conferencing API</FONT><BR><HR><P><P><FONT FACE="arial" SIZE="2">
+<H1><A NAME="msconfrf_0001000201000000">Conference Functions</A></H1>
+<H2><A NAME="msconfrf_0001000201000100">ConferenceConnect</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceConnect(
+	HCONF    * phConf,
+	LPCONFADDR lpConfAddr,
+	LPCONFINFO lpConfInfo,
+	LPCONFNOTIFY lpConfNotify);
+</FONT></PRE>
+<P>The <B>ConferenceConnect</B> function establishes a conference connection between two systems.
+
+<UL><LI>If the function succeeds, the return value is CONFERR_SUCCESS.
+<P>
+If there was a problem, the return value is one of the <A HREF="mscon002.htm#msconfrf_0001000202000100">CONFERR</A> values, such as:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_INVALID_HCONF</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The value pointed to by <I>phConf</I> is invalid
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_INVALID_PARAMETER</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">One of the other parameters or their fields is not valid
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>phConf</I>
+</DT><DD>Points to an <A HREF="mscon002.htm#msconfrf_0001000202000b00">HCONF</A> that can be used to identify the conference.
+If the value pointed to by <I>phConf</I> is set to NULL, a new conference is created and the new conference identifier is returned through this parameter.
+If it is initially set to a valid conference identifier, the node associated with <I>lpConfAddr</I> is added to that existing conference.
+
+</DD><DT><I>lpConfAddr</I>
+</DT><DD>Points to a <A HREF="mscon002.htm#msconfrf_0001000202000200">CONFADDR</A> structure that indicates the address of the machine to connect to.
+
+</DD><DT><I>lpConfInfo</I>
+</DT><DD>Points to a <A HREF="mscon002.htm#msconfrf_0001000202000600">CONFINFO</A> structure that contains the initial conference settings.
+
+</DD><DT><I>lpConfNotify</I>
+</DT><DD>Points to a <A HREF="mscon002.htm#msconfrf_0001000202000700">CONFNOTIFY</A> structure that contains the notification callback information.
+</DD></DL>
+<P>This function can be used to establish a new conference or add another user to an existing conference.
+<P>
+The callback routine receives the following notifications as a result of this function:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_CONFERENCE_INIT</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The function parameters have been validated and connection request is being processed. This notification is not received when adding users to an existing conference.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_CONFERENCE_START</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The conference has officially started.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_CONFERENCE_ERROR</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">An error was encountered when attempting to create the conference.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000200">ConferenceDisconnect</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000d00">CONFNOTIFYPROC</A>,
+<A HREF="mscon002.htm#msconfrf_0001000202000200">CONFADDR</A>,
+<A HREF="mscon002.htm#msconfrf_0001000202000600">CONFINFO</A>
+<A HREF="mscon002.htm#msconfrf_0001000202000700">CONFNOTIFY</A>
+<H2><A NAME="msconfrf_0001000201000200">ConferenceDisconnect</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceDisconnect(
+	HCONF hConf);
+</FONT></PRE>
+<P>The <B>ConferenceDisconnect</B> function stops an existing conference.
+
+<UL><LI>The return value is CONFERR_SUCCESS if the function succeeded or CONFERR_INVALID_HCONF if <I>hConf</I> is not a valid conference.
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>Specifies the conference to stop.
+</DD></DL>
+<P>If the conference was successfully terminated, the callback receives a CONFN_CONFERENCE_STOP notification.
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000100">ConferenceConnect</A>
+<A HREF="mscon001.htm#msconfrf_0001000201000d00">CONFNOTIFYPROC</A>
+<H2><A NAME="msconfrf_0001000201000300">ConferenceGetInfo</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceGetInfo(
+	HCONF  hConf,
+	DWORD  dwCode,
+	LPVOID lpv);
+</FONT></PRE>
+<P>The <B>ConferenceGetInfo</B> function obtains information about a conference or the users in a conference.
+<UL><LI>If the function succeeds in obtaining the information, the return value is CONFERR_SUCCESS.
+<P>
+If the return value is CONFERR_BUFFER_TOO_SMALL, then the DWORD pointed to by <I>lpv</I> contains the size of the buffer necessary to hold the data.
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>The <I>HCONF</I> used to identify the conference.
+
+</DD><DT><I>dwCode</I>
+</DT><DD>Indicates the type of information to put into the buffer.
+See the table below for valid values.
+
+</DD><DT><I>lpv</I>
+</DT><DD>Points to a buffer that will be modified to contain the information requested.
+The first 4 bytes must be set to indicate the total size of the buffer.
+This will be modified, if the function succeeds, to indicate the amount actually used.
+</DD></DL>
+<P>The following table describes the <I>dwCode</I> values and associated structures.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B><I>dwCode</I> 
+ </B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B><I>lpv</I> (structure) 
+ </B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B>Description
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_GET_USER 
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000900">CONFUSERINFO</A>
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Get information on a specific user. On entry, <B>dwUserId</B> must be a valid user identifier or 0 to obtain the data for the local user.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_ENUM_USER
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000900">CONFUSERINFO</A>
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Enumerate the users in a conference. On entry, <B>dwUserId</B> must be 0 to get the first user data, or the previous user identifier to get the next one in the list.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_GET_CONF
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000600">CONFINFO</A>
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Get conference information. On entry, <B>hConf</B> must be the handle of an existing conference or NULL to get the data for the default conference.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_ENUM_CONF
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000600">CONFINFO</A>
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Enumerate existing conferences. On entry, <B>hConf</B> must be 0 to get data for the first conference, or the <B>hConf</B> from the previous call to get the next one.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_ENUM_PEER
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A>
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Enumerate the peer users for an application in a conference. On entry, 
+ <B>dwUserId</B> must be 0 to get the first peer information, or the previous user identifier to get the next one in the list.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_GET_RECDIR
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000800">CONFRECDIR</A>
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Get the default directory for received files.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_GET_FILEINFO
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000400">CONFFILEINFO</A>
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Get file transfer progress information. On entry, <B>dwFileId</B> is the file identifier provided in the notification callback.
+</FONT></TD>
+</TR>
+</TABLE>
+<P>On entry to this routine, the DWORD pointed to by <I>lpv</I> (the first four bytes) must be set to the size, in bytes, of the appropriate structure.
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000400">ConferenceSetInfo</A>
+<H2><A NAME="msconfrf_0001000201000400">ConferenceSetInfo</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceSetInfo(
+	HCONF  hConf,
+	DWORD  dwCode,
+	LPVOID lpv);
+</FONT></PRE>
+<P>The <B>ConferenceSetInfo</B> function changes conference settings.
+<UL><LI>If the function succeeds in setting the information, the return value is CONFERR_SUCCESS.
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>The <A HREF="mscon002.htm#msconfrf_0001000202000b00">HCONF</A> used to identify the conference.
+This parameter may be NULL.
+
+</DD><DT><I>dwCode</I>
+</DT><DD>Indicates the type of information in the buffer. See the table below for valid values.
+
+</DD><DT><I>lpv</I>
+</DT><DD>Points to a buffer that holds the new conference data.
+The first 4 bytes must be set to indicate the total size of the structure.
+</DD></DL>
+<P>The following table describes the valid <I>dwCode</I> values and associated structures.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B><I>dwCode</I>
+ </B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B><I>lpv</I> (structure)
+ </B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B>Description
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_SET_RECDIR
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000800">CONFRECDIR</A>
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Set the default directory for receiving files. On entry, <B>szRecDir</B> is a null-terminated pathname to a valid directory. This change affects all subsequent file transfers on the local machine.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_SET_GUID
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000500">CONFGUID</A>
+ </FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Register the data specified in the <B>CONFGUID</B> structure. If the <B>pszApplication</B> and <B>pszCommandLine</B> are both empty strings, the entry for the <B>guid</B> is removed from the registry.
+</FONT></TD>
+</TR>
+</TABLE>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000300">ConferenceGetInfo</A>
+<H2><A NAME="msconfrf_0001000201000500">ConferenceSendData</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceSendData(
+	HCONF      hConf,
+	LPCONFDEST lpConfDest,
+	LPVOID     lpv,
+	DWORD      cb,
+	DWORD      dwFlags);
+</FONT></PRE>
+<P>The <B>ConferenceSendData</B> function sends data to participants in a conference.
+<UL><LI>The return value is CONFERR_SUCCESS if the data was sent successfully.
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>The <A HREF="mscon002.htm#msconfrf_0001000202000b00">HCONF</A> used to identify the conference.
+
+</DD><DT><I>lpConfDest</I>
+</DT><DD>Points to a <A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A> structure
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwSize</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">must be set to the size of this structure
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwFlags</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this field should be set to 0
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwUserId</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">the destination identifier for a single user, or 0 to indicate all participants in the conference
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwReserved</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this field is reserved and should be set to 0
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">guid</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">the unique application identifier <A HREF="mscon002.htm#msconfrf_0001000202000a00">GUID</A>
+</FONT></TD></TR></TABLE>
+</DD><DT><I>lpv</I>
+</DT><DD>Points to the buffer of data to be sent.
+
+</DD><DT><I>cb</I></DT><DD>The number of bytes in the buffer pointed to by <I>lpv</I>.
+
+</DD><DT><I>dwFlags</I></DT><DD>Reserved for future use.
+</DD></DL>
+<P>Notifications of data transmission are made through the notification callback routine for the process.
+The process receiving the data receives the CONFN_DATA_RECEIVED notification while the sending process gets CONFN_DATA_SENT.
+In each case, the <I>dwParam</I> parameter 
+is the number of bytes pointed to by <I>lpv2</I>, while <I>lpv1</I> is the <A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>.
+<P>
+The receiving application must have a callback registered with the same <I>guid</I> as specified in the <I>lpConfDest</I>.
+<P>
+The <I>dwFlags</I> field of the <A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A> structure pointed to by <I>lpv1</I> may have one or more of the following flags set:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_DF_BROADCAST</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The data was broadcast to all users
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_DF_PRIVATE</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The data was sent directly from one machine to another
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_DF_DATA_SEGMENT_BEGIN</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">This is the start of a data block
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_DF_DATA_SEGMENT_END</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">This is the end of a data block
+</FONT></TD></TR></TABLE>
+<P>
+If the size of the data block is under 4,000 bytes, the data will normally not be broken up
+into smaller packets and both the CONF_DF_DATA_SEGMENT_BEGIN and CONF_DF_DATA_SEGMENT_END
+bits will be set.
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000600">ConferenceSendFile</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000b00">ConferenceSetNotify</A>,
+<A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A>
+<A HREF="mscon001.htm#msconfrf_0001000201000d00">CONFNOTIFYPROC</A>
+<H2><A NAME="msconfrf_0001000201000600">ConferenceSendFile</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceSendFile(
+	HCONF      hConf,
+	LPCONFDEST lpConfDest,
+	LPCTSTR    szFileName,
+	DWORD      dwFlags);
+</FONT></PRE>
+<P>The <B>ConferenceSendFile</B> function sends a file to one or more participants in a conference.
+<UL><LI>The return value is CONFERR_SUCCESS if the file was sent successfully.
+<P>
+CONFERR_FILE_NOT_FOUND is returned if the file or pathname is invalid.
+<P>
+CONFERR_INVALID_PARAMETER is returned if there was a problem the <I>dwFlags</I> parameter or any of the members in the structure pointed to 
+by <I>lpConfDest</I>. 
+</UL>
+<DL><DT><I>hConf</I></DT><DD>The <A HREF="mscon002.htm#msconfrf_0001000202000b00">HCONF</A> used to identify the conference.
+
+</DD><DT><I>lpConfDest</I></DT><DD>Points to a <A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A> structure
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwSize</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">must be set to the size of this structure
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwFlags</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this field should be set to 0
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwUserId</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">the destination identifier for a single user, or 0 to indicate all participants in the conference
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwReserved</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this field is reserved and should be set to 0
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">guid</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this field is not used and should be set to 0
+</FONT></TD></TR></TABLE>
+</DD><DT><I>szFileName</I></DT><DD>The null terminated name of the file to send.
+
+</DD><DT><I>dwFlags</I></DT><DD>Specifies the options used to send the file.
+This parameter can be a combination of any of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_SF_NOWAIT</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The function should start the file transfer immediate and return without waiting for it to complete.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_SF_NOUI</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The default progress indicator should not be used.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_SF_NOCOMPRESS</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The file should not be compressed.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P>Notifications of file transfers are made through the <A HREF="mscon001.htm#msconfrf_0001000201000d00">CONFNOTIFYPROC</A> for the process.
+The notification callback receives the following information:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwParam</I></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">the unique file identifier (<B>dwFileId</B>).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>lpv1</I></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">a pointer to the <A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A> structure
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>lpv2</I></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">a pointer to the <A HREF="mscon002.htm#msconfrf_0001000202000400">CONFFILEINFO</A>
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000500">ConferenceSendData</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000300">ConferenceGetInfo</A>,
+<A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A>
+<H2><A NAME="msconfrf_0001000201000700">ConferenceCancelTransfer</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceCancelTransfer(
+	HCONF hConf,
+	DWORD dwFileId);
+</FONT></PRE>
+<P>The <B>ConferenceCancelTransfer</B> function stops the transfer of a file.
+
+<UL><LI>The return value is CONFERR_SUCCESS if the request was successfully processed.
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>The <A HREF="mscon002.htm#msconfrf_0001000202000b00">HCONF</A> used to identify the conference.
+
+</DD><DT><I>dwFileId</I>
+</DT><DD>The value used to identify a file transfer.
+This is the <I>dwParam</I> parameter passed to the callback for any of the CONFN_FILESEND or CONFN_FILERECEIVE notifications.
+
+</DD></DL>
+<P>Note that it is possible for the transfer to complete before the request to cancel has been processed.
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000600">ConferenceSendFile</A>
+<A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A>,
+<H2><A NAME="msconfrf_0001000201000800">ConferenceShareWindow</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceShareWindow(
+	HCONF hConf,
+	HWND  hwnd,
+	DWORD dwCode);
+</FONT></PRE>
+<P>The <B>ConferenceShareWindow</B> function shares an application window to the participants of the specified conference.
+
+<UL><LI>The function returns one of the following values
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_SUCCESS</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The function was successful
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_NO_APP_SHARING</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Application sharing is not currently active
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_NOT_SHARED</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The <I>hwnd</I> is not shared
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_NOT_SHAREABLE</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The <I>hwnd</I> can not be shared
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_ALREADY_SHARED</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The <I>hwnd</I> is already shared
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>Identifies the conference in which to share the window.
+If this is NULL, the default conference is used.
+</DD><DT><I>hwnd</I>
+</DT><DD>Identifies the window to share.
+</DD><DT><I>dwCode</I>
+</DT><DD>Specifies the sharing option.
+This must be one of:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_SW_SHARE</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Share the application associated with the <I>hwnd</I>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_SW_UNSHARE</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Stop sharing the application associated with the <I>hwnd</I>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_SW_SHAREABLE</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Check if the <I>hwnd</I> is capable of being shared
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_SW_IS_SHARED</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Check if the <I>hwnd</I> is currently shared
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P>The notification callback routine receives CONFN_WINDOW_SHARED or CONFN_WINDOW_UNSHARED when a window changes its sharing status.
+The <I>dwParam</I> is the window handle. A <I>dwParam</I> of 0 indicates application sharing has stopped.
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000d00">CONFNOTIFYPROC</A>
+<H2><A NAME="msconfrf_0001000201000900">ConferenceLaunchRemote</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceLaunchRemote(
+	HCONF      hConf,
+	LPCONFDEST lpConfDest,
+	DWORD      dwReserved);
+</FONT></PRE>
+<P>The <B>ConferenceLaunchRemote</B> function informs a remote system it should attempt to start an application that has been registered.
+
+<UL><LI>The return value is CONFERR_SUCCESS if the request was successfully processed.
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>The <A HREF="mscon002.htm#msconfrf_0001000202000b00">HCONF</A> used to identify the conference.
+
+</DD><DT><I>lpConfDest</I>
+</DT><DD>Points to a <A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A> structure
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwSize</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">must be set to the size of this structure
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwFlags</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this field should be set to 0
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwUserId</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">the destination identifier for a single user, or 0 to indicate all participants in the conference
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwReserved</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this field is reserved and should be set to 0
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">guid</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">the unique application identifier <A HREF="mscon002.htm#msconfrf_0001000202000a00">GUID</A>
+</FONT></TD></TR></TABLE>
+</DD><DT><I>dwReserved</I>
+</DT><DD>This parameter is reserved for future use and should be set to 0.
+
+</DD></DL>
+<P>When a destination node receives this notification, it searches the registry for a matching <B>guid</B>.
+If an entry for an application is found, it attempts to start it, based on the data supplied when it was registered.
+<P>
+There is no notification given if the <I>guid</I> is not found or the application fails to start.
+<P>
+Note that a return value of CONFERR_SUCCESS does not guarantee the remote application has been started.
+<P>
+To detect when a remote application has joined the conference, it could register a callback
+with a <I>guid</I>, usually the same as the one used to launch the application.
+When the remote version of the application is launched and establishes its callback with the same <I>guid</I>
+the local application will receive a CONFN_PEER_ADDED notification.
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000400">ConferenceSetInfo</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000b00">ConferenceSetNotify</A>,
+<A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A>,
+<H2><A NAME="msconfrf_0001000201000a00">ConferenceListen</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceListen(
+	DWORD dwReserved);
+</FONT></PRE>
+<P>The <B>ConferenceListen</B> function starts the conferencing system in background mode, allowing it to accept incoming calls.
+
+<UL><LI>The return value is CONFERR_SUCCESS if the request was successfully processed.
+</UL>
+<DL><DT><I>dwReserved</I>
+</DT><DD>This parameter is reserved for future use and should be set to 0.
+</DD></DL>
+<P>Note that the user can set the option to automatically accept incoming calls or
+shut down the conferencing system.
+<P>
+There is no effect if conferencing is already running.
+<H2><A NAME="msconfrf_0001000201000b00">ConferenceSetNotify</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceSetNotify(
+	HCONF        hConf,
+	LPCONFNOTIFY lpConfNotify,
+	HCONFNOTIFY * phConfNotify);
+</FONT></PRE>
+<P>The <B>ConferenceSetNotify</B> function establishes a notification callback routine for an application
+
+<UL><LI>The return value is CONFERR_SUCCESS if the request was successfully processed.
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>The <A HREF="mscon002.htm#msconfrf_0001000202000b00">HCONF</A> used to identify the conference.
+If this is NULL, the notification procedure will receive events for all conferences,
+otherwise the callback will be automatically removed when the conference is terminated.
+
+</DD><DT><I>lpConfNotify</I>
+</DT><DD>Points to a <A HREF="mscon002.htm#msconfrf_0001000202000700">CONFNOTIFY</A> structure.
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwSize</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">must be set to the size of this structure
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwUser</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this field is available for the application's use and will be passed back
+through the notification callback function
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">dwFlags</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">reserved for future use
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">guid</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">the field should be set to 0 unless the application intends to receive data sent via <A HREF="mscon001.htm#msconfrf_0001000201000500">ConferenceSendData</A>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">pfnNotifyProc</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">a pointer to the notification callback function (See <A HREF="mscon001.htm#msconfrf_0001000201000d00">CONFNOTIFYPROC</A>)
+</FONT></TD></TR></TABLE>
+</DD><DT><I>phConfNotify</I>
+</DT><DD>Points to a <A HREF="mscon002.htm#msconfrf_0001000202000c00">HCONFNOTIFY</A> identifier that must be used to remove the notification procedure.
+(See <A HREF="mscon001.htm#msconfrf_0001000201000c00">ConferenceRemoveNotify</A>)
+
+</DD></DL>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000c00">ConferenceRemoveNotify</A>
+<A HREF="mscon002.htm#msconfrf_0001000202000700">CONFNOTIFY</A>,
+<A HREF="mscon002.htm#msconfrf_0001000202000c00">HCONFNOTIFY</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000d00">CONFNOTIFYPROC</A>,
+<H2><A NAME="msconfrf_0001000201000c00">ConferenceRemoveNotify</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConferenceRemoveNotify(
+	HCONF       hConf,
+	HCONFNOTIFY hConfNotify);
+</FONT></PRE>
+<P>The <B>ConferenceRemoveNotify</B> function requests that a procedure,
+established by <A HREF="mscon001.htm#msconfrf_0001000201000b00">ConferenceSetNotify</A> no longer receive notifications about conferencing events.
+
+<UL><LI>The return value is CONFERR_SUCCESS if the request was successfully processed.
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>The <A HREF="mscon002.htm#msconfrf_0001000202000b00">HCONF</A> used to identify the conference.
+
+</DD><DT><I>hConfNotify</I>
+</DT><DD>The <A HREF="mscon002.htm#msconfrf_0001000202000c00">HCONFNOTIFY</A> returned from a call to <A HREF="mscon001.htm#msconfrf_0001000201000b00">ConferenceSetNotify</A>.
+</DD></DL>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000b00">ConferenceSetNotify</A>,
+<A HREF="mscon002.htm#msconfrf_0001000202000700">CONFNOTIFY</A>,
+<A HREF="mscon002.htm#msconfrf_0001000202000c00">HCONFNOTIFY</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000d00">CONFNOTIFYPROC</A>,
+<H2><A NAME="msconfrf_0001000201000d00">CONFNOTIFYPROC</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+DWORD WINAPI ConfNotifyProc(
+	HCONF  hConf,
+	DWORD  dwCode,
+	DWORD  dwParam,
+	LPVOID lpv1,
+	LPVOID lpv2,
+	DWORD  dwUser);
+</FONT></PRE>
+<P><B>CONFNOTIFYPROC</B> is an application-defined callback function for conference events. 
+
+<UL><LI>The function should normally return 0.
+</UL>
+<DL><DT><I>hConf</I>
+</DT><DD>Provides a conference identifier to the <B>ConfNotifyProc</B>.
+</DD><DT><I>dwCode</I>
+</DT><DD>Specifies the conference event that occurred. See the comments section for a table of valid notification codes.
+</DD><DT><I>dwParam</I>
+</DT><DD>Specifies a parameter for the event corresponding to <I>dwCode</I>.
+</DD><DT><I>lpv1</I>
+</DT><DD>Specifies a parameter for the event corresponding to <I>dwCode</I>.
+</DD><DT><I>lpv2</I>
+</DT><DD>Specifies a parameter for the event corresponding to <I>dwCode</I>.
+</DD><DT><I>dwUser</I>
+</DT><DD>The application specific value specified in the <A HREF="mscon002.htm#msconfrf_0001000202000700">CONFNOTIFY</A> structure.
+</DD></DL>
+<P>The following is a table of notification codes with their associated parameter definitions.
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B><I>dwCode</I>
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B><I>dwParam</I>
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B><I>lpv1</I>
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B><I>lpv2</I>
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_CONFERENCE_INIT
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000200">LPCONFADDR</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000600">LPCONFINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_CONFERENCE_START
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000600">LPCONFINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_CONFERENCE_STOP
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000600">LPCONFINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_CONFERENCE_ERROR
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000600">LPCONFINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_USER_ADDED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwUserId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000900">LPCONFUSERINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_USER_REMOVED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwUserId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000900">LPCONFUSERINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_USER_UPDATE
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwUserId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000900">LPCONFUSERINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_PEER_ADDED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwUserId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_PEER_REMOVED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwUserId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_WINDOW_SHARED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">HWND
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">-- 
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_WINDOW_UNSHARED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">HWND
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">--
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">-- 
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"> 
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_DATA_RECEIVED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">the number of bytes pointed to by <I>lpv2</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">pointer to data received
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_DATA_SENT
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"> the number of bytes pointed to by <I>lpv2</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">pointer to data sent
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_FILESEND_START
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwFileId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000400">LPCONFFILEINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_FILESEND_PROGRESS
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwFileId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000400">LPCONFFILEINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_FILESEND_COMPLETE
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwFileId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000400">LPCONFFILEINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_FILESEND_ERROR
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwFileId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000400">LPCONFFILEINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_FILERECEIVE_START
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwFileId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000400">LPCONFFILEINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_FILERECEIVE_PROGRESS
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwFileId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000400">LPCONFFILEINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_FILERECEIVE_COMPLETE
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwFileId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000400">LPCONFFILEINFO</A>
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFN_FILERECEIVE_ERROR
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwFileId</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000300">LPCONFDEST</A>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><A HREF="mscon002.htm#msconfrf_0001000202000400">LPCONFFILEINFO</A>
+</FONT></TD>
+</TR>
+</TABLE>
+<P>The values of <I>lpv1</I> and <I>lpv2</I> must not be used past the return from this callback.
+If necessary, the data pointed to by the structures may be copied.
+
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000100">ConferenceConnect</A>
+<A HREF="mscon002.htm#msconfrf_0001000202000700">CONFNOTIFY</A>
+<HR><CENTER>
+<A HREF="mscon000.htm">[Previous]</A>
+<A HREF="msconf.htm">[Up One Level]</A>
+<A HREF="mscon002.htm">[Next]</A>
+</CENTER>
+</FONT>
+</BODY></HTML>

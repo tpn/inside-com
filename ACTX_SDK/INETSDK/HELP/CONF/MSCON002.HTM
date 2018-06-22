@@ -1,0 +1,423 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Conference Types, Structures, and Constants</TITLE></HEAD>
+<BODY BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LEFTMARGIN=10 TOPMARGIN=10>
+<P><FONT FACE="arial" SIZE=5>Windows Conferencing API</FONT><BR><HR><P><P><FONT FACE="arial" SIZE="2">
+<H1><A NAME="msconfrf_0001000202000000">Conference Types, Structures, and Constants</A></H1>
+<H2><A NAME="msconfrf_0001000202000100">Conference Error Codes</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">
+typedef DWORD CONFERR;
+</FONT></PRE>
+<P>The return value of a conferencing function can be any one of the following values:
+<P><TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B>Error Code</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><B>Description
+
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_ACCESS_DENIED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Access to an object (file, user, etc.) was denied.
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_ALREADY_SHARED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The application is already shared
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_BUFFER_TOO_SMALL
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The buffer pointed to by a parameter is not large enough for the operation
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_ENUM_COMPLETE
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Enumeration complete
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_FILE_NOT_FOUND
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The file was not found
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_FILE_RECEIVE_ABORT
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The receiving of the file was canceled.
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_FILE_SEND_ABORT
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The file send was canceled
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_FILE_TRANSFER
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">There was a problem transferring the file
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_INVALID_ADDRESS
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The address is invalid or not found
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_INVALID_BUFFER
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The buffer pointed to by a parameter is not valid for read/write.
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_INVALID_HCONF
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The hConf parameter is not valid.
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_INVALID_HWND
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The value passed to ConferenceShareWindow is not a valid hwnd
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_INVALID_OPERATION
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The requested operation is not valid at this time.
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_INVALID_PARAMETER
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">One of the calling parameters is incorrect.
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_NO_APP_SHARING
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Application Sharing is not currently available
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_NOT_SHARED
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The application window is not currently shared
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_NOT_SHAREABLE
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The application window can not be shared
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_OUT_OF_MEMORY
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">A function could not allocate sufficient memory to complete the operation.
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_PATH_NOT_FOUND
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The path was not found
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_RECEIVE_DIR
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">There was a problem with the receive directory
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONFERR_SUCCESS
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The function completed the requested operation successfully
+
+</FONT></TD>
+</TR>
+</TABLE>
+<H2><A NAME="msconfrf_0001000202000200">CONFADDR</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct tagConfAddr {
+	DWORD dwSize;
+	DWORD dwAddrType;
+	union {
+		DWORD dwIp;
+		PTSTR psz;
+		};
+} CONFADDR;
+</FONT></PRE>
+<P>A <B>CONFADDR</B> structure describes the address of another machine.
+
+<DL><DT><I>dwSize</I>
+</DT><DD>Specifies the total size of the structure in bytes.
+</DD><DT><I>dwAddrType</I>
+</DT><DD>Specifies the type of address following this member. This can be one of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_ADDR_IP</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>dwIp</I> holds the IP address
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_ADDR_MACHINENAME</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>psz</I> is the name of a machine on the local network
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_ADDR_PSTN</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2"><I>psz</I> is the TAPI canonical telephone number
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_ADDR_UNKNOWN</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">neither <I>dwIp</I> nor <I>psz</I> are used
+</FONT></TD></TR></TABLE>
+</DD><DT><I>dwIp</I>
+</DT><DD>The IP address as a set of 4 bytes.
+</DD><DT><I>psz</I>
+</DT><DD>A pointer to the address as a null-terminated string. The definition of this depends upon the <I>dwAddrType</I> field.
+</DD></DL>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000100">ConferenceConnect</A>
+<H2><A NAME="msconfrf_0001000202000300">CONFDEST</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct tagConfDest {
+	DWORD dwSize;
+	DWORD dwFlags;
+	DWORD dwUserId;
+	DWORD dwReserved;
+	GUID  guid;
+} CONFDEST;
+</FONT></PRE>
+<P>A <B>CONFDEST</B> structure defines a destination node within a conference.
+
+<DL><DT><I>dwSize</I>
+</DT><DD>Specifies the structure size in bytes.
+</DD><DT><I>dwFlags</I>
+</DT><DD>Specifies the destination flags for the transfer.
+When receiving the CONFN_DATA_SENT or CONFN_DATA_RECEIVED notifications, this will be set to one or more of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_DF_BROADCAST</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">data was broadcast to everyone in the conference
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_DF_PRIVATE</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">data was sent from one peer to another
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_DF_DATA_SEGMENT_BEGIN</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this is the start of a data block
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_DF_DATA_SEGMENT_END</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">this is the end of a data block
+</FONT></TD></TR></TABLE>
+</DD><DT><I>dwUserId</I>
+</DT><DD>Specifies a unique user identification code. If this is 0, it implies everyone in the conference.
+</DD><DT><I>guid</I>
+</DT><DD>Specifies a unique application identifier <A HREF="mscon002.htm#msconfrf_0001000202000a00">GUID</A>. The fields of this structure can be set to 0, if not required.
+</DD></DL>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000500">ConferenceSendData</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000600">ConferenceSendFile</A>
+<A HREF="mscon002.htm#msconfrf_0001000202000a00">GUID</A>
+<H2><A NAME="msconfrf_0001000202000400">CONFFILEINFO</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct tagConfFileInfo {
+	DWORD dwSize;
+	DWORD dwFileId;
+	DWORD dwReserved1;
+	DWORD dwFileSize;
+	DWORD dwReserved2;
+	DWORD dwBytesTransferred;
+	DWORD dwFileAttributes;
+	FILETIME ftCreationTime;
+	FILETIME ftLastAccessTime;
+	FILETIME ftLastWriteTime;
+	TCHAR szFileNameSrc[MAX_PATH];
+	TCHAR szFileNameDest[MAX_PATH];
+} CONFFILEINFO;
+</FONT></PRE>
+<P>A <B>CONFFILEINFO</B> structure describes a file in the process of being transferred.
+
+<DL><DT><I>dwSize</I></DT><DD>Specifies the structure size in bytes.
+</DD><DT><I>dwFileId</I></DT><DD>Specifies a unique identifier for the file.
+</DD><DT><I>dwFileSize</I></DT><DD>Specifies the size of the file, in bytes.
+</DD><DT><I>dwBytesTransferred</I></DT><DD>Specfies the number of bytes that have been transferred.
+</DD><DT><I>dwFileAttributes</I></DT><DD>Specifies the DOS file attributes.
+</DD><DT><I>ftCreationTime</I></DT><DD>Specifies the creation time/date of the file.
+</DD><DT><I>ftLastAccessTime</I></DT><DD>Specfies the last time/date the file was accessed.
+</DD><DT><I>ftLastWriteTime</I></DT><DD>Specifies the last time/date the file was modified.
+</DD><DT><I>szFileNameSrc</I></DT><DD>Specifies the original file name.
+</DD><DT><I>szFileNameDest</I></DT><DD>Specifies the destination file name. This is only valid for the receiving process and may be not be the same as the original file name
+</DD></DL>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000300">ConferenceGetInfo</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000600">ConferenceSendFile</A>
+<A HREF="mscon001.htm#msconfrf_0001000201000700">ConferenceCancelTransfer</A>
+<H2><A NAME="msconfrf_0001000202000500">CONFGUID</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct tagConfGuid {
+	DWORD   dwSize;
+	GUID    guid;
+	LPCTSTR pszApplication;
+	LPCTSTR pszCommandLine;
+	LPCTSTR pszDirectory;
+} CONFGUID;
+</FONT></PRE>
+<P>A <B>CONFGUID</B> structure specifies the parameters passed to <B>CreateProcess</B> when an active conference receives a notification to invoke the application associated with the <I>guid</I>.
+
+
+<DL><DT><I>dwSize</I>
+</DT><DD>Specifies the structure size in bytes.
+
+</DD><DT><I>guid</I>
+</DT><DD>Specifies the unique application identifier <A HREF="mscon002.htm#msconfrf_0001000202000a00">GUID</A>.
+
+</DD><DT><I>pszApplication</I>
+</DT><DD>Pointer to a null-terminated string that specifies the module to execute.
+The string should specify the full path and filename of the module to execute.
+If <I>pszApplication</I> is NULL, the module name must be the first white space-delimited token in the <I>pszCommandLine</I> string.
+
+</DD><DT><I>pszCommandLine</I>
+</DT><DD>Pointer to a null-terminated string that specifies the command line to execute. 
+The pszCommandLine field can be NULL. In that case, the function uses the string pointed to by <I>pszApplication</I> as the command line.
+
+</DD><DT><I>pszDirectory</I>
+</DT><DD>Points to a null-terminated string that specifies the current drive and directory for the process.
+The string must be a full path and filename that includes a drive letter.
+This field may be NULL.
+</DD></DL>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000400">ConferenceSetInfo</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000900">ConferenceLaunchRemote</A>, 
+<H2><A NAME="msconfrf_0001000202000600">CONFINFO</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct tagConfInfo {
+	DWORD dwSize;
+	HCONF hConf;
+	DWORD dwMediaType;
+	DWORD dwState;
+	DWORD cUsers;
+	DWORD dwGCCID;
+	TCHAR szConferenceName[CONF_MAX_CONFERENCENAME];
+} CONFINFO;
+</FONT></PRE>
+<P>A <B>CONFINFO</B> structure defines the current conference settings.
+
+<DL><DT><I>dwSize</I>
+</DT><DD>Specifies the structure size in bytes.
+
+</DD><DT><I>hConf</I>
+</DT><DD>The handle for the conference.
+
+</DD><DT><I>dwMediaType</I>
+</DT><DD>Specifies the media type. This may be a combination of one or more of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_MT_DATA</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Data conference
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_MT_AUDIO</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Audio is available
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_MT_VIDEO</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">Video is available
+</FONT></TD></TR></TABLE>
+<P>Use CONF_MT_ALL to specify all supported types.
+
+</DD><DT><I>dwState</I>
+</DT><DD>Specifies the current conference state. This may be one of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_CS_INVALID</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">This is not a valid state
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_CS_INITIALIZING</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The conference is being initialized
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_CS_ACTIVE</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The conference is active
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_CS_STOPPING</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The conference is being terminated
+</FONT></TD></TR></TABLE>
+</DD><DT><I>cUsers</I>
+</DT><DD>The number of users in the conference.
+
+</DD><DT><I>dwGCCID</I>
+</DT><DD>The GCC conference identifier.
+
+</DD><DT><I>szConferenceName</I>
+</DT><DD>Specifies the null terminated name of the conference.
+</DD></DL>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000300">ConferenceGetInfo</A>
+<A HREF="mscon001.htm#msconfrf_0001000201000100">ConferenceConnect</A>
+<H2><A NAME="msconfrf_0001000202000700">CONFNOTIFY</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct tagConfNotify {
+	DWORD dwSize;
+	DWORD dwUser;
+	DWORD dwFlags;
+	CONFNOTIFYPROC pfnNotifyProc;
+	GUID guid;
+} CONFNOTIFY;
+</FONT></PRE>
+<P>A <B>CONFNOTIFY</B> structure specifies the notification callback routine for a process in a conference.
+
+<DL><DT><I>dwSize</I>
+</DT><DD>Specifies the structure size in bytes.
+</DD><DT><I>dwUser</I>
+</DT><DD>Available for use by the application. This is passed back to the notification callback as the <I>dwUser</I> parameter.
+</DD><DT><I>dwFlags</I>
+</DT><DD>Reserved for future use
+</DD><DT><I>pfnNotifyProc</I>
+</DT><DD>Specifies the address of the notification callback routine.
+</DD><DT><I>guid</I>
+</DT><DD>Specifies the unique application identifier <A HREF="mscon002.htm#msconfrf_0001000202000a00">GUID</A>.
+A null <I>guid</I> (all zeros) should be used unless the application intends to send or receive data using <A HREF="mscon001.htm#msconfrf_0001000201000500">ConferenceSendData</A>.
+If a non-zero <I>guid</I> is specified, then the callback will receive notifications of incoming data.
+</DD></DL>
+<P>An application must fill out the <I>dwSize</I> and <I>pfnNotifyProc</I> fields of this structure.
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000300">ConferenceGetInfo</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000100">ConferenceConnect</A>, 
+<A HREF="mscon001.htm#msconfrf_0001000201000500">ConferenceSendData</A>, 
+<A HREF="mscon001.htm#msconfrf_0001000201000d00">ConfNotifyProc</A>
+<H2><A NAME="msconfrf_0001000202000800">CONFRECDIR</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct tagConfRecDir {
+	DWORD dwSize;
+	TCHAR  szRecDir[MAX_PATH];
+} CONFRECDIR;
+</FONT></PRE>
+<P>A <B>CONFRECDIR</B> structure describes the default directory for received files.
+
+<DL><DT><I>dwSize</I>
+</DT><DD>Specifies the structure size in bytes.
+</DD><DT><I>szRecDir</I>
+</DT><DD>Specifies the full path of the default directory for received files.
+</DD></DL>
+<P>Note there is only one current receive directory for the local machine and it is saved across sessions.
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000300">ConferenceGetInfo</A>,
+<A HREF="mscon001.htm#msconfrf_0001000201000600">ConferenceSendFile</A>
+<H2><A NAME="msconfrf_0001000202000900">CONFUSERINFO</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct tagConfUserInfo {
+	DWORD dwSize;
+	DWORD dwUserId;
+	DWORD dwFlags;
+	DWORD dwReserved;
+	TCHAR  szUserName[CONF_MAX_USERNAME];
+} CONFUSERINFO;
+</FONT></PRE>
+<P>A <B>CONFUSERINFO</B> structure describes a single user in a conference.
+
+<DL><DT><I>dwSize</I>
+</DT><DD>Specifies the structure size in bytes.
+</DD><DT><I>dwUserId</I>
+</DT><DD>Specifies a unique value to identify a user within a conference.
+
+</DD><DT><I>dwFlags</I>
+</DT><DD>This may be a combination of any of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_UF_DATA</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The user is in the data conference
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_UF_AUDIO</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The user is participating in the audio conference
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_UF_VIDEO</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">The user is displaying a video image
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">CONF_UF_LOCAL</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="arial" SIZE="2">This indicates the local user
+</FONT></TD></TR></TABLE>
+</DD><DT><I>dwReserved</I>
+</DT><DD>Reserved for future use. This must be 0.
+</DD><DT><I>szUserName</I>
+</DT><DD>The null terminated string representing the user's name.
+</DD></DL>
+<P>See also <A HREF="mscon001.htm#msconfrf_0001000201000300">ConferenceGetInfo</A>
+<H2><A NAME="msconfrf_0001000202000a00">GUID</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2"> typedef struct _GUID {
+	unsigned long   Data1;
+	unsigned short  Data2;
+	unsigned short  Data3;
+	unsigned char   Data4[8];
+} GUID;
+</FONT></PRE>
+<P>The <B>GUID</B> structure holds a globally unique identifier (GUID), which identifies a particular object class and interface.
+This identifier is a 128-bit value.
+For more information about GUIDs, see the Remote Procedure Call (RPC) documentation or the OLE Programmer's Reference
+<P>Use the <B>guidgen.exe</B> utility to generate new values.
+
+<P>See also <A HREF="mscon002.htm#msconfrf_0001000202000300">CONFDEST</A>
+<A HREF="mscon002.htm#msconfrf_0001000202000500">CONFGUID</A>
+<A HREF="mscon002.htm#msconfrf_0001000202000700">CONFNOTIFY</A>
+<H2><A NAME="msconfrf_0001000202000b00">HCONF</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef HANDLE HCONF;
+</FONT></PRE>
+<P>This identifies a conference.
+<P>A NULL hConf implies the default conference, if one is available.
+<H2><A NAME="msconfrf_0001000202000c00">HCONFNOTIFY</A></H2>
+<PRE><FONT FACE="Courier" SIZE="2">typedef HANDLE HCONFNOTIFY;
+</FONT></PRE>
+<P>This identifies a conferencing notification callback.
+<P>This is returned by ConferenceSetNotify to identify a specific callback
+and must be passed to ConferenceRemoveNotify.
+<HR><CENTER>
+<A HREF="mscon001.htm">[Previous]</A>
+<A HREF="msconf.htm">[Up One Level]</A>
+</CENTER>
+</FONT>
+</BODY></HTML>

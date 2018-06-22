@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Basics</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep004.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep006.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_0001000104000000">Basics</A></H2>
+<BR CLEAR=ALL>
+<P>An HTML (hypertext markup language) document is a text file that contains the elements Internet Explorer uses to display text, multimedia objects, and hyperlinks. Using HTML, an author can format a document for display and add hyperlink jumps to other documents. Text that is formatted as a hyperlink can be selected by a user with the mouse. Once selected, the hyperlink jump will load the referenced document into your browser. A hyperlink and the object to which the link jumps can both be defined using HTML.
+
+<P>An element is the most basic part of HTML. An element consists of a start-tag, an end-tag, and the data characters enclosed by the two tags. A tag starts with a less-than (&lt;) sign and ends with a greater-than (&gt;) sign. An end-tag consists of the tag name immediately preceded by a slash (/). Some tags require that you always provide the matching end-tag; others allow you to omit the end-tag if the result is clear and unambiguous. For example, here is a sentence that will display in bold:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;B&gt;This sentence displays in bold.&lt;/B&gt;
+</FONT></PRE>
+<P>This example is an HTML element. The start-tag is &lt;B&gt;. The end-tag is &lt;/B&gt;. The data characters are "This sentence displays in bold." This element, when read by Internet Explorer, will turn on bold formatting, based on the start-tag, and display the data characters in bold. The end-tag switches off the bold formatting. Many elements can be "nested" by placing an entire element inside the tags of another. For example, here is some italicized text placed inside a bold element:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;B&gt;This sentence,&lt;I&gt;as written&lt;/I&gt;, displays in bold.&lt;/B&gt;
+</FONT></PRE>
+<P>The &lt;I&gt;as written&lt;/I&gt; element displays in both bold and italic because it is nested inside a bold element.
+
+<P>An element can have one or more attributes. An attribute is a parameter associated with an element that extends its meaning. Tags and attribute names are not case-sensitive, but they are typically written in uppercase to distinguish them from the data characters.
+
+<P>This is a very simple HTML document:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN"&gt;lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Simple HTML Document&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;P&gt;A very simple HTML document.
+&lt;/BODY&gt;
+&lt;/HTML&gt; 
+</FONT></PRE>
+<P>Every HTML document begins with the <A HREF="sweep021.htm#htmlref2_0001000114000200" TARGET=TEXT>!DOCTYPE</A> element. !DOCTYPE specifies to the browser which version of HTML is being used. 
+
+<P>The next element in this basic document is <A HREF="sweep021.htm#htmlref2_0001000114002500" TARGET=TEXT>HTML</A>, which informs the browser that the content of the file is written in HTML. The matching end-tag (&lt;/HTML&gt;) is the last tag in the file. 
+
+<P>The <A HREF="sweep021.htm#htmlref2_0001000114002300" TARGET=TEXT>HEAD</A> tag marks the beginning of the document header. The document header describes the elements that apply for all sections of the current document and any documents that contain content or are related to this document. Typically, the <A HREF="sweep021.htm#htmlref2_0001000114004e00" TARGET=TEXT>TITLE</A> element appears in the header. Internet Explorer displays the text of the TITLE element in its title bar. A menu bar or image that is repeated for other documents may appear in the header section. 
+
+<P>The <A HREF="sweep021.htm#htmlref2_0001000114000d00" TARGET=TEXT>BODY</A> element appears at the start of the main content of the document. The BODY element encloses the body text, images, and multimedia objects. The <A HREF="sweep021.htm#htmlref2_0001000114003800" TARGET=TEXT>P</A> element inserts a new paragraph with a carriage return and line feed. The end-tag, &lt;/P&gt;, is typically omitted.
+
+<P>With HTML, you can create hyperlink jumps between your documents. A hyperlink is any text or image that, when clicked, loads another document or another section of the current document into the Internet Explorer window. The <A HREF="sweep021.htm#htmlref2_0001000114000300" TARGET=TEXT>A</A> element, or anchor, associates text or a graphic to another document or to a location within the current document. A hyperlink appears as a clickable "hot spot" (the clickable text or image). To create a hyperlink, you enclose the text or image with the anchor tags and set the <A HREF="sweep021.htm#htmlref2_0001000114000302" TARGET=TEXT>HREF=</A> attribute to the destination address, as in the following:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;P&gt;Click &lt;A HREF="//www.microsoft.com/"&gt;here&lt;/A&gt; to visit the 
+Microsoft Web site.
+</FONT></PRE>
+<P>In this example, the address for the Web site is enclosed in double quotation marks. The double quotation marks are optional unless the attribute value contains spaces. If you enclose a value that contains double quotation marks, use &amp;QUOT; for each occurrence of the mark within the value. 
+
+<P>For example, you can create a hyperlink destination (anchor spot) within your HTML document by using the <A HREF="sweep021.htm#htmlref2_0001000114000304" TARGET=TEXT>NAME=</A> attribute. Use the <A HREF="sweep021.htm#htmlref2_0001000114000300" TARGET=TEXT>A</A> element to relate text or a graphic to a name that you create. Then reference the name with a hyperlink. In the following example, the first line creates the named reference. The second line in the example includes a hyperlink with a jump to that place in the document.
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;A NAME="using"&gt;&lt;/A&gt;&lt;H2&gt;Using Internet Explorer 3.0&lt;/H2&gt;
+
+...
+
+&lt;P&gt;For more information, see &lt;A HREF="#usingie30"&gt;Using Internet Explorer 3.0&lt;/A&gt;
+</FONT></PRE>
+<P>When you click the hyperlink "Using Internet Explorer", you jump to the named reference, usingie30.
+
+<P><B>Note</B>  Although Internet Explorer can display incomplete or improperly tagged files, the result is often not what you may have intended. You should always use the tags carefully, using them only in the context in which they are defined to be used and omitting end-tags only if they are defined as optional. 
+<P>The typical HTML document consists of one or more text paragraphs organized into sections. You can mark the beginning of the sections in your HTML documents by using the header <A HREF="sweep021.htm#htmlref2_0001000114002200" TARGET=TEXT>Hn</A> element, where "n" is a number from 1 to 6 (1 creates the highest level heading and uses the largest font size). These elements create headings by applying changes to the size and style of the text to indicate the section level. The specific heading format can be controlled by using attributes or a style sheet; otherwise, it takes the default formatting.
+
+The following example creates a first-level section heading:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;H1&gt;Welcome to Internet Explorer!&lt;/H1&gt; 
+</FONT></PRE>
+<P>The <A HREF="sweep021.htm#htmlref2_0001000114002200" TARGET=TEXT>Hn</A> element allows for six levels; you specify the level by using the element name that includes that level number (H1, H2, H3, and so on). The end-tag is always required.
+
+<P>By default, section headings are left-aligned. You can override the default alignment and center the heading by using the <A HREF="sweep021.htm#htmlref2_0001000114002201" TARGET=TEXT>ALIGN=</A> attribute, as in the following example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;H2 ALIGN=CENTER&gt;How to Use Internet Explorer&lt;/H2&gt; 
+</FONT></PRE>
+<P>In addition to using the <A HREF="sweep021.htm#htmlref2_0001000114003800" TARGET=TEXT>P</A> element to create simple paragraphs, you can use elements, such as <A HREF="sweep021.htm#htmlref2_0001000114000c00" TARGET=TEXT>BLOCKQUOTE</A>, <A HREF="sweep021.htm#htmlref2_0001000114002e00" TARGET=TEXT>LISTING</A>, <A HREF="sweep021.htm#htmlref2_0001000114003a00" TARGET=TEXT>PLAINTEXT</A>, <A HREF="sweep021.htm#htmlref2_0001000114003b00" TARGET=TEXT>PRE</A>, and <A HREF="sweep021.htm#htmlref2_0001000114005500" TARGET=TEXT>XMP</A>, to create paragraphs that use a different size and style for the text. For example, you can use the PRE element to display characters in a fixed-width font rather than the variable-width font used for simple paragraphs, or the BLOCKQUOTE element to slightly indent the paragraph text (from both the left and right margins) to make the paragraph stand out. 
+
+<P>You can apply a style to a sequence of paragraphs (for example, those tagged with <A HREF="sweep021.htm#htmlref2_0001000114003800" TARGET=TEXT>P</A>) by enclosing the paragraphs with an <A HREF="sweep021.htm#htmlref2_0001000114000400" TARGET=TEXT>ADDRESS</A>, <A HREF="sweep021.htm#htmlref2_0001000114000c00" TARGET=TEXT>BLOCKQUOTE</A>, or <A HREF="sweep021.htm#htmlref2_0001000114001000" TARGET=TEXT>CENTER</A> element. The following example shows how to center a sequence of simple paragraphs:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;CENTER&gt;
+&lt;P&gt;This paragraph is centered.
+
+&lt;P&gt;And this paragraph is centered too.
+&lt;/CENTER&gt;
+</FONT></PRE>
+<P>An alternate way to center individual paragraphs is to use the <A HREF="sweep021.htm#htmlref2_0001000114003801" TARGET=TEXT>ALIGN=</A> attribute with the <A HREF="sweep021.htm#htmlref2_0001000114003800" TARGET=TEXT>P</A> element and set the attribute value to CENTER, as in the following example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;P ALIGN=CENTER&gt;This paragraph is centered.
+</FONT></PRE>
+<P>This displays as:
+<!-- Demo program for HTML AG and Ref -->
+
+<P ALIGN=CENTER>This paragraph is centered.</P>
+<BR CLEAR=ALL><TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep004.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep006.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

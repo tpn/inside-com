@@ -1,0 +1,329 @@
+Win32 Software Development Kit Redistributables
+-----------------------------------------------
+
+
+
+Component Categories Manager for Windows NT and Windows 95
+----------------------------------------------------------
+The COMCAT.DLL may only be redistributed as part of CCDIST.EXE or CCDIST35.EXE.
+You may not redistribute COMCAT.DLL except by using CCDIST.EXE or CCDIST35.EXE.
+You may not modify CCDIST.EXE or CCDIST35.EXE.
+
+CCDIST.EXE is a self-extracting executable that will install the COMCAT.DLL
+only if there is not a more recent version of the COMCAT.DLL in the system
+directory.  CCDIST.EXE will write the registry keys required by COMCAT.DLL.
+CCDIST.EXE may be used on Windows NT 4.0 or Windows 95.  CCDIST35.EXE provides
+the same functionality for Windows NT 3.51.
+
+If CCDIST.EXE or CCDIST35.EXE do not meet your distribution needs for
+COMCAT.DLL, please send detailed feedback to oleidea@microsoft.com.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the DFLAYOUT Redistributable Code,
+you have the following non-exclusive, royalty free rights subject to the
+Distribution Requirements detailed in Section 1 of the Agreement:
+
+(1)  You may distribute CCDIST.EXE and CCDIST35.EXE.
+
+
+
+OLE Automation for Windows NT 3.51 and Windows 95
+-------------------------------------------------
+To install the updated OLE Automation on Windows NT 3.51, copy OLEAUT32.DLL
+and STDOLE2.TLB into the %systemroot%\system32 directory.  To install the
+updated OLE Automation on Windows 95, copy the same two files into the
+%windir%\system directory.  These two files are provided in the
+\mstools\oa351 directory on the Win32 SDK CD.
+
+These two files should never be installed over an existing copy of the
+same DLL that has a later version resource.  These two files should not
+be installed on a Windows NT 4.0 system (they are already built in).
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the OLE Automation Redistributable
+Code, you have the following non-exclusive, royalty free rights subject
+to the Distribution Requirements detailed in Section 1 of the Agreement:
+
+(1)  You may distribute OLEAUT32.DLL and STDOLE2.TLB.
+
+
+Compound File Optimization Tool (DFLAYOUT)
+------------------------------------------
+The DFLAYOUT.DLL may only be redistributed as part of DFLAYDLL.EXE.  You may
+not redistribute DFLAYOUT.DLL except by using DFLAYDLL.EXE.  You may not
+modify DFLAYDLL.EXE.
+
+DFLAYDLL.EXE is a self-extracting executable that will install the DFLAYOUT.DLL
+only if there is not a more recent version of the DFLAYOUT.DLL in the system
+directory.  DFLAYDLL.EXE will write the registry keys required by DFLAYOUT.DLL.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the DFLAYOUT Redistributable Code,
+you have the following non-exclusive, royalty free rights subject to the
+Distribution Requirements detailed in Section 1 of the Agreement:
+
+(1)  You may distribute DFLAYDLL.EXE.
+
+
+
+API functions relating to OLE Controls (OLEPRO32)
+-------------------------------------------------
+OLEPRO32.DLL may be distributed royalty-free with an OLE Controls project.
+One must, however, take the usual care when installing this DLL on a
+system to ensure that it does not replace a potentially newer version
+of the library.
+
+Before attempting to install this DLL, ensure that a DLL of the same name
+is not already present with a greater version number (as determined by the
+version resources).
+
+If you do install the DLL on a computer, you must also ensure that its
+registry entries are properly created.  OLEPRO32.DLL is a self-registering
+server, which means that it can create its own registry entries on
+demand.  To perform this self-registration, the installation program must
+execute the following code to call the standard export DllRegisterServer:
+
+        // pszPathToInstalledDLL is the path+name of OLEPRO32.DLL
+
+        HINSTANCE       hMod;
+
+        if (FAILED(CoInitialize(NULL))) return 0;
+
+        hMod=LoadLibraryA(pszPathToInstalledDLL);
+
+        if (hMod > (HINSTANCE)HINSTANCE_ERROR)
+            {
+            HRESULT (STDAPICALLTYPE *pfn)(void);
+            BOOL    fRes=FALSE;
+
+            (FARPROC&)pfn=GetProcAddress(hMod, "DllRegisterServer");
+
+            if (NULL!=pfn) fRes=SUCCEEDED((*pfn)());
+
+            //
+            // fRes indicates success or failure. The HRESULT from
+            // (*pfn)() provides the specific error.
+            //
+            }
+
+        FreeLibrary(hMod);
+        CoUninitialize();
+
+This will create the necessary registry entries for the standard font
+and picture objects, among other things.
+
+If you have an uninstaller program, you should call the exported
+function DllUnregisterServer in the same way when removing the DLL from
+the system.  This ensures registry cleanup.
+
+OLEPRO32.DLL is located on the Win32 SDK compact disk in \mstools\bin\win95.
+It should be installed in the %windir%\system directory on Windows 95.  It
+should never be installed on Windows NT 4.0.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the OLE Controls Redistributable
+Code, you have the following non-exclusive, royalty free rights subject
+to the Distribution Requirements detailed in Section 1 of the Agreement:
+
+(1)  You may distribute OLEPRO32.DLL.
+
+
+
+Performance Data Helper for Windows NT
+--------------------------------------
+To install the performance data helper DLL on Windows NT copy PDH.DLL into
+the %windir%\system directory.  The PDH.DLL should never be installed over
+an existing copy of the same DLL that has a later version resource.  The
+PDH.DLL should never be installed on a Windows 95 system (it will not work).
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the performance data helper DLL
+for Windows NT Redistributable Code, you have the following non-exclusive,
+royalty free rights subject to the Distribution Requirements detailed in
+Section 1 of the Agreement:
+
+(1)  You may distribute PDH.DLL.
+
+
+
+SNMPAPI for Windows NT 3.51 and Windows 95
+------------------------------------------
+To install the SNMPAPI.DLL on Windows NT 3.51 copy the DLL into the
+%systemroot%\system32 directory.  The SNMPAPI.DLL should never be
+installed over an existing copy of the same DLL that has a later
+version resource.  The SNMPAPI.DLL should never be installed on a
+Windows NT 4.0 system.
+
+The i386 version of SNMPAPI.DLL has been tested and will work on Windows 95.
+It should be installed in the %windir% directory.
+
+Both debug and retail versions of SNMPAPI.DLL for Windows NT 3.51 have
+been provided here.  The debug versions are for ISV debugging purposes
+only.  They may not be redistributed under any circumstances.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the SNMPAPI Redistributable
+Code, you have the following non-exclusive, royalty free rights subject
+to the Distribution Requirements detailed in Section 1 of the Agreement:
+
+(1)  You may distribute SNMPAPI.DLL.
+
+
+
+IMAGEHLP for Windows 95
+-----------------------
+To install the IMAGEHLP.DLL on Windows 95 copy the DLL into the
+%windir%\system directory.  The IMAGEHLP.DLL should never be
+installed over an existing copy of the same DLL that has a later
+version resource.  The IMAGEHLP.DLL should never be installed on a
+Windows NT system (it is already built in).
+
+The IMAGEHLP.DLL for Windows 95 is located in the \mstools\bin\win95
+directory on the Win32 SDK CD.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the IMAGEHLP.DLL for Windows 95
+Redistributable Code, you have the following non-exclusive, royalty free
+rights subject to the Distribution Requirements detailed in Section 1 of
+the Agreement:
+
+(1)  You may distribute IMAGEHLP.DLL.
+
+
+
+SETUPAPI for Windows 95
+-----------------------
+To install SETUPAPI on Windows 95 copy both SETUPAPI.DLL and CFGMGR32.DLL
+into the %windir%\system directory.  These DLLs should never be installed over
+an existing copy of the same DLLs that have later version resources.  These
+DLLs should never be installed on a Windows NT system.
+
+SETUPAPI.DLL and CFGMGR32.DLL for Windows 95 are located in the
+\mstools\bin\win95 directory on the Win32 SDK CD.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to SETUPAPI for Windows 95
+Redistributable Code, you have the following non-exclusive, royalty free
+rights subject to the Distribution Requirements detailed in Section 1 of
+the Agreement:
+
+(1)  You may distribute SETUPAPI.DLL and CFGMGR32.DLL.
+
+
+
+OpenGL for Windows 95
+---------------------
+The OpenGL for Windows 95 Redistributables are located in \mstools\opengl95\dll.
+These files must be installed as described in \mstools\opengl95\readme.txt.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the OpenGL for Windows 95
+Redistributable Code, you have the following non-exclusive, royalty free
+rights subject to the Distribution Requirements detailed in Section 1 of
+the Agreement:
+
+(1)  You may distribute OPENGL95.DLL and GLU32.DLL.
+
+
+
+Microsoft RPC Redistributable Code
+--------------------------------------
+The RPC redistributables are located in the \MSTOOLS\RPC_RT16 directory of the
+Win32 SDK distribution compact disk. These RPC run-time files must be installed on
+MS_DOS, Microsoft Windows 3.x, or Microsoft Windows for Workgroups 3.1xX to
+run your distributed applications that use Microsoft RPC.  Your application 
+should ship with and install these components.
+
+You cannot redistribute RPC components for Microsoft Windows NT or Windows 95.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the RPC Redistributable Code,
+you have the following non-exclusive, royalty free rights subject to the
+Distribution Requirements detailed in Section 1 of the Agreement:
+
+(1)  You may distribute the files identified for the appropriate platform:
+
+MS-DOS Redistributable Components
+    RPC16C1.RPC     RPC16C3.RPC     RPC16C4.RPC     RPC16C5.RPC
+    RPC16C6.RPC     RPC16DG3.RPC    RPC16DG6.RPC    RPCNS.RPC
+    RPCNSLM.RPC     RPCNSMGM.RPC    SECURITY.RPC
+.
+Microsoft Windows 3.x Redistributable Components
+    DNETAPI.DLL     NETAPI.DLL      RPCRT1.DLL      RPCNS1.DLL
+    RPC16C1.DLL     RPC16C3.DLL     RPC16C3X.DLL    RPC16C4.DLL
+    RPC16C5.DLL     RPC16C6.DLL     RPC16DG3.DLL    RPC16DG6.DLL
+    SECURITY.DLL
+
+
+
+Microsoft 32-bit Setup Toolkit Redistributable Code
+---------------------------------------------------
+The Setup Toolkit redistributables are located in the \MSTOOLS\MSSETUP\BIN
+directory of the Win32 SDK distribution compact disk.  These DLLs are
+necesssary in order to run the setup program created by the toolkit. It
+is necessary to ship these components with your setup program.
+
+In addition to the rights granted in Section 1 of the Agreement, with respect
+to the Microsoft 32-bit Setup Toolkit Redistributable Code, you have the
+following non-exclusive, royalty free rights, subject to the Distribution
+Requirements detailed in Section 1 of the Agreement:
+
+(1)  You may distribute the files identified as MSCOMSTF.DLL, MSDETSTF.DLL,
+MSINSSTF.DLL, MSSHLSTF.DLL, MSUILSTF.DLL, and
+
+(2)  You may modify and distribute the object code versions of the files
+located in the following directories: \MSTOOLS\MSSETUP\SOURCE,
+\MSTOOLS\MSSETUP\BLDCUI, and \MSTOOLS\MSSETUP\SAMPLE
+
+
+
+SPORDER for Windows NT 4.0 and Windows 95
+-----------------------------------------
+SPORDER.DLL should be installed in your application-specific directory.
+There is no reason to install it into the system directory.  It should
+not be used on Windows NT 3.51 (since it will not work).
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the SPORDER Redistributable
+Code, you have the following non-exclusive, royalty free rights subject
+to the Distribution Requirements detailed in Section 1 of the Agreement:
+
+(1)  You may distribute SPORDER.DLL.
+
+
+
+PSAPI for Windows NT
+--------------------
+PSAPI.DLL should be installed in your application-specific directory,
+and only on Windows NT.  It will not work on Windows 95.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to the PSAPI Redistributable
+Code, you have the following non-exclusive, royalty free rights subject
+to the Distribution Requirements detailed in Section 1 of the Agreement:
+
+(1)  You may distribute PSAPI.DLL.
+
+
+
+Redistributable Tools
+---------------------
+The following files are redistributable as individual components.
+
+In addition to the rights granted in Section 1 of the Development License
+Agreement ("Agreement"), with respect to Redistributable Code,
+you have the following non-exclusive, royalty free rights subject to the
+Distribution Requirements detailed in Section 1 of the Agreement:
+
+(1) You may distribute the following files for Windows NT or Windows 95, 
+    any platform:
+    COMPRESS.EXE
+
+
+
+NOT Redistributable
+-------------------
+The client side dynamic link libraries for the licensing API (LSAPI32.DLL and
+MSLSP32.DLL) are still beta code.  They are provided here for development
+purposes only.  They are not redistributable.  The interfaces may change in
+the future, requiring applications to be recompiled.

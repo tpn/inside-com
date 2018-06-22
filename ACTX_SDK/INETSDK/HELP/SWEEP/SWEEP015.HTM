@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Forms</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep014.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep016.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_000100010e000000">Forms</A></H2>
+<BR CLEAR=ALL>
+<P>Forms provide a way to prompt the user for information and to carry out actions based on that input. A form consists of one or more input controls that the user uses to enter text and select choices. Once the user provides the input, the form collects the data and sends it to a destination specified in the form element. To carry out the requested action, the server must have a script or other service that corresponds to the given destination. This script processes the information and can perform actions necessary to process the data.
+
+<P>To create a form, you use the <A HREF="sweep021.htm#htmlref2_0001000114001f00" TARGET=TEXT>FORM</A> element to enclose one or more <A HREF="sweep021.htm#htmlref2_0001000114002900" TARGET=TEXT>INPUT</A> elements. The FORM element specifies the action to take when the user has provided the information. The INPUT elements define the type and function of the input controls in the form. The following example shows how to combine these elements to create a form:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;FORM ACTION="http://intranet/survey" METHOD=POST&gt;
+&lt;P&gt;Name
+&lt;BR&gt;&lt;INPUT NAME="CONTROL1" TYPE=TEXTBOX VALUE="Your Name"&gt;
+&lt;P&gt;Password
+&lt;BR&gt;&lt;INPUT TYPE="PASSWORD" NAME="CONTROL2"&gt;
+&lt;P&gt;Color
+&lt;BR&gt;&lt;INPUT TYPE="RADIO" NAME="CONTROL3" VALUE="0" CHECKED&gt;Red
+&lt;INPUT TYPE="RADIO" NAME="CONTROL3" VALUE="1"&gt;Green
+&lt;INPUT TYPE="RADIO" NAME="CONTROL3" VALUE="2"&gt;Blue
+&lt;P&gt;Comments
+&lt;BR&gt;&lt;INPUT TYPE="TEXTAREA" NAME="CONTROL4" SIZE="20,5" MAXLENGTH="250"&gt;
+&lt;P&gt;&lt;INPUT NAME="CONTROL5" TYPE=CHECKBOX CHECKED&gt;Send receipt
+&lt;P&gt;&lt;INPUT TYPE="SUBMIT" VALUE="OK"&gt;&lt;INPUT TYPE="RESET" VALUE="Reset"&gt;
+&lt;/FORM&gt;
+</FONT></PRE>
+<P>This displays as:<P>
+<!-- Form example for IE AG and HR)  -->
+<FORM METHOD=GET ACTION=data.txt>
+<P>Name<INPUT NAME="CONTROL1" TYPE=TEXTBOX VALUE="Your Name">
+<P>Password<BR><INPUT TYPE="PASSWORD" NAME="CONTROL2">
+<P>Color
+<BR><INPUT TYPE="RADIO" NAME="CONTROL3" VALUE="0" CHECKED>Red
+<INPUT TYPE="RADIO" NAME="CONTROL3" VALUE="1">Green
+<INPUT TYPE="RADIO" NAME="CONTROL3" VALUE="2">Blue
+<P>Comments
+<BR><INPUT TYPE="TEXTAREA" NAME="CONTROL4" SIZE="20,5" MAXLENGTH="250">
+<P><INPUT NAME="CONTROL5" TYPE=CHECKBOX CHECKED>Send receipt
+<P><INPUT TYPE="SUBMIT" VALUE="OK"><INPUT TYPE="RESET" VALUE="Reset">
+</FORM>
+
+<BR CLEAR=ALL><TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep014.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep016.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

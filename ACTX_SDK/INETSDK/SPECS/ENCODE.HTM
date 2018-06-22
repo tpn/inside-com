@@ -1,0 +1,171 @@
+<HTML>
+
+<HEAD>
+
+<TITLE>Untitled</TITLE>
+
+<META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.0z">
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<H1>Encoding URLs when downloading data from the Internet</H1>
+
+<P>
+<FONT FACE="Arial">This document explains why you need to encode/escape
+or decode/un-escape URLs when using URL Monikers, URLOpenStream
+functions, and Win32 Internet Functions (WinInet). For further
+information on URL encoding, please refer to the Uniform Resource
+Locator RFC at <A HREF="http://ds.internic.net/rfc/rfc1738.txt" >http://ds.internic.net/rfc/rfc1738.txt</A>.</FONT>
+<H2>The Short Answer when using URL Monikers or URLOpenStream
+</H2>
+
+<P>
+<FONT FACE="Arial">All URLs passed to the URL Moniker interface
+and URLOpenStream functions are assumed to be encoded - in other
+words, special characters must be &quot;escaped&quot;. All URLs
+returned from these interfaces are likewise encoded, and if they
+are to be presented to users, they must first be decoded or &quot;un-escaped&quot;.</FONT>
+<P>
+<FONT FACE="Arial">Encoding and decoding is <I>not</I> built-in
+to the URL Moniker interface because the algorithm for encoding
+a given URL is <I>not</I> deterministic, but rather needs to follow
+heuristics (see details below). If you want to use the encoding
+heuristic of Microsoft Internet Explorer, you may encode and decode
+URLs using <B>InternetCanonicalizeURL</B> from the Win32 Internet
+Functions (WinInet). Please follow these guidelines when using
+<B>InternetCanonicalizeURL</B> with the URL Moniker and URLOpenStream
+interfaces:</FONT>
+<OL>
+<LI><FONT FACE="Arial">In short: <I>If it's going IN, encode it.
+If it's coming OUT, decode it</I>.</FONT>
+<LI><FONT FACE="Arial">When calling URL Moniker or URLOpenStream
+using an URL that has already been escaped (for example URLs inside
+HTML files), first canonicalize the URL by calling <B>InternetCanonicalizeURL
+</B>with no extra flags.</FONT>
+<LI><FONT FACE="Arial">When calling URL Moniker or URLOpenStream
+using an URL that has not already been escaped (for example URLs
+typed in by a user), first canonicalize the URL by calling <B>InternetCanonicalizeURL
+</B>with the special flags ICU_DECODE | ICU_BROWSER_MODE.</FONT>
+<LI><FONT FACE="Arial">When presenting the user with an URL returned
+by URL Moniker (e.g. in <B>IMoniker::GetDisplayName</B>), first
+decode the URL by calling <B>InternetCanonicalizeURL </B>with
+the special flags ICU_DECODE | ICU_NO_ENCODE. As a rule, <B>IMoniker::GetDisplayName()
+</B>always returns the canonicalized version of the URL used to create the moniker.
+No additional escaping or encoding is done beyond that done by
+the caller of <B>CreateURLMoniker()</B>.</FONT>
+<LI><FONT FACE="Arial">When converting a &quot;file:&quot; URL
+returned by URL Moniker into a Win32 filename, decode the file-path
+portion of the URL by calling <B>InternetCanonicalizeURL </B>with
+the special flags ICU_DECODE | ICU_NO_ENCODE. Note: separating
+out the file-path portion involves removing intra-page link information,
+if present (anything following a '#' character).</FONT>
+</OL>
+
+<H2>The Short Answer when using Win32 Internet Functions (WinInet)
+</H2>
+
+<P>
+<FONT FACE="Arial">All the above rules also apply to the Win32
+Internet Functions (WinInet) but <I>only </I>when using HTTP or
+HTTPS protocols. However, the Win32 Internet Functions do <I>not</I>
+assume encoding of URLs for FTP or GOPHER protocols. Specifically,
+any URLs passed to these functions should already be in the <I>exact</I>
+protocol-specific format that is to be passed &quot;on the wire&quot;.
+So HTTP and HTTPS URLs must be encoded, but FTP and GOPHER URLs
+must not. If this is confusing, you can encode <I>all</I> URLs
+(as described above) and use the URL Moniker or URLOpenStream
+interfaces which will perform the appropriate encoding/decoding
+per protocol.<BR>
+</FONT>
+<H2>Details</H2>
+
+<H3>Why encoding cannot always be performed algorithmically</H3>
+
+<P>
+<FONT FACE="Arial">Encoding of URLs is necessary because it allows
+deterministic differentiation between special characters that
+are part of the URL or query parameters that might otherwise be
+treated as delimiters. It is not always possible to encode URLs
+using a deterministic algorithm, and any encoding algorithm must
+include heuristics for resolving between two possible interpretations
+of the same URL. The <B>InternetCanonicalizeURL</B> function includes
+the heuristics that are used by Microsoft Internet Explorer.</FONT>
+<H3>Examples</H3>
+
+<P>
+<U><FONT COLOR=#0000FF FACE="Arial">http://www.foo.com/ myscript?query=What+Is+This%3F&amp;text=ScriptParameters</FONT></U><FONT FACE="Arial">
+// query is &quot;What Is This?&quot;, text is &quot;ScriptParameters&quot;</FONT>
+<P>
+<FONT FACE="Arial">Note: were this URL not escaped already, it
+would not be possible to tell where the query parameters began.
+Specifically, an URL such as </FONT><U><FONT COLOR=#0000FF FACE="Arial">http://foo?bar?goo</FONT></U><FONT FACE="Arial">
+cannot be encoded algorithmically because it is unclear which
+? is the delimiter between the path name and the query section</FONT>
+<P>
+<U><FONT COLOR=#0000FF FACE="Arial">file://\\ server\This%23File.htm#link</FONT></U><FONT FACE="Arial">
+// open the file \\server\This#File.htm and navigate to intra-page
+link &quot;link&quot;</FONT>
+<P>
+<FONT FACE="Arial">Again, were this URL not escaped, there is
+no accurate way to determine where the intra-page link really
+starts</FONT>
+<P>
+<U><FONT COLOR=#0000FF FACE="Arial">file://\\server\This%23File.htm
+</FONT></U><FONT FACE="Arial">// open the file \\server\This#File.htm</FONT>
+<P>
+<FONT FACE="Arial">As above, only this time there is no way at
+all to differentiate between an intra-page link and the file &quot;This#File.htm&quot;</FONT>
+<P>
+<U><FONT COLOR=#0000FF FACE="Arial">http://server.com/script?param1=1&amp;param2=2&amp;param3=3</FONT></U>
+<P>
+<U><FONT COLOR=#0000FF FACE="Arial">http://server.com/script?param1=1%26param2=2&amp;param3=3</FONT></U>
+<P>
+<FONT FACE="Arial">The above two URLs send different information
+to the script &quot;script&quot;; in the first case, there are
+three parameters, &quot;param1&quot;, &quot;param2&quot;, and
+&quot;param3&quot;, with the values &quot;1&quot;, &quot;2&quot;,
+and &quot;3&quot;, respectively. In the second case, however,
+there are <I>two</I> parameters, &quot;param1&quot; and &quot;param3&quot;,
+with the values (after decoding) &quot;1&amp;param2=2&quot; and
+&quot;3&quot;, respectively. Without encoding, these URLs would
+be indistinguishable from each other.<BR>
+</FONT>
+<H3>Some Frequently Asked Questions</H3>
+
+<P>
+<B><FONT FACE="Arial">Q: How many times should I encode? decode?</FONT></B>
+<P>
+<B><FONT FACE="Arial">A: ONCE. Never submit an URL multiply encoded
+or decoded. </FONT></B><FONT FACE="Arial">The rule here is &quot;How
+many times will the HTTP server decode my request?&quot; Once.
+So don't encode any more than that, or you'll confuse the server
+and yourself.<BR>
+</FONT>
+<P>
+<B><FONT FACE="Arial">Q: What if I want a % in my filename?</FONT></B>
+<P>
+<B><FONT FACE="Arial">A: % is encoded like all other special characters,
+and becomes %25. DO NOT USE %% TO ESCAPE THE % CHARACTER. It will
+result in at least one, and most likely two, bogus escape sequences.
+<BR>
+<BR>
+Q: What about my INF in my CODEBASE= cabinet file?</FONT></B>
+<P>
+<B><FONT FACE="Arial">A: Any references to URLs must be escaped
+WITHIN THE INF.</FONT></B>
+<P>
+<FONT FACE="Arial">Think of your INF as an HTML page. Anything
+you must escape in HTML, you must escape in this INF. While this
+may seem an onerous restriction, it is the only choice. If INFs
+<I>didn't</I> require escaping special characters, then the INF
+parser would have to either (1) remove all meaning for special
+characters, or (2) remove the ability to use files with special
+characters. Each of these is worse than requiring an INF author
+to encode URLs. For example, if a file in a .CAB cabinet was named
+&quot;OCX#1.OCX&quot;, how can one specify that filename? Requiring
+encoding of URLs in .INF files is the only way to solve this problem.
+<BR>
+</FONT>
+</BODY>
+
+</HTML>

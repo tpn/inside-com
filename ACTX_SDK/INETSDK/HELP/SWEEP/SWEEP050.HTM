@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Form Object</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep049.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep051.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_0004000106000000"></A><H3>Form Object<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106000100"></A><H3>form Object<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>An object that resides below the document in the scripting object model. A form may contain:
+
+<UL><LI><A HREF="sweep054.htm#scriptom_000400010a000100" TARGET=TEXT>Element</A> - The array of objects and intrinsic controls contained in the form.
+</UL>
+<P><map name=form>
+<area shape="rect" coords="0,0,109,25" href="sweep048.htm">
+<area shape="rect" coords="69,63,178,88" href="sweep055.htm">
+<area shape="rect" coords="69,94,178,119" href="sweep056.htm">
+<area shape="rect" coords="69,125,178,150" href="sweep051.htm">
+<area shape="rect" coords="69,187,178,212" href="sweep049.htm">
+<area shape="rect" coords="105,217,213,242" href="sweep052.htm">
+<area shape="rect" coords="105,248,213,273" href="sweep053.htm">
+<area shape="rect" coords="105,279,213,304" href="sweep050.htm">
+<area shape="rect" coords="138,309,246,334" href="sweep054.htm">
+</map>
+<IMG SRC="art/form.gif" WIDTH="277" HEIGHT="335" ALT="" BORDER=0 USEMAP="#form">
+
+<P>The form object represents a form in the HTML document. Forms are kept in the document object both as an array and by name. Script forms are accessible either by index (the documents forms array) or by name (given in the NAME="somename" attribute of the HTML &lt;FORM&gt; tag). Given a document with one form defined, the script can access the form in one of two ways:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;script language="VBScript"&gt;</FONT></PRE>
+<P>' ...first method, by name ...
+<PRE><FONT FACE="Courier" SIZE="2">sub pressedByName
+     document.Form1.Button1.value="I've been pressed"     ' access the form by name
+end sub</FONT></PRE>
+<P>' ... second method, by index...
+<P>' Note that indexes start at 0, not 1!
+<PRE><FONT FACE="Courier" SIZE="2">sub pressedByIndex
+     document.forms. (0).Button1.value="I've been pressed"     ' access the form by index
+end sub 
+&lt;/script&gt;
+
+&lt;form name="Form1"&gt;
+     &lt;input type="button" name="Button1" value="Press ME" onClick="pressedByName" language="VBScript"&gt;
+     &lt;input type="button" name="Button2" value="Press ME" onClick="pressedByIndex" language="VBScript"&gt;
+&lt;/form&gt; 
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010600" TARGET=TEXT>submit</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106020100" TARGET=TEXT>onSubmit</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010100" TARGET=TEXT>action</A>, <A HREF="sweep050.htm#scriptom_0004000106010200" TARGET=TEXT>encoding</A>, <A HREF="sweep050.htm#scriptom_0004000106010300" TARGET=TEXT>method</A>, <A HREF="sweep050.htm#scriptom_0004000106010400" TARGET=TEXT>target</A>, <A HREF="sweep050.htm#scriptom_0004000106010500" TARGET=TEXT>elements</A>
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106010000"></A><H3>Properties<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106010100"></A><H3>action Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the address to be used to carry out the action of the form.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>form.</I><B>action</B>[<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>form</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a form object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string containing the new action, generally a URL.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the current form action.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>If no URL is specified, the base URL of the document is used. Note that this is identical to changing the ACTION attribute of the &lt;FORM&gt; tag. So the script:
+<PRE><FONT FACE="Courier" SIZE="2">document.form[0].action = "http:// www.sample.com/bin/search"
+</FONT></PRE>
+<P>is identical to the following:
+<PRE><FONT FACE="Courier" SIZE="2">&lt;FORM ACTION="http:// www.sample.com/bin/search"&gt;
+&lt;/FORM&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010600" TARGET=TEXT>submit</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106020100" TARGET=TEXT>onSubmit</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010200" TARGET=TEXT>encoding</A>, <A HREF="sweep050.htm#scriptom_0004000106010300" TARGET=TEXT>method</A>, <A HREF="sweep050.htm#scriptom_0004000106010400" TARGET=TEXT>target</A>, <A HREF="sweep050.htm#scriptom_0004000106010500" TARGET=TEXT>elements</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106010200"></A><H3>encoding Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the encoding for the form.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>form.</I><B>encoding</B>[<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>form</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a form object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string containing the new encoding. This must be a valid mime type, like "text/html."
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the current form encoding.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>If no mime type is specified, "text/html" is used. Note that this is identical to changing the ENCTYPE attribute of the &lt;FORM&gt; tag. So the script:
+<PRE><FONT FACE="Courier" SIZE="2">
+document.form[0].action = "http:// www.sample.com/bin/search"
+document.form[0].enctype = "text/html"
+</FONT></PRE>
+<P>is identical to the following:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;FORM ACTION="http:// www.sample.com/bin/search" ENCTYPE="text/html"&gt;
+&lt;/FORM&gt;
+</FONT></PRE>
+<P>Note that in the current build, encoding can be set, but has no effect on the operation of the form.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010600" TARGET=TEXT>submit</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106020100" TARGET=TEXT>onSubmit</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010100" TARGET=TEXT>action</A>, <A HREF="sweep050.htm#scriptom_0004000106010300" TARGET=TEXT>method</A>, <A HREF="sweep050.htm#scriptom_0004000106010400" TARGET=TEXT>target</A>, <A HREF="sweep050.htm#scriptom_0004000106010500" TARGET=TEXT>elements</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106010300"></A><H3>method Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Indicates how the form data should be sent to the server.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>form.</I><B>method</B>[<I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>form</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a form object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string containing the new method, either GET or POST.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the current form method.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>GET means append the arguments to the action URL and open it as if it were an anchor; POST means send the data via an HTTP post transaction. Note that this is identical to the METHOD attribute of the &lt;FORM&gt; tag, so the script:
+<PRE><FONT FACE="Courier" SIZE="2">document.form[0].action = "http:// www.sample.com/bin/search"
+document.form[0].method = "GET"
+</FONT></PRE>
+<P>is identical to the following:
+<PRE><FONT FACE="Courier" SIZE="2">&lt;FORM ACTION="http:// www.sample.com/bin/search" METHOD=GET&gt;
+&lt;/FORM&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010600" TARGET=TEXT>submit</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106020100" TARGET=TEXT>onSubmit</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010100" TARGET=TEXT>action</A>, <A HREF="sweep050.htm#scriptom_0004000106010200" TARGET=TEXT>encoding</A>, <A HREF="sweep050.htm#scriptom_0004000106010400" TARGET=TEXT>target</A>, <A HREF="sweep050.htm#scriptom_0004000106010500" TARGET=TEXT>elements</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106010400"></A><H3>target Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Specifies the name of the target window to display the form results in.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>form.</I><B>target</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>form</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a form object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string containing the new target name.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the current form target.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>Note that this is identical to the TARGET attribute of the &lt;FORM&gt; tag, so the script:
+<PRE><FONT FACE="Courier" SIZE="2">document.form[0].action = "http:// www.sample.com/bin/search"
+document.form[0].target = "newWindow"
+</FONT></PRE>
+<P>is identical to the following:
+<PRE><FONT FACE="Courier" SIZE="2">&lt;FORM ACTION="http:// www.sample.com/bin/search" TARGET="newWindow"&gt;
+&lt;/FORM&gt;
+</FONT></PRE>
+<P>Note that in the current build, <B>target</B> can be set; however, it has no effect on the operation of the form.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010600" TARGET=TEXT>submit</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106020100" TARGET=TEXT>onSubmit</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010100" TARGET=TEXT>action</A>, <A HREF="sweep050.htm#scriptom_0004000106010200" TARGET=TEXT>encoding</A>, <A HREF="sweep050.htm#scriptom_0004000106010300" TARGET=TEXT>method</A>, <A HREF="sweep050.htm#scriptom_0004000106010500" TARGET=TEXT>elements</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106010500"></A><H3>elements Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the array of elements contained in the form.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>form.</I><B>elements</B>[<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>form</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a form object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to the array of elements in a form.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The elements include any intrinsics (specified using the INPUT tag) or any embedded objects (specified using the OBJECT tag) contained in the form. So, the HTML:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;FORM ACTION="http:// www.sample.com/bin/search" METHOD=GET&gt;
+&lt;INPUT NAME="aButton" TYPE ... &gt;
+&lt;INPUT NAME="aCheckBox" TYPE ... &gt;
+&lt;OBJECT NAME="anObject" DATA=...&gt;&lt;/OBJECT&gt;
+&lt;INPUT NAME="aRadio" TYPE ... &gt;
+&lt;/FORM&gt;
+</FONT></PRE>
+<P>would generate an elements array where <I>form.</I><B>elements</B>.length returns 4, and <I>form.</I><B>elements</B>[2].name returns "anObject".
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010600" TARGET=TEXT>submit</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106020100" TARGET=TEXT>onSubmit</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010100" TARGET=TEXT>action</A>, <A HREF="sweep050.htm#scriptom_0004000106010200" TARGET=TEXT>encoding</A>, <A HREF="sweep050.htm#scriptom_0004000106010300" TARGET=TEXT>method</A>, <A HREF="sweep050.htm#scriptom_0004000106010400" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106010600"></A><H3>submit Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Submits the form. Note that this is identical to clicking a form input with TYPE=SUBMIT.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>form.</I><B>submit<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>form</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a form object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106020100" TARGET=TEXT>onSubmit</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010100" TARGET=TEXT>action</A>, <A HREF="sweep050.htm#scriptom_0004000106010200" TARGET=TEXT>encoding</A>, <A HREF="sweep050.htm#scriptom_0004000106010300" TARGET=TEXT>method</A>, <A HREF="sweep050.htm#scriptom_0004000106010400" TARGET=TEXT>target</A>, <A HREF="sweep050.htm#scriptom_0004000106010500" TARGET=TEXT>elements</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106020000"></A><H3>Events<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000106020100"></A><H3>onSubmit Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fired when the form is submitted.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>form.</I><B>onSubmit</B> <B>=</B><I>action</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>form</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a form object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>action</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to a scripting function call.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>This event can be used to prevent the form from being submitted, or it can be used to run additional code before the form is submitted. To prevent the form from being submitted, you must use "return &lt;function&gt;." So, the script:
+<PRE><FONT FACE="Courier" SIZE="2">form.onsubmit = "return IsValid()"
+</FONT></PRE>
+<P>calls IsValid and submits the form if it returns TRUE, or does not submit the form if it returns FALSE, while:
+<PRE><FONT FACE="Courier" SIZE="2">form.onsubmit = "IsValid()"
+</FONT></PRE>
+<P>calls IsValid and submits the form regardless of return value.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A>
+
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010600" TARGET=TEXT>submit</A>
+
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep050.htm#scriptom_0004000106010100" TARGET=TEXT>action</A>, <A HREF="sweep050.htm#scriptom_0004000106010200" TARGET=TEXT>encoding</A>, <A HREF="sweep050.htm#scriptom_0004000106010300" TARGET=TEXT>method</A>, <A HREF="sweep050.htm#scriptom_0004000106010400" TARGET=TEXT>target</A>, <A HREF="sweep050.htm#scriptom_0004000106010500" TARGET=TEXT>elements</A>
+
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep049.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep051.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

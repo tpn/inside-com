@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Objects</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep016.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep018.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_0001000110000000">Objects</A></H2>
+<BR CLEAR=ALL>
+<P>Internet Explorer supports objects according to the WWW Consortium (W3C) object model extension to HTML 3.2. Objects add functionality to your HTML document by letting you insert images, video, and programs, such as Java applets, and ActiveX controls. 
+
+<P>To insert an object, you use the <A HREF="sweep021.htm#htmlref2_0001000114003500" TARGET=TEXT>OBJECT</A> element, supplying attribute values that specify the object type, location, initial data, and so on. If the object has configurable properties, you can set these using the <A HREF="sweep021.htm#htmlref2_0001000114003900" TARGET=TEXT>PARAM</A> element. The following example shows how to insert the marquee ActiveX Control and fill it with content:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;OBJECT
+ALIGN=CENTER CLASSID="clsid:1a4da620-6217-11cf-be62-0080c72edd2d"
+WIDTH=200 HEIGHT=200 BORDER=1 HSPACE=5
+ID=marquee&gt;
+&lt;PARAM NAME="ScrollStyleX" VALUE="Circular"&gt;
+&lt;PARAM NAME="ScrollStyleY" VALUE="Circular"&gt;
+&lt;PARAM NAME="szURL" VALUE="marqcont.htm"&gt;
+&lt;PARAM NAME="ScrollDelay" VALUE=60&gt;
+&lt;PARAM NAME="LoopsX" VALUE=-1&gt;
+&lt;PARAM NAME="LoopsY" VALUE=-1&gt;
+&lt;PARAM NAME="ScrollPixelsX" VALUE=0&gt;
+&lt;PARAM NAME="ScrollPixelsY" VALUE=-3&gt;
+&lt;PARAM NAME="DrawImmediately" VALUE=0&gt;
+&lt;PARAM NAME="Whitespace" VALUE=0&gt;
+&lt;PARAM NAME="PageFlippingOn" VALUE=0&gt;
+&lt;PARAM NAME="Zoom" VALUE=100&gt;
+&lt;PARAM NAME="WidthOfPage" VALUE=400&gt;
+&lt;/OBJECT&gt;
+</FONT></PRE>
+<P>This displays as:<P>
+<OBJECT
+ALIGN=CENTER CLASSID="clsid:1a4da620-6217-11cf-be62-0080c72edd2d"
+WIDTH=200 HEIGHT=200 BORDER=1 HSPACE=5 ID=marquee>
+<PARAM NAME="ScrollStyleX" VALUE="Circular">
+<PARAM NAME="ScrollStyleY" VALUE="Circular">
+<PARAM NAME="szURL" VALUE="other/marqcont.htm">
+<PARAM NAME="ScrollDelay" VALUE=200>
+<PARAM NAME="LoopsX" VALUE=-1>
+<PARAM NAME="LoopsY" VALUE=-1>
+<PARAM NAME="ScrollPixelsX" VALUE=30>
+<PARAM NAME="ScrollPixelsY" VALUE=-3>
+<PARAM NAME="DrawImmediately" VALUE=0>
+<PARAM NAME="Whitespace" VALUE=0>
+<PARAM NAME="PageFlippingOn" VALUE=0>
+<PARAM NAME="Zoom" VALUE=400>
+<PARAM NAME="WidthOfPage" VALUE=400>
+</OBJECT>
+
+<BR CLEAR=ALL><P>In this example, the <A HREF="sweep021.htm#htmlref2_0001000114003500" TARGET=TEXT>OBJECT</A> element specifies the class identifier of the control (assumed to be already installed and registered) and the alignment, width, height, and other attributes of the control. The series of <A HREF="sweep021.htm#htmlref2_0001000114003900" TARGET=TEXT>PARAM</A> elements sets the values for the individual properties of the control, determining how and when the contents are scrolled. The szURL property determines which HTML document is used as content. 
+
+<P>A matching end-tag is required for each OBJECT element. Within these elements, you can place one or more PARAM elements. You can also place any elements and text that you would ordinarily use in the body of the HTML document, but these elements and text are not processed and displayed unless the HTML viewer does not process the OBJECT element. To learn more about the inclusion of objects in HTML, read Microsoft's documentation for the <I>ActiveX Engineer's Guide and Object Reference</I>.
+
+
+<P><B>EMBED</B>
+
+<P>Microsoft Internet Explorer 3.0 will support the <A HREF="sweep021.htm#htmlref2_0001000114001d00" TARGET=TEXT>EMBED</A> element syntax for embedding objects on an HTML page. This support is meant for compatibility with other browsers. The accepted WWW Consortium (W3C) HTML standard recommends using the <A HREF="sweep021.htm#htmlref2_0001000114003500" TARGET=TEXT>OBJECT</A> element for embedding objects in HTML, and Internet Explorer 3.0 supports this syntax as well.
+
+<P><B>OBJECT Compatibility</B>
+
+<P>Internet Explorer 3.0 supports the <A HREF="sweep021.htm#htmlref2_0001000114003500" TARGET=TEXT>OBJECT</A> element. Browsers that comply with the accepted W3C HTML standard will understand this HTML syntax. However, the OBJECT syntax degrades gracefully in other browsers as well, because browsers that are compatible with the OBJECT element will ignore additional elements placed within the OBJECT element. The following illustrates how to use the OBJECT element but allow content to be viewable by other browsers:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;OBJECT 
+  CLASSID="clsid:05589FA1-C356-11CE-BF01-00AA0055595A" WIDTH=100 HEIGHT=250&gt;
+     &lt;PARAM NAME=SRC VALUE="TheEarth.AVI"&gt;
+     &lt;PARAM NAME=AUTOSTART VALUE=TRUE&gt;
+     &lt;PARAM NAME=PLAYBACK VALUE=FALSE&gt;
+     &lt;EMBED SRC="TheEarth.AVI" WIDTH=100 HEIGHT=250 AUTOSTART=TRUE 
+PLAYBACK=FALSE&gt;
+&lt;/OBJECT&gt;
+
+</FONT></PRE>
+<P>In browsers that support the OBJECT element, the <A HREF="sweep021.htm#htmlref2_0001000114001d00" TARGET=TEXT>EMBED</A> element will be ignored. Browsers that do not support OBJECT will ignore the OBJECT element and <A HREF="sweep021.htm#htmlref2_0001000114003900" TARGET=TEXT>PARAM</A> attribute. 
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep016.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep018.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

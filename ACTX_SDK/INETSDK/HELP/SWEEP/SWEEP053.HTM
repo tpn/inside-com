@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Anchor Object</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep052.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep054.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_0004000109000000"></A><H3>Anchor Object<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000109000100"></A><H3>anchor Object<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>An object that resides below the document in the scripting object model. This object specifies an array of anchors for a given document. Each entry in this array corresponds to an anchor tag, &lt;A&gt;, that is found in the corresponding document.
+
+<P><map name=anchor>
+<area shape="rect" coords="0,0,109,25" href="sweep048.htm">
+<area shape="rect" coords="69,63,178,88" href="sweep055.htm">
+<area shape="rect" coords="69,94,178,119" href="sweep056.htm">
+<area shape="rect" coords="69,125,178,150" href="sweep051.htm">
+<area shape="rect" coords="69,187,178,212" href="sweep049.htm">
+<area shape="rect" coords="105,217,213,242" href="sweep052.htm">
+<area shape="rect" coords="105,279,213,304" href="sweep050.htm">
+<area shape="rect" coords="138,309,246,334" href="sweep054.htm">
+</map>
+<IMG SRC="art/anchor.gif" WIDTH="277" HEIGHT="335" ALT="" BORDER=0 USEMAP="#anchor">
+
+<P>The anchor object is referenced as a read-only property array. An anchor object is constructed for every anchor tag, &lt;A&gt;, found in the HTML document. It is only accessible through the indexed array. The following lines of script would set anchortext to the name of the third anchor on the page (if it exists).
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;script language="VBScript"&gt;
+     [some preceding VBScript code]
+     anchortext = document.anchors(2).name
+     [some following VBScript code]
+&lt;/script&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000109010000"></A><H3>Properties<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000109010100"></A><H3>name Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the name of the anchor.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>anchor.</I><B>name</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>anchor</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an anchor object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string containing the new anchor name.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the complete name of the anchor.
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep052.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep054.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

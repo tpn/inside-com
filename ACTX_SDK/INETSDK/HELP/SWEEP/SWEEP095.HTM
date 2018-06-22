@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Introduction to Code Signing</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep094.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep096.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="codesign_000a000102000000">Introduction to Code Signing</A></H2>
+<BR CLEAR=ALL>
+<P>This section is a general introduction to code signing. A later section will discuss Microsoft's Authenticode technology, which helps developers easily sign their code.
+<P>One of the larger questions facing the software industry is this: How can users trust code that is published on the Internet? Currently, most Web pages contain only static information, but soon they will be filled with controls and applications that are downloaded and run locally, on the user's computer. 
+<P>Packaged software uses branding and trusted sales outlets to assure users of its integrity, but these are not available when code is transmitted on the Internet. Additionally, there is no guarantee that the code hasn't been altered while being downloaded. Browsers typically exhibit a warning message explaining the possible dangers of downloading data, but do nothing to actually see whether the code is what it claims to be. A more active approach must be taken to make the Internet a reliable medium for distributing software.
+<H3><A NAME="codesign_000a000102010000">Ensuring Integrity and Authenticity</A></H3>
+<P>Two issues must be addressed:
+<UL><LI>Ensuring authenticity, which means assuring users that they know where the code came from.
+<LI>Ensuring integrity, which means checking that the code hasn't been tampered with since it was published.
+</UL>
+<P>Microsoft's solution to these issues is Authenticode coupled with an infrastructure of trusted entities. A discussion of the infrastructure is included in the explanation of certification authorities later in this section. Authenticode, which is based on industry standards, allows developers to include information about themselves and their code with their programs through the use of <I>digital signatures</I>.
+<H3><A NAME="codesign_000a000102020000">Digital Signatures</A></H3>
+<P>You use digital signatures when you have data you want to distribute, and you want to assure the recipients that it does indeed come from you. Signing data does not alter it. It simply generates a digital signature string you can bundle with the data.
+<P>Digital signatures are created using a public-key signature algorithm such as the RSA public-key cipher. A public-key algorithm actually uses two different keys: the <I>public key</I> and the <I>private key</I>. (These are called a key pair.) The private key is known only to its owner, while a public key can be available to anyone. Public-key algorithms are designed so that if one key is used for encryption, the other is necessary for decryption. Furthermore, the decryption key cannot reasonably be calculated from the encryption key. In digital signatures, the private key generates the signature, and the corresponding public key validates it.
+<P>In practice, public-key algorithms are often too inefficient for signing long documents. To save time, digital signature protocols use a cryptographic digest, which is a one-way hash of the document. The hashed document is signed instead of the document itself. Both the hashing and digital signature algorithms are agreed upon beforehand. Here is a summary of the process:
+<OL><LI>A one-way hash of the document is produced.
+<LI>The hash is encrypted with the private key, thereby signing the document.
+<LI>The document and the signed hash are transmitted.
+<LI>The recipient produces a one-way hash of the document. 
+<LI>Using the digital signature algorithm, the recipient decrypts the signed hash with the sender's public key. 
+</OL>
+<P>If the signed hash matches the recipient's hash, the signature is valid and the code is intact.
+<P>When code is associated with a publisher's unique signature, distributing software on the Internet is no longer an anonymous activity. Digital signatures assure accountability, just as a manufacturer's brand name does on packaged software. If an organization or individual wants to use the Internet to distribute software, they should be willing to take responsibility for that software. This approach is based on the premise that accountability is a deterrent to the distribution of harmful code.
+<H3><A NAME="codesign_000a000102030000">Public-Key Certificates</A></H3>
+<P>Public keys, because they are public, are vulnerable to attack. In particular, an unscrupulous individual may want to substitute one public key for another. 
+<P>For example, if Microsoft wants to send an encrypted message to Bob, an independent developer, it goes to the public-key database and gets Bob's public key. Unfortunately, Bob has a rival named Mallet. Mallet is not only a rival, but a sneak as well. He has substituted his own key for Bob's in the public-key database. Microsoft encrypts a message in Mallet's key and sends it to Bob. Mallet intercepts the message, decrypts it, and reads it. Finally, he re-encrypts it with Bob's key and sends it on to Bob. Neither Bob nor Microsoft know what has happened.
+<P><I>Public-key certificates</I> are used to prevent this situation. A certificate is someone's public key, signed by a trustworthy person or organization. If Bob has a certificate in the database, it contains much more than his public key. It contains information about Bob, such as his name and address, and it is signed by some entity Microsoft trusts.
+<H3><A NAME="codesign_000a000102040000">Certification Authorities</A></H3>
+<P>Trustworthy persons or organizations are called <I>certification authorities</I> (CAs). Certificates are verified through a hierarchy of these CAs. Each certificate is linked to the certificate of the CA that signed it. By following this hierarchy, or <I>verification path</I>, to a known, trusted CA, you can be assured that a certificate is valid. An example of this is illustrated in the following diagram.
+<P><IMG SRC="art/code1.gif" WIDTH="536" HEIGHT="432" ALT="" >
+<P>
+<B>Sample Certification Hierarchy</B>
+<P>
+<P>In this example, Netwerks' certificate is certified by CA1 while Bob's is certified by CA3. Netwerks knows CA1's public key. CA2 has a certificate signed by CA1, so Netwerks can verify the CA2 certificate. The root also has a certificate signed by CA1. CA3 (Bob's CA) has a certificate signed by the root. By moving up the verification chain to a common point (in this case, the root), Netwerks can verify Bob's certificate.
+<H3><A NAME="codesign_000a000102050000">Duties of Certification Authorities</A></H3>
+<P>Certification authorities have two main duties:
+<UL><LI>They publish the criteria for granting certificates.
+<LI>They grant certificates if an applicant meets the published criteria.
+</UL>
+<P>Other duties may include:
+<UL><LI>Managing certificates (for example, enrolling, renewing, and revoking them).
+<LI>Storing root keys.
+<LI>Verifying evidence submitted by applicants.
+<LI>Providing tools for enrollment.
+<LI>Accepting the liability associated with these responsibilities.
+</UL>
+<P>
+<H4><A NAME="codesign_000a000102050100">Local Registration Agencies</A></H4>
+<P>A company that does not want to take on all the responsibilities associated with being a CA can become a local registration agency (LRA). The LRA views enrollment requests, verifies evidence, and passes on the approved request to the signing CA. The relationship between a CA and an LRA can vary depending on their arrangement, which is specified in a contract.
+<P>A possible LRA would be a university acting on behalf of its students. Any university could verify whether a student is actually enrolled and, consequently, could easily approve certificate requests.
+<P>
+<H4><A NAME="codesign_000a000102050200">Umbrella Organization</A></H4>
+<P>It is important that the software industry endorse both the policies that allow CAs to participate, and the criteria that define a responsible commercial or individual software publisher. To ensure this industry cooperation, Microsoft is working to establish an umbrella organization. Over time it is expected that a consortium of industry partners and certificate authorities or an industry organization similar to the Software Publishers Association or the World Wide Web Consortium will fill this role.
+<H3><A NAME="codesign_000a000102060000">Obtaining Certification</A></H3>
+<P>To obtain a certificate from a CA, a software publisher must meet the criteria for either a commercial or an individual publishing certificate and submit these credentials to either a CA or an LRA. 
+
+The criteria discussed below have been proposed by Microsoft. Note that standards bodies, such as the World Wide Web Consortium, are reviewing these criteria and they are subject to change. A description of the overall process of obtaining a certificate for code signing ends this section of the document.
+<H3><A NAME="codesign_000a000102070000">Criteria for Commercial Certification</A></H3>
+<P>Applicants for a commercial software publishing certificate must meet the following criteria:
+<UL><LI>Identification&#151;Applicants must submit their name, address, and other material that proves their identity as a corporate representative. Proof of identify requires either personal presence or registered credentials.
+<LI>The pledge&#151;Applicants must pledge that they will not distribute software that they know, or should have known, contains viruses or would otherwise harm the user's computer or code.
+<LI>Dun &amp; Bradstreet rating&#151;Applicants must achieve a level of financial standing as indicated by a D-U-N-S number (which indicates a company's financial stability) and any additional information provided by this service. This rating identifies the applicant as a corporation that is still in business. (Other financial rating services are being investigated.) Corporations that do not have a D-U-N-S number at the time of application (usually because of recent incorporation) can apply for one and expect a response in less than two weeks.
+<LI>Private key protection&#151;Applicants must agree to generate and store their private key using a dedicated hardware solution. This can be, for example, a magnetic stripe card, a plastic key with an embedded ROM chip (called a ROM key), or a smart card. For more information about storing keys, see Section 8.7 of Bruce Schneier's book, <I>Applied Cryptography</I>.
+</UL>
+<P>How do large software publishers determine who should apply for certificates and who should sign code? The answers depend on how the software publisher wants to control distribution of software on the Internet. 
+<P>In a centralized approach, where the company wants total control of what code is published, there may be only one certificate, and strict guidelines for releasing code through one source. Other software publishers may allow each division, or even smaller groups or individuals within the company, to sign their own code using the corporate name. The point is that the software publisher must decide who can apply for a certificate and sign code and who takes responsibility for any code signed using certificates that bear the corporate name.
+<P>Using the Dun &amp; Bradstreet rating as a criterion draws a line between "commercial" and "individual" developers. The intended distinction is between commercial persons or entities (that is, sole proprietors, partnerships, corporations, or other organizations that develop software as a business) and non-commercial persons or entities (that is, individuals or nonprofit corporations).
+<H3><A NAME="codesign_000a000102080000">Criteria for Individual Certification</A></H3>
+<P>Applicants for an individual software publishing certificate must meet the following criteria:
+<UL><LI>Identification&#151;Applicants must submit their name, address, and other material that will be checked against an independent consumer database to validate their credentials. 
+<LI>The pledge&#151;Applicants must pledge that they cannot and will not distribute software that they know, or should have known, contains viruses or would otherwise maliciously harm the user's computer or code.
+</UL>
+<P>The value of an individual software publishing certificate is in the information it provides to users so they can decide whether or not to download the code. Knowing who authored the code, and that the bits have not been altered from the time the code was signed to the present, is reassuring information. Additionally, a browser could provide links to a publisher's Web pages so the user can obtain detailed information about the signed code, the author, and the certificate authority. After learning about this code and the author, the user may decide to run the code, or all future code, coming from this particular individual. 
+<H3><A NAME="codesign_000a000102090000">The Application Process</A></H3>
+<P>The process of applying for certification is summarized in the following diagram.
+<P><IMG SRC="art/code2.gif" WIDTH="506" HEIGHT="246" ALT="" >
+<P>
+<P>These are the steps to apply for and grant a certificate:
+<OL><LI><B>Apply for a software publishing certificate.</B>
+<P>In this diagram, a software publisher's request for certification is sent to the local registration agency. (In a simpler model, it is sent to the CA.) It is expected that CAs and LRAs will have Web sites that step the applicant through the application process. Applicants will be able to look at the entire policy and practices statements of the CA or LRA. The utilities an applicant needs to generate signatures, such as Microsoft's Authenticode, should also be available.
+<P>The applicant must generate a key pair using either hardware or software encryption technology. The public key is sent to the LRA during the application process. For individuals, all of the necessary information can be transferred on-line. For commercial publishers, because of the identity requirements, proof of identification must be sent by mail or courier.
+<P>
+<LI><B>Verify the applicant's credentials.</B>
+<P>Depending on the contract between the CA and the LRA, these companies will examine the evidence to verify an applicant's credentials. To do this, they may employ external contractors such Dun &amp; Bradstreet.
+<P>
+<LI><B>Generate and issue the software publisher X.509 certificate.</B>
+<P>After the CA has decided that the applicant meets the policy criteria, it generates a Software Publisher Certificate (SPC) that conforms to the industry standard X.509 certificate format with Version 3 extensions. This certificate, which is distributed in the digital signature for the software, identifies the publisher, contains the publisher's public key, and is used to verify that the file has not been modified since it was signed. It is stored by the CA for reference and a copy is returned to the applicant via electronic mail.
+<P>The publisher should review the contents of the certificate and verify that the public key works with the private key. After accepting the certificate, the publisher should include a copy in all published software signed with the private key.
+<P>Commercial developers can expect a response to their application in less than two weeks. While there is no limit to the number of certificates commercial software publishers can obtain, it is up to the publisher to determine who gets a certificate, and how code is signed and distributed.
+<P>
+<LI><B>Distribute signed software</B>
+<P>The publisher can now begin signing and distributing software on the Internet. Publishers use utility programs to sign the software they intend to publish. The utility programs use the private key to generate a digital signature on a digest of the binary file and create a signature file containing a PKCS #7 signed-data object. (For more information about PKCS #7, see the RSA specification listed in the "Suggested Reading" section of this document.) The PKCS #7 signed-data object also contains a copy of the X.509 software publisher certificate. For portable executable (PE) image format files, the PKCS #7 signature file contents are stored in the binary file itself, in an additional section.
+</OL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep094.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep096.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

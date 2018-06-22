@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Image Maps</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep013.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep015.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_000100010d000000">Image Maps</A></H2>
+<BR CLEAR=ALL>
+<P>Image maps allow users to access other documents by clicking different areas in an image. You can implement image maps in two ways: by storing image map information on a server or by including image map information in your document. 
+
+<P>If you store image map information on a server, you need a script or other service on the server to process click information. In your document, you mark the image as a "server-side" image map by using the <B>ISMAP</B> attribute in the <A HREF="sweep021.htm#htmlref2_0001000114002800" TARGET=TEXT>IMG</A> element and enclosing the image in an <A HREF="sweep021.htm#htmlref2_0001000114000300" TARGET=TEXT>A</A> element, as in the following example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;A HREF="Jump.map"&gt;&lt;IMG SRC="Sample.gif" ISMAP&gt;&lt;/A&gt; 
+</FONT></PRE>
+<P>In this example, the image map information is in the file named Jump.map. When the user clicks the picture in Sample.gif, the server receives the coordinates of the click and can pick the appropriate destination for the click by checking the information in Jump.map. 
+
+<P>If you include image map information in your document, Internet Explorer processes the click information and picks the appropriate destination for the click. In your document, you mark the image as a "client-side" image map by using the <A HREF="sweep021.htm#htmlref2_000100011400280f" TARGET=TEXT>USEMAP=</A> attribute in the <A HREF="sweep021.htm#htmlref2_0001000114002800" TARGET=TEXT>IMG</A> element, and you add image map information by using the <A HREF="sweep021.htm#htmlref2_0001000114002f00" TARGET=TEXT>MAP</A> and <A HREF="sweep021.htm#htmlref2_0001000114000600" TARGET=TEXT>AREA</A> elements, as in the following example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;MAP NAME="map1"&gt;
+&lt;AREA SHAPE="RECT" COORDS="0, 0, 16, 16" HREF="Sample1.htm"&gt; 
+&lt;AREA SHAPE="RECT" COORDS="0, 16, 16, 16" HREF="Sample2.htm"&gt; 
+&lt;/MAP&gt;
+&lt;IMG BORDER=0 SRC="map1.gif" USEMAP="#map1"&gt;
+</FONT></PRE>
+<P>This displays as:<P>
+<!-- Demo for Image Map chapter, HTML Authors Guide and HTML Reference
+        Usemap.htm                                      -->
+<MAP NAME="map1">
+<AREA SHAPE="RECT" COORDS="0, 0, 100, 100"      HREF="other/Sample1.htm"> 
+<AREA SHAPE="RECT" COORDS="100, 0, 200, 100"    HREF="other/Sample2.htm"> 
+</MAP>
+<IMG BORDER=0 SRC="art/imgmap.gif" USEMAP="#map1">
+
+<BR CLEAR=ALL><P>In this example, the image map defines two equal rectangular areas. The area on the left is linked to Sample1.htm. The area on the right is linked to Sample2.htm.
+
+<P>The <A HREF="sweep021.htm#htmlref2_0001000114000600" TARGET=TEXT>AREA</A> element permits other shapes, such as circles and polygons. If two or more shapes overlap, Internet Explorer uses the first shape defined in the <A HREF="sweep021.htm#htmlref2_0001000114002f00" TARGET=TEXT>MAP</A> element to determine the destination. Any number of AREA elements can specify the same destination. This is useful if you want to map a complex shape to a single destination. If a portion of the image is not within a given shape, clicking in that portion has no effect. 
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep013.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep015.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

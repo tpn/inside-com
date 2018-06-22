@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Internet Shortcut Global Functions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep103.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep105.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="intshcut_000b000102000000">Internet Shortcut Global Functions</A></H2>
+<BR CLEAR=ALL>
+<P>This section contains information about the following Internet Shortcut global functions:
+
+<UL><LI><A HREF="sweep104.htm#intshcut_000b000102000100" TARGET=TEXT>InetIsOffline</A>
+<LI><A HREF="sweep104.htm#intshcut_000b000102000200" TARGET=TEXT>MIMEAssociationDialog</A>
+<LI><A HREF="sweep104.htm#intshcut_000b000102000300" TARGET=TEXT>TranslateURL</A>
+<LI><A HREF="sweep104.htm#intshcut_000b000102000400" TARGET=TEXT>URLAssociationDialog</A>
+</UL>
+<H3><A NAME="intshcut_000b000102000100">InetIsOffline</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InetIsOffline (
+    DWORD dwFlags
+);
+</FONT></PRE>
+<P>Determines whether the system is connected to the Internet.
+
+<UL><LI>Returns TRUE if the local system in not currently connected to the Internet. Returns FALSE if the local system is connected to the Internet or if no attempt has yet been made to connect to the Internet.
+</UL>
+<DL><DT><I>dwFlags</I>
+</DT><DD>Input flags for the function. This must be set to zero.
+</DD></DL>
+<H3><A NAME="intshcut_000b000102000200">MIMEAssociationDialog</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT WINAPI MIMEAssociationDialog (
+    HWND    hwndParent,
+    DWORD   dwInFlags,
+    LPCSTR  pcszFile,
+    LPCSTR  pcszMIMEContentType,
+    LPSTR   pszAppBuf,
+    UINT    ucAppBufLen
+);
+</FONT></PRE>
+<P>Runs the unregistered MIME content type dialog box.
+
+<UL><LI>Returns S_OK if the content type was successfully associated with the extension. In this case, the extension is associated as the default for the content type, and <I>pszAppBuf</I> points to the string that contains the path of the specified application. The function returns S_FALSE if nothing was registered. Otherwise, the return value will be one of the following:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value</B> </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning</B>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_ABORT </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The user canceled the operation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FLAGS </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The flag combination passed in <I>dwInFlags</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">There was insufficient memory available to complete the operation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">One of the input pointers is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>hwndParent</I>
+</DT><DD>Handle to the parent window of any posted child windows.
+</DD><DT><I>dwInFlags</I>
+</DT><DD>Bit flag value that specifies if an association is to be registered. The bit flag is the value MIMEASSOCDLG_FL_REGISTER_ASSOC (0x0001). If this bit is set, the selected application is registered as the handler for the given MIME type. If this bit is clear, no association is registered.
+<P>An application is registered only if this flag is set and the user indicates that a persistent association is to be made.
+<P>Registration is impossible if the string at <I>pcszFile</I> does not contain an extension.
+</DD><DT><I>pcszFile</I>
+</DT><DD>Pointer to a null-terminated string that contains the name of the target file. This file must conform to the content type described by the <I>pcszMIMEContentType</I> parameter.
+</DD><DT><I>pcszMIMEContentType</I>
+</DT><DD>Pointer to a null-terminated string that contains the unregistered content type.
+</DD><DT><I>pszAppBuf</I>
+</DT><DD>Pointer to a buffer that receives the path of the application specified by the user.
+</DD><DT><I>ucAppBufLen</I>
+</DT><DD>Size of <I>pszAppBuf</I>, in characters.
+</DD></DL>
+<P><P><B>Note:</B>  This function does not validate the syntax of the input content type string at <I>pcszMIMEContentType</I>. A successful return value does not indicate that the specified MIME content type is valid.
+<H3><A NAME="intshcut_000b000102000300">TranslateURL</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT WINAPI TranslateURL(
+    LPCSTR pcszURL,
+    DWORD dwInFlags,
+    LPSTR *ppszTranslatedURL
+);
+</FONT></PRE>
+<P>Applies common translations to a given URL string, creating a new URL string.
+
+<UL><LI>Returns S_OK upon success, or S_FALSE if the URL did not require translation. If an error occurs, the function returns one of the following values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value</B> </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning</B>
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FLAGS </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The flag combination passed in <I>dwInFlags</I> is invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_OUTOFMEMORY </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">There was insufficient memory to complete the operation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">One of the input pointers is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>pcszURL</I>
+</DT><DD>Pointer to the URL string to be translated.
+</DD><DT><I>dwInFlags</I>
+</DT><DD>Bit flags that specify how the URL string is to be translated. This value can be a combination of the following:
+<DL>
+<DT>TRANSLATEURL_FL_GUESS_PROTOCOL
+</DT><DD>If the protocol scheme is not specified in the <I>pcszURL</I> parameter to <B>TranslateURL</B>, the system automatically chooses a scheme and adds it to the URL.
+</DD><DT>TRANSLATEURL_FL_USE_DEFAULT_PROTOCOL
+</DT><DD>If the protocol scheme is not specified in the <I>pcszURL</I> parameter to <B>TranslateURL</B>, the system adds the default protocol to the URL.
+</DD></DL>
+</DD><DT><I>ppszTranslatedURL</I>
+</DT><DD>Pointer variable that receives the pointer to the newly created, translated URL string, if any. <I>*ppszTranslatedURL</I> is valid only if the function returns S_OK.
+</DD></DL>
+<P>This function does not validate the input URL string. A successful return value does not indicate that the URL strings are valid URLs.
+<H3><A NAME="intshcut_000b000102000400">URLAssociationDialog</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT WINAPI URLAssociationDialog(
+    HWND hwndParent,
+    DWORD dwInFlags,
+    LPCSTR pcszFile,
+    LPCSTR pcszURL,
+    LPSTR pszAppBuf,
+    UINT ucAppBufLen
+);
+</FONT></PRE>
+<P>Invokes the unregistered URL protocol dialog box. This dialog box allows the user to select an application to associate with a previously unknown protocol.
+
+<UL><LI>Returns S_OK if the application is registered with the URL protocol, or S_FALSE if nothing is registered. For example, the function returns S_FALSE when the user elects to perform a one-time execution via the selected application.
+</UL>
+<DL><DT><I>hwndParent</I>
+</DT><DD>Handle to the parent window.
+</DD><DT><I>dwInFlags</I>
+</DT><DD>Bit flags that specify the behavior of the function. This value can be a combination of the following:
+<DL>
+<DT>URLASSOCDLG_FL_USE_DEFAULT_NAME
+</DT><DD>Use the default file name (that is, "Internet Shortcut").
+</DD><DT>URLASSOCDLG_FL_REGISTER_ASSOC
+</DT><DD>Register the selected application as the handler for the protocol specified in <I>pcszURL</I>. The application is registered only if this flag is set and the user indicates that a persistent association is desired.
+</DD></DL>
+</DD><DT><I>pcszFile</I>
+</DT><DD>Pointer to a const zero-terminated string that contains the file name to associate with the URL's protocol.
+</DD><DT><I>pcszURL</I>
+</DT><DD>Pointer to a const zero-terminated string that contains the URL with an unknown protocol.
+</DD><DT><I>pszAppBuf</I>
+</DT><DD>Pointer to a buffer that receives the path of the application specified by the user.
+</DD><DT><I>ucAppBufLen</I>
+</DT><DD>The size of <I>pszAppBuf</I>, in characters.
+</DD></DL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep103.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep105.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

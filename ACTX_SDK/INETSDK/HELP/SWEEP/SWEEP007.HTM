@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Character Formatting</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep006.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep008.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_0001000106000000">Character Formatting</A></H2>
+<BR CLEAR=ALL>
+<P>You can use a variety of elements to set the size and style of the text characters. For example, you can use the <A HREF="sweep021.htm#htmlref2_0001000114000700" TARGET=TEXT>B</A> or <A HREF="sweep021.htm#htmlref2_0001000114004300" TARGET=TEXT>STRONG</A> element to make text bold, and the <A HREF="sweep021.htm#htmlref2_0001000114002600" TARGET=TEXT>I</A> or <A HREF="sweep021.htm#htmlref2_0001000114001c00" TARGET=TEXT>EM</A> element to make text italic. Similarly, you can use the <A HREF="sweep021.htm#htmlref2_0001000114003c00" TARGET=TEXT>S</A> or <A HREF="sweep021.htm#htmlref2_0001000114004200" TARGET=TEXT>STRIKE</A> element to strike out text, and the <A HREF="sweep021.htm#htmlref2_0001000114005100" TARGET=TEXT>U</A> element to underline text. The following examples set words and phrases within the paragraphs to bold and italic:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;P&gt;This &lt;B&gt;word&lt;/B&gt; is formatted as bold. This &lt;I&gt;word&lt;/I&gt; is formatted 
+as italic. 
+</FONT></PRE>
+<P>This displays as:
+<P>
+This <B>word</B> is formatted as bold.  This <I>word</I> is formatted as italic.
+
+<BR CLEAR=ALL><PRE><FONT FACE="Courier" SIZE="2">&lt;P&gt;&lt;STRONG&gt;Text formatted as strong.&lt;/STRONG&gt; &lt;EM&gt;Emphasized text.&lt;/EM&gt;.
+</FONT></PRE>
+<P>This displays as:
+<P>
+
+<STRONG>Text formatted as strong.</STRONG> <EM>Emphasized text.</EM>
+<BR CLEAR=ALL><P>You can apply character formatting to a sequence of paragraphs (for example, those tagged with <A HREF="sweep021.htm#htmlref2_0001000114003800" TARGET=TEXT>P</A>) by enclosing the paragraphs with a character formatting element. For example, to make all the text in a sequence of paragraphs bold, do the following:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;B&gt;
+&lt;P&gt;This text is bold.
+
+&lt;P&gt;And this text is bold too.
+&lt;/B&gt;
+</FONT></PRE>
+<P>Although you can use this technique with simple paragraphs, some elements "block" the effect of the character formatting elements. For example, you cannot make all the text in a table bold by enclosing it in a <A HREF="sweep021.htm#htmlref2_0001000114000700" TARGET=TEXT>B</A> element. 
+
+<P>You can create superscripts and subscripts by using the <A HREF="sweep021.htm#htmlref2_0001000114004600" TARGET=TEXT>SUP</A> and <A HREF="sweep021.htm#htmlref2_0001000114004500" TARGET=TEXT>SUB</A> elements. These elements reduce the size of the text and align it at the top or bottom of the current line of text. 
+
+<P>You can change the size of the text by using elements such as <A HREF="sweep021.htm#htmlref2_0001000114000b00" TARGET=TEXT>BIG</A> and <A HREF="sweep021.htm#htmlref2_0001000114004000" TARGET=TEXT>SMALL</A>, or by using the <A HREF="sweep021.htm#htmlref2_0001000114001e03" TARGET=TEXT>SIZE=</A> attribute with the <A HREF="sweep021.htm#htmlref2_0001000114001e00" TARGET=TEXT>FONT</A> element. The following example increases the size of the word "LARGE" and reduces the word "TINY":
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;P&gt;Use the &lt;BIG&gt;LARGE&lt;/BIG&gt; machine for business, 
+the &lt;SMALL&gt;TINY&lt;/SMALL&gt; machine for personal items.
+</FONT></PRE>
+<P>If you use the <A HREF="sweep021.htm#htmlref2_0001000114001e00" TARGET=TEXT>FONT</A> element to change text size, you can specify either a fixed or relative size. A fixed size is a number in the range 1 through 7. A relative size is a positive or negative number, preceded by the plus (+) or minus (-) sign, that indicates a size that is relative to the base font size, as set using the <A HREF="sweep021.htm#htmlref2_0001000114000900" TARGET=TEXT>BASEFONT</A> element. The following example shows the effect of using relative sizes: 
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;BASEFONT SIZE=3&gt; This sets the base font size to 3.
+&lt;FONT SIZE="+4"&gt; Now the font size is 7.
+&lt;FONT SIZE="-1"&gt; Now the font size is 2.
+</FONT></PRE>
+<P>You can also use the <A HREF="sweep021.htm#htmlref2_0001000114001e02" TARGET=TEXT>FACE=</A> attribute with the <A HREF="sweep021.htm#htmlref2_0001000114001e00" TARGET=TEXT>FONT</A> element to set the name of the font used for text. Some of the most-used fonts are "Arial," "Times New Roman," and "Courier New," but you can use the name of any font installed on the computer on which your HTML document is being viewed. The following example sets the Arial font for the text in the section heading:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;H1&gt;&lt;FONT FACE="ARIAL"&gt;Welcome to Internet Explorer!&lt;/FONT&gt;&lt;/H1&gt; 
+</FONT></PRE>
+<P>If the given font is not available, Internet Explorer uses a default font. To increase the chances that a font of your choice is applied to the text, you can specify more than one font in a <A HREF="sweep021.htm#htmlref2_0001000114001e00" TARGET=TEXT>FONT</A> element. In this case, Internet Explorer checks for each font (in the order given) before using the default font. In the following example, Internet Explorer checks for "Arial", "Lucida Sans", and "Times Roman" before resorting to the default font:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;FONT FACE="Arial,Lucida Sans,Times Roman"&gt; 
+This text will be in either Arial, Lucida Sans, or Times Roman, 
+depending on which fonts you have installed on your system.
+&lt;/FONT&gt; 
+</FONT></PRE>
+<P>You can apply size and font changes to a sequence of paragraphs by enclosing the paragraphs with the <A HREF="sweep021.htm#htmlref2_0001000114001e00" TARGET=TEXT>FONT</A> element. As with other character formatting elements, some elements do not accept the effect of FONT, so this technique does not work for all paragraphs. For example, table elements accept changes to the font's name but size changes are not accepted.
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep006.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep008.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

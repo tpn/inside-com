@@ -1,0 +1,35 @@
+USE_BASECTL=1
+Proj = IELnk
+crtmt = 1
+
+# pull in the master SDK makefile that defines all of the macros
+#  and all of the build rules
+
+!include <INetSDK.Mak>
+
+all: $(ObjDir)\$(Proj).Ocx Register
+
+$(ObjDir)\$(Proj).Ocx: $(@R).Obj $(@R).Res $(ObjDir)\Guids.Obj \
+                       $(ObjDir)\IELnkCtl.Obj $(ObjDir)\IELnkPPG.Obj \
+		       $(ObjDir)\CatHelp.Obj
+
+$(ObjDir)\$(Proj).Res: $(@B).Rc $(@R).Tlb ielnkCtl.Bmp $(ObjDir)\$(Proj).tlb
+
+$(ObjDir)\Guids.Obj: $(@B).Cpp ..\Include\IPServer.H Guids.H $(@D)\IELnkIfc.H
+
+$(ObjDir)\IELnk.Obj: $(@B).Cpp ..\Include\IPServer.H ..\Include\LocalSrv.H    \
+        LocalObj.H $(@D)\IELnkIfc.H ..\Include\CtrlObj.H ..\Include\Globals.H \
+        ..\Include\Util.H Resource.H IELnkCtl.H Dispids.H IELnkPPG.H          \
+        ..\Include\PropPage.H Guids.H
+
+$(ObjDir)\IELnkCtl.Obj: $(@B).Cpp ..\Include\IPServer.H Guids.H IELnkCtl.H    \
+        ..\Include\CtrlObj.H $(@D)\IELnkIfc.H Dispids.H LocalObj.H            \
+        ..\Include\Util.H ..\Include\Globals.H Resource.H
+
+$(ObjDir)\IELnkppg.Obj: $(@B).Cpp ..\Include\IPServer.H LocalObj.H IELnkPPG.H \
+        ..\Include\PropPage.H Resource.H Guids.H IELnkCtl.H                   \
+        ..\Include\CtrlObj.H $(@D)\IELnkIfc.H Dispids.H ..\Include\Util.H
+
+$(ObjDir)\XSink.Obj : $(@B).Cpp XSink.h TickCtl.h
+
+$(ObjDir)\CatHelp.Obj: $(@B).Cpp 

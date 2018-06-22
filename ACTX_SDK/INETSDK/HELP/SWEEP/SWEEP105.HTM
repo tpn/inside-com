@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Internet Shortcut Enumerated Types</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep104.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep106.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="intshcut_000b000103000000">Internet Shortcut Enumerated Types</A></H2>
+<BR CLEAR=ALL>
+<P>This section contains information on the following Internet Shortcut enumerated types:
+<UL><LI><A HREF="sweep105.htm#intshcut_000b000103000100" TARGET=TEXT>IURL_SETURL_FLAGS</A>
+<LI><A HREF="sweep105.htm#intshcut_000b000103000200" TARGET=TEXT>IURL_SETURL_INVOKECOMMAND_FLAGS</A>
+<LI><A HREF="sweep105.htm#intshcut_000b000103000300" TARGET=TEXT>MIMEASSOCIATIONDIALOG_IN_FLAGS</A>
+<LI><A HREF="sweep105.htm#intshcut_000b000103000400" TARGET=TEXT>TRANSLATEURL_IN_FLAGS</A>
+<LI><A HREF="sweep105.htm#intshcut_000b000103000500" TARGET=TEXT>URLASSOCIATIONDIALOG_IN_FLAGS</A>
+</UL>
+<H3><A NAME="intshcut_000b000103000100">IURL_SETURL_FLAGS</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum iurl_seturl_flags{
+    IURL_SETURL_FL_GUESS_PROTOCOL         = 0x0001,
+    IURL_SETURL_FL_USE_DEFAULT_PROTOCOL   = 0x0002
+}  IURL_SETURL_FLAGS;
+</FONT></PRE>
+<P>The following enumerated values are used with the <A HREF="sweep103.htm#intshcut_000b000101000300" TARGET=TEXT>IUniformResourceLocator::SetURL</A> method. They are passed in as the <I>dwInFlags</I> parameter.
+
+<DL><DT><B>IURL_SETURL_FL_GUESS_PROTOCOL</B>
+</DT><DD>If the protocol scheme is not specified in the <I>pcszURL</I> parameter to <A HREF="sweep103.htm#intshcut_000b000101000300" TARGET=TEXT>IUniformResourceLocator::SetURL</A>, the system automatically chooses a scheme and adds it to the URL.
+</DD><DT><B>IURL_SETURL_FL_USE_DEFAULT_PROTOCOL</B>
+</DT><DD>If the protocol scheme is not specified in the <I>pcszURL</I> parameter to <A HREF="sweep103.htm#intshcut_000b000101000300" TARGET=TEXT>IUniformResourceLocator::SetURL</A>, the system adds the default protocol to the URL.
+</DD></DL>
+<H3><A NAME="intshcut_000b000103000200">IURL_SETURL_INVOKECOMMAND_FLAGS</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum iurl_invokecommand_flags{
+    IURL_INVOKECOMMAND_FL_ALLOW_UI           = 0x0001,
+    IURL_INVOKECOMMAND_FL_USE_DEFAULT_VERB   = 0x0002,
+}  IURL_INVOKECOMMAND_FLAGS;
+</FONT></PRE>
+<P>The following enumerated values are used in the <B>dwFlags</B> member of the <A HREF="sweep106.htm#intshcut_000b000104000100" TARGET=TEXT>URLINVOKECOMMANDINFO</A> structure.
+
+<DL><DT><B>IURL_INVOKECOMMAND_FL_ALLOW_UI</B>
+</DT><DD>If this bit is set, interaction with the user is allowed and the <B>hwndParent</B> member of the <A HREF="sweep106.htm#intshcut_000b000104000100" TARGET=TEXT>URLINVOKECOMMANDINFO</A> structure is valid. If this bit is clear, interaction with the user is not allowed and the <B>hwndParent</B> member is ignored.
+</DD><DT><B>IURL_INVOKECOMMAND_FL_USE_DEFAULT_VERB</B>
+</DT><DD>If this bit is set, the default verb for the Internet Shortcut's protocol is to be used and the <B>pcszVerb</B> member of the <A HREF="sweep106.htm#intshcut_000b000104000100" TARGET=TEXT>URLINVOKECOMMANDINFO</A> structure is ignored.
+If this bit is clear, the verb is specified by <B>pcszVerb</B>.
+</DD></DL>
+<H3><A NAME="intshcut_000b000103000300">MIMEASSOCIATIONDIALOG_IN_FLAGS</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum mimeassociationdialog_in_flags{
+    MIMEASSOCDLG_FL_REGISTER_ASSOC     = 0x0001
+} MIMEASSOCIATIONDIALOG_IN_FLAGS;
+</FONT></PRE>
+<P>The following enumerated value is used with the <A HREF="sweep104.htm#intshcut_000b000102000200" TARGET=TEXT>MIMEAssociationDialog</A> function to determine how it executes.
+
+<DL><DT><B>MIMEASSOCDLG_FL_REGISTER_ASSOC</B>
+</DT><DD>Registers the selected application as the handler for the given MIME type. If this bit is clear, no association is registered.
+</DD></DL>
+<P>An application is registered only if this flag is set and the user indicates that a persistent association is to be made.
+<H3><A NAME="intshcut_000b000103000400">TRANSLATEURL_IN_FLAGS</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum translateurl_in_flags {
+    TRANSLATEURL_FL_GUESS_PROTOCOL         = 0x0001,
+    TRANSLATEURL_FL_USE_DEFAULT_PROTOCOL   = 0x0002,
+} TRANSLATEURL_IN_FLAGS;
+</FONT></PRE>
+<P>The following enumerated values are used with the <A HREF="sweep104.htm#intshcut_000b000102000300" TARGET=TEXT>TranslateURL</A> function to determine how it will execute.
+
+<DL><DT><B>TRANSLATEURL_FL_GUESS_PROTOCOL</B>
+</DT><DD>If the protocol scheme is not specified in the <I>pcszURL</I> parameter to <A HREF="sweep104.htm#intshcut_000b000102000300" TARGET=TEXT>TranslateURL</A>, the system automatically chooses a scheme and adds it to the URL.
+</DD><DT><B>TRANSLATEURL_FL_USE_DEFAULT_PROTOCOL</B>
+</DT><DD>If the protocol scheme is not specified in the <I>pcszURL</I> parameter to <A HREF="sweep104.htm#intshcut_000b000102000300" TARGET=TEXT>TranslateURL</A>, the system adds the default protocol to the URL.
+</DD></DL>
+<H3><A NAME="intshcut_000b000103000500">URLASSOCIATIONDIALOG_IN_FLAGS</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum urlassociationdialog_in_flags {
+    URLASSOCDLG_FL_USE_DEFAULT_NAME  = 0x0001,
+    URLASSOCDLG_FL_REGISTER_ASSOC    = 0x0002
+} URLASSOCIATIONDIALOG_IN_FLAGS;
+</FONT></PRE>
+<P>The following enumerated values are used with the <A HREF="sweep104.htm#intshcut_000b000102000400" TARGET=TEXT>URLAssociationDialog</A> function to determine how it executes.
+
+<DL><DT><B>URLASSOCDLG_FL_USE_DEFAULT_NAME</B>
+</DT><DD>Use the default file name (that is, "Internet Shortcut").
+</DD><DT><B>URLASSOCDLG_FL_REGISTER_ASSOC</B>
+</DT><DD>Register the selected application as the handler for the protocol specified in the <I>pcszURL</I> parameter of <A HREF="sweep104.htm#intshcut_000b000102000400" TARGET=TEXT>URLAssociationDialog</A>. The application is registered only if this flag is set and the user indicates that a persistent association is desired.
+</DD></DL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep104.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep106.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

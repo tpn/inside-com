@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>URL Open Stream Functions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep091.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep093.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="uos_0009000201000000">URL Open Stream Functions</A></H2>
+<BR CLEAR=ALL>
+<P><I>"...pass in a URL, get a stream..."</I>
+
+
+
+<H3><A NAME="uos_0009000201010000">Overview</A></H3>
+<P>Without a doubt, the easiest, most efficient, and most powerful way to download data from the Internet is to use the new URL Open Stream (UOS) functions. Before jumping into the specifications, let's cover a few of the high-level features and the philosophy behind the creation of these functions. The UOS functions are the newest addition to the ActiveX&#153; extensions to the Win32 API. They combine the familiarity of C-style programming with the power of COM. These functions work equally well inside an ActiveX framework (for example, a component, a document or frame window, a subcomponent, or a scriptable object) or standalone. 
+
+<P>Unlike other more complex interface negotiations, using these functions requires knowledge of no more than two COM interfaces, <B>IStream</B> and <A HREF="sweep092.htm#uos_0009000201010100" TARGET=TEXT>IBindStatusCallback</A>. 
+
+<P>The UOS functions use services from URL monikers and WinInet; therefore, all the caching and thread synchronization features of those components are in use whenever you call these functions. In addition, these functions handle all the host binding operations if your code is in an ActiveX container: the UOS functions automatically do the right thing to manage the download in the ActiveX client framework. 
+
+<P>Every UOS function works in the same basic way: the caller implements an <A HREF="sweep092.htm#uos_0009000201010100" TARGET=TEXT>IBindStatusCallback</A> interface (optional in some cases), then calls the function. The <A HREF="sweep092.htm#uos_0009000201010400" TARGET=TEXT>URLOpenStream</A> and <A HREF="sweep092.htm#uos_0009000201010600" TARGET=TEXT>URLOpenPullStream</A> functions require the caller to be on a thread that has a message loop (<B>GetMessage</B>/<B>DispatchMessage</B>). For ActiveX components, a message loop is given when these functions are called from the main thread. For standalone applications without a user interface, a message loop is still necessary for these functions. 
+
+<P>With the URL Open Stream functions, you can: 
+<UL><LI>Download a URL to a file with a single function call. You can optionally get progress notifications in the background.
+<LI>Create a blocking-type stream with a single function that will block when you call <B>IStream::Read</B>. You can optionally get progress notifications in the background.
+<LI>Post an Internet query (using the HTTP POST verb) with a single call and get the results in a stream.
+<LI>Optionally hook into the ActiveX client framework by passing your <I>this</I> pointer.
+<LI>Configure callbacks using either the push or pull model. 
+</UL>
+<H4><A NAME="uos_0009000201010100">IBindStatusCallback</A></H4>
+<P>Callbacks are issued on an <B>IBindStatusCallback</B> interface that is implemented on the caller. This is a simple callback interface to implement because most of the methods on the interface are optional (for example, <B>OnStartBinding</B>, <B>GetPriority</B>, <B>OnStopBinding</B>) and can return S_OK or E_NOTIMPL. Clients may choose to implement many of the <B>IBindStatusCallback</B> methods; however, only <B>OnDataAvailable</B> is needed for the UOS functions <A HREF="sweep092.htm#uos_0009000201010400" TARGET=TEXT>URLOpenStream</A> and <A HREF="sweep092.htm#uos_0009000201010600" TARGET=TEXT>URLOpenPullStream</A> to work correctly. In fact, for some UOS functions (<A HREF="sweep092.htm#uos_0009000201010300" TARGET=TEXT>URLDownloadToFile</A>, <A HREF="sweep092.htm#uos_0009000201010200" TARGET=TEXT>URLDownloadToCacheFile</A> and <A HREF="sweep092.htm#uos_0009000201010500" TARGET=TEXT>URLOpenBlockingStream</A>), <B>OnDataAvailable</B> is never called because it is unnecessary. Furthermore, <B>GetBindInfo</B> is never invoked for UOS clients because the the UOS function that is called determines the bind information. The UOS programming model is straightforward because there are no special flags to pass to the functions.
+
+<P>The URL Open Stream functions are described below: 
+
+
+
+<H4><A NAME="uos_0009000201010200">URLDownloadToCacheFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT URLDownloadToCacheFile( 
+    LPUNKNOWN            lpUnkcaller,
+    LPCWSTR             szURL,
+    LPWSTR              szFileName,
+    DWORD               dwBufLength,
+    DWORD               dwReserved,
+    IBindStatusCallback *pBSC
+);
+</FONT></PRE>
+<P><B>URLDownloadToCacheFile</B> downloads data into the Internet cache and returns the filename of the cache location for retrieving the bits. The client can choose to be notified of progress via a notification callback.
+<P>This function will always return a filename if the download operation succeeds. If the given URL is a "file:" URL, <B>URLDownloadToCacheFile</B> will directly return the
+filename for the "file:" URL rather than making a copy to the 
+cache. If the given URL is an Internet URL ("http:", "ftp:"), <B>URLDownloadToCacheFile</B> will download this file and return the local filename of the cached copy. Using this function ensures that a filename is returned without unnecessary copying of data.
+
+<DL><DT><I>lpUnkcaller</I>
+ </DT><DD>Pointer to the controlling <B>IUnknown</B> of the calling ActiveX component (if the caller is an ActiveX component). If the caller is not an ActiveX component, this value may be set to NULL. Otherwise, the caller is a COM object that is contained in another component (such as an ActiveX Control within the context of an HTML page). This parameter represents the outermost <B>IUnknown</B> of the calling component. The function will attempt the download within the context of the ActiveX client framework and allow the caller's container to receive callbacks on the progress of the download.
+
+</DD><DT><I>szURL</I>
+ </DT><DD>The URL to be downloaded. Cannot be NULL.
+
+</DD><DT><I>szFileName</I>
+ </DT><DD>The name of the downloaded file. Cannot be NULL.
+
+</DD><DT><I>dwBufLength</I>
+ </DT><DD>The count of bytes that were downloaded.
+
+</DD><DT><I>dwReserved</I>
+ </DT><DD>Reserved for future use. Must be zero.
+
+</DD><DT><I>lpfnCB</I>
+ </DT><DD>Pointer to the caller's <A HREF="sweep092.htm#uos_0009000201010100" TARGET=TEXT>IBindStatusCallback</A> interface.
+<B>URLDownloadToCacheFile</B> calls this interface's <B>OnProgress</B> method on a connection activity, including the arrival of data. <B>OnDataAvailable</B> is never called. Implementing <B>OnProgress</B> allows a caller to implement a user interface or other progress monitoring functionality. It also allows the download operation to be canceled by returning E_ABORT from the <B>OnProgress</B> call. Can be NULL.
+</DD></DL>
+<H4><A NAME="uos_0009000201010300">URLDownloadToFile</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT URLDownloadToFile(
+    LPUNKNOWN pCaller,
+    LPCWSTR szURL,
+    LPCTSTR szFileName,
+    DWORD dwReserved,
+    LPBINDSTATUSCALLBACK lpfnCB
+);
+</FONT></PRE>
+<P><B>URLDownloadToFile</B> downloads bits from the Internet and saves them to a file. The client can choose to be notified of progress via a notification callback.
+<DL><DT><I>pCaller</I>
+ </DT><DD>Pointer to the controlling <B>IUnknown</B> of the calling 
+ActiveX component (if the caller is an ActiveX component). 
+If the caller is not an ActiveX component, this value may 
+be set to NULL. Otherwise, the caller is a COM object that 
+is contained in another component (such as an ActiveX Control 
+within the context of an HTML page). This parameter 
+represents the outermost <B>IUnknown</B> of the calling component. 
+The function will attempt the download within the context of the 
+ActiveX client framework and allow the caller's container to 
+receive callbacks on the progress of the download. 
+</DD><DT><I>szURL</I>
+ </DT><DD>The URL to be downloaded. Cannot be NULL.
+</DD><DT><I>szFileName</I>
+ </DT><DD>Name of the file to create for bits that come from the download.
+</DD><DT><I>dwReserved</I>
+ </DT><DD>Reserved for future use. Must be zero. 
+</DD><DT><I>lpfnCB</I>
+ </DT><DD>Pointer to the caller's <A HREF="sweep092.htm#uos_0009000201010100" TARGET=TEXT>IBindStatusCallback</A> interface. <B>URLDownloadToFile</B> calls this interface's <B>OnProgress</B> method on a connection activity, including the arrival of data. <B>OnDataAvailable</B> is never called. Implementing <B>OnProgress</B> allows a caller to implement a user interface or other progress monitoring functionality. It also allows the download operation to be canceled by returning E_ABORT from the <B>OnProgress</B> call. Can be NULL.
+</DD></DL>
+<H4><A NAME="uos_0009000201010400">URLOpenStream</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT URLOpenStream(
+    LPUNKNOWN pCaller,
+    LPCWSTR szURL, 
+    DWORD dwReserved,
+    LPBINDSTATUSCALLBACK lpfnCB
+);
+</FONT></PRE>
+<P><B>URLOpenStream</B> creates a push-type stream object from a URL. The data is downloaded from the Internet as fast as possible. When data is available, it is "pushed" at the client through a notification callback.
+
+<DL><DT><I>pCaller</I>
+ </DT><DD>Pointer to the controlling <B>IUnknown</B> of the calling 
+ActiveX component (if the caller is an ActiveX component). If the caller is not an ActiveX component, this value may be set to NULL. Otherwise, the caller is a COM object that is contained in another component (such as an ActiveX Control within the context of an HTML page). This parameter represents the outermost <B>IUnknown</B> of the calling component. The function will attempt the download within the context of the 
+ActiveX client framework and allow the caller's container to receive callbacks on the progress of the download.
+</DD><DT><I>szURL</I>
+ </DT><DD>The URL to be converted to a stream object. Cannot be NULL.
+</DD><DT><I>dwReserved</I>
+ </DT><DD>Reserved for future use. Must be zero.
+</DD><DT><I>lpfnCB</I>
+ </DT><DD>Pointer to the caller's <A HREF="sweep092.htm#uos_0009000201010100" TARGET=TEXT>IBindStatusCallback</A> interface, on which <B>URLOpenStream</B> calls <B>OnDataAvailable</B> when data arrives from the Internet. <B>OnDataAvailable</B> can return E_ABORT to abort the download. When the callback is invoked and the <I>pstm</I> member of the STGMEDIUM structure is not NULL, the caller can read from the stream the amount of data specified in the <I>dwSize</I> argument passed with the <B>OnDataAvailable</B> call. If the caller does not read the full amount or does not call <I>pstm</I> <B>Read</B> at all, <B>OnDataAvailable</B> will still be called the next time data arrives if the <I>grfBSCF</I> flags do not indicate BINDF_LASTDATANOTIFICATION. In that case, no more data will be downloaded. Any data that is not read at any given time will still be available the next time <B>OnDataAvailable</B> is called.
+</DD></DL>
+<P>The logic in the following code fragment is a typical implementation of <B>OnDataAvailable</B> as it is used by the <B>URLOpenStream</B> function:
+<PRE><FONT FACE="Courier" SIZE="2">
+HRESULT MyBindStatusCallback::OnDataAvailable (DWORD grfBSCF, 
+    DWORD dwSize, ..., STGMEDIUM * pstgmed)
+{
+
+    if( dwSize &amp;lt  sizeof(BITMAPINFOHEADER) )
+        return(NOERROR);  // not enough has been read yet, just return
+
+    if( !g_bGotInfoHeader ) {   // did we get info before? 
+        // No, go ahead, read now...
+
+        DWORD dwRead;
+        HRESULT hr = pstgmed-&gt;pstm-&gt;Read( &amp;bmih, sizeof(bmih), &amp;dwRead);
+        if( SUCCEEDED(hr) ) {
+            // now we got it... we can return
+            g_bGotInfoHeader = TRUE;
+            return(hr);
+        }
+    }
+}
+</FONT></PRE>
+<H4><A NAME="uos_0009000201010500">URLOpenBlockingStream</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT URLOpenBlockingStream(
+    LPUNKNOWN pCaller,
+    LPCWSTR szURL,
+    LPSTREAM *ppStream,
+    DWORD dwReserved,
+    LPBINDSTATUSCALLBACK lpfnCB
+);
+</FONT></PRE>
+<P><B>URLOpenBlockingStream</B> creates a blocking-type stream object from a URL. The data is downloaded from the Internet on demand by a call to <B>IStream::Read</B>. The <B>Read</B> call will block until enough data has arrived.
+<DL><DT><I>pCaller</I>
+ </DT><DD>Pointer to the controlling <B>IUnknown</B> of the calling 
+ActiveX component (if the caller is an ActiveX component). If the caller is not an ActiveX component, this value may be set to NULL. Otherwise, the caller is a COM object that is contained in another component (such as an ActiveX Control within the context of an HTML page). This parameter represents the outermost <B>IUnknown</B> of the calling component. The function will attempt the download within the context of the 
+ActiveX client framework and allow the caller's container to receive callbacks on the progress of the download. 
+</DD><DT><I>szURL</I>
+ </DT><DD>The URL to be converted to a stream object. Cannot be NULL.
+</DD><DT><I>ppStream</I>
+ </DT><DD>Pointer to the <B>IStream</B> interface on the stream object created by this function. The caller can read from the stream as soon as it has this pointer. If the data requested has not yet been downloaded, the <B>Read</B> method will block until enough data has been downloaded. The following is a code fragment that logically does this:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+    IStream * pStream;
+    URLOpenStream( 0, L"http://www.msn.com/", &amp;pStream, 0, 0);
+
+    char buffer[0x100];
+
+    DWORD dwGot;
+    HRESULT hr = NOERROR;
+
+    do {
+        hr = pStream-&gt;Read( buffer, sizeof(buffer), &amp;dwGot );
+
+        // do something with contents of buffer 
+
+    } while( SUCCEEDED(hr) );
+</FONT></PRE>
+</DD><DT><I>dwReserved</I>
+ </DT><DD>Reserved for future use. Must be zero.
+</DD><DT><I>lpfnCB</I>
+ </DT><DD>Pointer to the caller's <A HREF="sweep092.htm#uos_0009000201010100" TARGET=TEXT>IBindStatusCallback</A> interface. <B>URLOpenBlockingStream</B> calls this interface's <B>OnProgress</B> method on a connection activity, including the arrival of data. <B>OnDataAvailable</B> is never called. Implementing <B>OnProgress</B> allows a caller to implement a user interface or other progress monitoring functionality. It also allows the download operation to be canceled by returning E_ABORT from the <B>OnProgress</B> call. Can be NULL.
+</DD></DL>
+<H4><A NAME="uos_0009000201010600">URLOpenPullStream</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT URLOpenPullStream(
+    LPUNKNOWN pCaller,
+    LPCWSTR szURL,
+    DWORD dwReserved,
+    LPBINDSTATUSCALLBACK lpfnCB
+);
+</FONT></PRE>
+<P><B>URLOpenPullStream</B> creates a pull&#150;type stream object from a URL. The data is downloaded from the Internet on demand. If not enough data is available locally to satisfy the requests, the <B>IStream::Read</B> call will not block until enough data has arrived. Instead, <B>Read</B> will immediately return E_PENDING, and <B>URLOpenPullStream</B> will request the next packet of data from the Internet server.
+<DL><DT><I>pCaller</I>
+ </DT><DD>Pointer to the controlling <B>IUnknown</B> of the calling 
+ActiveX component (if the caller is an ActiveX component). If the caller is not an ActiveX component, this value may be set to NULL. Otherwise, the caller is a COM object that is contained in another component (such as an ActiveX Control within the context of an HTML page). This parameter represents the outermost <B>IUnknown</B> of the calling component. The function will attempt the download within the context of the 
+ActiveX client framework and allow the caller's container to receive callbacks on the progress of the download. 
+</DD><DT><I>szURL</I>
+ </DT><DD>The URL to be converted to a stream object. Cannot be NULL.
+</DD><DT><I>dwReserved</I>
+ </DT><DD>Reserved for future use. Must be zero.
+</DD><DT><I>lpfnCB</I>
+ </DT><DD>Pointer to the caller's <A HREF="sweep092.htm#uos_0009000201010100" TARGET=TEXT>IBindStatusCallback</A> interface, on which <B>URLOpenPullStream</B> calls <B>OnDataAvailable</B> when data arrives from the Internet. <B>OnDataAvailable</B> can return E_ABORT to abort the download. When the callback is invoked and the <I>pstm</I> member of the STGMEDIUM structure is not NULL, the caller can read from the stream the amount of data specified in the <I>dwSize</I> argument passed with the <B>OnDataAvailable</B> call. If the caller does not read the full amount or does not call <I>pstm</I><B>Read</B> at all, <B>OnDataAvailable</B> will not be called again until this happens and <B>Read</B> returns E_PENDING.
+</DD></DL>
+<P>The pull model is slightly more cumbersome than the push model, but it allows the client to control the amount of Internet access for the download.
+
+<P>The logic in the following code fragment is a typical implementation of <B>OnDataAvailable</B> as it is used by the <A HREF="sweep092.htm#uos_0009000201010400" TARGET=TEXT>URLOpenStream</A> function: 
+
+<PRE><FONT FACE="Courier" SIZE="2">
+HRESULT CMyBindStatusCallback::OnDataAvailable( ...)
+{
+
+    HRESULT hr = NOERROR;
+    DWORD dwAmountToRead = dwSize - g_readSoFar;
+    BYTE * buffer = new BYTE[ dwAmountToRead ];
+
+    while( TRUE ) {
+
+        DWORD dwRead;
+
+        hr = pstgmed-&gt;pstrm-&gt;Read( buffer, dwAmountToRead, &amp;dwRead );
+        if( hr == E_PENDING ) {
+            // we'll get notified again when more data comes
+            return(NOERROR);
+        }
+
+        if( SUCCEEDED(hr) ) {
+            .
+            . // ok, process bits and keep looping
+            .
+        }
+        else {
+            // we have an error...
+            return(hr);
+        }
+    }
+}
+</FONT></PRE>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep091.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep093.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,24 @@
+
+# Nmake macros for building Windows 32-Bit apps
+!if "$(CPU)" == "ALPHA" || "$(CPU)" == "PPC" || "$(CPU)" == "MIPS" 
+Sorry:
+        @echo The WebPost sample only builds on X86 platforms at this time.
+!else
+
+
+APPVER=4.0
+
+!include <win32.mak>
+
+all: wbpost.exe
+
+# Update the object file if necessary
+
+wbpost.obj: wbpost.cpp
+    $(cc) $(cflags) $(cvars) $(cdebug) wbpost.cpp
+
+# Update the executable file if necessary, and if so, add the resource back in.
+
+wbpost.exe: wbpost.obj
+    $(link) $(linkdebug) $(conlflags) -out:wbpost.exe wbpost.obj $(conlibs) $(guilibs) webpost.lib 
+!endif

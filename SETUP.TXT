@@ -1,0 +1,58 @@
+[SetupText]
+
+OkButton=OK
+CancelButton=Cancel
+YesToAllTitle=Yes To All
+YesToAllButton=Yes
+NoButton=No
+ScreenMessage=MS Press Setup
+AppName=Setup
+
+WelcomeTitle=Welcome
+WelcomeText=Welcome to the %s Setup Program!
+
+InstallTitle=Install Where?
+InstallText=The Setup program will copy the %s sample code files into the specified directory. Click OK to continue.
+
+ExitTitle=Are you sure?
+ExitText=Setup has not completed installing the files. Are you sure you want to exit Setup?
+
+InstallingTitle=Installing....
+InstallingText1=Setup is installing
+InstallingText2=to
+
+FinishedTitle=Finished!
+FinishedText=Setup has finished installing the %s sample code files. Please read the file README.TXT for descriptions of and installation instruction for the other packages on this CD. Enjoy!
+
+NoRoomTitle=Not enough free space!
+NoRoomText=You don't have enough free space to install the files. Please free up some space and try again.
+
+ConfirmReplaceTitle=Confirm File Replace
+ConfirmReplaceText1=This folder already contains a file named '%s'.
+ConfirmReplaceText2=Would you like to replace the existing file
+ConfirmReplaceText3=modified on %s
+ConfirmReplaceText4=with this one?
+
+ChangeDirTitle=Change Directory
+ChangeDirButton=Change Folder
+FolderText=Folder
+
+SetupFailedTitle=Setup Failed
+SetupFailedText=Setup did not finish installing the files. Please run Setup again if you want to complete the installation process.
+
+LongFilenameProblemText=There was a problem installing the files. Please restart your computer in safe mode and try reinstalling the files. (To start the computer in safe mode, press F5 when the computer beeps during the boot process.)
+
+ProblemInstallingText=There was a problem installing the files. Please restart your computer in safe mode and try reinstalling the files. (To start the computer in safe mode, press F5 when the computer beeps during the boot process.)
+
+BrowseTitle=Browse
+BrowseText1=Current Directory:
+BrowseText2=New Directory:
+
+CreateDirText=The directory you've specified does not exist. Do you want to create it?
+
+UninstallText=This will remove all the files in the directory to which %s was installed. Are you sure you want to continue?
+UninstallProblemText=Not all the files could be removed. Be sure none of the files are in use and run the uninstall program again.
+
+ContinueButton=Continue
+ExitButton=Exit Setup
+

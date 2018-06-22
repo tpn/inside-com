@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>History Object</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep054.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep056.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_000400010b000000"></A><H3>History Object<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010b000100"></A><H3>history Object<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>An object that resides below the window in the scripting object model. This object accesses the history list from the browser.
+
+<P><map name=history>
+<area shape="rect" coords="0,0,109,25" href="sweep048.htm">
+<area shape="rect" coords="69,94,178,119" href="sweep056.htm">
+<area shape="rect" coords="69,125,178,150" href="sweep051.htm">
+<area shape="rect" coords="69,187,178,212" href="sweep049.htm">
+<area shape="rect" coords="105,217,213,242" href="sweep052.htm">
+<area shape="rect" coords="105,248,213,273" href="sweep053.htm">
+<area shape="rect" coords="105,279,213,304" href="sweep050.htm">
+<area shape="rect" coords="138,309,246,334" href="sweep054.htm">
+</map>
+<IMG SRC="art/history.gif" WIDTH="277" HEIGHT="335" ALT="" BORDER=0 USEMAP="#history">
+
+<P>The history object exposes methods for navigating through the current history.
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b020100" TARGET=TEXT>back</A>, <A HREF="sweep055.htm#scriptom_000400010b020200" TARGET=TEXT>forward</A>, <A HREF="sweep055.htm#scriptom_000400010b020300" TARGET=TEXT>go</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b010100" TARGET=TEXT>length</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010b010000"></A><H3>Properties<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010b010100"></A><H3>length Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the length of the history list.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>history.</I><B>length<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>history</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a history object. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the number of entries in the history. 
+
+<P>Always returns zero in current implementation.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b000100" TARGET=TEXT>History</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b020100" TARGET=TEXT>back</A>, <A HREF="sweep055.htm#scriptom_000400010b020200" TARGET=TEXT>forward</A>, <A HREF="sweep055.htm#scriptom_000400010b020300" TARGET=TEXT>go</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010b020000"></A><H3>Methods<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010b020100"></A><H3>back Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Jumps back in the history <I>n</I> steps. This behaves exactly as if the user has clicked on the back button <I>n</I> times.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>history.</I><B>back</B> <I>n</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>history</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a history object. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>n</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The number of pages to jump back in the history. <I>n</I> is always an integer &gt;= 0.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b000100" TARGET=TEXT>History</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b020200" TARGET=TEXT>forward</A>, <A HREF="sweep055.htm#scriptom_000400010b020300" TARGET=TEXT>go</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b010100" TARGET=TEXT>length</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010b020200"></A><H3>forward Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Jumps forward in the history <I>n</I> steps. This behaves exactly as if the user has clicked on the forward button <I>n</I> times.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>history.</I><B>forward</B> <I>n</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>history</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a history object. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>n</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The number of pages to jump forward in the history. <I>n</I> is always an integer &gt;= 0.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b000100" TARGET=TEXT>History</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b020100" TARGET=TEXT>back</A>, <A HREF="sweep055.htm#scriptom_000400010b020300" TARGET=TEXT>go</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b010100" TARGET=TEXT>length</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010b020300"></A><H3>go Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Goes to the <I>n</I> th item in the history, where <I>history.</I><B>go</B> 1 jumps to the first item in the history.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>history.</I><B>go</B> <I>n</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>history</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a history object. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>n</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The index of the history entry.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b000100" TARGET=TEXT>History</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b020100" TARGET=TEXT>back</A>, <A HREF="sweep055.htm#scriptom_000400010b020200" TARGET=TEXT>forward</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep055.htm#scriptom_000400010b010100" TARGET=TEXT>length</A>
+
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep054.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep056.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

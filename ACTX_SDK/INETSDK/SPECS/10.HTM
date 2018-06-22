@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<TITLE>Going Beyond Forms: Using Objects - Microsoft&#174; Visual Basic&#174; Scripting Edition</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BLOCKQUOTE>
+<FONT FACE="ARIAL" SIZE=2>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<H3><A HREF="16.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="1.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A>Going Beyond Forms - Using Objects</H3>
+<HR SIZE=2>
+</TD></TR></TABLE>
+
+<H5>Using Objects</H5>
+<BLOCKQUOTE>
+<P>
+Whether you use an ActiveX&#153; control (formerly called an OLE control) or a Java object, Microsoft&#174; Visual Basic&#174; Scripting Edition and Microsoft Internet Explorer version 3.0 handle it the same way. If you're using Microsoft Internet Explorer 3.0 and have installed the controls available in the <A HREF="http://www.microsoft.com/activex/controls/" TARGET="_top">ActiveX&#153; Gallery</A>, you can see <A HREF="11.htm">the code on this page in use</A>.</P>
+
+<P>You include an object using the &lt;OBJECT&gt; tags and set its initial property values using &lt;PARAM&gt; tags. If you're a Visual Basic programmer, you'll recognize that using the &lt;PARAM&gt; tags is just like setting initial properties for a control on a form. For example, the following set of &lt;OBJECT&gt; and &lt;PARAM&gt; tags adds the ActiveX&#153; Label control to a page:</P>
+<P><PRE><FONT FACE="Courier New" SIZE=3>
+&lt;OBJECT
+	classid="clsid:99B42120-6EC7-11CF-A6C7-00AA00A47DD2"
+	id=lblActiveLbl
+	width=250
+	height=250
+	align=left
+	hspace=20
+	vspace=0
+&gt;
+&lt;PARAM NAME="Angle" VALUE="90"&gt;
+&lt;PARAM NAME="Alignment" VALUE="2"&gt;
+&lt;PARAM NAME="BackStyle" VALUE="0"&gt;
+&lt;PARAM NAME="Caption" VALUE="A Simple Desultory Label"&gt;
+&lt;PARAM NAME="FontName" VALUE="Arial"&gt;
+&lt;PARAM NAME="FontSize" VALUE="20"&gt;
+&lt;PARAM NAME="FontBold" VALUE="1"&gt;
+&lt;PARAM NAME="FrColor" VALUE="0"&gt;
+&lt;/OBJECT&gt;
+</FONT></PRE>
+<P>You can get and set properties, and invoke methods just as with any of the form controls. The following code, for example, includes &lt;FORM&gt; controls you can use to manipulate two of the label control's properties:</P><P>
+<PRE><FONT FACE="Courier New" SIZE=3>
+&lt;FORM NAME="LabelControls"&gt;
+&lt;INPUT TYPE="TEXT" NAME="txtNewText" SIZE=25&gt;
+&lt;INPUT TYPE="BUTTON" NAME="cmdChangeIt" VALUE="Change Text"&gt;
+&lt;INPUT TYPE="BUTTON" NAME="cmdRotate" VALUE="Rotate Label"&gt;
+&lt;/FORM&gt;
+</FONT></PRE>
+<P>
+With the form defined, an event procedure for the <I>cmdChangeIt</I> button changes the label text:</P><P>
+<PRE><FONT FACE="Courier New" SIZE=3>
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+Sub cmdChangeIt_onClick
+	Dim TheForm
+	Set TheForm = Document.LabelControls
+	lblActiveLbl.Caption = TheForm.txtNewText.Value
+End Sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>The code qualifies references to controls and values inside the forms just as in the <A HREF="1.htm">simple validation</A> example.</P>
+<P>Several ActiveX&#153; Controls are available from the <A HREF="http://www.microsoft.com/activex/controls/" TARGET="_top">ActiveX&#153; Gallery</A> for use with Internet Explorer 3.0. You can find complete information about the properties, methods, and events there, as well as the class identifiers (CLSID) for the controls. You can find more information about the &lt;OBJECT&gt; tag on the <A HREF="../help/sweep/sweep016.htm#htmlref2_000100010f000000" TARGET="TEXT">Objects</A> page of the HTML Reference included in this SDK.</P>
+
+<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0 WIDTH=87%>
+<TR><TD COLSPAN=2 VALIGN=BOTTOM><HR></TD></TR>
+<TR><TD VALIGN=TOP><FONT SIZE=2><b>Note</b>    Previous releases of Internet Explorer 3.0 required braces ({}) around the classid attribute and did not conform to the <A HREF="http://www.w3.org/pub/WWW/Addressing/clsid-scheme" TARGET="_top">W3C specification</A>. Using braces with the current release will generate a "This page uses an outdated version of the &lt;OBJECT&gt; tag" message.
+</FONT></TD></TR>
+<TR><TD COLSPAN=2 VALIGN=TOP><HR></TD></TR></TABLE>
+
+</BLOCKQUOTE>
+<BR>
+<BR>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<FONT FACE=ARIAL SIZE=2><HR SIZE=2><A HREF="16.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="1.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A><A HREF="cpyright.htm" TARGET="_top">&#169; 1996 by Microsoft Corporation</a>.</FONT>
+
+</TD></TR></TABLE>
+</FONT>
+</BLOCKQUOTE>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

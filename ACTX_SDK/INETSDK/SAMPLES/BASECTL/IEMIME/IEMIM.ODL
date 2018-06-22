@@ -1,0 +1,99 @@
+//=--------------------------------------------------------------------------=
+// iemim.ODL
+//=--------------------------------------------------------------------------=
+// Copyright  1995  Microsoft Corporation.  All Rights Reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+//=--------------------------------------------------------------------------=
+//
+// ODL file for the control(s) and automation object(s) in this inproc server
+//
+#include <olectl.h>
+#include "dispids.h"
+
+// can't include oaidl.h, so this will have to do
+//
+#define DISPID_NEWENUM -4
+
+
+//=--------------------------------------------------------------------------=
+// the libid for this type libray
+//
+[
+    uuid(0cefc260-a295-11cf-a3a9-00a0c9034920),
+    helpstring("iemim Control Library"),
+    lcid(0x0000),
+    version(1.0)
+]
+library iemimObjects {
+
+    // standard imports
+    //
+    importlib("STDOLE2.TLB");
+    importlib(STDTYPE_TLB);
+
+    // primary dispatch interface for Ciemim control
+    //
+    [
+        uuid(0e0b92a0-a295-11cf-a3a9-00a0c9034920),
+	helpstring("iemim Control"),
+        hidden,
+	dual,
+	odl
+    ]
+    interface Iiemim : IDispatch {
+
+        // properties
+	//
+        [id(DISPID_URL), propget]
+            HRESULT URL([out, retval] BSTR * val);
+        [id(DISPID_URL), propput]
+            HRESULT URL([in]  BSTR val);
+        [id(DISPID_MEDIA), propget]
+            HRESULT Media([out, retval] BSTR * val);
+        [id(DISPID_MEDIA), propput]
+            HRESULT Media([in]  BSTR val);
+        [id(DISPID_CFFORMAT), propget]
+            HRESULT Cfformat([out, retval] BSTR * val);
+        [id(DISPID_CFFORMAT), propput]
+            HRESULT Cfformat([in]  BSTR val);
+        // methods
+	//
+        [id(DISPID_ABOUTBOX)]
+            void AboutBox(void);
+        [id(DISPID_RELOAD)]
+            void Reload(void);
+
+    };
+
+    // event interface for Ciemim controls ...
+    //
+    [
+        uuid(0f4a7b40-a295-11cf-a3a9-00a0c9034920),
+	helpstring("Event interface for iemim control"),
+	hidden
+    ]
+    dispinterface DiemimEvents {
+        properties:
+	methods:
+      [id(DISPID_COMPLETE)]
+                void Complete();
+    };
+
+    // coclass for Ciemim controls
+    //
+    [
+        uuid(10803c20-a295-11cf-a3a9-00a0c9034920),
+	helpstring("iemim control")
+    ]
+    coclass iemim {
+        [default]         interface Iiemim;
+	[default, source] dispinterface DiemimEvents;
+    };
+};
+
+
+

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Enumerations</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep077.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep079.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="iexplr_c_0007000204000000">Enumerations</A></H2>
+<BR CLEAR=ALL>
+<H3><A NAME="iexplr_c_0007000204000100">BrowserNavConstants</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum BrowserNavConstants {
+    navOpenInNewWindow = 1,
+    navNoHistory = 2,
+    navNoReadFromCache = 4,
+    navNoWriteToCache = 8
+} BrowserNavConstants;
+</FONT></PRE>
+<P>Contains values used by the <A HREF="sweep077.htm#iexplr_c_0007000203020700" TARGET=TEXT>IWebBrowserApp::Navigate</A> and <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A> functions.
+
+<P><B>Elements</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000101">navOpenInNewWindow</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Open the resource or file in a new window. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000102">navNoHistory</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not add the resource or file to the history list. The new page replaces the current page in the list.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000103">navNoReadFromCache</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not read from the disk cache for this navigation.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000104">navNoWriteToCache</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not write the results of this navigation to the disk cache.
+</FONT></TD></TR></TABLE>
+<P>See also  <A HREF="sweep077.htm#iexplr_c_0007000203030700" TARGET=TEXT>FrameNewWindow</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020700" TARGET=TEXT>IWebBrowserApp::Navigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010500" TARGET=TEXT>IWebBrowser::Navigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203020700" TARGET=TEXT>Navigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030100" TARGET=TEXT>BeforeNavigate</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030800" TARGET=TEXT>NavigateComplete</A>, <A HREF="sweep077.htm#iexplr_c_0007000203030900" TARGET=TEXT>NewWindow</A>
+
+<H3><A NAME="iexplr_c_0007000204000200">CommandStateChangeConstants</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum CommandStateChangeConstants {
+    CSC_UPDATECOMMANDS = 0xFFFFFFFF,
+    CSC_NAVIGATEFORWARD = 0x00000001,
+    CSC_NAVIGATEBACK = 0x00000002
+} CommandStateChangeConstants;
+</FONT></PRE>
+<P>Contains values used by the <A HREF="sweep077.htm#iexplr_c_0007000203030200" TARGET=TEXT>DWebBrowserEvents::CommandStateChange</A> function.
+
+<P><B>Elements</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000201">CSC_UPDATECOMMANDS</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The enabled state of a toolbar button may have changed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000202">CSC_NAVIGATEFORWARD</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The enabled state of the Forward button has changed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000203">NAVIGATEBACK</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The enabled state of the Back button has changed.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203030200" TARGET=TEXT>DWebBrowserEvents::CommandStateChange</A>
+
+<H3><A NAME="iexplr_c_0007000204000300">RefreshConstants</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum RefreshConstants {
+    REFRESH_NORMAL = 0,
+    REFRESH_IFEXPIRED = 1,
+    REFRESH_CONTINUE = 2,
+    REFRESH_COMPLETELY = 3
+} RefreshConstants;
+</FONT></PRE>
+<P>Contains values used with the <A HREF="sweep077.htm#iexplr_c_0007000203020b00" TARGET=TEXT>IWebBrowserApp::Refresh2</A> and <A HREF="sweep077.htm#iexplr_c_0007000203010700" TARGET=TEXT>IWebBrowser::Refresh2</A> functions.
+
+<P>The "pragma:nocache" header tells the server not to return a cached copy, but to ensure that the information is as fresh as possible. Browsers typically send this header when the user selects refresh, but the header causes problems for some servers. 
+
+<P><B>Elements</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000301">REFRESH_COMPLETELY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Perform a full refresh that includes sending a "pragma:nocache" header to the server (HTTP URLs only). 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000302">REFRESH_IFEXPIRED</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Perform a lightweight refresh if the page has expired.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000303">REFRESH_CONTINUE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">For internal use only - do not use.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplr_c_0007000204000304">REFRESH_NORMAL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Perform a lightweight refresh that does not include sending the HTTP "pragma:nocache" header to the server. 
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep077.htm#iexplr_c_0007000203020a00" TARGET=TEXT>IWebBrowserApp::Refresh</A>, <A HREF="sweep077.htm#iexplr_c_0007000203010600" TARGET=TEXT>IWebBrowser::Refresh</A>
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep077.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep079.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

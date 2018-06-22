@@ -1,0 +1,1056 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Interfaces and Methods</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep062.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep064.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="olescrpt_0005000106000000">Interfaces and Methods</A></H2>
+<BR CLEAR=ALL>
+<H3><A NAME="olescrpt_0005000106010000">IActiveScript</A></H3>
+<P>The scripting engine must implement the <B>IActiveScript</B> interface in order to be an ActiveX Scripting engine.
+
+<P><B>Methods in Vtable Order</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IUnknown</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>QueryInterface</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns pointers to supported interfaces.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>AddRef</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Increments the reference count.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Release</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Decrements the reference count.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IActiveScript</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010c00" TARGET=TEXT>SetScriptSite</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Informs the scripting engine of the <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A> site provided by the host.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010700" TARGET=TEXT>GetScriptSite</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the site object associated with the ActiveX Scripting engine.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010d00" TARGET=TEXT>SetScriptState</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Puts the scripting engine into the given state. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010800" TARGET=TEXT>GetScriptState</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the current state of the scripting engine. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010400" TARGET=TEXT>Close</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Causes the scripting engine to abandon any currently loaded script, lose its state, and release any interface pointers it has to other objects, thus entering a <A HREF="sweep062.htm#olescrpt_0005000105020006" TARGET=TEXT>closed</A> state.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010100" TARGET=TEXT>AddNamedItem</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Adds the name of a root-level item to the scripting engine's name space. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010200" TARGET=TEXT>AddTypeLib</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Adds a type library to the name space for the script. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010600" TARGET=TEXT>GetScriptDispatch</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the <B>IDispatch</B> interface for the methods and properties associated with the running script itself. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010500" TARGET=TEXT>GetCurrentScriptThreadID</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves a scripting-engine-defined identifier for the currently executing thread. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010900" TARGET=TEXT>GetScriptThreadID</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves a scripting-engine-defined identifier for the thread associated with the given Microsoft Win32&#174; thread. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010a00" TARGET=TEXT>GetScriptThreadState</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the current state of a script thread. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Interrupts the execution of a running script thread.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106010300" TARGET=TEXT>Clone</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Clones the current scripting engine (minus any current execution state), returning a loaded, unsited scripting engine in the current thread. 
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106010100">IActiveScript::AddNamedItem</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT AddNamedItem(
+    LPCOLESTR pstrName,  // address of item name
+    DWORD dwFlags        // item flags
+);
+</FONT></PRE>
+<P>Adds the name of a root-level item to the scripting engine's name space. A root-level item is an object with properties and methods, an event source, or both. 
+
+<DL><DT><I>pstrName</I>
+ </DT><DD>[in] Address of a buffer that contains the name of the item as viewed from the script. The name must be unique and persistable.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>[in] Flags associated with item. Can be a combination of these values:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010101">SCRIPTITEM_ISPERSISTENT</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the item should be saved if the scripting engine is saved. Similarly, setting this flag indicates that a transition back to the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state should retain the item's name and type information (the scripting engine must, however, release all pointers to interfaces on the actual object).
+
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010102">SCRIPTITEM_ISSOURCE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the item sources events that the script can sink. Children (properties of the object that are in themselves objects) can also source events to the script. This is not recursive, but it provides a convenient mechanism for the common case, for example, of adding a container and all of its member controls.
+
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010103">SCRIPTITEM_ISVISIBLE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the item's name is available in the name space of the script, allowing access to the properties, methods, and events of the item. Because by convention the properties of the item include the item's children, all child object properties and methods (and their children, recursively) will be accessible.
+
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010104">SCRIPTITEM_GLOBALMEMBERS</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the item is a collection of global properties and methods associated with the script. Normally, a scripting engine would ignore the object name (other than for the purpose of using it as a cookie for <A HREF="sweep063.htm#olescrpt_0005000106040200" TARGET=TEXT>IActiveScriptSite::GetItemInfo</A>, or for resolving explicit scoping) and expose its members as global variables and methods. This allows the host to extend the library (run-time functions and so on) available to the script. It is left to the scripting engine to deal with name conflicts (for example, when two <B>SCRIPTITEM_GLOBALMEMBERS</B> items have methods of the same name), although an error should not be returned because of this situation.
+
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010105">SCRIPTITEM_NOCODE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the item is simply a name being added to the script's name space, and should not be treated as an item for which code should be associated. For example, without this flag being set, VBScript will create a separate module for the named item, and C++ might create a separate wrapper class for the named item.
+
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010106">SCRIPTITEM_CODEONLY</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the named item represents a code-only object, and that the host has no <B>IUnknown</B> to be associated with this code-only object. The host only has a name for this object. In object-oriented languages such as C++, this flag would create a class. Not all languages support this flag.
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The named item was successfully added to the script's name space.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine has not yet been loaded or initialized).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An argument was invalid.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106040200" TARGET=TEXT>IActiveScriptSite::GetItemInfo</A>
+
+<H4><A NAME="olescrpt_0005000106010200">IActiveScript::AddTypeLib</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT AddTypeLib(
+    REFGUID guidTypeLib,  // LIBID of type library
+    DWORD dwMaj,          // major version number
+    DWORD dwMin,          // minor version number
+    DWORD dwFlags         // option flags
+);
+</FONT></PRE>
+<P>Adds a type library to the name space for the script. This is similar to the <B>#include</B> directive in C/C++. It allows a set of predefined items such as class definitions, typedefs, and named constants to be added to the run-time environment available to the script.
+
+<DL><DT><I>guidTypeLib</I>
+ </DT><DD>[in] LIBID of the type library to add.
+</DD><DT><I>dwMaj</I>
+ </DT><DD>[in] Major version number.
+</DD><DT><I>dwMin</I>
+ </DT><DD>[in] Minor version number.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>[in] Option flags. Can be <B><A NAME="olescrpt_0005000106010201">SCRIPTTYPELIB_ISCONTROL</B></A>, which indicates that the type library describes an ActiveX control used by the host.
+
+
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The specified type library was successfully added.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine has not yet been loaded or initialized).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">TYPE_E_CANTLOADLIBRARY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The specified type library could not be loaded.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An argument was invalid.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106010300">IActiveScript::Clone</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Clone(
+    IActiveScript **ppscript  // receives pointer to IActiveScript
+);
+</FONT></PRE>
+<P>Clones the current scripting engine (minus any current execution state), returning a loaded, unsited scripting engine in the current thread. The state of this new scripting engine should be identical to the state the original scripting engine would be in if it were transitioned back to the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state. 
+
+<DL><DT><I>ppscript</I>
+ </DT><DD>[out] Address of a variable that receives a pointer to the <A HREF="sweep063.htm#olescrpt_0005000106010000" TARGET=TEXT>IActiveScript</A> interface of the unsited, cloned scripting engine. The host must create a site and call <A HREF="sweep063.htm#olescrpt_0005000106010c00" TARGET=TEXT>SetScriptSite</A> on the new scripting engine before it will be in the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state and, therefore, usable.
+</DD></DL>
+<P>The <B>Clone</B> method is an optimization of <B>IPersist*::Save</B>, <B>CoCreateInstance</B>, and <B>IPersist*::Load</B>, so the state of the new scripting engine should be the same as if the state of the original scripting engine were saved and loaded into a new scripting engine. Named items are duplicated in the cloned scripting engine, but specific object pointers for each item are forgotten and are obtained with <A HREF="sweep063.htm#olescrpt_0005000106040200" TARGET=TEXT>GetItemInfo</A>. This allows an identical object model with per-thread entry points (an apartment model) to be used. 
+
+<P>This method is used for multithreaded server hosts that can run multiple instances of the same script. The scripting engine may return E_NOTIMPL, in which case the host can achieve the same result by duplicating the persistent state and creating a new instance of the scripting engine with <B>IPersist*</B>. 
+
+<P>This method can be called from non-base threads without resulting in a non-base callout to host objects or to <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The scripting engine was successfully cloned.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOTIMPL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The <B>Clone</B> method is not supported.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine has not yet been loaded or initialized).
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010c00" TARGET=TEXT>IActiveScript::SetScriptSite</A>, <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>, <A HREF="sweep063.htm#olescrpt_0005000106040200" TARGET=TEXT>IActiveScriptSite::GetItemInfo</A>
+
+<H4><A NAME="olescrpt_0005000106010400">IActiveScript::Close</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT Close(void);
+</FONT></PRE>
+<P>Causes the scripting engine to abandon any currently loaded script, lose its state, and release any interface pointers it has to other objects, thus entering a <A HREF="sweep062.htm#olescrpt_0005000105020006" TARGET=TEXT>closed</A> state. Event sinks, immediately executed script text, and macro invocations that are already in progress are completed before the state changes (use <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A> to cancel a running script thread). This method must be called by the creating host before it calls <B>Release</B> to prevent circular reference problems.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script was successfully closed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The method succeeded, but the script was already closed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">OLESCRIPT_S_PENDING
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The method was queued successfully, but the state hasn't changed yet. When the state changes, the site will be called back on <A HREF="sweep063.htm#olescrpt_0005000106040800" TARGET=TEXT>IActiveScriptSite::OnStateChange</A>.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine was already in the <A HREF="sweep062.htm#olescrpt_0005000105020006" TARGET=TEXT>closed</A> state).
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>IActiveScript::InterruptScriptThread</A>, <A HREF="sweep063.htm#olescrpt_0005000106040800" TARGET=TEXT>IActiveScriptSite::OnStateChange</A>
+<H4><A NAME="olescrpt_0005000106010500">IActiveScript::GetCurrentScriptThreadID</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetCurrentScriptThreadID(
+    SCRIPTTHREADID *pstidThread  // receives scripting thread identifier
+);
+</FONT></PRE>
+<P>Retrieves a scripting-engine-defined identifier for the currently executing thread. The identifier can be used in subsequent calls to script thread execution-control methods such as <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A>.
+
+<DL><DT><I>pstidThread</I>
+ </DT><DD>[out] Address of a variable that receives the script thread identifier associated with the current thread. The interpretation of this identifier is left to the scripting engine, but it can be just a copy of the Windows thread identifier. If the Win32 thread terminates, this identifier becomes unassigned and can subsequently be assigned to another thread. 
+</DD></DL>
+<P>This method can be called from non-base threads without resulting in a non-base callout to host objects or to <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The identifier was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>IActiveScript::InterruptScriptThread</A>, <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>
+<H4><A NAME="olescrpt_0005000106010600">IActiveScript::GetScriptDispatch</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetScriptDispatch(
+    LPCOLESTR pstrItemName  // address of item name
+    IDispatch **ppdisp      // receives IDispatch pointer
+);
+</FONT></PRE>
+<P>Retrieves the <B>IDispatch</B> interface for the methods and properties associated with the running script itself. 
+
+<DL><DT><I>pstrItemName</I>
+ </DT><DD>[in] Address of a buffer that contains the name of the item for which the caller needs the associated dispatch object. If this parameter is NULL, the dispatch object contains as its members all of the global methods and properties defined by the script. Through the <B>IDispatch</B> interface and the associated <B>ITypeInfo</B> interface, the host can invoke script methods or view and modify script variables.
+</DD><DT><I>ppdisp</I>
+ </DT><DD>[out] Address of a variable that receives a pointer to the object associated with the script's global methods and properties. If the scripting engine does not support such an object, NULL is returned.
+</DD></DL>
+<P>Because methods and properties can be added by calling <A HREF="sweep063.htm#olescrpt_0005000106020000" TARGET=TEXT>IActiveScriptParse</A>, the <B>IDispatch</B> interface returned by this function can dynamically support new methods and properties. Similarly, <B>IDispatch::GetTypeInfo</B> should return a new, unique <B>ITypeInfo</B> when methods and properties are added. Note, however, that language engines must not change the <B>IDispatch</B> interface in a way that is incompatible with any previous <B>ITypeInfo</B> interface returned. That implies, for example, that DISPIDs will never be reused.
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The dispatch object for the script was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The scripting engine does not support a dispatch object; the <I>ppdisp</I> parameter is set to NULL.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine has not yet been loaded or initialized).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An argument was invalid.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106010700">IActiveScript::GetScriptSite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetScriptSite(
+    REFIID iid,           // interface identifier
+    void **ppvSiteObject  // address of host site interface
+);
+</FONT></PRE>
+<P>Retrieves the site object associated with the ActiveX Scripting engine.
+
+<DL><DT><I>iid</I>
+ </DT><DD>[in] Identifier of the requested interface.
+</DD><DT><I>ppvSiteObject</I>
+ </DT><DD>[out] Address of the location that receives the interface pointer to the host's site object.
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The site object was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">No site has been set; <I>ppvSiteObject</I> is set to NULL.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An argument was invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The specified interface is not supported.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106010800">IActiveScript::GetScriptState</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetScriptState(
+    SCRIPTSTATE *pss  // address of structure for state information
+);
+</FONT></PRE>
+<P>Retrieves the current state of the scripting engine. This method can be called from non-base threads without resulting in a non-base callout to host objects or to <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>.
+
+<DL><DT><I>pss</I>
+ </DT><DD>[out] Address of a variable that receives a value defined in the <A HREF="sweep063.htm#olescrpt_0005000106060100" TARGET=TEXT>SCRIPTSTATE</A> enumeration. The value indicates the current state of the scripting engine associated with the calling thread. 
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The state information was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>, <A HREF="sweep063.htm#olescrpt_0005000106060100" TARGET=TEXT>SCRIPTSTATE</A>
+<H4><A NAME="olescrpt_0005000106010900">IActiveScript::GetScriptThreadID</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetScriptThreadID(
+    DWORD dwWin32ThreadID,       // Win32 thread identifier
+    SCRIPTTHREADID *pstidThread  // receives scripting thread identifier
+);
+</FONT></PRE>
+<P>Retrieves a scripting-engine-defined identifier for the thread associated with the given Win32 thread. This identifier can be used in subsequent calls to script thread execution control methods such as <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A>.
+
+<DL><DT><I>dwWin32ThreadID</I>
+ </DT><DD>[in] Thread identifier of a running Win32 thread in the current process. Use the <A HREF="sweep063.htm#olescrpt_0005000106010500" TARGET=TEXT>GetCurrentScriptThreadID</A> function to retrieve the thread identifier of the currently executing thread.
+</DD><DT><I>pstidThread</I>
+ </DT><DD>[out] Address of a variable that receives the script thread identifier associated with the given Win32 thread. The interpretation of this identifier is left to the scripting engine, but it can be just a copy of the Windows thread identifier. Note that if the Win32 thread terminates, this identifier becomes unassigned and may subsequently be assigned to another thread. 
+</DD></DL>
+<P>This method can be called from non-base threads without resulting in a non-base callout to host objects or to <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The identifier was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine has not yet been loaded or initialized).
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>IActiveScript::InterruptScriptThread</A>, <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>
+<H4><A NAME="olescrpt_0005000106010a00">IActiveScript::GetScriptThreadState</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetScriptThreadState(
+    SCRIPTTHREADID stidThread,    // identifier of script thread
+    SCRIPTTHREADSTATE *pstsState  // receives state flag
+);
+</FONT></PRE>
+<P>Retrieves the current state of a script thread. 
+
+<DL><DT><I>stidThread</I>
+ </DT><DD>[in] Identifier of the thread for which the state is desired, or one of the following special thread identifiers:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010a01">SCRIPTTHREADID_CURRENT</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The currently executing thread.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010a02">SCRIPTTHREADID_BASE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The base thread; that is, the thread in which the scripting engine was instantiated.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>pstsState</I>
+ </DT><DD>[out] Address of a variable that receives the state of the indicated thread. The state is indicated by one of the named constant values defined by the <A HREF="sweep063.htm#olescrpt_0005000106060200" TARGET=TEXT>SCRIPTTHREADSTATE</A> enumeration. If this parameter does not identify the current thread, the state may change at any time. 
+</DD></DL>
+<P>This method can be called from non-base threads without resulting in a non-base callout to host objects or to <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The current state was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine has not yet been loaded or initialized).
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>, <A HREF="sweep063.htm#olescrpt_0005000106060200" TARGET=TEXT>SCRIPTTHREADSTATE</A>
+<H4><A NAME="olescrpt_0005000106010b00">IActiveScript::InterruptScriptThread</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT InterruptScriptThread(
+    SCRIPTTHREADID   stidThread,  // identifier of thread
+    const EXCEPINFO *pexcepinfo,  // receives error information
+    DWORD dwFlags
+);
+</FONT></PRE>
+<P>Interrupts the execution of a running script thread (an event sink, an immediate execution, or a macro invocation). This method can be used to terminate a script that is stuck (for example, in an infinite loop). It can be called from non-base threads without resulting in a non-base callout to host objects or to <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>.
+
+<DL><DT><I>stidThread</I>
+ </DT><DD>[in] Thread identifier of the thread to interrupt, or one of the following special thread identifier values:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010b01">SCRIPTTHREADID_CURRENT</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The currently executing thread.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010b02">SCRIPTTHREADID_BASE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The base thread; that is, the thread in which the scripting engine was instantiated.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106010b03">SCRIPTTHREADID_ALL</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">All threads. The interrupt is applied to all script methods currently in progress. Note that unless the caller has requested that the script be disconnected, by calling <A HREF="sweep063.htm#olescrpt_0005000106010d00" TARGET=TEXT>SetScriptState</A> with the <A HREF="sweep063.htm#olescrpt_0005000106010d04" TARGET=TEXT>SCRIPTSTATE_DISCONNECTED</A> or <A HREF="sweep063.htm#olescrpt_0005000106010d01" TARGET=TEXT>SCRIPTSTATE_INITIALIZED</A> flag, the next scripted event causes script code to run again.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>pexcepinfo</I>
+ </DT><DD>[in] Address of an <B>EXCEPINFO</B> structure that receives error information associated with the error condition. 
+</DD><DT><I>dwFlags</I>
+ </DT><DD>[in] Option flags associated with the interruption. Can be one of these values:
+
+<DL>
+<DT><B><A NAME="olescrpt_0005000106010b04">SCRIPTINTERRUPT_DEBUG</B></A>
+</DT><DD>If supported, enter the scripting engine's debugger at the current script execution point.
+</DD><DT><B><A NAME="olescrpt_0005000106010b05">SCRIPTINTERRUPT_RAISEEXCEPTION</B></A>
+</DT><DD>If supported by the scripting engine's language, let the script handle the exception. Otherwise, the script method is aborted and the error code is returned to the caller; that is, the event source or macro invoker.
+</DD></DL>
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The given thread was successfully interrupted.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An argument was invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine has not yet been loaded or initialized).
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010d00" TARGET=TEXT>IActiveScript::SetScriptState</A>, <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>
+<H4><A NAME="olescrpt_0005000106010c00">IActiveScript::SetScriptSite</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SetScriptSite(
+    IActiveScriptSite *pScriptSite  // address of host script site
+);
+</FONT></PRE>
+<P>Informs the scripting engine of the <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A> site provided by the host. This method must be called before any other <A HREF="sweep063.htm#olescrpt_0005000106010000" TARGET=TEXT>IActiveScript</A> methods can be used.
+
+<DL><DT><I>pScriptSite</I>
+ </DT><DD>[in] Address of the host-supplied script site to be associated with this instance of the scripting engine. The site must be uniquely assigned to this scripting engine instance; it cannot be shared with other scripting engines.
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The host site was set successfully.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An argument was invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unspecified error occurred; the scripting engine was unable to finish initializing the site.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, a site was already set).
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>
+<H4><A NAME="olescrpt_0005000106010d00">IActiveScript::SetScriptState</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT SetScriptState(
+    SCRIPTSTATE ss  // identifier of new state
+);
+</FONT></PRE>
+<P>Puts the scripting engine into the given state. This method can be called from non-base threads without resulting in a non-base callout to host objects or to <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>.
+
+<DL><DT><I>ss</I>
+ </DT><DD>[in] Sets the scripting engine to the given state. Can be one of the values defined in the <A HREF="sweep063.htm#olescrpt_0005000106060100" TARGET=TEXT>SCRIPTSTATE</A> enumeration:
+<DL>
+<DT><B><A NAME="olescrpt_0005000106010d01">SCRIPTSTATE_INITIALIZED</B></A>
+ </DT><DD>Returns the scripting engine back to the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state from the <A HREF="sweep062.htm#olescrpt_0005000105020003" TARGET=TEXT>started</A>, <A HREF="sweep062.htm#olescrpt_0005000105020004" TARGET=TEXT>connected</A>, or <A HREF="sweep062.htm#olescrpt_0005000105020005" TARGET=TEXT>disconnected</A> state. Because languages can vary widely in semantics, scripting engines are not required to support this state transition. Engines that support <A HREF="sweep063.htm#olescrpt_0005000106010300" TARGET=TEXT>IActiveScript::Clone</A> must, however, support this state transition. Hosts must prepare for this transition and take the appropriate action: <B>Release</B> the current scripting engine, create a new scripting engine, and call <B>Load</B> or <A HREF="sweep063.htm#olescrpt_0005000106020200" TARGET=TEXT>InitNew</A> (and possibly also call <A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>ParseScriptText</A>). Use of this transition should be considered an optimization of the above steps. Note that any information the scripting engine has obtained about the names of Named Items and the type information describing Named Items remains valid.
+
+<P>Because languages vary widely, defining the exact semantics of this transition is difficult. At a minimum, the scripting engine must disconnect from all events, and release all of the <A HREF="sweep063.htm#olescrpt_0005000106040201" TARGET=TEXT>SCRIPTINFO_IUNKNOWN</A> pointers obtained by calling <A HREF="sweep063.htm#olescrpt_0005000106040200" TARGET=TEXT>IActiveScriptSite::GetItemInfo</A>. The engine must refetch these pointers after the script is run again. The scripting engine should also reset the script back to an initial state that is appropriate for the language. VBScript, for example, resets all variables and retains any code added dynamically by calling <A HREF="sweep063.htm#olescrpt_0005000106020000" TARGET=TEXT>IActiveScriptParse</A> with the <A HREF="sweep063.htm#olescrpt_0005000106020102" TARGET=TEXT>SCRIPTTEXT_ISPERSISTENT</A> flag set. Other languages may need to retain current values (such as Lisp because there is no code/data separation) or reset to a well-known state (this includes languages with statically initialized variables). These languages may or may not retain code added by calling <A HREF="sweep063.htm#olescrpt_0005000106020000" TARGET=TEXT>IActiveScriptParse</A>.
+
+<P>Note that the transition to the <A HREF="sweep062.htm#olescrpt_0005000105020003" TARGET=TEXT>started</A> state should have the same semantics (that is, it should leave the scripting engine in the same state) as calling <B>IPersist*::Save</B> to save the scripting engine, and then calling <B>IPersist*::Load</B> to load a new scripting engine; these actions should have the same semantics as <A HREF="sweep063.htm#olescrpt_0005000106010300" TARGET=TEXT>IActiveScript::Clone</A>. Scripting engines that do not yet support <A HREF="sweep063.htm#olescrpt_0005000106010300" TARGET=TEXT>Clone</A> or <B>IPersist*</B> should carefully consider how the transition to the <A HREF="sweep062.htm#olescrpt_0005000105020003" TARGET=TEXT>started</A> state should behave, so that such a transition would not violate the above conditions if <A HREF="sweep063.htm#olescrpt_0005000106010300" TARGET=TEXT>Clone</A> or <B>IPersist*</B> support was later added.
+
+<P>During this transition to the <A HREF="sweep062.htm#olescrpt_0005000105020003" TARGET=TEXT>started</A> state, the scripting engine will disconnect from event sinks after the appropriate destructors, and so on, are executed in the script. To avoid having these destructors executed, the host can first move the script into the <A HREF="sweep062.htm#olescrpt_0005000105020005" TARGET=TEXT>disconnected</A> state before moving into the <A HREF="sweep062.htm#olescrpt_0005000105020003" TARGET=TEXT>started</A> state.
+
+<P>Use <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A> to cancel a running script thread without waiting for current events, and so on, to finish running.
+
+</DD><DT><B><A NAME="olescrpt_0005000106010d02">SCRIPTSTATE_STARTED</B></A>
+ </DT><DD>The transition to this mode causes any code that was queued during the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state to be executed. From this state, script code can be executed, for example, by calling <A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>IActiveScriptParse::ParseScriptText</A> or by calling the <B>IDispatch</B> interface obtained from <A HREF="sweep063.htm#olescrpt_0005000106010600" TARGET=TEXT>IActiveScript::GetScriptDispatch</A>. The transition to this state is also the appropriate time to execute routines such as a <B>main()</B>-like script routine, if appropriate for the script language.
+
+</DD><DT><B><A NAME="olescrpt_0005000106010d03">SCRIPTSTATE_CONNECTED</B></A>
+ </DT><DD>Causes the script to connect to events. If this is a transition from the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state, the scripting engine should transition through the <A HREF="sweep062.htm#olescrpt_0005000105020003" TARGET=TEXT>started</A> state, performing the necessary actions, before entering the <A HREF="sweep062.htm#olescrpt_0005000105020004" TARGET=TEXT>connected</A> state and connecting to events.
+
+</DD><DT><B><A NAME="olescrpt_0005000106010d04">SCRIPTSTATE_DISCONNECTED</B></A>
+ </DT><DD>Causes the script to disconnect from event sinks. This can be done either <I>logically</I> (ignoring events received) or <I>physically</I> (calling <B>Unadvise</B> on the appropriate connection points). Returning to the <A HREF="sweep062.htm#olescrpt_0005000105020004" TARGET=TEXT>connected</A> state reverses this process. If this is a transition from the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state, the scripting engine should transition through the <A HREF="sweep062.htm#olescrpt_0005000105020003" TARGET=TEXT>started</A> state, performing the necessary actions, before entering the <A HREF="sweep062.htm#olescrpt_0005000105020005" TARGET=TEXT>disconnected</A> state. Event sinks that are in progress are completed before the state changes (use <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>InterruptScriptThread</A> to cancel a running script thread). The script's execution state is maintained. For example, an HTML browser may put the scripting engine into this state when a scripted HTML page is moved into the LRU cache, before the page is actually destroyed.
+</DD></DL>
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script successfully entered the given state.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The method succeeded, but the script was already in the given state.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">OLESCRIPT_S_PENDING
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The method was queued successfully, but the state hasn't changed yet. When the state changes, the site will be called back through the <A HREF="sweep063.htm#olescrpt_0005000106040800" TARGET=TEXT>IActiveScriptSite::OnStateChange</A> method.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The scripting engine does not support the transition back to the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state. The host must discard this scripting engine and create, initialize, and load a new scripting engine to achieve the same effect.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine has not yet been loaded or initialized).
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010300" TARGET=TEXT>IActiveScript::Clone</A>, <A HREF="sweep063.htm#olescrpt_0005000106010600" TARGET=TEXT>IActiveScript::GetScriptDispatch</A>, <A HREF="sweep063.htm#olescrpt_0005000106010b00" TARGET=TEXT>IActiveScript::InterruptScriptThread</A>, <A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>IActiveScriptParse::ParseScriptText</A>, <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>, <A HREF="sweep063.htm#olescrpt_0005000106040200" TARGET=TEXT>IActiveScriptSite::GetItemInfo</A>, <A HREF="sweep063.htm#olescrpt_0005000106040800" TARGET=TEXT>IActiveScriptSite::OnStateChange</A>, <A HREF="sweep063.htm#olescrpt_0005000106060100" TARGET=TEXT>SCRIPTSTATE</A>
+<H3><A NAME="olescrpt_0005000106020000">IActiveScriptParse</A></H3>
+<P>If the ActiveX Scripting engine allows raw text code scriptlets to be added to the script, or allows expression text to be evaluated at run time, it implements <B>IActiveScriptParse</B>. For interpreted scripting languages that have no independent authoring environment, such as Visual Basic Script, this provides an alternate mechanism (other than <B>IPersist*</B>) to get script code into the scripting engine, and to attach script fragments to various object events.
+
+<P><B>Methods in Vtable Order</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IUnknown</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>QueryInterface</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns pointers to supported interfaces.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>AddRef</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Increments the reference count.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Release</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Decrements the reference count.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IActiveScriptParse</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106020200" TARGET=TEXT>InitNew</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Initializes the scripting engine. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106020100" TARGET=TEXT>AddScriptlet</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Adds a code scriptlet to the script. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>ParseScriptText</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Parses the given code scriptlet, adding declarations into the name space and evaluating code as appropriate. 
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106020100">IActiveScriptParse::AddScriptlet</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT AddScriptlet(
+    LPCOLESTR pstrDefaultName,   // address of default name of scriptlet
+    LPCOLESTR pstrCode,          // address of scriptlet text
+    LPCOLESTR pstrItemName,      // address of item name
+    LPCOLESTR pstrSubItemName,   // address of subitem name
+    LPCOLESTR pstrEventName,     // address of event name
+    LPCOLESTR pstrEndDelimiter , // address of end-of-scriptlet delimiter
+    DWORD dwFlags,               // scriptlet flags
+    BSTR *pbstrName,             // address of actual name of scriptlet
+    EXCEPINFO *pexcepinfo        // address of exception information
+);
+</FONT></PRE>
+<P>Adds a code scriptlet to the script. This method is used in environments where the persistent state of the script is intertwined with the host document and must be restored under the host's control, rather than through <B>IPersist*</B>. The primary examples are HTML scripting languages that allow scriptlets of code embedded in the HTML document to be attached to intrinsic events (for example, <B>ONCLICK="button1.text='Exit'"</B>).
+
+<DL><DT><I>pstrDefaultName</I>
+ </DT><DD>[in] Address of a default name to associate with the scriptlet. If the scriptlet does not contain naming information (as in the <B>ONCLICK</B> example above), this name will be used to identify the scriptlet. If this parameter is NULL, the scripting engine manufactures a unique name, if necessary.
+</DD><DT><I>pstrCode</I>
+ </DT><DD>[in] Address of the scriptlet text to add. The interpretation of this string depends on the scripting language.
+</DD><DT><I>pstrItemName</I>
+ </DT><DD>[in] Address of a buffer that contains the item name associated with this scriptlet. This parameter, in addition to <I>pstrSubItemName</I>, identifies the object for which the scriptlet is an event handler.
+</DD><DT><I>pstrSubItemName</I>
+ </DT><DD>[in] Address of a buffer that contains the name of a subobject of the named item with which this scriptlet is associated; this name must be found in the named item's type information. This parameter is NULL if the scriptlet is to be associated with the named item instead of a subitem. This parameter, in addition to <I>pstrItemName</I>, identifies the specific object for which the scriptlet is an event handler.
+</DD><DT><I>pstrEventName</I>
+ </DT><DD>[in] Address of a buffer that contains the name of the event for which the scriptlet is an event handler.
+</DD><DT><I>pstrEndDelimiter</I>
+ </DT><DD>[in] Address of the end-of-scriptlet delimiter. When <I>pstrCode</I> is parsed from a stream of text, the host typically uses a delimiter, such as two single quotation marks ("), to detect the end of the scriptlet. This parameter specifies the delimiter that the host used, allowing the scripting engine to provide some conditional primitive preprocessing (for example, replacing a single quotation mark ['] with two single quotation marks for use as a delimiter). Exactly how (and if) the scripting engine makes use of this information depends on the scripting engine. Set this parameter to NULL if the host did not use a delimiter to mark the end of the scriptlet.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>[in] Flags associated with the scriptlet. Can be a combination of the following values:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106020101">SCRIPTTEXT_ISVISIBLE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the script text should be visible (and, therefore, callable by name) as a global method in the name space of the script.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106020102">SCRIPTTEXT_ISPERSISTENT</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the code added during this call should be saved if the scripting engine is saved (for example, through a call to <B>IPersist*::Save</B>), or if the scripting engine is reset by way of a transition back to the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state.
+
+
+</FONT></TD></TR></TABLE>
+</DD><DT><I>pbstrName</I>
+ </DT><DD>[out] The actual name used to identify the scriptlet. This will be, in order of preference: a name explicitly specified in the scriptlet text, the default name provided in <I>pstrDefaultName</I>, or a unique name synthesized by the scripting engine.
+</DD><DT><I>pexcepinfo</I>
+ </DT><DD>[out] Pointer to a structure containing exception information. This structure should be filled in if DISP_E_EXCEPTION is returned.
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The scriptlet was successfully added to the script&#151;the <I>pbstrName</I> parameter contains the scriptlet's name.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">OLESCRIPT_E_INVALIDNAME
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The default name supplied is invalid in this scripting language.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">OLESCRIPT_E_SYNTAX
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unspecified syntax error occurred in the scriptlet.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">DISP_E_EXCEPTION
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An exception occurred in the parsing of the scriptlet; the <I>pexcepinfo</I> parameter contains information about the exception.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine has not yet been loaded or initialized).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOTIMPL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">This method is not supported; the scripting engine does not support adding event-sinking scriptlets.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An argument was invalid.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106020200">IActiveScriptParse::InitNew</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT InitNew(void);
+</FONT></PRE>
+<P>Initializes the scripting engine. 
+
+<P>Before the scripting engine can be used, one of the following methods must be called: <B>IPersist*::Load</B>, <B>IPersist*::InitNew</B>, or <B>IActiveScriptParse::InitNew</B>. The semantics of this method are identical to <B>IPersistStreamInit::InitNew</B>, in that this method tells the scripting engine to initialize itself. Note that it is not valid to call both <B>InitNew</B> and <B>Load</B>, nor is it valid to call <B>InitNew</B> or <B>Load</B> more than once.
+
+
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The scripting engine was successfully initialized.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An error occurred during initialization.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106020300">IActiveScriptParse::ParseScriptText</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT ParseScriptText(
+    LPCOLESTR pstrCode,         // address of scriptlet text
+    LPCOLESTR pstrItemName,     // address of item name
+    IUnknown *punkContext,      // address of debugging context
+    LPCOLESTR pstrEndDelimiter, // address of end-of-scriptlet delimiter
+    DWORD dwFlags,              // scriptlet flags
+    VARIANT *pvarResult,        // address of buffer for results
+    EXCEPINFO *pexcepinfo       // address of buffer for error data
+);
+</FONT></PRE>
+<P>Parses the given code scriptlet, adding declarations into the name space and evaluating code as appropriate. 
+
+<DL><DT><I>pstrCode</I>
+ </DT><DD>[in] Address of the scriptlet text to evaluate. The interpretation of this string depends on the scripting language.
+</DD><DT><I>pstrItemName</I>
+ </DT><DD>[in] Address of the item name that gives the context in which the scriptlet is to be evaluated. If this parameter is NULL, the code is evaluated in the scripting engine's global context.
+</DD><DT><I>punkContext</I>
+ </DT><DD>[in] Address of context object. This object is reserved for use in a debugging environment, where such a context may be provided by the debugger to represent an active run-time context. If this parameter is NULL, the engine uses <I>pstrItemName</I> to identify the context.
+</DD><DT><I>pstrEndDelimiter</I>
+ </DT><DD>[in] Address of the end-of-scriptlet delimiter. When <I>pstrCode</I> is parsed from a stream of text, the host typically uses a delimiter, such as two single quotation marks ("), to detect the end of the scriptlet. This parameter specifies the delimiter that the host used, allowing the scripting engine to provide some conditional primitive preprocessing (for example, replacing a single quotation mark ['] with two single quotation marks for use as a delimiter). Exactly how (and if) the scripting engine makes use of this information depends on the scripting engine. Set this parameter to NULL if the host did not use a delimiter to mark the end of the scriptlet.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>[in] Flags associated with the scriptlet. Can be a combination of these values:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106020301">SCRIPTTEXT_ISEXPRESSION</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">If the distinction between a computational expression and a statement is important but syntactically ambiguous in the script language, this flag specifies that the scriptlet is to be interpreted as an expression, rather than as a statement or list of statements. By default, statements are assumed unless the correct choice can be determined from the syntax of the scriptlet text.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106020302">SCRIPTTEXT_ISPERSISTENT</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the code added during this call should be saved if the scripting engine is saved (for example, through a call to <B>IPersist*::Save</B>), or if the scripting engine is reset by way of a transition back to the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106020303">SCRIPTTEXT_ISVISIBLE</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates that the script text should be visible (and, therefore, callable by name) as a global method in the name space of the script.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>pvarResult</I>
+ </DT><DD>[out] Address of a buffer that receives the results of scriptlet processing, or NULL if the caller expects no result (that is, the <B>SCRIPTTEXT_ISEXPRESSION</B> value is not set).
+</DD><DT><I>pexcepinfo</I>
+ </DT><DD>[out] Address of a structure that receives exception information. This structure is filled if <B>ParseScriptText</B> returns DISP_E_EXCEPTION.
+</DD></DL>
+<P>If the scripting engine is in the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state, no code will actually be evaluated during this call; rather, such code is queued and executed when the scripting engine is transitioned into (or through) the <A HREF="sweep062.htm#olescrpt_0005000105020003" TARGET=TEXT>started</A> state. Because execution is not allowed in the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state, it is an error to call this method with the <B>SCRIPTTEXT_ISEXPRESSION</B> flag when in the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state. 
+
+<P>The scriptlet can be an expression, a list of statements, or anything allowed by the script language. For example, this method is used in the evaluation of the HTML &lt;SCRIPT&gt; tag, which allows statements to be executed as the HTML page is being constructed, rather than just compiling them into the script state. 
+
+<P>The code passed to this method must be a valid, complete portion of code. For example, in VBScript it is illegal to call this method once with <B>Sub Foo(x)</B> and then a second time with <B>End Sub</B>. The parser must not wait for the second call to complete the subroutine, but rather must generate a parse error because a subroutine declaration was started but not completed.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The expression or statement(s) has been evaluated. The <I>pvarResult</I> parameter contains the result, if any.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An argument was invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_UNEXPECTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The call was not expected (for example, the scripting engine is in the <A HREF="sweep062.htm#olescrpt_0005000105020001" TARGET=TEXT>uninitialized</A> or <A HREF="sweep062.htm#olescrpt_0005000105020006" TARGET=TEXT>closed</A> state, or the <B>SCRIPTTEXT_ISEXPRESSION</B> flag was set and the scripting engine is in the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">DISP_E_EXCEPTION
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An exception occurred in the processing of the scriptlet. The <I>pexcepinfo</I> parameter contains information about the exception.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">OLESCRIPT_E_SYNTAX
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An unspecified syntax error occurred in the scriptlet.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOTIMPL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">This method is not supported. The scripting engine does not support run-time evaluation of expressions or statements.
+</FONT></TD></TR></TABLE>
+<H3><A NAME="olescrpt_0005000106030000">IActiveScriptError</A></H3>
+<P>An object implementing this interface is passed to <A HREF="sweep063.htm#olescrpt_0005000106040600" TARGET=TEXT>IActiveScriptSite::OnScriptError</A> whenever the scripting engine encounters an unhandled error. The host then calls methods on this object to obtain information about the error that occurred.
+
+<P><B>Methods in Vtable Order</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IUnknown</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>QueryInterface</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns pointers to supported interfaces.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>AddRef</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Increments the reference count.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Release</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Decrements the reference count.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IActiveScriptError</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106030100" TARGET=TEXT>GetExceptionInfo</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves information about an error.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106030300" TARGET=TEXT>GetSourcePosition</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the location in the source code where an error occurred.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106030200" TARGET=TEXT>GetSourceLineText</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the line in the source file where an error occurred.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106030100">IActiveScriptError::GetExceptionInfo</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetExceptionInfo(
+    EXCEPINFO *pexcepinfo  // structure for exception information
+);
+</FONT></PRE>
+<P>Retrieves information about an error that occurred while the scripting engine was running a script.
+
+<DL><DT><I>pexcepinfo</I>
+ </DT><DD>[out] Address of an <B>EXCEPINFO</B> structure that receives error information.
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The error information was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An error occurred.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106030200">IActiveScriptError::GetSourceLineText</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetSourceLineText(
+    BSTR *pbstrSourceLine  // address of buffer for source line
+);
+</FONT></PRE>
+<P>Retrieves the line in the source file where an error occurred while a scripting engine was running a script.
+
+<DL><DT><I>pbstrSourceLine</I>
+ </DT><DD>[out] Address of a buffer that receives the line of source code in which the error occurred.
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The line in the source file was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An error occurred.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106030300">IActiveScriptError::GetSourcePosition</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetSourcePosition(
+    DWORD *pdwSourceContext,  // context cookie
+    ULONG *pulLineNumber,     // line number of error
+    LONG *pichCharPosition    // character position of error
+);
+</FONT></PRE>
+<P>Retrieves the location in the source code where an error occurred while the scripting engine was running a script.
+
+<DL><DT><I>pdwSourceContext</I>
+ </DT><DD>[out] Address of a variable that receives a cookie that identifies the context. The interpretation of this parameter depends on the host application.
+</DD><DT><I>pulLineNumber</I>
+ </DT><DD>[out] Address of a variable that receives the line number in the source file where the error occurred.
+</DD><DT><I>pichCharPosition</I>
+ </DT><DD>[out] Address of a variable that receives the character position in the line where the error occurred.
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The error location was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An error occurred.
+</FONT></TD></TR></TABLE>
+<H3><A NAME="olescrpt_0005000106040000">IActiveScriptSite</A></H3>
+<P>The host must create a site for the ActiveX Scripting engine by implementing <B>IActiveScriptSite</B>. Usually, this site will be associated with the container of all the objects that are visible to the script (for example, the ActiveX controls). Typically, this container will correspond to the document or page being viewed. Internet Explorer, for example, would create such a container for each HTML page being displayed. Each ActiveX control (or other automation object) on the page, and the scripting engine itself, would be enumerable within this container.
+
+<P><B>Methods in Vtable Order</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IUnknown</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>QueryInterface</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns pointers to supported interfaces.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>AddRef</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Increments the reference count.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Release</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Decrements the reference count.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IActiveScriptSite</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106040300" TARGET=TEXT>GetLCID</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the locale identifier that the host uses for displaying user-interface elements.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106040200" TARGET=TEXT>GetItemInfo</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Obtains information about an item that was added to an engine through a call to the <A HREF="sweep063.htm#olescrpt_0005000106010100" TARGET=TEXT>IActiveScript::AddNamedItem</A> method. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106040100" TARGET=TEXT>GetDocVersionString</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves a host-defined string that uniquely identifies the current document version from the host's point of view.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106040700" TARGET=TEXT>OnScriptTerminate</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Informs the host that the script has completed execution. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106040800" TARGET=TEXT>OnStateChange</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Informs the host that the scripting engine has changed states.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106040600" TARGET=TEXT>OnScriptError</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Informs the host that an execution error occurred while the engine was running the script.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106040400" TARGET=TEXT>OnEnterScript</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Informs the host that the scripting engine has begun executing the script code. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106040500" TARGET=TEXT>OnLeaveScript</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Informs the host that the scripting engine has returned from executing script code. 
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106040100">IActiveScriptSite::GetDocVersionString</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetDocVersionString(
+    BSTR *pbstrVersionString  // address of document version string
+);
+</FONT></PRE>
+<P>Retrieves a host-defined string that uniquely identifies the current document version from the host's point of view. If the related document has changed outside the scope of ActiveX Scripting (as in the case of an HTML page being edited with NotePad), the scripting engine can save this along with its persisted state, forcing a recompile the next time the script is loaded.
+
+<DL><DT><I>pstrVersionString</I>
+ </DT><DD>[out] Address of the host-defined document version string.
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The document version string was successfully retrieved. The <I>pstrVersionString</I> parameter contains the string.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOTIMPL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">This method is not supported. The scripting engine should assume that the script is in sync with the document.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106040200">IActiveScriptSite::GetItemInfo</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IActiveScriptSite::GetItemInfo(
+    LPCOLESTR pstrName,     // address of item name
+    DWORD dwReturnMask,     // bit mask for information retrieval
+    IUnknown **ppunkItem,   // address of pointer to item's IUnknown
+    ITypeInfo **ppTypeInfo  // address of pointer to item's ITypeInfo
+);
+</FONT></PRE>
+<P>Allows the scripting engine to obtain information about an item added with <A HREF="sweep063.htm#olescrpt_0005000106010100" TARGET=TEXT>IActiveScript::AddNamedItem</A>. 
+
+<DL><DT><I>pstrName</I>
+ </DT><DD>[in] The name associated with the item, as specified in <A HREF="sweep063.htm#olescrpt_0005000106010100" TARGET=TEXT>IActiveScript::AddNamedItem</A>.
+</DD><DT><I>dwReturnMask</I>
+ </DT><DD>[in] A bit mask specifying what information about the item should be returned. The scripting engine should request the minimum needed information because some of the return parameters (for example, <B>ITypeInfo</B>) can take considerable time to load or generate. Can be a combination of the following values:
+
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106040201">SCRIPTINFO_IUNKNOWN</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Return the <B>IUnknown</B> interface for this item.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106040202">SCRIPTINFO_ITYPEINFO</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Return the <B>ITypeInfo</B> interface for this item.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>ppunkItem</I>
+ </DT><DD>[out] Address of a variable that receives a pointer to the <B>IUnknown</B> interface associated with the given item. The scripting engine can use the <B>QueryInterface</B> method to obtain the <B>IDispatch</B> interface for the item. This parameter receives NULL if <I>dwReturnMask</I> does not include the <B>SCRIPTINFO_IUNKNOWN</B> value. Also, it receives NULL if there is no object associated with the item name; this mechanism is used to create a simple class when the named item was added with the <A HREF="sweep063.htm#olescrpt_0005000106010106" TARGET=TEXT>SCRIPTITEM_CODEONLY</A> flag set.
+</DD><DT><I>ppTypeInfo</I>
+ </DT><DD>[out] Address of a variable that receives a pointer to the <B>ITypeInfo</B> interface associated with the item. This parameter receives NULL if <I>dwReturnMask</I> does not include the <B>SCRIPTINFO_ITYPEINFO</B> value, or if type information is not available for this item. If type information is not available, the object cannot source events, and name binding must be realized with <B>IDispatch::GetIDsOfNames</B>. Note that this <B>ITypeInfo</B> describes the coclass (<B>TKIND_COCLASS</B>) because the object may support multiple interfaces and event interfaces. If the item supports the <B>IProvideMultipleTypeInfo</B> interface, the <B>ITypeInfo</B> interface corresponds to the <B>ITypeInfo</B> of index zero obtained from <B>IProvideMultipleTypeInfo::GetInfoOfIndex</B>.
+</DD></DL>
+<P>This method retrieves only the information indicated by the <I>dwReturnMask</I> parameter. This improves performance, for example, in the case where an <B>ITypeInfo</B> interface is not needed for an item.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The requested interface pointer was successfully retrieved. The <I>ppunkItem</I> or <I>ppTypeInfo</I> parameter contains the pointer.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An argument was invalid.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">TYPE_E_ELEMENTNOTFOUND
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An item of the specified name was not found.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010100" TARGET=TEXT>IActiveScript::AddNamedItem</A>
+<H4><A NAME="olescrpt_0005000106040300">IActiveScriptSite::GetLCID</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetLCID(
+    LCID *plcid  // address of variable for language identifier
+);
+</FONT></PRE>
+<P>Retrieves the locale identifier associated with the host's user interface. The scripting engine uses the identifier to ensure that error strings and other user-interface elements surfaced by the engine appear in the appropriate language. If this method returns E_NOTIMPL, the system-defined locale identifier should be used.
+
+<DL><DT><I>plcid</I>
+ </DT><DD>[out] Address of a variable that receives the locale identifier for user-interface elements displayed by the scripting engine.
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The locale identifier was successfully retrieved. The <I>plcid</I> parameter contains the identifier.
+
+
+
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_POINTER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An invalid pointer was specified.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOTIMPL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">This method is not implemented. Use the system-defined locale. 
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106040400">IActiveScriptSite::OnEnterScript</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT OnEnterScript(void);
+</FONT></PRE>
+<P>Informs the host that the scripting engine has begun executing the script code. 
+
+<P>The scripting engine must call this method on every entry or reentry into the scripting engine. For example, if the script calls an object that then fires an event handled by the scripting engine, the scripting engine must call <B>OnEnterScript</B> before executing the event, and must call <A HREF="sweep063.htm#olescrpt_0005000106040500" TARGET=TEXT>OnLeaveScript</A> after executing the event but before returning to the object that fired the event. Calls to this method can be nested. Every call to <B>OnEnterScript</B> requires a corresponding call to <A HREF="sweep063.htm#olescrpt_0005000106040500" TARGET=TEXT>OnLeaveScript</A>.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The method succeeded.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106040500" TARGET=TEXT>IActiveScriptSite::OnLeaveScript</A>
+
+<H4><A NAME="olescrpt_0005000106040500">IActiveScriptSite::OnLeaveScript</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IActiveScriptSite::OnLeaveScript(void);
+</FONT></PRE>
+<P>Informs the host that the scripting engine has returned from executing script code. 
+
+<P>The scripting engine must call this method before returning control to a caller that entered the scripting engine. For example, if the script calls an object that then fires an event handled by the scripting engine, the scripting engine must call <A HREF="sweep063.htm#olescrpt_0005000106040400" TARGET=TEXT>OnEnterScript</A> before executing the event, and must call <B>OnLeaveScript</B> after executing the event before returning to the object that fired the event. Calls to this method can be nested. Every call to <A HREF="sweep063.htm#olescrpt_0005000106040400" TARGET=TEXT>OnEnterScript</A> requires a corresponding call to <B>OnLeaveScript</B>.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The method was successful.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106040400" TARGET=TEXT>IActiveScriptSite::OnEnterScript</A>
+<H4><A NAME="olescrpt_0005000106040600">IActiveScriptSite::OnScriptError</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IActiveScriptSite::OnScriptError(
+    IActiveScriptError*pase  // address of error interface
+);
+</FONT></PRE>
+<P>Informs the host that an execution error occurred while the engine was running the script.
+
+<DL><DT><I>pase</I>
+ </DT><DD>[in] Address of the error object's <A HREF="sweep063.htm#olescrpt_0005000106030000" TARGET=TEXT>IActiveScriptError</A> interface. A host can use this interface to obtain information about the execution error. 
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The scripting engine should continue running the script as best as possible (perhaps abandoning the processing of this event).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The scripting engine should continue running the script in the debugger, if a debugger is available. If a debugger is not available, this error should be handled in the same way as E_FAIL.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The scripting engine should abort execution of the script and return it to the <A HREF="sweep062.htm#olescrpt_0005000105020002" TARGET=TEXT>initialized</A> state. In this case, the <I>pexcepinfo</I> parameter obtained from <A HREF="sweep063.htm#olescrpt_0005000106030100" TARGET=TEXT>IActiveScriptError::GetExceptionInfo</A> is generally passed to <A HREF="sweep063.htm#olescrpt_0005000106040700" TARGET=TEXT>OnScriptTerminate</A>.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106030000" TARGET=TEXT>IActiveScriptError</A>, <A HREF="sweep063.htm#olescrpt_0005000106030100" TARGET=TEXT>IActiveScriptError::GetExceptionInfo</A>
+<H4><A NAME="olescrpt_0005000106040700">IActiveScriptSite::OnScriptTerminate</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT OnScriptTerminate(
+    VARIANT *pvarResult,   // address of script results
+    EXCEPINFO *pexcepinfo  // address of structure with exception information
+);
+</FONT></PRE>
+<P>Informs the host that the script has completed execution. 
+
+<DL><DT><I>pvarResult</I>
+ </DT><DD>[in] Address of a variable that contains the script result, or NULL if the script produced no result.
+</DD><DT><I>pexcepinfo</I>
+ </DT><DD>[in] Address of an <B>EXCEPINFO</B> structure that contains exception information generated when the script terminated, or NULL if no exception was generated.
+</DD></DL>
+<P>The scripting engine calls this method before the call to <A HREF="sweep063.htm#olescrpt_0005000106040800" TARGET=TEXT>OnStateChange</A>(<A HREF="sweep063.htm#olescrpt_0005000106010d01" TARGET=TEXT>SCRIPTSTATE_INITIALIZED</A>) is completed. The <B>OnScriptTerminate</B> method can be used to return completion status and results to the host. Note that many script languages, which are based on sinking events from the host, have life spans that are defined by the host. In this case, this method may never be called.
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The method succeeded.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106040800">IActiveScriptSite::OnStateChange</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IActiveScriptSite::OnStateChange(
+    SCRIPTSTATE ssScriptState  // new state of engine
+);
+</FONT></PRE>
+<P>Informs the host that the scripting engine has changed states.
+
+<DL><DT><I>ssScriptState</I>
+ </DT><DD>[in] Value that indicates the new script state. See <A HREF="sweep063.htm#olescrpt_0005000106010800" TARGET=TEXT>IActiveScript::GetScriptState</A> for a description of the states.
+</DD></DL>
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The method succeeded.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010800" TARGET=TEXT>IActiveScript::GetScriptState</A>
+<H3><A NAME="olescrpt_0005000106050000">IActiveScriptSiteWindow</A></H3>
+<P>This interface is implemented by hosts that support a user interface on the same object as <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>. Hosts that do not support a user interface, such as servers, would not implement the <B>IActiveScriptSiteWindow</B> interface. The scripting engine accesses this interface by calling <B>QueryInterface</B> from <A HREF="sweep063.htm#olescrpt_0005000106040000" TARGET=TEXT>IActiveScriptSite</A>.
+
+<P><B>Methods in Vtable Order</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IUnknown</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>QueryInterface</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Returns pointers to supported interfaces.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>AddRef</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Increments the reference count.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Release</B>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Decrements the reference count.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><B>IActiveScriptSiteWindow</B> methods
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106050200" TARGET=TEXT>GetWindow</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Retrieves the window handle that can act as the owner of a pop-up window that the scripting engine needs to display. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><A HREF="sweep063.htm#olescrpt_0005000106050100" TARGET=TEXT>EnableModeless</A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Causes the host to enable or disable its main window as well as any modeless dialog boxes.
+
+
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106050100">IActiveScriptSite::EnableModeless</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT IActiveScriptSite::EnableModeless(
+    BOOL fEnable  // enable flag
+);
+</FONT></PRE>
+<P>Causes the host to enable or disable its main window as well as any modeless dialog boxes. 
+
+<DL><DT><I>fEnable</I>
+ </DT><DD>[in] Flag that, if TRUE, enables the main window and modeless dialogs or, if FALSE, disables them. 
+</DD></DL>
+<P>This method is identical to <B>IOleInPlaceFrame::EnableModeless</B>.
+
+<P>Calls to this method can be nested. 
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The method was successful.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An error occurred.
+</FONT></TD></TR></TABLE>
+<H4><A NAME="olescrpt_0005000106050200">IActiveScriptSite::GetWindow</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">HRESULT GetWindow(
+    HWND *phwnd  // address of variable for window handle
+);
+</FONT></PRE>
+<P>Retrieves the handle of a window that can act as the owner of a pop-up window that the scripting engine needs to display. 
+
+<DL><DT><I>phwnd</I>
+ </DT><DD>[out] Address of a variable that receives the window handle. 
+</DD></DL>
+<P>This method is similar to <B>IOleWindow::GetWindow</B>.
+
+<P><B>Returns
+</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The window handle was successfully retrieved.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_FAIL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An error occurred.
+</FONT></TD></TR></TABLE>
+<H3><A NAME="olescrpt_0005000106060000">Enumerations</A></H3>
+<H4><A NAME="olescrpt_0005000106060100">SCRIPTSTATE</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum tagSCRIPTSTATE {
+    SCRIPTSTATE_UNINITIALIZED = 0,
+    SCRIPTSTATE_INITIALIZED   = 5,
+    SCRIPTSTATE_STARTED       = 1,
+    SCRIPTSTATE_CONNECTED     = 2,
+    SCRIPTSTATE_DISCONNECTED  = 3,
+    SCRIPTSTATE_CLOSED        = 4
+} SCRIPTSTATE;
+</FONT></PRE>
+<P>Contains named constant values that specify the state of a scripting engine. This enumeration is used by the <A HREF="sweep063.htm#olescrpt_0005000106010800" TARGET=TEXT>IActiveScript::GetScriptState</A>, <A HREF="sweep063.htm#olescrpt_0005000106010d00" TARGET=TEXT>IActiveScript::SetScriptState</A>, and <A HREF="sweep063.htm#olescrpt_0005000106040800" TARGET=TEXT>IActiveScriptSite::OnStateChange</A> methods.
+
+<P><B>Elements</B>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106060101">SCRIPTSTATE_UNINITIALIZED</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script has just been created, but has not yet been initialized using an <B>IPersist*</B> interface and <A HREF="sweep063.htm#olescrpt_0005000106010c00" TARGET=TEXT>IActiveScript::SetScriptSite</A>.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106060102">SCRIPTSTATE_INITIALIZED</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script has been initialized, but is not running (connecting to other objects or sinking events) or executing any code. Code can be queried for execution by calling <A HREF="sweep063.htm#olescrpt_0005000106020300" TARGET=TEXT>IActiveScriptParse::ParseScriptText</A>. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106060103">SCRIPTSTATE_STARTED</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script can execute code, but is not yet sinking the events of objects added by the <A HREF="sweep063.htm#olescrpt_0005000106010100" TARGET=TEXT>IActiveScript::AddNamedItem</A> method.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106060104">SCRIPTSTATE_CONNECTED</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script is loaded and connected for sinking events.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106060105">SCRIPTSTATE_DISCONNECTED</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script is loaded and has a run-time execution state, but is temporarily disconnected from sinking events.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="olescrpt_0005000106060106">SCRIPTSTATE_CLOSED</B></A>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The script has been closed. The scripting engine no longer works and returns errors for most methods.
+</FONT></TD></TR></TABLE>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010800" TARGET=TEXT>IActiveScript::GetScriptState</A>, <A HREF="sweep063.htm#olescrpt_0005000106010d00" TARGET=TEXT>IActiveScript::SetScriptState</A>, <A HREF="sweep063.htm#olescrpt_0005000106040800" TARGET=TEXT>IActiveScriptSite::OnStateChange</A>
+
+<H4><A NAME="olescrpt_0005000106060200">SCRIPTTHREADSTATE</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum tagSCRIPTTHREADSTATE {
+    SCRIPTTHREADSTATE_NOTINSCRIPT  = 0,
+    SCRIPTTHREADSTATE_RUNNING      = 1
+} SCRIPTTHREADSTATE;
+</FONT></PRE>
+<P>Contains named constant values that specify the state of a thread in a scripting engine. This enumeration is used by the <A HREF="sweep063.htm#olescrpt_0005000106010a00" TARGET=TEXT>IActiveScript::GetScriptThreadState</A> method.
+
+<P><B>Elements</B>
+<DL>
+<DT><B><A NAME="olescrpt_0005000106060201">SCRIPTTHREADSTATE_NOTINSCRIPT</B></A>
+ </DT><DD>The specified thread is not currently servicing a scripted event, processing immediately executed script text, or running a script macro.
+</DD><DT><B><A NAME="olescrpt_0005000106060202">SCRIPTTHREADSTATE_RUNNING</B></A>
+ </DT><DD>The specified thread is actively servicing a scripted event, processing immediately executed script text, or running a script macro.
+</DD></DL>
+<P>See also <A HREF="sweep063.htm#olescrpt_0005000106010a00" TARGET=TEXT>IActiveScript::GetScriptThreadState</A>
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep062.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep064.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

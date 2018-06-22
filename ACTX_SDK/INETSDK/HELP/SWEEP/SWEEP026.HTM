@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Packaging component code for automatic download</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep025.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep027.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="codedwld_0002000203000000">Packaging component code for automatic download</A></H2>
+<BR CLEAR=ALL>
+<P>ISVs and authors of COM Objects for the internet should package their implementations so that they may be downloaded automatically by web browsers such as the Microsoft Internet Explorer. Such objects will be downloaded, for instance, when parsing the OBJECT tag in HTML(3). For details, see the OBJECT tag specification. 
+
+<H3><A NAME="codedwld_0002000203010000">Interpreting the &quot;CODEBASE&quot; URL</A></H3>
+<P>The "CODEBASE" attribute in an OBJECT tag contains a URL pointing to the implementation of a given COM object. This URL is of critical importance for component download, because it must specify all files necessary to implement a particular COM object. HTML authors can author "CODEBASE" URL to point to one of three file types. Component developers should choose one of the packaging schemes below for their COM Objects:
+<OL><LI>A single <B>PE</B> (portable executable, e.g. an .OCX, a .DLL, or a .EXE): This single executable is downloaded, installed, and registered in one fell swoop. This is the simplest way to package a single-file OLE control, but (a) it will not use file compression, (b) it will not be platform independent except with HTTP.
+<LI>A <B>.CAB</B> (cabinet) file: This file contains one or more files, all of which are downloaded together in a compressed cabinet(4). Exactly one file in the cabinet is an .INF file providing further installation information. This .INF file may refer to files in the .CAB as well to files at other URLs. This mechanism requires authoring of a .INF and packaging of a .CAB file, but in return it provides file compression. It will not be platform independent, however, except with HTTP format negotiation.
+<LI>A stand-alone <B>.INF</B> file: This file specifies various files that need to be downloaded and setup for the OCX to run. The syntax of the .INF file allows (a) URLs pointing to files to download, and (b) platform independence (by enumerating files for various platforms). This mechanism provides platform independence for non-HTTP servers.
+</OL>
+<H4><A NAME="codedwld_0002000203010100">Registry settings and self-extracting .exes</A></H4>
+<P>It's recommended to use self-registering code for Internet Component Download, because the .INF format used by Internet Component Download (see below) does <I>not</I> provide syntax for changing registry information (for security reasons). For .OCXs, .DLLs, and .EXEs marked as "OleSelfRegister" in the Version resource, Internet Component Download will try to run self-registration. For .DLLs, this means loading the .DLL library and calling the DllRegisterServer entry point, if available. For .EXEs, this means <I>running</I> the .EXE with the run-time parameter of "/RegServer". This ensures that COM Objects implemented as local servers (e.g. winword.exe) are registered correctly. If an object is not marked as "OleSelfRegister" but registration is necessary, or if it is desired to over-ride the "OleSelfRegister" flag, one can add the following to an .INF file (see .INF setup-script format below):
+<PRE><FONT FACE="Courier" SIZE="2">
+[foo.ocx]
+RegisterServer=no ; don't register even if marked OleSelfRegister
+	or
+RegsiterServer=yes ; register this even if not marked OleSelfRegister. This is the typical workaround for getting old
+			; controls to register
+</FONT></PRE>
+<P>Code that is downloaded via Internet Component Download may be a self-extracting .EXE because Internet Component Download ignores the "OleSelfRegister" flag if the main URL for code download points directly at a .EXE file. In this case it is assumed that this is a self-registering .EXE, and this enables self-extracting .EXEs to work correctly as long as they ignore the "/regsvr" command-line parameter. Supporting self-extracting .EXEs enables very complex setup mechanisms to be launched automatically via Internet Component Download. However, if a self-extracting .EXE is called via this mechanism, then any components that it installs will not be automatically tracked by Internet Component Download (see Appendix on ModuleUsage section in registry). Such components are permanently installed and are not marked by Internet Component Download for future cleanup.
+
+<H4><A NAME="codedwld_0002000203010200">Including version number in the &quot;CODEBASE&quot; URL</A></H4>
+<P>Besides the actual address of code, the "CODEBASE" URL may also include an optional version number using the following syntax: "CODEBASE=http://www.foo.com/bar.ocx#Version=a,b,c,d". The Internet Component Download mechanism will download and install the file only if the specified version number is <I>more recent</I> than any existing version of the same file currently installed in the system. (see Appendix on registry details for more information). If a version number is not specified with a file, it is assumed that any version installed on the system is recent enough(5).
+<P>If the version number specified in the CODEBASE attribute is "-1,-1,-1,-1", then Internet Component Download will <I>always</I> try to download the <I>latest</I> version of the desired component. Note that this can be a costly effort involving many network transactions, especially if the Internet Search Path is searched for newest versions of an object (see below for details on Internet Search Path). Note also that because of the Internet Search Path, it is possible for the Component Download service to try to download code in the absence of a CODEBASE attribute. In fact, if the CODEBASE attribute is the URL fragment "#Version=-1,-1,-1,-1", then there is no specific location to download code from, but the Internet Search Path will still be searched to find the <I>latest</I> version of an object(6).
+
+<H4><A NAME="codedwld_0002000203010300">Platform independence and HTTP</A></H4>
+<P>When code to downloaded is on an HTTP server, the HTTP Accept header MIME request type may be used to specify which platform the code is to run on, thus allowing platform independence of the "CODEBASE" URL.
+<P>The following MIME types will be used to describe PEs (portable executables - .EXE, .DLL, .OCX), cabinet files (.CAB), and setup scripts (.INF):(7)
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>File description
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>MIME Type
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">PE (portable executable) - .EXE, .DLL, .OCX
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">application/x-pe-%opersys%-%cpu%
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Cabinet files - .CAB
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">application/x-cabinet-%opersys%-%cpu%
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Setup scripts - .INF (platform independent)
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">application/x-setupscript
+</FONT></TD></TR></TABLE>
+<P>%opersys% and %cpu% above will specify the operating system and CPU for the desired platform downloaded components will be executed on. For example, the MIME type for a Win32 cabinet file running on an Intel&#174; x86-architecture processor would be application/x-cabinet-win32-x86.
+<P>The following are valid values for %opersys% and %cpu%:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Valid values for %opersys%
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">win32
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">32-bit Windows&#174; operating systems (Windows95 or Windows NT)
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">mac
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Macintosh&#174; operating system
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">&lt;other&gt;
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">will be defined as necessary
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Valid values for %cpu%
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">x86
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Intel&#174; x86 family of processors
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ppc
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Motorola&#174; PowerPC architecture
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">mips
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">MIPS&#174; architecture processors
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">alpha
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">DEC&#174; Alpha architecture
+</FONT></TD></TR></TABLE>
+<P>When the code is on a non-HTTP server (e.g. at a local LAN location), a .INF file can be used to achieve platform independence by specifying different URLs for files to be downloaded for different platforms. (see the section below on platform independence in .INF files)
+
+<H3><A NAME="codedwld_0002000203020000">.CAB format</A></H3>
+<P>The .CAB format used for Internet Component Download is a non-proprietary format based on Lempel-Ziv compression. The Microsoft Internet SDK includes a free tool called "DIAMOND.EXE" that will package cabinet files into this non-proprietary format. There no specification of this .CAB format publicly available, although such a specification will be distributed as soon as possible. 
+
+<H4><A NAME="codedwld_0002000203020100">Use of the DIAMOND.EXE tool for creating .CAB cabinet files</A></H4>
+<P>The DIAMOND.EXE tool takes a .DDF "directive file" specifying which files to combine into a cabinet. The syntax for using this tool from a command line is:
+<PRE><FONT FACE="Courier" SIZE="2">
+DIAMOND.EXE /f &lt;directive file.ddf&gt;
+</FONT></PRE>
+<P>The example directive file below, CIRC3Z.DDF, would be used for creating a cabinet file containing two files - circ3.inf and circ3.ocx. It should be straightforward to add to this list of files...
+<PRE><FONT FACE="Courier" SIZE="2">
+; DIAMOND directive file for CIRC3.OCX+CIRC3.INF
+.OPTION EXPLICIT							; Generate errors on variable typos
+.Set CabinetNameTemplate=CIRC3Z.CAB 
+;** The files specified below are stored, compressed, in cabinet files
+.Set Cabinet=on
+.Set Compress=on
+circ3.INF
+circ3.OCX
+</FONT></PRE>
+<P><B>Note</B>  It is possible to use the "code-signing" utilities to sign entire cabinet files using a digital certificate. However, in order to do this, it is necessary to add the following linesto the .DDF file before the list of files for inclusion in the cabinet.<PRE><FONT FACE="Courier" SIZE="2">
+;Reserve space for PKS#7 Code Signature
+.Set ReservePerCabinetSize=2048
+</FONT></PRE>
+<P>If a cabinet file is signed, it is assumed that <I>every</I> file inside the cabinet is trusted, including .INF and .INI files. This has two advantages:
+<OL><LI>It is now possible to include powerful .INFs inside a trusted cabinet
+<LI>By signing an entire cabinet the time for verifying digital certificates can be sped up due to the cabinet compression
+</OL>
+<H3><A NAME="codedwld_0002000203030000">.INF setup-script format</A></H3>
+<P>Here is a sample .INF file that demonstrates the syntax that is understood by the Component Download service. <B>Note: Only the .INF syntax below may be used to write setup scripts for Internet Component Download. Due to security reasons the system standard (SetupX) .INF setup is not called to install components with setup scripts, and instead the limited INF syntax below is the only legal format for Internet Component Download.</B> See Future Directions below for plans for eventually supporting other .INF formats.
+<PRE><FONT FACE="Courier" SIZE="2">
+;Sample INF file for CIRC3.OCX
+[Add.Code]
+circ3.ocx=circ3.ocx
+random.dll=random.dll
+mfc40.dll=mfc40.dll
+foo.ocx=foo.ocx
+
+[circ3.ocx]
+; lines below specify that the specified circ3.ocx (clsid, version) needs to be installed on
+; the system. If doesn't exist already, can be downloaded from the given location (a .CAB)
+; note: if "thiscab" is specified instead of the file location, it is assumed that the
+; desired file is present in the same .CAB cabinet that the INF originated from
+; otherwise, if the location pointed to is a different .CAB, the new cabinet is also downloaded and
+; unpacked in order to extract the desired file
+file=http://www.code.com/circ3/circ3.cab
+clsid={9DBAFCCF-592F-101B-85CE-00608CEC297B}
+;Note that the {}s are required when entering the CLSID in the INF file. This is slightly different from the HTML
+;syntax for inserting CLSIDs in an &lt;OBJECT&amp;gt; tag.
+FileVersion=1,0,0,143
+
+[random.dll]
+; lines below specify that the random.dll needs to be installed in the system
+; if this doesn't exist already, it can be downloaded from the given location.
+file=http:// www.code.com/circ3/random.dll
+; Note that the FileVersion is option, and it may also be left empty, meaning that any version is ok.
+FileVersion=
+DestDir=10
+
+
+; DestDir can be set to 10 or 11 ( LDID_WIN or LDID_SYS by INF convention)
+; this places files in \windows or \windows\system, respectively
+; if no dest dir specified (typical case), code is installed in the occache directory.
+
+[mfc40.dll]
+; leaving the file location empty specifies that the installation
+; needs mfc40 (version 4,0,0,5), but it should not be downloaded.
+; if this file is not already present on the client machine, component download fails
+file=
+FileVersion=4,0,0,5
+
+[foo.ocx]
+; leaving the file location empty specifies that the installation
+; needs the specified foo.ocx (clsid, version), but it should not be downloaded.
+; if this file is not already present on the client machine, component download fails
+file=
+clsid={DEADBEEF-592F-101B-85CE-00608CEC297B}
+FileVersion=1,0,0,143
+</FONT></PRE>
+<H4><A NAME="codedwld_0002000203030100">Platform independence in .INF files</A></H4>
+<P>It is possible to create platform-independent setup scripts that pull files from different locations depending on the desired platform. Internet Component Download .INF files will use a scheme similar to the one described above under "Platform Independence and HTTP". Specifically, a sample platform-independent .INF file would include a text such as the following:
+<PRE><FONT FACE="Courier" SIZE="2">
+[circ3.ocx]
+; lines below specify that the specified circ3.ocx (clsid, version) needs to be installed on
+; the system. If doesn't exist already, can be downloaded from the given location (a .CAB)
+file-win32-x86=file://products/release/circ3/x86/circ3.cab
+file-win32-mips=file://products/release/circ3/mips/circ3.cab
+file-mac-ppc=ignore
+	; the 'ignore' keyword means that this file is not needed for this platform
+
+clsid={9DBAFCCF-592F-101B-85CE-00608CEC297B}
+FileVersion=1,0,0,143
+</FONT></PRE>
+<P>Thus the "file=" syntax used in the .INF file is expanded to "file-%opersys%-%cpu =", allowing the .INF file to specify multiple locations where various platform-dependent modules can be found and downloaded. See the section above for valid values for %opersys% and %cpu%.
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep025.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep027.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

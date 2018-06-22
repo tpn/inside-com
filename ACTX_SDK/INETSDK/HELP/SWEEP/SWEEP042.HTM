@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Justification of the Proposed Scheme</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep041.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep043.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="license_0002000503000000">Justification of the Proposed Scheme</A></H2>
+<BR CLEAR=ALL>
+<P>To justify the proposed scheme, we present a brief outline of the advantages, as well as a brief summary of alternatives that were ruled out for various reasons. 
+
+<H3><A NAME="license_0002000503010000">Advantages of the Scheme:</A></H3>
+<UL><LI><B>Convenience for web authors</B> - while a sophisticated authoring tool could make the design-time process completely invisible for web authors, even a simple design-time utility could make creation of .LPK files quite easy for authors that write HTML directly using tools such as Notepad. 
+<LI><B>Extra convenience for web sites</B> - a site with many web pages and many licensed controls could easily create one .LPK license package file containing all the licenses for all the pages on the site. After the one-time creation of this .LPK file, it is easy to refer to it from all pages on the site. 
+<LI><B>Inconvenience for pirates</B> - the average web developer cannot accidentally pirate licensed controls without realizing that they are breaking copyright laws. Although intentional piracy is not impossible, it is rather inconvenient and requires knowledge of the .LPK file format. 
+</UL>
+<H3><A NAME="license_0002000503020000">Other Licensing Alternatives that Were Considered</A></H3>
+<UL><LI><B>Tying the .LPK file to a particular site(s)</B> - one could achieve additional security by tying a license package to the site at which it would be used (for example, by including a list of URL prefixes or an X.509 certificate in the .LPK). However, the additional security is not worth the inconvenience to web authors, especially for publishers that host many sites, or for HTML-designer contractors that write HTML pages for many different publishers. 
+<LI><B>Tying the .LPK to a particular HTML page</B> - it is possible to use CRC digests to link a .LPK to a particular .HTML page. This was widely rejected as being too difficult at design time, and impossible for dynamically generated content. 
+<LI><B>Using digital certificates for foolproof security</B> - although in the future Microsoft intends to pursue 100% foolproof solutions to the licensing probleme, for short-term needs (Internet Explorer 3.0) a simpler solution is much more practical. 
+</UL>
+<H3><A NAME="license_0002000503030000">HTML Syntax for Referencing .LPK Files</A></H3>
+<P>License packages must be inserted in HTML files using the existing &lt;OBJECT&gt; tag (element). The license package is interpreted by a <I>License Manager</I> object that is used to hand licenses to other Controls on the HTML page. The license package object must be embedded in the HTML page <I>before</I> any other objects that require licensing. The specific syntax for embedding license packages in HTML is as follows: 
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;OBJECT CLASSID = "clsid:5220cb21-c88d-11cf-b347-00aa00a28331"&gt;
+     &lt;PARAM NAME="LPKPath" VALUE="relative URL to .LPK file"&gt;
+&lt;/OBJECT&gt;
+</FONT></PRE>
+<P><B>Note</B>  Internet Explorer 3.0 will only honor the <I>first</I> license package in an HTML page. If controls on this page require licenses that are not inlcuded in this license package, then they will afil to instantiate.<H3><A NAME="license_0002000503040000">License Package File Format</A></H3>
+<P>The .LPK license package file is a plain text file, and must be labeled by servers with the MIME type <I>text/plain</I>. Any binary data in the file is <I>uuencoded</I>. This allows the file to be viewable by web browsers, so that anyone trying to copy the file would clearly notice the copyright statement at the top of the file. The contents of the file are as defined below. This file will be interpreted by a <I>License Manager</I> object.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>.LPK Header
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>This header identifies the file type: "<I>LPK License Package</I>" 
+
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Copyright text or other legal statement
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">"Legalese" to dissuade casual copying of .LPKs. 
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">LPK version GUID
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">In plain-text on a line by itself. This GUID is used to mark the beginning of 
+the real license package data, and it is also used to identify the LPK file format version: "<I>{5220cb21-c88d-11cf-b347-00aa00a28331}</I>"
+
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Uuencoded(Base64) license package:
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><PRE><FONT FACE="Courier" SIZE="2">
+struct {
+    UUID uuidLPKFile;   // unique per LPK
+    DWORD dwLicenses;   // number of licenses in the file
+    LICENSEPAIR aLicenses[]; // array of license pairs
+} LICENSEPACKAGE;
+
+struct {
+    CLSID clsid;        // clsid of object
+    DWORD cchLic;       // Number of characters in the license
+    WCHAR ach[];        // License (saved as UNICODE characters)
+} LICENSEPAIR;
+</FONT></PRE>
+</FONT></TD>
+</TR>
+</TABLE>
+<H3><A NAME="license_0002000503050000">Authoring Tools</A></H3>
+<P>HTML authoring tools will make it easy to create HTML pages with embedded ActiveX Controls. Such tools should be responsible for creating the .LPK license package for licensed controls used on a page or on a web site. Since there may be a one-to-many mapping between LPKs and HTMs, this may be more difficult for pagebased authoring tools as opposed to web-based authoring tools (e.g. Microsoft FrontPage).
+
+<P>Clearly, tool support is necessary for Notepad HTML authors as well. The solution is a simple GUI tool that lists all controls that are installed on a machine with <I>design-time</I> licenses. The tool allows a user to create a .LPK license package by selecting which Controls should be included in the package. A second tool could parse HTML pages an create a .LPK file for all the controls that require licensing.
+
+<H3><A NAME="license_0002000503060000">NCompass support for licensing ActiveX Controls</A></H3>
+<P>It is crucial that the licensing scheme described above works
+in other ActiveX-enabled web browsers, particularly in the NCompass
+ActiveX Plug-in. Because the plug-in specification only allows plug-ins to be specified using the &lt;EMBED&gt; syntax, therefore pages authored to work with both Internet Explorer 3.0 <I>and</I> NCompass will need to use syntax similar to the following:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;OBJECT CLASSID = "clsid:5220cb21-c88d-11cf-b347-00aa00a28331"&gt;
+    &lt;PARAM NAME="LPKPath" VALUE="relative URL to .LPK file"&gt;
+
+    &lt;EMBED SRC = "FOO.LPK"&gt;
+&lt;/OBJECT&gt;
+</FONT></PRE>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep041.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep043.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Cookie Functions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep085.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep087.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="wininet_0008000107000000">Cookie Functions</A></H2>
+<BR CLEAR=ALL>
+<P>Cookies are a means by which, under HTTP protocol, a server or a script can maintain state information on the client workstation. The Win32 Internet functions have implemented a persistent cookie database for this purpose. Cookie functions are provided for users of Win32 Internet functions in order to set cookies into, and access them from, the cookie database. The caller of these functions should be familiar with cookies as outlined in ftp://ds.internic.net/internet-drafts/draft-ietf-http-state-mgmt-*.txt. Please note that the implementation of these functions is evolving; be cautious when using them.
+
+
+
+<H3><A NAME="wininet_0008000107000100">InternetGetCookie</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetGetCookie(
+    IN  LPCSTR lpszUrlName,
+    IN  LPCSTR lpszCookieName,
+    OUT LPSTR lpszCookieData,
+    IN OUT LPDWORD  lpdwSize
+);
+</FONT></PRE>
+<P>Returns cookies for the specified URL and all its parent URLs.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get the specific error value, call <B>GetLastError</B>. The following error values apply to <B>InternetGetCookie</B>:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_NO_MORE_ITEMS
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">There is no cookie for the specified URL and all its parents.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR_INSUFFICIENT_BUFFER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The value passed in <I>lpdwSize</I> is insufficient to copy all the cookie data. The value returned in <I>lpdwSize</I> is the size of the buffer necessary to get all the data.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT><I>lpszUrlName</I>
+ </DT><DD>Address of a string that contains the URL to get cookies for.
+</DD><DT><I>lpszCookieName</I>
+ </DT><DD>Address of the name of the cookie to get for the specified URL. This has not been implemented in this release.
+</DD><DT><I>lpszCookieData</I>
+ </DT><DD>Address of the buffer that receives the cookie data. This value can be NULL.
+</DD><DT><I>lpdwSize</I>
+ </DT><DD>Address of a variable that specifies the size of the <I>lpszCookieData</I> buffer. If the function succeeds, the buffer receives the amount of data copied to the <I>lpszCookieData</I> buffer. If <I>lpCookieData</I> is NULL, this parameter receives a value that specifies the size of the buffer necessary to copy all the cookie data.
+</DD></DL>
+<P>No call to <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> is required to use this function. <B>InternetGetCookie</B> checks in the windows\cookies directory for cookies and searches memory for any cookies that do not have an expiration date, since these cookies are not written to any files. Rules for creating cookie files are internal to Win32 Internet functions and may change in the future.
+<H3><A NAME="wininet_0008000107000200">InternetSetCookie</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetSetCookie(
+    IN LPCSTR lpszUrlName,
+    IN LPCSTR lpszCookieName,
+    IN LPCSTR lpszCookieData
+);
+</FONT></PRE>
+<P>Sets a cookie on the specified URL. 
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get the specific error code, call <B>GetLastError</B>. 
+
+</UL>
+<DL><DT><I>lpszUrlname</I>
+ </DT><DD>Address of a null-terminated string that specifies the URL for which the cookie should be set.
+</DD><DT><I>lpszCookieName</I>
+ </DT><DD>Address of a string that contains the name to associate with the cookie. If this parameter is NULL, no name is associated with the cookie. This parameter is not implemented in this release and should be set to NULL.
+</DD><DT><I>lpszCookieData</I>
+ </DT><DD>Address of the actual data to associate with the URL. 
+</DD></DL>
+<P>Creating a new cookie may cause a dialog box to appear on the screen if the appropriate registry value is set. There is no way to change the registry value from a Win32 Internet function.
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep085.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep087.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

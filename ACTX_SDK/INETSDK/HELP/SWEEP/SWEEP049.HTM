@@ -1,0 +1,825 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Document Object</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep048.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep050.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_0004000105000000"></A><H3>Document Object<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105000100"></A><H3>document Object<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>An object that resides below the window in the scripting object model. A document may contain:
+
+<UL><LI><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A> - Array of hyperlinks found on the given document.
+<LI><A HREF="sweep053.htm#scriptom_0004000109000100" TARGET=TEXT>Anchor</A> - Array of anchors found on the given document.
+<LI><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A> - Array of forms found on the given document.
+</UL>
+<P><map name=document>
+<area shape="rect" coords="0,0,109,25" href="sweep048.htm">
+<area shape="rect" coords="69,63,178,88" href="sweep055.htm">
+<area shape="rect" coords="69,94,178,119" href="sweep056.htm">
+<area shape="rect" coords="69,125,178,150" href="sweep051.htm">
+<area shape="rect" coords="105,217,213,242" href="sweep052.htm">
+<area shape="rect" coords="105,248,213,273" href="sweep053.htm">
+<area shape="rect" coords="105,279,213,304" href="sweep050.htm">
+<area shape="rect" coords="138,309,246,334" href="sweep054.htm">
+</map>
+<IMG SRC="art/document.gif" WIDTH="277" HEIGHT="335" ALT="" BORDER=0 USEMAP="#document">
+
+<P>The document object reflects the HTML document currently in the browser and objects on the page&#151; links, forms, buttons, and ActiveX objects. Methods and properties of the document object must be called in a script by placing <I>document</I> first in the statement. This means that if you wanted to set the background color on the page, the script would look like:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;script language="VBScript"&gt;
+     document.bgColor = "Blue"
+&lt;/script&gt;
+</FONT></PRE>
+<P>The document object currently has no events.
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010000"></A><H3>Properties<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010100"></A><H3>linkColor Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the current color of the links in a document.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>linkColor</B> [<B>=</B><I>rgb-value</I>|<I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>rgb-value</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new color of links in the document.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string value specifying the color.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the rgb value of the current link color.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>Note that this property can only be set at parse time, not after the page is painted. So the code:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT LANGUAGE="JScript"&gt;
+document.vLinkColor = "green";
+document.linkColor = "red";
+document.alinkColor = "aqua";
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>sets the link color, while the code:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;FORM&gt;
+"document.linkColor='#000000'"&gt;
+&lt;INPUT TYPE="button" VALUE="Set Visited Link Color to White" onClick = "document.vLinkColor='#AAAAAA'"&gt;
+&lt;/FORM&gt;
+</FONT></PRE>
+<P>will have no effect when the button is clicked.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010200"></A><H3>aLinkColor Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the current color of the <I>active</I> links in a document. A link is active when the pointer is positioned over it and the mouse button is pressed and not released. Note that Internet Explorer does not have this feature, so <B>aLinkColor</B> has no effect; however, it is supported in the object model for compatibility reasons. As with <B>linkColor</B>, this property can only be set at parse time. See the examples in <B>linkColor</B> for details.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>aLinkColor</B> [<B>=</B><I>rgb-value</I>|<I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>rgb-value</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new color of links in the document.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string value specifying the color.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the rgb value of the current link color.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010300"></A><H3>vLinkColor Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the current color of the visited links in a document. As with <B>linkColor</B>, this property can only be set at parse time. See the examples in <B>linkColor</B> for details.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>vLinkColor</B> [<B>=</B><I>rgb-value</I>|<I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>rgb-value</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new color of links in the document.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string value specifying the color.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the rgb value of the current link color.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010400"></A><H3>bgColor Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the current color of the background in a document.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>bgColor</B> [<B>=</B><I>rgb-value</I>|<I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>rgb-value</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new color of the background in the document.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string value specifying the color.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the rgb value of the current background color.
+
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the background color to white, use:
+<PRE><FONT FACE="Courier" SIZE="2">document.bgColor="000000"
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010500"></A><H3>fgColor Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the foreground color.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>fgColor</B>[<B>=</B><I>rgb-value</I>] <BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>rgb-value</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new color of the foreground in the document.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the foreground color to white, use: 
+<PRE><FONT FACE="Courier" SIZE="2">document.fgColor="000000"
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010600"></A><H3>anchors Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the array of anchors in a document.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>anchors</B>[<I>integer</I>] <BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to the array of anchors.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To access the first anchor in the document, use:
+<PRE><FONT FACE="Courier" SIZE="2">document.anchors[0]
+</FONT></PRE>
+<P>To get the length of the anchors array, use:
+<PRE><FONT FACE="Courier" SIZE="2">document.anchors.length
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010700"></A><H3>links Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the array of links for the current document.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>links</B> [<I>integer</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to the array of links.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To access the first link in the document, use:
+<PRE><FONT FACE="Courier" SIZE="2">document.links[0]
+</FONT></PRE>
+<P>To get the length of the links array, use:
+<PRE><FONT FACE="Courier" SIZE="2">document.links.length
+</FONT></PRE>
+<P>Note that the locations in the links collection are read-only.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010800"></A><H3>forms Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the array of forms in a document.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>forms</B> [<I>integer</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to the array of forms.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To access the first form in the document, use:
+<PRE><FONT FACE="Courier" SIZE="2">document.forms[0]
+</FONT></PRE>
+<P>To get the length of the forms array, use:
+<PRE><FONT FACE="Courier" SIZE="2">document.forms.length
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010900"></A><H3>location Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns a read-only representation of the location object.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>location<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to the location object of the document.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set String1 to the document's URL, use: 
+<PRE><FONT FACE="Courier" SIZE="2">String1 = document.location.href
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010a00"></A><H3>lastModified Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the last modified date of the current page.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>lastModified<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the date.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set Date1 to the document's last modified date, use:
+<PRE><FONT FACE="Courier" SIZE="2">Date1 = document.lastModified
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010b00"></A><H3>title Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns a read-only representation of the document's title.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>title<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string expression that evaluates to the title of the document.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set String1 to the document's title, use: 
+<PRE><FONT FACE="Courier" SIZE="2">String1 = document.title
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010c00"></A><H3>cookie Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the cookie for the current document.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>cookie</B> [<B>=</B><I>newcookie</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>newcookie</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. The new value for the cookie. Because the cookie file is just a text file, this value is a string.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the current cookie.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The cookie is a string expression stored for the current page. Note that setting the cookie overwrites any current cookie information. Also note that you can use string expressions to locate particular information in the cookie string.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105010d00"></A><H3>referrer Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets the URL of the referring document.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>referrer<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the URL of the referring document.
+
+<P>Currently returns the URL of the referring document when there is a referrer, and NULL when there is no referrer.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The referring document is the document that contained the link the user clicked on to get to the current document. For example, if the user is on www.microsoft.com and clicks on a link to navigate to www.msn.com, the referrer property of the document for www.msn.com is www.microsoft.com. Note that by definition the referrer varies depending on how the user linked to the current document. If the user navigated to the document without clicking on a link from another page, referrer should return NULL.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A> 
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105020000"></A><H3>Methods<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105020100"></A><H3>write Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Places the given string into the current document. Unless otherwise specified, the string is appended to the current document at the current position. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>write</B><I>string</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The string to write to the current document. Note that the string is added into the HTML directly, so it must be formatted as HTML.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The following examples demonstrate the use of the <B>write</B> method:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;HTML&gt;&lt;BODY&gt;
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+document.write ("Hello world.")
+&lt;/SCRIPT&gt;
+This is a document.
+&lt;/BODY&gt;&lt;/HTML&gt;
+</FONT></PRE>
+<P>results in:
+<PRE><FONT FACE="Courier" SIZE="2">
+Hello world. This is a document.
+</FONT></PRE>
+<P>Whereas:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;HTML&gt;&lt;BODY&gt;
+This is a document.
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+document.write ("Hello world.")
+&lt;/SCRIPT&gt;
+&lt;/BODY&gt;&lt;/HTML&gt;
+</FONT></PRE>
+<P>results in:
+<PRE><FONT FACE="Courier" SIZE="2">
+This is a document. Hello world.
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105020200"></A><H3>writeLn Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Places the given string into the current document with a new-line character appended to the end. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>writeLn</B> <I>string</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The string to write to the current document. Note that the string is added into the HTML directly, so it must be formatted as HTML.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>This method is the same as the <I>document.</I><B>write</B> method with the addition of a newline character at the end. Note that a newline is ignored by HTML unless it is bracketed by &lt;PRE&gt; tags, so in many cases <I>document.</I><B>write</B> and <I>document.</I><B>writeLn</B> behave identically.
+
+<P>The following examples demonstrate the use of the <B>writeLn</B> method:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+document.writeLn ("Hello world.")
+document.write ("Hello world.")
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>results in:
+<PRE><FONT FACE="Courier" SIZE="2">Hello world.  Hello world.
+</FONT></PRE>
+<P>Whereas:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;PRE&gt;
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+document.writeLn ("Hello world.")
+document.write ("Hello world.")
+&lt;/SCRIPT&gt;
+&lt;/PRE&gt;
+</FONT></PRE>
+<P>results in:
+<PRE><FONT FACE="Courier" SIZE="2">
+Hello world.
+Hello world.
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105020300"></A><H3>open Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Opens the document stream for output.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>open</B> <BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>Generally <I>document.</I><B>open</B> is followed by a sequence of <I>document.</I><B>write</B> or <I>document.</I><B>writeLn</B> statements, followed by <I>document.</I><B>close</B>. If the referenced document exists already, any information contained in the document is cleared. To write "Hello World" to the document, use:
+<PRE><FONT FACE="Courier" SIZE="2">document.open
+document.writeLn "Hello World"
+document.close
+</FONT></PRE>
+<P>Note that this is identical to:
+<PRE><FONT FACE="Courier" SIZE="2">document.writeLn "Hello World"
+</FONT></PRE>
+<P>with two exceptions.
+<UL><LI>In the first example, "Hello World" is written to the screen after <I>document.</I><B>close</B>; in the second, it is written immediately.
+<LI>In the first example, <I>document.</I><B>open</B> clears the document if there is data; in the second, "Hello World" is appended to the end.
+</UL>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105020400"></A><H3>close Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Updates the screen to display all of the strings written after the last <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A> method call.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>close<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020500" TARGET=TEXT>clear</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000105020500"></A><H3>clear Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Closes the document output stream and writes the data to the screen. See the <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A> method description for more information and examples.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>document.</I><B>clear<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>document</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a document object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A>, <A HREF="sweep049.htm#scriptom_0004000105020200" TARGET=TEXT>writeLn</A>, <A HREF="sweep049.htm#scriptom_0004000105020300" TARGET=TEXT>open</A>, <A HREF="sweep049.htm#scriptom_0004000105020400" TARGET=TEXT>close</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep049.htm#scriptom_0004000105010100" TARGET=TEXT>linkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010200" TARGET=TEXT>aLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010300" TARGET=TEXT>vLinkColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010400" TARGET=TEXT>bgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010500" TARGET=TEXT>fgColor</A>, <A HREF="sweep049.htm#scriptom_0004000105010600" TARGET=TEXT>anchors</A>, <A HREF="sweep049.htm#scriptom_0004000105010700" TARGET=TEXT>links</A>, <A HREF="sweep049.htm#scriptom_0004000105010800" TARGET=TEXT>forms</A>, <A HREF="sweep049.htm#scriptom_0004000105010900" TARGET=TEXT>location</A>, <A HREF="sweep049.htm#scriptom_0004000105010a00" TARGET=TEXT>lastModified</A>, <A HREF="sweep049.htm#scriptom_0004000105010b00" TARGET=TEXT>title</A>, <A HREF="sweep049.htm#scriptom_0004000105010c00" TARGET=TEXT>cookie</A>, <A HREF="sweep049.htm#scriptom_0004000105010d00" TARGET=TEXT>referrer</A>
+
+
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep048.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep050.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

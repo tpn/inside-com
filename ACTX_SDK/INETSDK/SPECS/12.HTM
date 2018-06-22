@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<TITLE>Operators - Microsoft&#174; Visual Basic&#174; Scripting Edition</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BLOCKQUOTE>
+<FONT FACE="ARIAL" SIZE=2>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<H3><A HREF="5.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="4.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using VBScript"></A>VBScript Operators</H3>
+<HR SIZE=2>
+</TD></TR></TABLE>
+
+<H5>Operator Precedence</H5>
+<BLOCKQUOTE>
+<P>VBScript has a full range of operators, including arithmetic operators, comparison operators, concatenation operators, and logical operators.</P>
+
+<P>When several operations occur in an expression, each part is evaluated and resolved in a predetermined order.  That order is known as operator precedence.  You can use parentheses to override the order of precedence and force some parts of an expression to be evaluated before others.  Operations within parentheses are always performed before those outside.  Within parentheses, however, normal operator precedence is maintained.</P>
+
+<P>When expressions contain operators from more than one category, arithmetic operators are evaluated first, comparison operators are evaluated next, and logical operators are evaluated last.  Comparison operators all have equal precedence; that is, they are evaluated in the left to right order in which they appear.  Arithmetic and logical operators are evaluated in the following order of precedence.</P>
+
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR BGCOLOR=#DDDDDD VALIGN=TOP ALIGN=CENTER>
+	<TD COLSPAN=2><FONT FACE="Arial" SIZE=2><B>Arithmetic</B></FONT></TD>
+	<TD COLSPAN=2><FONT FACE="Arial" SIZE=2><B>Comparison</B></FONT></TD>
+	<TD COLSPAN=2 ><FONT FACE="Arial" SIZE=2><B>Logical</B></TD></FONT></TR>
+
+<TR  BGCOLOR=#DDDDDD VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Description</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2><B>Symbol</B></FONT></TD>
+  	<TD><FONT FACE="Arial" SIZE=2><B>Description</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2><B>Symbol</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Description</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2><B>Symbol</B></FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Exponentiation</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>^</FONT></TD>
+  	<TD><FONT FACE="Arial" SIZE=2><B>Equality</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>=</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Logical negation</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>Not</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Unary negation</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>-</FONT></TD>
+  	<TD><FONT FACE="Arial" SIZE=2><B>Inequality</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&lt;&gt;</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Logical conjunction</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>And</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Multiplication</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>*</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Less than</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&lt;</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Logical disjunction</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>Or</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Division</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>/</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Greater than</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&gt;</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Logical exclusion</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>Xor</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Integer division</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>\</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><b>Less than or equal to</B></FONT></TD>	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&lt;=</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Logical equivalence</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>Eqv</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Modulo arithmetic</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>Mod</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Greater than or equal to</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&gt;=</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Logical implication</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>Imp</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Addition</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>+</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Object equivalence</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>Is</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>&nbsp </FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&nbsp </FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Subtraction</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>-</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>&nbsp </FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&nbsp </FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>&nbsp </FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&nbsp </TD></FONT></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>String concatenation</B></FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&</FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>&nbsp </FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&nbsp </FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>&nbsp </FONT></TD>
+	<TD ALIGN=CENTER><FONT FACE="Arial" SIZE=2>&nbsp </FONT></TD></TR>
+
+</TABLE>
+<FONT FACE="ARIAL" SIZE=2>
+<P>When multiplication and division occur together in an expression, each operation is evaluated as it occurs from left to right.  Likewise, when addition and subtraction occur together in an expression, each operation is evaluated in order of appearance from left to right.</P>
+
+<P>The string concatenation operator (&) is not an arithmetic operator, but in precedence it does fall after all arithmetic operators and before all comparison operators.  The <B>Is</B> operator is an object reference comparison operator.  It does not compare objects or their values; it checks only to determine if two object references refer to the same object.</P>
+
+
+</BLOCKQUOTE>
+<BR>
+<BR>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<FONT FACE=ARIAL SIZE=2><HR SIZE=2><A HREF="5.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="4.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using VBScript"></A><A HREF="cpyright.htm" TARGET="_top">&#169; 1996 by Microsoft Corporation</a>.</FONT>
+
+</TD></TR></TABLE>
+</FONT>
+</BLOCKQUOTE>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+

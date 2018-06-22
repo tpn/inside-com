@@ -1,0 +1,3 @@
+#define IDD_PAGE_TEST		9000
+#define IDD_PAGE_TEST1		9001
+#define IDD_PAGE_TEST2		9999

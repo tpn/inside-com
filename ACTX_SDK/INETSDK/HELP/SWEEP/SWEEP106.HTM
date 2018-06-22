@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Internet Shortcut Structures</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep105.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep107.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="intshcut_000b000104000000">Internet Shortcut Structures</A></H2>
+<BR CLEAR=ALL>
+<P>This section provides information about the following Internet Shortcut structure:
+<UL><LI><A HREF="sweep106.htm#intshcut_000b000104000100" TARGET=TEXT>URLINVOKECOMMANDINFO</A>
+</UL>
+<H3><A NAME="intshcut_000b000104000100">URLINVOKECOMMANDINFO</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct  {
+    DWORD    dwcbSize;
+    DWORD    dwFlags;
+    HWND     hwndParent;
+    LPCSTR  pcszVerb;
+} URLINVOKECOMMANDINFO, *PURLINVOKECOMMANDINFO;
+</FONT></PRE>
+<P>Contains information for use with the <A HREF="sweep103.htm#intshcut_000b000101000200" TARGET=TEXT>IUniformResourceLocator::InvokeCommand</A> method.
+
+<DL><DT><B>dwcbSize</B>
+</DT><DD>Size of this structure, in bytes.
+</DD><DT><B>dwFlags</B>
+</DT><DD>Flag value that specifies how the <A HREF="sweep103.htm#intshcut_000b000101000200" TARGET=TEXT>IUniformResourceLocator::InvokeCommand</A> method will execute. This value can be a combination of the following:
+<DL>
+<DT>IURL_INVOKECOMMAND_FL_ALLOW_UI
+</DT><DD>Interaction with the user is allowed and the <B>hwndParent</B> member of this structure is valid. If this is not set, interaction with the user is not allowed and the <B>hwndParent</B> member is ignored.
+</DD><DT>IURL_INVOKECOMMAND_FL_USE_DEFAULT_VERB
+</DT><DD>Default verb for the Internet Shortcut's protocol is to be used and the <B>pcszVerb</B> member is ignored. If this bit is not set, the verb is specified by <B>pcszVerb</B>.
+</DD></DL>
+</DD><DT><B>hwndParent</B>
+</DT><DD>Handle to the parent window. If <B>dwFlags</B> is set to IURL_INVOKECOMMAND_FL_USE_DEFAULT_VERB, this member is ignored.
+</DD><DT><B>pcszVerb</B>
+</DT><DD>Pointer to a zero-terminated string that contains the verb to be invoked by <A HREF="sweep103.htm#intshcut_000b000101000200" TARGET=TEXT>IUniformResourceLocator::InvokeCommand</A>. If <B>dwFlags</B> is set to IURL_INVOKECOMMAND_FL_USE_DEFAULT_VERB, this member is ignored.
+</DD></DL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep105.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep107.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

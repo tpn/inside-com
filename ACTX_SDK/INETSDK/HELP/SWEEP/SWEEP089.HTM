@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Error Codes</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep088.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep090.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="wininet_000800010a000000">Error Codes</A></H2>
+<BR CLEAR=ALL>
+<P>The HTTP functions control the transmission and content of HTTP requests. 
+
+<P>The Win32 Internet functions return Win32 error codes where appropriate. The following error codes are specific to the Win32 Internet functions:
+
+<DL>
+<DT><B><A NAME="wininet_000800010a000001">ERROR_INTERNET_CLIENT_AUTH_NOT_SETUP</B></A>
+ </DT><DD>Client authorization is not set up on this computer.
+</DD><DT><B><A NAME="wininet_000800010a000002">ERROR_INTERNET_OUT_OF_HANDLES</B></A>
+ </DT><DD>No more handles could be generated at this time.
+</DD><DT><B><A NAME="wininet_000800010a000003">ERROR_INTERNET_TIMEOUT</B></A>
+ </DT><DD>The request has timed out.
+</DD><DT><B><A NAME="wininet_000800010a000004">ERROR_INTERNET_EXTENDED_ERROR</B></A>
+ </DT><DD>An extended error was returned from the server. This is typically a string or buffer containing a verbose error message. Call <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A> to retrieve the error text.
+</DD><DT><B><A NAME="wininet_000800010a000005">ERROR_INTERNET_INTERNAL_ERROR</B></A>
+ </DT><DD>An internal error has occurred.
+</DD><DT><B><A NAME="wininet_000800010a000006">ERROR_INTERNET_INVALID_URL</B></A>
+ </DT><DD>The URL is invalid.
+</DD><DT><B><A NAME="wininet_000800010a000007">ERROR_INTERNET_UNRECOGNIZED_SCHEME</B></A>
+ </DT><DD>The URL scheme could not be recognized, or is not supported.
+</DD><DT><B><A NAME="wininet_000800010a000008">ERROR_INTERNET_NAME_NOT_RESOLVED</B></A>
+ </DT><DD>The server name could not be resolved.
+</DD><DT><B><A NAME="wininet_000800010a000009">ERROR_INTERNET_PROTOCOL_NOT_FOUND</B></A>
+ </DT><DD>The requested protocol could not be located.
+</DD><DT><B><A NAME="wininet_000800010a00000a">ERROR_INTERNET_INVALID_OPTION</B></A>
+ </DT><DD>A request to <A HREF="sweep082.htm#wininet_0008000103000f00" TARGET=TEXT>InternetQueryOption</A> or <A HREF="sweep082.htm#wininet_0008000103001200" TARGET=TEXT>InternetSetOption</A> specified an invalid option value.
+</DD><DT><B><A NAME="wininet_000800010a00000b">ERROR_INTERNET_BAD_OPTION_LENGTH</B></A>
+ </DT><DD>The length of an option supplied to <A HREF="sweep082.htm#wininet_0008000103000f00" TARGET=TEXT>InternetQueryOption</A> or <A HREF="sweep082.htm#wininet_0008000103001200" TARGET=TEXT>InternetSetOption</A> is incorrect for the type of option specified.
+</DD><DT><B><A NAME="wininet_000800010a00000c">ERROR_INTERNET_OPTION_NOT_SETTABLE</B></A>
+ </DT><DD>The request option cannot be set, only queried.
+</DD><DT><B><A NAME="wininet_000800010a00000d">ERROR_INTERNET_SHUTDOWN</B></A>
+ </DT><DD>The Win32 Internet function support is being shut down or unloaded.
+</DD><DT><B><A NAME="wininet_000800010a00000e">ERROR_INTERNET_INCORRECT_USER_NAME</B></A>
+ </DT><DD>The request to connect and log on to an FTP server could not be completed because the supplied user name is incorrect.
+</DD><DT><B><A NAME="wininet_000800010a00000f">ERROR_INTERNET_INCORRECT_PASSWORD</B></A>
+ </DT><DD>The request to connect and log on to an FTP server could not be completed because the supplied password is incorrect.
+</DD><DT><B><A NAME="wininet_000800010a000010">ERROR_INTERNET_LOGIN_FAILURE</B></A>
+ </DT><DD>The request to connect and log on to an FTP server failed.
+</DD><DT><B><A NAME="wininet_000800010a000011">ERROR_INTERNET_INVALID_OPERATION</B></A>
+ </DT><DD>The requested operation is invalid.
+</DD><DT><B><A NAME="wininet_000800010a000012">ERROR_INTERNET_OPERATION_CANCELLED</B></A>
+ </DT><DD>The operation was canceled, usually because the handle on which the request was operating was closed before the operation completed.
+</DD><DT><B><A NAME="wininet_000800010a000013">ERROR_INTERNET_INCORRECT_HANDLE_TYPE</B></A>
+ </DT><DD>The type of handle supplied is incorrect for this operation.
+</DD><DT><B><A NAME="wininet_000800010a000014">ERROR_INTERNET_INCORRECT_HANDLE_STATE</B></A>
+ </DT><DD>The requested operation cannot be carried out because the handle supplied is not in the correct state.
+</DD><DT><B><A NAME="wininet_000800010a000015">ERROR_INTERNET_NOT_PROXY_REQUEST</B></A>
+ </DT><DD>The request cannot be made via a proxy.
+</DD><DT><B><A NAME="wininet_000800010a000016">ERROR_INTERNET_REGISTRY_VALUE_NOT_FOUND</B></A>
+ </DT><DD>A required registry value could not be located.
+</DD><DT><B><A NAME="wininet_000800010a000017">ERROR_INTERNET_BAD_REGISTRY_PARAMETER</B></A>
+ </DT><DD>A required registry value was located but is an incorrect type or has an invalid value.
+</DD><DT><B><A NAME="wininet_000800010a000018">ERROR_INTERNET_NO_DIRECT_ACCESS</B></A>
+ </DT><DD>Direct network access cannot be made at this time.
+</DD><DT><B><A NAME="wininet_000800010a000019">ERROR_INTERNET_NO_CONTEXT</B></A>
+ </DT><DD>An asynchronous request could not be made because a zero context value was supplied.
+</DD><DT><B><A NAME="wininet_000800010a00001a">ERROR_INTERNET_NO_CALLBACK</B></A>
+ </DT><DD>An asynchronous request could not be made because a callback function has not been set.
+</DD><DT><B><A NAME="wininet_000800010a00001b">ERROR_INTERNET_REQUEST_PENDING</B></A>
+ </DT><DD>The required operation could not be completed because one or more requests are pending.
+</DD><DT><B><A NAME="wininet_000800010a00001c">ERROR_INTERNET_INCORRECT_FORMAT</B></A>
+ </DT><DD>The format of the request is invalid.
+</DD><DT><B><A NAME="wininet_000800010a00001d">ERROR_INTERNET_ITEM_NOT_FOUND</B></A>
+ </DT><DD>The requested item could not be located.
+</DD><DT><B><A NAME="wininet_000800010a00001e">ERROR_INTERNET_CANNOT_CONNECT</B></A>
+ </DT><DD>The attempt to connect to the server failed.
+</DD><DT><B><A NAME="wininet_000800010a00001f">ERROR_INTERNET_CONNECTION_ABORTED</B></A>
+ </DT><DD>The connection with the server has been terminated.
+</DD><DT><B><A NAME="wininet_000800010a000020">ERROR_INTERNET_CONNECTION_RESET</B></A>
+ </DT><DD>The connection with the server has been reset.
+</DD><DT><B><A NAME="wininet_000800010a000021">ERROR_INTERNET_FORCE_RETRY</B></A>
+ </DT><DD>The Win32 Internet function needs to redo the request.
+</DD><DT><B><A NAME="wininet_000800010a000022">ERROR_INTERNET_ZONE_CROSSING</B></A>
+ </DT><DD>Not used in this release.
+</DD><DT><B><A NAME="wininet_000800010a000023">ERROR_INTERNET_MIXED_SECURITY</B></A>
+ </DT><DD>The content is not entirely secure. Some of the content being viewed may have come from unsecured servers.
+</DD><DT><B><A NAME="wininet_000800010a000024">ERROR_INTERNET_SSL_CERT_CN_INVALID</B></A>
+ </DT><DD>The certificate returned by an SSL/PCT server is invalid because of a mismatched server name. The server name that was given by the caller does not match the common name inside the certificate.
+</DD><DT><B><A NAME="wininet_000800010a000025">ERROR_INTERNET_HANDLE_EXISTS</B></A>
+ </DT><DD>The request failed because the handle already exists.
+</DD><DT><B><A NAME="wininet_000800010a000026">ERROR_FTP_TRANSFER_IN_PROGRESS</B></A>
+ </DT><DD>The requested operation cannot be made on the FTP session handle because an operation is already in progress.
+</DD><DT><B><A NAME="wininet_000800010a000027">ERROR_FTP_DROPPED</B></A>
+ </DT><DD>The FTP operation was not completed because the session was aborted.
+</DD><DT><B><A NAME="wininet_000800010a000028">ERROR_GOPHER_PROTOCOL_ERROR</B></A>
+ </DT><DD>An error was detected while parsing data returned from the gopher server.
+</DD><DT><B><A NAME="wininet_000800010a000029">ERROR_GOPHER_NOT_FILE</B></A>
+ </DT><DD>The request must be made for a file locator.
+</DD><DT><B><A NAME="wininet_000800010a00002a">ERROR_GOPHER_DATA_ERROR</B></A>
+ </DT><DD>An error was detected while receiving data from the gopher server.
+</DD><DT><B><A NAME="wininet_000800010a00002b">ERROR_GOPHER_END_OF_DATA</B></A>
+ </DT><DD>The end of the data has been reached.
+</DD><DT><B><A NAME="wininet_000800010a00002c">ERROR_GOPHER_INVALID_LOCATOR</B></A>
+ </DT><DD>The supplied locator is not valid.
+</DD><DT><B><A NAME="wininet_000800010a00002d">ERROR_GOPHER_INCORRECT_LOCATOR_TYPE</B></A>
+ </DT><DD>The type of the locator is not correct for this operation.
+</DD><DT><B><A NAME="wininet_000800010a00002e">ERROR_GOPHER_NOT_GOPHER_PLUS</B></A>
+ </DT><DD>The requested operation can only be made against a Gopher+ server, or with a locator that specifies a Gopher+ operation.
+</DD><DT><B><A NAME="wininet_000800010a00002f">ERROR_GOPHER_ATTRIBUTE_NOT_FOUND</B></A>
+ </DT><DD>The requested attribute could not be located.
+</DD><DT><B><A NAME="wininet_000800010a000030">ERROR_GOPHER_UNKNOWN_LOCATOR</B></A>
+ </DT><DD>The locator type is unknown.
+</DD><DT><B><A NAME="wininet_000800010a000031">ERROR_HTTP_HEADER_NOT_FOUND</B></A>
+ </DT><DD>The requested header could not be located.
+</DD><DT><B><A NAME="wininet_000800010a000032">ERROR_HTTP_DOWNLEVEL_SERVER</B></A>
+ </DT><DD>The server did not return any headers.
+</DD><DT><B><A NAME="wininet_000800010a000033">ERROR_HTTP_INVALID_SERVER_RESPONSE</B></A>
+ </DT><DD>The server response could not be parsed.
+</DD><DT><B><A NAME="wininet_000800010a000034">ERROR_HTTP_INVALID_HEADER</B></A>
+ </DT><DD>The supplied header is invalid.
+</DD><DT><B><A NAME="wininet_000800010a000035">ERROR_HTTP_INVALID_QUERY_REQUEST</B></A>
+ </DT><DD>The request made to <A HREF="sweep085.htm#wininet_0008000106000300" TARGET=TEXT>HttpQueryInfo</A> is invalid.
+</DD><DT><B><A NAME="wininet_000800010a000036">ERROR_HTTP_HEADER_ALREADY_EXISTS</B></A>
+ </DT><DD>The header could not be added because it already exists.
+</DD><DT><B><A NAME="wininet_000800010a000037">ERROR_INVALID_HANDLE</B></A>
+ </DT><DD>The handle that was passed to the API has been either invalidated or closed.
+</DD></DL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep088.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep090.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

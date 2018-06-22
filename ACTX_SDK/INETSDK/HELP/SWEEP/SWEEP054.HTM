@@ -1,0 +1,794 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Element Object</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep053.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep055.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_000400010a000000"></A><H3>Element Object<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a000100"></A><H3>element Object<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>An object that resides below the document in the scripting object model. Elements are intrinsic HTML controls or objects. Controls are placed on a document with the &lt;INPUT&gt; tag while objects are placed on a document with the &lt;OBJECT&gt; tag.
+
+<P><map name=element>
+<area shape="rect" coords="0,0,109,25" href="sweep048.htm">
+<area shape="rect" coords="69,63,178,88" href="sweep055.htm">
+<area shape="rect" coords="69,94,178,119" href="sweep056.htm">
+<area shape="rect" coords="69,125,178,150" href="sweep051.htm">
+<area shape="rect" coords="69,187,178,212" href="sweep049.htm">
+<area shape="rect" coords="105,217,213,242" href="sweep052.htm">
+<area shape="rect" coords="105,248,213,273" href="sweep053.htm">
+<area shape="rect" coords="105,279,213,304" href="sweep050.htm">
+</map>
+<IMG SRC="art/element.gif" WIDTH="277" HEIGHT="335" ALT="" BORDER=0 USEMAP="#element">
+
+<P>Elements are intrinsic HTML controls (placed on a page through the input tag &lt;INPUT&gt;) or objects that are insertable in HTML via the object tag &lt;OBJECT&gt;. These include ActiveX Controls. They can be referenced either by array or name, but this reference must follow the form identifier. 
+Not all properties, methods, and events apply to all elements. Some properties apply to all elements; some only apply to specific elements. See the list below for details by element type, then see the specific method, event, or property documentation for details.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Element</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Properties</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Methods</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Events
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">button, reset, submit</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">form, name, value</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">click</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">onClick
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">checkbox</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">form, name, value, checked, defaultChecked</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">click</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">onClick
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">radio</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">form, name, value, checked</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">click, focus</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">onClick
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">password</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">form, name, value, defaultValue</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">focus, blur, select</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">text, textarea</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">form, name, value, defaultValue</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">focus, blur, select</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">onFocus, onBlur, onChange, onSelect
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">select</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">name, length, options, selectedIndex</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">focus, blur</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">onFocus, onBlur, onChange
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">hidden</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">name, value</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD>
+</TR>
+</TABLE>
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010000"></A><H3>Properties<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010100"></A><H3>form Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets the form object containing the element.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>form<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2"> An object expression that evaluates to the form containing the element
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to a form object.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>All elements except select and hidden.</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010200"></A><H3>name Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the name of the element.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>name</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string containing the new element name.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the name of the element.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>All elements</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010300"></A><H3>value Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the value of the element.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>value</B> [<B>=</B><I>string</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string containing the new element value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the value of the element.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>All elements</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010400"></A><H3>defaultValue Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the default value of the element.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>defaultValue</B> [<B>=</B><I>string</I>]</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string containing the new default value.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the default value of the element.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>password</B>, <B>text</B>, <B>textarea</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010500"></A><H3>checked Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the checked state of the checkbox.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>checked</B> [<B>=</B><I>bool</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. Sets the checked state of the checkbox or the radio button.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns 1 if the checkbox or radio button is checked; 0 if not.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>checkbox</B>, <B>radio button</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010600"></A><H3>defaultChecked Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets or sets the default checked property of the checkbox.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>defaultChecked</B> [<B>=</B><I>bool</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. Sets the default state of the checkbox.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns TRUE if the checkbox is checked by default; FALSE if not.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>checkbox</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010700"></A><H3>length Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets the number of options in a select element.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>length<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a select element.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an integer specifying the number of options in a select element.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>select</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010800"></A><H3>options Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets the &lt;options&gt; tags for a select element.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>options<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a select element.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object with the &lt;options&gt; for a select element.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The options array has the following properties:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">defaultSelected
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Identifies the currently selected attribute.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">index
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Specifies the index of an option.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">length
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Specifies the number of options in the selected object.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">name
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Specifies the name attribute of the selected object.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">selected
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Used to programmatically select an option.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">selectedIndex
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Specifies the index of the selected option.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">text
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Specifies the text to be displayed (this text follows the &lt;option&gt; tag).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">value
+</FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Specifies the value attribute.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>select</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a010900"></A><H3>selectedIndex Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Gets the index for the selected option (or the first option selected when there are multiple selected options).
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>selectedIndex<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a select element.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an integer specifying the index for the selected option in a select element.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>select</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a020000"></A><H3>Methods<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a020100"></A><H3>click Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Clicks the element.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>click<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>button</B>, <B>reset</B>, <B>submit</B>, <B>checkbox</B>, <B>radio</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a020200"></A><H3>focus Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Sets the focus to the element.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>focus<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>password</B>, <B>text</B>, <B>textarea</B>, <B>select</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a020300"></A><H3>blur Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Clears the focus from the element.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>blur<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>password</B>, <B>text</B>, <B>textarea</B>, <B>select</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a020400"></A><H3>select Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Selects the contents of the element.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>select<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>password</B>, <B>text</B>, <B>textarea</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a030000"></A><H3>Event Handlers<HR></H3><P>There are two ways to script events from objects:
+
+<OL><LI>Using the onEvent="subroutine" syntax. This method can be used for any HTML intrinsic elements, such as forms, buttons, or links. This method does not work for items inserted using the OBJECT tag. The following example uses this syntax in Button1 to handle onClick:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;form name="Form1"&gt;
+     &lt;input type="button" name="Button1" value="Press me" onClick="pressed"&gt;
+&lt;/form&gt; 
+
+&lt;script language="VBScript"&gt;
+     sub pressed
+     alert "I've been pressed"
+     document.Form1.Button1.value="OUCH"
+     end sub    
+&lt;/script&gt;
+</FONT></PRE>
+<LI>Using the FOR="object" EVENT="eventname" syntax. This method can be used for any named element and any element inserted using the OBJECT tag. The following example is the same as the first but with a different syntax:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;form name="Form1"&gt;
+     input type="button" name="Button1" value="Press"&gt;
+     &lt;script for="Button1" event="onClick" language="VBScript"&gt;
+     alert "Button pressed"
+     document.Form1.Button1.value="Pressed"
+     &lt;/script&gt;
+&lt;/form&gt;
+</FONT></PRE>
+</OL>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a030100"></A><H3>onClick Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fired when the element is clicked.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>onClick<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>button</B>, <B>reset</B>, <B>submit</B>, <B>checkbox</B>, <B>radio</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a030200"></A><H3>onFocus Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fired when the element gets the focus.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>onFocus<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>select</B>, <B>text</B>, <B>textarea</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a030300"></A><H3>onBlur Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fired when the element loses the focus.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>onBlur<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>select</B>, <B>text</B>, <B>textarea</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a030400"></A><H3>onChange Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fired when the element has changed.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>onChange<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>select</B>, <B>text</B>, <B>textarea</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030500" TARGET=TEXT>onSelect</A> 
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_000400010a030500"></A><H3>onSelect Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fired when the contents of the element are selected.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>element.</I><B>onSelect<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>element</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an intrinsic control.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><B>text</B>, <B>textarea</B>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a020100" TARGET=TEXT>click</A>, <A HREF="sweep054.htm#scriptom_000400010a020200" TARGET=TEXT>focus</A>, <A HREF="sweep054.htm#scriptom_000400010a020300" TARGET=TEXT>blur</A>, <A HREF="sweep054.htm#scriptom_000400010a020400" TARGET=TEXT>select</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a030100" TARGET=TEXT>onClick</A>, <A HREF="sweep054.htm#scriptom_000400010a030200" TARGET=TEXT>onFocus</A>, <A HREF="sweep054.htm#scriptom_000400010a030300" TARGET=TEXT>onBlur</A>, <A HREF="sweep054.htm#scriptom_000400010a030400" TARGET=TEXT>onChange</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep054.htm#scriptom_000400010a010100" TARGET=TEXT>form</A>, <A HREF="sweep054.htm#scriptom_000400010a010200" TARGET=TEXT>name</A>, <A HREF="sweep054.htm#scriptom_000400010a010300" TARGET=TEXT>value</A>, <A HREF="sweep054.htm#scriptom_000400010a010400" TARGET=TEXT>defaultValue</A>, <A HREF="sweep054.htm#scriptom_000400010a010500" TARGET=TEXT>checked</A>, <A HREF="sweep054.htm#scriptom_000400010a010600" TARGET=TEXT>defaultChecked</A>, <A HREF="sweep054.htm#scriptom_000400010a010700" TARGET=TEXT>length</A>, <A HREF="sweep054.htm#scriptom_000400010a010800" TARGET=TEXT>options</A>, <A HREF="sweep054.htm#scriptom_000400010a010900" TARGET=TEXT>selectedIndex</A>
+
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep053.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep055.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

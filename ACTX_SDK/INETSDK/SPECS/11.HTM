@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF/DTD HTML//EN">
+<HTML>
+<HEAD><TITLE> </TITLE>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+
+' Change the text in the label to the text in the textbox when user clicks cmdChangeIt.
+Sub cmdChangeIt_onClick
+	Dim TheForm
+	Set TheForm = Document.LabelControls
+	lblActiveLbl.Caption = TheForm.txtNewText.Value
+End Sub
+
+' Rotate the label by 45 degrees for each button press.
+Sub cmdRotate_onClick
+	Dim TheForm
+	Set TheForm = Document.LabelControls
+	lblActiveLbl.Angle = (lblActiveLbl.Angle + 45) Mod 360
+End Sub
+
+-->
+</SCRIPT>
+</HEAD>
+<BODY>
+<FONT FACE=ARIAL SIZE=2> <!-- global default -->
+<H3>Object Sample</H3>
+<P>This page requires the Label control available in the <A HREF="http://www.microsoft.com/ie/appdev/controls/" TARGET="_top">ActiveX&#153; Gallery</A>.</P>
+<HR>
+<!-- Insert a label object and set its default values. -->
+<OBJECT
+	classid="clsid:99B42120-6EC7-11CF-A6C7-00AA00A47DD2"
+	id=lblActiveLbl
+	width=250
+	height=250
+	align=left
+	hspace=20
+	vspace=0
+>
+<PARAM NAME="Angle" VALUE="90">
+<PARAM NAME="Alignment" VALUE="2">
+<PARAM NAME="BackStyle" VALUE="0">
+<PARAM NAME="Caption" VALUE="A Desultory Label">
+<PARAM NAME="FontName" VALUE="Arial">
+<PARAM NAME="FontSize" VALUE="20">
+<PARAM NAME="FontBold" VALUE="1">
+<PARAM NAME="FrColor" VALUE="0">
+</OBJECT>
+<FORM NAME="LabelControls" Action="">
+<INPUT TYPE="TEXT" NAME="txtNewText" SIZE=25>
+<INPUT TYPE="BUTTON" NAME="cmdChangeIt" VALUE="Change Text">
+<INPUT TYPE="BUTTON" NAME="cmdRotate" VALUE="Rotate Label">
+</FORM>
+</FONT>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+

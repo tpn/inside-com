@@ -1,0 +1,102 @@
+<HTML>
+<HEAD>
+<TITLE>Data Types - Microsoft&#174; Visual Basic&#174; Scripting Edition</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<BLOCKQUOTE>
+<FONT FACE="ARIAL" SIZE=2>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<H3><A HREF="14.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="9.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using VBScript"></A>VBScript Data Types</H3>
+<HR SIZE=2>
+</TD></TR></TABLE>
+
+<H5>What Are The VBScript Data Types?</H5>
+<BLOCKQUOTE>
+<P>VBScript has only one data type and it's called a <B>Variant</B>.  A <B>Variant</B> is a special kind of data type that can contain different kinds of information, depending on how it's used. Because <B>Variant</B> is the only data type in VBScript, it's also the data type returned by all functions in VBScript.</P>
+
+<P>At its simplest, a <B>Variant</B> can contain either numeric or string information. A <B>Variant</B> behaves as a number when you're using it in a numeric context and as a string when you use it in a string context.  That is, if you're working with data that looks like numbers, VBScript assumes that it is numbers and does the thing that is most appropriate for numbers.  Of course, you can always make numbers behave as strings, by enclosing them in quotation marks. Similarly, if you're working with data that can only be string data, VBScript treats it as string data.</P>
+
+<P>Beyond the simple numeric or string classifications, a <B>Variant</B> can make further distinctions about the specific nature of numeric information.  For example, you can have numeric information that represents a date or a time.  When used with other date or time data, the result is always expressed as a date or a time. Of course, you can also have a rich variety of numeric information ranging in size from Boolean values to huge floating-point numbers.  These different categories of information that can be contained in a <B>Variant</B> are called <I>subtypes</I>.  Most of the time, you can just put the kind of data you want in a <B>Variant</B> and it behaves in a way that is most appropriate for the data it contains.</P>
+
+<P>The following table shows the various subtypes of data that a <B>Variant</B> can contain.</P>
+
+
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR BGCOLOR=#DDDDDD VALIGN=TOP><TD WIDTH=25%><FONT FACE="Arial" SIZE=2><B>Subtype</B></FONT></TD><TD WIDTH=75%><FONT FACE="Arial" SIZE=2><B>Meaning</B></FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Empty</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Variant</B> is uninitialized. Value is either 0 for numeric variables	or a zero-length string ("") for string variables.</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Null</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2><B>Variant</B> intentionally contains no valid data. </FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Boolean</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Contains either <B>True</B>  or  <B>False</B> .</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Byte</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Contains integer in the range 0 to 255. </FONT></TD></TR>
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Integer</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Contains integer in the range -32,768 to 32,767. </FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Long</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Contains integer in the range -2,147,483,648 to 2,147,483,647.</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Single</B></FONT></TD>	<TD><FONT FACE="Arial" SIZE=2>Contains a single-precision, floating-point number in the range -3.402823E38 to -1.401298E-45 for negative values; 1.401298E-45 to 3.402823E38 for positive values.</FONT></TD></TR>
+
+<TR VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Double</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Contains a double-precision, floating-point number in the range -1.79769313486232E308 to -4.94065645841247E-324 for negative values; 4.94065645841247E-324 to 1.79769313486232E308 for positive values.</FONT></TD></TR>
+<TR  VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Date (Time)</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Contains a number that represents a date between January 1, 100 to December 31, 9999.</FONT></TD></TR>
+
+<TR  VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>String</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Contains a variable-length string that can be up to approximately 2 billion characters in length.</FONT></TD></TR>
+
+<TR  VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Object</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Contains an object.</FONT></TD></TR>
+
+<TR  VALIGN=TOP>
+	<TD><FONT FACE="Arial" SIZE=2><B>Error</B></FONT></TD>
+	<TD><FONT FACE="Arial" SIZE=2>Contains an error number.</FONT></TD></TR>
+</TABLE>
+</BLOCKQUOTE>
+
+
+<P>If you want to convert from one subtype to another, there is a rich set of <B>conversion functions</B> you can use. In addition, another function, <B>VarType</B>,  returns information about how your data is stored within a <B>Variant</B>.</P>
+
+
+
+<BR>
+<BR>
+
+<TABLE WIDTH=92% CELLSPACING=0 CELLPADDING=3 BORDER=0><TR><TD>
+<FONT FACE=ARIAL SIZE=2><HR SIZE=2><A HREF="14.htm" ><IMG SRC="next.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Next" BORDER=0 ></A><A HREF="9.htm" ><IMG SRC="prev.jpg" WIDTH=49 HEIGHT=32 ALIGN=RIGHT ALT="Previous" BORDER=0 ></A><A HREF="vbstutor.htm"><IMG src="btntutor.jpg" WIDTH=110 height=32 border=0 ALIGN=RIGHT alt="Using Visual Basic Script"></A><A HREF="cpyright.htm" TARGET="_top">&#169; 1996 by Microsoft Corporation</a>.</FONT>
+
+</TD></TR></TABLE>
+</FONT>
+</BLOCKQUOTE>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

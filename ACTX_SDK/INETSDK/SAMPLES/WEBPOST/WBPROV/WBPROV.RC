@@ -1,0 +1,32 @@
+//*********************************************************************
+//*                  Microsoft Windows                               **
+//*            Copyright(c) Microsoft Corp., 1995                    **
+//*********************************************************************
+
+#include <windows.h>
+#include <prsht.h>
+#include "resource.h"
+
+IDD_PAGE_TEST DIALOG DISCARDABLE  0, 0, WIZ_CXDLG, WIZ_CYDLG
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "External Page 0"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Test Page 0",-1,WIZ_BODYX,0,WIZ_BODYCX,27
+END
+
+IDD_PAGE_TEST1 DIALOG DISCARDABLE  0, 0, WIZ_CXDLG, WIZ_CYDLG
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "External Page 1"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Test Page 1",-1,WIZ_BODYX,0,WIZ_BODYCX,27
+END
+
+IDD_PAGE_TEST2 DIALOG DISCARDABLE  0, 0, WIZ_CXDLG, WIZ_CYDLG
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "External Page 2"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Test Page 2",-1,WIZ_BODYX,0,WIZ_BODYCX,27
+END

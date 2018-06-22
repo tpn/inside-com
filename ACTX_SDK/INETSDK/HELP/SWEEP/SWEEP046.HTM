@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Attaching and Invoking Scripts</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep045.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep047.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_0004000102000000"></A><H3>Attaching and Invoking Scripts<BR CLEAR=ALL>
+<HR></H3><P>There are three ways to attach and invoke scripts in HTML: 
+<UL><LI>Use the SCRIPT tag.
+<LI>Use those attributes of HTML elements that support scripts.
+<LI>Use a custom URL type.
+</UL>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000102010000"></A><H3>Using the SCRIPT Element<HR></H3><P>Use the SCRIPT element to add scripts to HTML. SCRIPT is an element for embedding script code in a document. Using SCRIPT, the full source code of a script can be included within the document. The SCRIPT element can be used to point to external scripts, using the SRC attribute.
+
+<P>For example, this HTML describes a page with a SCRIPT element which includes code written in VBScript:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT language="VBScript"&gt;
+&lt;!--
+	document.write("Hello, Webmaster.")    
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>This displays as:
+
+<SCRIPT language="VBScript">
+	document.write("Hello, Webmaster.")
+</SCRIPT><P>
+
+<BR CLEAR=ALL><P>The example in JScript would read:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT LANGUAGE="Javascript"&gt;
+	document.write("Hello, Webmaster.")
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>This displays as:
+
+<SCRIPT language="JavaScript">
+	document.write("Hello, Webmaster.")
+</SCRIPT><P>
+
+<BR CLEAR=ALL><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000102010100"></A><H3>Evaluation of SCRIPT<HR></H3><P>The SCRIPT element is evaluated when the document is loaded. All code is executed at load time in the order in which it appears in the document. Therefore, any reference to an object must appear in the text <I>after</I> the script element in which the object is defined. 
+
+<P>The document object's <A HREF="sweep049.htm#scriptom_0004000105020100" TARGET=TEXT>write</A> method can insert both text and objects&#151;such as buttons and ActiveX controls. These objects can be referenced only in a script block following the script block that defined them. You will be able to refer to and copy references to objects that are the result of a code download. You can invoke any method on an object&#151;but only when the object has been downloaded.
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000102010200"></A><H3>Using Scripts as Attributes of HTML Elements<HR></H3><P>Another way to insert scripts is to use the attributes of HTML elements that support scripts. When these attributes match with events on the elements, the script is executed when the event occurs. This can be done with HTML elements, such as forms, buttons, or links; however, this method does not work for items inserted using the OBJECT element. 
+
+<P>The following example uses this syntax in Button1 to handle the onClick event. To demonstrate the ability to combine multiple scripting languages on the same page, the script for Button1 is implemented in VBScript and that for Button2 in JScript. 
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;FORM NAME="Form1"&gt;
+	&lt;INPUT TYPE="button" NAME="Button1" VALUE="VBScript" 
+		onClick="pressed" LANGUAGE="VBScript"&gt;
+	&lt;INPUT TYPE="button" NAME="Button2" ="JScript"
+		onClick="pressed2( )" language="Javascript"&gt;
+&lt;/form&gt;
+
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+	sub pressed
+		document.Form1.Button1.value="Pressed"
+		alert "Pressed the VBScript button"
+	end sub 
+&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE="Javascript"&gt;
+	function pressed2( )
+	{
+		document.Form1.Button2.value="Pressed"
+		alert("Pressed the Java button.")
+	}
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>This displays as:
+
+<!-- Demonstrates the construction of two buttons, one in VB Script, one in JScript.)  -->
+
+<form name="Form1">
+<input type="button" name="Button1" value="VBScript" onClick="pressed" language="VBScript">
+<input type="button" name="Button2" value="JScript" onClick="pressed2()" language="JavaScript">
+</form>
+
+<!-- Builds a button example using VBScript -->
+
+<script language="VBScript">
+sub pressed
+        document.Form1.Button1.value="Pressed"
+        alert "Pressed the VBScript button"
+end sub
+</script>
+
+<!-- Builds a button using JScript       -->
+
+<script language="JavaScript">
+function pressed2()
+{
+        document.Form1.Button2.value="Pressed"
+        alert("Pressed the JScript button.")
+}
+</script>
+
+<BR CLEAR=ALL><P>Note the use of the language attribute on the input tag to indicate the scriptlet's language. If no language is specified, the scriptlet defaults to the language of the most recently encountered script block. If no script block has been encountered, the language defaults to JScript.
+
+<P>The elements FORM, INPUT, BODY, and A support this syntax, but with differing events. See the individual tags referenced later in this document.
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000102010300"></A><H3>An Alternative Using SCRIPT<HR></H3><P>The SCRIPT element can also be used with the FOR="object" EVENT="eventname" syntax. This method can be used for any named elements, and for any elements inserted using the OBJECT tag. The following example is similar to the previous script example, but it uses a different syntax:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;FORM NAME="Form1"&gt;
+	&lt;INPUT TYPE="button" NAME="Button1" VALUE="Click"&gt;
+	&lt;SCRIPT FOR="Button1" EVENT="onClick" LANGUAGE="VBScript"&gt;
+		alert "Button has been pressed"
+		document.Form1.Button1.value="PRESSED"
+	&lt;/SCRIPT&gt;
+&lt;/form&gt;
+</FONT></PRE>
+<P>This displays as:
+
+<!-- Demonstrates the use for FORM to attach an ActiveX control script. -->
+<form name="Form2" ACTION=>
+        <input type="button" name="Button003" value="Click">
+        <script for="Button003" event="onClick" language="VBScript">
+		alert "Button has been pressed."
+                document.Form2.Button003.value="PRESSED"
+	</script>
+</form>
+
+<BR CLEAR=ALL><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000102010400"></A><H3>Using Scripts in URLs<HR></H3><P>Scripts can be invoked using the A element combined with a custom URL type. This allows a script to be executed when the user clicks on a hyperlink. This URL type is valid in any context, but is most useful when used with the A element. For example:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;A HREF="javascript:alert('hi there')"&gt;Click me to see a message.&lt;/A&gt;
+</FONT></PRE>
+<P>This displays as:
+
+<A HREF="javascript:alert('hi there')">Click me to see a message.</A>
+
+<BR CLEAR=ALL><P><B>Syntax</B>
+<P><I>script-engine:script-code</I>
+
+<P>Use the <I>script-engine:script-code</I> syntax to executes the script code using the script engine when the URL is resolved. For example, to execute a script when the user clicks on a hyperlink, use:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;TITLE&gt; JScript example &lt;/TITLE&gt;
+&lt;A HREF="javascript:alert(document.title)"&gt;Click here to see the title of the current document.&lt;/A&gt;
+</FONT></PRE>
+<P>Notice that the script is executed in the context of the current page, which means that document.title evaluates to the document containing the script.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Argument
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Type
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Description
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">script-engine
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">String
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string that names a scripting engine. "Javascript" is the only acceptable value.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">script-code
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">String
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string that evaluates to a script in the syntax supported by the scripting engine. This script is executed by the scripting engine when the URL is evaluated.
+</FONT></TD>
+</TR>
+</TABLE>
+<P><B>Note</B>  This syntax is only supported for JScript; in particular, VBScript: will not work in Internet Explorer; however, you can call VBScript functions with the &lt;A HREF="javascript:FunctionName()"&gt; syntax. This syntax does not support VBScript processing in the URL itself. For example:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;HTML&gt;
+&lt;SCRIPT language="VBScript"&gt;
+
+SUB CallMe( )
+MsgBox("Called")
+END SUB
+
+&lt;/SCRIPT&gt;
+
+&lt;BODY&gt;
+This is a &lt;A HREF="JavaScript:CallMe()"&gt;link&lt;/A&gt;
+&amp;lt/BODY&gt;
+&amp;lt/HTML&gt;
+
+</FONT></PRE>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep045.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep047.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

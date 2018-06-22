@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>ActiveX Conferencing COM Objects and Control</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep121.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep123.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="confcom_000f000401000000">ActiveX Conferencing COM Objects and Control</A></H2>
+<BR CLEAR=ALL>
+<P>This document describes the usage models for the COM objects and the ActiveX Control.
+
+<H3><A NAME="confcom_000f000401010000">COM Objects</A></H3>
+<P>There are at least two classes of applications that can use the COM objects:
+<UL><LI>Productivity applications&#151;developers can enable COM-based productivity applications, such as a word processor or a spreadsheet, for conferencing. For example, a word processor could contain a user interface (UI), such as a toolbar button, that starts a conference, then provide another UI that allows document owners to share or transfer their document to others on the conference.
+ <LI>Conferencing applications&#151;the COM objects allow a developer to create a full-featured COM-based conferencing application that can start conferences, share applications, transfer files, and so on. The developer creates the UI and harnesses the Microsoft conferencing platform's capabilities underneath.
+</UL>
+<H3><A NAME="confcom_000f000401020000">ActiveX Control</A></H3>
+<P>The ActiveX Control can be used by:
+<UL><LI>Visual Basic applications&#151;the control can be used to create a Visual Basic conferencing application that can start conferences, share applications, transfer files, and so on. The control can also be used to enable other Visual Basic applications for conferencing.
+ <LI>Scripts (VBScript or JScript) within HTML pages&#151;the key Web-related functionality enabled by the ActiveX Conferencing controls is using a Web page to bring together, in a conference, a community of users with a similar interest.
+</UL>
+<H3><A NAME="confcom_000f000401030000">Architecture</A></H3>
+<P>This section describes, at a high level, how developers will interface with the COM objects and the ActiveX Conferencing control.
+
+<P>Details of the data and audio conferencing-related subsystems under Conf.exe are not shown because the details are not relevant to this specification.
+
+<H4><A NAME="confcom_000f000401030100">COM Object Interface</A></H4>
+<P><IMG SRC="art/actconf1.gif" WIDTH="369" HEIGHT="219" ALT="" ><P>COM applications access the conferencing functionality via the COM object interfaces contained in Imsconf.dll.
+
+<H4><A NAME="confcom_000f000401030200">ActiveX Control Interface</A></H4>
+<P>The following shows the interface for the ActiveX Conferencing control accessed from within a script (VBScript or JScript) that is within an HTML page. The diagram would appear similar for a Visual Basic application&#151;the application would appear in place of the HTML, browser, and script engine.
+
+
+ <P><IMG SRC="art/actconf2.gif" WIDTH="369" HEIGHT="376" ALT="" ><TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep121.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep123.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

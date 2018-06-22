@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Scripts</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep015.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep017.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_000100010f000000">Scripts</A></H2>
+<BR CLEAR=ALL>
+<P>Scripts are blocks of code that can run when an HTML page is loaded or when an event happens, such as the click of a button. To learn more about scripts and scripting, read the Object Model for Scripting document included in the ActiveX SDK, as well as Microsoft's pages on VBScript and JavaScript. This section describes how to incorporate a script into an HTML document.
+
+<P>There are three ways to attach and invoke scripts in HTML: 
+
+<UL><LI>Use the <A HREF="sweep021.htm#htmlref2_0001000114003e00" TARGET=TEXT>SCRIPT</A> element.
+<LI>Use those attributes of HTML elements that support scripts.
+<LI>Use a custom URL type.
+</UL>
+<P><B>Using the SCRIPT Element</B>
+
+<P>Use the <A HREF="sweep021.htm#htmlref2_0001000114003e00" TARGET=TEXT>SCRIPT</A> element to add scripts to HTML documents. Scripts reside inside the container of a SCRIPT element.
+
+<P>Using SCRIPT, the full source code of a script can be included within the document. The SCRIPT element can be used to point to external scripts as well.
+
+<P>For example, this HTML element describes a page with a SCRIPT element that includes code written in VBScript:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;SCRIPT language="VBScript"&gt;
+Document.write("Hello, Webmaster.")    
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>This displays as:<P>
+<SCRIPT language="VBScript">
+	Document.write("Hello, Webmaster.")
+</SCRIPT><P>
+<BR CLEAR=ALL><P>The example in JScript would read:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;SCRIPT language="JavaScript"&gt;
+document.write("Hello, Webmaster.")
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>This displays as:<P>
+<SCRIPT language="JavaScript">
+	document.write("Hello, Webmaster.")
+</SCRIPT><P>
+<BR CLEAR=ALL><P><B>Evaluation of SCRIPT and its use with objects</B>
+
+<P>The <A HREF="sweep021.htm#htmlref2_0001000114003e00" TARGET=TEXT>SCRIPT</A> element is evaluated when the document is loaded. All code is executed at load time in the order in which it appears in the document. Therefore, any reference to an object, such as an ActiveX Control, must appear in the text <I>after</I> the script element in which the object is defined. These objects can be referenced only in a script block following the script block that defined them. You will be able to refer to and copy references to objects that are the result of a code download at any time after the object has been downloaded to your computer.
+
+<P><B>Using Scripts as Attributes of HTML Elements</B>
+
+<P>Another way to insert scripts is to use the attributes of HTML elements that support scripts. When these attributes match with events on the elements, the script is executed when the event occurs. This can be done with HTML elements, such as forms, buttons, or links; however, this method does not work for items inserted using the <A HREF="sweep021.htm#htmlref2_0001000114003500" TARGET=TEXT>OBJECT</A> tag. 
+
+<P>The following example uses this syntax in Button1 to handle the onClick event. To demonstrate the ability to combine scripting languages on the same page, the scriptlet for Button1 is implemented in VBScript, and that for Button2 in JScript. 
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;SCRIPT NAME="Form1"&gt;
+	&lt;INPUT TYPE="button" NAME="Button1" VALUE="VBScript" 	onClick="pressed" LANGUAGE="VBScript"&gt;
+        &lt;INPUT TYPE="button" NAME="Button2" VALUE="JScript" onClick="pressed2()" LANGUAGE="JavaScript"&gt;
+&lt;/FORM&gt;
+
+&lt;SCRIPT LANGUAGE="VBSCRIPT"&gt;
+	sub pressed
+		document.Form1.Button1.value="Pressed"
+                alert "Pressed the VBScript button"
+	end sub	
+&lt;/SCRIPT&gt;
+
+&lt;SCRIPT LANGUAGE="JavaScript"&gt;
+	function pressed2()
+	{
+                document.Form1.Button2.value="Pressed"
+		alert("Pressed the JScript button.")
+	}
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>This displays as:
+<!-- Demonstrates the construction of two buttons, one in VB Script, one in JScript.)  -->
+
+<form name="Form1">
+<input type="button" name="Button1" value="VBScript" 	 onClick="pressed" language="VBScript">
+<input type="button" name="Button2" value="JScript" onClick="pressed2()" language="JavaScript">
+</form>
+
+<!-- Builds a button example using VBScript -->
+
+<script language="VBScript">
+sub pressed
+        document.Form1.Button1.value="Pressed"
+        alert "Pressed the VBScript button"
+end sub
+</script>
+
+<!-- Builds a button using JScript       -->
+
+<script language="JavaScript">
+function pressed2()
+{
+        document.Form1.Button2.value="Pressed"
+        alert("Pressed the JScript button.")
+}
+</script>
+
+
+<BR CLEAR=ALL><P>Note the use of the language attribute on the input tag to indicate the script's language. If no language is specified, the scriptlet defaults to the language of the most recently encountered script block. If no script block has been encountered, the language defaults to JScript.
+
+<P>The <A HREF="sweep021.htm#htmlref2_0001000114001f00" TARGET=TEXT>FORM</A>, <A HREF="sweep021.htm#htmlref2_0001000114002900" TARGET=TEXT>INPUT</A>, <A HREF="sweep021.htm#htmlref2_0001000114000d00" TARGET=TEXT>BODY</A>, and <A HREF="sweep021.htm#htmlref2_0001000114000300" TARGET=TEXT>A</A> elements support this syntax, but with differing events. See the individual tags referenced later in this document.
+
+<P><B>An alternative using SCRIPT</B>
+
+<P>This method can be used for any named elements, and for any elements inserted using the <A HREF="sweep021.htm#htmlref2_0001000114003500" TARGET=TEXT>OBJECT</A> tag. The following example is similar to the previous script example, but it uses a different syntax:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;FORM NAME="Form1"&gt;
+        &lt;INPUT TYPE="button" NAME="Button1" VALUE="Click"&gt;
+	&lt;SCRIPT FOR="Button1" EVENT="onClick" LANGUAGE="VBScript"&gt;
+		alert "Button has been pressed"
+                document.Form1.Button1.value="PRESSED"
+	&lt;/SCRIPT&gt;
+&lt;/FORM&gt;
+</FONT></PRE>
+<P>This displays as:<P>
+<!-- Demonstrates the use for FORM to attach an ActiveX control script. -->
+<form name="Form2">
+        <input type="button" name="Button003" value="Click">
+        <script for="Button003" event="onClick" language="VBScript">
+		alert "Button has been pressed."
+                document.Form2.Button003.value="PRESSED"
+	</script>
+</form>
+
+<BR CLEAR=ALL><P><B>Using Scripts in URLs</B>
+
+<P>Scripts can be invoked using the <A HREF="sweep021.htm#htmlref2_0001000114000300" TARGET=TEXT>A</A> element combined with a custom URL type. This allows a script to be executed when the user clicks a hyperlink. This URL type is valid in any context, but is most useful when used with the A element. For example:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;A HREF="javascript:alert('hi there')"&gt;Click me to see a message.&lt;/A&gt;
+</FONT></PRE>
+<P>displays an alert message box that contains the text 'hi there'.
+
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep015.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep017.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>The Licensing Problem: Background, Goals, Assumptions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep039.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep041.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="license_0002000501000000">The Licensing Problem: Background, Goals, Assumptions</A></H2>
+<BR CLEAR=ALL>
+<P>In order to create a market for ActiveX Controls to proliferate on the World Wide Web, it's essential to standardize a method for licensing ActiveX Controls embedded in HTML documents. Before discussing proposed licensing schemes, we establish criteria and objectives for such schemes. 
+
+<P>One must first understand the existing <B>IClassFactory2</B> (ICF2) mechanism for licensing OLE Controls on the desktop-i.e. for use in Visual Basic. In the existing scheme, a VB programmer buys a <I>design-time license</I> for a control. When the programmer creates a VB form, the authoring tool embeds a free <I>run-time license</I> for the control inside the form, allowing anybody to use the form without paying for the control. The control itself participates in this process via the <B>IClassFactory2</B> interface, which exposes two important methods. The first method, RequestLicKey, is used by the authoring tool (VB) for querying the <I>run-time license</I> at <I>design-time</I>. The second method, CreateInstanceLic, is used by the run-time application (VBRUN.DLL) for instantiating the control using this <I>run-time</I> license. For more information on the existing scheme for licensing of Controls, see OLE Reference documentation for the <B>IClassFactory2</B> interface. 
+
+<P>Having understood the desktop model for licensing controls, we specify objectives for online licensing of controls. The goals for online licensing make this model quite analogous to the desktop model: 
+<UL><LI><B>Business model:</B> web authors purchase a design-time license to author HTML pages using a control. The run-time license for browsing the HTML page is typically free. 
+<LI><B>Security:</B> although a 100% foolproof mechanism would be great, it's not necessary. "Standard" online licensing need only be secure enough to prevent casual or unintentional copying of licensed controls. It's therefore not necessary to make piracy <I>impossible</I>-it's adequate to make piracy <I>inconvenient</I>. A control developer can always develop a private scheme that is more secure. 
+<LI><B>Convenience for authors:</B> licensing should not make things difficult for web authors. It's clear that the harder it is for web authors to use licensed controls, the less chance they will actually pay for such controls. 
+<LI><B>Compatibility:</B> the online model should accommodate existing controls that use the <B>IClassFactory2</B> licensing mechanism. This means each HTML page should have some associated control licensing information that is created at design-time and recognized by web browsers at run-time. In this model an HTML page is analogous to a Visual Basic form. 
+<LI><B>Versatility:</B> the online model must be versatile enough to support other online ActiveX Control containers, such as the NCompass ActiveX plug-in. 
+</UL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep039.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep041.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

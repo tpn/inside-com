@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+
+<head>
+<title>Untitled Normal Page</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 1.1">
+</head>
+
+<body>
+<h1 align=center><font color="#0000FF"><u>URLPAD Sample</u></font></h1>
+<h3 align=left><font color="#0000FF"><u>What changed from Beta:-</u></font></h3>
+<ol>
+<li><p align=left>Updated the sample to remove the fix made for bug in URLHLINK (UrlDownloadToFile). No more message 
+loop to wait for file to be downloaded. It is now full blocking call.</p>
+</li>
+<li><p align=left>Added support for Status Bar. Now the progress of download can be seen in the status bar of MDI frame.</p>
+</li>
+<li><p align=left><u>New Files being modified from SuperPad</u> :- Mainfrm.cpp :- Added a function MyShowPane() to support 
+status bar display.</p>
+</li>
+</ol>
+<h3 align=left><font color="#0000FF"><u>Old Readme:-</u></font></h3>
+<p align=left>This sample is the modified version of SuperPad sample. URLPad adds the functionality of editing any file sitting 
+in the Web Server with ease and also help in posting the file back to the Web Server using the WebPost wizard. 
+The sample uses the URLOpenstream API's (which are the wrapped up API's for URLMON calls ) to download a 
+file when a URL is passed to it. The file is opened in the URLPad edit box which can then be modified. This file 
+can be again posted back to the Web Server using the WebPost wizard.</p>
+<p align=left>The file can be opened by using the File-Open command from the menu. A modified version of FileOpen dialog is 
+presented. There is a checkbox for selecting whether a URL is to be opened. The user can then type in the full 
+URL path. The file is downloaded (blocked) into a temporary file. This file after editing can be posted back to the 
+WEB Server by using the File-Save command from the menubar.</p>
+<p align=left><font color="#0000FF"><u>Requirements :-</u></font></p>
+<p align=left>1. Please go through the MSDN article or books online for the details regarding implementation of Superpad.</p>
+<p align=left>2. InetSDK should be installed on the machine. (Run SetupSDK.EXE from the SDK root). </p>
+<p align=left>3. You need to install Microsoft WebPost runtime by executing WebPost.EXE which comes along with the 
+InetSDK.</p>
+<p align=left>4. The sample uses two major libraries.</p>
+<ul>
+<li><p align=left>URLHlink.lib :- Static Library which has all the URL Openstream API's. Please note that this library might 
+become part of URLMON post-Beta. </p>
+</li>
+<li><p align=left>WebPost.lib :- Library for calling Webpost wizard. </p>
+</li>
+</ul>
+<p align=left><font color="#0000FF"><u>Description of New Files being added from SuperPad :-</u></font></p>
+<p align=left><font color="#0000FF"><u>download.cpp :</u></font><font color="#000000"> It implements all the callback for the IBindStatusCallback which is abstracted in 
+CBindStatusCallback class.</font></p>
+<p align=left><font color="#0000FF"><u>download.h:</u></font><font color="#000000"> It contains the CBindStatusCallback class definition.</font></p>
+<p align=left><font color="#0000FF"><u>fileopen.cpp</u>: </font><font color="#000000">It implements CModFileDialog class. This is basically for Customizing the FileOpen Common 
+Dialog</font></p>
+<p align=left><font color="#0000FF"><u>fileopen.h:</u></font><font color="#000000"> It contains the CModFileDialog class definition.</font></p>
+<p align=left><font color="#0000FF"><u>Description of New Files being modified from SuperPad :-</u></font></p>
+<p align=left><font color="#0000FF"><u>paddoc.cpp</u></font><font color="#000000"> : Handler has been added for OnFileSave() to call the WebPost wizard.</font></p>
+<p align=left><font color="#0000FF"><u>paddoc.h</u></font><font color="#000000"> : Minor modification because of the handler being added.</font></p>
+<p align=left><font color="#0000FF"><u>superpad.doc</u></font><font color="#000000"> : It implements the custom file open dialog and also the handling of OnFileOpen() has been 
+changed. It also defines one additional function PromptForFileName() for handling FileOpen.</font></p>
+<p align=left><font color="#0000FF"><u>superpad.h</u></font><font color="#000000"> : Minor modification done to the original file. PromptForFileName() function definition added to the 
+class.</font></p>
+<p align=left><font color="#0000FF"><u>URLPad.Reg :</u></font><font color="#000000"> This file has been modified so that URLPad entries will be updated in the registry. All the 
+association will be moved from SuperPad to URLPad. </font></p>
+<p align=left>&#160;</p>
+<p align=left>&#160;</p>
+<p align=left>&#160;</p>
+</body>
+
+</html>

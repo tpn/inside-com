@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Lists</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep005.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep007.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_0001000105000000">Lists</A></H2>
+<BR CLEAR=ALL>
+<P>You can create a variety of lists in your document by using the <A HREF="sweep021.htm#htmlref2_0001000114005200" TARGET=TEXT>UL</A>, <A HREF="sweep021.htm#htmlref2_0001000114003600" TARGET=TEXT>OL</A>, <A HREF="sweep021.htm#htmlref2_0001000114003100" TARGET=TEXT>MENU</A>, and <A HREF="sweep021.htm#htmlref2_0001000114001800" TARGET=TEXT>DIR</A> elements in conjunction with the <A HREF="sweep021.htm#htmlref2_0001000114002c00" TARGET=TEXT>LI</A> element. You can also create definition lists that give you a simple two-column list for terms and their definitions.
+
+<P>For example, you can create a bulleted list, consisting of individual items preceded by a bullet character, by using UL and LI, as in the following example: 
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;UL&gt;
+&lt;LI&gt;Bulleted Lists
+&lt;LI&gt;Ordered Lists
+&lt;LI&gt;Directory Lists
+&lt;LI&gt;Itemized Lists
+&lt;LI&gt;Definition Lists
+&lt;/UL&gt;
+</FONT></PRE>
+<P>This displays as:
+<!-- Demo program for HTML AG and Ref -->
+
+<UL>
+<LI>Bulleted Lists
+<LI>Ordered Lists
+<LI>Directory Lists
+<LI>Itemized Lists
+<LI>Definition Lists
+</UL>
+<BR CLEAR=ALL><P>You use the <A HREF="sweep021.htm#htmlref2_0001000114003600" TARGET=TEXT>OL</A> and <A HREF="sweep021.htm#htmlref2_0001000114002c00" TARGET=TEXT>LI</A> elements to create an ordered list. The ordered list consists of individual items that are sequentially numbered or lettered. To set the style of numbering or lettering, you use the <A HREF="sweep021.htm#htmlref2_0001000114003606" TARGET=TEXT>TYPE=</A> attribute in OL. Similarly, you use the <A HREF="sweep021.htm#htmlref2_0001000114003604" TARGET=TEXT>START=</A> attribute to set the initial number or letter. By default, the style is decimal numbers starting at 1.
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;OL&gt;
+&lt;LI&gt;Step One.
+&lt;LI&gt;Step Two.
+&lt;LI&gt;Step Three.
+&lt;/OL&gt;
+</FONT></PRE>
+<P>This displays as:
+<!-- Demo program for HTML AG and Ref -->
+
+
+<OL>
+<LI>Step One.
+<LI>Step Two.
+<LI>Step Three.
+</OL>
+<BR CLEAR=ALL><P>The <A HREF="sweep021.htm#htmlref2_0001000114001800" TARGET=TEXT>DIR</A> and <A HREF="sweep021.htm#htmlref2_0001000114002c00" TARGET=TEXT>LI</A> elements create a directory list, consisting of individual items (none containing more than 20 characters) displayed in columns. The <A HREF="sweep021.htm#htmlref2_0001000114003100" TARGET=TEXT>MENU</A> and LI elements create an itemized list consisting of individual items. 
+
+<P>A definition list formats terms at the left, with their definitions indented below. You use the <A HREF="sweep021.htm#htmlref2_0001000114001a00" TARGET=TEXT>DL</A> element to create the list, the <A HREF="sweep021.htm#htmlref2_0001000114001b00" TARGET=TEXT>DT</A> element to refer to the term, and the <A HREF="sweep021.htm#htmlref2_0001000114001600" TARGET=TEXT>DD</A> element to contain the term's definition. The following example shows how to use these elements to create a list: 
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;DL&gt;
+&lt;DT&gt;Cat
+&lt;DD&gt;A small domesticated mammal.
+&lt;DT&gt;Lizard
+&lt;DD&gt;A reptile generally found in dry areas.
+&lt;/DL&gt; 
+</FONT></PRE>
+<P>This displays as:
+<!-- Demo program for HTML Ref and AG -->
+
+<DL>
+<DT>Cat
+<DD>A small domesticated mammal.
+<DT>Lizard
+<DD>A reptile generally found in dry areas.
+</DL>
+
+<BR CLEAR=ALL><TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep005.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep007.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,35 @@
+# Nmake macros for building Windows 32-Bit apps
+
+!if "$(CPU)" == "ALPHA" || "$(CPU)" == "PPC" || "$(CPU)" == "MIPS" 
+Sorry:
+        @echo The WbProv sample only builds on X86 platforms at this time.
+!else
+
+APPVER=4.0
+
+!include <win32.mak>
+
+all: wbprov.dll
+
+# Update the object file if necessary
+
+wbprov.obj: wbprov.cpp
+    $(cc) $(cflags) $(cvars) $(cdebug) wbprov.cpp
+
+guid.obj: guid.c
+    $(cc) $(cflags) $(cvars) $(cdebug) guid.c
+
+site.obj: site.cpp
+    $(cc) $(cflags) $(cvars) $(cdebug) site.cpp
+
+wizard.obj: wizard.cpp
+    $(cc) $(cflags) $(cvars) $(cdebug) wizard.cpp
+
+wbprov.res: wbprov.rc resource.h
+    rc -r wbprov.rc
+
+# Update the executable file if necessary, and if so, add the resource back in.
+
+wbprov.dll: wbprov.obj site.obj guid.obj wizard.obj wbprov.res wbprov.def
+    $(link) $(linkdebug) $(dlllflags) -out:wbprov.dll -def:wbprov.def wbprov.obj site.obj guid.obj wizard.obj wbprov.res $(conlibs) $(guilibs) comctl32.lib uuid.lib webpost.lib 
+!endif

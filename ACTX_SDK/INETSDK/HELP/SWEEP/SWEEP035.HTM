@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Scripting Security Hazards</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep034.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep036.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="safety_0002000302000000">Scripting Security Hazards</A></H2>
+<BR CLEAR=ALL>
+<P>Code signing can guarantee that code is trusted to be operated by an end user. However, allowing ActiveX controls to be accessed from scripts raises several new security issues. Even if a control is known to be safe in the hands of a user, it is not necessarily safe when automated by an untrusted script. For example, Microsoft Word is a trusted tool from a (presumably) reputable source, but a malicious script can use its automation model to delete files on the users machine, install macro viruses, and worse.
+<P>We therefore require that controls vouch for their ability to be safely scripted. They do this either by supporting a simple interface (IObjectSafety) or through entries in the registry. Such an entry promises that, no matter how malicious a script is, the automation model of the control does not allow any harm to the user, either in the form of data corruption or security leaks. (Of course a control can lie and say its safe for scripting when it isn't. But if control writers really want to be malicious there is no need for scripts to be involved at all&#151;they can do whatever damage it wants directly in the control implementation.) 
+<P>If a control is not marked as safe for scripting, the user will receive a warning dialog whenever the control is inserted on an untrusted page, asking them whether to the object should be visible from scripts. (This is only at medium security level, at high security, the object is never visible to scripts, and at low, always visible.)
+<P>This security mechanism allows controls to be authored which support interesting, potentially unsafe capabilities, while only allowing those capabilities to be used from pages which the user trusts.
+
+<H3><A NAME="safety_0002000302010000">Initialization Security Hazards</A></H3>
+<P>Another potential security hazard is initializing a control's state using untrusted data. When a control is created, it can be given data from an arbitrary IPersist* interface (from both local and remote URLs) for initializing its state. This again is a potential security hazard because the data could be coming from an untrusted source and the control might do harmful things when given bad or private data. 
+
+<P>We therefore define another category of controls&#151;controls which are safe for initializing from persistent data. These are controls which are guaranteed to do nothing bad no matter what data they are initialized with. The user receives a warning, as described above, if a untrusted page attempts to initialize a control that is not safe for initialzing.
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep034.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep036.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

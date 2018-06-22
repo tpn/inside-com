@@ -1,0 +1,607 @@
+<HTML>
+<HEAD>
+<TITLE>ActiveX SDK Frequently Asked Questions</TITLE>
+</HEAD>
+
+<BODY LEFTMARGIN="50" RIGHTMARGIN="50" TOPMARGIN="30" bgcolor="#FFFFFF" VLINK=PURPLE LINK=BLUE>
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+
+
+
+<A NAME="#top"><FONT SIZE=4>ActiveX SDK FAQ</FONT></A>
+<P><FONT FACE=ARIAL SIZE=2>Frequently Asked Questions on Developing with the ActiveX SDK<BR>
+Last updated: October 16, 1996<P>
+
+
+<!--List of Questions go here-------------------------------->
+<TABLE CELLPADDING=3 BORDER=0 CELLSPACING=0 >
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#WBDistribute>I'm using the WebBrowser Control in my application. 
+      How do I redistribute it?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#WBPrint>How do I print from the WebBrowser Control?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#WBFont >How do I change the font from a WebBrowser Control?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#ICPSupport >Where do I get support for the controls in the Internet Control Pack?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#AXControlPad >What is the ActiveX Control Pad and where can I find out more about it?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#OLEvsAXControls>With all the marketing hype about ActiveX, 
+  what <I>really</I> is the difference between an OLE Control and an ActiveX Control?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#IEWarning >Why does IE bring up a "Potential Safety Violation" warning 
+when I try to display a page that contains a control I've written?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#RegControl >How does one register a control as a player for a particular file/MIME type?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#LicControl >I'm trying to license my control. Is there a tool available for generating .lpk (license package) files?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#WindowlessControl>Does IE3 support windowless controls? If not, when will support for this be available?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#JPEGControl >Is there an API to render JPEG/GIFs from an ActiveX Control?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#IEObjectModel> How do I access IE's object model from a contained control?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#IELaunch >Is there a way to launch Internet Explorer and have it open a URL?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#UpDownload >I've been able to download a file using the URL Open Stream functions. Is there a similar
+ functionality available to upload files?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#WinInetNT > How do I get WinInet to work correctly in Windows NT 3.51?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#JScriptDocs >Where can I find JScript documentation? I can't seem to find it in the SDK.</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#VBScriptDocs >Where can I find VBScript documentation?</A><BR>
+  </FONT></TD>
+</TR>
+
+<TR>
+  <TD><LI></TD>
+  <TD><FONT FACE=ARIAL SIZE=2><A HREF=#MoreFAQ >Are there any other FAQs on related topics that I should know about?</A><BR>
+  </FONT></TD>
+</TR>
+
+</TABLE>
+<HR>
+
+
+
+<!--Q & A Starts here...------------------------------------------------------>
+<H4><A NAME="WBDistribute"></A>I'm using the WebBrowser Control in my application. How do I redistribute it?</H4>
+
+<P>You must obtain a redistribution license for Internet Explorer (IE) 3.0 and use the IE 3.0 
+self-extracting executable (Msie30.exe) to install the necessary files and registry entries.
+You can license Microsoft Internet Explorer for Windows 95, Windows 3.1, Windows NT 
+Workstation, and Macintosh royalty-free to redistribute within your organization or to 
+your customers. 
+
+<P>More information on this can be found in article <A HREF="http://www.microsoft.com/kb/developr/devutil/q155969.htm"
+TARGET="_top">Q155969</A> in the Microsoft Knowledge Base. The KnowledgeBase is an excellent resource
+for technical articles and samples on various Microsoft products, and is currently available on the Internet
+under the Microsoft Support Page at <A HREF="http://www.microsoft.com/kb" TARGET="_top">
+http://www.microsoft.com/kb</A>. Related articles on developing with the ActiveX SDK can be found by choosing "ActiveX SDK" or
+"Misc Internet Topics" from the list of products/technologies on that page.
+
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="WBPrint"></A>How do I print from the WebBrowser Control?</H4>
+
+<P>Although the WebBrowser Control does not support a print method, you can
+print its contents using one of two ways:
+<P>1. Set focus to the Web Browser Control and send a key combination of Ctrl-P, or<BR>
+   2. Call the GetDocument() method, which returns an *IDispatch. Using this IDispatch pointer,
+      call QueryInterface() on IID_IOleCommandTarget. With the object pointer returned,
+      call Exec (NULL, OLECMDID_PRINT, 0, NULL, NULL).
+
+<FONT FACE="COURIER" SIZE="2" COLOR=GREEN>
+<P>
+    LPDISPATCH lpDispatch = NULL;<BR>
+    LPOLECOMMANDTARGET lpOleCommandTarget = NULL;<BR>
+
+<P> lpDispatch = m_ctlWebBrowser.GetDocument();<BR>
+    ASSERT(lpDispatch);<BR>
+
+<P> lpDispatch->QueryInterface(IID_IOleCommandTarget, (void**)&lpOleCommandTarget);<BR>
+    ASSERT(lpOleCommandTarget);<BR>
+
+<P> lpDispatch->Release();<BR>
+
+<P> // print contents of web browser control<BR>
+    lpOleCommandTarget->Exec(NULL, OLECMDID_PRINT, 0, NULL,NULL);<BR>
+    lpOleCommandTarget->Release();  <BR>
+</FONT>
+
+<P>More information on this can be found in article <A HREF="http://www.microsoft.com/kb/developr/visual_c/q156732.htm"
+TARGET="_top">Q156732</A> in the Microsoft Knowledge Base. The KnowledgeBase is an excellent resource
+for technical articles and samples on various Microsoft products, and is currently available on the Internet
+under the Microsoft Support Page at <A HREF="http://www.microsoft.com/kb" TARGET="_top">
+http://www.microsoft.com/kb</A>. Related articles on developing with the ActiveX SDK can be found by choosing 
+"ActiveX SDK" or "Misc Internet Topics" from the list of products/technologies on that page.
+
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="WBFont"></A>How do I change the font from a WebBrowser Control?</H4>
+
+<P>The WebBrowser automation model does not support a method that will allow you to change 
+the font of the text of the currently displayed page. 
+
+<P>The WebBrowser Control, however, exposes this functionality through the IOleCommandTarget 
+interface. Call the GetDocument() method, which returns an *IDispatch. Using this IDispatch
+pointer, call QueryInterface() on IID_IOleCommandTarget. With this IOleCommandTarget 
+pointer, call Exec() with OLECMDID_ZOOM and use the pvaIn input argument to pass a value 
+in the range of 0 to 5 (where 0 is smallest) indicating the desired scale of the font.
+
+This, in effect, mimicks the functionality available through Internet Explorer's View\Fonts 
+menu.
+
+<FONT FACE="COURIER" SIZE="2" COLOR=GREEN>
+
+
+<P>LPDISPATCH pDisp = NULL;<BR>
+   LPOLECOMMANDTARGET pCmdTarg = NULL;<BR>
+
+<P>pDisp = m_ctlWebBrowser.GetDocument();<BR>
+   ASSERT(pDisp);<BR>
+
+<P>
+   pDisp->QueryInterface(IID_IOleCommandTarget, (LPVOID*)&pCmdTarg);<BR>
+   ASSERT(pCmdTarg);<BR>
+
+
+<P>VARIANT vaZoomFactor;	// Input arguments<BR>
+
+<P>VariantInit(&vaZoomFactor);<BR>
+   V_VT(&vaZoomFactor) = VT_I4;<BR>
+   V_I4(&vaZoomFactor) = fontSize;<BR>
+   pCmdTarg->Exec(NULL, OLECMDID_ZOOM, OLECMDEXECOPT_DONTPROMPTUSER, &vaZoomFactor, NULL);<BR>
+   VariantClear(&vaZoomFactor);			<BR>
+ 
+<P>if (pCmdTarg) pCmdTarg->Release(); // release document's command target<BR>
+   if (pDisp) pDisp->Release();       // release document's dispatch interface<BR>
+
+</FONT>
+
+<P>More information on this can be found in the IEZOOM sample described in article <A HREF="http://www.microsoft.com/kb/developr/devutil/q156693.htm"
+TARGET="_top">Q156693</A> in the Microsoft Knowledge Base. The KnowledgeBase is an excellent resource
+for technical articles and samples on various Microsoft products, and is currently available on the Internet
+under the Microsoft Support Page at <A HREF="http://www.microsoft.com/kb" TARGET="_top">
+http://www.microsoft.com/kb</A>. Related articles on developing with the ActiveX SDK can be found by choosing 
+"ActiveX SDK" or "Misc Internet Topics" from the list of products/technologies on that page.
+
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="ICPSupport"></A>Where do I get support for the controls in the Internet Control Pack?</H4>
+
+<P>Other than the information provided in the Internet Control Pack Web site on 
+   <A HREF="http://www.microsoft.com/icp" TARGET="text">http://www.microsoft.com/icp</a>, 
+   Microsoft does not support any of the controls that are part of the Internet Control Pack 
+   (ICP). The controls included in the ICP are the FTP, HTML, HTTP, NNTP, POP, SMTP, WinSock 
+   TCP, and WinSock UDP controls. 
+
+<P>Questions on these controls should be directed to:
+
+<P><B>NetManage</B> <BR>
+   <A HREF="http://www.netmanage.com" TARGET="text">http://www.netmanage.com</A><BR>
+   10725 North De Anza Blvd.<BR>
+   Cupertino, CA 95014<BR>
+   (408) 973-7171 sales phone<BR>
+   (408) 257-6405 fax<BR>
+   (408) 973-8181 support phone<BR>
+
+<P>More information on this can be found in article <A HREF="http://www.microsoft.com/kb/developr/devutil/q156692.htm"
+TARGET="_top">Q156692</A> in the Microsoft Knowledge Base. The KnowledgeBase is an excellent resource
+for technical articles and samples on various Microsoft products, and is currently available on the Internet
+under the Microsoft Support Page at <A HREF="http://www.microsoft.com/kb" TARGET="_top">
+http://www.microsoft.com/kb</A>. Related articles on developing with the ActiveX SDK can be found by choosing 
+"ActiveX SDK" or "Misc Internet Topics" from the list of products/technologies on that page.
+
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+
+<!--------------------------------------------------------->
+<H4><A NAME="AXControlPad"></A>What is the ActiveX Control Pad, and where can I find out more about it?</H4>
+
+<P>The AcitveX Control Pad can be used to quickly and easily author the <b>&lt;OBJECT&gt;</b> tags 
+   which are used to support ActiveX Controls in HTML. Also included is the Script Wizard, 
+   which can be used to quickly connect controls together in either VBScript or in JScript.
+
+<P>HTML Layout Controls are also authored using this tool. The ActiveX Control Pad is <B>not</B> 
+   included with the ActiveX SDK, but may be downloaded for free from <A HREF="http://www.microsoft.com/workshop/author/cpad" 
+   TARGET="text">http://www.microsoft.com/workshop/author/cpad</A>.
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="OLEvsAXControls"></A>What <I>really</I> is the difference between an OLE Control and an ActiveX Control?"</H4>
+
+<P>ActiveX Controls are a superset of OLE Controls. Originally, OLE Controls were required to support a number of 
+interfaces which are optional for ActiveX Controls. For ActiveX Controls, the only requirements are that the control 
+supports IUnknown and is self-registering (ie exports DllRegisterServer and DllUnregisterServer).
+
+<P>Mike McKeown addresses this very confused issue of OLE Controls versus ActiveX Controls in the Oct. 1996 issue of the 
+<A HREF="http://www.microsoft.com/mind" TARGET="_top">MIND</A> (Microsoft Interactive Developer) magazine.<BR>
+
+<P>More information on enabling controls for the Internet, as well as various documentation on interfaces and functions 
+an ActiveX Control should support, can be found on the "ActiveX Controls" section of the ActiveX SDK online docs.
+
+<H5>So are out of the box OCX's such as the one shipped with VB4 also ActiveX controls?</H5>
+<P>Yes. All OCXs are ActiveX Controls.
+
+<H5>How about MFC Controls, are they also ActiveX Controls?</H4>
+<P>Yes, all MFC Controls are ActiveX Controls. An old Visual C++ 4.0 Control is an ActiveX Control, as is one created 
+with VB4, or the ActiveX Controls BaseCtl Framework that comes as part of the ActiveX SDK samples. 
+Look at the term <I>ActiveX Control</I> as a renaming and restructuring of the OLE Control technology - 
+an evolution. 
+
+<P>A control can be architected to work efficiently on the Internet, or to be hosted in desktop container 
+apps, or to do both. Sure, some controls are not as better suited to be used on the Internet due to their 
+large size and synchronously loading of properties, but they are still <I>ActiveX Controls</I>. This is where 
+most of the confusion comes in.
+
+
+<H5>Are there different types of ActiveX Controls?</H5>
+<P>Yes. The OLE Control and Control Container Guidelines v2.0 describe a number of <I>optional</I> features which may be 
+implemented. Some controls will implement features which require corresponding features in the container in order to work 
+properly. Conversely, some containers will only recognize controls which implement some optional features. 
+
+<P>Older containers will typically only recognize controls which are marked in the registry with the "Control" key and 
+which implement the older OLE Control specification, although they may be able to use newer controls as Automation objects. 
+Newer controls and containers can use something called "Component Categories" to describe their abilities and requirements. 
+Component Categories are defined in the OLE Programmer's Guide, which is part of the ActiveX SDK and Win32 SDK.<BR>
+
+<P>The OLE Control and Control Container Guidelines v2.0 and other related specifications can be found under the
+InetSDK\Specs subdirectory of the ActiveX SDK installation. 
+
+<H5>So, will all ActiveX Controls work with VB4?</H5>
+<P>Most ActiveX Controls should work with VB4. It is possible that a control will require container support that VB4 does not provide. This is true for any 
+control and container combination. 
+
+<H5>Will all ActiveX Controls work with IE3?</H5>
+<P>Again, it is possible that controls will require container support that IE3 does not provide. 
+
+<P>IE3 also includes security features which may prevent some ActiveX Controls from working with all IE3 configurations. This is most likely for older controls. 
+In order for controls to work smoothly with IE when it is configured for the high safety level for active-content security (which is the default), the controls must be marked as 
+"safe for initialization" and/or "safe for scripting". If a control is used on an HTML page in a way which conflicts with its safety identification and the user's safety level, 
+IE will not create the control. See the "Safety API Reference" in the ActiveX SDK documentation for more information.
+
+<H5>How do <I>"lightweight OLE Controls"</I> come into play?</H5>
+<P>Typically, when someone uses this term, they are referring to controls which are written to be as small as possible, so they can be downloaded quickly. 
+Lightweight controls are ActiveX Controls, but may not implement all the required features of the older OLE Control specification. 
+
+<P>The ActiveX Controls BaseCtl Framework  mentioned above, that ships with the ActiveX SDK samples, provides small self-sufficient "lightweight" controls 
+not dependent on associated DLL's (such as the MFC or VB runtimes), although it requires a solid understanding of OLE and COM technologies.
+
+
+<P>If you want to know more about ActiveX controls, particularly on developing web pages, check out another <A HREF="http://www.microsoft.com/intdev/controls/ctrlfaq.htm" TARGET="_top">FAQ</A> available 
+on the "ActiveX Controls" section of the <A HREF="http://www.microsoft.com/intdev/sdk" TARGET="_top">ActiveX SDK page</A>.
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+
+<!--------------------------------------------------------->
+<H4><A NAME="IEWarning"></A>Why does IE bring up a "Potential Safety Violation" warning when I 
+try to display a page that contains a control I've written?</H4>
+
+<P>Depending on how Internet Explorer's Safety Level is set, IE brings up a 
+"Potential Safety Violation" message box, which indicates "the page contains active 
+content that is not verifiably safe to display." It then either refuses to display the
+control or gives the user an option to allow it to be used.
+
+<P>Internet Explorer is trying to protect the client workstation by refusing to execute content 
+that may be potentially unsafe. There are three ways to resolve this issue. 
+
+<P>The first, and least satisfactory, option is for the end-user to reduce the security 
+settings of their browser via Internet Explorer's View\Options\Security\Safety Level option. 
+This is the least appealing option because it reduces or disables security on <U>all</U> content 
+displayed in the browser.
+
+<P>The second option is for control developers to register their controls as implementing 
+the "safe for scripting" component category. When Internet Explorer encounters an 
+<b>&lt;OBJECT&gt;</b> tag, it uses the Component Categories Manager to determine whether or 
+not the specified CLASSID is safe for scripting.
+
+<P>The third option is for control developers to implement the IObjectSafety interface.
+<P>More information about the second and third options can be found under the "Safety API 
+Reference" in the ActiveX SDK documentation.
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+
+<!--------------------------------------------------------->
+<H4><A NAME="RegControl"></A>How does one register a control as a player for a particular 
+file/MIME type?</H4>
+
+<P>This information is available in the SDK documention under <U>\inetsdk\specs\register.htm</U>.
+Registering an ActiveX object is essential in order for Internet Explorer to launch the correct
+player when interpreting the standard HTML <b>&lt;A HREF&gt;</b> tag, or Netscape's 
+<b>&lt;EMBED&gt;</b> tag. Without the registration described in this document, it is impossible
+for ActiveX containers to guess what application to use to display or play an unknown media file.
+
+<P>The document outlines the four steps necessary for registering your ActiveX Control, including 
+the special registry settings that allow ActiveX Controls to 
+<P>(a) Launch with the <b>&lt;EMBED&gt;</b> tag (that is, without <b>&lt;OBJECT&gt;</b> and without 
+       CLSID specified) <BR>
+   (b) Work full-frame (that is, for <b>&lt;A HREF&gt;</b> tags). Even ActiveX Controls work 
+       full-frame, so you no longer need to have a DocObject to work full-frame (although 
+       controls won't get the full menu-negotiation, and so forth.)
+
+<P>  Step1: Register the CLSID for the ActiveX object.<BR>
+     Step2: Associate the object's CLSID with a ProgId.<BR>
+     Step3: Associate the object with a MIME type.<BR>
+     Step4: Associate the file extension with a ProgId and optionally with a MIME type.<BR>
+
+<P>What's missing from the document, however, is how to get the file name from within 
+your control. This is passed to IPersistPropertyBag as a parameter called SRC. 
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+
+
+<!--------------------------------------------------------->
+<H4><A NAME="LicControl"></A>I'm trying to license my control. Is there a tool available for 
+generating .lpk (license package) files?</H4>
+
+<P>Use the LPK_TOOL that is part of the ActiveX SDK on inetsdk\bin directory.<BR>
+   Be sure to specify the ClassID of the IE licensing manager, not the control you're licensing.
+
+<P>For example, if you run the LPK_TOOL, add the Masked Edit Control, and save it out to
+   Maskedit.lpk, your HTML code will look like the following:
+<P>   
+   <b>&lt;OBJECT CLASSID="clsid:5220cb21-c88d-11cf-b347-00aa00a28331"&gt;</b><BR>
+   <b>&lt;PARAM NAME="LPKPath" VALUE="maskedit.lpk"&gt;</b><BR>
+   <b>&lt;/OBJECT&gt;</b><BR>
+
+<P>
+   <b>&lt;OBJECT CLASSID="clsid:C932BA85-4374-101B-A56C-00AA003668DC" WIDTH=200 HEIGHT=200&gt;</b><BR>
+   <b>&lt;/OBJECT&gt;</b><BR>
+
+<P>Refer to the "Licensing ActiveX Controls" section of the ActiveX SDK documentation for more information.
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+
+<!--------------------------------------------------------->
+<H4><A NAME="WindowlessControl"></A>Does IE3 support windowless controls? If not, when will support for this be available?</H4>
+
+<P> No, IE3 does not support windowless controls. Watch for this feature in future versions of Internet 
+    Explorer. Currently, you can work around this with the HTML layout Control, which allows the windowless controls 
+    to be transparent relative to the background of the Layout Control.
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="JPEGControl"></A>Is there an API to render JPEG/GIFs from an ActiveX Control?</H4>
+
+<P> Not currently, but as a workaround you could host the WebBrowser Control and point it 
+    to the file in question.<BR>
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="IEObjectModel"></A> How do I access IE's object model from a contained control?</H4>
+
+<P>IE supports an Automation interface called IWebBrowserApp. It also supports an object
+model for scripting through a hierarchy of interfaces, the root of which is IHTMLDocument.  
+The IHTMLDocument interface has one property, Script, which returns the dispinterface for 
+the IOmWindow interface. This corresponds to the window object described in the ActiveX 
+SDK documentation. From a contained control or doc object, you can get the dispinterface 
+for IWebBrowserApp with the following code:<BR>
+
+<FONT FACE="COURIER" SIZE="2" COLOR=GREEN>
+<P>
+IOleClientSite*     pClientSite; // already points to the control's client site<BR>
+IServiceProvider*   pISP;<BR>
+IDispatch*          pIEIDisp;<BR>
+
+<P>
+pClientSite->QueryInterface(IID_IServiceProvider, (void **)&pISP);<BR>
+pISP->QueryService(IID_IWebBrowserApp, IID_IDispatch, (void **)&pIEIDisp);<BR>
+
+<P>To get the dispinterface for IHTMLDocument, given that you already have the ISP 
+   pointer as above, you can use this code:<BR>
+
+<P>IDispatch*                  pScriptIEDisp;<BR>
+   pISP->QueryService(SID_SContainerDispatch, IID_IDispatch, (void**)&pScriptIEDisp);<BR>
+</FONT>
+
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+
+
+<!--------------------------------------------------------->
+<H4><A NAME="IELaunch"></A>Is there a way to launch Internet Explorer and have it open a URL?</H4>
+
+<P>Yes, this is done through the magic of OLE Automation and the InternetExplorer object.
+
+<P>The InternetExplorer object allows an application to create and manipulate an instance of
+IE through OLE Automation. Here's how you can launch IE3 in Visual Basic, for instance, 
+and have it open the Microsoft Web page at http://www.microsoft.com. Note, however, that this
+method launches a new instance of IE everytime.
+
+<FONT FACE="COURIER" SIZE="2" COLOR=GREEN>
+<P>Dim Explorer As Object
+
+<P>Explorer = CreateObject ("InternetExplorer.Application")<BR>
+   Explorer.Navigate "http://www.microsoft.com"<BR>
+   Explorer.Visible = True<BR>
+
+</FONT>
+<P>More information on the InternetExplorer object can be found on the <A HREF="http://www.microsoft.com/intdev/sdk" 
+TARGET="text">ActiveX SDK page</a> under the "IE Object Model" section.
+
+<P>Another way an application can launch IE, and have it navigate to a specified URL, is through DDE.
+Internet Explorer provides support for DDE (Dynamic Data Exchange) so that applications 
+could to talk to a currently running instance of IE, or even open a new IE window.
+
+<P>Applications could communicate to IE in this manner by establishing a DDE connection with IE, 
+specifying <B>iexplore</B> as the <I>appName</I>, the verb <B>WWW_OpenURL</B> as the <I>topicName</I>,
+and the desired URL, say <B>http://www.microsoft.com</B>, for its XTYP_EXECUTE string.
+
+<P>More information on Internet Explorer's DDE support, particularly the various topicNames you can
+specify, can be found on <A HREF="http://www.microsoft.com/ie/support/docs/tech30/dde.htm" TARGET="_top">
+http://www.microsoft.com/ie/support/docs/tech30/dde.htm</A>. A more <I>detailed</I> documentation on this is
+made available by Spyglass on <A HREF="http://www.spyglass.com/techspec/specs/sdi_spec.html" TARGET="_top">
+http://www.spyglass.com/techspec/specs/sdi_spec.html</A>.
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+
+
+
+<!--------------------------------------------------------->
+<H4><A NAME="UpDownload"></A>I've been able to download a file using the URL Open Stream functions. Is there a similar
+    functionality available to upload a file to the Internet?</H4>
+
+<P> Yes. Check out the WebPost API, in particular the WpPost function. This function allows you 
+    to upload a bunch of files (or directories even!) to an Internet site. The URLPAD and WEBPOST
+    samples available on Inetsdk\Samples directory both demonstrate how to use this function 
+    correctly.
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="WinInetNT"></A>How do I get WinInet to work correctly in Windows NT 3.51?</H4>
+
+<P>WinInet requires enhancements for asynchronous operations, which is only available with
+Windows NT 3.51 Service Pack 4 (SP4). Be sure to install SP4 when running WinNT 3.51.
+
+<P>Also, verify that you're using Wint351.exe, which installs Wininet.dll and dependencies on WinNT 3.51.
+Refer to the ActiveX SDK's Readme.txt file for more information.
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="JScriptDocs"></A>Where can I find JScript documentation? I can't seem to find it in the SDK.</H4>
+
+<P>There is no JScript specific document. JScript is exactly like JavaScript syntactically.
+The <A HREF="http://www.microsoft.com/intdev/sdk/docs/scriptom/" TARGET="text">Scripting Object Model document</A> applies to both VBScript and JScript as both are just 
+language engines calling a common model. Almost all questions are answered in this document.  
+<P>Refer to <A HREF="http://www.microsoft.com/jscript" TARGET="text">
+http://www.microsoft.com/jscript</A> for more information. There is also an <A HREF="http://www.microsoft.com/JScript/us/JSmain/JSfaq.htm" TARGET="text">FAQ</A> 
+on that page that addresses the top JScript issues.
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="VBScriptDocs"></A>Where can I find VBScript documentation?</H4>
+
+<P>Documentation for VBScript is available on the <A HREF="http://www.microsoft.com/vbscript" TARGET="text">VBScript 
+Web page</A>, which is updated frequently. That site will soon be updated to contain links to good VBScript books. 
+There is also an <A HREF="http://www.microsoft.com/vbscript/us/vbsmain/vbsfaq.htm" TARGET="text">FAQ</A> available 
+on that page that addresses the most common VBScript issues.
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+<!--------------------------------------------------------->
+<H4><A NAME="MoreFAQ"></A>Are there any other FAQs on related topics that I should know about?</H4>
+
+<P>Yes. Check out the <A HREF="http://www.microsoft.com/intdev/sdk" TARGET="text">ActiveX SDK Page</A>.
+Scroll through the various topics on the left frame and you'll find FAQs on ActiveX Controls,
+Java, Internet Security Framework, Authenticode, and other topics we believe are of special
+interest to the Internet developer.
+
+<P><A HREF="#top"><IMG SRC="sweep/art/uparrow.GIF"  WIDTH="14" HEIGHT="10" BORDER="0" ALT="Up">Back to list of questions</A>
+<HR>
+
+
+
+
+<!--DocFooterStart-->
+<P>
+</FONT>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A HREF="http://www.microsoft.com/Misc/cpyright.htm" target="_top">&#169; 1996 Microsoft Corporation</A><P>
+</FONT>
+<!--DocFooterEnd-->
+
+
+</BODY>
+</HTML>

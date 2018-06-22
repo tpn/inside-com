@@ -1,0 +1,514 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Link Object</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep051.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep053.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_0004000108000000"></A><H3>Link Object<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108000100"></A><H3>link Object<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>An object that resides below the document in the scripting object model. This object specifies an array of links for a given document.
+
+<P><map name=link>
+<area shape="rect" coords="0,0,109,25" href="sweep048.htm">
+<area shape="rect" coords="69,63,178,88" href="sweep055.htm">
+<area shape="rect" coords="69,94,178,119" href="sweep056.htm">
+<area shape="rect" coords="69,125,178,150" href="sweep051.htm">
+<area shape="rect" coords="69,187,178,212" href="sweep049.htm">
+<area shape="rect" coords="105,248,213,273" href="sweep053.htm">
+<area shape="rect" coords="105,279,213,304" href="sweep050.htm">
+<area shape="rect" coords="138,309,246,334" href="sweep054.htm">
+</map>
+<IMG SRC="art/link.gif" WIDTH="277" HEIGHT="335" ALT="" BORDER=0 USEMAP="#link">
+
+<P>The link object is referenced as a read-only property array. A link object is constructed for every link that appears in the HTML document. A link is defined in scripting as the anchor tag &lt;A&gt; containing the HREF attribute, &lt;A HREF="http://www.microsoft.com"&gt;. All properties of the link object are read-only and are the same as the location object's properties. It is only accessible through the indexed array. The following lines of script would set linktext to the third link on the page (if it exists):
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;script language="VBScript"&gt;
+	[some preceding VBScript code]
+	linktext = document.links(2).href
+	[some following VBScript code]
+&lt;/script&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010000"></A><H3>Properties<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010100"></A><H3>href Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the compete URL for the link. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>href</B>[<B>=string</B>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the complete URL for the link.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010200"></A><H3>protocol Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the protocol portion of the URL.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>protocol<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the protocol portion of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com, this would return http:. 
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010300"></A><H3>host Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the host and port portions of the URL (hostname:port).
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>host<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the host and port portions of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com, this would return www.microsoft.com:80. 
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010400"></A><H3>hostname Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the host portion of the URL, either a name or an IP address.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>hostname<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the hostname portion of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com, this would return www.microsoft.com. 
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010500"></A><H3>port Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the port of the URL.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>port<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the port of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com, this returns 80 (the default for HTTP). 
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010600"></A><H3>pathname Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the pathname in the URL.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>pathname<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the pathname portion of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com/intdev, this returns /intdev. 
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010700"></A><H3>search Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the search portion of the URL, if specified.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>search<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the search portion of the URL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>For http://www.microsoft.com/intdev?user, this returns user. 
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010800"></A><H3>hash Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the hash portion of the URL, if specified.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>hash<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the hash portion of the URL. If no hash is specified, this property returns NULL.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The hash portion of the URL is the section after #, including the #. For http://www.microsoft.com/intdev#user, this returns #user.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108010900"></A><H3>target Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the target of the link, if specified.
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>target<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns a string containing the target of the link.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>This is the same as the value of the TARGET attribute of the LINK tag.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108020000"></A><H3>Events<HR></H3><P>Link events can be used to set status bar text or other custom actions on mouse movement. The following example is an excerpt from an HTML document that uses a text control to display rich information about the links in an image map. The code decides on the link location.
+<PRE><FONT FACE="Courier" SIZE="2">&lt;script language="VBScript" for="Link1" event="onMouseMove(shift, button, x, y)"&gt;
+		if (InRect(x, y,  5, 30, 120, 85)=true) then 
+		DescribeLink "A full description of Microsoft's product line"
+		[some following VBScript code]
+&lt;/script&gt;
+</FONT></PRE>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108020100"></A><H3>onMouseMove Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fires an event any time the pointer moves over a link.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>onMouseMove</B> <I>shift</I><B>,</B> <I>button</I><B>,</B> <I>x</I><B>,</B> <I>y</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>shift</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The status of the shift key.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>button</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Indicates which button is pressed, if any.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>x</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The horizontal position of the pointer, in pixels.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>y</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The vertical position of the pointer, in pixels.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>Shift and button are currently set to zero. x and y contain the actual positional data. To attach scripts or behavior to this event, use the SCRIPT tag as follows:
+<PRE><FONT FACE="Courier" SIZE="2">&lt;script language=script-engine for=link-name event="onMouseMove(shift, button, x, y)"&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108020200"></A><H3>onMouseOver Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fires an event any time the pointer moves over a link.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>onMouseOver<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object. Note: this does not work if the link is inside of a form.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To attach scripts or behavior to this event, use the SCRIPT tag as follows:
+<PRE><FONT FACE="Courier" SIZE="2">&lt;script language=script-engine for=link-name event="onMouseOver"&gt;
+</FONT></PRE>
+<P>or attach a script directly in the HTML:
+<PRE><FONT FACE="Courier" SIZE="2">&lt;A HREF="http://www.microsoft.com" onMouseOver="alert ('Clicked here')"&gt;To Microsoft&lt;/A&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020300" TARGET=TEXT>onClick</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000108020300"></A><H3>onClick Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fires an event any time you click on a link.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><I>link.</I><B>onClick<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>link</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a link object.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P> To attach scripts or behavior to this event, use the SCRIPT tag as follows:
+<PRE><FONT FACE="Courier" SIZE="2">&lt;script language=script-engine for=link-name event="onClick"&gt;
+</FONT></PRE>
+<P>or attach a script directly in the HTML:
+<PRE><FONT FACE="Courier" SIZE="2">&lt;A HREF="http://www.microsoft.com" onClick="alert ('Clicked here')"&gt;To Microsoft&lt;/A&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><B>onMouseMove</B>, <A HREF="sweep052.htm#scriptom_0004000108020200" TARGET=TEXT>onMouseOver</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep052.htm#scriptom_0004000108010100" TARGET=TEXT>href</A>, <A HREF="sweep052.htm#scriptom_0004000108010200" TARGET=TEXT>protocol</A>, <A HREF="sweep052.htm#scriptom_0004000108010300" TARGET=TEXT>host</A>, <A HREF="sweep052.htm#scriptom_0004000108010400" TARGET=TEXT>hostname</A>, <A HREF="sweep052.htm#scriptom_0004000108010500" TARGET=TEXT>port</A>, <A HREF="sweep052.htm#scriptom_0004000108010600" TARGET=TEXT>pathname</A>, <A HREF="sweep052.htm#scriptom_0004000108010700" TARGET=TEXT>search</A>, <A HREF="sweep052.htm#scriptom_0004000108010800" TARGET=TEXT>hash</A>, <A HREF="sweep052.htm#scriptom_0004000108010900" TARGET=TEXT>target</A>
+
+
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep051.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep053.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

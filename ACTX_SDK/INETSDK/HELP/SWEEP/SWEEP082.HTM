@@ -1,0 +1,1003 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>General Win32 Internet Functions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep081.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep083.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="wininet_0008000103000000">General Win32 Internet Functions</A></H2>
+<BR CLEAR=ALL>
+<P>The general Win32 Internet functions perform basic Internet file manipulations.
+
+
+
+<H3><A NAME="wininet_0008000103000100">InternetAttemptConnect</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">DWORD InternetAttemptConnect(
+    DWORD dwReserved
+);
+</FONT></PRE>
+<P>Attempts to make a connection to the Internet. This function allows an application to first attempt to connect before issuing any requests. If the connection fails, the application can enter off-line mode.
+
+<UL><LI>Returns ERROR_SUCCESS if successful, or a Win32 error value otherwise.
+
+</UL>
+<DL><DT><I>dwReserved</I>
+ </DT><DD> Reserved; must be zero.
+</DD></DL>
+<H3><A NAME="wininet_0008000103000200">InternetCanonicalizeUrl</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetCanonicalizeUrl(
+    IN LPCTSTR lpszUrl,
+    OUT LPTSTR lpszBuffer,
+    IN OUT LPDWORD lpdwBufferLength,
+    IN DWORD dwFlags
+);
+</FONT></PRE>
+<P>Converts a URL to a canonical form, which includes converting unsafe characters into escape sequences.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. Possible errors include:
+<DL>
+<DT>ERROR_INVALID_PARAMETER
+ </DT><DD>Bad string, buffer, buffer size, or flags parameter.
+</DD><DT>ERROR_INSUFFICIENT_BUFFER
+ </DT><DD>Canonicalized URL is too large to fit in the buffer provided. The <I>*lpdwBufferLength</I> parameter is set to the size, in bytes, of the buffer required to hold the resultant, canonicalized URL.
+</DD><DT>ERROR_BAD_PATHNAME
+ </DT><DD>The URL could not be canonicalized.
+</DD><DT>ERROR_INTERNET_INVALID_URL
+ </DT><DD>The format of the URL is invalid.
+</DD></DL>
+</UL>
+<DL><DT><I>lpszUrl</I>
+ </DT><DD>Address of the input URL to canonicalize.
+</DD><DT><I>lpszBuffer</I>
+ </DT><DD>Address of the buffer that receives the resulting canonicalized URL.
+</DD><DT><I>lpdwBufferLength</I>
+ </DT><DD>Length, in bytes, of the <I>lpszBuffer</I> buffer. If the function succeeds, this parameter receives the length of the <I>lpszBuffer</I> buffer&#151;the length does not include the terminating null. If the function fails, this parameter receives the required length, in bytes, of the <I>lpszBuffer</I> buffer&#151;the required length includes the terminating null.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Flags that control canonicalization. Can be one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_DECODE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Convert %XX escape sequences to characters.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_NO_ENCODE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not convert unsafe characters to escape sequence.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_NO_META
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not remove meta sequences (such as "." and "..") from the URL.
+
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_ENCODE_SPACES_ONLY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Encode spaces only.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_BROWSER_MODE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Do not encode or decode characters after #' or '?', and do not remove trailing white space after '?'. If this value is not specified, the entire URL is encoded and trailing white space is removed.
+</FONT></TD></TR></TABLE>
+<P>If no flags are specified, the function converts all unsafe characters and meta sequences (such as \.,\ .., and \...) to escape sequences.
+</DD></DL>
+<P><B>InternetCanonicalizeUrl</B> 
+
+always encodes by default, even if the ICU_DECODE flag has been specified. To decode without re-encoding, use ICU_DECODE | ICU_NO_ENCODE. If the ICU_DECODE flag is used without ICU_NO_ENCODE, the URL is decoded before being parsed; unsafe characters then are re-encoded after parsing. This function will handle arbitrary protocol schemes, but to do so it must make inferences from the unsafe character set.
+
+<H3><A NAME="wininet_0008000103000300">InternetCloseHandle</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetCloseHandle(
+    IN HINTERNET hInet
+);
+</FONT></PRE>
+<P>Closes a single Internet handle or a subtree of Internet handles.
+
+<UL><LI>Returns TRUE if the handle is successfully closed, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hInet</I>
+ </DT><DD>Valid Internet handle to be closed.
+</DD></DL>
+<P>This function can be used to close any Internet handle or subtree of handles of the type HINTERNET and free any associated resources. The function terminates any pending operations on the handle and discards any outstanding data. If a thread is blocking a call to Wininet.dll, another thread in the application can call <B>InternetCloseHandle</B> on the Internet handle being used by the first thread to cancel the operation and unblock the first thread.
+
+<P><B>InternetCloseHandle</B> should be used to close the handle returned from <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> when the application has finished using the Internet DLL.
+
+<P>If there is a status callback registered for the handle being closed and the handle was created with a non-NULL context value, an INTERNET_STATUS_HANDLE_CLOSING callback will be made. This indication will be the last callback made from a handle and indicates that the handle is being destroyed. 
+
+<P>If asynchronous requests are pending for the handle or any of its child handles, the handle cannot be closed immediately, but it will be invalidated. Any new requests attempted using the handle will return with an ERROR_INVALID_HANDLE notification. The asynchronous requests will complete with INTERNET_STATUS_REQUEST_COMPLETE. Applications must be prepared to receive any INTERNET_STATUS_REQUEST_COMPLETE indications on the handle before the final INTERNET_STATUS_HANDLE_CLOSING indication is made, which indicates that the handle is completely closed. 
+
+<P>An application can call <B>GetLastError</B> to determine if requests are pending. If <B>GetLastError</B> returns ERROR_IO_PENDING, there were outstanding requests when the handle was closed.
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000300" TARGET=TEXT>FtpFindFirstFile</A>, <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A>, <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>, <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>, <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> 
+<H3><A NAME="wininet_0008000103000400">InternetCombineUrl</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetCombineUrl(
+    IN LPCTSTR lpszBaseUrl,
+    IN LPCTSTR lpszRelativeUrl,
+    OUT LPTSTR lpszBuffer,
+    IN OUT LPDWORD lpdwBufferLength,
+    IN DWORD dwFlags
+);
+</FONT></PRE>
+<P>Combines a base and relative URL into a single URL. The resultant URL will be canonicalized (see <A HREF="sweep082.htm#wininet_0008000103000200" TARGET=TEXT>InternetCanonicalizeUrl</A>).
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. Possible error codes include:
+<DL>
+<DT>ERROR_INVALID_PARAMETER
+ </DT><DD>Bad string, buffer, buffer size, or flags parameter.
+</DD><DT>ERROR_INSUFFICIENT_BUFFER
+ </DT><DD>The <I>*lpdwBufferLength</I> parameter, in bytes, of the buffer required to hold the resultant, combined URL.
+</DD><DT>ERROR_BAD_PATHNAME
+ </DT><DD>The URLs could not be combined.
+</DD><DT>ERROR_INTERNET_INVALID_URL
+ </DT><DD>The format of the URL is invalid.
+</DD></DL>
+</UL>
+<DL><DT><I>lpszBaseUrl</I>
+ </DT><DD>Address of the base URL to be combined.
+</DD><DT><I>lpszRelativeUrl</I>
+ </DT><DD>Address of the relative URL to be combined.
+</DD><DT><I>lpszBuffer</I>
+ </DT><DD>Address of a buffer that receives the resulting URL.
+</DD><DT><I>lpdwBufferLength</I>
+ </DT><DD>Size, in bytes, of the <I>lpszBuffer</I> buffer. If the function succeeds, this parameter receives the length, in characters, of the resultant combined URL&#151;the length does not include the null terminator. If the function fails, this parameter receives the length, in bytes, of the required buffer&#151;the length includes the null terminator. 
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Flags controlling the operation of the function. For a description of the flags, see <A HREF="sweep082.htm#wininet_0008000103000200" TARGET=TEXT>InternetCanonicalizeUrl</A>.
+</DD></DL>
+<H3><A NAME="wininet_0008000103000500">InternetConnect</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HINTERNET InternetConnect(
+    IN HINTERNET hInternetSession,
+    IN LPCTSTR lpszServerName,
+    IN INTERNET_PORT nServerPort,
+    IN LPCTSTR lpszUsername OPTIONAL,
+    IN LPCTSTR lpszPassword OPTIONAL,
+    IN DWORD dwService,
+    IN DWORD dwFlags,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Opens an FTP, Gopher, or HTTP session for a given site.
+
+<UL><LI>Returns a valid handle to the FTP, Gopher, or HTTP session if the connection is successful, or NULL otherwise. To get extended error information, call <B>GetLastError</B>. An application can also use <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A> to determine why access to the service was denied.
+
+</UL>
+<DL><DT><I>hInternetSession</I>
+ </DT><DD>Handle of the current Internet session. The handle must have been returned by a previous call to <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A>.
+</DD><DT><I>lpszServerName</I>
+ </DT><DD>Address of a null-terminated string that contains the host name of an Internet server. Alternately, the string can contain the IP number of the site in ASCII dotted-decimal format (for example, 11.0.1.45).
+</DD><DT><I>nServerPort</I>
+ </DT><DD>Number of the TCP/IP port on the server to connect to. Can be one of the values in the following list. If this parameter is set to INTERNET_INVALID_PORT_NUMBER, the function uses the default port for the specified service. These values do not cause the function to use this protocol. The value sets the port to be used. A flag must be used to set the service.
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_DEFAULT_FTP_PORT
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Use the default port for FTP servers (port 21).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_DEFAULT_GOPHER_PORT
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Use the default port for Gopher servers (port 70).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_DEFAULT_HTTP_PORT
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Use the default port for HTTP servers (port 80).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_DEFAULT_HTTPS_PORT
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Use the default port for HTTPS servers (port 443).
+</FONT></TD></TR></TABLE>
+</DD><DT><I>lpszUsername</I>
+ </DT><DD>Address of a null-terminated string that contains the name of the user to log on. If this parameter is NULL, the function uses an appropriate default, except for HTTP. A NULL parameter in HTTP causes the server to return an error. For the FTP protocol, the default is anonymous.
+</DD><DT><I>lpszPassword</I>
+ </DT><DD>Address of a null-terminated string that contains the password to use to log on. If both <I>lpszPassword</I> and <I>lpszUsername</I> are NULL, the function uses the default anonymous password. In the case of FTP, the default anonymous password is the user's e-mail name. If <I>lpszPassword</I> is NULL, but <I>lpszUsername</I> is not NULL, the function uses a blank password. The following table describes the behavior for the four possible settings of <I>lpszUsername</I> and <I>lpszPassword</I>:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><I>lpszUsername</I>
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><I>lpszPassword</I>
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>User name sent to FTP server
+</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Password sent to FTP server
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">NULL
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">NULL
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">"anonymous"
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">User's e-mail name
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Non-NULL string
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">NULL
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><I>lpszUsername</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">""
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">NULL
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Non-NULL string
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ERROR
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Non-NULL string
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Non-NULL string
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><I>lpszUsername</I>
+</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><I>lpszPassword</I>
+</FONT></TD>
+</TR>
+</TABLE>
+</DD><DT><I>dwService</I>
+ </DT><DD>Type of service to access. Can be one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_SERVICE_FTP
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">FTP service.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_SERVICE_GOPHER
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Gopher service.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_SERVICE_HTTP
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP service.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Flags specific to the service used. Can be one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">If <I>dwService</I> is:
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><I>dwFlags</I> supported
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_SERVICE_FTP
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_CONNECT_FLAG_PASSIVE (Use passive mode in all data connections for this FTP session.)
+</FONT></TD></TR></TABLE>
+</DD><DT><I>dwContext</I> 
+ </DT><DD>An application-defined value that is used to identify the application context for the returned handle in callbacks. 
+</DD></DL>
+<P>The <B>InternetConnect</B> function is required before communicating with any Internet service. 
+
+<P>Having a connect function for all protocols, even those that do not use persistent connections, lets an application communicate common information about several requests using a single function call. In addition, this allows for future versions of Internet protocols that do not require a connection to be established for every client request. 
+
+<P>For FTP sites, <B>InternetConnect</B> actually establishes a connection with the server; for others, such as Gopher, the actual connection is not established until the application requests a specific transaction.
+
+<P>For maximum efficiency, applications using the Gopher and HTTP protocols should try to minimize calls to <B>InternetConnect</B> and avoid calling this function for every transaction requested by the user. One way to accomplish this is to keep a small cache of handles returned from <B>InternetConnect</B>; when the user makes a request to a previously accessed server, that session handle is still available.
+
+<P>An application that needs to display multiline text information sent by an FTP server can use <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A> to retrieve the text.
+
+<P>For FTP connections, if <I>lpszUsername</I> is NULL, <B>InternetConnect</B> sends the string "anonymous" as the user name. If <I>lpszPassword</I> is NULL, <B>InternetConnect</B> attempts to use the user's e-mail name as the password.
+
+<P>To close the handle returned from <B>InternetConnect</B>, the application should call <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>. This function disconnects the client from the server and frees all resources associated with the connection.
+<P>See also <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A>
+<H3><A NAME="wininet_0008000103000600">InternetConfirmZoneCrossing</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">DWORD InternetConfirmZoneCrossing(
+    IN HWND hWnd,
+    IN LPSTR szUrlPrev,
+    IN LPSTR szUrlNew,
+    IN BOOL bPost
+); 
+</FONT></PRE>
+<P>Checks for changes between secure and non-secure URLs. When a change occurs in security between two URLs, an application should allow the user to acknowledge this change, typically by displaying a dialog box.
+
+<UL><LI>Returns ERROR_SUCCESS if the user confirmed that it was okay to continue or there was no user input needed, ERROR_CANCELLED if the user canceled, or ERROR_NOT_ENOUGH_MEMORY if there is not enough memory to carry out the request. 
+
+</UL>
+<DL><DT><I>hWnd </I>
+ </DT><DD>Handle of the parent window for any needed dialog box. 
+</DD><DT><I>szUrlPrev</I>
+ </DT><DD>URL that was viewed before the current request was made.
+</DD><DT><I>szUrlNew</I>
+ </DT><DD>New URL that the user has requested to view. 
+
+</DD><DT><I>bPost</I>
+ </DT><DD>TRUE if a post is being made in this request. This flag is ignored in this release.
+</DD></DL>
+<H3><A NAME="wininet_0008000103000700">InternetCrackUrl</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetCrackUrl(
+    IN LPCSTR lpszUrl,
+    IN DWORD dwUrlLength,
+    IN DWORD dwFlags,
+    IN OUT LPURL_COMPONENTS lpUrlComponents
+);
+</FONT></PRE>
+<P>Cracks a URL into its component parts. 
+
+<UL><LI>Returns TRUE if the function succeeds, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. 
+
+</UL>
+<DL><DT><I>lpszUrl</I>
+ </DT><DD>Address of a string that contains the canonical URL to crack. 
+</DD><DT><I>dwUrlLength</I>
+ </DT><DD>Length of the <I>lpszUrl</I> string, or zero if <I>lpszUrl</I> is an ASCIIZ string.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Flags controlling the operation. Can be one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_ESCAPE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Convert unsafe characters in the URL-path component to escape sequences.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_DECODE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Convert encoded characters back to their normal form. This can be used only if the user provides buffers to copy the components into.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_USERNAME
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Not currently implemented. 
+</FONT></TD></TR></TABLE>
+</DD><DT><I>lpUrlComponents</I>
+ </DT><DD>Address of a <A HREF="sweep088.htm#wininet_0008000109000a00" TARGET=TEXT>URL_COMPONENTS</A> structure that receives the URL components.
+</DD></DL>
+<P>The required components are indicated by members of the <A HREF="sweep088.htm#wininet_0008000109000a00" TARGET=TEXT>URL_COMPONENTS</A> structure. Each component has a pointer to the value, and has a member that stores the length of the stored value. If both the value and the length for a component are equal to zero, that component is not returned. If the pointer to the value of the component is NULL and the value of its corresponding length member is non-zero, the address of the first character of the corresponding component in the <I>lpszUrl</I> string is stored in the pointer, and the length of the component is stored in the length member. Otherwise, the pointer contains the address of the user-supplied buffer where the component is copied, and the length member is updated with the length of the copied component, minus 1 for the trailing string terminator.
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A>, <A HREF="sweep082.htm#wininet_0008000103001400" TARGET=TEXT>InternetSetStatusCallback</A>
+<H3><A NAME="wininet_0008000103000800">InternetCreateUrl</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetCreateUrl( 
+    IN LPURL_COMPONENTS lpUrlComponents,
+    IN DWORD dwFlags,
+    OUT LPSTR lpszUrl,
+    IN OUT LPDWORD lpdwUrlLength
+);
+</FONT></PRE>
+<P>Creates a URL from its component parts.
+
+<UL><LI>Returns TRUE if the function succeeds, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. If the function finds no matching files, <B>GetLastError</B> returns ERROR_NO_MORE_FILES.
+
+</UL>
+<DL><DT><I>lpUrlComponents</I>
+ </DT><DD>Address of a <A HREF="sweep088.htm#wininet_0008000109000a00" TARGET=TEXT>URL_COMPONENTS</A> structure that contains the components from which to create the URL.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Flags that control the operation of this function. Can be a combination of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+</B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B> Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_ESCAPE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Convert unsafe characters in the URL-path component to escape sequences.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ICU_USERNAME
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">When adding the user name, use the name that was specified at login time. 
+</FONT></TD></TR></TABLE>
+</DD><DT><I>lpszUrl</I>
+ </DT><DD>Address of a buffer that receives the URL.
+</DD><DT><I>lpdwUrlLength</I>
+ </DT><DD>Length, in bytes, of the <I>lpszUrl</I> buffer. When the function returns, this parameter receives the length, in bytes, of the URL string, minus 1 for the terminating character. If <B>GetLastError</B> returns ERROR_INSUFFICIENT_BUFFER, this parameter receives the number of bytes required to hold the created URL.
+</DD></DL>
+<H3><A NAME="wininet_0008000103000900">InternetErrorDlg</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">DWORD InternetErrorDlg(
+    IN HWND hWnd,
+    IN OUT HINTERNET hInternet,
+    IN DWORD dwError,
+    IN DWORD dwFlags,
+    IN OUT LPVOID *lppvData
+);
+ </FONT></PRE>
+<P>Displays a dialog box that explains why an error occurred with an <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A> Win32 Internet function. An application can call this function for several different error codes, and can do bookkeeping based on the user's response to the dialog box. 
+
+<UL><LI>Returns ERROR_SUCCESS, ERROR_CANCELLED, or ERROR_INTERNET_FORCE_RETRY.
+
+</UL>
+<DL><DT><I>hWnd</I>
+ </DT><DD>Handle of the parent window for any needed dialog box. This parameter can be NULL if no dialog box is needed. 
+</DD><DT><I>hInternet</I>
+ </DT><DD>Handle of the Internet connection used in the call to <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>.
+</DD><DT><I>dwError</I>
+ </DT><DD>Error value for which to display a dialog box. Can be one of these values:
+<DL>
+<DT>ERROR_INTERNET_HTTP_TO_HTTPS_ON_REDIR
+ </DT><DD>Notifies the user of the zone crossing to and from a secure site.
+</DD><DT>ERROR_INTERNET_INCORRECT_PASSWORD
+ </DT><DD>Displays a dialog box for obtaining the user's name and password. (On Windows 95, the function attempts to use the network caching user interface and disk cache.)
+</DD><DT>ERROR_INTERNET_INVALID_CA
+ </DT><DD>Notifies the user that the Win32 Internet function does not have a certificate for this SSL site.
+</DD><DT>ERROR_INTERNET_POST_IS_NON_SECURE
+ </DT><DD>Displays a warning about posting data to the server through a non-secure connection.
+</DD><DT>ERROR_INTERNET_SEC_CERT_CN_INVALID
+ </DT><DD>Displays an Invalid SSL Common Name dialog box, and lets the user view the incorrect certificate. Also allows the user to select a certificate in response to a server request.
+</DD><DT>ERROR_INTERNET_SEC_CERT_DATE_INVALID
+ </DT><DD>Tells the user that the SSL certificate has expired.
+</DD></DL>
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Action flags. Can be a combination of these values:
+<DL>
+<DT>FLAGS_ERROR_UI_FLAGS_CHANGE_OPTIONS
+ </DT><DD>If the function succeeds, store the results of the dialog box in the Internet handle.
+</DD><DT>FLAGS_ERROR_UI_FLAGS_GENERATE_DATA
+ </DT><DD>Query the Internet handle for needed information. The function constructs the appropriate data structure for the error. (For example, for Cert CN failures, the function will grab the certificate.)
+</DD><DT>FLAGS_ERROR_UI_FILTER_FOR_ERRORS
+ </DT><DD>Scan the returned headers for errors. Call after every <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>. 
+
+The function detects any hidden errors, such as an authentication error.
+</DD></DL>
+</DD><DT><I>lppvData</I>
+ </DT><DD>Address of a yet-to-be-defined structure. The structure may be different for each error that needs to be handled
+</DD></DL>
+<H3><A NAME="wininet_0008000103000a00">InternetFindNextFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetFindNextFile(
+    IN HINTERNET hFind,
+    OUT LPVOID lpvFindData
+);
+</FONT></PRE>
+<P>Continues a file search started as a result of a previous call to <A HREF="sweep083.htm#wininet_0008000104000300" TARGET=TEXT>FtpFindFirstFile</A> or <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A>.
+
+<UL><LI>Returns TRUE if the function succeeds, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. If the function finds no matching files, <B>GetLastError</B> returns ERROR_NO_MORE_FILES.
+
+</UL>
+<DL><DT><I>hFind</I>
+ </DT><DD>Valid handle returned from either <A HREF="sweep083.htm#wininet_0008000104000300" TARGET=TEXT>FtpFindFirstFile</A> or <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A>.
+</DD><DT><I>lpvFindData</I>
+ </DT><DD>Address of the buffer that receives information about the found file or directory. The format of the information placed in the buffer depends on the protocol in use. The FTP protocol returns a <B>WIN32_FIND_DATA</B> structure, and the Gopher protocol returns a <A HREF="sweep088.htm#wininet_0008000109000200" TARGET=TEXT>GOPHER_FIND_DATA</A> structure.
+</DD></DL>
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000300" TARGET=TEXT>FtpFindFirstFile</A>, <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A>
+<H3><A NAME="wininet_0008000103000b00">InternetGetLastResponseInfo</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetGetLastResponseInfo(
+    OUT LPDWORD lpdwError,
+    OUT LPTSTR lpszBuffer OPTIONAL,
+    IN OUT LPDWORD lpdwBufferLength
+);
+</FONT></PRE>
+<P>Retrieves the last Win32 Internet function error description or server response on the thread calling this API.
+ 
+<UL><LI>Returns TRUE if error text was successfully written to the buffer, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. If the buffer is too small to hold all the error text, <B>GetLastError</B> returns ERROR_INSUFFICIENT_BUFFER, and the <I>lpdwBufferLength</I> parameter contains the minimum buffer size required to return all the error text.
+</UL>
+<DL><DT><I>lpdwError</I>
+ </DT><DD>Address of a variable that receives an error code pertaining to the operation that failed.
+</DD><DT><I>lpszBuffer</I>
+ </DT><DD>Address of a buffer that receives the error text.
+</DD><DT><I>lpdwBufferLength</I>
+ </DT><DD>Size of the <I>lpszBuffer</I> buffer. When the function returns, this parameter contains the size of the string written to the buffer.
+</DD></DL>
+<P>The FTP and Gopher protocols can return additional text information along with most errors. This extended error information can be retrieved by using the <B>InternetGetLastResponseInfo</B> function whenever <B>GetLastError</B> returns ERROR_INTERNET_EXTENDED_ERROR (occurring after an unsuccessful function call).
+
+<P>The buffer pointed to by <I>lpszBuffer</I> must be large enough to hold both the error string and a zero terminator at the end of the string. However, note that the value returned in <I>lpdwBufferLength</I> does not include the terminating zero.
+
+<P><B>InternetGetLastResponseInfo</B> can be called multiple times until another Win32 Internet function API is called on this thread. When another API is called, the internal buffer that is storing the last response information is cleared.
+<H3><A NAME="wininet_0008000103000c00">InternetOpen</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HINTERNET InternetOpen(
+    IN LPCTSTR lpszAgent,
+    IN DWORD dwAccessType,
+    IN LPCTSTR lpszProxyName OPTIONAL,
+    IN LPCSTR lpszProxyBypass OPTIONAL,
+    IN DWORD dwFlags
+);
+</FONT></PRE>
+<P>Initializes an application's use of the Win32 Internet functions.
+
+<UL><LI>Returns a valid handle that the application passes on to subsequent Win32 Internet functions. If <B>InternetOpen</B> fails, it returns NULL. To get a specific error code, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>lpszAgent</I>
+ </DT><DD>Address of a string that contains the name of the application or entity calling the Internet functions (for example, Microsoft Internet Explorer). This name is used as the user agent in the HTTP protocol.
+</DD><DT><I>dwAccessType</I>
+ </DT><DD>Type of access required. Can be one of these values:
+<DL>
+<DT>INTERNET_OPEN_TYPE_DIRECT
+ </DT><DD>Resolve all host names locally.
+</DD><DT>INTERNET_OPEN_TYPE_PROXY
+ </DT><DD>Pass requests to the proxy unless a proxy bypass list is supplied and the name to be resolved bypasses the proxy. In this case, the function proceeds as for INTERNET_OPEN_TYPE_DIRECT.
+</DD><DT>INTERNET_OPEN_TYPE_PRECONFIG
+ </DT><DD>Retrieve the proxy or direct configuration from the registry. 
+</DD></DL>
+</DD><DT><I>lpszProxyName</I>
+ </DT><DD>Address of a string that contains the name of the proxy server (or servers) to use if proxy access was specified. If this parameter is NULL, the function reads proxy information from the registry. For more information about this parameter, see the comments below.
+</DD><DT><I>lpszProxyBypass</I>
+ </DT><DD>Address of an optional list of host names or IP addresses, or both, that are known locally. Requests to these names are not routed through the proxy. The list can contain wildcards, such as "157.55.* *int*", meaning any IP address starting with 157.55, or any name containing the substring "int", will bypass the proxy. 
+ <P>If this parameter specifies the "&lt;local&gt;" macro as the only entry, the function bypasses any host name that does not contain a period. For example, "www.microsoft.com" would be routed to the proxy, whereas "internet" would not.
+ <P>If this parameter is NULL, the function reads the bypass list from the registry.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Flag that indicates various options affecting the behavior of the function. Can be a combination of these values:
+<DL>
+<DT>INTERNET_FLAG_OFFLINE
+ </DT><DD>Satisfy download operations on this handle through the persistent cache only. If the item does not exist in the cache, the function returns an appropriate error code.
+</DD><DT>INTERNET_FLAG_ASYNC
+ </DT><DD>Future operations on this handle may fail with ERROR_IO_PENDING. A status callback will be made with INTERNET_STATUS_REQUEST_COMPLETE. This callback will be on a thread other than the one for the original request. A status callback routine must be registered or the functions will be completed synchronously.
+</DD></DL>
+</DD></DL>
+<P>This function is the first Win32 Internet function called by an application. It tells the Internet DLL to initialize internal data structures and prepare for future calls from the application. When the application finishes using the Internet functions, it should call <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> to free the handle and any associated resources. 
+
+<P>If <I>dwFlags</I> includes INTERNET_FLAG_ASYNC, all handles derived from this handle will have asynchronous behavior as long as a status callback routine is registered. For a function to be completed synchronously, <I>dwContext</I> must be set to zero for that call.
+
+<P>By default, the function assumes that the proxy specified by <I>lpszProxyName</I> is a CERN proxy. 
+For example, "proxy" defaults to a CERN proxy called "proxy" that listens at port 80 (decimal). An application can specify more than one proxy, including different proxies for the different protocols. For example, if you specify "ftp=ftp://ftp-gw gopher=http://jericho:99 proxy", FTP requests are made through the FTP proxy "ftp-gw", which listens at port 21 (default for FTP), and Gopher requests are made through a CERN proxy called "jericho", which listens at port 99. All other requests (for example, HTTP requests) are made through the CERN proxy called "proxy", which listens at port 80. Note that if the application is only using FTP, for example, it would not need to specify "ftp=ftp://ftp-gw:21". It could specify just "ftp-gw". An application must specify the protocol names only if it will be using more than one protocol per handle returned by <B>InternetOpen</B>.
+
+
+<P>The application can make any number of calls to <B>InternetOpen</B>, although a single call is normally sufficient. The application may need to have separate behaviors defined for each <B>InternetOpen</B> instance, such as different proxy servers configured for each.
+<P>See also <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>
+<H3><A NAME="wininet_0008000103000d00">InternetOpenUrl</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HINTERNET InternetOpenUrl(
+    IN HINTERNET hInternetSession, 
+    IN LPCTSTR lpszUrl,
+    IN LPCTSTR lpszHeaders OPTIONAL,
+    IN DWORD dwHeadersLength,
+    IN DWORD dwFlags,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Begins reading a complete FTP, Gopher, or HTTP Universal Resource Locator (URL). Use <A HREF="sweep082.htm#wininet_0008000103000200" TARGET=TEXT>InternetCanonicalizeUrl</A> first if the URL being used contains a relative URL and a base URL separated by blank spaces.
+
+<UL><LI>Returns a valid handle to the FTP, Gopher, or HTTP URL if the connection is successfully established, or NULL if the connection fails. To get a specific error code, call <B>GetLastError</B>. To determine why access to the service was denied, call <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A>.
+
+</UL>
+<DL><DT><I>hInternetSession</I>
+ </DT><DD>Handle of the current Internet session. The handle must have been returned by a previous call to <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A>.
+</DD><DT><I>lpszUrl</I>
+ </DT><DD>Address of a string that contains the URL to begin reading. Only URLs beginning with ftp:, gopher:, http:, or https: are supported.
+</DD><DT><I>lpszHeaders</I>
+ </DT><DD>Address of a string that contains the headers to be sent to the HTTP server. (For more information, see the description of the <I>lpszHeaders</I> parameter to <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>.)
+</DD><DT><I>dwHeadersLength</I>
+ </DT><DD>Length, in characters, of the additional headers. If this parameter is -1L and <I>lpszHeaders</I> is not NULL, <I>lpszHeaders</I> is assumed to be zero-terminated (ASCIIZ) and the length is calculated.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Action flags. Can be one of these values:
+<DL>
+<DT>INTERNET_FLAG_RELOAD
+ </DT><DD>Get the data from the wire even if it is locally cached.
+</DD><DT>INTERNET_FLAG_DONT_CACHE
+ </DT><DD>Do not cache the data, either locally or in any gateways.
+</DD><DT>INTERNET_FLAG_RAW_DATA
+ </DT><DD>Return raw data (<B>WIN32_FIND_DATA</B> structures for FTP, and <A HREF="sweep088.htm#wininet_0008000109000200" TARGET=TEXT>GOPHER_FIND_DATA</A> structures for Gopher). If this flag is not specified, <B>InternetOpenUrl</B> returns HTML formatted for directories.
+</DD><DT>INTERNET_FLAG_SECURE
+ </DT><DD>Request secure transactions on the wire with Secure Sockets Layer or PCT. This flag applies to HTTP requests only. 
+</DD><DT>INTERNET_FLAG_EXISTING_CONNECT
+ </DT><DD>If possible, reuse the existing connections to the server for new requests generated by <B>InternetOpenUrl</B> instead of creating a new session for each request.
+</DD></DL>
+</DD><DT><I>dwContext</I>
+ </DT><DD>An application-defined value that is passed, along with the returned handle, to any callback functions.
+</DD></DL>
+<P>This is a general function that an application can use to retrieve data over any of the protocols that the Win32 Internet functions support. This function is particularly useful when the application does not need to access the particulars of a protocol, but only requires the data corresponding to a URL. The <B>InternetOpenUrl</B> function parses the URL string, establishes a connection to the server, and prepares to download the data identified by the URL. The application can then use <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A> to retrieve the URL data. It is not necessary to call <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A> before <B>InternetOpenUrl</B>.
+
+<P><B>InternetOpenUrl</B> disables Gopher on ports less than 1024, except for port 70 (the standard Gopher port) and port 105 (typically used for Central Services Organization [CSO] name searches).
+
+
+<P>Use <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> to close the handle returned from <B>InternetOpenUrl</B>. However, note that closing the handle before all the URL data has been read results in the connection being terminated.
+
+<P>See also <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>, <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A>, <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A>
+<H3><A NAME="wininet_0008000103000e00">InternetQueryDataAvailable</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetQueryDataAvailable( 
+    IN HINTERNET hFile,
+    OUT LPDWORD lpdwNumberOfBytesAvailable,
+    IN DWORD dwFlags,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Queries the amount of data available.
+
+<UL><LI>Returns TRUE if the function succeeds, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. If the function finds no matching files, the <B>GetLastError</B> function returns ERROR_NO_MORE_FILES.
+
+</UL>
+<DL><DT><I>hFile</I>
+ </DT><DD>Valid Internet file handle, as returned by <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep084.htm#wininet_0008000105000600" TARGET=TEXT>GopherOpenFile</A>, or <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>.
+</DD><DT><I>lpdwNumberOfBytesAvailable</I>
+ </DT><DD>Address of a variable that receives the number of available bytes.
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Reserved; must be zero. 
+</DD><DT><I>dwContext</I>
+ </DT><DD>Reserved; must be zero. 
+</DD></DL>
+<P>This function returns the number of bytes of data that are available to be read immediately by a subsequent call to <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A>. If there is currently no data available and the end of the file has not been reached, the request waits until data becomes available. The amount of data remaining will not be recalculated until all of the available data indicated by the call to <B>InternetQueryDataAvailable</B> is read.
+
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000300" TARGET=TEXT>FtpFindFirstFile</A>, <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A>
+<H3><A NAME="wininet_0008000103000f00">InternetQueryOption</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetQueryOption(
+    IN HINTERNET hInternet OPTIONAL,
+    IN DWORD dwOption,
+    OUT LPVOID lpBuffer OPTIONAL,
+    IN OUT LPDWORD lpdwBufferLength
+);
+</FONT></PRE>
+<P>Queries an Internet option on the specified handle.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get a specific error code, call <B>GetLastError</B>. 
+
+
+</UL>
+<DL><DT><I>hInternet</I>
+ </DT><DD>Internet handle on which to query information.
+</DD><DT><I>dwOption</I>
+ </DT><DD>Internet option to query. Can be one of these values:
+<DL>
+<DT>INTERNET_OPTION_CALLBACK
+ </DT><DD>Returns the address of the callback function defined for this handle.
+
+</DD><DT>INTERNET_OPTION_CONNECT_TIMEOUT
+ </DT><DD>Returns the time-out value in milliseconds to use for Internet connection requests. If a connection request takes longer than this time-out value, the request is canceled. The default time-out value is infinite.
+</DD><DT>INTERNET_OPTION_CONNECT_RETRIES
+ </DT><DD>Returns the retry count to use for Internet connection requests. If a connection attempt still fails after the specified number of tries, the request is canceled. The default is five retries.
+</DD><DT>INTERNET_OPTION_CONNECT_BACKOFF
+ </DT><DD>Returns the delay value, in milliseconds, to wait between connection retries. (This flag is currently not implemented.)
+</DD><DT>INTERNET_OPTION_CONTROL_SEND_TIMEOUT
+ </DT><DD>Returns the time-out value, in milliseconds, to use for non-data (control) Internet send requests. If a non-data send request takes longer than this time-out, the request is canceled. The default time-out is infinite. Currently, this value has meaning only for FTP sessions.
+</DD><DT>INTERNET_OPTION_CONTROL_RECEIVE_TIMEOUT
+ </DT><DD>Returns the time-out value, in milliseconds, to use for non-data (control) Internet receive requests. If a non-data receive request takes longer than this time-out value, the request is canceled. The default time-out is infinite. Currently, this value has meaning only for FTP sessions.
+</DD><DT>INTERNET_OPTION_DATA_SEND_TIMEOUT
+ </DT><DD>Returns the time-out value, in milliseconds, to use for Internet data send requests. If a data send request takes longer than this time-out value, the request is canceled. The default time-out value is infinite.
+</DD><DT>INTERNET_OPTION_DATA_RECEIVE_TIMEOUT
+ </DT><DD>Returns the time-out value, in milliseconds, to use for Internet data receive requests. If a data receive request takes longer than this time-out value, the request is canceled. The default time-out value is infinite.
+</DD><DT>INTERNET_OPTION_HANDLE_TYPE
+ </DT><DD>Returns the type of the Internet handle passed in. Possible return values include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_INTERNET </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_CONNECT_FTP </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_CONNECT_GOPHER </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_CONNECT_HTTP </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_FTP_FIND </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_FTP_FIND_HTML </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_FTP_FILE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_FTP_FILE_HTML </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_GOPHER_FIND </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_GOPHER_FIND_HTML </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_GOPHER_FILE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_GOPHER_FILE_HTML </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_HANDLE_TYPE_HTTP_REQUEST </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR></TABLE>
+</DD><DT>INTERNET_OPTION_CONTEXT_VALUE
+ </DT><DD>Returns the context value associated with this Internet handle.
+</DD><DT>INTERNET_OPTION_READ_BUFFER_SIZE
+ </DT><DD>Returns the size of the read buffer (for example, the buffer used by <A HREF="sweep083.htm#wininet_0008000104000500" TARGET=TEXT>FtpGetFile</A>).
+</DD><DT>INTERNET_OPTION_WRITE_BUFFER_SIZE
+ </DT><DD>Returns the size of the write buffer (for example, the buffer used by <A HREF="sweep083.htm#wininet_0008000104000700" TARGET=TEXT>FtpPutFile</A>).
+</DD><DT>INTERNET_OPTION_ASYNC_PRIORITY
+ </DT><DD>Returns the priority of this download if it is an asynchronous download.
+</DD><DT>INTERNET_OPTION_PARENT_HANDLE
+ </DT><DD>Returns the parent handle of this handle.
+</DD><DT>INTERNET_OPTION_KEEP_CONNECTION
+ </DT><DD>Returns an indication whether this handle uses persistent connections. Can be one of these values: 
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_KEEP_ALIVE_UNKNOWN </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_KEEP_ALIVE_ENABLED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_KEEP_ALIVE_DISABLED </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR></TABLE>
+</DD><DT>INTERNET_OPTION_USERNAME
+ </DT><DD>Returns the user name associated with a handle returned by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>.
+</DD><DT>INTERNET_OPTION_PASSWORD
+ </DT><DD>Returns the password associated with the handle returned by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>.
+</DD><DT>INTERNET_OPTION_REQUEST_FLAGS
+ </DT><DD>Returns special status flags about the current download in progress. The only flag that is returned at this time is INTERNET_REQFLAG_FROM_CACHE. This is the way for the caller to find out whether a request is being satisfied from the cache.
+
+</DD><DT>INTERNET_OPTION_EXTENDED_ERROR
+ </DT><DD>Returns the Windows Sockets error code that was mapped to the ERROR_INTERNET_ error codes last returned in this thread context.
+</DD><DT>INTERNET_OPTION_SECURITY_CERTIFICATE_STRUCT
+ </DT><DD>Returns the certificate for an SSL/PCT server into the <A HREF="sweep088.htm#wininet_0008000109000500" TARGET=TEXT>INTERNET_CERTIFICATE_INFO</A> structure.
+</DD><DT>INTERNET_OPTION_SECURITY_CERTIFICATE
+ </DT><DD>Returns the certificate for an SSL/PCT server into a formatted string. 
+</DD><DT>INTERNET_OPTION_SECURITY_KEY_BITNESS
+ </DT><DD>Returns the bit size of the encryption key. The larger the number, the greater the encryption strength being used.
+</DD><DT>INTERNET_OPTION_OFFLINE_MODE
+ </DT><DD>Not currently implemented.
+</DD><DT>INTERNET_OPTION_CACHE_STREAM_HANDLE
+ </DT><DD>Returns the file handle being used to write the cached data.
+</DD><DT>INTERNET_OPTION_ASYNC
+ </DT><DD>Not currently implemented.
+</DD><DT>INTERNET_OPTION_SECURITY_FLAGS
+ </DT><DD>Returns the security flags for a handle. Can be a combination of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_128BIT </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_40BIT </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_56BIT </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_IETFSSL4 </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_IGNORE_CERT_CN_INVALID </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_IGNORE_CERT_DATE_INVALID </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTP </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTPS </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_NORMALBITNESS </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_PCT </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_PCT4 </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_SECURE </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_SSL </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_SSL3 </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SECURITY_FLAG_UNKNOWNBIT </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"></FONT></TD></TR></TABLE>
+</DD><DT>INTERNET_OPTION_DATAFILE_NAME
+ </DT><DD>Returns the name of the file backing a downloaded entity.
+</DD><DT>INTERNET_OPTION_URL
+ </DT><DD>Returns the full URL of a downloaded entity. 
+</DD><DT>INTERNET_OPTION_REFRESH
+ </DT><DD>Returns TRUE if variables are allowed to be re-read from the registry for a handle. 
+</DD><DT>INTERNET_OPTION_PROXY
+ </DT><DD>Returns the proxy information on an existing <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> handle when the process handle is not NULL. If the process handle is NULL, the API sets or queries the global proxy information. The <I>lpBuffer</I> parameter is an <A HREF="sweep088.htm#wininet_0008000109000700" TARGET=TEXT>INTERNET_PROXY_INFO</A> structure that contains the proxy information.
+</DD><DT>INTERNET_OPTION_VERSION
+ </DT><DD>Returns the version number of Wininet.dll. The <I>lpBuffer</I> parameter is the address of an <A HREF="sweep088.htm#wininet_0008000109000900" TARGET=TEXT>INTERNET_VERSION_INFO</A> structure.
+</DD><DT>INTERNET_OPTION_USER_AGENT
+ </DT><DD>Returns the user agent string on handles supplied by <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> and used in a subsequent <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>, so long as it is not overridden by a header added by <A HREF="sweep085.htm#wininet_0008000106000100" TARGET=TEXT>HttpAddRequestHeaders</A> or <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>.
+</DD></DL>
+</DD><DT><I>lpBuffer</I>
+ </DT><DD>Address of a buffer that receives the option setting.
+</DD><DT><I>lpdwBufferLength</I>
+ </DT><DD>Address of a variable that contains the length of <I>lpBuffer</I>. When the function returns, this parameter receives the length of the data placed into <I>lpBuffer</I>. If <B>GetLastError</B> returns ERROR_INSUFFICIENT_BUFFER, this parameter receives the number of bytes required to hold the created URL.
+</DD></DL>
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000500" TARGET=TEXT>FtpGetFile</A>, <A HREF="sweep083.htm#wininet_0008000104000700" TARGET=TEXT>FtpPutFile</A>, <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>, <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A>, <A HREF="sweep082.htm#wininet_0008000103001200" TARGET=TEXT>InternetSetOption</A>
+
+<H3><A NAME="wininet_0008000103001000">InternetReadFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetReadFile(
+    IN HINTERNET hFile,
+    IN LPVOID lpBuffer,
+    IN DWORD dwNumberOfBytesToRead,
+    OUT LPDWORD lpNumberOfBytesRead
+);
+</FONT></PRE>
+<P>Reads data from a handle opened by the <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>, <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep084.htm#wininet_0008000105000600" TARGET=TEXT>GopherOpenFile</A>, or <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A> function.
+
+<UL><LI>Returns TRUE if successful or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. An application can also use <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A> when necessary.
+
+</UL>
+<DL><DT><I>hFile</I>
+ </DT><DD>Valid handle returned from a previous call to <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>, <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep084.htm#wininet_0008000105000600" TARGET=TEXT>GopherOpenFile</A>, or <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>.
+</DD><DT><I>lpBuffer</I>
+ </DT><DD>Address of a buffer that receives the data read.
+</DD><DT><I>dwNumberOfBytesToRead</I>
+ </DT><DD>Number of bytes to read.
+</DD><DT><I>lpNumberOfBytesRead</I>
+ </DT><DD>Address of a variable that receives the number of bytes read. The <B>InternetReadFile</B> function sets this value to zero before doing any work or error checking.
+</DD></DL>
+<P>If the return value is TRUE and the number of bytes read is zero, the transfer has been completed and there are no more bytes to read on the handle. This is analogous to reaching EOF in a local file. Call <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> to free up the connection to the server.
+
+<P>The buffer pointed to by <I>lpBuffer</I> is not always filled by calls to <B>InternetReadFile</B> (sufficient data may not have arrived from the server). When reading HTML data, for the first read posted, the buffer must be large enough to hold the HTML headers. When reading HTML-encoded directory entries, the buffer must be large enough to hold at least one complete entry.
+
+<P>When the item being read is also being cached by a Win32 Internet function, the application must ensure that a read is made for end-of-file so the cache file is committed correctly.
+
+<P>This function always fulfills the user's request. If more data is requested than is available, the function waits until enough data to complete the request is available. The only time that less data is returned than requested is when the end of the file has been reached.
+
+<P>This function can also be used to retrieve FTP and Gopher directory listings as an HTML document on a handle opened by <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>. The INTERNET_FLAG_RAW_DATA value must not have been specified in the call to <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>.
+
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep084.htm#wininet_0008000105000600" TARGET=TEXT>GopherOpenFile</A>, <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>, <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>
+<H3><A NAME="wininet_0008000103001100">InternetSetFilePointer</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetSetFilePointer(
+    IN HINTERNET hFile,
+    IN LONG IDistanceToMove,
+    IN PVOID pReserved,
+    IN DWORD dwMoveMethod,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Sets a file position for <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A>. This is a synchronous call; however, subsequent calls to <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A> may block or return pending if the data is not available from the cache and the server does not support random access.
+
+<UL><LI>Returns the current file position if the function succeeds, or -1 otherwise.
+
+</UL>
+<DL><DT><I>hFile</I>
+ </DT><DD>Valid handle returned from a previous call to <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep084.htm#wininet_0008000105000600" TARGET=TEXT>GopherOpenFile</A>, <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A> on an HTTP URL, or to <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A> (using the GET or HEAD method and passed to <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>). This handle must not have been created with the INTERNET_FLAG_DONT_CACHE or INTERNET_FLAG_NO_CACHE_WRITE value set.
+</DD><DT><I>IDistanceToMove</I>
+ </DT><DD>Number of bytes to move the file pointer. A positive value moves the pointer forward in the file, and a negative value moves it backward. 
+</DD><DT><I>pReserved</I>
+ </DT><DD>Reserved; must be NULL.
+</DD><DT><I>dwMoveMethod</I>
+ </DT><DD>Starting point for the file pointer move. Can be one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">FILE_BEGIN
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The starting point is zero or the beginning of the file. If FILE_BEGIN is specified, <I>lDistanceToMove</I> is interpreted as an unsigned location for the new file pointer.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">FILE_CURRENT
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The current value of the file pointer is the starting point.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">FILE_END
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The current end-of-file position is the starting point. This method fails if the content length is unknown.
+</FONT></TD></TR></TABLE>
+</DD><DT><I>dwContext</I>
+ </DT><DD>Reserved; must be zero.
+</DD></DL>
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep084.htm#wininet_0008000105000600" TARGET=TEXT>GopherOpenFile</A>, <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>, <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>, <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>, <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A>
+<H3><A NAME="wininet_0008000103001200">InternetSetOption</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetSetOption(
+    IN HINTERNET hInternet OPTIONAL,
+    IN DWORD dwOption,
+    IN LPVOID lpBuffer,
+    IN DWORD dwBufferLength
+);
+</FONT></PRE>
+<P>Sets an Internet option on the specified handle.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get a specific error code, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hInternet</I>
+ </DT><DD>Internet handle on which to set information.
+</DD><DT><I>dwOption</I>
+ </DT><DD>Internet option to set. Can be a combination of these values:
+<DL>
+<DT>INTERNET_OPTION_CALLBACK
+ </DT><DD>Sets the address of the callback function defined for this handle.
+</DD><DT>INTERNET_OPTION_CONNECT_TIMEOUT
+ </DT><DD>Sets the time-out value, in milliseconds, to use for Internet connection requests. If a connection request takes longer than this time-out value, the request is canceled. The default time-out value is infinite.
+</DD><DT>INTERNET_OPTION_CONNECT_RETRIES
+ </DT><DD>Sets the retry count to use for Internet connection requests. If a connection attempt still fails after the specified number of tries, the request is canceled. The default is five retries.
+</DD><DT>INTERNET_OPTION_CONNECT_BACKOFF
+ </DT><DD>Sets the delay value, in milliseconds, to wait between connection retries.
+</DD><DT>INTERNET_OPTION_CONTROL_RECEIVE_TIMEOUT
+ </DT><DD>Sets the time-out value, in milliseconds, to use for non-data (control) Internet receive requests. If a non-data receive request takes longer than this time-out value, the request is canceled. The default time-out is infinite. Currently, this value has meaning only for FTP sessions.
+</DD><DT>INTERNET_OPTION_CONTROL_SEND_TIMEOUT
+ </DT><DD>Sets the time-out value, in milliseconds, to use for non-data (control) Internet send requests. If a non-data send request takes longer than this time-out value, the request is canceled. The default time-out value is infinite. Currently, this value has meaning only for FTP sessions.
+</DD><DT>INTERNET_OPTION_CONTROL_RECEIVE_TIMEOUT
+ </DT><DD>Sets the time-out value, in milliseconds, to use for non-data (control) Internet receive requests. If a non-data receive request takes longer than this time-out value, the request is canceled. The default time-out value is infinite. Currently, this value has meaning only for FTP sessions.
+</DD><DT>INTERNET_OPTION_DATA_SEND_TIMEOUT
+ </DT><DD>Sets the time-out value, in milliseconds, to use for data Internet send requests. If a data send request takes longer than this time-out value, the request is canceled. The default time-out value is infinite.
+</DD><DT>INTERNET_OPTION_DATA_RECEIVE_TIMEOUT
+ </DT><DD>Sets the time-out value, in milliseconds, to use for data Internet receive requests. If a data receive request takes longer than this time-out value, the request is canceled. The default time-out value is infinite.
+</DD><DT>INTERNET_OPTION_ASYNC_PRIORITY
+ </DT><DD>Sets the priority of this download if it is an asynchronous download. This option has not been implemented.
+</DD><DT>INTERNET_OPTION_CONTEXT_VALUE
+ </DT><DD>Sets the context value associated with this Internet handle. Currently, this sets the context value to the address stored in the pointer, DWORD(lpBuffer). For Internet Explorer 4.0, this will be corrected so that the value stored in the buffer will be used, and this flag will be reassigned a new value. The old value, 10, will be preserved so that applications that are written for the old behavior will still be supported.
+</DD><DT>INTERNET_OPTION_REFRESH
+ </DT><DD>Allows variables to be re-read from the registry for a handle. 
+</DD><DT>INTERNET_OPTION_PROXY
+ </DT><DD>Sets the proxy information on an existing <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> handle when the process handle is not NULL. If the process handle is NULL, the API sets or queries the global proxy information. The <I>lpBuffer</I> parameter is an <A HREF="sweep088.htm#wininet_0008000109000700" TARGET=TEXT>INTERNET_PROXY_INFO</A> structure that contains the proxy information.
+
+</DD><DT>INTERNET_OPTION_USER_AGENT
+ </DT><DD>Sets the user agent string on handles supplied by <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> and used in subsequent <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A> functions, as long as it is not overridden by a header added by <A HREF="sweep085.htm#wininet_0008000106000100" TARGET=TEXT>HttpAddRequestHeaders</A> or <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>.
+</DD><DT>INTERNET_OPTION_USERNAME
+ </DT><DD>Sets the user name associated with a handle returned by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>.
+</DD><DT>INTERNET_OPTION_PASSWORD
+ </DT><DD>Sets the password associated with a handle returned by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>.
+</DD><DT>INTERNET_OPTION_READ_BUFFER_SIZE
+ </DT><DD>Sets the size, in bytes, of the buffer to use to read the data.
+</DD><DT>INTERNET_OPTION_WRITE_BUFFER_SIZE
+ </DT><DD>Sets the size of the write buffer (for example, the buffer used by <A HREF="sweep083.htm#wininet_0008000104000700" TARGET=TEXT>FtpPutFile</A>).
+</DD><DT>INTERNET_OPTION_WRITE_DATA
+ </DT><DD>Sets the size, in bytes, of the buffer to use while writing out the data.
+</DD></DL>
+</DD><DT><I>lpBuffer</I>
+ </DT><DD>Address of a buffer that contains the option setting.
+</DD><DT><I>dwBufferLength</I>
+ </DT><DD>Length of the <I>lpBuffer</I> buffer. 
+</DD></DL>
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000500" TARGET=TEXT>FtpGetFile</A>, <A HREF="sweep083.htm#wininet_0008000104000700" TARGET=TEXT>FtpPutFile</A>, <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>, <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A>, <A HREF="sweep082.htm#wininet_0008000103000f00" TARGET=TEXT>InternetQueryOption</A>
+
+<H3><A NAME="wininet_0008000103001300">InternetSetOptionEx</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetSetOptionEx(
+    IN HINTERNET hInternet OPTIONAL,
+    IN DWORD dwOption,
+    IN LPVOID lpBuffer,
+    IN DWORD dwBufferLength,
+    IN DWORD dwFlags
+); 
+</FONT></PRE>
+<P>Sets an Internet option on the specified handle. 
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get a specific error code, call <B>GetLastError</B>. 
+
+</UL>
+<DL><DT><I>hInternet</I>
+ </DT><DD>Internet handle on which to set information.
+</DD><DT><I>dwOption</I>
+ </DT><DD>Internet option to set. For a list of possible values, see <A HREF="sweep082.htm#wininet_0008000103001200" TARGET=TEXT>InternetSetOption</A>.
+</DD><DT><I>lpBuffer</I>
+ </DT><DD>Address of a buffer that contains the option setting.
+</DD><DT><I>dwBufferLength</I>
+ </DT><DD>Length of the <I>lpBuffer</I> buffer. 
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Action flags. Can be one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ISO_GLOBAL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Modify the option globally.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">ISO_REGISTRY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Write the option to the registry (where applicable).
+</FONT></TD></TR></TABLE>
+</DD></DL>
+<H3><A NAME="wininet_0008000103001400">InternetSetStatusCallback</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">INTERNET_STATUS_CALLBACK InternetSetStatusCallback(
+    IN HINTERNET hInternet,
+    IN INTERNET_STATUS_CALLBACK lpfnInternetCallback
+);
+</FONT></PRE>
+<P>Sets up a callback function that Win32 Internet functions can call as progress is made during an operation.
+
+<UL><LI>Returns the previously defined status callback function if successful, NULL if there was no previously defined status callback function, or INTERNET_INVALID_STATUS_CALLBACK if the callback function is not valid.
+
+</UL>
+<DL><DT><I>hInternet</I>
+ </DT><DD>Handle for which the callback is to be set.
+</DD><DT><I>lpfnInternetCallback</I>
+ </DT><DD>Address of the callback function to call when progress is made, or to return NULL to remove the existing callback function. For more information about the callback function, see <A HREF="sweep082.htm#wininet_0008000103001500" TARGET=TEXT>InternetStatusCallback</A>.
+</DD></DL>
+<P>Both synchronous and asynchronous functions use the callback function to indicate the progress of the request, such as resolving a name, connecting to a server, and so on. The callback function is required for an asynchronous operation. The asynchronous request will call back to the application with INTERNET_STATUS_REQUEST_COMPLETE to indicate the request has been completed.
+
+<P>A callback function can be set on any handle, and is inherited by derived handles. A callback function can be changed using <B>InternetSetStatusCallback</B>, providing there are no pending requests that need to use the previous callback value. Note, however, that changing the callback function on a handle does not change the callbacks on derived handles, such as that returned by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>. You must change the callback function at each level.
+
+<P>Many of the Win32 Internet functions perform several operations on the network. Each operation can take time to complete, and each can fail. 
+
+<P>It is sometimes desirable to display status information during a long-term operation. You can display status information by setting up an Internet status callback function that cannot be removed as long as any callbacks or any asynchronous functions are pending.
+
+<P>After initiating <B>InternetSetStatusCallback</B>, it can be accessed from within any Win32 Internet function for monitoring time-intensive network operations. 
+<H3><A NAME="wininet_0008000103001500">InternetStatusCallback</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">VOID InternetStatusCallback(
+    IN HINTERNET hInternet,
+    IN DWORD dwContext,
+    IN DWORD dwInternetStatus,
+    IN LPVOID lpvStatusInformation OPTIONAL,
+    IN DWORD dwStatusInformationLength
+);
+</FONT></PRE>
+<P>This is a placeholder for the application-defined status callback
+
+<UL><LI>No return value.
+
+</UL>
+<DL><DT><I>hInternet</I>
+ </DT><DD>Handle for which the callback function is being called.
+</DD><DT><I>dwContext</I>
+ </DT><DD>Application-defined context value associated with <I>hInternet</I>
+</DD><DT><I>dwInternetStatus</I>
+ </DT><DD>Status code that indicates why the callback function is being called. Can be one of these values:
+<DL>
+<DT>INTERNET_STATUS_RESOLVING_NAME
+ </DT><DD>Looking up the IP address of the name contained in <I>lpvStatusInformation</I>.
+</DD><DT>INTERNET_STATUS_NAME_RESOLVED
+ </DT><DD>Successfully found the IP address of the name contained in <I>lpvStatusInformation</I>.
+</DD><DT>INTERNET_STATUS_CONNECTING_TO_SERVER
+ </DT><DD>Connecting to the socket address (SOCKADDR) pointed to by <I>lpvStatusInformation</I>.
+</DD><DT>INTERNET_STATUS_CONNECTED_TO_SERVER
+ </DT><DD>Successfully connected to the socket address (SOCKADDR) pointed to by <I>lpvStatusInformation</I>.
+</DD><DT>INTERNET_STATUS_SENDING_REQUEST
+ </DT><DD>Sending the information request to the server. The <I>lpvStatusInformation</I> parameter is NULL.
+</DD><DT>INTERNET_STATUS_ REQUEST_SENT
+ </DT><DD>Successfully sent the information request to the server. The <I>lpvStatusInformation</I> parameter points to a DWORD containing the number of bytes sent.
+</DD><DT>INTERNET_STATUS_RECEIVING_RESPONSE
+ </DT><DD>Waiting for the server to respond to a request. The <I>lpvStatusInformation</I> parameter is NULL.
+</DD><DT>INTERNET_STATUS_RESPONSE_RECEIVED
+ </DT><DD>Successfully received a response from the server. The <I>lpvStatusInformation</I> parameter points to a DWORD containing the number of bytes received.
+</DD><DT>INTERNET_STATUS_REDIRECT
+ </DT><DD>Indicates that an HTTP request is about to automatically redirect the request. The <I>lpvStatusInformation</I> parameter points to the new URL. At this point, the application may read any data returned by the server with the redirect response, and may query the response headers. It may also cancel the operation by closing the handle. This callback is not made if the original request specified INTERNET_FLAG_NO_AUTO_REDIRECT.
+</DD><DT>INTERNET_STATUS_CLOSING_CONNECTION
+ </DT><DD>Closing the connection to the server. The <I>lpvStatusInformation</I> parameter is NULL.
+</DD><DT>INTERNET_STATUS_CONNECTION_CLOSED
+ </DT><DD>Successfully closed the connection to the server. The <I>lpvStatusInformation</I> parameter is NULL.
+</DD><DT>INTERNET_STATUS_HANDLE_CREATED
+ </DT><DD>Used by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A> to indicate it has created the new handle. This lets the application call <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> from another thread, if the connect is taking too long.
+</DD><DT>INTERNET_STATUS_HANDLE_CLOSING
+ </DT><DD>This handle value is now terminated
+</DD><DT>INTERNET_STATUS_REQUEST_COMPLETE
+ </DT><DD>An asynchronous operation has been completed. See <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> for details on INTERNET_FLAG_ASYNC.
+ <P>The <I>lpvStatusInformation</I> parameter points to an <A HREF="sweep088.htm#wininet_0008000109000300" TARGET=TEXT>INTERNET_ASYNC_RESULT</A> structure. The <I>dwStatusInformationLength</I> parameter contains the final completion status of the asynchronous function. If this is ERROR_INTERNET_EXTENDED_ERROR, the application can retrieve the server error information by using <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A>.
+</DD></DL>
+</DD><DT><I>lpvStatusInformation</I>
+ </DT><DD>Address of a buffer that contains information pertinent to this call to the callback function.
+</DD><DT><I>dwStatusInformationLength</I>
+ </DT><DD>Size of the <I>lpvStatusInformation</I> buffer.
+</DD></DL>
+<P>In the case of INTERNET_STATUS_REQUEST_COMPLETE, <I>lpvStatusInformation</I> is the address of an <A HREF="sweep088.htm#wininet_0008000109000300" TARGET=TEXT>INTERNET_ASYNC_RESULT</A> structure.
+
+<P>An application uses the callback function to indicate the progress of synchronous and asynchronous functions, and to indicate the completion of an asynchronous request.
+
+<P>Because callbacks are made during processing of the request, the application should spend as little time as possible in the callback function to avoid degrading data throughput on the network. For example, displaying a dialog box in a callback function may be such a lengthy operation that the server terminates the request.
+
+<P>The callback function may be called in a thread context different from the thread that initiated the request.
+
+<P>See also <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>, <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A>, <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A>
+<H3><A NAME="wininet_0008000103001600">InternetTimeFromSystemTime</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetTimeFromSystemTime(
+    IN  CONST SYSTEMTIME *pst,
+    IN  DWORD dwRFC,
+    OUT LPSTR lpszTime,
+    IN  DWORD cbTime
+);
+</FONT></PRE>
+<P>Formats a date and time according to the specified RFC format (as specified in the HTTP version 1.0 specification).
+
+<UL><LI>Returns TRUE if the function succeeds, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. 
+
+</UL>
+<DL><DT><I>pst</I>
+ </DT><DD>Address of a <B>SYSTEMTIME</B> structure that contains the date and time to format.
+</DD><DT><I>dwRFC</I>
+ </DT><DD>RFC format.
+</DD><DT><I>lpszTime</I>
+ </DT><DD>Address of a buffer that receives the formatted data and time.
+</DD><DT><I>cbTime</I>
+ </DT><DD>Size, in bytes, of the <I>lpszTime</I> buffer. 
+</DD></DL>
+<H3><A NAME="wininet_0008000103001700">InternetTimeToSystemTime</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetTimeToSystemTime(
+    IN LPCSTR lpszTime,
+    OUT SYSTEMTIME *pst,
+    IN DWORD dwReserved
+);
+</FONT></PRE>
+<P>Takes an HTTP time/date string and converts it to a <B>SYSTEMTIME</B> structure.
+
+<UL><LI>Returns TRUE if the string was converted, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>lpszTime</I>
+ </DT><DD>Pointer to a null-terminated date/time string to convert
+</DD><DT><I>pst</I>
+ </DT><DD>Address of the pointer to the converted time.
+</DD><DT><I>dwReserved</I>
+ </DT><DD> Reserved; must be zero. 
+</DD></DL>
+<H3><A NAME="wininet_0008000103001800">InternetWriteFile</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL InternetWriteFile(
+    IN HINTERNET hFile,
+    IN LPCVOID lpBuffer,
+    IN DWORD dwNumberOfBytesToWrite,
+    OUT LPDWORD lpdwNumberOfBytesWritten
+);
+</FONT></PRE>
+<P>Writes data to an open Internet file.
+
+<UL><LI>Returns TRUE if the function succeeds, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>. An application can also use <A HREF="sweep082.htm#wininet_0008000103000b00" TARGET=TEXT>InternetGetLastResponseInfo</A>, when necessary. 
+
+</UL>
+<DL><DT><I>hFile</I>
+ </DT><DD>Valid handle returned from a previous call to <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>.
+</DD><DT><I>lpBuffer</I>
+ </DT><DD>Address of a buffer that contains the data to be written to the file.
+</DD><DT><I>dwNumberOfBytesToWrite</I>
+ </DT><DD>Number of bytes to write to the file.
+</DD><DT><I>lpdwNumberOfBytesWritten</I>
+ </DT><DD>Address of a variable that receives the number of bytes written to the buffer. The <B>InternetWriteFile</B> function sets this value to zero before doing any work or error checking.
+</DD></DL>
+<P>When the application is sending data, it must call <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> to end the data transfer. 
+
+<P>See also <A HREF="sweep083.htm#wininet_0008000104000600" TARGET=TEXT>FtpOpenFile</A>, <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep081.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep083.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

@@ -1,0 +1,383 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Structures</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep087.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep089.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="wininet_0008000109000000">Structures</A></H2>
+<BR CLEAR=ALL>
+<P>This list identifies the Win32 Internet function data structures and their uses.
+
+
+
+<H3><A NAME="wininet_0008000109000100">GOPHER_ATTRIBUTE_TYPE</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct {
+    DWORD CategoryId
+    DWORD AttributeId
+    union {
+        GOPHER_ADMIN_ATTRIBUTE Admin;
+        GOPHER_MOD_DATE_ATTRIBUTE ModDate;
+        GOPHER_SCORE_ATTRIBUTE Score;
+        GOPHER_SCORE_RANGE_ATTRIBUTE ScoreRange;
+        GOPHER_SITE_ATTRIBUTE Site;
+        GOPHER_ORGANIZATION_ATTRIBUTE Organization;
+        GOPHER_LOCATION_ATTRIBUTE Location;
+        GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE GeographicalLocation;
+        GOPHER_TIMEZONE_ATTRIBUTE TimeZone;
+        GOPHER_PROVIDER_ATTRIBUTE Provider;
+        GOPHER_VERSION_ATTRIBUTE Version;
+        GOPHER_ABSTRACT_ATTRIBUTE Abstract;
+        GOPHER_VIEW_ATTRIBUTE View;
+        GOPHER_VERONICA_ATTRIBUTE Veronica;
+        GOPHER_ASK_ATTRIBUTE_TYPE Ask;
+        GOPHER_UNKNOWN_ATTRIBUTE Unknown;
+    } AttributeType;
+} GOPHER_ATTRIBUTE_TYPE, *LPGOPHER_ATTRIBUTE_TYPE;
+</FONT></PRE>
+<P>Contains the relevant information of a single Gopher attribute for an object. 
+
+<DL><DT><B><A NAME="wininet_0008000109000101">CategoryId</B></A>
+ </DT><DD>Gopher name for the attribute. The possible values include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_CATEGORY_ID_ALL
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_CATEGORY_ID_INFO
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_CATEGORY_ID_ADMIN
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_CATEGORY_ID_VIEWS
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_CATEGORY_ID_ABSTRACT
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_CATEGORY_ID_VERONICA
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_CATEGORY_ID_UNKNOWN
+</FONT></TD></TABLE>
+</DD><DT><B><A NAME="wininet_0008000109000102">AttributeId</B></A>
+ </DT><DD>Identifier of the structure contained in the <B>AttributeType</B> member. The possible values include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_ADMIN
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_MOD_DATE
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_TTL
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_SCORE
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_RANGE
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_SITE
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_ORG
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_LOCATION
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_GEOG
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_TIMEZONE
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_PROVIDER
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_VERSION
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_ABSTRACT
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_VIEW
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_TREEWALK
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">GOPHER_ATTRIBUTE_ID_UNKNOWN
+</FONT></TD></TABLE>
+</DD><DT><B><A NAME="wininet_0008000109000103">AttributeType</B></A>
+ </DT><DD>Actual setting for the Gopher attribute. The specific value of <B>AttributeType</B> depends on the <B>AttributeId</B> member. The definitions of the various attribute structures is available in Wininet.h.
+</DD></DL>
+<P>See also <A HREF="sweep084.htm#wininet_0008000105000400" TARGET=TEXT>GopherGetAttribute</A>
+<H3><A NAME="wininet_0008000109000200">GOPHER_FIND_DATA</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct {
+    TCHAR DisplayString[MAX_GOPHER_DISPLAY_TEXT + 1];
+    DWORD GopherType;
+    DWORD SizeLow;
+    DWORD SizeHigh;
+    FILETIME LastModificationTime;
+    TCHAR Locator[MAX_GOPHER_LOCATOR_LENGTH + 1];
+} GOPHER_FIND_DATA, FAR *LPGOPHER_FIND_DATA;
+</FONT></PRE>
+<P>Contains information retrieved by the <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A> and <A HREF="sweep082.htm#wininet_0008000103000a00" TARGET=TEXT>InternetFindNextFile</A> functions. 
+
+<DL><DT><B><A NAME="wininet_0008000109000201">DisplayString</B></A>
+ </DT><DD>String that contains the friendly name of an object. An application can display this string to allow the user to select the object. 
+</DD><DT><B><A NAME="wininet_0008000109000202">GopherType</B></A>
+ </DT><DD>Mask of flags that describe the item returned.
+</DD><DT><B><A NAME="wininet_0008000109000203">FileSizeLow</B></A>
+ </DT><DD>Low 32 bits of the file size.
+</DD><DT><B><A NAME="wininet_0008000109000204">FileSizeHigh</B></A>
+ </DT><DD>High 32 bits of the file size.
+</DD><DT><B><A NAME="wininet_0008000109000205">LastModificationTime</B></A>
+ </DT><DD>Time when the file was last modified.
+</DD><DT><B><A NAME="wininet_0008000109000206">Locator</B></A>
+ </DT><DD>String that identifies the file. An application can pass the locator string to <A HREF="sweep084.htm#wininet_0008000105000600" TARGET=TEXT>GopherOpenFile</A> or <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A>.
+</DD></DL>
+<P>See also <A HREF="sweep084.htm#wininet_0008000105000300" TARGET=TEXT>GopherFindFirstFile</A>
+<H3><A NAME="wininet_0008000109000300">INTERNET_ASYNC_RESULT</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">
+typedef struct {
+    DWORD dwResult;
+    DWORD dwError;
+} INTERNET_ASYNC_RESULT, * LPINTERNET_ASYNC_RESULT;
+</FONT></PRE>
+<P>Contains the result of a call to an asynchronous function. This structure is used with the <A HREF="sweep082.htm#wininet_0008000103001500" TARGET=TEXT>InternetStatusCallback</A> function.
+
+<DL><DT><B><A NAME="wininet_0008000109000301">dwResult</B></A>
+ </DT><DD>HINTERNET, DWORD, or BOOL return code from an asynchronous function.
+</DD><DT><B><A NAME="wininet_0008000109000302">dwError</B></A>
+ </DT><DD>Error code if <B>dwResult</B> indicates that the function failed. If the operation succeeded, this member usually contains ERROR_SUCCESS.
+</DD></DL>
+<P>See also <A HREF="sweep082.htm#wininet_0008000103001500" TARGET=TEXT>InternetStatusCallback</A>
+
+<H3><A NAME="wininet_0008000109000400">INTERNET_CACHE_ENTRY_INFO</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">
+typedef struct _CACHE_ENTRY_INFO {
+    DWORD dwStructSize;
+    LPSTR lpszSourceUrlName;
+    LPTSTR lpszLocalFileName;
+    DWORD CacheEntryType;
+    DWORD dwUseCount;
+    DWORD dwHitRate;
+    DWORD dwSizeLow;
+    DWORD dwSizeHigh;
+    FILETIME LastModifiedTime;
+    FILETIME ExpireTime;
+    FILETIME LastAccessTime;
+    FILETIME LastSyncTime;
+    LPBYTE lpHeaderInfo;
+    DWORD dwHeaderInfoSize;
+    LPTSTR lpszFileExtension;
+    DWORD dwReserved;
+} INTERNET_CACHE_ENTRY_INFO, *LPINTERNET_CACHE_ENTRY_INFO;
+</FONT></PRE>
+<P>Contains information about an entry in the cache.
+
+<DL><DT><B><A NAME="wininet_0008000109000401">dwStructSize</B></A>
+ </DT><DD>Size, in bytes, of this structure.
+</DD><DT><B><A NAME="wininet_0008000109000402">lpszSourceUrlName</B></A>
+ </DT><DD>Address of a string that contains the URL name. The string occupies memory area at the end of this structure.
+</DD><DT><B><A NAME="wininet_0008000109000403">lpszLocalFileName</B></A>
+ </DT><DD>Address of a string that contains the local file name. The string occupies memory area at the end of this structure.
+</DD><DT><B><A NAME="wininet_0008000109000404">CacheEntryType</B></A>
+ </DT><DD>Cache type bit mask. Can be one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">NORMAL_CACHE_ENTRY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Normal cache entry; may be deleted to recover space for new entries.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">STABLE_CACHE_ENTRY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Stable cache entry such as graphic and audio/video files; may be deleted to recover space for the new entries only when there is no more NORMAL_CACHE_ENTRY.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">STICKY_CACHE_ENTRY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Entries that will never be removed automatically by the cache management system.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">SPARSE_CACHE_ENTRY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">This cache entry is incomplete.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">OCX_CACHE_ENTRY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Special OCX type cache entry.
+</FONT></TD></TR></TABLE>
+</DD><DT><B><A NAME="wininet_0008000109000405">dwUseCount</B></A>
+ </DT><DD>Current user count of the cache entry.
+</DD><DT><B><A NAME="wininet_0008000109000406">dwHitRate</B></A>
+ </DT><DD>Number of times the cache entry was retrieved.
+</DD><DT><B><A NAME="wininet_0008000109000407">dwSizeLow</B></A>
+ </DT><DD>Low-order double word of the file size.
+</DD><DT><B><A NAME="wininet_0008000109000408">dwSizeHigh</B></A>
+ </DT><DD>High-order double word of the file size.
+</DD><DT><B><A NAME="wininet_0008000109000409">LastModifiedTime</B></A>
+ </DT><DD>Last modified time of this URL in GMT format.
+</DD><DT><B><A NAME="wininet_000800010900040a">ExpireTime</B></A>
+ </DT><DD>Expiration time of this file in GMT format.
+</DD><DT><B><A NAME="wininet_000800010900040b">LastAccessTime</B></A>
+ </DT><DD>Last accessed time in GMT format.
+</DD><DT><B><A NAME="wininet_000800010900040c">LastSyncTime</B></A>
+ </DT><DD> Last time the cache was synchronized. 
+</DD><DT><B><A NAME="wininet_000800010900040d">lpHeaderInfo</B></A>
+ </DT><DD>Address of a buffer that contains the header information. The buffer occupies memory at the end of this structure.
+</DD><DT><B><A NAME="wininet_000800010900040e">dwHeaderInfoSize</B></A>
+ </DT><DD>Size of the <B>lpHeaderInfo</B> buffer.
+</DD><DT><B><A NAME="wininet_000800010900040f">lpszFileExtension</B></A>
+ </DT><DD>Address of a string that contains the file extension used to retrieve the data as a file. The string occupies memory area at the end of this structure.
+</DD><DT><B><A NAME="wininet_0008000109000410">dwReserved</B></A>
+ </DT><DD> Reserved; must be zero.
+</DD></DL>
+<P>The MAX_CACHE_ENTRY_INFO_SIZE value defines the maximum size of the <B>INTERNET_CACHE_ENTRY_INFO</B> structure that could be returned by the implementation of the cache functions. Thus passing in a buffer of this size in functions returning <B>INTERNET_CACHE_ENTRY_INFO</B> guarantees that the function does not fail because of an insufficient buffer.
+
+<H3><A NAME="wininet_0008000109000500">INTERNET_CERTIFICATE_INFO</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct {
+    FILETIME ftExpiry;
+    FILETIME ftStart;
+    LPTSTR lpszSubjectInfo;
+    LPTSTR lpszIssuerInfo;
+    LPTSTR lpszProtocolName;
+    LPTSTR lpszSignatureAlgName;
+    LPTSTR lpszEncryptionAlgName;
+    DWORD dwKeySize;
+} INTERNET_CERTIFICATE_INFO, * LPINTERNET_CERTIFICATE_INFO;
+
+</FONT></PRE>
+<P>Contains certificate information returned from the server. This structure is used by the <A HREF="sweep082.htm#wininet_0008000103000f00" TARGET=TEXT>InternetQueryOption</A> function.
+
+<DL><DT><B><A NAME="wininet_0008000109000501">ftExpiry</B></A>
+ </DT><DD><B>FILETIME</B> structure that contains the date the certificate expires.
+</DD><DT><B><A NAME="wininet_0008000109000502">ftStart</B></A>
+ </DT><DD><B>FILETIME</B> structure that contains the date the certificate becomes valid.
+</DD><DT><B><A NAME="wininet_0008000109000503">lpszSubjectInfo</B></A>
+ </DT><DD>Address of a buffer that contains the name of the organization, site, and server for which the certificate was issued.
+</DD><DT><B><A NAME="wininet_0008000109000504">lpszIssuerInfo</B></A>
+ </DT><DD>Address of a buffer that contains the name of the organization, site, and server that issued the certificate.
+</DD><DT><B><A NAME="wininet_0008000109000505">lpszProtocolName</B></A>
+ </DT><DD>Address of a buffer that contains the name of the protocol used to provide the secure connection.
+</DD><DT><B><A NAME="wininet_0008000109000506">lpszSignatureAlgName</B></A>
+ </DT><DD>Address of a buffer that contains the name of the algorithm used for signing the certificate.
+</DD><DT><B><A NAME="wininet_0008000109000507">lpszEncryptionAlgName</B></A>
+ </DT><DD>Address of a buffer that contains the name of the algorithm used for doing encryption over the secure channel (SSL/PCT) connection.
+</DD><DT><B><A NAME="wininet_0008000109000508">dwKeySize</B></A>
+ </DT><DD>Size, in bytes, of the key.
+</DD></DL>
+<P>Applications requesting this information must free pointers that are allocated and placed in the returned structure.
+<P>See also <A HREF="sweep082.htm#wininet_0008000103000f00" TARGET=TEXT>InternetQueryOption</A>
+<H3><A NAME="wininet_0008000109000600">INTERNET_PREFETCH_STATUS</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct {
+    DWORD dwStatus;
+    DWORD dwSize;
+} INTERNET_PREFETCH_STATUS, * LPINTERNET_PREFETCH_STATUS;
+</FONT></PRE>
+<P>Contains the status of a prefetch download operation. 
+
+<DL><DT><B><A NAME="wininet_0008000109000601">dwStatus</B></A>
+ </DT><DD>Status of the download. Can be one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_PREFETCH_PROGRESS
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation is in progress.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_PREFETCH_COMPLETE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation has completed.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_PREFETCH_ABORTED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The operation was aborted.
+</FONT></TD></TR></TABLE>
+</DD><DT><B><A NAME="wininet_0008000109000602">dwSize</B></A>
+ </DT><DD>Size, in bytes, of data downloaded so far.
+</DD></DL>
+<H3><A NAME="wininet_0008000109000700">INTERNET_PROXY_INFO</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct {
+    DWORD dwAccessType;
+    LPCTSTR lpszProxy;
+    LPCTSTR lpszProxyBypass;
+} INTERNET_PROXY_INFO, * LPINTERNET_PROXY_INFO;
+</FONT></PRE>
+<P>Contains information that is supplied with the INTERNET_OPTION_PROXY value to get or set proxy information on a handle obtained from a call to the <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> function. 
+
+<DL><DT><B><A NAME="wininet_0008000109000701">dwAccessType</B></A>
+ </DT><DD>Access type. Can be one of these values:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_OPEN_TYPE_DIRECT
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internet accessed through a direct connection.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_OPEN_TYPE_PROXY
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Internet accessed using a proxy.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">INTERNET_OPEN_TYPE_PRECONFIG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Applies only when setting proxy information. 
+</FONT></TD></TR></TABLE>
+</DD><DT><B><A NAME="wininet_0008000109000702">lpszProxy</B></A>
+ </DT><DD>Proxy server list.
+</DD><DT><B><A NAME="wininet_0008000109000703">lpszProxyBypass</B></A>
+ </DT><DD>Proxy bypass list.
+</DD></DL>
+<H3><A NAME="wininet_0008000109000800">INTERNET_SCHEME</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef enum {
+    INTERNET_SCHEME_PARTIAL = -2,
+    INTERNET_SCHEME_UNKNOWN = -1,
+    INTERNET_SCHEME_DEFAULT = 0,
+    INTERNET_SCHEME_FTP,
+    INTERNET_SCHEME_GOPHER,
+    INTERNET_SCHEME_HTTP,
+    INTERNET_SCHEME_HTTPS,
+    INTERNET_SCHEME_FILE,
+    INTERNET_SCHEME_NEWS,
+    INTERNET_SCHEME_MAILTO,
+    INTERNET_SCHEME_FIRST = INTERNET_SCHEME_FTP,
+    INTERNET_SCHEME_LAST = INTERNET_SCHEME_MAILTO
+} INTERNET_SCHEME, * LPINTERNET_SCHEME;
+</FONT></PRE>
+<P>Defines the flags used with the <A HREF="sweep088.htm#wininet_0008000109000a04" TARGET=TEXT>nScheme</A> member of the <A HREF="sweep088.htm#wininet_0008000109000a00" TARGET=TEXT>URL_COMPONENTS</A> structure.
+
+<H3><A NAME="wininet_0008000109000900">INTERNET_VERSION_INFO</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct {
+    DWORD dwMajorVersion;
+    DWORD dwMinorVersion;
+} INTERNET_VERSION_INFO, * LPINTERNET_VERSION_INFO;
+</FONT></PRE>
+<P>Contains the version number of the DLL that contains the Windows Internet functions (Wininet.dll). This structure is used when passing the INTERNET_OPTION_VERSION flag to the <A HREF="sweep082.htm#wininet_0008000103000f00" TARGET=TEXT>InternetQueryOption</A> function.
+
+<DL><DT><B><A NAME="wininet_0008000109000901">dwMajorVersion</B></A>
+ </DT><DD>Major version number.
+</DD><DT><B><A NAME="wininet_0008000109000902">dwMinorVersion</B></A>
+ </DT><DD>Minor version number.
+</DD></DL>
+<H3><A NAME="wininet_0008000109000a00">URL_COMPONENTS</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">typedef struct {
+    DWORD dwStructSize;
+    LPSTR lpszScheme;
+    DWORD dwSchemeLength;
+    INTERNET_SCHEME nScheme;
+    LPSTR lpszHostName;
+    DWORD dwHostNameLength;
+    INTERNET_PORT nPort;
+    LPSTR lpszUserName;
+    DWORD dwUserNameLength;
+    LPSTR lpszPassword;
+    DWORD dwPasswordLength'
+    LPSTR lpszUrlPath;
+    DWORD dwUrlPathLength;
+    LPTSTR lpszExtraInfo;
+    DWORD dwExtraInfoLength;
+} URL_COMPONENTS;
+</FONT></PRE>
+<P>Contains the constituent parts of a URL. This structure is used with the <A HREF="sweep082.htm#wininet_0008000103000700" TARGET=TEXT>InternetCrackUrl</A> and <A HREF="sweep082.htm#wininet_0008000103000800" TARGET=TEXT>InternetCreateUrl</A> functions. 
+
+<DL><DT><B><A NAME="wininet_0008000109000a01">dwStructSize</B></A>
+ </DT><DD>Size, in bytes, of this structure. Used for version checking.
+</DD><DT><B><A NAME="wininet_0008000109000a02">lpszScheme</B></A>
+ </DT><DD>Address of a buffer that contains the scheme name.
+</DD><DT><B><A NAME="wininet_0008000109000a03">dwSchemeLength</B></A>
+ </DT><DD>Length of the scheme name.
+</DD><DT><B><A NAME="wininet_0008000109000a04">nScheme</B></A>
+ </DT><DD>Enumerated scheme type (if known). For a list of scheme types, see <A HREF="sweep088.htm#wininet_0008000109000800" TARGET=TEXT>INTERNET_SCHEME</A>.
+</DD><DT><B><A NAME="wininet_0008000109000a05">lpszHostName</B></A>
+ </DT><DD>Address of a buffer that contains the host name.
+</DD><DT><B><A NAME="wininet_0008000109000a06">dwHostNameLength</B></A>
+ </DT><DD>Length of the host name.
+</DD><DT><B><A NAME="wininet_0008000109000a07">nPort</B></A>
+ </DT><DD>Converted port number.
+</DD><DT><B><A NAME="wininet_0008000109000a08">lpszUserName</B></A>
+ </DT><DD>Address of a buffer that contains the user name.
+</DD><DT><B><A NAME="wininet_0008000109000a09">dwUserNameLength</B></A>
+ </DT><DD>Length of the user name.
+</DD><DT><B><A NAME="wininet_0008000109000a0a">lpszPassword</B></A>
+ </DT><DD>Address of a buffer that contains the password.
+</DD><DT><B><A NAME="wininet_0008000109000a0b">dwPasswordLength</B></A>
+ </DT><DD>Length of the password.
+</DD><DT><B><A NAME="wininet_0008000109000a0c">lpszUrlPath</B></A>
+ </DT><DD>Address of a buffer that contains the URL path.
+</DD><DT><B><A NAME="wininet_0008000109000a0d">dwUrlPathLength</B></A>
+ </DT><DD>Length of the URL path.
+</DD><DT><B><A NAME="wininet_0008000109000a0e">lpszExtraInfo</B></A>
+ </DT><DD>Address of a buffer that contains the extra information (for example, ?foo or #foo).
+</DD><DT><B><A NAME="wininet_0008000109000a0f">dwExtraInfoLength</B></A>
+ </DT><DD>Length of the extra information.
+</DD></DL>
+<P>For <A HREF="sweep082.htm#wininet_0008000103000700" TARGET=TEXT>InternetCrackUrl</A>, if a pointer member and its corresponding length member are both zero, that component is not returned. If the pointer member is NULL but the length member is not zero, both the pointer and length members are returned. If both pointer and corresponding length members are non-zero, the pointer member points to a buffer where the component is copied. The component may be un-escaped, depending on the <I>dwFlags</I> parameter of <A HREF="sweep082.htm#wininet_0008000103000700" TARGET=TEXT>InternetCrackUrl</A>.
+
+<P>For <A HREF="sweep082.htm#wininet_0008000103000800" TARGET=TEXT>InternetCreateUrl</A>, the pointer members should be NULL if the component is not required. If the corresponding length member is zero, the pointer member is the address of a zero-terminated string. If the length member is not zero, it is the string length of the corresponding pointer member
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep087.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep089.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

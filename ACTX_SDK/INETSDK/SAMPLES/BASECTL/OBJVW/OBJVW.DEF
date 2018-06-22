@@ -1,0 +1,24 @@
+; --------------------------------------------------------------------------
+; WImg.Def - Module definition file for WebImage.Ocx
+; --------------------------------------------------------------------------
+; Copyright 1995-1996 Microsoft Corporation.  All Rights Reserved.
+;
+; THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+; ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+; THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+; PARTICULAR PURPOSE.
+;=--------------------------------------------------------------------------=
+;
+
+LIBRARY         ObjVw
+PROTMODE
+
+DESCRIPTION	'Object View Control'
+
+CODE            PRELOAD MOVEABLE DISCARDABLE
+DATA            PRELOAD MOVEABLE SINGLE
+
+EXPORTS     DllRegisterServer
+EXPORTS		DllUnregisterServer
+EXPORTS		DllCanUnloadNow
+EXPORTS		DllGetClassObject

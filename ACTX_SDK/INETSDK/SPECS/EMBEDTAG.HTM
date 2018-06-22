@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+
+<head>
+<title>EMBED TAG</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 1.1">
+</head>
+
+<body bgcolor=#ffffff>
+<p><font color="#000000"><font size=5><strong>IE3.0 Support for the EMBED Tag<br>
+</strong></font></font></p>
+<p><font color="#000000"><font size=2>Microsoft Internet Explorer 3.0 will support the &lt;EMBED&gt; tag syntax for embedding objects on an HTML page. This support is meant 
+for compatibility with other browsers. The accepted WWW Consortium HTML standard recommends using the &lt;OBJECT&gt; tag for 
+embedding objects in HTML, and Internet Explorer 3.0 supports this syntax as well.</font></font></p>
+<h2><font color="#000000"><font size=2>Using &lt;OBJECT&gt; but degrading gracefully to work in other browsers:</font></font></h2>
+<blockquote>
+<p><font size=2>Internet Explorer 3.0 supports the &lt;OBJECT&gt; tag. All browsers that comply with the accepted W3C HTML 3.2 standard will 
+understand this HTML syntax. However, the &lt;OBJECT&gt; syntax degrades gracefully in other browsers as well, because 
+OBJECT-aware browsers will ignore additional tags placed between &lt;OBJECT&gt; and &lt;/OBJECT&gt;. So to use the &lt;OBJECT&gt; 
+tag but allow content to be viewable by other browsers (perhaps using the &lt;EMBED&gt; tag), one should author the 
+following HTML:</font></p>
+<blockquote>
+<pre><font size=2>&lt;OBJECT CLASSID=&quot;clsid:<I>unique object identifier</I>&quot; DATA=&quot;MyMovie.AVI&quot; WITDTH=100 HEIGHT=250&gt;
+     &lt;PARAM NAME=AUTOSTART VALUE=TRUE&gt;
+     &lt;PARAM NAME=PLAYBACK VALUE=FALSE&gt;
+     </font><font color="#0000FF"><font size=2>&lt;EMBED SRC=&quot;MyMovie.AVI&quot; WIDTH=100 HEIGHT=250 AUTOSTART=TRUE PLAYBACK=FALSE&gt;</font></font><font size=2>
+&lt;/OBJECT&gt;</font></pre>
+</blockquote>
+<p><font size=2>In browsers that support the &lt;OBJECT&gt; tag, the &lt;EMBED&gt; tag will be ignored. Browsers that do not support &lt;OBJECT&gt; 
+will ignore the &lt;OBJECT&gt;, &lt;PARAM&gt; and &lt;/OBJECT&gt; tags. So in both cases an object will be displayed</font></p>
+</blockquote>
+<h2><font size=2>Support for &lt;EMBED&gt; - compatibility with existing web pages</font></h2>
+<blockquote>
+<p><font color="#000000"><font size=2>Internet Explorer 3.0 supports the &lt;EMBED&gt; syntax for backwards compatibility with existing 
+HTML pages that were authored before the &lt;OBJECT&gt; tag was added to the HTML standard. The 
+following is the &lt;EMBED&gt; syntax accepted by IE3.0:</code></font></font></p>
+<blockquote><pre><font color="#000000" size=2>&lt;EMBED SRC=&quot;<I>object data</I>&quot;
+       WIDTH=&quot;<I>width of object</I>&quot;
+       HEIGHT=&quot;<I>height of object</I>&quot;
+       PALETTE=&quot;foreground | background&quot;
+       NAME=&quot;<I>programmatic name</I>&quot;
+       PLUGINSPAGE=&quot;<I>page with installation instructions</I>&quote;
+       <I>OPTIONAL PARAM</I>=&quot;<I>value</I>&quot;
+       <I>OPTIONAL PARAM</I>=&quot;<I>value</I>&quot; ...</em>&gt;</font></p>
+</blockquote>
+       EXAMPLE:
+       &lt;EMBED SRC=&quot;MyMovie.AVI&quot; WIDTH=100 HEIGHT=250 AUTOSTART=TRUE PLAYBACK=FALSE&gt;</code></font></font></pre>
+</blockquote>
+</body>
+
+</html>

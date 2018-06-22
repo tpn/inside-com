@@ -1,0 +1,147 @@
+<HTML>
+
+<HEAD>
+
+<TITLE>What’s changed in URL Monikers and Asynchronous Monikers since 3/12/96
+</TITLE>
+
+<META NAME="GENERATOR" CONTENT="Internet Assistant for Microsoft Word 2.0z">
+</HEAD>
+
+<BODY BGCOLOR=FFFFFF>
+
+<H1>The IE3.0 solution for pluggable URL protocols</H1>
+
+<P>
+<FONT SIZE=2>There are two mechanisms in IE3.0 for registering
+new URL protocol handlers. The first is implemented via ShellExecute(),
+and is enabled by defaultthis mechanism allows registering a new
+application to be launched on all attempts to navigate to a particular
+URL (for example registering applications to handle &quot;mailto:&quot;
+or &quot;news:&quot; URLs). The latter mechanism is implemented
+via URL Monikers, and it allows defining new protocols for retrieving
+data and linking into the IE3.0 web browser and all clients of
+URL Monikers. This latter mechanism is disabled by default in
+IE3.0, but it may be enabled via a registry setting. Neither of
+these solutions address the needs of all customers of pluggable
+URL protocols, but together we believe they address 80% of customer
+needs.</FONT>
+<H2>Registering a new ShellExecute verb as the handler for a particular
+protocol</H2>
+
+<P>
+<FONT SIZE=2>It is very simple to register an application to be
+ShellExecute()ed on all attempts to navigate to a particular URL
+protocol (<I>e.g. </I>&quot;mailto:&quot;, &quot;news:&quot;,
+&quot;foo:&quot;, etc.). This is best demonstrated by example.
+The following registry values must be added to register a new
+application (say &quot;notepad.exe&quot;) to handle a new URL
+protocol (say &quot;note:&quot;):</FONT>
+<PRE>
+[HKEY_CLASSES_ROOT]
+    [note]
+        (Default) = &quot;URL:Note Protocol&quot;
+        URL Protocol = &quot;&quot;
+        [DefaultIcon]
+            (Default) = &quot;notepad.exe&quot;
+        [shell]
+            [open]
+                [command]
+                    (Default) = &quot;c:\windows\notepad.exe %1&quot;
+</PRE>
+<FONT SIZE=2>By adding these settings to the registry, attempts
+to navigate to URLs such as &quot;note:c:\foo.txt&quot; would
+launch NOTEPAD to edit the file &quot;note:c:\foo.txt&quot;.
+Furthermore, all of the commands supported under Shell\Open are supported, 
+including DDEEXEC (in other words, &quot;command&quot; is not the only key you 
+can put under the verb name).
+<P>
+<B>Note:</B> The example above doesn't
+work correctly because NOTEPAD cannot understand edit files with the
+prefix &quot;note:&quot;.</FONT>
+
+<P>
+<B><FONT SIZE=2>Note: </FONT></B><FONT SIZE=2>It is not possible
+to register handlers to override the &quot;http:&quot;, &quot;ftp:&quot;,
+&quot;gopher:&quot;, or &quot;file:&quot; protocols.<BR>
+</FONT>
+<P>
+
+<H2>Defining a new URL protocol for binding to data via URL Monikers
+</H2>
+
+<P>
+<FONT SIZE=2>It is possible to define a new URL protocol for binding
+to data via URL Monikers. This allows hooking a new storage medium
+or transport protocol into all clients of URL Monikers (including
+IE3.0 and most Internet-aware ActiveX Controls) without requiring
+any code change from those clients. This opens up a world of possibilities
+for extending web browsers, <I>e.g. </I>enabling the browsing
+of HTML documents inside databases, either in a compressed format
+on a CD or on a local network, or enabling the browsing of web
+pages over new network protocols, etc.</FONT>
+<P>
+<FONT SIZE=2>Unfortunately, the current implementation of pluggable
+URL protocols has limitations that will hopefully be resolved
+in future releases of URL Monikers:</FONT>
+<OL>
+<LI><FONT SIZE=2>All pluggable protocols must take the format
+&quot;<B>mk:@<I>progid</I>:<I>random-display-name</I></B>&quot;,
+where <I><B>progid</B></I> is the name of the new protocol, and
+<I><B>random-display-name</B></I><B> </B>is a protocol-specific
+string interpreted by the protocol handler. In the future, URL
+Monikers should support pluggable protocols with the friendlier
+format &quot;<I><B>progid</B></I><B>:<I>random-display-name</I></B>&quot;.</FONT>
+<LI><FONT SIZE=2>Binding to pluggable protocols always happens
+<I>synchronously</I>, even if the underlying data source could
+support asynchronous downloads. Future plans include support for
+<I>asynchronous</I> pluggable protocols.</FONT>
+<LI><FONT SIZE=2>The pluggable URL protocol mechanism is disabled
+in default installations of URL Monikers and Microsoft Internet
+Explorer 3.0. A registry setting is needed to enable the pluggable
+protocol behavior, although in the future this capability should
+be enabled by default.</FONT>
+</OL>
+
+<H3>Details</H3>
+
+<P>
+<FONT SIZE=2>When interpreting URLs of the format &quot;<B>mk:@progid:<I>display-name</I></B>&quot;,
+the URL Moniker's pluggable protocol manager will look up the
+CLSID for the given <B>progid </B>and then call </FONT>
+<PRE>    CoCreateInstance(clsid, NULL, CLSCTX_INPROC_SERVER, IID_IParseDisplayName)
+</PRE>
+<FONT SIZE=2>The resulting IParseDisplayName interface is used
+to parse the string &quot;<B>@progid:<I>display-name</I></B>&quot;
+and to return a custom &quot;protocol-handler&quot; moniker that
+understands the new protocol. This custom moniker must support
+synchronous data binding via <B>IMoniker::BindToStorage(&#133;IID_IStream&#133;)</B>,
+and it must also support <B>IMoniker::ParseDisplayName</B>. The
+pluggable protocol manager uses this custom moniker to bind to
+the data (via <B>BindToStorage</B>) and to return the data to
+the URL Moniker client. <B>Note:</B> The stream returned by the 
+custom moniker should support <B>IStream::Stat()</B>
+(to get the stream size) and <B>IStream::Seek()</B>, to rewind the
+stream to offset 0.</FONT>
+<P>
+<FONT SIZE=2>It's important to note that the URL Moniker's pluggable
+protocol manager disguises all pluggable protocol handlers as
+URL Monikers. As far as a client of URL Monikers is concerned,
+all the new &quot;<B>mk:@progid:</B>&quot; protocols are still
+represented by URL Monikers and behave like other URL Monikers.
+In addition, the Windows Internet Functions for parsing URLs (e.g.
+<B>InternetCanonicalizeURL</B>) also parse URLs in the &quot;<B>mk:@progid:</B>&quot;
+format. The first portion of the URL (up to a forward slash) is
+assumed to be a &quot;root&quot;, and the usual rules of parsing
+(including relative paths) apply.</FONT>
+<H3>How to enable the pluggable protocol support</H3>
+
+<P>
+<FONT SIZE=2>The &quot;<B>mk:@progid:</B>&quot; pluggable protocol
+scheme only works when the registry key &quot;HKEY_LOCAL_MACHINE\Software\Microsoft\Internet
+Explorer&quot; contains the key &quot;MkEnabled&quot; = &quot;Yes&quot;.
+This registry setting should be enabled at the same time as the
+custom protocol-handler moniker is registered in the system.</FONT>
+</BODY>
+
+</HTML>

@@ -1,0 +1,171 @@
+<HTML>
+<HEAD>
+<TITLE>Microsoft ActiveX Software Development Kit </TITLE> 
+</HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#0000ff" VLINK="#000080">
+<FONT FACE="ARIAL,HELVETICA" SIZE=2>
+<P>
+<IMG SRC="techead.gif" WIDTH="67" HEIGHT="49" ALT="Internet Development Technologies">
+<H1>Microsoft ActiveX Software Development Kit</H1> 
+<P>Last updated: October 25, 1996
+
+<p>The Microsoft&reg; ActiveX&#153; Software Development Kit (SDK) includes a variety of technologies that Microsoft is introducing to facilitate development of Internet applications and content. This document provides a quick overview of what's new in the ActiveX SDK.  The overview covers some new tools, some new documentation, and some of the key issues associated with this release.  Be sure to visit the README.TXT file for more details and time-saving information.
+
+<P>This release of the ActiveX SDK is synchronized with the recent Internet Explorer 3.01 final version.  It introduces for the first time, development support for the RISC platforms (these bits are in early beta stages).   To use the SDK, you will need to install the latest version of Internet Explorer 3.01.  You will need the latest Win32 SDK (dated Aug '96).  If you are doing RISC development, you can use VC++ 4.0a.  For Intel development you should use either VC++ 4.1 or the patched version VC++ 4.2b.  See the Readme.txt for details on different configurations.  Because the addition of RISC support grew the size of the SDK, it has been divided up into several downloads.  More details on that are available on the download pages and in the Readme.txt.
+
+<P>
+Below you will find a brief description of things that are new in the release of the SDK.  If you would like to see what others are doing with ActiveX technologies, take a quick look at the
+<A HREF="http://www.microsoft.com/gallery/" TARGET="_top">Microsoft Web Gallery</A>.  This is a collection of multimedia components and sample code that you can add to your Web sites.  Currently the web master of this site is pulling together sounds, images, Java code, stylesheets, fonts, script samples, HTML samples, animation, and free tools.  Something worth visiting from time to time.
+<p>
+
+Good coding!<BR>
+Jerry Drain<BR>
+ActiveX SDK Program Manager
+
+
+
+<HR>
+<H2>New in Documentation:</H2>
+
+<H3>Cross Platform Issues with Downloading Controls:</H3>
+<P>IE 3.01 and ActiveX controls can run on the Apple Macintosh, the Intel x86, as well any of several RISC machines. As a result, it's important that a control developer create, test, and bundle their control's binaries for each platform. One of the issues associated with shipping multiple binaries (or even a single binary) for a given control is file size. In order to minimize the impact of downloading large binaries over the Internet or corporate Intranet, Microsoft supports cabinet (or CAB) files. A CAB file is a collection of one or more files compressed using the Lempel-Ziv algorithm for data compression. Like ActiveX controls, CAB files can be signed for download.
+<H4><A NAME="pkg_0000000001010000">The CAB WebSite</A></H4>
+<P>Microsoft supplies a CAB Development Kit which provides the tools and information that you'll need to create CAB files for your controls. You will find the CAB Development Kit in a self extracting .exe in the \INetSDK\Bin\CabRscKt.exe.  
+<H4><A NAME="pkg_0000000001020000">Packaging Methods</A></H4>
+<P>This page illustrates several possible methods of packaging an ActiveX control. Each method has its benefits and drawbacks. The following table describes each method as well as the corresponding issues:
+
+<Table border cellpadding=4 width=99%>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Method</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Benefits</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Drawbacks
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CODEBASE= pointing at a CAB with just the INF file in it; and other CAB files containing OS/processor specific binaries pointed at by this INF file. (note: you are not advised to point the CODEBASE at an INF as you cannot sign the INF)</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reduced size at download time (only the .INF and required binary are downloaded). Preferred Internet solution for cross platform support.</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Two digital certificates will appear.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">One CAB file containing the .INF file as well as the x86 binary. Remaining binaries packaged in separate CAB files.</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reduced size at download time. Preferred Internet solution for controls which are targeted primarily at the x86 platform.</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Apple Macintosh and RISC users are forced to wait for x86 binaries to download (even though these binaries are useless on these platforms).
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">All binaries packaged into a single CAB file.</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Simplified package for small controls with no dependencies. Preferred Intranet solution.</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">This is a wasteful solution in most scenarios, it does not optimize for dependency DLLs that may already be on the client machine.  This will also increase download time and may only be acceptable in Intranets where bandwidth is not such an issue.
+</FONT></TD>
+</TR>
+</TABLE>
+<P>Refer to the documentation on the Cabinet File Technology, and the CabRscKt.exe for more information about creating .CAB and .INF files.
+<H4><A NAME="pkg_0000000001030000">HTML Example</A></H4>
+<P>You'll find a sample .CAB and .INF file in the INetSDK\samples\basectl\webimage\cabs directory of the ActiveX SDK. You can test this sample by opening the <A HREF="..\samples\basectl\webimage\cabs\showwimg.HTM">.HTM page</A> in the same directory.  There will be more information and sample made available in future SDK releases.
+
+
+<H3>Download and Install Issues:</H3>
+Because the addition of RISC support has grown the SDK, and because of some other size issues, I have divided up the SDK into separate installable/downloadable parts.  See the Readme.txt for more details.
+
+<H3>Cascading Stylesheet Changes:</H3>
+There is a difference in the way Internet Explorer 3.01 uses CSS1 
+(Cascading Stylesheet Specifications)  properties which causes pages
+formatted for version 3.01 to appear differently when viewed with 
+Internet Explorer 3.0.   The problem is that stylesheet properties can 
+be "inherited" at different object levels within the document.   
+Version 3.01 correctly interprets inherited properties for margins 
+and version 3.0 does not.    A "readme" chapter with a section 
+regarding stylesheets was added to the HTML Reference to explain the 
+issue, and it gives a solution for creating stylesheets compatible with 
+both versions of Internet Explorer.
+
+<HR>
+<H2>Refreshed SDKs</H2>
+
+
+<H3>Conferencing Technology</H3>
+ActiveX Conferencing technology has now available in the Microsoft NetMeeting&#153 SDK 1.0a.  This technology has been refreshed in this release of the ActiveX SDK, and is available as a self extracting .exe in the \Bin directory (MSCNF10A.exe).  You can also find this SDK on the web at <A HREF="http://www.microsoft.com/intdev/msconf"> http://www.microsoft.com/intdev/msconf</A>.  See the Readme.txt file for more details.
+
+<H3>CAB Technology</H3>
+A new file has been added to the \Bin directory: before you had the CabDevKt.exe, a self extracting .exe which contained Diamond.exe, some other tools and documentation.  Added to that, a new file, CabRscKt.exe, contains compression and decompression library binaries, sample code to show you how to build CAB support into you application, and documentation on the compression and decompression API.   See the Readme.txt file for more details.
+
+<H3>ActiveX SDK for the Macintosh</H3>
+Sorry, not part of this download, bit if you haven't heard, it's available at <A HREF="http://www.microsoft.com/intdev/SDK/Mac"> http://www.microsoft.com/intdev/SDK/Mac</A>
+
+<HR>
+<H2>Refreshed Redistributable Components</H2>
+<UL>
+<LI> The Intel bits have been refreshed to match IE 3.01.
+<LI> New RISC Redistributables have been created, and are available in beta for testing.
+<LI> The Redistributables for Windows NT 4.0 have been localized into Traditional Chinese (Taiwan), Japanese, and German. (more will follow).
+</UL>
+For more information, see the Readme.txt and the Redist.txt.
+
+
+<HR>
+<H2>New in Samples</H2>
+Solitaire and Poker, HTML and ActiveX Controls style.  A new sample has been provided which shows how Solitaire can be implemented as ActiveX Controls on an HTML page.  This sample/s is called CARD
+<P>
+Many ISVs who have been using the WebBrowser Control have run into similar issues.  To answer their development questions the ObjVw sample demonstrates how to access IE's Automation model and Scripting model from within a contained control, how to enumerate controls and Java applets in a page, how to make a generic class to sink events, etc.  This sample is called ObjVw.
+<P>
+You can learn more about both by reading the Readme.txt, or by reading the readme.txt of the samples.
+
+
+<HR>
+<a name="help"></a><H2>Okay, So Where Do I Go If I Need Help?</H2>
+One place to go is the Web, to see a list of known issues.  The Internet Explorer 3.0 team tries to keep this site updated with all the known issues affecting the current release: <A HREF="http://www.microsoft.com/iesupport/content/issues/" target="_top"> http://www.microsoft.com/iesupport/content/issues/</A>.  However, sooner or later there comes a how-to question.  For those, you can try several places, depending on what fits your needs.
+
+<h3>Paid Support for the ActiveX SDK</h3>
+<P>
+The ActiveX SDK is supported by Microsoft's AnswerPoint group (Product Support Services).  You can ask questions through your Premier Level support contract.  You can also ask questions through your Priority Level contract or purchase individual Priority Support incidents (essentially a one-time fee for one question).  If you would like to understand more about Microsoft's paid support options, you can call Microsoft Support Sales at (800) 936-3500 from 6:00 a.m. to 6:00 p.m. Pacific time, Monday through Friday, excluding holidays. Please note that technical support is not available through this number. AnswerPoint Information is also available on the World Wide Web at <A HREF="http://www.microsoft.com/support/" target="_top">http://www.microsoft.com/support/</A>.
+
+<h3>Free Support for the ActiveX SDK</h3>
+
+<P>Newsgroups are a great place for free peer support.  As time and resources allow, Microsoft developers, program managers, support engineers, and test engineers visit the site to collect feedback and answer questions or correct misperceptions. They will lurk there often to read feedback, but they will not become actively involved unless a specific question is asked or a misperception is observed.  This largely depends on bandwidth and time, which is greatly affected by shipping schedules.  Some more interesting news groups for Internet Explorer are on microsoft.public.internetexplorer.
+
+<P>To access newsgroups, use your preferred newsgroup reader and enter the news server address as <A HREF="news://msnews.microsoft.com" target="_top">news://msnews.microsoft.com</A>.
+You can use the following URL to access the newsgroups directly from a Web browser: news:microsoft.public.newsgroup-name.  The newsreader included with  Internet Explorer version 3.0 supports multiple news servers; you can download the newsreader from 
+<A HREF="http://www.microsoft.com/ie/ie3/imn.htm" target="_top">http://www.microsoft.com/ie/ie3/imn.htm</A>.
+<P>
+Mailing lists are another good form of free peer support.  An advantage to being on a mailing list is that this is where Microsoft will make early announcements of information on a given topic.  Again, it is peer support, and Microsoft staff will often lurk there, but not send mail unless a specific question is asked.  To learn more about mailing lists, please review <A HREF="http://www.microsoft.com/workshop/resource/mail-f.htm" target="_top">http://www.microsoft.com/workshop/resource/mail-f.htm</A>
+<P>
+
+<H3><A NAME="AdditionalSupport">Additional Support Information</A></H3>
+<UL>
+<LI>AnswerPoint Information Services provides you with easy access to the latest technical and support information for Microsoft products. You can access a variety of low and no cost Information Services 24 hours a day, 365 days a year. Many of the AnswerPoint Information Services make reference to the following technical content: 
+<UL>
+<LI>Microsoft Frequently Asked Questions (FAQ): Here you will find quick answers to the most common technical issues on using your favorite Microsoft product.
+<LI>Microsoft Software Library: The Microsoft Software Library contains hundreds of free software add-ons, bug fixes, peripheral drivers, software updates, and programming aids for easy downloading at your convenience.
+<LI>Microsoft Knowledge Base: The Microsoft Knowledge Base is the same database that Microsoft support engineers use to answer technical questions. It is a comprehensive collection of more than 70,000 detailed articles with technical information about Microsoft products, bug and fix lists, and answers to commonly asked technical questions. 
+</UL>
+<P>
+<LI>Internet services (World Wide Web and FTP sites): Customers access the Microsoft FAQ, Microsoft Software Library, and Microsoft Knowledge Base more than 850,000 times each week on our Internet sites. Additional information, such as resource kits, white papers, and the latest information about Microsoft products is also readily available. It's easy to search through these technical sources to find what you need. If you're an Internet user, you can access this no-charge information (connect charges may apply) at the following locations: 
+<UL>
+<LI>The World Wide Web site is located at <A NAME="http://www.microsoft.com">http://www.microsoft.com</A>
+<LI>The FTP site is located at ftp.microsoft.com 
+</UL>
+<P>
+<LI>The Microsoft Network (MSN) and other online services: You can access the 70,000-plus Microsoft Knowledge Base articles and the Microsoft Software Library files through MSN and other online services. Additional technical information and community services, such as the Microsoft Frequently Asked Questions, Member-to-Member Bulletin Board Services, and links to the World Wide Web, are available on MSN. To access Microsoft support services on MSN, choose "Go To Other Location" from the Edit menu and type "MSSUPPORT".
+<P> 
+<LI>Microsoft TechNet: Microsoft TechNet is the front-line resource for fast complete answers to technical questions on Microsoft desktop and systems products. From crucial data on client-server and workgroup computing, systems platforms, and database products, to the latest on support for Microsoft Windows and Macintosh&reg;-based applications, it's all on Microsoft TechNet. Microsoft TechNet is $299 annually for a single user license, or $699 annually for a single-server, unlimited-users license. To subscribe to Microsoft TechNet, call (800) 344-2121. 
+<P>
+<LI>Microsoft Developer Network (MSDN): The Microsoft Developer Network is the comprehensive source of programming information and toolkits for those who write applications for the Microsoft Windows, Windows 95, and Windows NT operating systems, or use Microsoft products for development purposes. Members with an MSDN annual subscription are kept up-to-date through regular deliveries of information, a newsletter, and other information sources. To subscribe to the Microsoft Developer Network, call (800) 759-5474. 
+<P>
+<LI>Microsoft Download Service (MSDL): The Microsoft Download Service contains sample programs, device drivers, patches, software updates, and programming aids. Direct modem access to MSDL is available by dialing (206) 936-6735. The service is available 24 hours a day, 365 days a year. Connect information: 1200, 2400, 9600, or 14400 baud, no parity, 8 data bits, and 1 stop bit. 
+<P>
+<LI>Microsoft FastTips: This automated service provides quick answers to your common technical questions via an automated toll-free telephone number, fax, or mail. To access FastTips or to receive a map and catalog, call the FastTips number listed for your product of interest: 
+<UL>
+<LI>Desktop applications(800) 936-4100
+<LI>Personal Systems products(800) 936-4200
+<LI>Development tools(800) 936-4300
+<LI>Business Systems(800) 936-4400
+</UL>
+<P>
+<LI>Per-Incident Electronic Service Requests: This service is available to Premier, Priority Comprehensive 35 and 75, and Priority Developer 35 customers. You can directly submit electronic service requests to Microsoft support engineers who receive the requests and work with you to resolve your technical problem. This capability also allows you to access Microsoft information databases so you can use the information to maintain and troubleshoot your Microsoft products independently. 
+</UL>
+<P>
+<P>
+<a href="#top">Back to top</a>
+<P>
+<HR>
+</FONT>
+</BODY>
+</HTML>
+

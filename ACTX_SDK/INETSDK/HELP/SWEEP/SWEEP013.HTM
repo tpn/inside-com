@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Cascading Style Sheets</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep012.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep014.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_000100010c000000">Cascading Style Sheets</A></H2>
+<BR CLEAR=ALL>
+<P>Using cascading style sheets, more than one style sheet can influence the presentation simultaneously. There are two main reasons for this feature: modularity and author/reader balance.
+
+<P>A style sheet designer can combine several (partial) style sheets to reduce redundancy:
+
+<PRE><FONT FACE="Courier" SIZE="2">@import url(http://www.style.org/stylea);
+@import url(http://www.style.org/styleb);
+
+H1 { color: red }     /* override imported sheets */
+</FONT></PRE>
+<P>Also, both readers and authors can influence the presentation through style sheets. To do so, they use the same style sheet language, thus reflecting a fundamental feature of the Web: everyone can become a publisher.
+
+<P>Sometimes conflicts will arise between the style sheets that influence the presentation. Conflict resolution is based on each style rule having a weight. By default, the weights of the reader's rules are less than the weights of rules in the author's documents, but style sheet designers can increase the weights of their rules by using the keyword "important". In this example, the H1 and <A HREF="sweep021.htm#htmlref2_0001000114003800" TARGET=TEXT>P</A> styles will override all other style sheet formatting:
+
+<PRE><FONT FACE="Courier" SIZE="2">H1 { color: red ! important }
+P  { font-size: 12pt ! important }
+</FONT></PRE>
+<P>A reader rule labeled important will override an author rule with normal weight. An author rule labeled important will override an important reader rule.
+
+<P><B>Cascading Order</B>
+
+<P>Conflicting rules are intrinsic to the CSS mechanism. To find the value for an element/property combination, the following algorithm should be followed:
+
+<OL><LI>Find all declarations that apply to the element/property in question. Declarations apply if the selector matches the element in question. If no declarations apply, the inherited value is used. If there is no inherited value (this is the case on the root element and for properties that do not inherit), the initial value is used.
+
+<LI>Sort the declarations by explicit weight: declarations marked '!important' carry more weight than unmarked (normal) declarations.
+
+<LI>Sort by origin: the author's style sheets override the reader's style sheets, which override the default values.
+
+<LI>Sort by specificity of selector: more specific selectors will override more general ones. To find the specificity, count the number of ID attributes in the selector (a), the number of CLASS attributes in the selector (b), and the number of tag names in the selector (c). Concatenating the three numbers (in a number system with a large base) gives the specificity. Some examples are:
+
+<PRE><FONT FACE="Courier" SIZE="2">  LI            {...}  /* a=0 b=0 c=1 -&gt; specificity =   1 */
+  UL LI         {...}  /* a=0 b=0 c=2 -&gt; specificity =   2 */
+  UL OL LI      {...}  /* a=0 b=0 c=3 -&gt; specificity =   3 */
+  LI.red        {...}  /* a=0 b=1 c=1 -&gt; specificity =  11 */
+  UL OL LI.red  {...}  /* a=0 b=1 c=3 -&gt; specificity =  13 */ 
+  #x34y         {...}  /* a=1 b=0 c=0 -&gt; specificity = 100 */ 
+</FONT></PRE>
+<LI>Sort by order specified: if two rules have the same weight, the latter specified should live.
+</OL>
+<P>The search for the property value can be terminated whenever one rule has a higher weight than the other rules that apply to the same element/property combination. 
+
+<P>This strategy gives authors' style sheets considerably higher weight than those of the reader. It is therefore important that the reader has the ability to turn off the influence of a certain style sheet, for example through a pull-down menu.
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep012.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep014.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

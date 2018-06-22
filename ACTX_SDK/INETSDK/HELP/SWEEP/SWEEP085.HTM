@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>HTTP Functions</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep084.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep086.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="wininet_0008000106000000">HTTP Functions</A></H2>
+<BR CLEAR=ALL>
+<P>The HTTP functions control the transmission and content of HTTP requests. 
+
+
+<H3><A NAME="wininet_0008000106000100">HttpAddRequestHeaders</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL HttpAddRequestHeaders(
+    IN HINTERNET hHttpRequest,
+    IN LPCTSTR lpszHeaders,
+    IN DWORD dwHeadersLength,
+    IN DWORD dwModifiers
+);
+</FONT></PRE>
+<P>Adds one or more HTTP request headers to the HTTP request handle.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hHttpRequest</I>
+ </DT><DD>Open HTTP request handle returned by <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>.
+</DD><DT><I>lpszHeaders</I>
+ </DT><DD>Headers to append to the request. Each header must be terminated by a CR/LF (carriage return/line feed) pair.
+</DD><DT><I>dwHeadersLength</I>
+ </DT><DD>Length, in characters, of <I>lpszHeaders</I>. If this parameter is -1L, the function assumes that <I>lpszHeaders</I> is zero-terminated (ASCIIZ), and the length is computed.
+</DD><DT><I>dwModifiers</I>
+ </DT><DD>Values used to modify the semantics of this function. Can be a combination of these values:
+<DL>
+<DT>HTTP_ADDREQ_FLAG_COALESCE_WITH_COMMA
+ </DT><DD>Coalesces headers of the same name. For example, adding "Accept: text/*" followed by "Accept: audio/*" with this flag results in the formation of the single header "Accept: text/*, audio/*". This causes the first header found to be coalesced. It is up to the calling application to ensure a cohesive scheme with respect to coalesced/separate headers.
+</DD><DT>HTTP_ADDREQ_FLAG_COALESCE_WITH_SEMICOLON
+ </DT><DD>Coaleses headers of the same name using a semicolon.
+</DD><DT>HTTP_ADDREQ_FLAG_COALESCE
+ </DT><DD>Coaleses headers of the same name.
+
+</DD><DT>HTTP_ADDREQ_FLAG_REPLACE
+ </DT><DD>Replaces or removes a header. If the header value is empty and the header is found, it is removed. If not empty, the header value is replaced.
+</DD><DT>HTTP_ADDREQ_FLAG_ADD
+ </DT><DD>Adds the header if it does not exist. Used with REPLACE. 
+</DD><DT>HTTP_ADDREQ_FLAG_ADD_IF_NEW
+ </DT><DD>Adds the header only if it does not already exist; otherwise, an error is returned.
+</DD></DL>
+</DD></DL>
+<P>This function appends additional, free-format headers to the HTTP request handle and is intended for use by sophisticated clients that need detailed control over the exact request sent to the HTTP server.
+
+<P>Note that for basic <B>HttpAddRequestHeaders</B>, the application can pass in multiple headers in a single buffer. If the application is trying to remove or replace a header, only one header can be supplied in <I>lpszHeaders.</I>
+
+<P>See also <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>, <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>
+<H3><A NAME="wininet_0008000106000200">HttpOpenRequest</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">HINTERNET HttpOpenRequest(
+    IN HINTERNET hHttpSession,
+    IN LPCTSTR lpszVerb,
+    IN LPCTSTR lpszObjectName,
+    IN LPCTSTR lpszVersion,
+    IN LPCTSTR lpszReferer OPTIONAL,
+    IN LPCTSTR FAR * lpszAcceptTypes OPTIONAL,
+    IN DWORD dwFlags,
+    IN DWORD dwContext
+);
+</FONT></PRE>
+<P>Opens an HTTP request handle.
+
+<UL><LI>Returns a valid (non-NULL) HTTP request handle if successful, or NULL otherwise. To get extended error information, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hHttpSession</I>
+ </DT><DD>Handle to an HTTP session returned by <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>.
+</DD><DT><I>lpszVerb</I>
+ </DT><DD>Address of a string that contains the verb to use in the request. If this parameter is NULL, the function uses "GET" as the verb.
+</DD><DT><I>lpszObjectName</I>
+ </DT><DD>Address of a string that contains the name of the target object of the specified verb. This is generally a file name, an executable module, or a search specifier.
+</DD><DT><I>lpszVersion</I>
+ </DT><DD>Address of a string that contains the HTTP version. If this parameter is NULL, the function uses "HTTP/1.0" as the version.
+</DD><DT><I>lpszReferer</I>
+ </DT><DD>Address of a string that specifies the address (URL) of the document from which the URL in the request (<I>lpszObjectName</I>) was obtained. If this parameter is NULL, no "referrer" is specified.
+</DD><DT><I>lpszAcceptTypes</I>
+ </DT><DD>Address of a null-terminated array of LPCTSTR pointers indicating content types accepted by the client. If this parameter is NULL, no types are accepted by the client. Servers interpret a lack of accept types to indicate that the client accepts only documents of type "text/*" (that is, only text documents and not pictures or other binary files).
+</DD><DT><I>dwFlags</I>
+ </DT><DD>Internet flag values. For a list of valid flag values, see <A HREF="sweep082.htm#wininet_0008000103000d00" TARGET=TEXT>InternetOpenUrl</A>.
+</DD><DT><I>dwContext</I>
+ </DT><DD>An application-defined value that associates this operation with any application data.
+</DD></DL>
+<P>This function creates a new HTTP request handle and stores the specified parameters in that handle. An HTTP request handle holds a request to be sent to an HTTP server and contains all RFC822/MIME/HTTP headers to be sent as part of the request.
+
+<P>Use the <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> function to close the handle returned by <B>HttpOpenRequest</B>. <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A> cancels all outstanding I/O on the handle.
+
+<P>The <I>lpszReferer</I> parameter to <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A> is used as the referrer for the HTTP request.
+
+<P>See also <A HREF="sweep085.htm#wininet_0008000106000100" TARGET=TEXT>HttpAddRequestHeaders</A>, <A HREF="sweep085.htm#wininet_0008000106000300" TARGET=TEXT>HttpQueryInfo</A>, <A HREF="sweep085.htm#wininet_0008000106000400" TARGET=TEXT>HttpSendRequest</A>, <A HREF="sweep082.htm#wininet_0008000103000300" TARGET=TEXT>InternetCloseHandle</A>, <A HREF="sweep082.htm#wininet_0008000103000500" TARGET=TEXT>InternetConnect</A>, <A HREF="sweep082.htm#wininet_0008000103000c00" TARGET=TEXT>InternetOpen</A>, <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A>
+<H3><A NAME="wininet_0008000106000300">HttpQueryInfo</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL HttpQueryInfo(
+    IN HINTERNET hHttpRequest,
+    IN DWORD dwInfoLevel,
+    IN LPVOID lpvBuffer OPTIONAL,
+    IN LPDWORD lpdwBufferLength,
+    IN OUT LPDWORD lpdwIndex OPTIONAL,
+);
+</FONT></PRE>
+<P>Queries for information about an HTTP request.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hHttpRequest</I>
+ </DT><DD>Open HTTP request handle returned by <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>.
+</DD><DT><I>dwInfoLevel</I>
+ </DT><DD>Combination of the attribute to query and the flags that modify the request. The following flags can be used to modify a request:
+<DL>
+<DT>HTTP_QUERY_INFO_NUMBER
+ </DT><DD>This flag is required to set the type of the data returned by <B>HttpQueryInfo</B> to a DWORD.
+</DD><DT>HTTP_QUERY_CUSTOM
+ </DT><DD>If this query level is specified, <I>lpvBuffer</I> contains an ASCIIZ header name. This header name is searched for and its value returned in <I>lpvBuffer</I> on output.
+</DD><DT>HTTP_QUERY_FLAG_COALESCE
+ </DT><DD>Combine the values from several headers of the same name into the output buffer.
+</DD><DT>HTTP_QUERY_FLAG_REQUEST_HEADERS
+ </DT><DD>Typically, response headers are queried, but an application can also query request headers by using this flag.
+</DD><DT>HTTP_QUERY_FLAG_SYSTEMTIME
+ </DT><DD>For those headers whose value is a date/time string, such as "Last-Modified-Time", specifying this flag returns the header value as a standard Win32 <B>SYSTEMTIME</B> structure, which does not require the application to parse the data.
+</DD><DT>HTTP_QUERY_FLAG_NUMBER
+ </DT><DD>For those headers whose value is a number, such as the status code, specifying this flag returns the data as a 32-bit number.
+</DD></DL>
+</DD><DT><I>lpvBuffer</I>
+ </DT><DD>Address of the buffer that receives the information.
+</DD><DT><I>lpdwBufferLength</I>
+ </DT><DD>Address of a value that contains the length of the data buffer. When the function returns, this parameter contains the address of a value specifying the length of the information written to the buffer. When the function returns strings, the following rules apply:
+<UL><LI>If the function succeeds, <I>lpdwBufferLength</I> specifies the length of the string, in characters, minus 1 for the terminating null. 
+<LI>If the function fails and ERROR_INSUFFICIENT_BUFFER is returned, <I>lpdwBufferLength</I> specifies the number of bytes that the application must allocate in order to receive the string.
+</UL>
+</DD><DT><I>lpdwIndex</I>
+ </DT><DD>Address of a zero-based header index used to enumerate multiple headers with the same name. When calling the function, this parameter is the index of the specified header to return. When the function returns, this parameter is the index of the next header. If the next index cannot be found, <A HREF="sweep089.htm#wininet_000800010a000031" TARGET=TEXT>ERROR_HTTP_HEADER_NOT_FOUND</A> is returned.
+</DD></DL>
+<P>The possible values for the <I>dwInfoLevel</I> parameter include:
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_MIME_VERSION
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_CONTENT_TYPE
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_CONTENT_TRANSFER_ENCODING
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_CONTENT_ID
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_CONTENT_DESCRIPTION
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_CONTENT_LENGTH
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_ALLOW
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_PUBLIC
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_DATE
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_EXPIRES
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_LAST_MODIFIED
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_MESSAGE_ID
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_URI
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_DERIVED_FROM
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_LANGUAGE
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_COST
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_WWW_LINK
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_PRAGMA
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_VERSION
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_STATUS_CODE
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_STATUS_TEXT
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_RAW_HEADERS
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_RAW_HEADERS_CRLF
+</FONT></TD><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">HTTP_QUERY_REQUEST_METHOD
+</FONT></TD></TABLE>
+<P>In HTTP_QUERY_REQUEST_METHOD, the <I>lpvBuffer</I> parameter receives the verb that is being used in the request, typically "GET" or "POST".
+
+<P>This function is used to return response or request headers from an HTTP request. 
+
+You can retrieve different types of data from <B>HttpQueryInfo</B>:
+
+<UL><LI>strings (default)
+<LI>SYSTEMTIME (for Data: Expires:, headers)
+<LI>DWORD (for STATUS_CODE, CONTENT_LENGTH, and so on if HTTP_QUERY_INFO_NUMBER has been used)
+</UL>
+<P>See also <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>
+<H3><A NAME="wininet_0008000106000400">HttpSendRequest</A></H3>
+<PRE><FONT FACE="Courier" SIZE="2">BOOL HttpSendRequest(
+    IN HINTERNET hHttpRequest,
+    IN LPCTSTR lpszHeaders OPTIONAL,
+    IN DWORD dwHeadersLength,
+    IN LPVOID lpOptional OPTIONAL,
+    DWORD dwOptionalLength
+);
+</FONT></PRE>
+<P>Sends the specified request to the HTTP server.
+
+<UL><LI>Returns TRUE if successful, or FALSE otherwise. To get extended error information, call <B>GetLastError</B>.
+
+</UL>
+<DL><DT><I>hHttpRequest</I>
+ </DT><DD>Open HTTP request handle returned by <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>.
+</DD><DT><I>lpszHeaders</I>
+ </DT><DD>Additional headers to be appended to the request. This parameter can be NULL if there are no additional headers to append.
+</DD><DT><I>dwHeadersLength</I>
+ </DT><DD>Length, in characters, of the additional headers. If this parameter is -1L and <I>lpszHeaders</I> is not NULL, the function assumes that <I>lpszHeaders</I> is zero-terminated (ASCIIZ), and the length is calculated.
+</DD><DT><I>lpOptional</I>
+ </DT><DD>Address of any optional data to send immediately after the request headers. This is generally used for POST and PUT operations. This parameter can be NULL if there is no optional data to send.
+</DD><DT><I>dwOptionalLength</I>
+ </DT><DD>Length, in bytes, of the optional data. This parameter can be zero if there is no optional data to send.
+</DD></DL>
+<P>This function sends the specified request to the HTTP server and allows the client to specify additional RFC822/MIME/HTTP headers to send along with the request. 
+
+<P>The function also lets the client specify optional data to send to the HTTP server immediately following the request headers. This feature is generally used for "write" operations such as PUT and POST.
+
+<P>After the request is sent, the status code and response headers from the HTTP server are read. These headers are maintained internally and are available to client applications through the <A HREF="sweep085.htm#wininet_0008000106000300" TARGET=TEXT>HttpQueryInfo</A> function.
+
+<P>An application can use the same HTTP request handle in multiple calls to <B>HttpSendRequest</B>, but the application must read all data returned from the previous call before calling the function again. 
+
+<P>See also <A HREF="sweep085.htm#wininet_0008000106000200" TARGET=TEXT>HttpOpenRequest</A>, <A HREF="sweep085.htm#wininet_0008000106000300" TARGET=TEXT>HttpQueryInfo</A>, <A HREF="sweep082.htm#wininet_0008000103001000" TARGET=TEXT>InternetReadFile</A>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep084.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep086.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

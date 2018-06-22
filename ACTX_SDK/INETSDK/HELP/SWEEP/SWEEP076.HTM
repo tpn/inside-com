@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Internet Explorer Object Model</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep075.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep077.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="iexplr_c_0007000202000000">Internet Explorer Object Model</A></H2>
+<BR CLEAR=ALL>
+<P>The Web browsing component of Internet Explorer (the Web browser control) is the core of what customers perceive as the Internet Explorer 3.0 application. Because it is implemented as an in-process COM server, the Web browser control must be hosted within some other process. For Internet Explorer 3.0, the hosting process is IEXPLORE.EXE; for Internet Explorer 4.0, the hosting process is the Windows shell. 
+
+<P>The Web browser control hosts OLE document objects and fully implements OLE Hyperlinks, so from one perspective the Web browser control is a container, but it is also an OLE COM class object. As a COM class object, the Web browser control implements all the interfaces necessary to be an OLE control and can be contained within any OLE control container. Two special OLE control containers that are coded specifically to host the Web browser control are Internet Explorer 4.0, which hosts the browser as an additional "view" in the Windows shell, and the Internet Explorer 3.0 standalone application, which primarily provides a frame for the control. 
+
+<P>As a rich OLE document object host, the Web browser control can host any OLE document object, with the added benefit of fully supporting hyperlinking to any document type. 
+
+<P>Because the Web browser control implements the OLE Automation object model, a client application can programmatically control browsing. The Internet Explorer 3.0 frame exposes the control's Autmation object model through the Application object, and Internet Explorer 4.0 exposes the model through the Views collection property. 
+
+<P>The Web browser control is implemented in SHDOCVW.DLL and has its own class identifier: CLSID_IExplorer. 
+
+<P>There is another object that is related to the Web browser control: the component that implements the Automation interface to OLE Hyperlinks. CLSID_OAHyperLink is an in-proc class object that wraps the "COM level" hyperlinks accessed through the <B>CreateHLinkFromData</B> function (among others). Various methods and properties of the Web browser control pass references to OAHyperlinks. 
+
+<P>The <A HREF="sweep077.htm#iexplr_c_0007000203010000" TARGET=TEXT>IWebBrowser</A> interface is the primary OLE Automation compatible (dual) interface exposed by the Web browser control. <A HREF="sweep077.htm#iexplr_c_0007000203010000" TARGET=TEXT>IWebBrowser</A> is also the logical 'base' interface for the <A HREF="sweep077.htm#iexplr_c_0007000203020000" TARGET=TEXT>IWebBrowserApp</A> interface, which applications use to maniplute an instance of the Internet Explorer application though OLE Automation. In other words, <A HREF="sweep077.htm#iexplr_c_0007000203020000" TARGET=TEXT>IWebBrowserApp</A> is a super-set of <A HREF="sweep077.htm#iexplr_c_0007000203010000" TARGET=TEXT>IWebBrowser</A>.
+
+<H3><A NAME="iexplr_c_0007000202010000">Printing from the Web Browser Control</A></H3>
+<P>Use the following steps to print the document that the Web browser control is currently displaying:
+
+<OL><LI>Retrieve the document object's <B>IDispatch</B> interface by calling <A HREF="sweep077.htm#iexplr_c_0007000203010c00" TARGET=TEXT>IWebBrowser::get_Document</A>.
+<LI>Retrieve the document object's <B>IOleCommandTarget</B> interface by calling <B>IDispatch::QueryInterface</B>.
+<LI>Print the document by calling <B>IOleCommandTarget::Exec</B>(NULL,OLECMDID_PRINT,
+OLECMDEXECOPT_DONTPROMPTUSER, NULL,NULL). This function acts as though the Print menu item was chosen through the user interface.
+</OL>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep075.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep077.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

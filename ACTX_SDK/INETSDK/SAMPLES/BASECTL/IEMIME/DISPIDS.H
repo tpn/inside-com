@@ -1,0 +1,32 @@
+//=--------------------------------------------------------------------------=
+// Dispids.H
+//=--------------------------------------------------------------------------=
+// Copyright  1995  Microsoft Corporation.  All Rights Reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+//=--------------------------------------------------------------------------=
+//
+// dispids for use in an automation or control object.
+//
+#ifndef _DISPIDS_H_
+
+//=--------------------------------------------------------------------------=
+// for the iemim control
+// properties & methods
+//
+
+#define DISPID_URL		100
+#define DISPID_MEDIA	101
+#define DISPID_CFFORMAT 102
+#define DISPID_RELOAD	103
+
+// events
+//
+
+#define DISPID_COMPLETE	104
+
+#define _DISPIDS_H_
+#endif // _DISPIDS_H_

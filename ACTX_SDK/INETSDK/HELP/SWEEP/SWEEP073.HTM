@@ -1,0 +1,495 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Events</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep072.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep074.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="iexplore_0007000107000000"></A><H3>Events<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000100"></A><H3>BeforeNavigate Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when the WebBrowser control is about to navigate to a different URL, which may happen as a result of external automation, internal automation from a script, or the user clicking a link or typing in the address bar. The container has an opportunity to cancel the pending navigation.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_BeforeNavigate(ByVal</B> <I>URL</I> <B>As</B> <B>String,</B> <B>ByVal</B> <I>Flags</I> <B>As</B> <B>Long,</B> <BR>
+    <B>ByVal</B> <I>TargetFrameName</I> <B>As</B> <B>String,</B> <I>PostData</I> <B>As</B> <B>Variant,</B> <B>ByVal</B> <I>Headers</I> <B>As</B> <B>String,<BR>
+</B>    <I>Cancel</I> <B>As</B> <B>Boolean)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>URL</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the URL to which the browser is navigating. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Flags</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reserved for future use. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>TargetFrameName</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the name of the frame in which to display the resource, or NULL if no named frame is targeted for the resource.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>PostData</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Data to send to the server if the HTTP POST transaction is being used. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Headers</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A value that specifies the additional HTTP headers to send to the server (HTTP URLs only). The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Cancel</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A Boolean value that the container can set to <B>True</B> to cancel the navigation operation, or to <B>False</B> to allow it to proceed. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000600" TARGET=TEXT>FrameNavigateComplete</A>, <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000800" TARGET=TEXT>NavigateComplete</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000200"></A><H3>CommandStateChange Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when the enabled state of a command changes.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_CommandStateChange</B> <B>(ByVal</B> <I>Command</I> <B>As</B> <B>Long,<BR>
+</B>    <B>ByVal</B> <I>Enable</I> <B>As</B> <B>Boolean)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Command</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A long integer specifying the identifier of the command that changed. It can be one of the following constants or values.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Constant</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Value</B></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Meaning
+</B></FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000107000201">CSC_UPDATECOMMANDS</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">-1</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The enabled state of a toolbar button may have changed; the <I>Enable</I> parameter should be ignored.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000107000202">CSC_NAVIGATEFORWARD</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">1</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The enabled state of the Forward button has changed.
+</FONT></TD>
+</TR>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B><A NAME="iexplore_0007000107000203">CSC_NAVIGATEBACK</B></A></FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">3</FONT></TD>
+<TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The enabled state of the Back button has changed.
+</FONT></TD>
+</TR>
+</TABLE>
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Enable</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A Boolean value that is <B>True</B> if the command is enabled, or <B>False</B> if not.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000300"></A><H3>DownloadBegin Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when a navigation operation is beginning. This event is fired shortly after the <A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A> event, unless the navigation is canceled. Any animation or "busy" indication that the container needs to display should be connected to this event.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_DownloadBegin</B> <B>(</B> <B>)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000400" TARGET=TEXT>DownloadComplete</A>, <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000a00" TARGET=TEXT>ProgressChange</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000400"></A><H3>DownloadComplete Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when a navigation operation finished, was halted, or failed. Unlike <A HREF="sweep073.htm#iexplore_0007000107000800" TARGET=TEXT>NavigateComplete</A>, which is fired only when a URL is successfully navigated to, this event is always fired after a navigation starts. Any animation or "busy" indication that the container needs to display should be connected to this event.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_DownloadComplete</B> <B>(</B> <B>)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000300" TARGET=TEXT>DownloadBegin</A>, <A HREF="sweep073.htm#iexplore_0007000107000500" TARGET=TEXT>FrameBeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000600" TARGET=TEXT>FrameNavigateComplete</A>, <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000800" TARGET=TEXT>NavigateComplete</A>, <A HREF="sweep073.htm#iexplore_0007000107000a00" TARGET=TEXT>ProgressChange</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000500"></A><H3>FrameBeforeNavigate Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when the WebBrowser control is about to navigate to a different URL, which may happen as a result of external automation, internal automation from a script, or the user clicking a link or typing in the address bar. The container has an opportunity to cancel the pending navigation. This event is fired for navigations that occur inside an HTML frame.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_FrameBeforeNavigate(ByVal</B> <I>URL</I> <B>As</B> <B>String,</B> <B>ByVal</B> <I>Flags</I> <B>As</B> <B>Long,</B> <BR>
+    <B>ByVal</B> <I>TargetFrameName</I> <B>As</B> <B>String,</B> <I>PostData</I> <B>As</B> <B>Variant,</B> <B>ByVal</B> <I>Headers</I> <B>As</B> <B>String,<BR>
+</B>    <I>Cancel</I> <B>As</B> <B>Boolean)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Required. An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>URL</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the URL to which the browser is navigating. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Flags</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reserved for future use. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>TargetFrameName</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the name of the frame in which to display the resource, or NULL if no named frame is targeted for the resource.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>PostData</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Data to send to the server if the HTTP POST transaction is being used. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Headers</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A value that specifies the additional HTTP headers to send to the server (HTTP URLs only). The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Cancel</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A Boolean value that the container can set to <B>True</B> to cancel the navigation operation, or to <B>False</B> to allow it to proceed. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000600" TARGET=TEXT>FrameNavigateComplete</A>, <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000800" TARGET=TEXT>NavigateComplete</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000600"></A><H3>FrameNavigateComplete Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs after the browser has successfully navigated to a new location. This event is fired for navigations that occur inside an HTML frame.The document may still be downloading (and in the case of HTML, images may still be downloading), but at least part of the document has been received from the server, and the viewer for the document has been created. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_FrameNavigateComplete(ByVal</B> <I>URL</I> <B>As</B> <B>String)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>URL</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the URL that was navigated to. Note that this URL can be different from the URL that the browser was told to navigate to. One reason is that this URL is the canonicalized and qualified URL; for instance, if an application specified a URL of "www.microsoft.com" in a call to the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method, the URL passed by <A HREF="sweep073.htm#iexplore_0007000107000800" TARGET=TEXT>NavigateComplete</A> will be "http://www.microsoft.com/". Also, if the server has redirected the browser to a different URL, the redirected URL will be reflected here.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000500" TARGET=TEXT>FrameBeforeNavigate</A>, <B>FrameNavigateComplete</B>, <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000700"></A><H3>FrameNewWindow Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when a new window is to be created for displaying a resource. This event is fired for navigations that occur inside an HTML frame. Some actions that can cause this include the user shift-clicking on a link, the user right-clicking on a link and choosing "open in new window", or a targeted navigation to a frame name that does not yet exist. The container has an opportunity to handle the new window creation itself. If it does not, a top-level Internet Explorer window is created as a separate process.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <I>object</I><B>_FrameNewWindow</B> <B>(ByVal</B> <I>URL</I> <B>As</B> <B>String,</B> <B>ByVal</B> <I>Flags</I> <B>As</B> <B>Long,</B> <BR>
+    <B>ByVal</B> <I>TargetFrameName</I> <B>As</B> <B>String,</B> <I>PostData</I> <B>As</B> <B>Variant,</B> <B>ByVal</B> <I>Headers</I> <B>As</B> <B>String,<BR>
+</B>    <I>Processed</I> <B>As</B> <B>Boolean)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>URL</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the URL of the resource being navigated to.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Flags</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reserved for future use.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>TargetFrameName</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the name of the frame in which to display the resource, or NULL if no named frame is targeted for the resource.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>PostData</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Data to send to the server if an HTTP POST transaction is used. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Headers</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A value that specifies the HTTP headers to send to the server (HTTP URLs only). The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Processed</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A Boolean value that indicates whether the container intends to create the new window. Set this parameter to <B>True</B> if the container will create the window, or to <B>False</B> if a top-level Internet Explorer window is to be created.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The preferred behavior of WebBrowser control containers is to process this event, create a new instance of the WebBrowser control, and pass all the parameters from the <A HREF="sweep073.htm#iexplore_0007000107000900" TARGET=TEXT>NewWindow</A> event directly to the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method on the newly created WebBrowser control. Another option for containers that cannot or do not need to create a new window is to degrade by performing the navigation in the existing window. To do this, they may process this event and then pass the parameters from this event to <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> on the existing window.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000500" TARGET=TEXT>FrameBeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000600" TARGET=TEXT>FrameNavigateComplete</A>, <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000800" TARGET=TEXT>NavigateComplete</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000800"></A><H3>NavigateComplete Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs after the browser has successfully navigated to a new location. The document may still be downloading (and in the case of HTML, images may still be downloading), but at least part of the document has been received from the server, and the viewer for the document has been created.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_NavigateComplete(ByVal</B> <I>URL</I> <B>As</B> <B>String)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>URL</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the URL that was navigated to. Note that this URL can be different from the URL that the browser was told to navigate to. One reason is that this URL is the canonicalized and qualified URL; for instance, if an application specified a URL of "www.microsoft.com" in a call to the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method, the URL passed by <B>NavigateComplete</B> will be "http://www.microsoft.com/". Also, if the server has redirected the browser to a different URL, the redirected URL will be reflected here.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000500" TARGET=TEXT>FrameBeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000600" TARGET=TEXT>FrameNavigateComplete</A>, <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000900"></A><H3>NewWindow Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when a new window is to be created for displaying a resource. Some actions that can cause this include the user shift-clicking on a link, the user right-clicking on a link and choosing "open in new window", or a targeted navigation to a frame name that does not yet exist. The container has an opportunity to handle the new window creation itself. If it does not, a top-level Internet Explorer window is created as a separate process.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <I>object</I><B>_NewWindow</B> <B>(ByVal</B> <I>URL</I> <B>As</B> <B>String,</B> <B>ByVal</B> <I>Flags</I> <B>As</B> <B>Long,</B> <BR>
+    <B>ByVal</B> <I>TargetFrameName</I> <B>As</B> <B>String,</B> <I>PostData</I> <B>As</B> <B>Variant,</B> <B>ByVal</B> <I>Headers</I> <B>As</B> <B>String,<BR>
+</B>    <I>Processed</I> <B>As</B> <B>Boolean)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>URL</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the URL of the resource being navigated to.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Flags</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reserved for future use.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>TargetFrameName</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that evaluates to the name of the frame in which to display the resource, or NULL if no named frame is targeted for the resource.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>PostData</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Data to send to the server if an HTTP POST transaction is used. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Headers</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A value that specifies the HTTP headers to send to the server (HTTP URLs only). The headers can specify such things as the action required of the server, the type of data being passed to the server, or a status code.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Processed</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A Boolean value that indicates whether the container intends to create the new window. Set this parameter to <B>True</B> if the container will create the window, or to <B>False</B> if a top-level Internet Explorer window is to be created.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The preferred behavior of WebBrowser control containers is to process this event, create a new instance of the WebBrowser control, and pass all the parameters from the <B>NewWindow</B> event directly to the <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> method on the newly created WebBrowser control. Another option for containers that cannot or do not need to create a new window is to degrade by performing the navigation in the existing window. To do this, they may process this event and then pass the parameters from this event to <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A> on the existing window.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000100" TARGET=TEXT>BeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000500" TARGET=TEXT>FrameBeforeNavigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000600" TARGET=TEXT>FrameNavigateComplete</A>, <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>, <A HREF="sweep073.htm#iexplore_0007000107000800" TARGET=TEXT>NavigateComplete</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000a00"></A><H3>ProgressChange Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when the progress of a download operation is updated. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_ProgressChange(ByVal</B> <I>Progress</I> <B>As</B> <B>Long,</B> <B>ByVal</B> <I>ProgressMax</I> <B>As</B> <B>Long)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Progress</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A long integer that specifies the amount of total progress to show, or &#150;1 when progress is complete. 
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>ProgressMax</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A long integer that specifies the maximum progress value. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The container can use the information provided by this event to display the number of bytes downloaded so far or to update a progress indicator. 
+
+<P>To calculate the percentage of progress to show in a progress indicator, multiply the value of <I>Progress</I> by 100 and divide by the value of <I>ProgressMax</I> (unless progress is &#150;1, in which case the container can indicate that the operation is finished or hide the progress indicator). 
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep073.htm#iexplore_0007000107000300" TARGET=TEXT>DownloadBegin</A>, <A HREF="sweep073.htm#iexplore_0007000107000400" TARGET=TEXT>DownloadComplete</A>, <A HREF="sweep072.htm#iexplore_0007000106000700" TARGET=TEXT>Navigate</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000b00"></A><H3>PropertyChange Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when the <A HREF="sweep072.htm#iexplore_0007000106000800" TARGET=TEXT>PutProperty</A> method changes the value of a property. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_PropertyChange(ByVal</B> <I>szProperty</I> <B>As</B> <B>String)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>szProperty</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string expression that contains the name of the property whose value has changed.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep072.htm#iexplore_0007000106000200" TARGET=TEXT>GetProperty</A>, <A HREF="sweep072.htm#iexplore_0007000106000800" TARGET=TEXT>PutProperty</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000c00"></A><H3>Quit Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when the Internet Explorer application is ready to quit.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_Quit(</B><I>Cancel</I> <B>As</B> <B>Boolean)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Cancel</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A Boolean value that is <B>True</B> if the last <A HREF="sweep072.htm#iexplore_0007000106000900" TARGET=TEXT>Quit</A> was canceled, or <B>False</B> if not.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<B>Quit</B>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000d00"></A><H3>StatusTextChange Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when the status bar text has changed.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_StatusTextChange(ByVal</B> <I>Text</I> <B>As</B> <B>String)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Text</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string containing the new status bar text.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The container can use the information provided by this event to update the text of a status bar.
+
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<H5>See Also</H5><BLOCKQUOTE><P>
+<A HREF="sweep071.htm#iexplore_0007000105001000" TARGET=TEXT>StatusBar</A>, <A HREF="sweep071.htm#iexplore_0007000105001100" TARGET=TEXT>StatusText</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="iexplore_0007000107000e00"></A><H3>TitleChange Event<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Occurs when the title of a document in the WebBrowser control becomes available or changes. For HTML, the title may change; while HTML is still downloading, the URL of the document is set as the title. After the real title (if there is one) is parsed from the HTML, the title is changed to reflect the actual title.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>Private</B> <B>Sub</B> <I>object</I><B>_TitleChange(ByVal</B> <I>Text</I> <B>As</B> <B>String)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>object</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to an object in the Applies To list.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>Text</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string containing the new document title. 
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep070.htm#iexplore_0007000104000100" TARGET=TEXT>WebBrowser</A>, <A HREF="sweep070.htm#iexplore_0007000104000200" TARGET=TEXT>InternetExplorer</A>
+
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep072.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep074.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

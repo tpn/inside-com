@@ -1,0 +1,106 @@
+//=--------------------------------------------------------------------------=
+// ielnk.ODL
+//=--------------------------------------------------------------------------=
+// Copyright  1996  Microsoft Corporation.  All Rights Reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+//=--------------------------------------------------------------------------=
+//
+// ODL file for the control(s) and automation object(s) in this inproc server
+//
+#include <olectl.h>
+#include "dispids.h"
+
+// can't include oaidl.h, so this will have to do
+//
+#define DISPID_NEWENUM -4
+
+
+//=--------------------------------------------------------------------------=
+// the libid for this type libray
+//
+[
+    uuid(7d635f20-984a-11cf-a3a9-00a0c9034920),
+    helpstring("ielnk Control Library"),
+    lcid(0x0000),
+    version(1.0)
+]
+library ielnkObjects {
+
+    // standard imports
+    //
+    importlib("STDOLE2.TLB");
+    importlib(STDTYPE_TLB);
+
+    // primary dispatch interface for Cielnk control
+    //
+    [
+        uuid(7e778e40-984a-11cf-a3a9-00a0c9034920),
+	helpstring("ielnk Control"),
+        hidden,
+	dual,
+	odl
+    ]
+    interface Iielnk : IDispatch {
+
+        // properties
+	//
+        [id(DISPID_HLINK), propget]
+            HRESULT Hlink([out, retval] BSTR * val);
+        [id(DISPID_HLINK), propput]
+            HRESULT Hlink([in]  BSTR val);        // methods
+        [id(DISPID_LOCATION), propget]
+            HRESULT Location([out, retval] BSTR * val);
+        [id(DISPID_LOCATION), propput]
+            HRESULT Location([in]  BSTR val);        // methods
+        [id(DISPID_TARGETFRAME), propget]
+            HRESULT TargetFrame([out, retval] BSTR * val);
+        [id(DISPID_TARGETFRAME), propput]
+            HRESULT TargetFrame([in]  BSTR val);        // methods
+        [id(DISPID_FLAGS), propget]
+            HRESULT Flags([out, retval] long * val);
+        [id(DISPID_FLAGS), propput]
+            HRESULT Flags([in]  long val);        // methods
+
+        [id(DISPID_MODE), propget]
+            HRESULT Mode([out, retval] long * val);
+        [id(DISPID_MODE), propput]
+            HRESULT Mode([in]  long val);        // methods
+	//
+        [id(DISPID_ABOUTBOX)]
+            void AboutBox(void);
+        [id(DISPID_FORWARD)]
+            void Forward(void);
+        [id(DISPID_BACK)]
+            void Back(void);
+        [id(DISPID_GO)]
+            void Go(void);
+
+    };
+
+    // event interface for Cielnk controls ...
+    //
+    [
+        uuid(804d86c0-984a-11cf-a3a9-00a0c9034920),
+	helpstring("Event interface for ielnk control"),
+	hidden
+    ]
+    dispinterface DielnkEvents {
+        properties:
+	methods:
+    };
+
+    // coclass for Cielnk controls
+    //
+    [
+        uuid(80ec37c0-984a-11cf-a3a9-00a0c9034920),
+	helpstring("ielnk control")
+    ]
+    coclass ielnk {
+        [default]         interface Iielnk;
+	[default, source] dispinterface DielnkEvents;
+    };
+};

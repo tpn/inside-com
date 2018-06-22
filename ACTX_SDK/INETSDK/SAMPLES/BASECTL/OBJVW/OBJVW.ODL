@@ -1,0 +1,83 @@
+//=--------------------------------------------------------------------------=
+// ObjVw.ODL
+//=--------------------------------------------------------------------------=
+// Copyright 1995-1996 Microsoft Corporation.  All Rights Reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+//=--------------------------------------------------------------------------=
+//
+// ODL file for the control(s) and automation object(s) in this inproc server
+//
+#include <olectl.h>
+#include "dispids.h"
+
+// can't include oaidl.h, so this will have to do
+//
+#define DISPID_NEWENUM -4
+
+
+//=--------------------------------------------------------------------------=
+// the libid for this type libray
+//
+[
+    uuid(f98e3de0-1fc2-11d0-9c8a-000000000000),
+    helpstring("Object View Control Library"),
+    lcid(0x0000),
+    version(1.0)
+]
+library ObjVwObjects {
+
+    // standard imports
+    //
+    importlib("STDOLE32.TLB");
+    importlib(STDTYPE_TLB);
+
+    // primary dispatch interface for CObjVw control
+    //
+    [
+        uuid(f98e3de1-1fc2-11d0-9c8a-000000000000),
+        helpstring("ObjVw Control"),
+        hidden,
+		dual,
+		odl
+    ]
+    interface IObjVw : IDispatch {
+
+		// properties
+		//
+
+        // methods
+		//
+        [id(DISPID_ABOUTBOX)]
+            void AboutBox(void);
+    };
+
+    // event interface for CObjVw controls ...
+    //
+    [
+        uuid(f98e3de2-1fc2-11d0-9c8a-000000000000),
+        helpstring("Event interface for ObjVw control"),
+		hidden
+    ]
+    dispinterface DObjVwEvents {
+        
+		properties:
+		
+		methods:
+	    
+    };
+
+    // coclass for CObjVw controls
+    //
+    [
+        uuid(f98e3de3-1fc2-11d0-9c8a-000000000000),
+        helpstring("ObjVw control")
+    ]
+    coclass ObjVw {
+        [default]         interface IObjVw;
+        [default, source] dispinterface DObjVwEvents;
+    };
+};

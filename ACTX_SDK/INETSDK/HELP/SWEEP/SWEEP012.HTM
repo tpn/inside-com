@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Style Sheets</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep011.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep013.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="htmlref2_000100010b000000">Style Sheets</A></H2>
+<BR CLEAR=ALL>
+<P>Style sheets give you the ability to attach styles to HTML elements. This allows you to control margins, line spacing, the placement of text and graphics, colors, font faces, and font sizes. Style sheets make it easier to create an index because indexing software has only to read the structural elements rather than the full content of a page. Cascading style sheets, as defined by the W3C CSS1 specifications, are supported by Microsoft Internet Explorer 3.0. For more information on CSS1 and Internet Explorer's support for its properties, see <A HREF="http://www.microsoft.com/workshop/author/howto/css-f.htm" TARGET="_top">A User's Guide to Style Sheets</A>.
+
+<P>Using the <A HREF="sweep021.htm#htmlref2_0001000114004400" TARGET=TEXT>STYLE</A> element, you can include style information as part of an HTML document and apply the style to some or all of the text, or you can create a style sheet as a separate document and attach it to one or more pages on your Web site. You can use both methods in a single document&#151;creating a style sheet for all the documents on a Web site, while selectively applying a special style sheet to text within selected documents. When you include multiple sets of style information, there may be some contention as to what style controls the display of an element. CSS1 provides rules of precedence to decide this.
+
+<P>There are two ways to place style information inside a document. The first is to assign a style to an element. For example, here's how to specify a paragraph with a font size of 20 points.
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;P "font-size: 20pt"&gt; This paragraph is in 20-point text. 
+As Hemingway once said, "It is a great thing to be able to specify 
+point sizes, especially large ones."
+</FONT></PRE>
+<P>This displays as:<P>
+<P STYLE="font-size: 20pt">This paragraph is in 20-point text. As Hemingway once said, "It is a great thing to be able to specify point sizes, especially large ones."
+
+<BR CLEAR=ALL><P>To place style information at the top of a page, insert a <A HREF="sweep021.htm#htmlref2_0001000114004400" TARGET=TEXT>STYLE</A> block at the top of your document. The block is placed after the <A HREF="sweep021.htm#htmlref2_0001000114002500" TARGET=TEXT>HTML</A> element and before the <A HREF="sweep021.htm#htmlref2_0001000114000d00" TARGET=TEXT>BODY</A> element. One type of style information that can be used within the STYLE element is cascading style sheet (CSS) properties. In the examples for this section, CSS properties appear within the curly braces after the elements for which they provide formatting information. (For a full listing of the CSS properties supported by Microsoft Internet Explorer 3.0, see <A HREF="http://www.microsoft.com/workshop/author/howto/css-f.htm" TARGET="_top">A User's Guide to Style Sheets</A>.)
+
+
+
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;HTML&gt;
+&lt;STYLE&gt;
+BODY {background: white; color: black}
+H1 {font: 14pt Arial bold}
+P {font: 10pt Arial; text-indent: 0.5in}
+A {text-decoration: none; color: blue}
+&lt;/STYLE&gt;
+&lt;BODY&gt;
+&lt;H1&gt;This is a headline! In 14-point Arial bold!&lt;/H1&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</FONT></PRE>
+<P>To assign more than one kind of style information at the same time, separate the styles with semicolons. For example, to set an entire HTML page to 10-point Times font, the colors to black on white, and both left and right margins to one inch, use the following:
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;STYLE&gt;
+BODY {font: 10pt Times; color: black; background: white; 
+margin-left: 1in; margin-right: 1in}
+&lt;/STYLE&gt; 
+</FONT></PRE>
+<P>You can attach an external style sheet to a document or documents on a site. To link a page to this style sheet, use the <A HREF="sweep021.htm#htmlref2_0001000114002d00" TARGET=TEXT>LINK</A> element, as in the following example (where mystyles.css is the external style sheet):
+
+<PRE><FONT FACE="Courier" SIZE="2">&lt;LINK REL=STYLE TYPE="text/css" HREF="http://www.mycompany.com/mystyles.css"&gt; 
+</FONT></PRE>
+<P>The best method for accomplishing this, however, is to use the <A HREF="sweep021.htm#htmlref2_0001000114004400" TARGET=TEXT>STYLE</A> tag.
+
+<P><B>Note</B>  Notice the use of the <A HREF="sweep021.htm#htmlref2_0001000114004402" TARGET=TEXT>TYPE=</A> attribute. This describes the MIME type of the external file that contains the style information.
+<P>The text formatting features supported by Internet Explorer 3.0 are described fully in <A HREF="http://www.microsoft.com/workshop/author/howto/css-f.htm" TARGET="_top">A User's Guide to Style Sheets</A>.
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep011.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep013.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

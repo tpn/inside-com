@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Object Hierarchy and Scoping</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep046.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep048.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_0004000103000000"></A><H3>Object Hierarchy and Scoping<BR CLEAR=ALL>
+<HR></H3><P>There are ten objects to consider in the HTML object model:
+<UL><LI><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+<LI><B>Frame</B>
+<LI><A HREF="sweep055.htm#scriptom_000400010b000100" TARGET=TEXT>History</A>
+<LI><A HREF="sweep056.htm#scriptom_000400010c000100" TARGET=TEXT>Navigator</A>
+<LI><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A>
+<LI><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A>
+<LI><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A>
+<LI><A HREF="sweep053.htm#scriptom_0004000109000100" TARGET=TEXT>Anchor</A>
+<LI><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A>
+<LI><A HREF="sweep054.htm#scriptom_000400010a000100" TARGET=TEXT>Element</A>
+</UL>
+<P>These objects are organized in the following hierarchy (the dotted line following an object indicates that multiple objects may exist):
+
+<P><map name=objmodel>
+<area shape="rect" coords="0,0,109,25" href="sweep048.htm">
+<area shape="rect" coords="69,63,178,88" href="sweep055.htm">
+<area shape="rect" coords="69,94,178,119" href="sweep056.htm">
+<area shape="rect" coords="69,125,178,150" href="sweep051.htm">
+<area shape="rect" coords="69,187,178,212" href="sweep049.htm">
+<area shape="rect" coords="105,217,213,242" href="sweep052.htm">
+<area shape="rect" coords="105,248,213,273" href="sweep053.htm">
+<area shape="rect" coords="105,279,213,304" href="sweep050.htm">
+<area shape="rect" coords="138,309,246,334" href="sweep054.htm">
+</map>
+<IMG SRC="art/objmodel.gif" WIDTH="277" HEIGHT="335" ALT="" BORDER=0 USEMAP="#objmodel">
+
+<P>Each of these objects has its own rules for scoping and containment. 
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000103010000"></A><H3>The Window Object<HR></H3><P>The top level object is a window. Every window contains:
+
+<UL><LI><B>Frame</B> - Array of contained frame windows. Each frame is a window that has its own properties, including a document.
+<LI><A HREF="sweep055.htm#scriptom_000400010b000100" TARGET=TEXT>History</A> - History object for the current window. This object is used to access the history list from the browser.
+<LI><A HREF="sweep056.htm#scriptom_000400010c000100" TARGET=TEXT>Navigator</A> - Navigator object for the current window. The navigator object contains information about the browser application.
+<LI><A HREF="sweep051.htm#scriptom_0004000107000100" TARGET=TEXT>Location</A> - Location object for the current window. Provides information about the location of the window's URL.
+<LI><B>Script</B> - Scripting function defined using the SCRIPT element in the window scope.
+<LI><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A> - Document in the current window.
+</UL>
+<P>The window object properties can be referenced directly by scripts while in the window scope. So, for example, script authors do not need to type: 
+
+<PRE><FONT FACE="Courier" SIZE="2">
+window.name 
+</FONT></PRE>
+<P>to reference the window name; instead, it is sufficient just to type:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+name
+</FONT></PRE>
+<P> Note also that it is possible to call scripts from one window object to another. So, to execute the script myscript in the topmost window, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+top.myscript( )
+</FONT></PRE>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000103020000"></A><H3>The Document Object<HR></H3><P>The document object inherits from the Window object. These object inherit from the document object:
+<UL><LI><A HREF="sweep052.htm#scriptom_0004000108000100" TARGET=TEXT>Link</A> - Array of hyperlinks found on the given document.
+<LI><A HREF="sweep053.htm#scriptom_0004000109000100" TARGET=TEXT>Anchor</A> - Array of anchors found on the given document.
+<LI><A HREF="sweep050.htm#scriptom_0004000106000100" TARGET=TEXT>Form</A> - Array of forms found on the given document.
+</UL>
+<P>Because scripts attach to the window object, not the document object, the script author must type <B>document.</B><I>property</I> 
+to access document properties. For example, to get the title of the document:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+'...
+string1 = document.title     -put the document title into string1
+'...
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>To access the forms in a document, the author can either refer by name or through the form array. For example, the following form can be addressed by name, by index or by index name and array reference:
+
+<P>In this example, the form is addressed by name:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;FORM NAME="Form1"&gt;
+     &lt;INPUT TYPE="button" NAME="Button1" VALUE="Press" onClick="pressed"&gt;
+&lt;/FORM&gt; 
+</FONT></PRE>
+<P>The author can access the object named button1 by name:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+sub pressed
+   document.Form1.Button1.value="Pressed"  '   access the form by name
+end sub
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>In this example, the form is accessed by index by index:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+sub pressed
+     document.forms(0).Button1.value="Pressed"   '   access the form by index
+end sub 
+--&gt;
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+<P>Scripts can refer to contained elements that are not form types directly, without using <B>document</B>. For example, the object "myObject" is referenced directly in script:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;OBJECT NAME="myObject" ... &gt;
+&lt;/OBJECT&gt;
+
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+&lt;!--
+sub foo
+     myObject.color = "green"     - access the form by index
+end sub 
+--&gt;
+&lt;/SCRIPT&gt;
+
+</FONT></PRE>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000103030000"></A><H3>The Form Object<HR></H3><P>The form object contains:
+<UL><LI><A HREF="sweep054.htm#scriptom_000400010a000100" TARGET=TEXT>Element</A> - Array of objects and intrinsic controls contained in the form.
+</UL>
+<P>A script can reside either in a form or in a window. If a script lives outside the form, it needs to access the elements in the form, either by 
+name or through the form array (see the example in "The Document Object"). If, however, the script element is inside the form, it can access the elements in the form 
+directly.
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;FORM NAME="Form1"&gt;
+     &lt;INPUT TYPE="button" NAME="Button1" VALUE="Press me"&gt;
+     &lt;SCRIPT FOR="Button1" EVENT="onClick" LANGUAGE="VBScript"&gt;
+	  alert "I've been pressed"
+	  document.Form1.Button1.value="Click"    
+	  Button1.value="Click"     
+     &lt;/SCRIPT&gt;
+&lt;/FORM&gt;
+     
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+sub foo
+     document.Form1.Button1.value="Click"
+end sub
+&lt;/SCRIPT&gt; 
+</FONT></PRE>
+<P><B>In vbscript, you must use this form of the syntax to perform validation: &lt;SCRIPT anguage=vbscript&gt; function form1_onsubmit() 'do validation here 'if the validation fails, then return false form1_onsubmit = false end function &lt;/SCRIPT&gt; &lt;FORM NAME=form1&gt; &lt;INPUT TYPE=text VALUE=&quot;some value&quot;&gt; &lt;INPUT TYPE=submit&gt; &lt;/FORM&gt;</B>  <TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep046.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep048.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

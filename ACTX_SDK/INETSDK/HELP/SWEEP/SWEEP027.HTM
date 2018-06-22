@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>The Internet Component Download interface</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep026.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep028.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="codedwld_0002000204000000">The Internet Component Download interface</A></H2>
+<BR CLEAR=ALL>
+<P>The Internet Component Download service is exposed via a single function, CoGetClassObjectFromURL(). This system function is called by an application that wishes to download, verify, and install code for an OLE component. The function is used in the implementation of Microsoft&#174; Internet Explorer. The implementation uses <B>URL Moniker</B> to asynchronously download code, and it uses the <B>WinVerifyTrust</B> service to verify validity of the code.
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Related Documents
+ </B></FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2"><B>Filename
+</B></FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">URL Moniker specification
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">urlmon.doc
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Asynchronous Moniker specification
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">asyncmon.doc
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">WinVerifyTrust specification 
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">wintrust.doc
+</FONT></TD></TR></TABLE>
+<H3><A NAME="codedwld_0002000204010000">Architecture</A></H3>
+<P>The diagram below shows the implementation architecture for the Internet Component Download mechanism and its relation to other system services:
+
+<P><IMG SRC="art/codedwld.gif" WIDTH="202" HEIGHT="105" ALT="" >
+
+<H3><A NAME="codedwld_0002000204020000">Technical Details</A></H3>
+<P>This section describes technical details of the Internet Component Download API used by applications (e.g. web browsers) to download and install COM Object code.
+
+<H4><A NAME="codedwld_0002000204020100">CoGetClassObjectFromURL</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">
+STDAPI CoGetClassObjectFromURL ( [in] REFCLSID rclsid, [in] LPCWSTR szCodeURL, [in] DWORD dwFileVersionMS,
+			[in] DWORD dwFileVersionLS, [in] LPCWSTR szContentTYPE, [in] LPBINDCTX pBindCtx, 
+			[in] DWORD dwClsContext, [in] LPVOID pvReserved, [in] REFIID riid, [out] VOID **ppv );
+</FONT></PRE>
+<P>This function will return a factory object for a given rclsid. If no CLSID is specified (CLSID_NULL), this function will choose the appropriate CLSID for interpreting the Internet MIME type specified in szContentType. If the desired object is installed on the system, it is instantiated. Otherwise, the necessary code is downloaded and installed from the location specified in szCodeURL or from an Object Store on the Internet Search Path (see below). 
+<P>This "download and install" process involves the following steps:
+
+<OL><LI>Downloading the necessary file(s) (.CAB, .INF, or executable) using URL Moniker(s).
+<LI>Call WinVerifyTrust to ensure that all downloaded files are safe to install.
+<LI>Complete self-registration of all COM components(8)
+<LI>Add registry entries to keep track of downloaded code (see Appendix on Registry Details)
+<LI>Call CoGetClassObject for the desired rclsid.
+</OL>
+<P>CoGetClassObjectFromURL accepts the following arguments:
+
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">REFCLSID<I>rclsid</I> 
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CLSID of the COM object that needs to be installed. If value is CLSID_NULL, then szContentType is used to determine the CLSID.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">LPCWSTR<I>szCodeURL</I> 
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">URL pointing to the code for the COM object. This may point to an executable, to an .INF file, or to a .CAB file (see below for details). If this value is NULL, then Internet Component Download will still attempt to download the desired code from an Object Store on the Internet Search Path.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">DWORD<I>dwFileVersionMS</I> 
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Most significant bits of the version number for the object that needs to be installed. If this value and the next are both 0xFFFFFFFF, then it is assumed that the latest version of the code is always desired, which means that Internet Component Download will <I>always</I> attempt to download new code.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">DWORD<I>dwFileVersionLS</I>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Least significant bits of the version number for the object that needs to be installed. If this value and the previous one are both 0xFFFFFFFF, then it is assumed that the latest version of the code is always desired, which means that Internet Component Download will <I>always</I> attempt to download new code.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">LPCWSTR<I>szContentType</I>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">MIME type that needs to be understood by the installed COM object. If rclsid is CLSID_NULL, this string is used to determine the CLSID of the object that must be installed. Note: this parameter is only useful when trying to download a viewer for a particular media type, if the MIME type of the media is known but the CLSID is not.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">LPBINDCTX<I>pBindCtx</I> 
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A bind context to use for downloading/installing component code. The client should register its IBindStatusCallback in this bind context to receive callbacks during the download and installation process. (See <B>Asynchronous Monikers</B> specification for details)
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">DWORD<I>dwClsContext</I>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Values taken from the CLSCTX enumeration specifying the execution context for the class object.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">LPVOID<I>pvReserved</I>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Reserved value, must be set to NULL.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">REFIID<I>riid</I>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The interface to obtain on the factory object (typically IClassFactory).
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">VOID **<I>ppv</I>
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Pointer in which to store the interface pointer upon return if the call is synchronous.
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK 
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success. ppv contains the requested interface pointer.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">MK_S_ASYNCHRONOUS
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Component code will be downloaded and installed asynchronously. The client will receive notifications through the IBIndStatusCallback interface it has registered on pBindCtx..
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_NOINTERFACE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The desired interface pointer is not available. Other CoGetClassObject error return values are also possible here..
+</FONT></TD></TR></TABLE>
+<P>In the common web-browser scenario, the values for parameters passed to this function are read directly from an HTML OBJECT tag. For example, the szCodeURL, dwFileVersionMS, and dwFileVersionLS are specified inside an &lt;OBJECT&gt; tag as "CODEBASE=http://www.foo.com/bar.ocx#Version=a,b,c,d", where szCodeURL is "http://www.foo.com/bar.ocx", dwFileVersionMS is MAKELONG(b, a), and dwFileVersionLS is MAKELONG(d, c).
+
+<P>Because the downloading and installation of code occurs asynchronously, CoGetClassObjectFromURL will often return immediately with a return value of E_PENDING. At this point, the IBindStatusCallBack mechanism is used to communicate the status of the download operation to the client(9). To participate in this communication, the client <I>must</I> implement IBindStatusCallback and register this interface in the pBindCtx passed into CoGetClassObjectFromURL using RegisterBindStatusCallback. The client can expect to be called with callback notifications for OnStartBinding (providing an IBinding for controlling the download), OnProgress (reporting progress), OnObjectAvailable (which returns the desired object interface pointer), and OnStopBinding (which returns error codes in case of an error). For further negotiations, the client <I>must</I> also implement ICodeInstall as described below.
+
+<P><B>Note</B>  The initial implementation of CoGetClassObjectFromURL will not handle system-wide simultaneous downloads of the <I>same</I> code. Similarly, it will not handle cases where different simultaneous downloads refer to the same piece of dependent code.<H4><A NAME="codedwld_0002000204020200">IBindStatusCallback::OnProgress</A></H4>
+<P>The client of CoGetClassObjectFromURL will receive notification about the download / install process via the provided IBindStatusCallback interface. During the download process , the following additional values (from the BINDSTATUS enumeration) may be passed back as the ulStatusCode parameter for IBindStatusCallback::OnProgress.
+<DL><DT>BINDSTATUS_BEGINDOWNLOADCOMPONENTS
+ </DT><DD>The download operation has begun downloading code for COM components that will be installed before the object may be instantiated. The szStatusText accompanying IBindStatusCallback::OnProgress() provides the display name of the component being downloaded.
+</DD><DT>BINDSTATUS_INSTALLINGCOMPONENTS
+ </DT><DD>The download operation has downloaded code and is installing it. The szStatusText accompanying IBindStatusCallback::OnProgress() provides the display name of the component being installed.
+</DD><DT>BINDSTATUS_ENDDOWNLOADCOMPONENTS
+ </DT><DD>The download operation has finished downloading and installing all necessary code. The szStatusText accompanying OnProgress() provides the display name of the newly installed component.
+</DD></DL>
+<H4><A NAME="codedwld_0002000204020300">ICodeInstall</A></H4>
+<PRE><FONT FACE="Courier" SIZE="2">
+interface ICodeInstallIParseDisplayNameInterfaces : IUnknown{
+	HRESULT	GetWindow( [out] HWND* phwnd);
+	HRESULT 	OnCodeInstallProblem( [in] ULONG ulStatusCode, [in] LPCWSTRszDestination, 
+			[in] LPCWSTR szSource, [in] DWORD dwReserved); 
+	};
+</FONT></PRE>
+<P>A code install operation requires additional services from the client in order to complete the negotiation necessary for a download operation. Such services are requested using IBindStatusCallback::QueryInterface. The specific interface requested in IBindStatusCallback::QueryInterface is ICodeInstall. This interface must be implemented by a client of Internet Component Download.
+<H4><A NAME="codedwld_0002000204020400">ICodeInstall::GetWindow</A></H4>
+<P>This function is called when Component Download needs to display user interface for verification of downloaded code(10). When a client is called with this function, it has the opportunity to clear the message queue of it's parent window before allowing UI to be displayed. If the client does not wish to display UI, code verification may continue, but components may fail to be installed. 
+
+<P><B>Note</B>  ICodeInstall actually inherits from the IWindow interface (see documentation for URL Monikers), which consists of the single member function GetWindow. However, as far as any client code is concerned, the interface definition in this specification is still accurate.<UL><LI><TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Success.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">No window is available.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The argument is invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT>HWND *<I>phwnd</I>
+ </DT><DD>Client-provided HWND of the parent window for displaying code verification UI. If this parameter is NULL, the desktop window is used. If the value is INVALID_HANDLE_VALUE, or if the return value is S_FALSE, then no code verification UI will be displayed, and certain necessary components may not be installed.
+</DD></DL>
+<H4><A NAME="codedwld_0002000204020500">ICodeInstall::OnCodeInstallProblem</A></H4>
+<P>This function is called when there is a problem with code installation. This notification gives the client a chance to resolve the problem, often by displaying UI, or by aborting the code installation process.
+<P><B>Note</B>  If the client does not understand the problem, it should return E_ABORT by default to abort the code installation process, because returning S_OK would imply retrying the operation.<UL><LI><TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_OK
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Continue the installation process. If there was an "access denied" or disk-full problem, retry the installation. If there was an existing file (newer <I>or</I> older version), overwrite it.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">S_FALSE
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Skip this particular file, but continue with the rest of the code installation process. Note: this is the typical response for the CIP_NEWER_VERSION_EXISTS case.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_ABORT
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Abort the code installation process.
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">E_INVALIDARG
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The given arguments are invalid.
+</FONT></TD></TR></TABLE>
+</UL>
+<DL><DT>ULONG<I>ulStatusCode</I>
+ </DT><DD>Status code describing what problem occurred. A member of CIP_STATUS.
+</DD><DT>LPCWSTR<I>szDestination</I> 
+ </DT><DD>The name of the existing file that was causing a problem. This may be the name of an existing file that needs to be overwritten, the name of a directory causing access problems, or the name of a drive that is full.
+</DD><DT>LPCWSTR<I>szSource</I>
+ </DT><DD>Name of the new file to replace the existing file (if applicable).
+</DD><DT>DWORD<I>dwReserved</I>
+ </DT><DD>Reserved for future use.
+</DD></DL>
+<P>The ulStatusCode parameter above is one of the following values:
+<PRE><FONT FACE="Courier" SIZE="2">
+	typedef enum {
+		CIP_DISK_FULL,
+		CIP_ACCESS_DENIED,
+		CIP_OLDER_VERSION_EXISTS,
+		CIP_NEWER_VERSION_EXISTS,
+		CIP_NAME_CONFLICT,
+		CIP_TRUST_VERIFICATION_COMPONENT_MISSING
+	} CIP_STATUS;
+</FONT></PRE>
+<TABLE BORDER=0>
+<TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CIP_DRIVE_FULL
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The drive specified in szDestination is full.. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CIP_ACCESS_DENIED
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">Access to the file specified in szDestination is denied. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CIP_OLDER_VERSION_EXISTS
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">An existing file (older version) specified in szDestination needs to be overwritten by the file specified in szSource. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CIP_NEWER_VERSION_EXISTS
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A file exists (specified in szDestination) that is a newer version of a file to be installed (specified in szSource)
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CIP_NAME_CONFLICT
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">A file exists (specified in szDestination) that has a naming conflict with a file to be installed (specified in szSource). The existing file is neither a newer nor an older version of the new filethey are mismatched but have the same file name. 
+</FONT></TD></TR><TR><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">CIP_TRUST_VERIFICATION_COMPONENT_MISSING
+ </FONT></TD><TD ALIGN=LEFT VALIGN=TOP><FONT FACE="ARIAL,HELVETICA" SIZE="2">The code installation process cannot find the necessary component (WinVerifyTrust) for verifying trust in downloaded code. szSource specifies the name of the file that cannot be certified. The client should display UI asking the user whether or not to install the untrusted code, and should then return E_ABORT to abort the download, S_OK to continue anyway, or S_FALSE to skip this file but continue (usually dangerous).
+</FONT></TD></TR></TABLE>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep026.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep028.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

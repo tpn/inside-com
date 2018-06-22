@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>The PICS Standard</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep108.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep110.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<H2><A NAME="intratng_000c000102000000">The PICS Standard</A></H2>
+<BR CLEAR=ALL>
+<P>This section describes how the PICS system works, shows an example of rating information within an HTML page, and briefly describes the PICS specification. 
+
+<H3><A NAME="intratng_000c000102010000">How the PICS System Works</A></H3>
+<P>The PICS system has two types of components: rating systems and rating labels. A <I>rating system</I> defines the criteria for how content is rated. PICS has created a metalanguage for defining the different categories and the different values for rating content. For example, the Motion Picture Association of America (MPAA) rating system has one category with five values: G, PG, PG-13, R, and NC-17. Using the PICS specification, rating systems with multiple categories can be defined.
+
+<P>The <I>rating label</I> is the actual rating information. The label can appear on a Web page as part of the HTML content, on a third-party Web site, or anywhere else that a particular client application "knows" to look for them. Each item of content that is rated would have its own label. PICS has defined the syntax for these rating labels, as well as extensions to many Internet protocols to support labels.
+
+<P>The PICS system works by matching labels to their associated systems. The client software, either part of the Web browser or a separate application, allows parents to decide what levels of content they want to allow their children to see for each rating system. Then, as the child uses the PICS-aware Web browser or application, the Web browser finds the rating labels for the content and checks against the values the parent has set by calling a function in the Internet Ratings API. If the content is rated higher than the child is allowed, the content is not displayed. 
+
+
+
+<H3><A NAME="intratng_000c000102020000">Example of HTML Tagged Ratings</A></H3>
+<P>Ratings are specified by using an additional tag within the HTML header (&lt;HEAD&gt; rating information &lt;/HEAD&gt;). The rating is in English text, as defined by the PICS specification. More details are provided in the full PICS documentation found on the PICS Web site: <A HREF=" http://www.w3.org" TARGET="TEXT">http://www.w3.org</A>.
+
+<P>The following example shows the general format of rating information within an HTML page:
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;META http-equiv="PICS-Label" content='(PICS-1.0 "http://www.rsac.org"
+labels on "1996.11.05T08:15-0500"
+until "1996.12.31T23:59-0000"
+for "http://www.rsac.org/index.html"
+by "RSAC "
+rating (language 2 nudity 0 violence 1))'&gt;
+&lt;/HEAD&gt;
+</FONT></PRE>
+<P>The core of the rating label is the <I>rating</I>string, which provides a list of category/value pairs. For each category, the name and the associated value are listed. 
+
+
+<H3><A NAME="intratng_000c000102030000">What PICS Has Defined</A></H3>
+<P>PICS has defined two specifications&#151;one for creating rating systems and one for creating rating labels. A rating system defines the criteria for how content is rated. Based on the PICS specification for rating systems, any group or individual could define a system for rating content. Using the PICS specification, you could take the MPAA rating system and define it as a PICS-compliant rating system. 
+
+<P>The PICS specification is quite extensive, and it allows for a system to contain multiple categories. The MPAA system has only one category with five values: G, PG, PG-13, R, and NC-17. It has been criticized for being too simplistic and not offering granularity on multiple dimensions. PICS solves this problem by allowing the creator of the rating system to have great flexibility in how the system is defined.
+
+<P>PICS has not defined an actual rating system or an actual scheme for rating Internet content. PICS is a framework and a language that allows any group or organization to rate content on their own criteria. PICS has not created a replacement for the movie rating system, nor does it intend to. 
+
+<P>For more information about rating systems, see the PICS specification on their Web site: <A HREF=" http://www.w3.org" TARGET="TEXT">http://www.w3.org</A>.
+
+<H3><A NAME="intratng_000c000102040000">Amendments to the PICS Specification</A></H3>
+<P>The PICS specification makes no provisions for storing information on rating systems locally. On the Windows platform, the text description for PICS rating systems is contained in a text file with an .RAT extension. This file would contain all of the category and value information that PICS has defined as necessary. Microsoft may define fields for information about a given rating system, including its PICS rating server URL if it has one.
+
+<H3><A NAME="intratng_000c000102050000">What Internet Content Providers Should Know About PICS</A></H3>
+<P>Internet Content Providers (ICPs) need to be aware that they must take the initiative in getting their content rated by a PICS-compliant rating system. For a rating system to be useful, the browser application must deny access to sites that are unrated. ICPs should contact the PICS committee for a listing of rating groups that are based on PICS. 
+
+<P>Microsoft is committed to supporting the PICS standard and providing API and reference information for other products that want to support PICS. In addition, Microsoft is assisting several third-party groups to create PICS-based rating systems. In particular, the Recreation Software Advisory Council (RSAC) has created a rating system called RSACi. Their Web site, <A HREF=" http://www.rsac.org" TARGET="TEXT">http://www.rsac.org</A>, provides a simple online mechanism for getting content rated through their system. 
+
+<H3><A NAME="intratng_000c000102060000">What Developers of Web Authoring Tools Should Know About PICS</A></H3>
+<P>Developers of Web authoring tools need to be PICS aware, in that they support the ability to easily enter META tags into Web pages. Web authoring tools can help promote the PICS technology by providing templates or wizards for adding PICS ratings to documents. 
+
+<P>Of significant importance is the ability to maintain ratings for groups or "virtual trees" of pages. Some PICS-compliant rating systems may offer ratings for groups of content. This will allow larger sites to section adult content from general audience content. Web authoring and management tools need to provide the ability to propagate rating information across user-defined groups of pages.
+
+<P>Microsoft intends to provide support for the easy addition of PICS-compliant rating information into appropriate Internet content tools. 
+
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep108.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep110.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>

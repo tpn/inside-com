@@ -1,0 +1,24 @@
+# Nmake macros for building Windows 32-Bit apps
+
+TARGETOS=BOTH
+APPVER=4.0
+
+all:progress.exe
+
+!include <win32.mak>
+Proj = Progress
+!include <Inetsdk.mak>
+
+progress.res: progress.rc resource.h
+    $(rc) $(rcvars) $(rcflags) progress.rc
+
+progress.obj: progress.cpp
+    $(cc) $(cflags) $(cvars) $(cdebug) progress.cpp
+
+progress.exe: progress.obj progress.res
+    $(link) $(lflags) $(ldebug) -out:progress.exe progress.obj progress.res $(olelibs) urlmon.lib comctl32.lib
+
+clean:
+    del *.exe
+    del *.obj
+    del *.res

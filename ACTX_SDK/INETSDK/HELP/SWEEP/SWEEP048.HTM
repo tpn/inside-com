@@ -1,0 +1,1025 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD><TITLE>Window Object</TITLE>
+<STYLE>
+#tctop {color: red}
+#cpslug {color: red; text-decoration: none}
+</STYLE>
+</HEAD>
+<BODY TOPMARGIN=10 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+<FONT FACE="ARIAL,HELVETICA" SIZE="2">
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep047.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep049.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<A NAME="scriptom_0004000104000000"></A><H3>Window Object<BR CLEAR=ALL>
+<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104000100"></A><H3>window Object<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+The top level object in the scripting object model is a window. Every window contains:
+
+<UL><LI><B>Frame</B> - Array of frame windows contained by a parent window. Each frame is a window that has its own properties, including a document.
+<LI><A HREF="sweep055.htm#scriptom_000400010b000100" TARGET=TEXT>History</A> - History object for the current window. This object is used to access the history list from the browser.
+<LI><A HREF="sweep056.htm#scriptom_000400010c000100" TARGET=TEXT>Navigator</A> - Navigator object for the current window. The navigator object contains information about the browser application.
+<LI><B>Location</B> - Location object for the current window. Provides information about the location of the window's URL.
+<LI><B>Script</B> - Scripting function defined using the SCRIPT element in the window scope.
+<LI><A HREF="sweep049.htm#scriptom_0004000105000100" TARGET=TEXT>Document</A> - Document in the current window.
+</UL>
+<P><map name=window>
+<area shape="rect" coords="69,63,178,88" href="sweep055.htm">
+<area shape="rect" coords="69,94,178,119" href="sweep056.htm">
+<area shape="rect" coords="69,125,178,150" href="sweep051.htm">
+<area shape="rect" coords="69,187,178,212" href="sweep049.htm">
+<area shape="rect" coords="105,217,213,242" href="sweep052.htm">
+<area shape="rect" coords="105,248,213,273" href="sweep053.htm">
+<area shape="rect" coords="105,279,213,304" href="sweep050.htm">
+<area shape="rect" coords="138,309,246,334" href="sweep054.htm">
+</map>
+<IMG SRC="art/window.gif" WIDTH="277" HEIGHT="335" ALT="" BORDER=0 USEMAP="#window">
+
+<P>The window object represents the Internet Explorer window and its methods and properties. Methods and properties of the window object can be called by scripts directly. This means that if you wanted to get the name of the current page, you would use the following script (Notice that the property name does not need a prefix):
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+     '...
+     string1=name          - get the name of the current window
+     alert string1          - display that name as an alert
+     '...
+&lt;/SCRIPT&gt; 
+</FONT></PRE>
+<P>However, you can access the properties of other window objects without explicitly mentioning the window. For example, to get the name of the current window's parent, you would use:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+     '...
+     string1=parent.name       - get the name of the parent window
+     '...
+&lt;/SCRIPT&gt; 
+</FONT></PRE>
+<P>Window events can be hooked to scripts using extensions to the BODY tag. To add scripts to a window event, add a script for either the <A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A> or <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A> events in the BODY tag at the top of the page. In the following example, the <I>Foo</I> function is called when the page is loaded:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;HTML&gt;
+...
+&lt;BODY Language="VBScript" onLoad="Foo"&gt;
+...
+&lt;SCRIPT language="VBScript"&gt;
+... 
+Sub Foo
+	MsgBox "This is sub foo"
+End Sub
+... 
+&lt;/SCRIPT&gt;
+....
+&lt;/BODY&gt;&lt;/HTML&gt;
+</FONT></PRE>
+<P>To access a window by name, the window must be given a name. This can happen in three ways: by using the <I>window.</I><B>open</B> method, by creating the window with a name using the FRAMESET element, or by creating the window with a URL using the TARGET attribute.
+
+<P>The following examples all create a window named <I>foo</I> with contents <I>a</I>.<I>htm</I>.
+
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT Language="VBScript"&gt;
+window.open ("a.htm", "foo");
+&lt;/SCRIPT&gt;
+
+&lt;FRAMESET COLS = "200, *" FRAMEBORDER=0&gt;
+  &lt;FRAME NAME= "frame1" SRC="a.htm"&gt;
+  &lt;FRAME NAME= "frame2" SRC="b.htm"&gt;
+&lt;/FRAMESET&gt;
+
+&lt;A HREF="a.htm" TARGET = "frame1" Click here to see a.htm in frame "frame1".&lt;/A&gt;
+
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010000"></A><H3>Properties<HR></H3><P>Window properties can be referenced directly in the scripting language. Consequently, all window properties are reserved words and cannot be used as variable names in procedures. The following window properties are used:
+
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010100"></A><H3>name Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the name of the current window. This property is read-only.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>name<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the string containing the current window name or "null" if none.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the value of String1 to be the name of the current window, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+String1=name.
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010200"></A><H3>parent Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the window object of the window's parent. This property is read-only. The parent of the window is the containing frame. If the current window has no containing frame windows, then the parent evaluates to the current window.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>parent<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the window object that evaluates to the parent window.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the value of String1 to be the name of the parent of the current window, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+String1=parent.name.
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010300"></A><H3>opener Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the window object of the window that opened the current window.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>opener<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the window object that evaluates to the opener window.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the value of "String1" to be the opener of the current window, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+String1=opener.name.
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010400"></A><H3>self Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the window object of the current window. This property is read-only.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>self<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object that evaluates to the current window.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the value of String1 to be the name of the current window, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+String1=self.name
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010500"></A><H3>top Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the window object of the topmost window. This property is read-only. The topmost window is the containing window of all frames in the current browser instance. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>top<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object that evaluates to the topmost window.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the value of String1 to be the name of the topmost window, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+String1=top.name.
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010600"></A><H3>location Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the location object for the current window. For more details, see "location Object." 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>location</B> <BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object that evaluates to the location object of window.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the value of String1 to be the name of the URL of the current window, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+String1=location.HRef.
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010700"></A><H3>defaultStatus Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Sets the default status text in the lower left portion of the status bar. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>defaultStatus</B>[<B>=</B><I>string</I>] <BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. Sets the default status text to the value of string.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the default status to "Hello" use:
+<PRE><FONT FACE="Courier" SIZE="2">
+defaultStatus="Hello"
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010800"></A><H3>status Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Sets the status text in the lower left part of the status bar.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>status</B>[<B>=</B><I>string</I>] <BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. Sets the status text to the value of string.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set the status to "Hello" use:
+<PRE><FONT FACE="Courier" SIZE="2">
+status="Hello"
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010900"></A><H3>frames Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the array of frames for the current window.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>frames</B>[<I>integer</I>] <BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to the array of frames.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To set String1 to the URL of frame[0], use:
+<PRE><FONT FACE="Courier" SIZE="2">
+String1=parent.frames[0].location.href.
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010a00"></A><H3>history Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the history object of the current window. For more details on methods, properties, and events, see "history Object."
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>history<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to a history object.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010b00"></A><H3>navigator Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the navigator object of the current window. For more details on methods, properties, and events, see "navigator Object."
+
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>navigator<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to a navigator object.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104010c00"></A><H3>document Property<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Returns the document object of the current window. For more details on methods, properties, and events, see "document Object."
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>document<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to a document object.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104020000"></A><H3>Methods<HR></H3><P>This section describes the methods for the window object.
+
+
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104020100"></A><H3>alert Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Displays an alert message box.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>alert</B> <B>(</B><I>string</I><B>)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string containing the text to display in the message box.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The following example would display an alert that contained the string "Hello World":
+<PRE><FONT FACE="Courier" SIZE="2">
+alert ("Hello World")
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104020200"></A><H3>confirm Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Displays a message box that allows the user to select <B>OK</B> or <B>Cancel</B>.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>bool</I> <B>=</B>][<I>window.</I>]<B>confirm</B> <B>(</B><I>string</I><B>)<BR>
+</B></BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>string</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string containing the text to display in the message box.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the user response: TRUE if the user pressed OK; FALSE if not.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The following example would display a message box that contained the string "Do you want to continue?":
+<PRE><FONT FACE="Courier" SIZE="2">x=confirm ("Do you want to continue?")
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104020300"></A><H3>prompt Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P> Prompts the user for input.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>string</I>  <B>=</B>][<I>window.</I>]<B>prompt</B> [<I>prompt</I>] [<B>,</B> <I>default</I>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>prompt</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string containing the text to display in the message box.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I> default </I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. A string containing the default text to display in the input field.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the user input.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104020400"></A><H3>open Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P> Creates a new window.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>newwindow</I> <B>=</B> ][<I>window.</I>]<B>open</B> <I>url</I><B>,</B> <I>target</I><B>,</B> [<B>"</B>[<B>toolbar=</B><I>bool</I>] [<B>,</B> <B>location=</B><I>bool</I>][<B>,</B> <B>directories=</B><I>bool</I>][<B>,</B> <B>status=</B><I>bool</I>][<B>,</B> <B>menubar=</B><I>bool</I>][<B>,</B> <B>scrollbars=</B><I>bool</I>][<B>,</B> <B>resizeable=</B><I>bool</I>][<B>,</B> <B>width=</B><I>pixels</I>][<B>,</B> <B>height=</B><I>pixels</I>][<B>,</B> <B>top=</B><I>pixels</I>][<B>,</B> <B>left=</B><I>pixels</I>]<B>"</B>]<BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>url</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string containing a correctly parsed URL. The URL is parsed identically to a link&#151;both relative and absolute paths are supported.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>target</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string containing the name of the target window. If a window with this name already exists, the existing window is reused with the new URL. If the window does not exist, a new window is created with that name. Note that this works identically to the TARGET attribute of an HREF in HTML.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>bool</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The remaining window properties are passed as a comma-separated list. Most of these can be set to Boolean values, either <I>yes</I> or <I>no</I> [<I>1</I> or <I>0</I>]. These properties are toolbar, location, directories, status, menubar, scrollbars, and resizeable.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>pixels</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Four other properties in this list, top, left, width, and height, have values in pixels.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to the created window object.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>The following example would create a new window:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+	open "http://www.microsoft.com", "myWindow", "toolbar=no, location=no, directories=no"
+&lt;/SCRIPT&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104020500"></A><H3>close Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Closes the window. 
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>close</B> <BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns an object expression that evaluates to the indexed frame.
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104020600"></A><H3>setTimeout Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Sets a timer to call a function after a specified number of milliseconds.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>ID</B> <B>=</B> [<I>window.</I>]<B>setTimeout</B> <I>expression</I><B>,</B> <I>msec</I><B>,</B> <I>language</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>expression</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a function or object property. This function is called when the Timeout is set.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>msec</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The number of milliseconds that passes before the expression is evaluated.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>language</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The scripting language used. Can be "VBScript" or "Javascript."
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Return Value</H5>
+<BLOCKQUOTE><P>
+<P>Returns the ID of the timer object. This can be used to cancel the timer using the <B>clearTimeout</B> method.
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To call Button1.Click after 100 milliseconds, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+MyID = setTimeout ("Button1.Click", 100).
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104020700"></A><H3>clearTimeout Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Clears the timer having a particular ID.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>clearTimout</B> <I>ID</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>ID</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">The ID of the timer to be cleared. If there is no timer with this ID, the function does nothing.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To clear the timer with ID=MyID, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+clearTimeout MyID
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020800" TARGET=TEXT>navigate</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104020800"></A><H3>navigate Method<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Navigates the window to a new URL.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P>[<I>window.</I>]<B>navigate</B> <I>url</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Part</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>window</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">Optional. An object expression that evaluates to a window object. If omitted, the current script window is used.
+</FONT></TD></TR><TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>url</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">A string containing a valid URL. The URL can be either relative or absolute.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+
+</BLOCKQUOTE><P>
+<H5>Methods</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104020100" TARGET=TEXT>alert</A>, <A HREF="sweep048.htm#scriptom_0004000104020200" TARGET=TEXT>confirm</A>, <A HREF="sweep048.htm#scriptom_0004000104020300" TARGET=TEXT>prompt</A>, <A HREF="sweep048.htm#scriptom_0004000104020400" TARGET=TEXT>open</A>, <A HREF="sweep048.htm#scriptom_0004000104020500" TARGET=TEXT>close</A>, <A HREF="sweep048.htm#scriptom_0004000104020600" TARGET=TEXT>setTimeout</A>, <A HREF="sweep048.htm#scriptom_0004000104020700" TARGET=TEXT>clearTimeout</A>
+
+</BLOCKQUOTE><P>
+<H5>Events</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104030100" TARGET=TEXT>onLoad</A>, <A HREF="sweep048.htm#scriptom_0004000104030200" TARGET=TEXT>onUnload</A>
+
+</BLOCKQUOTE><P>
+<H5>Properties</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104010100" TARGET=TEXT>name</A>, <A HREF="sweep048.htm#scriptom_0004000104010200" TARGET=TEXT>parent</A>, <A HREF="sweep048.htm#scriptom_0004000104010300" TARGET=TEXT>opener</A>, <A HREF="sweep048.htm#scriptom_0004000104010400" TARGET=TEXT>self</A>, <A HREF="sweep048.htm#scriptom_0004000104010500" TARGET=TEXT>top</A>, <A HREF="sweep048.htm#scriptom_0004000104010600" TARGET=TEXT>location</A>, <A HREF="sweep048.htm#scriptom_0004000104010700" TARGET=TEXT>defaultStatus</A>, <A HREF="sweep048.htm#scriptom_0004000104010800" TARGET=TEXT>status</A>, <A HREF="sweep048.htm#scriptom_0004000104010900" TARGET=TEXT>frames</A>, <A HREF="sweep048.htm#scriptom_0004000104010a00" TARGET=TEXT>history</A>, <A HREF="sweep048.htm#scriptom_0004000104010b00" TARGET=TEXT>navigator</A>, <A HREF="sweep048.htm#scriptom_0004000104010c00" TARGET=TEXT>document</A>
+
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104030000"></A><H3>Events<HR></H3><P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104030100"></A><H3>onLoad Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fired after all HTML has been parsed and processed.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>onLoad=</B><I>function-name</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>function-name</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a scripting function.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To call the VBScript function <I>Foo</I> when the page is loaded, use:
+<PRE><FONT FACE="Courier" SIZE="2">
+&lt;BODY Language="VBScript" onLoad="Foo"&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+</BLOCKQUOTE><P>
+<P><P><P><HR SIZE=5 NOSHADE>
+<A NAME="scriptom_0004000104030200"></A><H3>onUnload Event Handler<HR></H3><H5>Description</H5>
+<BLOCKQUOTE><P>
+<P>Fired when the contents of the window are unloaded.
+
+</BLOCKQUOTE><P>
+<H5>Syntax</H5>
+<BLOCKQUOTE><P><B>onUnload=</B><I>function-name</I><BR>
+</BLOCKQUOTE><P>
+<BLOCKQUOTE>
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Value</B></FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><B>Description</B></FONT></TD></TR>
+<TR VALIGN=TOP><TD><FONT FACE="ARIAL,HELVETICA" SIZE=2><I>function-name</I>
+</FONT></TD><TD><FONT FACE="ARIAL,HELVETICA" SIZE="2">An object expression that evaluates to a scripting function.
+</FONT></TD></TR></TABLE>
+</BLOCKQUOTE><P>
+<H5>Remarks</H5><BLOCKQUOTE><P>
+<P>To call the VBScript function <I>Foo</I> when the page is unloaded, use:
+<PRE><FONT FACE="Courier" SIZE="2">&lt;BODY Language="VBScript" onUnload="Foo"&gt;
+</FONT></PRE>
+</BLOCKQUOTE><P>
+<H5>Applies To</H5><BLOCKQUOTE><P>
+<P><A HREF="sweep048.htm#scriptom_0004000104000100" TARGET=TEXT>Window</A>
+</BLOCKQUOTE><P>
+<TABLE BORDER=0 ALIGN=RIGHT><TR><TD VALIGN=TOP>
+<A HREF="sweep047.htm" TARGET="TEXT"><IMG SRC="art/previous.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Previous"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep000.htm" TARGET="TEXT"><IMG SRC="art/contents.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Up"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="index.htm" TARGET="TEXT"><IMG SRC="art/index.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Index"></A>
+</TD>
+<TD VALIGN=TOP><A HREF="sweep049.htm" TARGET="TEXT"><IMG SRC="art/next.gif" WIDTH="50" HEIGHT="20"  BORDER=0 ALT="Next"></A>
+</TD></TABLE>
+<P><P><FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+<A ID=cpslug HREF="legal.htm" TARGET=TEXT>&#169; 1996 Microsoft Corporation</A>
+</FONT>
+<BR CLEAR=ALL>
+</FONT><P>
+</BODY></HTML>
